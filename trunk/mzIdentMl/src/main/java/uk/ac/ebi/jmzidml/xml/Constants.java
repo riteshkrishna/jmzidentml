@@ -35,7 +35,9 @@ public class Constants {
         AnalysisProtocolCollection,
         DataCollection,
         BibliographicReference,
-        Peptide
+        Peptide,
+        DBSequence,              //Ritesh
+        PeptideEvidence        // Ritesh
     }
 
     private static Set<String> xpathsToIndex = new HashSet<String>();
