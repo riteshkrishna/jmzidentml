@@ -1,16 +1,22 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
  * The software used for performing the analyses.
- * <p/>
+ * 
  * <p>Java class for PSI-PI.analysis.search.AnalysisSoftwareType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="PSI-PI.analysis.search.AnalysisSoftwareType">
  *   &lt;complexContent>
@@ -24,15 +30,18 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PSI-PI.analysis.search.AnalysisSoftwareType", propOrder = {
-        "softwareName",
-        "customizations"
+    "softwareName",
+    "customizations"
 })
 public class AnalysisSoftware
-        extends Software
-        implements Serializable {
+    extends Software
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "SoftwareName", required = true)
@@ -45,9 +54,11 @@ public class AnalysisSoftware
 
     /**
      * Gets the value of the softwareName property.
-     *
-     * @return possible object is
-     *         {@link ParamAlternative }
+     * 
+     * @return
+     *     possible object is
+     *     {@link ParamAlternative }
+     *     
      */
     public ParamAlternative getSoftwareName() {
         return softwareName;
@@ -55,9 +66,11 @@ public class AnalysisSoftware
 
     /**
      * Sets the value of the softwareName property.
-     *
-     * @param value allowed object is
-     *              {@link ParamAlternative }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ParamAlternative }
+     *     
      */
     public void setSoftwareName(ParamAlternative value) {
         this.softwareName = value;
@@ -65,9 +78,11 @@ public class AnalysisSoftware
 
     /**
      * Gets the value of the customizations property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getCustomizations() {
         return customizations;
@@ -75,9 +90,11 @@ public class AnalysisSoftware
 
     /**
      * Sets the value of the customizations property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setCustomizations(String value) {
         this.customizations = value;
@@ -85,9 +102,11 @@ public class AnalysisSoftware
 
     /**
      * Gets the value of the uri property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getURI() {
         return uri;
@@ -95,9 +114,11 @@ public class AnalysisSoftware
 
     /**
      * Sets the value of the uri property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setURI(String value) {
         this.uri = value;

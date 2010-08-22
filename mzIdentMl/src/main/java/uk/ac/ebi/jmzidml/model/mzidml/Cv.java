@@ -1,18 +1,22 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
  * A source controlled vocabulary from which cvParams will be obtained.
- * <p/>
+ * 
  * <p>Java class for FuGE.Common.Ontology.cvType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Common.Ontology.cvType">
  *   &lt;complexContent>
@@ -25,11 +29,14 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Common.Ontology.cvType")
 public class Cv
-        implements Serializable, MzIdentMLObject {
+    implements Serializable, MzIdentMLObject
+{
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(required = true)
@@ -44,9 +51,11 @@ public class Cv
 
     /**
      * Gets the value of the fullName property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getFullName() {
         return fullName;
@@ -54,9 +63,11 @@ public class Cv
 
     /**
      * Sets the value of the fullName property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setFullName(String value) {
         this.fullName = value;
@@ -64,9 +75,11 @@ public class Cv
 
     /**
      * Gets the value of the version property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getVersion() {
         return version;
@@ -74,9 +87,11 @@ public class Cv
 
     /**
      * Sets the value of the version property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setVersion(String value) {
         this.version = value;
@@ -84,9 +99,11 @@ public class Cv
 
     /**
      * Gets the value of the uri property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getURI() {
         return uri;
@@ -94,9 +111,11 @@ public class Cv
 
     /**
      * Sets the value of the uri property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setURI(String value) {
         this.uri = value;
@@ -104,9 +123,11 @@ public class Cv
 
     /**
      * Gets the value of the id property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getId() {
         return id;
@@ -114,9 +135,11 @@ public class Cv
 
     /**
      * Sets the value of the id property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setId(String value) {
         this.id = value;

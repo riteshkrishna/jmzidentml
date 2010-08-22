@@ -45,6 +45,8 @@ import javax.xml.bind.UnmarshallerHandler;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.DBSequenceAdapter;
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.PeptideEvidenceAdapter;
 
 public class UnmarshallerFactory {
 
@@ -96,6 +98,9 @@ public class UnmarshallerFactory {
             //create a cache object that will be common to all adapters in this unmarshaller
             unmarshaller.setAdapter(new CvAdapter(index, cache));
             unmarshaller.setAdapter(new PeptideAdapter(index, cache));
+            
+            unmarshaller.setAdapter(new DBSequenceAdapter(index, cache)); // Ritesh
+            unmarshaller.setAdapter(new PeptideEvidenceAdapter(index, cache)); // Ritesh
 
             //we don't have a validation handler yet
 //            unmarshaller.setEventHandler(new DefaultValidationEventHandler());

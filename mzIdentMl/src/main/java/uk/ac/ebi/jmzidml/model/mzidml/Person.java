@@ -1,23 +1,23 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
  * A person for which the attributes are self describing.
- * <p/>
+ * 
  * <p>Java class for FuGE.Common.Audit.PersonType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Common.Audit.PersonType">
  *   &lt;complexContent>
@@ -40,14 +40,17 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Common.Audit.PersonType", propOrder = {
-        "affiliations"
+    "affiliations"
 })
 public class Person
-        extends Contact
-        implements Serializable {
+    extends Contact
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     protected List<Person.Affiliations> affiliations;
@@ -60,23 +63,25 @@ public class Person
 
     /**
      * Gets the value of the affiliations property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the affiliations property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getAffiliations().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Person.Affiliations }
+     * 
+     * 
      */
     public List<Person.Affiliations> getAffiliations() {
         if (affiliations == null) {
@@ -87,9 +92,11 @@ public class Person
 
     /**
      * Gets the value of the lastName property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getLastName() {
         return lastName;
@@ -97,9 +104,11 @@ public class Person
 
     /**
      * Sets the value of the lastName property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setLastName(String value) {
         this.lastName = value;
@@ -107,9 +116,11 @@ public class Person
 
     /**
      * Gets the value of the firstName property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getFirstName() {
         return firstName;
@@ -117,9 +128,11 @@ public class Person
 
     /**
      * Sets the value of the firstName property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setFirstName(String value) {
         this.firstName = value;
@@ -127,9 +140,11 @@ public class Person
 
     /**
      * Gets the value of the midInitials property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getMidInitials() {
         return midInitials;
@@ -137,9 +152,11 @@ public class Person
 
     /**
      * Sets the value of the midInitials property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setMidInitials(String value) {
         this.midInitials = value;
@@ -148,9 +165,9 @@ public class Person
 
     /**
      * <p>Java class for anonymous complex type.
-     * <p/>
+     * 
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * <p/>
+     * 
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -160,11 +177,14 @@ public class Person
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
+     * 
+     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "")
     public static class Affiliations
-            implements Serializable, MzIdentMLObject {
+        implements Serializable, MzIdentMLObject
+    {
 
         private final static long serialVersionUID = 100L;
         @XmlAttribute(name = "Organization_ref", required = true)
@@ -172,9 +192,11 @@ public class Person
 
         /**
          * Gets the value of the organizationRef property.
-         *
-         * @return possible object is
-         *         {@link String }
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
          */
         public String getOrganizationRef() {
             return organizationRef;
@@ -182,9 +204,11 @@ public class Person
 
         /**
          * Sets the value of the organizationRef property.
-         *
-         * @param value allowed object is
-         *              {@link String }
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
          */
         public void setOrganizationRef(String value) {
             this.organizationRef = value;

@@ -1,19 +1,19 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
  * <p>Java class for DataCollectionType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="DataCollectionType">
  *   &lt;complexContent>
@@ -26,14 +26,17 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DataCollectionType", propOrder = {
-        "inputs",
-        "analysisData"
+    "inputs",
+    "analysisData"
 })
 public class DataCollection
-        implements Serializable, MzIdentMLObject {
+    implements Serializable, MzIdentMLObject
+{
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "Inputs", required = true)
@@ -43,9 +46,11 @@ public class DataCollection
 
     /**
      * Gets the value of the inputs property.
-     *
-     * @return possible object is
-     *         {@link Inputs }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Inputs }
+     *     
      */
     public Inputs getInputs() {
         return inputs;
@@ -53,9 +58,11 @@ public class DataCollection
 
     /**
      * Sets the value of the inputs property.
-     *
-     * @param value allowed object is
-     *              {@link Inputs }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Inputs }
+     *     
      */
     public void setInputs(Inputs value) {
         this.inputs = value;
@@ -63,9 +70,11 @@ public class DataCollection
 
     /**
      * Gets the value of the analysisData property.
-     *
-     * @return possible object is
-     *         {@link AnalysisData }
+     * 
+     * @return
+     *     possible object is
+     *     {@link AnalysisData }
+     *     
      */
     public AnalysisData getAnalysisData() {
         return analysisData;
@@ -73,9 +82,11 @@ public class DataCollection
 
     /**
      * Sets the value of the analysisData property.
-     *
-     * @param value allowed object is
-     *              {@link AnalysisData }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link AnalysisData }
+     *     
      */
     public void setAnalysisData(AnalysisData value) {
         this.analysisData = value;

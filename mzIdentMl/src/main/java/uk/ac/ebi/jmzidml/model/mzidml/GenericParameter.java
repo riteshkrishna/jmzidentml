@@ -1,21 +1,23 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
- * A subclass of the abstract Parameter class to represent a parameter that is defined by a controlled vocabulary term.
- * <p/>
+ * A subclass of the abstract Parameter class to represent a parameter that is defined by a
+ *                 controlled vocabulary term.
+ *             
+ * 
  * <p>Java class for FuGE.Common.Protocol.GenericParameterType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Common.Protocol.GenericParameterType">
  *   &lt;complexContent>
@@ -37,23 +39,28 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Common.Protocol.GenericParameterType", propOrder = {
-        "parameterType"
+    "parameterType"
 })
 public class GenericParameter
-        extends Parameter
-        implements Serializable {
+    extends Parameter
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     protected GenericParameter.ParameterType parameterType;
 
     /**
      * Gets the value of the parameterType property.
-     *
-     * @return possible object is
-     *         {@link GenericParameter.ParameterType }
+     * 
+     * @return
+     *     possible object is
+     *     {@link GenericParameter.ParameterType }
+     *     
      */
     public GenericParameter.ParameterType getParameterType() {
         return parameterType;
@@ -61,9 +68,11 @@ public class GenericParameter
 
     /**
      * Sets the value of the parameterType property.
-     *
-     * @param value allowed object is
-     *              {@link GenericParameter.ParameterType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link GenericParameter.ParameterType }
+     *     
      */
     public void setParameterType(GenericParameter.ParameterType value) {
         this.parameterType = value;
@@ -72,9 +81,9 @@ public class GenericParameter
 
     /**
      * <p>Java class for anonymous complex type.
-     * <p/>
+     * 
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * <p/>
+     * 
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -86,13 +95,16 @@ public class GenericParameter
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
+     * 
+     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-            "cvParam"
+        "cvParam"
     })
     public static class ParameterType
-            implements Serializable, MzIdentMLObject {
+        implements Serializable, MzIdentMLObject
+    {
 
         private final static long serialVersionUID = 100L;
         @XmlElement(required = true)
@@ -100,9 +112,11 @@ public class GenericParameter
 
         /**
          * Gets the value of the cvParam property.
-         *
-         * @return possible object is
-         *         {@link CvParam }
+         * 
+         * @return
+         *     possible object is
+         *     {@link CvParam }
+         *     
          */
         public CvParam getCvParam() {
             return cvParam;
@@ -110,9 +124,11 @@ public class GenericParameter
 
         /**
          * Sets the value of the cvParam property.
-         *
-         * @param value allowed object is
-         *              {@link CvParam }
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link CvParam }
+         *     
          */
         public void setCvParam(CvParam value) {
             this.cvParam = value;

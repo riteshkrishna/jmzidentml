@@ -1,18 +1,23 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlType;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
  * Abstract entity allowing either cvParam or userParam to be referenced in other schemas.
- * <p/>
+ *             
+ * 
  * <p>Java class for FuGE.Common.Ontology.ParamType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Common.Ontology.ParamType">
  *   &lt;complexContent>
@@ -26,14 +31,17 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Common.Ontology.ParamType")
 @XmlSeeAlso({
-        UserParam.class,
-        CvParam.class
+    UserParam.class,
+    CvParam.class
 })
-public abstract class Param implements Serializable, MzIdentMLObject {
+public abstract class Param implements Serializable, MzIdentMLObject
+{
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(required = true)
@@ -49,9 +57,11 @@ public abstract class Param implements Serializable, MzIdentMLObject {
 
     /**
      * Gets the value of the name property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getName() {
         return name;
@@ -59,9 +69,11 @@ public abstract class Param implements Serializable, MzIdentMLObject {
 
     /**
      * Sets the value of the name property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setName(String value) {
         this.name = value;
@@ -69,9 +81,11 @@ public abstract class Param implements Serializable, MzIdentMLObject {
 
     /**
      * Gets the value of the value property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getValue() {
         return value;
@@ -79,9 +93,11 @@ public abstract class Param implements Serializable, MzIdentMLObject {
 
     /**
      * Sets the value of the value property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setValue(String value) {
         this.value = value;
@@ -89,9 +105,11 @@ public abstract class Param implements Serializable, MzIdentMLObject {
 
     /**
      * Gets the value of the unitAccession property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getUnitAccession() {
         return unitAccession;
@@ -99,9 +117,11 @@ public abstract class Param implements Serializable, MzIdentMLObject {
 
     /**
      * Sets the value of the unitAccession property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setUnitAccession(String value) {
         this.unitAccession = value;
@@ -109,9 +129,11 @@ public abstract class Param implements Serializable, MzIdentMLObject {
 
     /**
      * Gets the value of the unitName property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getUnitName() {
         return unitName;
@@ -119,9 +141,11 @@ public abstract class Param implements Serializable, MzIdentMLObject {
 
     /**
      * Sets the value of the unitName property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setUnitName(String value) {
         this.unitName = value;
@@ -129,9 +153,11 @@ public abstract class Param implements Serializable, MzIdentMLObject {
 
     /**
      * Gets the value of the unitCvRef property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getUnitCvRef() {
         return unitCvRef;
@@ -139,9 +165,11 @@ public abstract class Param implements Serializable, MzIdentMLObject {
 
     /**
      * Sets the value of the unitCvRef property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setUnitCvRef(String value) {
         this.unitCvRef = value;

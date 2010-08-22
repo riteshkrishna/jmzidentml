@@ -1,20 +1,26 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
- * A subclass of ProtocolApplication to be used as it is in data formats without being extended.
- * <p/>
+ * A subclass of ProtocolApplication to be used as it is in data formats without being
+ *                 extended.
+ *             
+ * 
  * <p>Java class for FuGE.Common.Protocol.GenericProtocolApplicationType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Common.Protocol.GenericProtocolApplicationType">
  *   &lt;complexContent>
@@ -64,19 +70,22 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Common.Protocol.GenericProtocolApplicationType", propOrder = {
-        "genericMaterialMeasurement",
-        "inputData",
-        "outputData",
-        "outputMaterials",
-        "inputCompleteMaterials",
-        "parameterValue"
+    "genericMaterialMeasurement",
+    "inputData",
+    "outputData",
+    "outputMaterials",
+    "inputCompleteMaterials",
+    "parameterValue"
 })
 public class GenericProtocolApplication
-        extends ProtocolApplication
-        implements Serializable {
+    extends ProtocolApplication
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "GenericMaterialMeasurement")
@@ -91,24 +100,28 @@ public class GenericProtocolApplication
     protected String protocolRef;
 
     /**
-     * Measured sources of material that are inputs to this GenericProtocolApplication. Gets the value of the genericMaterialMeasurement property.
-     * <p/>
-     * <p/>
+     * Measured sources of material that are inputs to this
+     *                                 GenericProtocolApplication.
+     *                             Gets the value of the genericMaterialMeasurement property.
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the genericMaterialMeasurement property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getGenericMaterialMeasurement().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link GenericMaterialMeasurement }
+     * 
+     * 
      */
     public List<GenericMaterialMeasurement> getGenericMaterialMeasurement() {
         if (genericMaterialMeasurement == null) {
@@ -119,23 +132,25 @@ public class GenericProtocolApplication
 
     /**
      * Gets the value of the inputData property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the inputData property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getInputData().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link GenericProtocolApplication.InputData }
+     * 
+     * 
      */
     public List<GenericProtocolApplication.InputData> getInputData() {
         if (inputData == null) {
@@ -146,23 +161,25 @@ public class GenericProtocolApplication
 
     /**
      * Gets the value of the outputData property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the outputData property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getOutputData().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link GenericProtocolApplication.OutputData }
+     * 
+     * 
      */
     public List<GenericProtocolApplication.OutputData> getOutputData() {
         if (outputData == null) {
@@ -173,23 +190,25 @@ public class GenericProtocolApplication
 
     /**
      * Gets the value of the outputMaterials property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the outputMaterials property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getOutputMaterials().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link GenericProtocolApplication.OutputMaterials }
+     * 
+     * 
      */
     public List<GenericProtocolApplication.OutputMaterials> getOutputMaterials() {
         if (outputMaterials == null) {
@@ -200,23 +219,25 @@ public class GenericProtocolApplication
 
     /**
      * Gets the value of the inputCompleteMaterials property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the inputCompleteMaterials property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getInputCompleteMaterials().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link GenericProtocolApplication.InputCompleteMaterials }
+     * 
+     * 
      */
     public List<GenericProtocolApplication.InputCompleteMaterials> getInputCompleteMaterials() {
         if (inputCompleteMaterials == null) {
@@ -226,24 +247,27 @@ public class GenericProtocolApplication
     }
 
     /**
-     * The parameter values for this Parameterizable Application. Gets the value of the parameterValue property.
-     * <p/>
-     * <p/>
+     * The parameter values for this Parameterizable Application.
+     *                             Gets the value of the parameterValue property.
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the parameterValue property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getParameterValue().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link ParameterValue }
+     * 
+     * 
      */
     public List<ParameterValue> getParameterValue() {
         if (parameterValue == null) {
@@ -254,9 +278,11 @@ public class GenericProtocolApplication
 
     /**
      * Gets the value of the protocolRef property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getProtocolRef() {
         return protocolRef;
@@ -264,9 +290,11 @@ public class GenericProtocolApplication
 
     /**
      * Sets the value of the protocolRef property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setProtocolRef(String value) {
         this.protocolRef = value;
@@ -275,9 +303,9 @@ public class GenericProtocolApplication
 
     /**
      * <p>Java class for anonymous complex type.
-     * <p/>
+     * 
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * <p/>
+     * 
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -287,11 +315,14 @@ public class GenericProtocolApplication
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
+     * 
+     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "")
     public static class InputCompleteMaterials
-            implements Serializable, MzIdentMLObject {
+        implements Serializable, MzIdentMLObject
+    {
 
         private final static long serialVersionUID = 100L;
         @XmlAttribute(name = "Material_ref", required = true)
@@ -299,9 +330,11 @@ public class GenericProtocolApplication
 
         /**
          * Gets the value of the materialRef property.
-         *
-         * @return possible object is
-         *         {@link String }
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
          */
         public String getMaterialRef() {
             return materialRef;
@@ -309,9 +342,11 @@ public class GenericProtocolApplication
 
         /**
          * Sets the value of the materialRef property.
-         *
-         * @param value allowed object is
-         *              {@link String }
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
          */
         public void setMaterialRef(String value) {
             this.materialRef = value;
@@ -322,9 +357,9 @@ public class GenericProtocolApplication
 
     /**
      * <p>Java class for anonymous complex type.
-     * <p/>
+     * 
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * <p/>
+     * 
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -334,11 +369,14 @@ public class GenericProtocolApplication
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
+     * 
+     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "")
     public static class InputData
-            implements Serializable, MzIdentMLObject {
+        implements Serializable, MzIdentMLObject
+    {
 
         private final static long serialVersionUID = 100L;
         @XmlAttribute(name = "Data_ref", required = true)
@@ -346,9 +384,11 @@ public class GenericProtocolApplication
 
         /**
          * Gets the value of the dataRef property.
-         *
-         * @return possible object is
-         *         {@link String }
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
          */
         public String getDataRef() {
             return dataRef;
@@ -356,9 +396,11 @@ public class GenericProtocolApplication
 
         /**
          * Sets the value of the dataRef property.
-         *
-         * @param value allowed object is
-         *              {@link String }
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
          */
         public void setDataRef(String value) {
             this.dataRef = value;
@@ -369,9 +411,9 @@ public class GenericProtocolApplication
 
     /**
      * <p>Java class for anonymous complex type.
-     * <p/>
+     * 
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * <p/>
+     * 
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -381,11 +423,14 @@ public class GenericProtocolApplication
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
+     * 
+     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "")
     public static class OutputData
-            implements Serializable, MzIdentMLObject {
+        implements Serializable, MzIdentMLObject
+    {
 
         private final static long serialVersionUID = 100L;
         @XmlAttribute(name = "Data_ref", required = true)
@@ -393,9 +438,11 @@ public class GenericProtocolApplication
 
         /**
          * Gets the value of the dataRef property.
-         *
-         * @return possible object is
-         *         {@link String }
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
          */
         public String getDataRef() {
             return dataRef;
@@ -403,9 +450,11 @@ public class GenericProtocolApplication
 
         /**
          * Sets the value of the dataRef property.
-         *
-         * @param value allowed object is
-         *              {@link String }
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
          */
         public void setDataRef(String value) {
             this.dataRef = value;
@@ -416,9 +465,9 @@ public class GenericProtocolApplication
 
     /**
      * <p>Java class for anonymous complex type.
-     * <p/>
+     * 
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * <p/>
+     * 
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -428,11 +477,14 @@ public class GenericProtocolApplication
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
+     * 
+     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "")
     public static class OutputMaterials
-            implements Serializable, MzIdentMLObject {
+        implements Serializable, MzIdentMLObject
+    {
 
         private final static long serialVersionUID = 100L;
         @XmlAttribute(name = "Material_ref", required = true)
@@ -440,9 +492,11 @@ public class GenericProtocolApplication
 
         /**
          * Gets the value of the materialRef property.
-         *
-         * @return possible object is
-         *         {@link String }
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
          */
         public String getMaterialRef() {
             return materialRef;
@@ -450,9 +504,11 @@ public class GenericProtocolApplication
 
         /**
          * Sets the value of the materialRef property.
-         *
-         * @param value allowed object is
-         *              {@link String }
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
          */
         public void setMaterialRef(String value) {
             this.materialRef = value;

@@ -1,21 +1,29 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.PeptideAdapter;
-
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.PeptideAdapter;
 
 
 /**
- * An identification of a single (poly)peptide, resulting from querying an input spectra, along with the set of confidence values for that identification. PeptideEvidence elements should be given for all mappings of the corresponding Peptide sequence within protein sequences.
- * <p/>
+ * An identification of a single (poly)peptide, resulting from querying an input spectra,
+ *                 along with the set of confidence values for that identification. PeptideEvidence elements should be
+ *                 given for all mappings of the corresponding Peptide sequence within protein sequences.
+ *             
+ * 
  * <p>Java class for PSI-PI.analysis.search.SpectrumIdentificationItemType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="PSI-PI.analysis.search.SpectrumIdentificationItemType">
  *   &lt;complexContent>
@@ -38,23 +46,26 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PSI-PI.analysis.search.SpectrumIdentificationItemType", propOrder = {
-        "peptideEvidence",
-        "paramGroup",
-        "fragmentation"
+    "peptideEvidence",
+    "paramGroup",
+    "fragmentation"
 })
 public class SpectrumIdentificationItem
-        extends Identifiable
-        implements Serializable {
+    extends Identifiable
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "PeptideEvidence")
     protected List<PeptideEvidence> peptideEvidence;
     @XmlElements({
-            @XmlElement(name = "userParam", type = UserParam.class),
-            @XmlElement(name = "cvParam", type = CvParam.class)
+        @XmlElement(name = "userParam", type = UserParam.class),
+        @XmlElement(name = "cvParam", type = CvParam.class)
     })
     protected List<Param> paramGroup;
     @XmlElement(name = "Fragmentation")
@@ -81,23 +92,25 @@ public class SpectrumIdentificationItem
 
     /**
      * Gets the value of the peptideEvidence property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the peptideEvidence property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getPeptideEvidence().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link PeptideEvidence }
+     * 
+     * 
      */
     public List<PeptideEvidence> getPeptideEvidence() {
         if (peptideEvidence == null) {
@@ -108,24 +121,26 @@ public class SpectrumIdentificationItem
 
     /**
      * Gets the value of the paramGroup property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the paramGroup property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getParamGroup().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link UserParam }
      * {@link CvParam }
+     * 
+     * 
      */
     public List<Param> getParamGroup() {
         if (paramGroup == null) {
@@ -136,9 +151,11 @@ public class SpectrumIdentificationItem
 
     /**
      * Gets the value of the fragmentation property.
-     *
-     * @return possible object is
-     *         {@link Fragmentation }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Fragmentation }
+     *     
      */
     public Fragmentation getFragmentation() {
         return fragmentation;
@@ -146,9 +163,11 @@ public class SpectrumIdentificationItem
 
     /**
      * Sets the value of the fragmentation property.
-     *
-     * @param value allowed object is
-     *              {@link Fragmentation }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Fragmentation }
+     *     
      */
     public void setFragmentation(Fragmentation value) {
         this.fragmentation = value;
@@ -156,6 +175,7 @@ public class SpectrumIdentificationItem
 
     /**
      * Gets the value of the chargeState property.
+     * 
      */
     public int getChargeState() {
         return chargeState;
@@ -163,6 +183,7 @@ public class SpectrumIdentificationItem
 
     /**
      * Sets the value of the chargeState property.
+     * 
      */
     public void setChargeState(int value) {
         this.chargeState = value;
@@ -170,6 +191,7 @@ public class SpectrumIdentificationItem
 
     /**
      * Gets the value of the experimentalMassToCharge property.
+     * 
      */
     public double getExperimentalMassToCharge() {
         return experimentalMassToCharge;
@@ -177,6 +199,7 @@ public class SpectrumIdentificationItem
 
     /**
      * Sets the value of the experimentalMassToCharge property.
+     * 
      */
     public void setExperimentalMassToCharge(double value) {
         this.experimentalMassToCharge = value;
@@ -184,9 +207,11 @@ public class SpectrumIdentificationItem
 
     /**
      * Gets the value of the calculatedMassToCharge property.
-     *
-     * @return possible object is
-     *         {@link Double }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Double }
+     *     
      */
     public Double getCalculatedMassToCharge() {
         return calculatedMassToCharge;
@@ -194,9 +219,11 @@ public class SpectrumIdentificationItem
 
     /**
      * Sets the value of the calculatedMassToCharge property.
-     *
-     * @param value allowed object is
-     *              {@link Double }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Double }
+     *     
      */
     public void setCalculatedMassToCharge(Double value) {
         this.calculatedMassToCharge = value;
@@ -204,9 +231,11 @@ public class SpectrumIdentificationItem
 
     /**
      * Gets the value of the calculatedPI property.
-     *
-     * @return possible object is
-     *         {@link Float }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Float }
+     *     
      */
     public Float getCalculatedPI() {
         return calculatedPI;
@@ -214,9 +243,11 @@ public class SpectrumIdentificationItem
 
     /**
      * Sets the value of the calculatedPI property.
-     *
-     * @param value allowed object is
-     *              {@link Float }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Float }
+     *     
      */
     public void setCalculatedPI(Float value) {
         this.calculatedPI = value;
@@ -224,9 +255,11 @@ public class SpectrumIdentificationItem
 
     /**
      * Gets the value of the peptide property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public Peptide getPeptide() {
         return peptide;
@@ -234,9 +267,11 @@ public class SpectrumIdentificationItem
 
     /**
      * Sets the value of the peptide property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setPeptide(Peptide value) {
         this.peptide = value;
@@ -244,6 +279,7 @@ public class SpectrumIdentificationItem
 
     /**
      * Gets the value of the rank property.
+     * 
      */
     public int getRank() {
         return rank;
@@ -251,6 +287,7 @@ public class SpectrumIdentificationItem
 
     /**
      * Sets the value of the rank property.
+     * 
      */
     public void setRank(int value) {
         this.rank = value;
@@ -258,6 +295,7 @@ public class SpectrumIdentificationItem
 
     /**
      * Gets the value of the passThreshold property.
+     * 
      */
     public boolean isPassThreshold() {
         return passThreshold;
@@ -265,6 +303,7 @@ public class SpectrumIdentificationItem
 
     /**
      * Sets the value of the passThreshold property.
+     * 
      */
     public void setPassThreshold(boolean value) {
         this.passThreshold = value;
@@ -272,9 +311,11 @@ public class SpectrumIdentificationItem
 
     /**
      * Gets the value of the massTableRef property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getMassTableRef() {
         return massTableRef;
@@ -282,9 +323,11 @@ public class SpectrumIdentificationItem
 
     /**
      * Sets the value of the massTableRef property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setMassTableRef(String value) {
         this.massTableRef = value;
@@ -292,9 +335,11 @@ public class SpectrumIdentificationItem
 
     /**
      * Gets the value of the sampleRef property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getSampleRef() {
         return sampleRef;
@@ -302,9 +347,11 @@ public class SpectrumIdentificationItem
 
     /**
      * Sets the value of the sampleRef property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setSampleRef(String value) {
         this.sampleRef = value;

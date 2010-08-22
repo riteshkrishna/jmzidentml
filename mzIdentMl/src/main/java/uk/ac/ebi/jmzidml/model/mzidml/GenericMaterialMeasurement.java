@@ -1,19 +1,22 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
 
 
 /**
- * A subclass of MaterialMeasurement to be used without being extended in conjunction with GenericProtocolApplication and GenericMaterial to model measured sources of materials.
- * <p/>
+ * A subclass of MaterialMeasurement to be used without being extended in conjunction with
+ *                 GenericProtocolApplication and GenericMaterial to model measured sources of materials.
+ *             
+ * 
  * <p>Java class for FuGE.Bio.Material.GenericMaterialMeasurementType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Bio.Material.GenericMaterialMeasurementType">
  *   &lt;complexContent>
@@ -23,12 +26,15 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Bio.Material.GenericMaterialMeasurementType")
 public class GenericMaterialMeasurement
-        extends MaterialMeasurement
-        implements Serializable {
+    extends MaterialMeasurement
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(name = "Material_ref", required = true)
@@ -36,9 +42,11 @@ public class GenericMaterialMeasurement
 
     /**
      * Gets the value of the materialRef property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getMaterialRef() {
         return materialRef;
@@ -46,9 +54,11 @@ public class GenericMaterialMeasurement
 
     /**
      * Sets the value of the materialRef property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setMaterialRef(String value) {
         this.materialRef = value;

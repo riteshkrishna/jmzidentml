@@ -1,18 +1,26 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.DBSequenceAdapter;
 
 
 /**
  * A single result of the ProteinDetection analysis (i.e. a protein).
- * <p/>
+ * 
  * <p>Java class for PSI-PI.analysis.process.ProteinDetectionHypothesisType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="PSI-PI.analysis.process.ProteinDetectionHypothesisType">
  *   &lt;complexContent>
@@ -27,48 +35,54 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PSI-PI.analysis.process.ProteinDetectionHypothesisType", propOrder = {
-        "peptideHypothesis",
-        "paramGroup"
+    "peptideHypothesis",
+    "paramGroup"
 })
 public class ProteinDetectionHypothesis
-        extends Identifiable
-        implements Serializable {
+    extends Identifiable
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "PeptideHypothesis", required = true)
     protected List<PeptideHypothesis> peptideHypothesis;
     @XmlElements({
-            @XmlElement(name = "cvParam", type = CvParam.class),
-            @XmlElement(name = "userParam", type = UserParam.class)
+        @XmlElement(name = "cvParam", type = CvParam.class),
+        @XmlElement(name = "userParam", type = UserParam.class)
     })
     protected List<Param> paramGroup;
     @XmlAttribute(name = "DBSequence_ref")
-    protected String dbSequenceRef;
+    @XmlJavaTypeAdapter(DBSequenceAdapter.class)
+    protected DBSequence dbSequenceProteinDetection;
     @XmlAttribute(required = true)
     protected boolean passThreshold;
 
     /**
      * Gets the value of the peptideHypothesis property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the peptideHypothesis property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getPeptideHypothesis().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link PeptideHypothesis }
+     * 
+     * 
      */
     public List<PeptideHypothesis> getPeptideHypothesis() {
         if (peptideHypothesis == null) {
@@ -79,24 +93,26 @@ public class ProteinDetectionHypothesis
 
     /**
      * Gets the value of the paramGroup property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the paramGroup property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getParamGroup().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link CvParam }
      * {@link UserParam }
+     * 
+     * 
      */
     public List<Param> getParamGroup() {
         if (paramGroup == null) {
@@ -106,27 +122,32 @@ public class ProteinDetectionHypothesis
     }
 
     /**
-     * Gets the value of the dbSequenceRef property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * Gets the value of the dbSequenceProteinDetection property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public String getDBSequenceRef() {
-        return dbSequenceRef;
+    public DBSequence getDBSequenceProteinDetection() {
+        return dbSequenceProteinDetection;
     }
 
     /**
-     * Sets the value of the dbSequenceRef property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * Sets the value of the dbSequenceProteinDetection property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public void setDBSequenceRef(String value) {
-        this.dbSequenceRef = value;
+    public void setDBSequenceProteinDetection(DBSequence value) {
+        this.dbSequenceProteinDetection = value;
     }
 
     /**
      * Gets the value of the passThreshold property.
+     * 
      */
     public boolean isPassThreshold() {
         return passThreshold;
@@ -134,6 +155,7 @@ public class ProteinDetectionHypothesis
 
     /**
      * Sets the value of the passThreshold property.
+     * 
      */
     public void setPassThreshold(boolean value) {
         this.passThreshold = value;

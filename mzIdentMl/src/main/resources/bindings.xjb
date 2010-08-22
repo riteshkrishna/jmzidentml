@@ -139,9 +139,32 @@
             <jxb:class name="PeptideHypothesis"/>
         </jxb:bindings>
 
+        <!-- Added by Ritesh>
+        <jxb:bindings
+                node="//xsd:complexType[@name='PeptideHypothesisType']/xsd:complexContent/xsd:attribute[@name='PeptideEvidence_Ref']">
+            <jxb:property name="PeptideEvidence">
+                <jxb:baseType>
+                    <xjc:javaType name="PeptideEvidence"
+                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.PeptideEvidenceAdapter"/>
+                </jxb:baseType>
+            </jxb:property>
+        </jxb:bindings>
+
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.process.PeptideEvidenceType']">
             <jxb:class name="PeptideEvidence"/>
         </jxb:bindings>
+
+        <!-- Added by Ritesh -->
+        <jxb:bindings
+                node="//xsd:complexType[@name='PSI-PI.analysis.process.PeptideEvidenceType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='DBSequence_Ref']">
+            <jxb:property name="DBSequence">
+                <jxb:baseType>
+                    <xjc:javaType name="DBSequence"
+                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.DBSequenceAdapter"/>
+                </jxb:baseType>
+            </jxb:property>
+        </jxb:bindings>
+
 
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinAmbiguityGroupType']">
             <jxb:class name="ProteinAmbiguityGroup"/>
@@ -150,6 +173,18 @@
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinDetectionHypothesisType']">
             <jxb:class name="ProteinDetectionHypothesis"/>
         </jxb:bindings>
+
+        <!-- Added by Ritesh-->
+        <jxb:bindings
+                node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinDetectionHypothesisType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='DBSequence_ref']">
+            <jxb:property name="DBSequence_ProteinDetection">
+                <jxb:baseType>
+                    <xjc:javaType name="DBSequence"
+                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.DBSequenceAdapter"/>
+                </jxb:baseType>
+            </jxb:property>
+        </jxb:bindings>
+
 
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinDetectionListType']">
             <jxb:class name="ProteinDetectionList"/>

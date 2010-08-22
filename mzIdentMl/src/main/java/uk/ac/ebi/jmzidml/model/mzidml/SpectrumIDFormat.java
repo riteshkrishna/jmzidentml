@@ -1,21 +1,21 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
  * The format of the spectrum identifier within the source file
- * <p/>
+ * 
  * <p>Java class for spectrumIDFormatType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="spectrumIDFormatType">
  *   &lt;complexContent>
@@ -27,13 +27,16 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "spectrumIDFormatType", propOrder = {
-        "cvParam"
+    "cvParam"
 })
 public class SpectrumIDFormat
-        implements Serializable, MzIdentMLObject {
+    implements Serializable, MzIdentMLObject
+{
 
     private final static long serialVersionUID = 100L;
     @XmlElement(required = true)
@@ -41,9 +44,11 @@ public class SpectrumIDFormat
 
     /**
      * Gets the value of the cvParam property.
-     *
-     * @return possible object is
-     *         {@link CvParam }
+     * 
+     * @return
+     *     possible object is
+     *     {@link CvParam }
+     *     
      */
     public CvParam getCvParam() {
         return cvParam;
@@ -51,9 +56,11 @@ public class SpectrumIDFormat
 
     /**
      * Sets the value of the cvParam property.
-     *
-     * @param value allowed object is
-     *              {@link CvParam }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link CvParam }
+     *     
      */
     public void setCvParam(CvParam value) {
         this.cvParam = value;

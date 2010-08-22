@@ -1,18 +1,26 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlType;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
- * MaterialMeasurement represents the quantity of a source Material used in a ProtocolApplication. MaterialMeasurement is abstract and should be extended if a subclass of ProtocolApplication has to be associated with a measured source of a subclass of Material.
- * <p/>
+ * MaterialMeasurement represents the quantity of a source Material used in a
+ *                 ProtocolApplication. MaterialMeasurement is abstract and should be extended if a subclass of
+ *                 ProtocolApplication has to be associated with a measured source of a subclass of Material.
+ *             
+ * 
  * <p>Java class for FuGE.Bio.Material.MaterialMeasurementType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Bio.Material.MaterialMeasurementType">
  *   &lt;complexContent>
@@ -24,34 +32,39 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Bio.Material.MaterialMeasurementType", propOrder = {
-        "measurementGroup"
+    "measurementGroup"
 })
 @XmlSeeAlso({
-        GenericMaterialMeasurement.class
+    GenericMaterialMeasurement.class
 })
 public abstract class MaterialMeasurement
-        implements Serializable, MzIdentMLObject {
+    implements Serializable, MzIdentMLObject
+{
 
     private final static long serialVersionUID = 100L;
     @XmlElements({
-            @XmlElement(name = "ComplexValue", type = ComplexValue.class),
-            @XmlElement(name = "AtomicValue", type = AtomicValue.class),
-            @XmlElement(name = "Range", type = Range.class),
-            @XmlElement(name = "BooleanValue", type = BooleanValue.class)
+        @XmlElement(name = "BooleanValue", type = BooleanValue.class),
+        @XmlElement(name = "ComplexValue", type = ComplexValue.class),
+        @XmlElement(name = "AtomicValue", type = AtomicValue.class),
+        @XmlElement(name = "Range", type = Range.class)
     })
     protected Measurement measurementGroup;
 
     /**
      * The value of the measured source of material.
-     *
-     * @return possible object is
-     *         {@link ComplexValue }
-     *         {@link AtomicValue }
-     *         {@link Range }
-     *         {@link BooleanValue }
+     * 
+     * @return
+     *     possible object is
+     *     {@link BooleanValue }
+     *     {@link ComplexValue }
+     *     {@link AtomicValue }
+     *     {@link Range }
+     *     
      */
     public Measurement getMeasurementGroup() {
         return measurementGroup;
@@ -59,12 +72,14 @@ public abstract class MaterialMeasurement
 
     /**
      * Sets the value of the measurementGroup property.
-     *
-     * @param value allowed object is
-     *              {@link ComplexValue }
-     *              {@link AtomicValue }
-     *              {@link Range }
-     *              {@link BooleanValue }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BooleanValue }
+     *     {@link ComplexValue }
+     *     {@link AtomicValue }
+     *     {@link Range }
+     *     
      */
     public void setMeasurementGroup(Measurement value) {
         this.measurementGroup = value;

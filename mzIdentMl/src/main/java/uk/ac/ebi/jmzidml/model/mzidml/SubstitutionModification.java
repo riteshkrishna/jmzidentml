@@ -1,21 +1,22 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
  * A modification where one residue is substituted by another (amino acid change).
- * <p/>
+ *             
+ * 
  * <p>Java class for PSI-PI.polypeptide.SubstitutionModificationType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="PSI-PI.polypeptide.SubstitutionModificationType">
  *   &lt;complexContent>
@@ -41,11 +42,14 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PSI-PI.polypeptide.SubstitutionModificationType")
 public class SubstitutionModification
-        implements Serializable, MzIdentMLObject {
+    implements Serializable, MzIdentMLObject
+{
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(required = true)
@@ -61,9 +65,11 @@ public class SubstitutionModification
 
     /**
      * Gets the value of the originalResidue property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getOriginalResidue() {
         return originalResidue;
@@ -71,9 +77,11 @@ public class SubstitutionModification
 
     /**
      * Sets the value of the originalResidue property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setOriginalResidue(String value) {
         this.originalResidue = value;
@@ -81,9 +89,11 @@ public class SubstitutionModification
 
     /**
      * Gets the value of the replacementResidue property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getReplacementResidue() {
         return replacementResidue;
@@ -91,9 +101,11 @@ public class SubstitutionModification
 
     /**
      * Sets the value of the replacementResidue property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setReplacementResidue(String value) {
         this.replacementResidue = value;
@@ -101,9 +113,11 @@ public class SubstitutionModification
 
     /**
      * Gets the value of the location property.
-     *
-     * @return possible object is
-     *         {@link Integer }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
      */
     public Integer getLocation() {
         return location;
@@ -111,9 +125,11 @@ public class SubstitutionModification
 
     /**
      * Sets the value of the location property.
-     *
-     * @param value allowed object is
-     *              {@link Integer }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
      */
     public void setLocation(Integer value) {
         this.location = value;
@@ -121,9 +137,11 @@ public class SubstitutionModification
 
     /**
      * Gets the value of the avgMassDelta property.
-     *
-     * @return possible object is
-     *         {@link Double }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Double }
+     *     
      */
     public Double getAvgMassDelta() {
         return avgMassDelta;
@@ -131,9 +149,11 @@ public class SubstitutionModification
 
     /**
      * Sets the value of the avgMassDelta property.
-     *
-     * @param value allowed object is
-     *              {@link Double }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Double }
+     *     
      */
     public void setAvgMassDelta(Double value) {
         this.avgMassDelta = value;
@@ -141,9 +161,11 @@ public class SubstitutionModification
 
     /**
      * Gets the value of the monoisotopicMassDelta property.
-     *
-     * @return possible object is
-     *         {@link Double }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Double }
+     *     
      */
     public Double getMonoisotopicMassDelta() {
         return monoisotopicMassDelta;
@@ -151,9 +173,11 @@ public class SubstitutionModification
 
     /**
      * Sets the value of the monoisotopicMassDelta property.
-     *
-     * @param value allowed object is
-     *              {@link Double }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Double }
+     *     
      */
     public void setMonoisotopicMassDelta(Double value) {
         this.monoisotopicMassDelta = value;

@@ -1,19 +1,21 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
 
 
 /**
  * The use of a piece of software with the requisite Parameters and ParameterValues.
- * <p/>
+ *             
+ * 
  * <p>Java class for FuGE.Common.Protocol.SoftwareApplicationType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Common.Protocol.SoftwareApplicationType">
  *   &lt;complexContent>
@@ -23,12 +25,15 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Common.Protocol.SoftwareApplicationType")
 public class SoftwareApplication
-        extends ParameterizableApplication
-        implements Serializable {
+    extends ParameterizableApplication
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(name = "Software_ref", required = true)
@@ -36,9 +41,11 @@ public class SoftwareApplication
 
     /**
      * Gets the value of the softwareRef property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getSoftwareRef() {
         return softwareRef;
@@ -46,9 +53,11 @@ public class SoftwareApplication
 
     /**
      * Sets the value of the softwareRef property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setSoftwareRef(String value) {
         this.softwareRef = value;

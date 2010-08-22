@@ -1,22 +1,29 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.CalendarAdapter;
-
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.CalendarAdapter;
 
 
 /**
- * The upper-most hierarchy level of mzIdentML with sub-containers for example describing software, protocols and search results (spectrum identifications or protein detection results).
- * <p/>
+ * The upper-most hierarchy level of mzIdentML with sub-containers for example describing
+ *                 software, protocols and search results (spectrum identifications or protein detection results).
+ *             
+ * 
  * <p>Java class for PSI-PI.Main.mzIdentMLType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="PSI-PI.Main.mzIdentMLType">
  *   &lt;complexContent>
@@ -39,23 +46,26 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PSI-PI.Main.mzIdentMLType", propOrder = {
-        "cvList",
-        "analysisSoftwareList",
-        "provider",
-        "auditCollection",
-        "analysisSampleCollection",
-        "sequenceCollection",
-        "analysisCollection",
-        "analysisProtocolCollection",
-        "dataCollection",
-        "bibliographicReference"
+    "cvList",
+    "analysisSoftwareList",
+    "provider",
+    "auditCollection",
+    "analysisSampleCollection",
+    "sequenceCollection",
+    "analysisCollection",
+    "analysisProtocolCollection",
+    "dataCollection",
+    "bibliographicReference"
 })
 public class MzIdentML
-        extends Identifiable
-        implements Serializable {
+    extends Identifiable
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlElement(required = true)
@@ -87,9 +97,11 @@ public class MzIdentML
 
     /**
      * Gets the value of the cvList property.
-     *
-     * @return possible object is
-     *         {@link CvList }
+     * 
+     * @return
+     *     possible object is
+     *     {@link CvList }
+     *     
      */
     public CvList getCvList() {
         return cvList;
@@ -97,9 +109,11 @@ public class MzIdentML
 
     /**
      * Sets the value of the cvList property.
-     *
-     * @param value allowed object is
-     *              {@link CvList }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link CvList }
+     *     
      */
     public void setCvList(CvList value) {
         this.cvList = value;
@@ -107,9 +121,11 @@ public class MzIdentML
 
     /**
      * Gets the value of the analysisSoftwareList property.
-     *
-     * @return possible object is
-     *         {@link AnalysisSoftwareList }
+     * 
+     * @return
+     *     possible object is
+     *     {@link AnalysisSoftwareList }
+     *     
      */
     public AnalysisSoftwareList getAnalysisSoftwareList() {
         return analysisSoftwareList;
@@ -117,19 +133,25 @@ public class MzIdentML
 
     /**
      * Sets the value of the analysisSoftwareList property.
-     *
-     * @param value allowed object is
-     *              {@link AnalysisSoftwareList }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link AnalysisSoftwareList }
+     *     
      */
     public void setAnalysisSoftwareList(AnalysisSoftwareList value) {
         this.analysisSoftwareList = value;
     }
 
     /**
-     * The Provider of the mzIdentML record in terms of the contact and software.
-     *
-     * @return possible object is
-     *         {@link Provider }
+     * The Provider of the mzIdentML record in terms of the contact and
+     *                                 software.
+     *                             
+     * 
+     * @return
+     *     possible object is
+     *     {@link Provider }
+     *     
      */
     public Provider getProvider() {
         return provider;
@@ -137,9 +159,11 @@ public class MzIdentML
 
     /**
      * Sets the value of the provider property.
-     *
-     * @param value allowed object is
-     *              {@link Provider }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Provider }
+     *     
      */
     public void setProvider(Provider value) {
         this.provider = value;
@@ -147,9 +171,12 @@ public class MzIdentML
 
     /**
      * The complete set of Contacts (people and organisations) for this file.
-     *
-     * @return possible object is
-     *         {@link AuditCollection }
+     *                             
+     * 
+     * @return
+     *     possible object is
+     *     {@link AuditCollection }
+     *     
      */
     public AuditCollection getAuditCollection() {
         return auditCollection;
@@ -157,9 +184,11 @@ public class MzIdentML
 
     /**
      * Sets the value of the auditCollection property.
-     *
-     * @param value allowed object is
-     *              {@link AuditCollection }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link AuditCollection }
+     *     
      */
     public void setAuditCollection(AuditCollection value) {
         this.auditCollection = value;
@@ -167,9 +196,11 @@ public class MzIdentML
 
     /**
      * Gets the value of the analysisSampleCollection property.
-     *
-     * @return possible object is
-     *         {@link AnalysisSampleCollection }
+     * 
+     * @return
+     *     possible object is
+     *     {@link AnalysisSampleCollection }
+     *     
      */
     public AnalysisSampleCollection getAnalysisSampleCollection() {
         return analysisSampleCollection;
@@ -177,9 +208,11 @@ public class MzIdentML
 
     /**
      * Sets the value of the analysisSampleCollection property.
-     *
-     * @param value allowed object is
-     *              {@link AnalysisSampleCollection }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link AnalysisSampleCollection }
+     *     
      */
     public void setAnalysisSampleCollection(AnalysisSampleCollection value) {
         this.analysisSampleCollection = value;
@@ -187,9 +220,11 @@ public class MzIdentML
 
     /**
      * Gets the value of the sequenceCollection property.
-     *
-     * @return possible object is
-     *         {@link SequenceCollection }
+     * 
+     * @return
+     *     possible object is
+     *     {@link SequenceCollection }
+     *     
      */
     public SequenceCollection getSequenceCollection() {
         return sequenceCollection;
@@ -197,9 +232,11 @@ public class MzIdentML
 
     /**
      * Sets the value of the sequenceCollection property.
-     *
-     * @param value allowed object is
-     *              {@link SequenceCollection }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link SequenceCollection }
+     *     
      */
     public void setSequenceCollection(SequenceCollection value) {
         this.sequenceCollection = value;
@@ -207,9 +244,11 @@ public class MzIdentML
 
     /**
      * Gets the value of the analysisCollection property.
-     *
-     * @return possible object is
-     *         {@link AnalysisCollection }
+     * 
+     * @return
+     *     possible object is
+     *     {@link AnalysisCollection }
+     *     
      */
     public AnalysisCollection getAnalysisCollection() {
         return analysisCollection;
@@ -217,9 +256,11 @@ public class MzIdentML
 
     /**
      * Sets the value of the analysisCollection property.
-     *
-     * @param value allowed object is
-     *              {@link AnalysisCollection }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link AnalysisCollection }
+     *     
      */
     public void setAnalysisCollection(AnalysisCollection value) {
         this.analysisCollection = value;
@@ -227,9 +268,11 @@ public class MzIdentML
 
     /**
      * Gets the value of the analysisProtocolCollection property.
-     *
-     * @return possible object is
-     *         {@link AnalysisProtocolCollection }
+     * 
+     * @return
+     *     possible object is
+     *     {@link AnalysisProtocolCollection }
+     *     
      */
     public AnalysisProtocolCollection getAnalysisProtocolCollection() {
         return analysisProtocolCollection;
@@ -237,9 +280,11 @@ public class MzIdentML
 
     /**
      * Sets the value of the analysisProtocolCollection property.
-     *
-     * @param value allowed object is
-     *              {@link AnalysisProtocolCollection }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link AnalysisProtocolCollection }
+     *     
      */
     public void setAnalysisProtocolCollection(AnalysisProtocolCollection value) {
         this.analysisProtocolCollection = value;
@@ -247,9 +292,11 @@ public class MzIdentML
 
     /**
      * Gets the value of the dataCollection property.
-     *
-     * @return possible object is
-     *         {@link DataCollection }
+     * 
+     * @return
+     *     possible object is
+     *     {@link DataCollection }
+     *     
      */
     public DataCollection getDataCollection() {
         return dataCollection;
@@ -257,9 +304,11 @@ public class MzIdentML
 
     /**
      * Sets the value of the dataCollection property.
-     *
-     * @param value allowed object is
-     *              {@link DataCollection }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link DataCollection }
+     *     
      */
     public void setDataCollection(DataCollection value) {
         this.dataCollection = value;
@@ -267,23 +316,25 @@ public class MzIdentML
 
     /**
      * Any bibliographic references associated with the file Gets the value of the bibliographicReference property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the bibliographicReference property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getBibliographicReference().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link BibliographicReference }
+     * 
+     * 
      */
     public List<BibliographicReference> getBibliographicReference() {
         if (bibliographicReference == null) {
@@ -294,9 +345,11 @@ public class MzIdentML
 
     /**
      * Gets the value of the creationDate property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public Calendar getCreationDate() {
         return creationDate;
@@ -304,9 +357,11 @@ public class MzIdentML
 
     /**
      * Sets the value of the creationDate property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setCreationDate(Calendar value) {
         this.creationDate = value;
@@ -314,9 +369,11 @@ public class MzIdentML
 
     /**
      * Gets the value of the version property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getVersion() {
         return version;
@@ -324,9 +381,11 @@ public class MzIdentML
 
     /**
      * Sets the value of the version property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setVersion(String value) {
         this.version = value;

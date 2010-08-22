@@ -1,19 +1,21 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
 
 
 /**
  * The use of a piece of Equipment with the requisite Parameters and ParameterValues.
- * <p/>
+ *             
+ * 
  * <p>Java class for FuGE.Common.Protocol.EquipmentApplicationType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Common.Protocol.EquipmentApplicationType">
  *   &lt;complexContent>
@@ -24,12 +26,15 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Common.Protocol.EquipmentApplicationType")
 public class EquipmentApplication
-        extends ParameterizableApplication
-        implements Serializable {
+    extends ParameterizableApplication
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute
@@ -39,9 +44,11 @@ public class EquipmentApplication
 
     /**
      * Gets the value of the serialNumber property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getSerialNumber() {
         return serialNumber;
@@ -49,9 +56,11 @@ public class EquipmentApplication
 
     /**
      * Sets the value of the serialNumber property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setSerialNumber(String value) {
         this.serialNumber = value;
@@ -59,9 +68,11 @@ public class EquipmentApplication
 
     /**
      * Gets the value of the equipmentRef property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getEquipmentRef() {
         return equipmentRef;
@@ -69,9 +80,11 @@ public class EquipmentApplication
 
     /**
      * Sets the value of the equipmentRef property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setEquipmentRef(String value) {
         this.equipmentRef = value;

@@ -1,19 +1,20 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
 
 
 /**
  * A single entry from an ontology or a controlled vocabulary.
- * <p/>
+ * 
  * <p>Java class for FuGE.Common.Ontology.cvParamType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Common.Ontology.cvParamType">
  *   &lt;complexContent>
@@ -24,12 +25,15 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Common.Ontology.cvParamType")
 public class CvParam
-        extends Param
-        implements Serializable {
+    extends Param
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(required = true)
@@ -39,9 +43,11 @@ public class CvParam
 
     /**
      * Gets the value of the cvRef property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getCvRef() {
         return cvRef;
@@ -49,9 +55,11 @@ public class CvParam
 
     /**
      * Sets the value of the cvRef property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setCvRef(String value) {
         this.cvRef = value;
@@ -59,9 +67,11 @@ public class CvParam
 
     /**
      * Gets the value of the accession property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getAccession() {
         return accession;
@@ -69,9 +79,11 @@ public class CvParam
 
     /**
      * Sets the value of the accession property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setAccession(String value) {
         this.accession = value;

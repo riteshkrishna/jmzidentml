@@ -1,23 +1,23 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
  * A range value.
- * <p/>
+ * 
  * <p>Java class for FuGE.Common.Measurement.RangeType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Common.Measurement.RangeType">
  *   &lt;complexContent>
@@ -61,16 +61,19 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Common.Measurement.RangeType", propOrder = {
-        "lowerLimit",
-        "upperLimit",
-        "rangeDescriptors"
+    "lowerLimit",
+    "upperLimit",
+    "rangeDescriptors"
 })
 public class Range
-        extends Measurement
-        implements Serializable {
+    extends Measurement
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlElement(required = true)
@@ -81,9 +84,11 @@ public class Range
 
     /**
      * Gets the value of the lowerLimit property.
-     *
-     * @return possible object is
-     *         {@link Range.LowerLimit }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Range.LowerLimit }
+     *     
      */
     public Range.LowerLimit getLowerLimit() {
         return lowerLimit;
@@ -91,9 +96,11 @@ public class Range
 
     /**
      * Sets the value of the lowerLimit property.
-     *
-     * @param value allowed object is
-     *              {@link Range.LowerLimit }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Range.LowerLimit }
+     *     
      */
     public void setLowerLimit(Range.LowerLimit value) {
         this.lowerLimit = value;
@@ -101,9 +108,11 @@ public class Range
 
     /**
      * Gets the value of the upperLimit property.
-     *
-     * @return possible object is
-     *         {@link Range.UpperLimit }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Range.UpperLimit }
+     *     
      */
     public Range.UpperLimit getUpperLimit() {
         return upperLimit;
@@ -111,9 +120,11 @@ public class Range
 
     /**
      * Sets the value of the upperLimit property.
-     *
-     * @param value allowed object is
-     *              {@link Range.UpperLimit }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Range.UpperLimit }
+     *     
      */
     public void setUpperLimit(Range.UpperLimit value) {
         this.upperLimit = value;
@@ -121,23 +132,25 @@ public class Range
 
     /**
      * Gets the value of the rangeDescriptors property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the rangeDescriptors property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getRangeDescriptors().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Range.RangeDescriptors }
+     * 
+     * 
      */
     public List<Range.RangeDescriptors> getRangeDescriptors() {
         if (rangeDescriptors == null) {
@@ -149,9 +162,9 @@ public class Range
 
     /**
      * <p>Java class for anonymous complex type.
-     * <p/>
+     * 
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * <p/>
+     * 
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -163,13 +176,16 @@ public class Range
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
+     * 
+     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-            "propertyValue"
+        "propertyValue"
     })
     public static class LowerLimit
-            implements Serializable, MzIdentMLObject {
+        implements Serializable, MzIdentMLObject
+    {
 
         private final static long serialVersionUID = 100L;
         @XmlElement(name = "PropertyValue", required = true)
@@ -177,9 +193,11 @@ public class Range
 
         /**
          * Gets the value of the propertyValue property.
-         *
-         * @return possible object is
-         *         {@link PropertyValue }
+         * 
+         * @return
+         *     possible object is
+         *     {@link PropertyValue }
+         *     
          */
         public PropertyValue getPropertyValue() {
             return propertyValue;
@@ -187,9 +205,11 @@ public class Range
 
         /**
          * Sets the value of the propertyValue property.
-         *
-         * @param value allowed object is
-         *              {@link PropertyValue }
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link PropertyValue }
+         *     
          */
         public void setPropertyValue(PropertyValue value) {
             this.propertyValue = value;
@@ -200,9 +220,9 @@ public class Range
 
     /**
      * <p>Java class for anonymous complex type.
-     * <p/>
+     * 
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * <p/>
+     * 
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -214,13 +234,16 @@ public class Range
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
+     * 
+     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-            "cvParam"
+        "cvParam"
     })
     public static class RangeDescriptors
-            implements Serializable, MzIdentMLObject {
+        implements Serializable, MzIdentMLObject
+    {
 
         private final static long serialVersionUID = 100L;
         @XmlElement(required = true)
@@ -228,9 +251,11 @@ public class Range
 
         /**
          * Gets the value of the cvParam property.
-         *
-         * @return possible object is
-         *         {@link CvParam }
+         * 
+         * @return
+         *     possible object is
+         *     {@link CvParam }
+         *     
          */
         public CvParam getCvParam() {
             return cvParam;
@@ -238,9 +263,11 @@ public class Range
 
         /**
          * Sets the value of the cvParam property.
-         *
-         * @param value allowed object is
-         *              {@link CvParam }
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link CvParam }
+         *     
          */
         public void setCvParam(CvParam value) {
             this.cvParam = value;
@@ -251,9 +278,9 @@ public class Range
 
     /**
      * <p>Java class for anonymous complex type.
-     * <p/>
+     * 
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * <p/>
+     * 
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -265,13 +292,16 @@ public class Range
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
+     * 
+     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-            "propertyValue"
+        "propertyValue"
     })
     public static class UpperLimit
-            implements Serializable, MzIdentMLObject {
+        implements Serializable, MzIdentMLObject
+    {
 
         private final static long serialVersionUID = 100L;
         @XmlElement(name = "PropertyValue", required = true)
@@ -279,9 +309,11 @@ public class Range
 
         /**
          * Gets the value of the propertyValue property.
-         *
-         * @return possible object is
-         *         {@link PropertyValue }
+         * 
+         * @return
+         *     possible object is
+         *     {@link PropertyValue }
+         *     
          */
         public PropertyValue getPropertyValue() {
             return propertyValue;
@@ -289,9 +321,11 @@ public class Range
 
         /**
          * Sets the value of the propertyValue property.
-         *
-         * @param value allowed object is
-         *              {@link PropertyValue }
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link PropertyValue }
+         *     
          */
         public void setPropertyValue(PropertyValue value) {
             this.propertyValue = value;

@@ -121,7 +121,8 @@
             </snapshots>
         </repository>
     </repositories>
-    <!--
+
+    <!-- Florian says - uncomment this -->
         <pluginRepositories>
             <pluginRepository>
                 <id>maven2-repository.dev.java.net</id>
@@ -134,7 +135,7 @@
                 <layout>legacy</layout>
             </pluginRepository>
         </pluginRepositories>
-    -->
+     
 
     <distributionManagement>
         <repository>

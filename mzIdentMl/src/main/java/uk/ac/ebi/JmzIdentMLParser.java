@@ -5,6 +5,7 @@
 
 package uk.ac.ebi;
 
+import java.util.List;
 import org.xml.sax.SAXException;
 import uk.ac.ebi.jmzidml.model.mzidml.CvList;
 import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationResult;
@@ -13,10 +14,16 @@ import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.net.URL;
+import uk.ac.ebi.jmzidml.model.mzidml.DBSequence;
+import uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidence;
+import uk.ac.ebi.jmzidml.model.mzidml.PeptideHypothesis;
+import uk.ac.ebi.jmzidml.model.mzidml.ProteinDetectionHypothesis;
+import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationItem;
 
 public class JmzIdentMLParser {
 
     public static void main(String[] args) {
+        List<SpectrumIdentificationItem> SpectrumIdentificationItem;
 
         try {
 
@@ -34,12 +41,39 @@ public class JmzIdentMLParser {
                 MzIdentMLObjectIterator iter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/DataCollection/AnalysisData/SpectrumIdentificationList/SpectrumIdentificationResult", SpectrumIdentificationResult.class);
                 while (iter.hasNext()) {
                     SpectrumIdentificationResult res = (SpectrumIdentificationResult) iter.next();
-                    System.out.println("res = " + res.getSpectrumIdentificationItem().get(0).getPeptide());
-                }
+                    System.out.println("Peptide info = " + res.getSpectrumIdentificationItem().get(0).getPeptide().getId());
 
-                System.out.println("Accn : " + unmarshaller.getMzIdentMLAccession());
-                System.out.println("Version : " + unmarshaller.getMzIdentMLVersion());
-                System.out.println("XPath Obj Count : " + unmarshaller.getObjectCountForXpath("/mzIdentML/DataCollection/AnalysisData/SpectrumIdentificationList/SpectrumIdentificationResult/SpectrumIdentificationItem"));
+                     List<SpectrumIdentificationItem> SI = res.getSpectrumIdentificationItem();
+                        for(int i = 0; i < SI.size(); i++){
+                            if(!SI.get(i).getPeptideEvidence().isEmpty()){
+                                List<PeptideEvidence> PE = SI.get(i).getPeptideEvidence();
+
+                                for(int k = 0; k < PE.size(); k++){
+                                    System.out.println("Peptide Evidence :: ID = " + PE.get(k).getId());
+                                    System.out.println("Peptide Evidence :: DBSequence ID = " + PE.get(k).getDBSequence().getAccession());
+                                    System.out.println("Peptide Evidence :: DBSequence Sequence = " + PE.get(k).getDBSequence().getSeq());
+
+                                }
+                            }
+                        }
+                }
+               
+                System.out.println("\n\n Testing Adapters in ProteinDetectionHypothesis : \n\n");
+
+                MzIdentMLObjectIterator iterPD = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/DataCollection/AnalysisData/ProteinDetectionList/ProteinAmbiguityGroup/ProteinDetectionHypothesis", ProteinDetectionHypothesis.class);
+                while(iterPD.hasNext()){
+                    ProteinDetectionHypothesis ph = (ProteinDetectionHypothesis)iterPD.next();
+                    System.out.println("ProteinDetectionHypothesis ID = " + ph.getId());
+                    System.out.println("ProteinDetectionHypothesis : Resolved -- DB_Ref = " + ph.getDBSequenceProteinDetection().getId() + "\t" + ph.getDBSequenceProteinDetection().getAccession());
+
+                    List <PeptideHypothesis> pepHyp = ph.getPeptideHypothesis();
+                    for(int i = 0; i < pepHyp.size() ; i++){
+                        System.out.println("---- Resolved PeptideHypothesis :: ID = " + pepHyp.get(i).getPeptideEvidenceRef());
+                        //--- not getting the object !!
+                        //System.out.println("---- Resolved PeptideHypothesis :: ID = " + pepHyp.get(i).);
+                    }
+
+                }
 
             } else {
                 System.err.println("FILE NOT FOUND");

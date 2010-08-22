@@ -1,19 +1,20 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
 
 
 /**
  * A Boolean value.
- * <p/>
+ * 
  * <p>Java class for FuGE.Common.Measurement.BooleanValueType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Common.Measurement.BooleanValueType">
  *   &lt;complexContent>
@@ -23,12 +24,15 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Common.Measurement.BooleanValueType")
 public class BooleanValue
-        extends Measurement
-        implements Serializable {
+    extends Measurement
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(required = true)
@@ -36,6 +40,7 @@ public class BooleanValue
 
     /**
      * Gets the value of the value property.
+     * 
      */
     public boolean isValue() {
         return value;
@@ -43,6 +48,7 @@ public class BooleanValue
 
     /**
      * Sets the value of the value property.
+     * 
      */
     public void setValue(boolean value) {
         this.value = value;

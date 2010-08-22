@@ -1,18 +1,25 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * A database for searching mass spectra. Examples include a set of amino acid sequence entries, or annotated spectra libraries.
- * <p/>
+ * A database for searching mass spectra. Examples include a set of amino acid sequence
+ *                 entries, or annotated spectra libraries.
+ *             
+ * 
  * <p>Java class for PSI-PI.analysis.search.SearchDatabaseType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="PSI-PI.analysis.search.SearchDatabaseType">
  *   &lt;complexContent>
@@ -29,15 +36,18 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PSI-PI.analysis.search.SearchDatabaseType", propOrder = {
-        "databaseName",
-        "cvParam"
+    "databaseName",
+    "cvParam"
 })
 public class AnalysisSearchDatabase
-        extends ExternalData
-        implements Serializable {
+    extends ExternalData
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "DatabaseName", required = true)
@@ -54,9 +64,11 @@ public class AnalysisSearchDatabase
 
     /**
      * Gets the value of the databaseName property.
-     *
-     * @return possible object is
-     *         {@link ParamAlternative }
+     * 
+     * @return
+     *     possible object is
+     *     {@link ParamAlternative }
+     *     
      */
     public ParamAlternative getDatabaseName() {
         return databaseName;
@@ -64,9 +76,11 @@ public class AnalysisSearchDatabase
 
     /**
      * Sets the value of the databaseName property.
-     *
-     * @param value allowed object is
-     *              {@link ParamAlternative }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ParamAlternative }
+     *     
      */
     public void setDatabaseName(ParamAlternative value) {
         this.databaseName = value;
@@ -74,23 +88,25 @@ public class AnalysisSearchDatabase
 
     /**
      * Gets the value of the cvParam property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the cvParam property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getCvParam().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link CvParam }
+     * 
+     * 
      */
     public List<CvParam> getCvParam() {
         if (cvParam == null) {
@@ -101,9 +117,11 @@ public class AnalysisSearchDatabase
 
     /**
      * Gets the value of the version property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getVersion() {
         return version;
@@ -111,9 +129,11 @@ public class AnalysisSearchDatabase
 
     /**
      * Sets the value of the version property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setVersion(String value) {
         this.version = value;
@@ -121,9 +141,11 @@ public class AnalysisSearchDatabase
 
     /**
      * Gets the value of the releaseDate property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getReleaseDate() {
         return releaseDate;
@@ -131,9 +153,11 @@ public class AnalysisSearchDatabase
 
     /**
      * Sets the value of the releaseDate property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setReleaseDate(String value) {
         this.releaseDate = value;
@@ -141,9 +165,11 @@ public class AnalysisSearchDatabase
 
     /**
      * Gets the value of the numDatabaseSequences property.
-     *
-     * @return possible object is
-     *         {@link Long }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *     
      */
     public Long getNumDatabaseSequences() {
         return numDatabaseSequences;
@@ -151,9 +177,11 @@ public class AnalysisSearchDatabase
 
     /**
      * Sets the value of the numDatabaseSequences property.
-     *
-     * @param value allowed object is
-     *              {@link Long }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *     
      */
     public void setNumDatabaseSequences(Long value) {
         this.numDatabaseSequences = value;
@@ -161,9 +189,11 @@ public class AnalysisSearchDatabase
 
     /**
      * Gets the value of the numResidues property.
-     *
-     * @return possible object is
-     *         {@link Long }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *     
      */
     public Long getNumResidues() {
         return numResidues;
@@ -171,9 +201,11 @@ public class AnalysisSearchDatabase
 
     /**
      * Sets the value of the numResidues property.
-     *
-     * @param value allowed object is
-     *              {@link Long }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *     
      */
     public void setNumResidues(Long value) {
         this.numResidues = value;

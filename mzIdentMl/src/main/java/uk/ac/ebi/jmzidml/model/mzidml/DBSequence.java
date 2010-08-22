@@ -1,18 +1,27 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * A database sequence from the specified SearchDatabase (nucleic acid or amino acid). If the sequence is nucleic acid, the source nucleic acid sequence should be given in the seq attribute rather than a translated sequence.
- * <p/>
+ * A database sequence from the specified SearchDatabase (nucleic acid or amino acid). If
+ *                 the sequence is nucleic acid, the source nucleic acid sequence should be given in the seq attribute
+ *                 rather than a translated sequence.
+ *             
+ * 
  * <p>Java class for PSI-PI.analysis.search.DBSequenceType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="PSI-PI.analysis.search.DBSequenceType">
  *   &lt;complexContent>
@@ -28,21 +37,24 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PSI-PI.analysis.search.DBSequenceType", propOrder = {
-        "seq",
-        "paramGroup"
+    "seq",
+    "paramGroup"
 })
 public class DBSequence
-        extends ConceptualMolecule
-        implements Serializable {
+    extends ConceptualMolecule
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     protected String seq;
     @XmlElements({
-            @XmlElement(name = "cvParam", type = CvParam.class),
-            @XmlElement(name = "userParam", type = UserParam.class)
+        @XmlElement(name = "cvParam", type = CvParam.class),
+        @XmlElement(name = "userParam", type = UserParam.class)
     })
     protected List<Param> paramGroup;
     @XmlAttribute
@@ -54,9 +66,11 @@ public class DBSequence
 
     /**
      * Gets the value of the seq property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getSeq() {
         return seq;
@@ -64,9 +78,11 @@ public class DBSequence
 
     /**
      * Sets the value of the seq property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setSeq(String value) {
         this.seq = value;
@@ -74,24 +90,26 @@ public class DBSequence
 
     /**
      * Gets the value of the paramGroup property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the paramGroup property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getParamGroup().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link CvParam }
      * {@link UserParam }
+     * 
+     * 
      */
     public List<Param> getParamGroup() {
         if (paramGroup == null) {
@@ -102,9 +120,11 @@ public class DBSequence
 
     /**
      * Gets the value of the length property.
-     *
-     * @return possible object is
-     *         {@link Integer }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
      */
     public Integer getLength() {
         return length;
@@ -112,9 +132,11 @@ public class DBSequence
 
     /**
      * Sets the value of the length property.
-     *
-     * @param value allowed object is
-     *              {@link Integer }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
      */
     public void setLength(Integer value) {
         this.length = value;
@@ -122,9 +144,11 @@ public class DBSequence
 
     /**
      * Gets the value of the searchDatabaseRef property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getSearchDatabaseRef() {
         return searchDatabaseRef;
@@ -132,9 +156,11 @@ public class DBSequence
 
     /**
      * Sets the value of the searchDatabaseRef property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setSearchDatabaseRef(String value) {
         this.searchDatabaseRef = value;
@@ -142,9 +168,11 @@ public class DBSequence
 
     /**
      * Gets the value of the accession property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getAccession() {
         return accession;
@@ -152,9 +180,11 @@ public class DBSequence
 
     /**
      * Sets the value of the accession property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setAccession(String value) {
         this.accession = value;

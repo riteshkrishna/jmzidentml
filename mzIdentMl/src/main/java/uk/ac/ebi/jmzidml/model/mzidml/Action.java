@@ -1,16 +1,23 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * An Action is one step of a Protocol. Sets of ordered Actions define the Protocol. Action is abstract and can be extended to specify particular types of steps within a subclass of Protocol.
- * <p/>
+ * An Action is one step of a Protocol. Sets of ordered Actions define the Protocol. Action
+ *                 is abstract and can be extended to specify particular types of steps within a subclass of Protocol.
+ *             
+ * 
  * <p>Java class for FuGE.Common.Protocol.ActionType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Common.Protocol.ActionType">
  *   &lt;complexContent>
@@ -20,15 +27,18 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Common.Protocol.ActionType")
 @XmlSeeAlso({
-        GenericAction.class
+    GenericAction.class
 })
 public abstract class Action
-        extends Identifiable
-        implements Serializable {
+    extends Identifiable
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute
@@ -36,9 +46,11 @@ public abstract class Action
 
     /**
      * Gets the value of the actionOrdinal property.
-     *
-     * @return possible object is
-     *         {@link Integer }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
      */
     public Integer getActionOrdinal() {
         return actionOrdinal;
@@ -46,9 +58,11 @@ public abstract class Action
 
     /**
      * Sets the value of the actionOrdinal property.
-     *
-     * @param value allowed object is
-     *              {@link Integer }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
      */
     public void setActionOrdinal(Integer value) {
         this.actionOrdinal = value;

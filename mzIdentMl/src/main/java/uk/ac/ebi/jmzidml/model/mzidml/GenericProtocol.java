@@ -1,20 +1,27 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
- * GenericProtocol should be used with GenericAction, GenericParameter or protocolText to describe protocols in a data format for cases where no explicit extension of Protocol has been developed.
- * <p/>
+ * GenericProtocol should be used with GenericAction, GenericParameter or protocolText to
+ *                 describe protocols in a data format for cases where no explicit extension of Protocol has been
+ *                 developed.
+ *             
+ * 
  * <p>Java class for FuGE.Common.Protocol.GenericProtocolType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Common.Protocol.GenericProtocolType">
  *   &lt;complexContent>
@@ -46,18 +53,21 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Common.Protocol.GenericProtocolType", propOrder = {
-        "protocolText",
-        "software",
-        "equipment",
-        "genericParameter",
-        "genericAction"
+    "protocolText",
+    "software",
+    "equipment",
+    "genericParameter",
+    "genericAction"
 })
 public class GenericProtocol
-        extends Protocol
-        implements Serializable {
+    extends Protocol
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     protected String protocolText;
@@ -70,9 +80,11 @@ public class GenericProtocol
 
     /**
      * Gets the value of the protocolText property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getProtocolText() {
         return protocolText;
@@ -80,9 +92,11 @@ public class GenericProtocol
 
     /**
      * Sets the value of the protocolText property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setProtocolText(String value) {
         this.protocolText = value;
@@ -90,23 +104,25 @@ public class GenericProtocol
 
     /**
      * Gets the value of the software property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the software property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getSoftware().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link GenericProtocol.Software }
+     * 
+     * 
      */
     public List<GenericProtocol.Software> getSoftware() {
         if (software == null) {
@@ -117,23 +133,25 @@ public class GenericProtocol
 
     /**
      * Gets the value of the equipment property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the equipment property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getEquipment().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link GenericProtocol.Equipment }
+     * 
+     * 
      */
     public List<GenericProtocol.Equipment> getEquipment() {
         if (equipment == null) {
@@ -143,24 +161,26 @@ public class GenericProtocol
     }
 
     /**
-     * The parameters defined for the GenericProtocol. Gets the value of the genericParameter property.
-     * <p/>
-     * <p/>
+     * The parameters defined for the GenericProtocol.Gets the value of the genericParameter property.
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the genericParameter property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getGenericParameter().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link GenericParameter }
+     * 
+     * 
      */
     public List<GenericParameter> getGenericParameter() {
         if (genericParameter == null) {
@@ -170,24 +190,26 @@ public class GenericProtocol
     }
 
     /**
-     * The actions performed within a GenericProtocol. Gets the value of the genericAction property.
-     * <p/>
-     * <p/>
+     * The actions performed within a GenericProtocol.Gets the value of the genericAction property.
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the genericAction property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getGenericAction().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link GenericAction }
+     * 
+     * 
      */
     public List<GenericAction> getGenericAction() {
         if (genericAction == null) {
@@ -199,9 +221,9 @@ public class GenericProtocol
 
     /**
      * <p>Java class for anonymous complex type.
-     * <p/>
+     * 
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * <p/>
+     * 
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -211,11 +233,14 @@ public class GenericProtocol
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
+     * 
+     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "")
     public static class Equipment
-            implements Serializable, MzIdentMLObject {
+        implements Serializable, MzIdentMLObject
+    {
 
         private final static long serialVersionUID = 100L;
         @XmlAttribute(name = "GenericEquipment_ref", required = true)
@@ -223,9 +248,11 @@ public class GenericProtocol
 
         /**
          * Gets the value of the genericEquipmentRef property.
-         *
-         * @return possible object is
-         *         {@link String }
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
          */
         public String getGenericEquipmentRef() {
             return genericEquipmentRef;
@@ -233,9 +260,11 @@ public class GenericProtocol
 
         /**
          * Sets the value of the genericEquipmentRef property.
-         *
-         * @param value allowed object is
-         *              {@link String }
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
          */
         public void setGenericEquipmentRef(String value) {
             this.genericEquipmentRef = value;
@@ -246,9 +275,9 @@ public class GenericProtocol
 
     /**
      * <p>Java class for anonymous complex type.
-     * <p/>
+     * 
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * <p/>
+     * 
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -258,11 +287,14 @@ public class GenericProtocol
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
+     * 
+     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "")
     public static class Software
-            implements Serializable, MzIdentMLObject {
+        implements Serializable, MzIdentMLObject
+    {
 
         private final static long serialVersionUID = 100L;
         @XmlAttribute(name = "GenericSoftware_ref", required = true)
@@ -270,9 +302,11 @@ public class GenericProtocol
 
         /**
          * Gets the value of the genericSoftwareRef property.
-         *
-         * @return possible object is
-         *         {@link String }
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
          */
         public String getGenericSoftwareRef() {
             return genericSoftwareRef;
@@ -280,9 +314,11 @@ public class GenericProtocol
 
         /**
          * Sets the value of the genericSoftwareRef property.
-         *
-         * @param value allowed object is
-         *              {@link String }
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
          */
         public void setGenericSoftwareRef(String value) {
             this.genericSoftwareRef = value;
