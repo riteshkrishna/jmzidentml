@@ -52,8 +52,8 @@ public abstract class Parameter
     @XmlElements({
         @XmlElement(name = "AtomicValue", type = AtomicValue.class),
         @XmlElement(name = "BooleanValue", type = BooleanValue.class),
-        @XmlElement(name = "ComplexValue", type = ComplexValue.class),
-        @XmlElement(name = "Range", type = Range.class)
+        @XmlElement(name = "Range", type = Range.class),
+        @XmlElement(name = "ComplexValue", type = ComplexValue.class)
     })
     protected Measurement measurementGroup;
 
@@ -64,8 +64,8 @@ public abstract class Parameter
      *     possible object is
      *     {@link AtomicValue }
      *     {@link BooleanValue }
-     *     {@link ComplexValue }
      *     {@link Range }
+     *     {@link ComplexValue }
      *     
      */
     public Measurement getMeasurementGroup() {
@@ -79,8 +79,8 @@ public abstract class Parameter
      *     allowed object is
      *     {@link AtomicValue }
      *     {@link BooleanValue }
-     *     {@link ComplexValue }
      *     {@link Range }
+     *     {@link ComplexValue }
      *     
      */
     public void setMeasurementGroup(Measurement value) {

@@ -52,8 +52,8 @@ public class ProteinDetectionHypothesis
     @XmlElement(name = "PeptideHypothesis", required = true)
     protected List<PeptideHypothesis> peptideHypothesis;
     @XmlElements({
-        @XmlElement(name = "cvParam", type = CvParam.class),
-        @XmlElement(name = "userParam", type = UserParam.class)
+        @XmlElement(name = "userParam", type = UserParam.class),
+        @XmlElement(name = "cvParam", type = CvParam.class)
     })
     protected List<Param> paramGroup;
     @XmlAttribute(name = "DBSequence_ref")
@@ -109,8 +109,8 @@ public class ProteinDetectionHypothesis
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link CvParam }
      * {@link UserParam }
+     * {@link CvParam }
      * 
      * 
      */

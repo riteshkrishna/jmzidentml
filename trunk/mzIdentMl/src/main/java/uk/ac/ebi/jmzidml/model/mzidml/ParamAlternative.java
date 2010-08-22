@@ -37,8 +37,8 @@ public class ParamAlternative
 
     private final static long serialVersionUID = 100L;
     @XmlElements({
-        @XmlElement(name = "cvParam", type = CvParam.class),
-        @XmlElement(name = "userParam", type = UserParam.class)
+        @XmlElement(name = "userParam", type = UserParam.class),
+        @XmlElement(name = "cvParam", type = CvParam.class)
     })
     protected Param paramGroup;
 
@@ -47,8 +47,8 @@ public class ParamAlternative
      * 
      * @return
      *     possible object is
-     *     {@link CvParam }
      *     {@link UserParam }
+     *     {@link CvParam }
      *     
      */
     public Param getParamGroup() {
@@ -60,8 +60,8 @@ public class ParamAlternative
      * 
      * @param value
      *     allowed object is
-     *     {@link CvParam }
      *     {@link UserParam }
+     *     {@link CvParam }
      *     
      */
     public void setParamGroup(Param value) {

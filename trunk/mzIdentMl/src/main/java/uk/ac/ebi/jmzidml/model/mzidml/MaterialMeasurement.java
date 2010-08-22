@@ -48,10 +48,10 @@ public abstract class MaterialMeasurement
 
     private final static long serialVersionUID = 100L;
     @XmlElements({
-        @XmlElement(name = "BooleanValue", type = BooleanValue.class),
-        @XmlElement(name = "ComplexValue", type = ComplexValue.class),
+        @XmlElement(name = "Range", type = Range.class),
         @XmlElement(name = "AtomicValue", type = AtomicValue.class),
-        @XmlElement(name = "Range", type = Range.class)
+        @XmlElement(name = "BooleanValue", type = BooleanValue.class),
+        @XmlElement(name = "ComplexValue", type = ComplexValue.class)
     })
     protected Measurement measurementGroup;
 
@@ -60,10 +60,10 @@ public abstract class MaterialMeasurement
      * 
      * @return
      *     possible object is
+     *     {@link Range }
+     *     {@link AtomicValue }
      *     {@link BooleanValue }
      *     {@link ComplexValue }
-     *     {@link AtomicValue }
-     *     {@link Range }
      *     
      */
     public Measurement getMeasurementGroup() {
@@ -75,10 +75,10 @@ public abstract class MaterialMeasurement
      * 
      * @param value
      *     allowed object is
+     *     {@link Range }
+     *     {@link AtomicValue }
      *     {@link BooleanValue }
      *     {@link ComplexValue }
-     *     {@link AtomicValue }
-     *     {@link Range }
      *     
      */
     public void setMeasurementGroup(Measurement value) {

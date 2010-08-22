@@ -49,8 +49,8 @@ public class SpectrumIdentificationList
 
     private final static long serialVersionUID = 100L;
     @XmlElements({
-        @XmlElement(name = "cvParam", type = CvParam.class),
-        @XmlElement(name = "userParam", type = UserParam.class)
+        @XmlElement(name = "userParam", type = UserParam.class),
+        @XmlElement(name = "cvParam", type = CvParam.class)
     })
     protected List<Param> paramGroup;
     @XmlElement(name = "FragmentationTable")
@@ -80,8 +80,8 @@ public class SpectrumIdentificationList
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link CvParam }
      * {@link UserParam }
+     * {@link CvParam }
      * 
      * 
      */
