@@ -1,19 +1,19 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
  * <p>Java class for PeptideHypothesisType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="PeptideHypothesisType">
  *   &lt;complexContent>
@@ -23,11 +23,14 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PeptideHypothesisType")
 public class PeptideHypothesis
-        implements Serializable, MzIdentMLObject {
+    implements Serializable, MzIdentMLObject
+{
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(name = "PeptideEvidence_Ref", required = true)
@@ -35,9 +38,11 @@ public class PeptideHypothesis
 
     /**
      * Gets the value of the peptideEvidenceRef property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getPeptideEvidenceRef() {
         return peptideEvidenceRef;
@@ -45,9 +50,11 @@ public class PeptideHypothesis
 
     /**
      * Sets the value of the peptideEvidenceRef property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setPeptideEvidenceRef(String value) {
         this.peptideEvidenceRef = value;

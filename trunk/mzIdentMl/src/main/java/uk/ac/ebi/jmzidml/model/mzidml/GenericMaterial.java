@@ -1,23 +1,25 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
- * A subclass of the abstract Material class, which should be used in conjunction with controlled vocabulary terms to describe Materials of any types used in an investigation.
- * <p/>
+ * A subclass of the abstract Material class, which should be used in conjunction with
+ *                 controlled vocabulary terms to describe Materials of any types used in an investigation.
+ *             
+ * 
  * <p>Java class for FuGE.Bio.Material.GenericMaterialType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Bio.Material.GenericMaterialType">
  *   &lt;complexContent>
@@ -37,37 +39,42 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Bio.Material.GenericMaterialType", propOrder = {
-        "components"
+    "components"
 })
 public class GenericMaterial
-        extends Material
-        implements Serializable {
+    extends Material
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     protected List<GenericMaterial.Components> components;
 
     /**
      * Gets the value of the components property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the components property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getComponents().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link GenericMaterial.Components }
+     * 
+     * 
      */
     public List<GenericMaterial.Components> getComponents() {
         if (components == null) {
@@ -79,9 +86,9 @@ public class GenericMaterial
 
     /**
      * <p>Java class for anonymous complex type.
-     * <p/>
+     * 
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * <p/>
+     * 
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -91,11 +98,14 @@ public class GenericMaterial
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
+     * 
+     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "")
     public static class Components
-            implements Serializable, MzIdentMLObject {
+        implements Serializable, MzIdentMLObject
+    {
 
         private final static long serialVersionUID = 100L;
         @XmlAttribute(name = "GenericMaterial_ref", required = true)
@@ -103,9 +113,11 @@ public class GenericMaterial
 
         /**
          * Gets the value of the genericMaterialRef property.
-         *
-         * @return possible object is
-         *         {@link String }
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
          */
         public String getGenericMaterialRef() {
             return genericMaterialRef;
@@ -113,9 +125,11 @@ public class GenericMaterial
 
         /**
          * Sets the value of the genericMaterialRef property.
-         *
-         * @param value allowed object is
-         *              {@link String }
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
          */
         public void setGenericMaterialRef(String value) {
             this.genericMaterialRef = value;

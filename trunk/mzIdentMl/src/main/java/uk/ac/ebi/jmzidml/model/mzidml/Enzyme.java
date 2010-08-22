@@ -1,18 +1,24 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
- * The details of an individual cleavage enzyme should be provided by giving a regular expression or a CV term if a "standard" enzyme cleavage has been performed.
- * <p/>
+ * The details of an individual cleavage enzyme should be provided by giving a regular
+ *                 expression or a CV term if a "standard" enzyme cleavage has been performed.
+ *             
+ * 
  * <p>Java class for PSI-PI.analysis.search.EnzymeType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="PSI-PI.analysis.search.EnzymeType">
  *   &lt;complexContent>
@@ -49,14 +55,17 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PSI-PI.analysis.search.EnzymeType", propOrder = {
-        "siteRegexp",
-        "enzymeName"
+    "siteRegexp",
+    "enzymeName"
 })
 public class Enzyme
-        implements Serializable, MzIdentMLObject {
+    implements Serializable, MzIdentMLObject
+{
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "SiteRegexp")
@@ -78,9 +87,11 @@ public class Enzyme
 
     /**
      * Gets the value of the siteRegexp property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getSiteRegexp() {
         return siteRegexp;
@@ -88,9 +99,11 @@ public class Enzyme
 
     /**
      * Sets the value of the siteRegexp property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setSiteRegexp(String value) {
         this.siteRegexp = value;
@@ -98,9 +111,11 @@ public class Enzyme
 
     /**
      * Gets the value of the enzymeName property.
-     *
-     * @return possible object is
-     *         {@link ParamAlternativeList }
+     * 
+     * @return
+     *     possible object is
+     *     {@link ParamAlternativeList }
+     *     
      */
     public ParamAlternativeList getEnzymeName() {
         return enzymeName;
@@ -108,9 +123,11 @@ public class Enzyme
 
     /**
      * Sets the value of the enzymeName property.
-     *
-     * @param value allowed object is
-     *              {@link ParamAlternativeList }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ParamAlternativeList }
+     *     
      */
     public void setEnzymeName(ParamAlternativeList value) {
         this.enzymeName = value;
@@ -118,9 +135,11 @@ public class Enzyme
 
     /**
      * Gets the value of the id property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getId() {
         return id;
@@ -128,9 +147,11 @@ public class Enzyme
 
     /**
      * Sets the value of the id property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setId(String value) {
         this.id = value;
@@ -138,9 +159,11 @@ public class Enzyme
 
     /**
      * Gets the value of the nTermGain property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getNTermGain() {
         return nTermGain;
@@ -148,9 +171,11 @@ public class Enzyme
 
     /**
      * Sets the value of the nTermGain property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setNTermGain(String value) {
         this.nTermGain = value;
@@ -158,9 +183,11 @@ public class Enzyme
 
     /**
      * Gets the value of the cTermGain property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getCTermGain() {
         return cTermGain;
@@ -168,9 +195,11 @@ public class Enzyme
 
     /**
      * Sets the value of the cTermGain property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setCTermGain(String value) {
         this.cTermGain = value;
@@ -178,9 +207,11 @@ public class Enzyme
 
     /**
      * Gets the value of the semiSpecific property.
-     *
-     * @return possible object is
-     *         {@link Boolean }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
      */
     public Boolean isSemiSpecific() {
         return semiSpecific;
@@ -188,9 +219,11 @@ public class Enzyme
 
     /**
      * Sets the value of the semiSpecific property.
-     *
-     * @param value allowed object is
-     *              {@link Boolean }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
      */
     public void setSemiSpecific(Boolean value) {
         this.semiSpecific = value;
@@ -198,9 +231,11 @@ public class Enzyme
 
     /**
      * Gets the value of the missedCleavages property.
-     *
-     * @return possible object is
-     *         {@link Integer }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
      */
     public Integer getMissedCleavages() {
         return missedCleavages;
@@ -208,9 +243,11 @@ public class Enzyme
 
     /**
      * Sets the value of the missedCleavages property.
-     *
-     * @param value allowed object is
-     *              {@link Integer }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
      */
     public void setMissedCleavages(Integer value) {
         this.missedCleavages = value;
@@ -218,9 +255,11 @@ public class Enzyme
 
     /**
      * Gets the value of the minDistance property.
-     *
-     * @return possible object is
-     *         {@link Integer }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
      */
     public Integer getMinDistance() {
         return minDistance;
@@ -228,9 +267,11 @@ public class Enzyme
 
     /**
      * Sets the value of the minDistance property.
-     *
-     * @param value allowed object is
-     *              {@link Integer }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
      */
     public void setMinDistance(Integer value) {
         this.minDistance = value;

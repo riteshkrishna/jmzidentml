@@ -1,21 +1,21 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
  * <p>Java class for SpecificityRulesType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="SpecificityRulesType">
  *   &lt;complexContent>
@@ -27,13 +27,16 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SpecificityRulesType", propOrder = {
-        "cvParam"
+    "cvParam"
 })
 public class SpecificityRules
-        implements Serializable, MzIdentMLObject {
+    implements Serializable, MzIdentMLObject
+{
 
     private final static long serialVersionUID = 100L;
     @XmlElement(required = true)
@@ -41,23 +44,25 @@ public class SpecificityRules
 
     /**
      * Gets the value of the cvParam property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the cvParam property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getCvParam().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link CvParam }
+     * 
+     * 
      */
     public List<CvParam> getCvParam() {
         if (cvParam == null) {

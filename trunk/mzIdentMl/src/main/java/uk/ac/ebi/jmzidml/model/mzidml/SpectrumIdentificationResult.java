@@ -1,18 +1,27 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * All identifications made from searching one spectrum. For PMF data, all peptide identifications will be listed underneath as SpectrumIdentificationItems. For MS/MS data, there will be ranked SpectrumIdentificationItems corresponding to possible different peptide IDs.
- * <p/>
+ * All identifications made from searching one spectrum. For PMF data, all peptide
+ *                 identifications will be listed underneath as SpectrumIdentificationItems. For MS/MS data, there will be
+ *                 ranked SpectrumIdentificationItems corresponding to possible different peptide IDs.
+ *             
+ * 
  * <p>Java class for PSI-PI.analysis.search.SpectrumIdentificationResultType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="PSI-PI.analysis.search.SpectrumIdentificationResultType">
  *   &lt;complexContent>
@@ -27,22 +36,25 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PSI-PI.analysis.search.SpectrumIdentificationResultType", propOrder = {
-        "spectrumIdentificationItem",
-        "paramGroup"
+    "spectrumIdentificationItem",
+    "paramGroup"
 })
 public class SpectrumIdentificationResult
-        extends Identifiable
-        implements Serializable {
+    extends Identifiable
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "SpectrumIdentificationItem", required = true)
     protected List<SpectrumIdentificationItem> spectrumIdentificationItem;
     @XmlElements({
-            @XmlElement(name = "userParam", type = UserParam.class),
-            @XmlElement(name = "cvParam", type = CvParam.class)
+        @XmlElement(name = "userParam", type = UserParam.class),
+        @XmlElement(name = "cvParam", type = CvParam.class)
     })
     protected List<Param> paramGroup;
     @XmlAttribute(required = true)
@@ -52,23 +64,25 @@ public class SpectrumIdentificationResult
 
     /**
      * Gets the value of the spectrumIdentificationItem property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the spectrumIdentificationItem property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getSpectrumIdentificationItem().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link SpectrumIdentificationItem }
+     * 
+     * 
      */
     public List<SpectrumIdentificationItem> getSpectrumIdentificationItem() {
         if (spectrumIdentificationItem == null) {
@@ -79,24 +93,26 @@ public class SpectrumIdentificationResult
 
     /**
      * Gets the value of the paramGroup property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the paramGroup property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getParamGroup().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link UserParam }
      * {@link CvParam }
+     * 
+     * 
      */
     public List<Param> getParamGroup() {
         if (paramGroup == null) {
@@ -107,9 +123,11 @@ public class SpectrumIdentificationResult
 
     /**
      * Gets the value of the spectrumID property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getSpectrumID() {
         return spectrumID;
@@ -117,9 +135,11 @@ public class SpectrumIdentificationResult
 
     /**
      * Sets the value of the spectrumID property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setSpectrumID(String value) {
         this.spectrumID = value;
@@ -127,9 +147,11 @@ public class SpectrumIdentificationResult
 
     /**
      * Gets the value of the spectraDataRef property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getSpectraDataRef() {
         return spectraDataRef;
@@ -137,9 +159,11 @@ public class SpectrumIdentificationResult
 
     /**
      * Sets the value of the spectraDataRef property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setSpectraDataRef(String value) {
         this.spectraDataRef = value;

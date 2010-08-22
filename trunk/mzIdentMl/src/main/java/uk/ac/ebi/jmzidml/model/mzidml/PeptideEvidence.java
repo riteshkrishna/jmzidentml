@@ -1,18 +1,28 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.DBSequenceAdapter;
 
 
 /**
- * PeptideEvidence maps a spectrum identification to DBSequence in which such a peptide is located.
- * <p/>
+ * PeptideEvidence maps a spectrum identification to DBSequence in which such a peptide is
+ *                 located.
+ *             
+ * 
  * <p>Java class for PSI-PI.analysis.process.PeptideEvidenceType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="PSI-PI.analysis.process.PeptideEvidenceType">
  *   &lt;complexContent>
@@ -45,23 +55,27 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PSI-PI.analysis.process.PeptideEvidenceType", propOrder = {
-        "paramGroup"
+    "paramGroup"
 })
 public class PeptideEvidence
-        extends Identifiable
-        implements Serializable {
+    extends Identifiable
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlElements({
-            @XmlElement(name = "cvParam", type = CvParam.class),
-            @XmlElement(name = "userParam", type = UserParam.class)
+        @XmlElement(name = "cvParam", type = CvParam.class),
+        @XmlElement(name = "userParam", type = UserParam.class)
     })
     protected List<Param> paramGroup;
     @XmlAttribute(name = "DBSequence_Ref", required = true)
-    protected String dbSequenceRef;
+    @XmlJavaTypeAdapter(DBSequenceAdapter.class)
+    protected DBSequence dbSequence;
     @XmlAttribute
     protected Integer start;
     @XmlAttribute
@@ -81,24 +95,26 @@ public class PeptideEvidence
 
     /**
      * Gets the value of the paramGroup property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the paramGroup property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getParamGroup().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link CvParam }
      * {@link UserParam }
+     * 
+     * 
      */
     public List<Param> getParamGroup() {
         if (paramGroup == null) {
@@ -108,30 +124,36 @@ public class PeptideEvidence
     }
 
     /**
-     * Gets the value of the dbSequenceRef property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * Gets the value of the dbSequence property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public String getDBSequenceRef() {
-        return dbSequenceRef;
+    public DBSequence getDBSequence() {
+        return dbSequence;
     }
 
     /**
-     * Sets the value of the dbSequenceRef property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * Sets the value of the dbSequence property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public void setDBSequenceRef(String value) {
-        this.dbSequenceRef = value;
+    public void setDBSequence(DBSequence value) {
+        this.dbSequence = value;
     }
 
     /**
      * Gets the value of the start property.
-     *
-     * @return possible object is
-     *         {@link Integer }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
      */
     public Integer getStart() {
         return start;
@@ -139,9 +161,11 @@ public class PeptideEvidence
 
     /**
      * Sets the value of the start property.
-     *
-     * @param value allowed object is
-     *              {@link Integer }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
      */
     public void setStart(Integer value) {
         this.start = value;
@@ -149,9 +173,11 @@ public class PeptideEvidence
 
     /**
      * Gets the value of the end property.
-     *
-     * @return possible object is
-     *         {@link Integer }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
      */
     public Integer getEnd() {
         return end;
@@ -159,9 +185,11 @@ public class PeptideEvidence
 
     /**
      * Sets the value of the end property.
-     *
-     * @param value allowed object is
-     *              {@link Integer }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
      */
     public void setEnd(Integer value) {
         this.end = value;
@@ -169,9 +197,11 @@ public class PeptideEvidence
 
     /**
      * Gets the value of the pre property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getPre() {
         return pre;
@@ -179,9 +209,11 @@ public class PeptideEvidence
 
     /**
      * Sets the value of the pre property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setPre(String value) {
         this.pre = value;
@@ -189,9 +221,11 @@ public class PeptideEvidence
 
     /**
      * Gets the value of the post property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getPost() {
         return post;
@@ -199,9 +233,11 @@ public class PeptideEvidence
 
     /**
      * Sets the value of the post property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setPost(String value) {
         this.post = value;
@@ -209,9 +245,11 @@ public class PeptideEvidence
 
     /**
      * Gets the value of the translationTableRef property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getTranslationTableRef() {
         return translationTableRef;
@@ -219,9 +257,11 @@ public class PeptideEvidence
 
     /**
      * Sets the value of the translationTableRef property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setTranslationTableRef(String value) {
         this.translationTableRef = value;
@@ -229,9 +269,11 @@ public class PeptideEvidence
 
     /**
      * Gets the value of the frame property.
-     *
-     * @return possible object is
-     *         {@link Integer }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
      */
     public Integer getFrame() {
         return frame;
@@ -239,9 +281,11 @@ public class PeptideEvidence
 
     /**
      * Sets the value of the frame property.
-     *
-     * @param value allowed object is
-     *              {@link Integer }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
      */
     public void setFrame(Integer value) {
         this.frame = value;
@@ -249,9 +293,11 @@ public class PeptideEvidence
 
     /**
      * Gets the value of the isDecoy property.
-     *
-     * @return possible object is
-     *         {@link Boolean }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
      */
     public boolean isIsDecoy() {
         if (isDecoy == null) {
@@ -263,9 +309,11 @@ public class PeptideEvidence
 
     /**
      * Sets the value of the isDecoy property.
-     *
-     * @param value allowed object is
-     *              {@link Boolean }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
      */
     public void setIsDecoy(Boolean value) {
         this.isDecoy = value;
@@ -273,9 +321,11 @@ public class PeptideEvidence
 
     /**
      * Gets the value of the missedCleavages property.
-     *
-     * @return possible object is
-     *         {@link Integer }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
      */
     public Integer getMissedCleavages() {
         return missedCleavages;
@@ -283,9 +333,11 @@ public class PeptideEvidence
 
     /**
      * Sets the value of the missedCleavages property.
-     *
-     * @param value allowed object is
-     *              {@link Integer }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
      */
     public void setMissedCleavages(Integer value) {
         this.missedCleavages = value;

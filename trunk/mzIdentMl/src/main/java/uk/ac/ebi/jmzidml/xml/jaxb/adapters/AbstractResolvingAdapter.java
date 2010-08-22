@@ -38,6 +38,8 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import javax.xml.transform.sax.SAXSource;
 import java.io.StringReader;
+import uk.ac.ebi.jmzidml.model.mzidml.DBSequence;
+import uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidence;
 
 
 public abstract class AbstractResolvingAdapter<ValueType, BoundType> extends XmlAdapter<ValueType, BoundType> {
@@ -88,6 +90,12 @@ public abstract class AbstractResolvingAdapter<ValueType, BoundType> extends Xml
             case Peptide:
                 cls = Peptide.class;
                 break;
+            case DBSequence:
+                 cls = DBSequence.class;
+                 break;
+            case PeptideEvidence:
+                 cls = PeptideEvidence.class;
+                 break;
             default:
                 throw new IllegalStateException("Unkonwn cache type: " + refType);
         }

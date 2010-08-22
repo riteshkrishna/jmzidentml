@@ -55,7 +55,7 @@ public class MzIdentMLIndexerFactory {
 
         // Ritesh - Suggestions :
         // Some maps like auditCollectionMap, bibliographicReferenceMap may not be required. Instead we can include
-        // maps for spectrumIdentificationItems, peptide_ref etc which will be more lloked at.
+        // maps for spectrumIdentificationItems, peptide_ref etc which will be more looked at.
         private HashMap<String, IndexElement> cvIdMap = new HashMap<String, IndexElement>();
         private HashMap<String, IndexElement> analysisSoftwareMap = new HashMap<String, IndexElement>();
         private HashMap<String, IndexElement> providerMap = new HashMap<String, IndexElement>();
@@ -67,6 +67,9 @@ public class MzIdentMLIndexerFactory {
         private HashMap<String, IndexElement> dataCollectionMap = new HashMap<String, IndexElement>();
         private HashMap<String, IndexElement> peptideMap = new HashMap<String, IndexElement>();
         private HashMap<String, IndexElement> bibliographicReferenceMap = new HashMap<String, IndexElement>();
+
+        private HashMap<String, IndexElement> dbSequenceMap = new HashMap<String, IndexElement>();
+
 
         private MzIdentMLIndexerImpl(File xmlFile) {
 
@@ -144,6 +147,10 @@ public class MzIdentMLIndexerFactory {
                 //peptide cache
                 logger.info("Init Peptide  cache");
                 initIdMapCache(peptideMap, "/SequenceCollection/Peptide");
+
+                //DBSequence cache -- // Ritesh
+                logger.info("Init DBSequence  cache");
+                initIdMapCache(dbSequenceMap, "/SequenceCollection/DBSequence");
 
                 //extract the MzIdentML attributes from the MzML start tag
                 //get start position
@@ -319,6 +326,10 @@ public class MzIdentMLIndexerFactory {
                 case Peptide:
                     xml = readXML(peptideMap.get(ID));
                     break;
+                case DBSequence:
+                    xml = readXML(dbSequenceMap.get(ID));
+                    break;
+
                 default:
                     throw new IllegalStateException("Unkonwn cache type: " + type);
 

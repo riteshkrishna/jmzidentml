@@ -1,21 +1,25 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.AnalysisSoftwareAdapter;
-
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.AnalysisSoftwareAdapter;
 
 
 /**
  * The parameters and settings of a SpectrumIdentification analysis.
- * <p/>
+ * 
  * <p>Java class for PSI-PI.analysis.search.SpectrumIdentificationProtocolType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="PSI-PI.analysis.search.SpectrumIdentificationProtocolType">
  *   &lt;complexContent>
@@ -37,23 +41,26 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PSI-PI.analysis.search.SpectrumIdentificationProtocolType", propOrder = {
-        "searchType",
-        "additionalSearchParams",
-        "modificationParams",
-        "enzymes",
-        "massTable",
-        "fragmentTolerance",
-        "parentTolerance",
-        "threshold",
-        "databaseFilters",
-        "databaseTranslation"
+    "searchType",
+    "additionalSearchParams",
+    "modificationParams",
+    "enzymes",
+    "massTable",
+    "fragmentTolerance",
+    "parentTolerance",
+    "threshold",
+    "databaseFilters",
+    "databaseTranslation"
 })
 public class SpectrumIdentificationProtocol
-        extends Protocol
-        implements Serializable {
+    extends Protocol
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "SearchType", required = true)
@@ -82,9 +89,11 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Gets the value of the searchType property.
-     *
-     * @return possible object is
-     *         {@link ParamAlternative }
+     * 
+     * @return
+     *     possible object is
+     *     {@link ParamAlternative }
+     *     
      */
     public ParamAlternative getSearchType() {
         return searchType;
@@ -92,9 +101,11 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Sets the value of the searchType property.
-     *
-     * @param value allowed object is
-     *              {@link ParamAlternative }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ParamAlternative }
+     *     
      */
     public void setSearchType(ParamAlternative value) {
         this.searchType = value;
@@ -102,9 +113,11 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Gets the value of the additionalSearchParams property.
-     *
-     * @return possible object is
-     *         {@link ParamAlternativeList }
+     * 
+     * @return
+     *     possible object is
+     *     {@link ParamAlternativeList }
+     *     
      */
     public ParamAlternativeList getAdditionalSearchParams() {
         return additionalSearchParams;
@@ -112,9 +125,11 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Sets the value of the additionalSearchParams property.
-     *
-     * @param value allowed object is
-     *              {@link ParamAlternativeList }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ParamAlternativeList }
+     *     
      */
     public void setAdditionalSearchParams(ParamAlternativeList value) {
         this.additionalSearchParams = value;
@@ -122,9 +137,11 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Gets the value of the modificationParams property.
-     *
-     * @return possible object is
-     *         {@link ModificationParams }
+     * 
+     * @return
+     *     possible object is
+     *     {@link ModificationParams }
+     *     
      */
     public ModificationParams getModificationParams() {
         return modificationParams;
@@ -132,9 +149,11 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Sets the value of the modificationParams property.
-     *
-     * @param value allowed object is
-     *              {@link ModificationParams }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ModificationParams }
+     *     
      */
     public void setModificationParams(ModificationParams value) {
         this.modificationParams = value;
@@ -142,9 +161,11 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Gets the value of the enzymes property.
-     *
-     * @return possible object is
-     *         {@link Enzymes }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Enzymes }
+     *     
      */
     public Enzymes getEnzymes() {
         return enzymes;
@@ -152,9 +173,11 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Sets the value of the enzymes property.
-     *
-     * @param value allowed object is
-     *              {@link Enzymes }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Enzymes }
+     *     
      */
     public void setEnzymes(Enzymes value) {
         this.enzymes = value;
@@ -162,23 +185,25 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Gets the value of the massTable property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the massTable property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getMassTable().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link MassTable }
+     * 
+     * 
      */
     public List<MassTable> getMassTable() {
         if (massTable == null) {
@@ -189,9 +214,11 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Gets the value of the fragmentTolerance property.
-     *
-     * @return possible object is
-     *         {@link Tolerance }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Tolerance }
+     *     
      */
     public Tolerance getFragmentTolerance() {
         return fragmentTolerance;
@@ -199,9 +226,11 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Sets the value of the fragmentTolerance property.
-     *
-     * @param value allowed object is
-     *              {@link Tolerance }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Tolerance }
+     *     
      */
     public void setFragmentTolerance(Tolerance value) {
         this.fragmentTolerance = value;
@@ -209,9 +238,11 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Gets the value of the parentTolerance property.
-     *
-     * @return possible object is
-     *         {@link Tolerance }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Tolerance }
+     *     
      */
     public Tolerance getParentTolerance() {
         return parentTolerance;
@@ -219,9 +250,11 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Sets the value of the parentTolerance property.
-     *
-     * @param value allowed object is
-     *              {@link Tolerance }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Tolerance }
+     *     
      */
     public void setParentTolerance(Tolerance value) {
         this.parentTolerance = value;
@@ -229,9 +262,11 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Gets the value of the threshold property.
-     *
-     * @return possible object is
-     *         {@link ParamAlternativeList }
+     * 
+     * @return
+     *     possible object is
+     *     {@link ParamAlternativeList }
+     *     
      */
     public ParamAlternativeList getThreshold() {
         return threshold;
@@ -239,9 +274,11 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Sets the value of the threshold property.
-     *
-     * @param value allowed object is
-     *              {@link ParamAlternativeList }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ParamAlternativeList }
+     *     
      */
     public void setThreshold(ParamAlternativeList value) {
         this.threshold = value;
@@ -249,9 +286,11 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Gets the value of the databaseFilters property.
-     *
-     * @return possible object is
-     *         {@link DatabaseFilters }
+     * 
+     * @return
+     *     possible object is
+     *     {@link DatabaseFilters }
+     *     
      */
     public DatabaseFilters getDatabaseFilters() {
         return databaseFilters;
@@ -259,9 +298,11 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Sets the value of the databaseFilters property.
-     *
-     * @param value allowed object is
-     *              {@link DatabaseFilters }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link DatabaseFilters }
+     *     
      */
     public void setDatabaseFilters(DatabaseFilters value) {
         this.databaseFilters = value;
@@ -269,9 +310,11 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Gets the value of the databaseTranslation property.
-     *
-     * @return possible object is
-     *         {@link DatabaseTranslation }
+     * 
+     * @return
+     *     possible object is
+     *     {@link DatabaseTranslation }
+     *     
      */
     public DatabaseTranslation getDatabaseTranslation() {
         return databaseTranslation;
@@ -279,9 +322,11 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Sets the value of the databaseTranslation property.
-     *
-     * @param value allowed object is
-     *              {@link DatabaseTranslation }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link DatabaseTranslation }
+     *     
      */
     public void setDatabaseTranslation(DatabaseTranslation value) {
         this.databaseTranslation = value;
@@ -289,9 +334,11 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Gets the value of the analysisSoftware property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public AnalysisSoftware getAnalysisSoftware() {
         return analysisSoftware;
@@ -299,9 +346,11 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Sets the value of the analysisSoftware property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setAnalysisSoftware(AnalysisSoftware value) {
         this.analysisSoftware = value;

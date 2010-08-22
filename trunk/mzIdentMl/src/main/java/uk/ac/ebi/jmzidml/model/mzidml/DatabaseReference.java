@@ -1,21 +1,21 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
  * A reference to a record in a database.
- * <p/>
+ * 
  * <p>Java class for FuGE.Common.References.DatabaseReferenceType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Common.References.DatabaseReferenceType">
  *   &lt;complexContent>
@@ -27,11 +27,14 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Common.References.DatabaseReferenceType")
 public class DatabaseReference
-        implements Serializable, MzIdentMLObject {
+    implements Serializable, MzIdentMLObject
+{
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(required = true)
@@ -43,9 +46,11 @@ public class DatabaseReference
 
     /**
      * Gets the value of the accession property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getAccession() {
         return accession;
@@ -53,9 +58,11 @@ public class DatabaseReference
 
     /**
      * Sets the value of the accession property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setAccession(String value) {
         this.accession = value;
@@ -63,9 +70,11 @@ public class DatabaseReference
 
     /**
      * Gets the value of the accessionVersion property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getAccessionVersion() {
         return accessionVersion;
@@ -73,9 +82,11 @@ public class DatabaseReference
 
     /**
      * Sets the value of the accessionVersion property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setAccessionVersion(String value) {
         this.accessionVersion = value;
@@ -83,9 +94,11 @@ public class DatabaseReference
 
     /**
      * Gets the value of the databaseRef property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getDatabaseRef() {
         return databaseRef;
@@ -93,9 +106,11 @@ public class DatabaseReference
 
     /**
      * Sets the value of the databaseRef property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setDatabaseRef(String value) {
         this.databaseRef = value;

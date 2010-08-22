@@ -1,20 +1,25 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
  * The modification searched for, sourced from e.g. UniMod and the mass delta
- * <p/>
+ *             
+ * 
  * <p>Java class for PSI-PI.polypeptide.ModParamType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="PSI-PI.polypeptide.ModParamType">
  *   &lt;complexContent>
@@ -28,13 +33,16 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PSI-PI.polypeptide.ModParamType", propOrder = {
-        "cvParam"
+    "cvParam"
 })
 public class ModParam
-        implements Serializable, MzIdentMLObject {
+    implements Serializable, MzIdentMLObject
+{
 
     private final static long serialVersionUID = 100L;
     @XmlElement(required = true)
@@ -46,9 +54,11 @@ public class ModParam
 
     /**
      * The name of the modification imported from a relevant CV
-     *
-     * @return possible object is
-     *         {@link CvParam }
+     * 
+     * @return
+     *     possible object is
+     *     {@link CvParam }
+     *     
      */
     public CvParam getCvParam() {
         return cvParam;
@@ -56,9 +66,11 @@ public class ModParam
 
     /**
      * Sets the value of the cvParam property.
-     *
-     * @param value allowed object is
-     *              {@link CvParam }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link CvParam }
+     *     
      */
     public void setCvParam(CvParam value) {
         this.cvParam = value;
@@ -66,6 +78,7 @@ public class ModParam
 
     /**
      * Gets the value of the massDelta property.
+     * 
      */
     public float getMassDelta() {
         return massDelta;
@@ -73,6 +86,7 @@ public class ModParam
 
     /**
      * Sets the value of the massDelta property.
+     * 
      */
     public void setMassDelta(float value) {
         this.massDelta = value;
@@ -80,23 +94,25 @@ public class ModParam
 
     /**
      * Gets the value of the residues property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the residues property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getResidues().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
+     * 
+     * 
      */
     public List<String> getResidues() {
         if (residues == null) {

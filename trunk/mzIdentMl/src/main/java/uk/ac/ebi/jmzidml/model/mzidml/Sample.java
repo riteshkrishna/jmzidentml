@@ -1,20 +1,23 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * A description of the sample analysed by mass spectrometry using CVParams or UserParams. If a composite sample has been analysed, a parent sample should be defined, which references subsamples.
- * <p/>
+ * A description of the sample analysed by mass spectrometry using CVParams or UserParams.
+ *                 If a composite sample has been analysed, a parent sample should be defined, which references subsamples.
+ *             
+ * 
  * <p>Java class for SampleType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="SampleType">
  *   &lt;complexContent>
@@ -26,37 +29,42 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SampleType", propOrder = {
-        "subSample"
+    "subSample"
 })
 public class Sample
-        extends Material
-        implements Serializable {
+    extends Material
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     protected List<SubSample> subSample;
 
     /**
      * Gets the value of the subSample property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the subSample property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getSubSample().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link SubSample }
+     * 
+     * 
      */
     public List<SubSample> getSubSample() {
         if (subSample == null) {

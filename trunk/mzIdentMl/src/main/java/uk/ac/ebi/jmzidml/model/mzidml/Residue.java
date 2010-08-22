@@ -1,19 +1,19 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
  * <p>Java class for ResidueType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="ResidueType">
  *   &lt;complexContent>
@@ -24,11 +24,14 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ResidueType")
 public class Residue
-        implements Serializable, MzIdentMLObject {
+    implements Serializable, MzIdentMLObject
+{
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(name = "Code", required = true)
@@ -38,9 +41,11 @@ public class Residue
 
     /**
      * Gets the value of the code property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getCode() {
         return code;
@@ -48,9 +53,11 @@ public class Residue
 
     /**
      * Sets the value of the code property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setCode(String value) {
         this.code = value;
@@ -58,6 +65,7 @@ public class Residue
 
     /**
      * Gets the value of the mass property.
+     * 
      */
     public float getMass() {
         return mass;
@@ -65,6 +73,7 @@ public class Residue
 
     /**
      * Sets the value of the mass property.
+     * 
      */
     public void setMass(float value) {
         this.mass = value;

@@ -1,18 +1,23 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
  * The interface that is the use of a Parameterizable class.
- * <p/>
+ * 
  * <p>Java class for FuGE.Common.Protocol.ParameterizableApplicationType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Common.Protocol.ParameterizableApplicationType">
  *   &lt;complexContent>
@@ -24,43 +29,49 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Common.Protocol.ParameterizableApplicationType", propOrder = {
-        "parameterValue"
+    "parameterValue"
 })
 @XmlSeeAlso({
-        SoftwareApplication.class,
-        ActionApplication.class,
-        EquipmentApplication.class
+    SoftwareApplication.class,
+    ActionApplication.class,
+    EquipmentApplication.class
 })
 public abstract class ParameterizableApplication
-        extends Identifiable
-        implements Serializable {
+    extends Identifiable
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "ParameterValue")
     protected List<ParameterValue> parameterValue;
 
     /**
-     * The parameter values for this Parameterizable Application. Gets the value of the parameterValue property.
-     * <p/>
-     * <p/>
+     * The parameter values for this Parameterizable Application.
+     *                             Gets the value of the parameterValue property.
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the parameterValue property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getParameterValue().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link ParameterValue }
+     * 
+     * 
      */
     public List<ParameterValue> getParameterValue() {
         if (parameterValue == null) {

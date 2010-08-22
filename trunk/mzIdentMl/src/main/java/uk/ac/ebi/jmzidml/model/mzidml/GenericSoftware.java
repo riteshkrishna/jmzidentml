@@ -1,20 +1,25 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
  * A subclass of the abstract Software class for capturing the description of Software used.
- * <p/>
+ *             
+ * 
  * <p>Java class for FuGE.Common.Protocol.GenericSoftwareType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Common.Protocol.GenericSoftwareType">
  *   &lt;complexContent>
@@ -35,15 +40,18 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Common.Protocol.GenericSoftwareType", propOrder = {
-        "equipment",
-        "genericParameter"
+    "equipment",
+    "genericParameter"
 })
 public class GenericSoftware
-        extends Software
-        implements Serializable {
+    extends Software
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     protected List<GenericSoftware.Equipment> equipment;
@@ -52,23 +60,25 @@ public class GenericSoftware
 
     /**
      * Gets the value of the equipment property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the equipment property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getEquipment().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link GenericSoftware.Equipment }
+     * 
+     * 
      */
     public List<GenericSoftware.Equipment> getEquipment() {
         if (equipment == null) {
@@ -78,24 +88,26 @@ public class GenericSoftware
     }
 
     /**
-     * The parameters for this piece of GenericSoftware. Gets the value of the genericParameter property.
-     * <p/>
-     * <p/>
+     * The parameters for this piece of GenericSoftware.Gets the value of the genericParameter property.
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the genericParameter property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getGenericParameter().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link GenericParameter }
+     * 
+     * 
      */
     public List<GenericParameter> getGenericParameter() {
         if (genericParameter == null) {
@@ -107,9 +119,9 @@ public class GenericSoftware
 
     /**
      * <p>Java class for anonymous complex type.
-     * <p/>
+     * 
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * <p/>
+     * 
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -119,11 +131,14 @@ public class GenericSoftware
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
+     * 
+     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "")
     public static class Equipment
-            implements Serializable, MzIdentMLObject {
+        implements Serializable, MzIdentMLObject
+    {
 
         private final static long serialVersionUID = 100L;
         @XmlAttribute(name = "GenericEquipment_ref", required = true)
@@ -131,9 +146,11 @@ public class GenericSoftware
 
         /**
          * Gets the value of the genericEquipmentRef property.
-         *
-         * @return possible object is
-         *         {@link String }
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
          */
         public String getGenericEquipmentRef() {
             return genericEquipmentRef;
@@ -141,9 +158,11 @@ public class GenericSoftware
 
         /**
          * Sets the value of the genericEquipmentRef property.
-         *
-         * @param value allowed object is
-         *              {@link String }
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
          */
         public void setGenericEquipmentRef(String value) {
             this.genericEquipmentRef = value;

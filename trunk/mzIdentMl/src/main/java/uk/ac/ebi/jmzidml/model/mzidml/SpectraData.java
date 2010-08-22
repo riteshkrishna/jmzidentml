@@ -1,19 +1,21 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
 
 
 /**
  * A data set containing spectra data (consisting of one or more spectra).
- * <p/>
+ *             
+ * 
  * <p>Java class for PSI-PI.spectra.SpectraDataType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="PSI-PI.spectra.SpectraDataType">
  *   &lt;complexContent>
@@ -25,14 +27,17 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PSI-PI.spectra.SpectraDataType", propOrder = {
-        "spectrumIDFormat"
+    "spectrumIDFormat"
 })
 public class SpectraData
-        extends ExternalData
-        implements Serializable {
+    extends ExternalData
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlElement(required = true)
@@ -40,9 +45,11 @@ public class SpectraData
 
     /**
      * Gets the value of the spectrumIDFormat property.
-     *
-     * @return possible object is
-     *         {@link SpectrumIDFormat }
+     * 
+     * @return
+     *     possible object is
+     *     {@link SpectrumIDFormat }
+     *     
      */
     public SpectrumIDFormat getSpectrumIDFormat() {
         return spectrumIDFormat;
@@ -50,9 +57,11 @@ public class SpectraData
 
     /**
      * Sets the value of the spectrumIDFormat property.
-     *
-     * @param value allowed object is
-     *              {@link SpectrumIDFormat }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link SpectrumIDFormat }
+     *     
      */
     public void setSpectrumIDFormat(SpectrumIDFormat value) {
         this.spectrumIDFormat = value;

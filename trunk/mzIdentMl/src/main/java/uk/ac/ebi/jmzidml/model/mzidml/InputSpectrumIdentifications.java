@@ -1,19 +1,19 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
  * <p>Java class for InputSpectrumIdentificationsType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="InputSpectrumIdentificationsType">
  *   &lt;complexContent>
@@ -23,11 +23,14 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "InputSpectrumIdentificationsType")
 public class InputSpectrumIdentifications
-        implements Serializable, MzIdentMLObject {
+    implements Serializable, MzIdentMLObject
+{
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(name = "SpectrumIdentificationList_ref", required = true)
@@ -35,9 +38,11 @@ public class InputSpectrumIdentifications
 
     /**
      * Gets the value of the spectrumIdentificationListRef property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getSpectrumIdentificationListRef() {
         return spectrumIdentificationListRef;
@@ -45,9 +50,11 @@ public class InputSpectrumIdentifications
 
     /**
      * Sets the value of the spectrumIdentificationListRef property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setSpectrumIdentificationListRef(String value) {
         this.spectrumIdentificationListRef = value;

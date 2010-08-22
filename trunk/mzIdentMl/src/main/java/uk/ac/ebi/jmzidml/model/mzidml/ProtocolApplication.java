@@ -1,20 +1,29 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.CalendarAdapter;
-
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.Calendar;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.CalendarAdapter;
 
 
 /**
- * The use of a protocol with the requisite Parameters and ParameterValues. ProtocolApplications can take Material or Data (or both) as input and produce Material or Data (or both) as output. ProtocolApplication is abstract and should be subclassed in the development of modular formats. The subclass GenericProtocolApplication can be used without extension.
- * <p/>
+ * The use of a protocol with the requisite Parameters and ParameterValues.
+ *                 ProtocolApplications can take Material or Data (or both) as input and produce Material or Data (or both)
+ *                 as output. ProtocolApplication is abstract and should be subclassed in the development of modular
+ *                 formats. The subclass GenericProtocolApplication can be used without extension.
+ *             
+ * 
  * <p>Java class for FuGE.Common.Protocol.ProtocolApplicationType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Common.Protocol.ProtocolApplicationType">
  *   &lt;complexContent>
@@ -24,17 +33,20 @@ import java.util.Calendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Common.Protocol.ProtocolApplicationType")
 @XmlSeeAlso({
-        GenericProtocolApplication.class,
-        ProteinDetection.class,
-        SpectrumIdentification.class
+    GenericProtocolApplication.class,
+    ProteinDetection.class,
+    SpectrumIdentification.class
 })
 public abstract class ProtocolApplication
-        extends Identifiable
-        implements Serializable {
+    extends Identifiable
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute
@@ -44,9 +56,11 @@ public abstract class ProtocolApplication
 
     /**
      * Gets the value of the activityDate property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public Calendar getActivityDate() {
         return activityDate;
@@ -54,9 +68,11 @@ public abstract class ProtocolApplication
 
     /**
      * Sets the value of the activityDate property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setActivityDate(Calendar value) {
         this.activityDate = value;

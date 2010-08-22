@@ -1,19 +1,23 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
 
 
 /**
- * The equipment (hardware) used in the Protocol. Examples include: computers, scanners, wash stations etc...   Equipment is abstract and should either be extended by subclassing or the GenericEquipment class, a functional version of Equipment, should be used.
- * <p/>
+ * The equipment (hardware) used in the Protocol. Examples include: computers, scanners,
+ *                 wash stations etc... Equipment is abstract and should either be extended by subclassing or the
+ *                 GenericEquipment class, a functional version of Equipment, should be used.
+ *             
+ * 
  * <p>Java class for FuGE.Common.Protocol.EquipmentType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Common.Protocol.EquipmentType">
  *   &lt;complexContent>
@@ -26,18 +30,21 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Common.Protocol.EquipmentType", propOrder = {
-        "make",
-        "model"
+    "make",
+    "model"
 })
 @XmlSeeAlso({
-        GenericEquipment.class
+    GenericEquipment.class
 })
 public abstract class Equipment
-        extends Identifiable
-        implements Serializable {
+    extends Identifiable
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     protected ParamAlternative make;
@@ -45,9 +52,11 @@ public abstract class Equipment
 
     /**
      * Gets the value of the make property.
-     *
-     * @return possible object is
-     *         {@link ParamAlternative }
+     * 
+     * @return
+     *     possible object is
+     *     {@link ParamAlternative }
+     *     
      */
     public ParamAlternative getMake() {
         return make;
@@ -55,9 +64,11 @@ public abstract class Equipment
 
     /**
      * Sets the value of the make property.
-     *
-     * @param value allowed object is
-     *              {@link ParamAlternative }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ParamAlternative }
+     *     
      */
     public void setMake(ParamAlternative value) {
         this.make = value;
@@ -65,9 +76,11 @@ public abstract class Equipment
 
     /**
      * Gets the value of the model property.
-     *
-     * @return possible object is
-     *         {@link ParamAlternative }
+     * 
+     * @return
+     *     possible object is
+     *     {@link ParamAlternative }
+     *     
      */
     public ParamAlternative getModel() {
         return model;
@@ -75,9 +88,11 @@ public abstract class Equipment
 
     /**
      * Sets the value of the model property.
-     *
-     * @param value allowed object is
-     *              {@link ParamAlternative }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ParamAlternative }
+     *     
      */
     public void setModel(ParamAlternative value) {
         this.model = value;

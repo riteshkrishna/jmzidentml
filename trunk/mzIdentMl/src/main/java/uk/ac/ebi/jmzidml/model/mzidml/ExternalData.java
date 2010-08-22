@@ -1,18 +1,26 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlType;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
- * Data external to the XML instance document. The location of the data file is given in the location attribute.
- * <p/>
+ * Data external to the XML instance document. The location of the data file is given in the
+ *                 location attribute.
+ *             
+ * 
  * <p>Java class for FuGE.Bio.Data.ExternalDataType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Bio.Data.ExternalDataType">
  *   &lt;complexContent>
@@ -36,20 +44,23 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Bio.Data.ExternalDataType", propOrder = {
-        "externalFormatDocumentation",
-        "fileFormat"
+    "externalFormatDocumentation",
+    "fileFormat"
 })
 @XmlSeeAlso({
-        SpectraData.class,
-        SourceFile.class,
-        AnalysisSearchDatabase.class
+    SpectraData.class,
+    SourceFile.class,
+    AnalysisSearchDatabase.class
 })
 public class ExternalData
-        extends Data
-        implements Serializable {
+    extends Data
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlSchemaType(name = "anyURI")
@@ -61,9 +72,11 @@ public class ExternalData
 
     /**
      * Gets the value of the externalFormatDocumentation property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getExternalFormatDocumentation() {
         return externalFormatDocumentation;
@@ -71,9 +84,11 @@ public class ExternalData
 
     /**
      * Sets the value of the externalFormatDocumentation property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setExternalFormatDocumentation(String value) {
         this.externalFormatDocumentation = value;
@@ -81,9 +96,11 @@ public class ExternalData
 
     /**
      * Gets the value of the fileFormat property.
-     *
-     * @return possible object is
-     *         {@link ExternalData.FileFormat }
+     * 
+     * @return
+     *     possible object is
+     *     {@link ExternalData.FileFormat }
+     *     
      */
     public ExternalData.FileFormat getFileFormat() {
         return fileFormat;
@@ -91,9 +108,11 @@ public class ExternalData
 
     /**
      * Sets the value of the fileFormat property.
-     *
-     * @param value allowed object is
-     *              {@link ExternalData.FileFormat }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ExternalData.FileFormat }
+     *     
      */
     public void setFileFormat(ExternalData.FileFormat value) {
         this.fileFormat = value;
@@ -101,9 +120,11 @@ public class ExternalData
 
     /**
      * Gets the value of the location property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getLocation() {
         return location;
@@ -111,9 +132,11 @@ public class ExternalData
 
     /**
      * Sets the value of the location property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setLocation(String value) {
         this.location = value;
@@ -122,9 +145,9 @@ public class ExternalData
 
     /**
      * <p>Java class for anonymous complex type.
-     * <p/>
+     * 
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * <p/>
+     * 
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -136,13 +159,16 @@ public class ExternalData
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
+     * 
+     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-            "cvParam"
+        "cvParam"
     })
     public static class FileFormat
-            implements Serializable, MzIdentMLObject {
+        implements Serializable, MzIdentMLObject
+    {
 
         private final static long serialVersionUID = 100L;
         @XmlElement(required = true)
@@ -150,9 +176,11 @@ public class ExternalData
 
         /**
          * Gets the value of the cvParam property.
-         *
-         * @return possible object is
-         *         {@link CvParam }
+         * 
+         * @return
+         *     possible object is
+         *     {@link CvParam }
+         *     
          */
         public CvParam getCvParam() {
             return cvParam;
@@ -160,9 +188,11 @@ public class ExternalData
 
         /**
          * Sets the value of the cvParam property.
-         *
-         * @param value allowed object is
-         *              {@link CvParam }
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link CvParam }
+         *     
          */
         public void setCvParam(CvParam value) {
             this.cvParam = value;

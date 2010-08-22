@@ -1,16 +1,21 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
  * The parameters and settings of a ProteinDetection process.
- * <p/>
+ * 
  * <p>Java class for PSI-PI.analysis.process.ProteinDetectionProtocolType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="PSI-PI.analysis.process.ProteinDetectionProtocolType">
  *   &lt;complexContent>
@@ -24,15 +29,18 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PSI-PI.analysis.process.ProteinDetectionProtocolType", propOrder = {
-        "analysisParams",
-        "threshold"
+    "analysisParams",
+    "threshold"
 })
 public class ProteinDetectionProtocol
-        extends Protocol
-        implements Serializable {
+    extends Protocol
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "AnalysisParams")
@@ -44,9 +52,11 @@ public class ProteinDetectionProtocol
 
     /**
      * Gets the value of the analysisParams property.
-     *
-     * @return possible object is
-     *         {@link ParamAlternativeList }
+     * 
+     * @return
+     *     possible object is
+     *     {@link ParamAlternativeList }
+     *     
      */
     public ParamAlternativeList getAnalysisParams() {
         return analysisParams;
@@ -54,9 +64,11 @@ public class ProteinDetectionProtocol
 
     /**
      * Sets the value of the analysisParams property.
-     *
-     * @param value allowed object is
-     *              {@link ParamAlternativeList }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ParamAlternativeList }
+     *     
      */
     public void setAnalysisParams(ParamAlternativeList value) {
         this.analysisParams = value;
@@ -64,9 +76,11 @@ public class ProteinDetectionProtocol
 
     /**
      * Gets the value of the threshold property.
-     *
-     * @return possible object is
-     *         {@link ParamAlternativeList }
+     * 
+     * @return
+     *     possible object is
+     *     {@link ParamAlternativeList }
+     *     
      */
     public ParamAlternativeList getThreshold() {
         return threshold;
@@ -74,9 +88,11 @@ public class ProteinDetectionProtocol
 
     /**
      * Sets the value of the threshold property.
-     *
-     * @param value allowed object is
-     *              {@link ParamAlternativeList }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ParamAlternativeList }
+     *     
      */
     public void setThreshold(ParamAlternativeList value) {
         this.threshold = value;
@@ -84,9 +100,11 @@ public class ProteinDetectionProtocol
 
     /**
      * Gets the value of the analysisSoftwareRef property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getAnalysisSoftwareRef() {
         return analysisSoftwareRef;
@@ -94,9 +112,11 @@ public class ProteinDetectionProtocol
 
     /**
      * Sets the value of the analysisSoftwareRef property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setAnalysisSoftwareRef(String value) {
         this.analysisSoftwareRef = value;

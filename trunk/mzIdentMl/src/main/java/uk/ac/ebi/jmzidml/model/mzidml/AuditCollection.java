@@ -1,20 +1,24 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlType;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
  * The collection of Contact records.
- * <p/>
+ * 
  * <p>Java class for FuGE.Collection.AuditCollectionType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Collection.AuditCollectionType">
  *   &lt;complexContent>
@@ -26,41 +30,46 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Collection.AuditCollectionType", propOrder = {
-        "contactGroup"
+    "contactGroup"
 })
 public class AuditCollection
-        implements Serializable, MzIdentMLObject {
+    implements Serializable, MzIdentMLObject
+{
 
     private final static long serialVersionUID = 100L;
     @XmlElements({
-            @XmlElement(name = "Organization", type = Organization.class),
-            @XmlElement(name = "Person", type = Person.class)
+        @XmlElement(name = "Organization", type = Organization.class),
+        @XmlElement(name = "Person", type = Person.class)
     })
     protected List<Contact> contactGroup;
 
     /**
-     * The complete set of Contacts. Gets the value of the contactGroup property.
-     * <p/>
-     * <p/>
+     * The complete set of Contacts.Gets the value of the contactGroup property.
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the contactGroup property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getContactGroup().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Organization }
      * {@link Person }
+     * 
+     * 
      */
     public List<Contact> getContactGroup() {
         if (contactGroup == null) {

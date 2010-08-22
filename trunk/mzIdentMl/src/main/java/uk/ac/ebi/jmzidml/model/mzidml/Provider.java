@@ -1,16 +1,23 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * The provider of the document in terms of the Contact and the software the produced the document instance.
- * <p/>
+ * The provider of the document in terms of the Contact and the software the produced the
+ *                 document instance.
+ *             
+ * 
  * <p>Java class for FuGE.Collection.ProviderType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Collection.ProviderType">
  *   &lt;complexContent>
@@ -23,14 +30,17 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Collection.ProviderType", propOrder = {
-        "contactRole"
+    "contactRole"
 })
 public class Provider
-        extends Identifiable
-        implements Serializable {
+    extends Identifiable
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "ContactRole")
@@ -40,9 +50,11 @@ public class Provider
 
     /**
      * The Contact that provided the document instance.
-     *
-     * @return possible object is
-     *         {@link ContactRole }
+     * 
+     * @return
+     *     possible object is
+     *     {@link ContactRole }
+     *     
      */
     public ContactRole getContactRole() {
         return contactRole;
@@ -50,9 +62,11 @@ public class Provider
 
     /**
      * Sets the value of the contactRole property.
-     *
-     * @param value allowed object is
-     *              {@link ContactRole }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ContactRole }
+     *     
      */
     public void setContactRole(ContactRole value) {
         this.contactRole = value;
@@ -60,9 +74,11 @@ public class Provider
 
     /**
      * Gets the value of the softwareRef property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getSoftwareRef() {
         return softwareRef;
@@ -70,9 +86,11 @@ public class Provider
 
     /**
      * Sets the value of the softwareRef property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setSoftwareRef(String value) {
         this.softwareRef = value;

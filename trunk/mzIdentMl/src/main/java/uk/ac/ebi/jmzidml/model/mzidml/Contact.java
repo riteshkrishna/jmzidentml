@@ -1,16 +1,21 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
  * A contact is either a person or an organization.
- * <p/>
+ * 
  * <p>Java class for FuGE.Common.Audit.ContactType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Common.Audit.ContactType">
  *   &lt;complexContent>
@@ -24,16 +29,19 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Common.Audit.ContactType")
 @XmlSeeAlso({
-        Organization.class,
-        Person.class
+    Organization.class,
+    Person.class
 })
 public abstract class Contact
-        extends Identifiable
-        implements Serializable {
+    extends Identifiable
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute
@@ -49,9 +57,11 @@ public abstract class Contact
 
     /**
      * Gets the value of the address property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getAddress() {
         return address;
@@ -59,9 +69,11 @@ public abstract class Contact
 
     /**
      * Sets the value of the address property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setAddress(String value) {
         this.address = value;
@@ -69,9 +81,11 @@ public abstract class Contact
 
     /**
      * Gets the value of the phone property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getPhone() {
         return phone;
@@ -79,9 +93,11 @@ public abstract class Contact
 
     /**
      * Sets the value of the phone property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setPhone(String value) {
         this.phone = value;
@@ -89,9 +105,11 @@ public abstract class Contact
 
     /**
      * Gets the value of the email property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getEmail() {
         return email;
@@ -99,9 +117,11 @@ public abstract class Contact
 
     /**
      * Sets the value of the email property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setEmail(String value) {
         this.email = value;
@@ -109,9 +129,11 @@ public abstract class Contact
 
     /**
      * Gets the value of the fax property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getFax() {
         return fax;
@@ -119,9 +141,11 @@ public abstract class Contact
 
     /**
      * Sets the value of the fax property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setFax(String value) {
         this.fax = value;
@@ -129,9 +153,11 @@ public abstract class Contact
 
     /**
      * Gets the value of the tollFreePhone property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getTollFreePhone() {
         return tollFreePhone;
@@ -139,9 +165,11 @@ public abstract class Contact
 
     /**
      * Sets the value of the tollFreePhone property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setTollFreePhone(String value) {
         this.tollFreePhone = value;

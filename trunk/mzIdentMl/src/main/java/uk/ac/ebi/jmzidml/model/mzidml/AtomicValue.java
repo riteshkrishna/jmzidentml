@@ -1,19 +1,20 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
 
 
 /**
  * An atomic value i.e. one that has a single value.
- * <p/>
+ * 
  * <p>Java class for FuGE.Common.Measurement.AtomicValueType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Common.Measurement.AtomicValueType">
  *   &lt;complexContent>
@@ -25,14 +26,17 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Common.Measurement.AtomicValueType", propOrder = {
-        "propertyValue"
+    "propertyValue"
 })
 public class AtomicValue
-        extends Measurement
-        implements Serializable {
+    extends Measurement
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "PropertyValue", required = true)
@@ -40,9 +44,11 @@ public class AtomicValue
 
     /**
      * Gets the value of the propertyValue property.
-     *
-     * @return possible object is
-     *         {@link PropertyValue }
+     * 
+     * @return
+     *     possible object is
+     *     {@link PropertyValue }
+     *     
      */
     public PropertyValue getPropertyValue() {
         return propertyValue;
@@ -50,9 +56,11 @@ public class AtomicValue
 
     /**
      * Sets the value of the propertyValue property.
-     *
-     * @param value allowed object is
-     *              {@link PropertyValue }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link PropertyValue }
+     *     
      */
     public void setPropertyValue(PropertyValue value) {
         this.propertyValue = value;

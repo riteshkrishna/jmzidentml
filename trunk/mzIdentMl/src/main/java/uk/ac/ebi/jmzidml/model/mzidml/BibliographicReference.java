@@ -1,19 +1,22 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
 
 
 /**
- * Represents bibliographic references, including the most common attributes. Note that because a BibliographicReference is Identifiable, a DatabaseEntry can also be specified.
- * <p/>
+ * Represents bibliographic references, including the most common attributes. Note that
+ *                 because a BibliographicReference is Identifiable, a DatabaseEntry can also be specified.
+ *             
+ * 
  * <p>Java class for FuGE.Common.References.BibliographicReferenceType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Common.References.BibliographicReferenceType">
  *   &lt;complexContent>
@@ -31,12 +34,15 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Common.References.BibliographicReferenceType")
 public class BibliographicReference
-        extends Identifiable
-        implements Serializable {
+    extends Identifiable
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute
@@ -60,9 +66,11 @@ public class BibliographicReference
 
     /**
      * Gets the value of the authors property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getAuthors() {
         return authors;
@@ -70,9 +78,11 @@ public class BibliographicReference
 
     /**
      * Sets the value of the authors property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setAuthors(String value) {
         this.authors = value;
@@ -80,9 +90,11 @@ public class BibliographicReference
 
     /**
      * Gets the value of the publication property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getPublication() {
         return publication;
@@ -90,9 +102,11 @@ public class BibliographicReference
 
     /**
      * Sets the value of the publication property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setPublication(String value) {
         this.publication = value;
@@ -100,9 +114,11 @@ public class BibliographicReference
 
     /**
      * Gets the value of the publisher property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getPublisher() {
         return publisher;
@@ -110,9 +126,11 @@ public class BibliographicReference
 
     /**
      * Sets the value of the publisher property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setPublisher(String value) {
         this.publisher = value;
@@ -120,9 +138,11 @@ public class BibliographicReference
 
     /**
      * Gets the value of the editor property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getEditor() {
         return editor;
@@ -130,9 +150,11 @@ public class BibliographicReference
 
     /**
      * Sets the value of the editor property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setEditor(String value) {
         this.editor = value;
@@ -140,9 +162,11 @@ public class BibliographicReference
 
     /**
      * Gets the value of the year property.
-     *
-     * @return possible object is
-     *         {@link Integer }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
      */
     public Integer getYear() {
         return year;
@@ -150,9 +174,11 @@ public class BibliographicReference
 
     /**
      * Sets the value of the year property.
-     *
-     * @param value allowed object is
-     *              {@link Integer }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
      */
     public void setYear(Integer value) {
         this.year = value;
@@ -160,9 +186,11 @@ public class BibliographicReference
 
     /**
      * Gets the value of the volume property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getVolume() {
         return volume;
@@ -170,9 +198,11 @@ public class BibliographicReference
 
     /**
      * Sets the value of the volume property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setVolume(String value) {
         this.volume = value;
@@ -180,9 +210,11 @@ public class BibliographicReference
 
     /**
      * Gets the value of the issue property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getIssue() {
         return issue;
@@ -190,9 +222,11 @@ public class BibliographicReference
 
     /**
      * Sets the value of the issue property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setIssue(String value) {
         this.issue = value;
@@ -200,9 +234,11 @@ public class BibliographicReference
 
     /**
      * Gets the value of the pages property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getPages() {
         return pages;
@@ -210,9 +246,11 @@ public class BibliographicReference
 
     /**
      * Sets the value of the pages property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setPages(String value) {
         this.pages = value;
@@ -220,9 +258,11 @@ public class BibliographicReference
 
     /**
      * Gets the value of the title property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getTitle() {
         return title;
@@ -230,9 +270,11 @@ public class BibliographicReference
 
     /**
      * Sets the value of the title property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setTitle(String value) {
         this.title = value;

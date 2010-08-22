@@ -1,19 +1,19 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
  * <p>Java class for FilterType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FilterType">
  *   &lt;complexContent>
@@ -27,15 +27,18 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FilterType", propOrder = {
-        "filterType",
-        "include",
-        "exclude"
+    "filterType",
+    "include",
+    "exclude"
 })
 public class Filter
-        implements Serializable, MzIdentMLObject {
+    implements Serializable, MzIdentMLObject
+{
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "FilterType", required = true)
@@ -47,9 +50,11 @@ public class Filter
 
     /**
      * Gets the value of the filterType property.
-     *
-     * @return possible object is
-     *         {@link ParamAlternative }
+     * 
+     * @return
+     *     possible object is
+     *     {@link ParamAlternative }
+     *     
      */
     public ParamAlternative getFilterType() {
         return filterType;
@@ -57,9 +62,11 @@ public class Filter
 
     /**
      * Sets the value of the filterType property.
-     *
-     * @param value allowed object is
-     *              {@link ParamAlternative }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ParamAlternative }
+     *     
      */
     public void setFilterType(ParamAlternative value) {
         this.filterType = value;
@@ -67,9 +74,11 @@ public class Filter
 
     /**
      * Gets the value of the include property.
-     *
-     * @return possible object is
-     *         {@link ParamAlternativeList }
+     * 
+     * @return
+     *     possible object is
+     *     {@link ParamAlternativeList }
+     *     
      */
     public ParamAlternativeList getInclude() {
         return include;
@@ -77,9 +86,11 @@ public class Filter
 
     /**
      * Sets the value of the include property.
-     *
-     * @param value allowed object is
-     *              {@link ParamAlternativeList }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ParamAlternativeList }
+     *     
      */
     public void setInclude(ParamAlternativeList value) {
         this.include = value;
@@ -87,9 +98,11 @@ public class Filter
 
     /**
      * Gets the value of the exclude property.
-     *
-     * @return possible object is
-     *         {@link ParamAlternativeList }
+     * 
+     * @return
+     *     possible object is
+     *     {@link ParamAlternativeList }
+     *     
      */
     public ParamAlternativeList getExclude() {
         return exclude;
@@ -97,9 +110,11 @@ public class Filter
 
     /**
      * Sets the value of the exclude property.
-     *
-     * @param value allowed object is
-     *              {@link ParamAlternativeList }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ParamAlternativeList }
+     *     
      */
     public void setExclude(ParamAlternativeList value) {
         this.exclude = value;

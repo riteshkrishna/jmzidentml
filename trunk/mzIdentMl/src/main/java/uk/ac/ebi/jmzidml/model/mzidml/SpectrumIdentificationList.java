@@ -1,18 +1,24 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
  * Represents the set of all search results from SpectrumIdentification.
- * <p/>
+ * 
  * <p>Java class for PSI-PI.analysis.search.SpectrumIdentificationListType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="PSI-PI.analysis.search.SpectrumIdentificationListType">
  *   &lt;complexContent>
@@ -27,21 +33,24 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PSI-PI.analysis.search.SpectrumIdentificationListType", propOrder = {
-        "paramGroup",
-        "fragmentationTable",
-        "spectrumIdentificationResult"
+    "paramGroup",
+    "fragmentationTable",
+    "spectrumIdentificationResult"
 })
 public class SpectrumIdentificationList
-        extends InternalData
-        implements Serializable {
+    extends InternalData
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlElements({
-            @XmlElement(name = "userParam", type = UserParam.class),
-            @XmlElement(name = "cvParam", type = CvParam.class)
+        @XmlElement(name = "cvParam", type = CvParam.class),
+        @XmlElement(name = "userParam", type = UserParam.class)
     })
     protected List<Param> paramGroup;
     @XmlElement(name = "FragmentationTable")
@@ -52,25 +61,29 @@ public class SpectrumIdentificationList
     protected Long numSequencesSearched;
 
     /**
-     * Scores or output parameters associated with the SpectrumIdentificationList Gets the value of the paramGroup property.
-     * <p/>
-     * <p/>
+     * Scores or output parameters associated with the
+     *                                 SpectrumIdentificationList
+     *                             Gets the value of the paramGroup property.
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the paramGroup property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getParamGroup().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link UserParam }
      * {@link CvParam }
+     * {@link UserParam }
+     * 
+     * 
      */
     public List<Param> getParamGroup() {
         if (paramGroup == null) {
@@ -81,9 +94,11 @@ public class SpectrumIdentificationList
 
     /**
      * Gets the value of the fragmentationTable property.
-     *
-     * @return possible object is
-     *         {@link FragmentationTable }
+     * 
+     * @return
+     *     possible object is
+     *     {@link FragmentationTable }
+     *     
      */
     public FragmentationTable getFragmentationTable() {
         return fragmentationTable;
@@ -91,9 +106,11 @@ public class SpectrumIdentificationList
 
     /**
      * Sets the value of the fragmentationTable property.
-     *
-     * @param value allowed object is
-     *              {@link FragmentationTable }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link FragmentationTable }
+     *     
      */
     public void setFragmentationTable(FragmentationTable value) {
         this.fragmentationTable = value;
@@ -101,23 +118,25 @@ public class SpectrumIdentificationList
 
     /**
      * Gets the value of the spectrumIdentificationResult property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the spectrumIdentificationResult property.
-     * <p/>
-     * <p/>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getSpectrumIdentificationResult().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     * 
+     * 
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link SpectrumIdentificationResult }
+     * 
+     * 
      */
     public List<SpectrumIdentificationResult> getSpectrumIdentificationResult() {
         if (spectrumIdentificationResult == null) {
@@ -128,9 +147,11 @@ public class SpectrumIdentificationList
 
     /**
      * Gets the value of the numSequencesSearched property.
-     *
-     * @return possible object is
-     *         {@link Long }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *     
      */
     public Long getNumSequencesSearched() {
         return numSequencesSearched;
@@ -138,9 +159,11 @@ public class SpectrumIdentificationList
 
     /**
      * Sets the value of the numSequencesSearched property.
-     *
-     * @param value allowed object is
-     *              {@link Long }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *     
      */
     public void setNumSequencesSearched(Long value) {
         this.numSequencesSearched = value;

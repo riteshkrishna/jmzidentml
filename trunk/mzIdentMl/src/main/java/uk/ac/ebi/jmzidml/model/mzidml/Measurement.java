@@ -1,21 +1,22 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
  * Abstract superclass representing different methods of supplying a value or measurement.
- * <p/>
+ *             
+ * 
  * <p>Java class for FuGE.Common.Measurement.MeasurementType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Common.Measurement.MeasurementType">
  *   &lt;complexContent>
@@ -27,27 +28,32 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Common.Measurement.MeasurementType", propOrder = {
-        "dataType"
+    "dataType"
 })
 @XmlSeeAlso({
-        BooleanValue.class,
-        Range.class,
-        AtomicValue.class,
-        ComplexValue.class
+    BooleanValue.class,
+    Range.class,
+    AtomicValue.class,
+    ComplexValue.class
 })
-public abstract class Measurement implements Serializable, MzIdentMLObject {
+public abstract class Measurement implements Serializable, MzIdentMLObject
+{
 
     private final static long serialVersionUID = 100L;
     protected CvParam dataType;
 
     /**
      * Gets the value of the dataType property.
-     *
-     * @return possible object is
-     *         {@link CvParam }
+     * 
+     * @return
+     *     possible object is
+     *     {@link CvParam }
+     *     
      */
     public CvParam getDataType() {
         return dataType;
@@ -55,9 +61,11 @@ public abstract class Measurement implements Serializable, MzIdentMLObject {
 
     /**
      * Sets the value of the dataType property.
-     *
-     * @param value allowed object is
-     *              {@link CvParam }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link CvParam }
+     *     
      */
     public void setDataType(CvParam value) {
         this.dataType = value;
