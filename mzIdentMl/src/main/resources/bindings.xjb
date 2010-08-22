@@ -139,7 +139,7 @@
             <jxb:class name="PeptideHypothesis"/>
         </jxb:bindings>
 
-        <!-- Added by Ritesh>
+        <!-- Added by Ritesh
         <jxb:bindings
                 node="//xsd:complexType[@name='PeptideHypothesisType']/xsd:complexContent/xsd:attribute[@name='PeptideEvidence_Ref']">
             <jxb:property name="PeptideEvidence">
@@ -149,7 +149,8 @@
                 </jxb:baseType>
             </jxb:property>
         </jxb:bindings>
-
+	 -->
+	
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.process.PeptideEvidenceType']">
             <jxb:class name="PeptideEvidence"/>
         </jxb:bindings>
