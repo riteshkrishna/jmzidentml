@@ -5,13 +5,12 @@
 
 package uk.ac.ebi;
 
-import org.xml.sax.SAXException;
-import uk.ac.ebi.jmzidml.model.mzidml.*;
-import uk.ac.ebi.jmzidml.xml.io.MzIdentMLObjectIterator;
+import uk.ac.ebi.jmzidml.model.mzidml.Person;
+import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationItem;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
-import javax.xml.parsers.ParserConfigurationException;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.List;
 
 public class JmzIdentMLParser {
@@ -29,11 +28,22 @@ public class JmzIdentMLParser {
 
                 MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, aUseSpectrumCache);
 
-                System.out.println("attempt to read contacts");
-                ContactRole role = unmarshaller.unmarshalFromXpath("/mzIdentML/AnalysisSoftwareList/AnalysisSoftware/ContactRole", ContactRole.class);
-                System.out.println("contactRole: " + role.getContact().getId());
-                System.out.println("contactRole: " + role.getContact().getAddress());
+//                System.out.println("attempt to read contacts");
+//                ContactRole role = unmarshaller.unmarshalFromXpath("/mzIdentML/AnalysisSoftwareList/AnalysisSoftware/ContactRole", ContactRole.class);
+//                System.out.println("contactRole: " + role.getContact().getId());
+//                System.out.println("contactRole: " + role.getContact().getAddress());
 
+
+                System.out.println("attempt to read Person");
+                Iterator<Person> personIter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/AuditCollection/Person", Person.class);
+                while (personIter.hasNext()) {
+                    Person person = personIter.next();
+                    System.out.println("person affiliation id: " + person.getAffiliations().get(0).getOrganization().getId());
+                    System.out.println("person affiliation name: " + person.getAffiliations().get(0).getOrganization().getName());
+                }
+
+
+   /*
                 CvList list = unmarshaller.unmarshalFromXpath("/mzIdentML/cvList", CvList.class);
                 System.out.println("list = " + list);
 
@@ -76,14 +86,16 @@ public class JmzIdentMLParser {
 
                 }
 
+
+
+    */
+
             } else {
                 System.err.println("FILE NOT FOUND");
             }
 
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (SAXException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }

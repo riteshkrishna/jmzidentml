@@ -1,14 +1,17 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.OrganizationAdapter;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -188,7 +191,8 @@ public class Person
 
         private final static long serialVersionUID = 100L;
         @XmlAttribute(name = "Organization_ref", required = true)
-        protected String organizationRef;
+        @XmlJavaTypeAdapter(OrganizationAdapter.class)
+        protected Organization organization;
 
         /**
          * Gets the value of the organizationRef property.
@@ -198,8 +202,8 @@ public class Person
          *     {@link String }
          *     
          */
-        public String getOrganizationRef() {
-            return organizationRef;
+        public Organization getOrganization() {
+            return organization;
         }
 
         /**
@@ -210,8 +214,8 @@ public class Person
          *     {@link String }
          *     
          */
-        public void setOrganizationRef(String value) {
-            this.organizationRef = value;
+        public void setOrganization(Organization value) {
+            this.organization = value;
         }
 
     }

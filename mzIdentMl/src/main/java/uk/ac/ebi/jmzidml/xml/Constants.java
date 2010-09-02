@@ -36,8 +36,8 @@ public class Constants {
         DataCollection,
         BibliographicReference,
         Peptide,
-        DBSequence,              //Ritesh
-        PeptideEvidence,        // Ritesh
+        DBSequence,
+        PeptideEvidence,
         Contact,
         Person,
         Organization

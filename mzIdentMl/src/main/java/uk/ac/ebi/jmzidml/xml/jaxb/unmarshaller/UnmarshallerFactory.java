@@ -96,9 +96,10 @@ public class UnmarshallerFactory {
             unmarshaller.setAdapter(new CvAdapter(index, cache));
             unmarshaller.setAdapter(new PeptideAdapter(index, cache));
             
-            unmarshaller.setAdapter(new DBSequenceAdapter(index, cache)); // Ritesh
-            unmarshaller.setAdapter(new PeptideEvidenceAdapter(index, cache)); // Ritesh
-            unmarshaller.setAdapter(new ContactAdapter(index, cache)); // Ritesh
+            unmarshaller.setAdapter(new DBSequenceAdapter(index, cache));
+            unmarshaller.setAdapter(new PeptideEvidenceAdapter(index, cache));
+            unmarshaller.setAdapter(new ContactAdapter(index, cache));
+            unmarshaller.setAdapter(new OrganizationAdapter(index, cache));
 
             //we don't have a validation handler yet
 //            unmarshaller.setEventHandler(new DefaultValidationEventHandler());

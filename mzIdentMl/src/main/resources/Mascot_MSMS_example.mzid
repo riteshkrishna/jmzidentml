@@ -50,11 +50,11 @@
         </ContactRole>
     </Provider>
     <AuditCollection>
-        <Person id="">
-            <affiliations Organization_ref="ORG_MSL"/>
+        <Person id="XX">
+            <affiliations Organization_ref="ORG_DOC_OWNER"/>
         </Person>
         <Person id="PERSON_DOC_OWNER" firstName="" lastName="Some Person" email="someone@someuniversity.edu">
-            <affiliations Organization_ref="ORG_DOC_OWNER"/>
+            <affiliations Organization_ref="ORG_MSL"/>
         </Person>
         <Organization id="ORG_MSL" name="Matrix Science Limited" address="64 Baker Street, London W1U 7GB, UK"
                       email="support@matrixscience.com" fax="+44 (0)20 7224 1344" phone="+44 (0)20 7486 1050"/>
