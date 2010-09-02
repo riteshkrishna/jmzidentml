@@ -70,6 +70,8 @@ public class MzIdentMLIndexerFactory {
 
         private HashMap<String, IndexElement> dbSequenceMap = new HashMap<String, IndexElement>();
         private HashMap<String, IndexElement> peptideEvidenceMap = new HashMap<String, IndexElement>();
+        private HashMap<String, IndexElement> personMap = new HashMap<String, IndexElement>();
+        private HashMap<String, IndexElement> organizationMap = new HashMap<String, IndexElement>();
 
         private MzIdentMLIndexerImpl(File xmlFile) {
 
@@ -148,15 +150,21 @@ public class MzIdentMLIndexerFactory {
                 logger.info("Init Peptide  cache");
                 initIdMapCache(peptideMap, "/SequenceCollection/Peptide");
 
-                //DBSequence cache -- // Ritesh
+                //DBSequence cache
                 logger.info("Init DBSequence  cache");
                 initIdMapCache(dbSequenceMap, "/SequenceCollection/DBSequence");
                 
-                //PeptideEvidenceMap cache -- // Ritesh
+                //PeptideEvidenceMap cache
                 logger.info("Init PeptideEvidence  cache");
                 initIdMapCache(peptideEvidenceMap, "/DataCollection/AnalysisData/SpectrumIdentificationList/SpectrumIdentificationResult/SpectrumIdentificationItem/PeptideEvidence");
                 
-                
+                //contact cache for Person elements
+                logger.info("Init PeptideEvidence  cache");
+                initIdMapCache(personMap, "/AuditCollection/Person");
+                //contact cache for Organisation elements
+                logger.info("Init PeptideEvidence  cache");
+                initIdMapCache(organizationMap, "/AuditCollection/Organization");
+
 
                 //extract the MzIdentML attributes from the MzML start tag
                 //get start position
@@ -296,7 +304,7 @@ public class MzIdentMLIndexerFactory {
 
             logger.debug("Getting cached ID: " + ID + " from cache: " + type);
 
-            String xml;
+            String xml = null;
             switch (type) {
 
                 case CV:
@@ -338,6 +346,16 @@ public class MzIdentMLIndexerFactory {
                 case PeptideEvidence:
                     xml = readXML(peptideEvidenceMap.get(ID));
                     break;    
+                case Person:
+                    IndexElement personElement = personMap.get(ID);
+                    if (personElement == null) break; // if there it no entry for the ID we break here and return null
+                    xml = readXML(personElement);
+                    break;
+                case Organization:
+                    IndexElement organizationElement = organizationMap.get(ID);
+                    if (organizationElement == null) break; // if there it no entry for the ID we break here and return null
+                    xml = readXML(organizationElement);
+                    break;
 
                 default:
                     throw new IllegalStateException("Unkonwn cache type: " + type);

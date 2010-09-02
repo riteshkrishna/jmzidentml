@@ -5,20 +5,14 @@
 
 package uk.ac.ebi;
 
-import java.util.List;
 import org.xml.sax.SAXException;
-import uk.ac.ebi.jmzidml.model.mzidml.CvList;
-import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationResult;
+import uk.ac.ebi.jmzidml.model.mzidml.*;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLObjectIterator;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.net.URL;
-import uk.ac.ebi.jmzidml.model.mzidml.DBSequence;
-import uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidence;
-import uk.ac.ebi.jmzidml.model.mzidml.PeptideHypothesis;
-import uk.ac.ebi.jmzidml.model.mzidml.ProteinDetectionHypothesis;
-import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationItem;
+import java.util.List;
 
 public class JmzIdentMLParser {
 
@@ -34,6 +28,11 @@ public class JmzIdentMLParser {
                 boolean aUseSpectrumCache = true;
 
                 MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, aUseSpectrumCache);
+
+                System.out.println("attempt to read contacts");
+                ContactRole role = unmarshaller.unmarshalFromXpath("/mzIdentML/AnalysisSoftwareList/AnalysisSoftware/ContactRole", ContactRole.class);
+                System.out.println("contactRole: " + role.getContact().getId());
+                System.out.println("contactRole: " + role.getContact().getAddress());
 
                 CvList list = unmarshaller.unmarshalFromXpath("/mzIdentML/cvList", CvList.class);
                 System.out.println("list = " + list);

@@ -24,8 +24,7 @@ package uk.ac.ebi.jmzidml.xml.jaxb.adapters;
 
 import org.apache.log4j.Logger;
 import org.xml.sax.InputSource;
-import uk.ac.ebi.jmzidml.model.mzidml.Cv;
-import uk.ac.ebi.jmzidml.model.mzidml.Peptide;
+import uk.ac.ebi.jmzidml.model.mzidml.*;
 import uk.ac.ebi.jmzidml.xml.Constants;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.UnmarshallerFactory;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.cache.AdapterObjectCache;
@@ -38,8 +37,6 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import javax.xml.transform.sax.SAXSource;
 import java.io.StringReader;
-import uk.ac.ebi.jmzidml.model.mzidml.DBSequence;
-import uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidence;
 
 
 public abstract class AbstractResolvingAdapter<ValueType, BoundType> extends XmlAdapter<ValueType, BoundType> {
@@ -74,30 +71,48 @@ public abstract class AbstractResolvingAdapter<ValueType, BoundType> extends Xml
 
         logger.debug("AbstractResolvingAdapter.unmarshal for id: " + refId);
 
-        String xml = index.getXmlString(refId, refType);
+        String xml;
+        Class cls;
+        // special case for Contact.class as we can either have a Person.class or a Organisation.class
+        if (refType == Constants.ReferencedType.Contact) {
+            // see if the ID fits a Person
+            String personXML = index.getXmlString(refId, Constants.ReferencedType.Person);
+            // see if the ID fits an Organisation
+            String organisationXML = index.getXmlString(refId, Constants.ReferencedType.Organization);
+            //toDo: check if not found xml is null or throws exception
+            if (personXML != null && organisationXML == null) {
+                xml = personXML;
+                cls = Person.class;
+            } else if (personXML == null && organisationXML != null) {
+                xml = organisationXML;
+                cls = Organization.class;
+            } else {
+                throw new IllegalStateException("Could not uniquely resolve Contact reference " + refId);
+            }
+        } else {
+            xml = index.getXmlString(refId, refType);
+
+            switch (refType) {
+
+                case CV:
+                    cls = Cv.class;
+                    break;
+                case Peptide:
+                    cls = Peptide.class;
+                    break;
+                case DBSequence:
+                     cls = DBSequence.class;
+                     break;
+                case PeptideEvidence:
+                     cls = PeptideEvidence.class;
+                     break;
+                default:
+                    throw new IllegalStateException("Unkonwn cache type: " + refType);
+            }
+        }
 
         if (logger.isDebugEnabled()) {
             logger.trace("read xml is = " + xml);
-        }
-
-        //set the class of the return object desired
-        Class cls;
-        switch (refType) {
-
-            case CV:
-                cls = Cv.class;
-                break;
-            case Peptide:
-                cls = Peptide.class;
-                break;
-            case DBSequence:
-                 cls = DBSequence.class;
-                 break;
-            case PeptideEvidence:
-                 cls = PeptideEvidence.class;
-                 break;
-            default:
-                throw new IllegalStateException("Unkonwn cache type: " + refType);
         }
 
         try {

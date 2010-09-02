@@ -1,13 +1,12 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.ContactAdapter;
+
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.io.Serializable;
 
 
 /**
@@ -57,7 +56,8 @@ public class ContactRole
     @XmlElement(required = true)
     protected ContactRole.Role role;
     @XmlAttribute(name = "Contact_ref", required = true)
-    protected String contactRef;
+    @XmlJavaTypeAdapter(ContactAdapter.class)
+    protected Contact contact;
 
     /**
      * Gets the value of the role property.
@@ -91,8 +91,8 @@ public class ContactRole
      *     {@link String }
      *     
      */
-    public String getContactRef() {
-        return contactRef;
+    public Contact getContact() {
+        return contact;
     }
 
     /**
@@ -103,8 +103,8 @@ public class ContactRole
      *     {@link String }
      *     
      */
-    public void setContactRef(String value) {
-        this.contactRef = value;
+    public void setContact(Contact value) {
+        this.contact = value;
     }
 
 
