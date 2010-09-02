@@ -67,10 +67,12 @@ public class JmzIdentMLParser {
                     System.out.println("ProteinDetectionHypothesis : Resolved -- DB_Ref = " + ph.getDBSequenceProteinDetection().getId() + "\t" + ph.getDBSequenceProteinDetection().getAccession());
 
                     List <PeptideHypothesis> pepHyp = ph.getPeptideHypothesis();
-                    for(int i = 0; i < pepHyp.size() ; i++){
-                        System.out.println("---- Resolved PeptideHypothesis :: ID = " + pepHyp.get(i).getPeptideEvidenceRef());
-                        //--- not getting the object !!
-                        //System.out.println("---- Resolved PeptideHypothesis :: ID = " + pepHyp.get(i).);
+                    System.out.println("Total Peptide Hypothesis :: " + pepHyp.size());
+                    for(int s = 0; s < pepHyp.size() ; s++){
+                    		PeptideEvidence phEvd = pepHyp.get(s).getPeptideEvidence();
+                    		// To do :: This part resulting into null 
+                    		if(phEvd != null)
+                    			System.out.println("---- Resolved PeptideHypothesis :: PeptideEvidence = " + phEvd.getId());
                     }
 
                 }
@@ -78,9 +80,6 @@ public class JmzIdentMLParser {
             } else {
                 System.err.println("FILE NOT FOUND");
             }
-
-//        File mzIdentMLFile = new File(xmlFileName);
-//        String xmlFileName = "C:\\Ritesh_Work\\Work_Done_At_EBI\\Project_Codes\\jmzidentml\\src\\main\\resources\\Mascot_MSMS_example.mzid";
 
         } catch (ParserConfigurationException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.

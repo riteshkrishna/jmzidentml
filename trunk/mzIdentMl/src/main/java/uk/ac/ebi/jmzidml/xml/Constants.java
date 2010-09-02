@@ -77,7 +77,9 @@ public class Constants {
         xpathsToIndex.add("/mzIdentML/DataCollection/AnalysisData/ProteinDetectionList");
         xpathsToIndex.add("/mzIdentML/DataCollection/AnalysisData/ProteinDetectionList/ProteinAmbiguityGroup");
         xpathsToIndex.add("/mzIdentML/DataCollection/AnalysisData/ProteinDetectionList/ProteinAmbiguityGroup/ProteinDetectionHypothesis");
-
+        
+        xpathsToIndex.add("/mzIdentML/DataCollection/AnalysisData/SpectrumIdentificationList/SpectrumIdentificationResult/SpectrumIdentificationItem/PeptideEvidence");
+        
         xpathsToIndex.add("/mzIdentML/BibliographicReference");
 
         // finally make the set unmodifiable
