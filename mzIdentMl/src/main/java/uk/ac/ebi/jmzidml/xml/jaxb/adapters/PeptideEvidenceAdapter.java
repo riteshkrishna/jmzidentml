@@ -29,7 +29,7 @@ public class PeptideEvidenceAdapter extends AbstractResolvingAdapter<String, Pep
             retval = (PeptideEvidence) cache.getCachedObject(refId, PeptideEvidence.class);
             logger.debug("used cached value for ID: " + refId);
         } else {
-            retval = super.unmarshal(refId, Constants.ReferencedType.Peptide);
+            retval = super.unmarshal(refId, Constants.ReferencedType.PeptideEvidence);
             cache.putInCache(refId, retval);
             logger.debug("cached object at ID: " + refId);
         }

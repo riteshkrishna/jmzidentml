@@ -6,7 +6,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.PeptideEvidenceAdapter;
 
 
 /**
@@ -34,30 +36,31 @@ public class PeptideHypothesis
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(name = "PeptideEvidence_Ref", required = true)
-    protected String peptideEvidenceRef;
+    @XmlJavaTypeAdapter(PeptideEvidenceAdapter.class)
+    protected PeptideEvidence peptideEvidence;
 
     /**
-     * Gets the value of the peptideEvidenceRef property.
+     * Gets the value of the peptideEvidence property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getPeptideEvidenceRef() {
-        return peptideEvidenceRef;
+    public PeptideEvidence getPeptideEvidence() {
+        return peptideEvidence;
     }
 
     /**
-     * Sets the value of the peptideEvidenceRef property.
+     * Sets the value of the peptideEvidence property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setPeptideEvidenceRef(String value) {
-        this.peptideEvidenceRef = value;
+    public void setPeptideEvidence(PeptideEvidence value) {
+        this.peptideEvidence = value;
     }
 
 }

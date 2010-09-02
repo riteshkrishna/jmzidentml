@@ -69,7 +69,7 @@ public class MzIdentMLIndexerFactory {
         private HashMap<String, IndexElement> bibliographicReferenceMap = new HashMap<String, IndexElement>();
 
         private HashMap<String, IndexElement> dbSequenceMap = new HashMap<String, IndexElement>();
-
+        private HashMap<String, IndexElement> peptideEvidenceMap = new HashMap<String, IndexElement>();
 
         private MzIdentMLIndexerImpl(File xmlFile) {
 
@@ -151,6 +151,12 @@ public class MzIdentMLIndexerFactory {
                 //DBSequence cache -- // Ritesh
                 logger.info("Init DBSequence  cache");
                 initIdMapCache(dbSequenceMap, "/SequenceCollection/DBSequence");
+                
+                //PeptideEvidenceMap cache -- // Ritesh
+                logger.info("Init PeptideEvidence  cache");
+                initIdMapCache(peptideEvidenceMap, "/DataCollection/AnalysisData/SpectrumIdentificationList/SpectrumIdentificationResult/SpectrumIdentificationItem/PeptideEvidence");
+                
+                
 
                 //extract the MzIdentML attributes from the MzML start tag
                 //get start position
@@ -329,6 +335,9 @@ public class MzIdentMLIndexerFactory {
                 case DBSequence:
                     xml = readXML(dbSequenceMap.get(ID));
                     break;
+                case PeptideEvidence:
+                    xml = readXML(peptideEvidenceMap.get(ID));
+                    break;    
 
                 default:
                     throw new IllegalStateException("Unkonwn cache type: " + type);
