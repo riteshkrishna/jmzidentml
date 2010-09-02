@@ -106,6 +106,12 @@ public abstract class AbstractResolvingAdapter<ValueType, BoundType> extends Xml
                 case PeptideEvidence:
                      cls = PeptideEvidence.class;
                      break;
+                case Organization:
+                     cls = Organization.class;
+                     break;
+                case Person:
+                     cls = Person.class;
+                     break;
                 default:
                     throw new IllegalStateException("Unkonwn cache type: " + refType);
             }
