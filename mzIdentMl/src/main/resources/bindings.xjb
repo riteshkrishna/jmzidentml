@@ -408,6 +408,15 @@
         <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Audit.ContactRoleType']">
             <jxb:class name="ContactRole"/>
         </jxb:bindings>
+        <jxb:bindings
+                node="//xsd:complexType[@name='FuGE.Common.Audit.ContactRoleType']/xsd:attribute[@name='Contact_ref']">
+            <jxb:property name="Contact">
+                <jxb:baseType>
+                    <xjc:javaType name="Contact"
+                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.ContactAdapter"/>
+                </jxb:baseType>
+            </jxb:property>
+        </jxb:bindings>
 
 
         <!--

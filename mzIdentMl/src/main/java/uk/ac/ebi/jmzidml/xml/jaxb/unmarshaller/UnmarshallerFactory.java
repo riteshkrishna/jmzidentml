@@ -32,8 +32,7 @@ import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import uk.ac.ebi.jmzidml.model.utils.ModelConstants;
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.CvAdapter;
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.PeptideAdapter;
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.*;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.cache.AdapterObjectCache;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.filters.MzIdentMLNamespaceFilter;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
@@ -45,8 +44,6 @@ import javax.xml.bind.UnmarshallerHandler;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.DBSequenceAdapter;
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.PeptideEvidenceAdapter;
 
 public class UnmarshallerFactory {
 
@@ -101,6 +98,7 @@ public class UnmarshallerFactory {
             
             unmarshaller.setAdapter(new DBSequenceAdapter(index, cache)); // Ritesh
             unmarshaller.setAdapter(new PeptideEvidenceAdapter(index, cache)); // Ritesh
+            unmarshaller.setAdapter(new ContactAdapter(index, cache)); // Ritesh
 
             //we don't have a validation handler yet
 //            unmarshaller.setEventHandler(new DefaultValidationEventHandler());

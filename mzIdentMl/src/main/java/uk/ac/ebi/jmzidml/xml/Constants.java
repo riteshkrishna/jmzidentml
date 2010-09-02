@@ -37,7 +37,10 @@ public class Constants {
         BibliographicReference,
         Peptide,
         DBSequence,              //Ritesh
-        PeptideEvidence        // Ritesh
+        PeptideEvidence,        // Ritesh
+        Contact,
+        Person,
+        Organization
     }
 
     private static Set<String> xpathsToIndex = new HashSet<String>();
@@ -50,10 +53,14 @@ public class Constants {
         xpathsToIndex.add("/mzIdentML/cvList/cv");
 
         xpathsToIndex.add("/mzIdentML/AnalysisSoftwareList");
+        xpathsToIndex.add("/mzIdentML/AnalysisSoftwareList/AnalysisSoftware");
+        xpathsToIndex.add("/mzIdentML/AnalysisSoftwareList/AnalysisSoftware/ContactRole");
 
         xpathsToIndex.add("/mzIdentML/Provider");
 
         xpathsToIndex.add("/mzIdentML/AuditCollection");
+        xpathsToIndex.add("/mzIdentML/AuditCollection/Person");
+        xpathsToIndex.add("/mzIdentML/AuditCollection/Organization");
 
         xpathsToIndex.add("/mzIdentML/AnalysisSampleCollection");
         xpathsToIndex.add("/mzIdentML/AnalysisSampleCollection/Sample");
