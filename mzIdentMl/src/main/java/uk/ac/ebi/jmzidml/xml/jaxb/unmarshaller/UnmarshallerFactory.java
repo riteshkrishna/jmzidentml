@@ -110,6 +110,7 @@ public class UnmarshallerFactory {
             unmarshaller.setAdapter(new TranslationTableAdapter(index, cache));
             unmarshaller.setAdapter(new MassTableAdapter(index, cache));
             unmarshaller.setAdapter(new SampleAdapter(index, cache));
+            unmarshaller.setAdapter(new MeasureAdapter(index, cache));
 
             //we don't have a validation handler yet
 //            unmarshaller.setEventHandler(new DefaultValidationEventHandler());

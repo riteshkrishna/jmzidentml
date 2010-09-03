@@ -98,6 +98,7 @@ public class Constants {
         xpathsToIndex.add("/mzIdentML/DataCollection/Inputs/SpectraData");
         xpathsToIndex.add("/mzIdentML/DataCollection/AnalysisData");
         xpathsToIndex.add("/mzIdentML/DataCollection/AnalysisData/SpectrumIdentificationList");
+        xpathsToIndex.add("/mzIdentML/DataCollection/AnalysisData/SpectrumIdentificationList/FragmentationTable/Measure");
         xpathsToIndex.add("/mzIdentML/DataCollection/AnalysisData/SpectrumIdentificationList/SpectrumIdentificationResult");
         xpathsToIndex.add("/mzIdentML/DataCollection/AnalysisData/SpectrumIdentificationList/SpectrumIdentificationResult/SpectrumIdentificationItem");
         xpathsToIndex.add("/mzIdentML/DataCollection/AnalysisData/ProteinDetectionList");

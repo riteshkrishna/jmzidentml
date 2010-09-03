@@ -94,6 +94,14 @@
         <jxb:bindings node="//xsd:complexType[@name='FragmentArrayType']">
             <jxb:class name="FragmentArray"/>
         </jxb:bindings>
+        <jxb:bindings node="//xsd:complexType[@name='FragmentArrayType']/xsd:attribute[@name='Measure_ref']">
+            <jxb:property name="Measure">
+                <jxb:baseType>
+                    <xjc:javaType name="Measure"
+                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.MeasureAdapter"/>
+                </jxb:baseType>
+            </jxb:property>
+        </jxb:bindings>
 
         <jxb:bindings node="//xsd:complexType[@name='FragmentationTableType']">
             <jxb:class name="FragmentationTable"/>
