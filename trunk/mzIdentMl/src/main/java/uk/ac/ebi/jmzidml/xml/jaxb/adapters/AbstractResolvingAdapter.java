@@ -136,6 +136,12 @@ public abstract class AbstractResolvingAdapter<ValueType, BoundType> extends Xml
                 case TranslationTable:
                      cls = TranslationTable.class;
                      break;
+                case MassTable:
+                     cls = MassTable.class;
+                     break;
+                case Sample:
+                     cls = Sample.class;
+                     break;
                 default:
                     throw new IllegalStateException("Unkonwn cache type: " + refType);
             }

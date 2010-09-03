@@ -291,6 +291,24 @@
                 </jxb:baseType>
             </jxb:property>
         </jxb:bindings>
+        <jxb:bindings
+                node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationItemType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='MassTable_ref']">
+            <jxb:property name="MassTable">
+                <jxb:baseType>
+                    <xjc:javaType name="MassTable"
+                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.MassTableAdapter"/>
+                </jxb:baseType>
+            </jxb:property>
+        </jxb:bindings>
+        <jxb:bindings
+                node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationItemType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='Sample_ref']">
+            <jxb:property name="Sample">
+                <jxb:baseType>
+                    <xjc:javaType name="Sample"
+                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.SampleAdapter"/>
+                </jxb:baseType>
+            </jxb:property>
+        </jxb:bindings>
 
 
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationListType']">
