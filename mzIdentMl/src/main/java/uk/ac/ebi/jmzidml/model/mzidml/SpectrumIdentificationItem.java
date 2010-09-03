@@ -1,17 +1,15 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.MassTableAdapter;
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.PeptideAdapter;
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.SampleAdapter;
+
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.PeptideAdapter;
 
 
 /**
@@ -86,9 +84,11 @@ public class SpectrumIdentificationItem
     @XmlAttribute(required = true)
     protected boolean passThreshold;
     @XmlAttribute(name = "MassTable_ref")
-    protected String massTableRef;
+    @XmlJavaTypeAdapter(MassTableAdapter.class)
+    protected MassTable massTable;
     @XmlAttribute(name = "Sample_ref")
-    protected String sampleRef;
+    @XmlJavaTypeAdapter(SampleAdapter.class)
+    protected Sample sample;
 
     /**
      * Gets the value of the peptideEvidence property.
@@ -317,8 +317,8 @@ public class SpectrumIdentificationItem
      *     {@link String }
      *     
      */
-    public String getMassTableRef() {
-        return massTableRef;
+    public MassTable getMassTable() {
+        return massTable;
     }
 
     /**
@@ -329,8 +329,8 @@ public class SpectrumIdentificationItem
      *     {@link String }
      *     
      */
-    public void setMassTableRef(String value) {
-        this.massTableRef = value;
+    public void setMassTable(MassTable value) {
+        this.massTable = value;
     }
 
     /**
@@ -341,8 +341,8 @@ public class SpectrumIdentificationItem
      *     {@link String }
      *     
      */
-    public String getSampleRef() {
-        return sampleRef;
+    public Sample getSample() {
+        return sample;
     }
 
     /**
@@ -353,8 +353,8 @@ public class SpectrumIdentificationItem
      *     {@link String }
      *     
      */
-    public void setSampleRef(String value) {
-        this.sampleRef = value;
+    public void setSample(Sample value) {
+        this.sample = value;
     }
 
 }

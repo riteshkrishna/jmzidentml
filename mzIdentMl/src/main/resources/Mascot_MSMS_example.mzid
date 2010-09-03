@@ -60,6 +60,23 @@
                       email="support@matrixscience.com" fax="+44 (0)20 7224 1344" phone="+44 (0)20 7486 1050"/>
         <Organization id="ORG_DOC_OWNER"/>
     </AuditCollection>
+    <AnalysisSampleCollection>
+        <Sample id="sample1" name="name23">
+                <ContactRole Contact_ref="ORG_MSL">
+                    <role>
+                        <cvParam accession="MS:1001267" name="software vendor" cvRef="PSI-MS"/>
+                    </role>
+                </ContactRole>
+                <ContactRole Contact_ref="ORG_MSL">
+                    <role>
+                        <cvParam accession="MS:1001267" name="software vendor" cvRef="PSI-MS"/>
+                    </role>
+                </ContactRole>
+                    <userParam name="name29" value="value15" unitAccession="unitAccession15" unitName="unitName15" unitCvRef="unitCvRef15"/>
+                    <cvParam cvRef="cvRef15" accession="accession15" name="name31" value="value17" unitAccession="unitAccession17"
+                         unitName="unitName17" unitCvRef="unitCvRef17"/>
+        </Sample>
+    </AnalysisSampleCollection>
     <SequenceCollection>
         <DBSequence id="DBSeq_HSP7D_MANSE" length="652" SearchDatabase_ref="SDB_SwissProt" accession="HSP7D_MANSE">
             <seq>
@@ -1077,7 +1094,7 @@
                 <SpectrumIdentificationResult id="SIR_1" spectrumID="query=1" SpectraData_ref="SD_1">
                     <SpectrumIdentificationItem id="SII_1_1" calculatedMassToCharge="671.869886" chargeState="2"
                                                 experimentalMassToCharge="671.9" Peptide_ref="peptide_1_1" rank="1"
-                                                passThreshold="true">
+                                                passThreshold="true" MassTable_ref="MT" Sample_ref="sample1">
                         <PeptideEvidence id="PE_1_1_HSP70_ECHGR_0" start="161" end="172" pre="K" post="I"
                                          missedCleavages="0" isDecoy="false" DBSequence_Ref="DBSeq_HSP70_ECHGR"/>
                         <PeptideEvidence id="PE_1_1_HSP70_ONCMY_0" start="160" end="171" pre="K" post="L"

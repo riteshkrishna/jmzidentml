@@ -79,6 +79,8 @@ public class MzIdentMLIndexerFactory {
         private HashMap<String, IndexElement> proteinDetectionListMap = new HashMap<String, IndexElement>();
         private HashMap<String, IndexElement> proteinDetectionProtocolMap = new HashMap<String, IndexElement>();
         private HashMap<String, IndexElement> translationTableMap = new HashMap<String, IndexElement>();
+        private HashMap<String, IndexElement> massTableMap = new HashMap<String, IndexElement>();
+        private HashMap<String, IndexElement> sampleMap = new HashMap<String, IndexElement>();
 
         private MzIdentMLIndexerImpl(File xmlFile) {
 
@@ -199,6 +201,14 @@ public class MzIdentMLIndexerFactory {
                 //contact cache for TranslationTable elements
                 logger.info("Init TranslationTable cache");
                 initIdMapCache(translationTableMap, "/AnalysisProtocolCollection/SpectrumIdentificationProtocol/DatabaseTranslation/TranslationTable");
+
+                //contact cache for MassTable elements
+                logger.info("Init MassTable cache");
+                initIdMapCache(massTableMap, "/AnalysisProtocolCollection/SpectrumIdentificationProtocol/MassTable");
+
+                //contact cache for Sample elements
+                logger.info("Init Sample cache");
+                initIdMapCache(sampleMap, "/AnalysisSampleCollection/Sample");
 
 
                 //extract the MzIdentML attributes from the MzML start tag
@@ -411,6 +421,12 @@ public class MzIdentMLIndexerFactory {
                     break;
                 case TranslationTable:
                     xml = readXML(translationTableMap.get(ID));
+                    break;
+                case MassTable:
+                    xml = readXML(massTableMap.get(ID));
+                    break;
+                case Sample:
+                    xml = readXML(sampleMap.get(ID));
                     break;
 
                 default:
