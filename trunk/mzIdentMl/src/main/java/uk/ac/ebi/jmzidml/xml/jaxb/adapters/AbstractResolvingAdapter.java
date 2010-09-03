@@ -142,6 +142,9 @@ public abstract class AbstractResolvingAdapter<ValueType, BoundType> extends Xml
                 case Sample:
                      cls = Sample.class;
                      break;
+                case Measure:
+                     cls = Measure.class;
+                     break;
                 default:
                     throw new IllegalStateException("Unkonwn cache type: " + refType);
             }

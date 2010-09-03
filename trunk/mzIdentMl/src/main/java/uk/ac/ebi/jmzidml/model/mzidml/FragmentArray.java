@@ -1,14 +1,17 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.MeasureAdapter;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -39,7 +42,8 @@ public class FragmentArray
     @XmlAttribute(required = true)
     protected List<Float> values;
     @XmlAttribute(name = "Measure_ref", required = true)
-    protected String measureRef;
+    @XmlJavaTypeAdapter(MeasureAdapter.class)
+    protected Measure measure;
 
     /**
      * Gets the value of the values property.
@@ -78,8 +82,8 @@ public class FragmentArray
      *     {@link String }
      *     
      */
-    public String getMeasureRef() {
-        return measureRef;
+    public Measure getMeasure() {
+        return measure;
     }
 
     /**
@@ -90,8 +94,8 @@ public class FragmentArray
      *     {@link String }
      *     
      */
-    public void setMeasureRef(String value) {
-        this.measureRef = value;
+    public void setMeasure(Measure value) {
+        this.measure = value;
     }
 
 }

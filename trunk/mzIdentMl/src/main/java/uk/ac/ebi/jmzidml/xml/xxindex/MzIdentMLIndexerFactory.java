@@ -81,6 +81,7 @@ public class MzIdentMLIndexerFactory {
         private HashMap<String, IndexElement> translationTableMap = new HashMap<String, IndexElement>();
         private HashMap<String, IndexElement> massTableMap = new HashMap<String, IndexElement>();
         private HashMap<String, IndexElement> sampleMap = new HashMap<String, IndexElement>();
+        private HashMap<String, IndexElement> measureMap = new HashMap<String, IndexElement>();
 
         private MzIdentMLIndexerImpl(File xmlFile) {
 
@@ -209,6 +210,10 @@ public class MzIdentMLIndexerFactory {
                 //contact cache for Sample elements
                 logger.info("Init Sample cache");
                 initIdMapCache(sampleMap, "/AnalysisSampleCollection/Sample");
+
+                //contact cache for Measure elements
+                logger.info("Init Measure cache");
+                initIdMapCache(measureMap, "/DataCollection/AnalysisData/SpectrumIdentificationList/FragmentationTable/Measure");
 
 
                 //extract the MzIdentML attributes from the MzML start tag
@@ -427,6 +432,9 @@ public class MzIdentMLIndexerFactory {
                     break;
                 case Sample:
                     xml = readXML(sampleMap.get(ID));
+                    break;
+                case Measure:
+                    xml = readXML(measureMap.get(ID));
                     break;
 
                 default:
