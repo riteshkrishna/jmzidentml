@@ -1,15 +1,13 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.SpectraDataAdapter;
+
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -60,7 +58,8 @@ public class SpectrumIdentificationResult
     @XmlAttribute(required = true)
     protected String spectrumID;
     @XmlAttribute(name = "SpectraData_ref", required = true)
-    protected String spectraDataRef;
+    @XmlJavaTypeAdapter(SpectraDataAdapter.class)
+    protected SpectraData spectraData;
 
     /**
      * Gets the value of the spectrumIdentificationItem property.
@@ -153,8 +152,8 @@ public class SpectrumIdentificationResult
      *     {@link String }
      *     
      */
-    public String getSpectraDataRef() {
-        return spectraDataRef;
+    public SpectraData getSpectraData() {
+        return spectraData;
     }
 
     /**
@@ -165,8 +164,8 @@ public class SpectrumIdentificationResult
      *     {@link String }
      *     
      */
-    public void setSpectraDataRef(String value) {
-        this.spectraDataRef = value;
+    public void setSpectraData(SpectraData value) {
+        this.spectraData = value;
     }
 
 }

@@ -100,6 +100,8 @@ public class UnmarshallerFactory {
             unmarshaller.setAdapter(new PeptideEvidenceAdapter(index, cache));
             unmarshaller.setAdapter(new ContactAdapter(index, cache));
             unmarshaller.setAdapter(new OrganizationAdapter(index, cache));
+            unmarshaller.setAdapter(new AnalysisSearchDatabaseAdapter(index, cache));
+            unmarshaller.setAdapter(new SpectraDataAdapter(index, cache));
 
             //we don't have a validation handler yet
 //            unmarshaller.setEventHandler(new DefaultValidationEventHandler());

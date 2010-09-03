@@ -112,6 +112,12 @@ public abstract class AbstractResolvingAdapter<ValueType, BoundType> extends Xml
                 case Person:
                      cls = Person.class;
                      break;
+                case AnalysisSearchDatabase:
+                     cls = AnalysisSearchDatabase.class;
+                     break;
+                case SpectraData:
+                     cls = SpectraData.class;
+                     break;
                 default:
                     throw new IllegalStateException("Unkonwn cache type: " + refType);
             }

@@ -40,7 +40,9 @@ public class Constants {
         PeptideEvidence,
         Contact,
         Person,
-        Organization
+        Organization,
+        AnalysisSearchDatabase,
+        SpectraData
     }
 
     private static Set<String> xpathsToIndex = new HashSet<String>();
@@ -70,6 +72,9 @@ public class Constants {
         xpathsToIndex.add("/mzIdentML/SequenceCollection/Peptide");
 
         xpathsToIndex.add("/mzIdentML/AnalysisCollection");
+        xpathsToIndex.add("/mzIdentML/AnalysisCollection/SpectrumIdentification");
+        xpathsToIndex.add("/mzIdentML/AnalysisCollection/SpectrumIdentification/InputSpectra");
+        xpathsToIndex.add("/mzIdentML/AnalysisCollection/SpectrumIdentification/SearchDatabase");
 
         xpathsToIndex.add("/mzIdentML/AnalysisProtocolCollection");
         xpathsToIndex.add("/mzIdentML/AnalysisProtocolCollection/SpectrumIdentificationProtocol");
@@ -77,6 +82,8 @@ public class Constants {
 
         xpathsToIndex.add("/mzIdentML/DataCollection");
         xpathsToIndex.add("/mzIdentML/DataCollection/Inputs");
+        xpathsToIndex.add("/mzIdentML/DataCollection/Inputs/SearchDatabase");
+        xpathsToIndex.add("/mzIdentML/DataCollection/Inputs/SpectraData");
         xpathsToIndex.add("/mzIdentML/DataCollection/AnalysisData");
         xpathsToIndex.add("/mzIdentML/DataCollection/AnalysisData/SpectrumIdentificationList");
         xpathsToIndex.add("/mzIdentML/DataCollection/AnalysisData/SpectrumIdentificationList/SpectrumIdentificationResult");
@@ -84,7 +91,6 @@ public class Constants {
         xpathsToIndex.add("/mzIdentML/DataCollection/AnalysisData/ProteinDetectionList");
         xpathsToIndex.add("/mzIdentML/DataCollection/AnalysisData/ProteinDetectionList/ProteinAmbiguityGroup");
         xpathsToIndex.add("/mzIdentML/DataCollection/AnalysisData/ProteinDetectionList/ProteinAmbiguityGroup/ProteinDetectionHypothesis");
-        
         xpathsToIndex.add("/mzIdentML/DataCollection/AnalysisData/SpectrumIdentificationList/SpectrumIdentificationResult/SpectrumIdentificationItem/PeptideEvidence");
         
         xpathsToIndex.add("/mzIdentML/BibliographicReference");

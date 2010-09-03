@@ -206,6 +206,14 @@
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.DBSequenceType']">
             <jxb:class name="DBSequence"/>
         </jxb:bindings>
+        <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.DBSequenceType']/xsd:attribute[@name='SearchDatabase_ref']">
+            <jxb:property name="AnalysisSearchDatabase">
+                <jxb:baseType>
+                    <xjc:javaType name="AnalysisSearchDatabase"
+                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.AnalysisSearchDatabaseAdapter"/>
+                </jxb:baseType>
+            </jxb:property>
+        </jxb:bindings>
 
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.EnzymesType']">
             <jxb:class name="Enzymes"/>
@@ -266,6 +274,14 @@
 
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationResultType']">
             <jxb:class name="SpectrumIdentificationResult"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationResultType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='SpectraData_ref']">
+            <jxb:property name="SpectraData">
+                <jxb:baseType>
+                    <xjc:javaType name="SpectraData"
+                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.SpectraDataAdapter"/>
+                </jxb:baseType>
+            </jxb:property>
         </jxb:bindings>
 
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationType']">
