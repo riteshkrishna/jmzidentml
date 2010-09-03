@@ -42,7 +42,9 @@ public class Constants {
         Person,
         Organization,
         AnalysisSearchDatabase,
-        SpectraData
+        SpectraData,
+        SpectrumIdentificationList,
+        SpectrumIdentificationProtocol
     }
 
     private static Set<String> xpathsToIndex = new HashSet<String>();

@@ -1,12 +1,15 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import java.io.Serializable;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.SpectrumIdentificationListAdapter;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.io.Serializable;
 
 
 /**
@@ -34,7 +37,8 @@ public class InputSpectrumIdentifications
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(name = "SpectrumIdentificationList_ref", required = true)
-    protected String spectrumIdentificationListRef;
+    @XmlJavaTypeAdapter(SpectrumIdentificationListAdapter.class)
+    protected SpectrumIdentificationList spectrumIdentificationList;
 
     /**
      * Gets the value of the spectrumIdentificationListRef property.
@@ -44,8 +48,8 @@ public class InputSpectrumIdentifications
      *     {@link String }
      *     
      */
-    public String getSpectrumIdentificationListRef() {
-        return spectrumIdentificationListRef;
+    public SpectrumIdentificationList getSpectrumIdentificationList() {
+        return spectrumIdentificationList;
     }
 
     /**
@@ -56,8 +60,8 @@ public class InputSpectrumIdentifications
      *     {@link String }
      *     
      */
-    public void setSpectrumIdentificationListRef(String value) {
-        this.spectrumIdentificationListRef = value;
+    public void setSpectrumIdentificationList(SpectrumIdentificationList value) {
+        this.spectrumIdentificationList = value;
     }
 
 }

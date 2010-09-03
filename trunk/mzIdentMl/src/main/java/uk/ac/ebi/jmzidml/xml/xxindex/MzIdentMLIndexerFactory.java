@@ -74,6 +74,8 @@ public class MzIdentMLIndexerFactory {
         private HashMap<String, IndexElement> organizationMap = new HashMap<String, IndexElement>();
         private HashMap<String, IndexElement> analysisSearchDatabaseMap = new HashMap<String, IndexElement>();
         private HashMap<String, IndexElement> spectraDataMap = new HashMap<String, IndexElement>();
+        private HashMap<String, IndexElement> spectrumIdentificationListMap = new HashMap<String, IndexElement>();
+        private HashMap<String, IndexElement> spectrumIdentificationProtocolMap = new HashMap<String, IndexElement>();
 
         private MzIdentMLIndexerImpl(File xmlFile) {
 
@@ -114,7 +116,7 @@ public class MzIdentMLIndexerFactory {
 
                 //dataProcessing cache
                 logger.info("Init AnalysisSoftware cache");
-                initIdMapCache(analysisSoftwareMap, "/AnalysisSoftwareList");
+                initIdMapCache(analysisSoftwareMap, "/AnalysisSoftwareList/AnalysisSoftware");
 
                 //provider cache
                 logger.info("Init Provider cache");
@@ -175,7 +177,15 @@ public class MzIdentMLIndexerFactory {
                 logger.info("Init SpectraData cache");
                 initIdMapCache(spectraDataMap, "/DataCollection/Inputs/SpectraData");
 
+                //contact cache for SpectrumIdentificationList elements
+                logger.info("Init SpectrumIdentificationList cache");
+                initIdMapCache(spectrumIdentificationListMap, "/DataCollection/AnalysisData/SpectrumIdentificationList");
 
+                //contact cache for SpectrumIdentificationProtocol elements
+                logger.info("Init SpectrumIdentificationProtocol cache");
+                initIdMapCache(spectrumIdentificationProtocolMap, "/AnalysisProtocolCollection/SpectrumIdentificationProtocol");
+
+                
                 //extract the MzIdentML attributes from the MzML start tag
                 //get start position
                 List<IndexElement> ie = index.getElements(root);
@@ -371,6 +381,12 @@ public class MzIdentMLIndexerFactory {
                     break;
                 case SpectraData:
                     xml = readXML(spectraDataMap.get(ID));
+                    break;
+                case SpectrumIdentificationList:
+                    xml = readXML(spectrumIdentificationListMap.get(ID));
+                    break;
+                case SpectrumIdentificationProtocol:
+                    xml = readXML(spectrumIdentificationProtocolMap.get(ID));
                     break;
 
                 default:

@@ -118,6 +118,14 @@
         <jxb:bindings node="//xsd:complexType[@name='InputSpectrumIdentificationsType']">
             <jxb:class name="InputSpectrumIdentifications"/>
         </jxb:bindings>
+        <jxb:bindings node="//xsd:complexType[@name='InputSpectrumIdentificationsType']/xsd:attribute[@name='SpectrumIdentificationList_ref']">
+                <jxb:property name="SpectrumIdentificationList">
+                    <jxb:baseType>
+                        <xjc:javaType name="SpectrumIdentificationList"
+                                      adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.SpectrumIdentificationListAdapter"/>
+                    </jxb:baseType>
+                </jxb:property>
+            </jxb:bindings>
 
         <jxb:bindings node="//xsd:complexType[@name='InputsType']">
             <jxb:class name="Inputs"/>
@@ -242,7 +250,6 @@
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationItemType']">
             <jxb:class name="SpectrumIdentificationItem"/>
         </jxb:bindings>
-
         <jxb:bindings
                 node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationItemType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='Peptide_ref']">
             <jxb:property name="Peptide">
@@ -287,14 +294,22 @@
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationType']">
             <jxb:class name="SpectrumIdentification"/>
         </jxb:bindings>
-        <!--<jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationType']/xsd:complexContent/xsd:extension/xsd:sequence/xsd:element[@name='SearchDatabase']">-->
-        <!--<jxb:property name="AnalysisSearchDatabase">-->
-        <!--<jxb:baseType>-->
-        <!--<xjc:javaType name="AnalysisSearchDatabase"-->
-        <!--adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.AnalysisSearchDatabaseAdapter"/>-->
-        <!--</jxb:baseType>-->
-        <!--</jxb:property>-->
-        <!--</jxb:bindings>-->
+        <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='SpectrumIdentificationProtocol_ref']">
+            <jxb:property name="SpectrumIdentificationProtocol">
+                <jxb:baseType>
+                    <xjc:javaType name="SpectrumIdentificationProtocol"
+                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.SpectrumIdentificationProtocolAdapter"/>
+                </jxb:baseType>
+            </jxb:property>
+        </jxb:bindings>
+        <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='SpectrumIdentificationList_ref']">
+            <jxb:property name="SpectrumIdentificationList">
+                <jxb:baseType>
+                    <xjc:javaType name="SpectrumIdentificationList"
+                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.SpectrumIdentificationListAdapter"/>
+                </jxb:baseType>
+            </jxb:property>
+        </jxb:bindings>
 
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.Main.mzIdentMLType']">
             <jxb:class name="MzIdentML"/>

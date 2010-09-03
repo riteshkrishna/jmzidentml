@@ -102,6 +102,9 @@ public class UnmarshallerFactory {
             unmarshaller.setAdapter(new OrganizationAdapter(index, cache));
             unmarshaller.setAdapter(new AnalysisSearchDatabaseAdapter(index, cache));
             unmarshaller.setAdapter(new SpectraDataAdapter(index, cache));
+            unmarshaller.setAdapter(new SpectrumIdentificationListAdapter(index, cache));
+            unmarshaller.setAdapter(new SpectrumIdentificationProtocolAdapter(index, cache));
+            unmarshaller.setAdapter(new AnalysisSoftwareAdapter(index, cache));
 
             //we don't have a validation handler yet
 //            unmarshaller.setEventHandler(new DefaultValidationEventHandler());
