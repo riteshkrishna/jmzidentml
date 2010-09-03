@@ -72,6 +72,8 @@ public class MzIdentMLIndexerFactory {
         private HashMap<String, IndexElement> peptideEvidenceMap = new HashMap<String, IndexElement>();
         private HashMap<String, IndexElement> personMap = new HashMap<String, IndexElement>();
         private HashMap<String, IndexElement> organizationMap = new HashMap<String, IndexElement>();
+        private HashMap<String, IndexElement> analysisSearchDatabaseMap = new HashMap<String, IndexElement>();
+        private HashMap<String, IndexElement> spectraDataMap = new HashMap<String, IndexElement>();
 
         private MzIdentMLIndexerImpl(File xmlFile) {
 
@@ -119,51 +121,59 @@ public class MzIdentMLIndexerFactory {
                 initIdMapCache(providerMap, "/Provider");
 
                 //auditCollection cache
-                logger.info("Init AuditCollection  cache");
+                logger.info("Init AuditCollection cache");
                 initIdMapCache(auditCollectionMap, "/AuditCollection");
 
                 //AnalysisSampleCollection cache
-                logger.info("Init AnalysisSampleCollection  cache");
+                logger.info("Init AnalysisSampleCollection cache");
                 initIdMapCache(analysisSampleCollectionMap, "/AnalysisSampleCollection");
 
                 //SequenceCollection cache
-                logger.info("Init sequenceCollection  cache");
+                logger.info("Init sequenceCollection cache");
                 initIdMapCache(sequenceCollectionMap, "/SequenceCollection");
 
                 //analysisCollection cache
-                logger.info("Init AnalysisCollection  cache");
+                logger.info("Init AnalysisCollection cache");
                 initIdMapCache(analysisCollectionMap, "/AnalysisCollection");
 
                 //analysisProtocolCollection cache
-                logger.info("Init AnalysisProtocolCollection  cache");
+                logger.info("Init AnalysisProtocolCollection cache");
                 initIdMapCache(analysisProtocolCollectionMap, "/AnalysisProtocolCollection");
 
                 //dataCollection cache
-                logger.info("Init DataCollection  cache");
+                logger.info("Init DataCollection cache");
                 initIdMapCache(dataCollectionMap, "/DataCollection");
 
                 //bibliographicReferenceMap cache
-                logger.info("Init BibliographicReference  cache");
+                logger.info("Init BibliographicReference cache");
                 initIdMapCache(bibliographicReferenceMap, "/BibliographicReference");
 
                 //peptide cache
-                logger.info("Init Peptide  cache");
+                logger.info("Init Peptide cache");
                 initIdMapCache(peptideMap, "/SequenceCollection/Peptide");
 
                 //DBSequence cache
-                logger.info("Init DBSequence  cache");
+                logger.info("Init DBSequence cache");
                 initIdMapCache(dbSequenceMap, "/SequenceCollection/DBSequence");
                 
                 //PeptideEvidenceMap cache
-                logger.info("Init PeptideEvidence  cache");
+                logger.info("Init PeptideEvidence cache");
                 initIdMapCache(peptideEvidenceMap, "/DataCollection/AnalysisData/SpectrumIdentificationList/SpectrumIdentificationResult/SpectrumIdentificationItem/PeptideEvidence");
                 
                 //contact cache for Person elements
-                logger.info("Init PeptideEvidence  cache");
+                logger.info("Init Person cache");
                 initIdMapCache(personMap, "/AuditCollection/Person");
                 //contact cache for Organisation elements
-                logger.info("Init PeptideEvidence  cache");
+                logger.info("Init Organization cache");
                 initIdMapCache(organizationMap, "/AuditCollection/Organization");
+
+                //contact cache for SearchDatabase elements
+                logger.info("Init SearchDatabase cache");
+                initIdMapCache(analysisSearchDatabaseMap, "/DataCollection/Inputs/SearchDatabase");
+
+                //contact cache for SpectraData elements
+                logger.info("Init SpectraData cache");
+                initIdMapCache(spectraDataMap, "/DataCollection/Inputs/SpectraData");
 
 
                 //extract the MzIdentML attributes from the MzML start tag
@@ -355,6 +365,12 @@ public class MzIdentMLIndexerFactory {
                     IndexElement organizationElement = organizationMap.get(ID);
                     if (organizationElement == null) break; // if there it no entry for the ID we break here and return null
                     xml = readXML(organizationElement);
+                    break;
+                case AnalysisSearchDatabase:
+                    xml = readXML(analysisSearchDatabaseMap.get(ID));
+                    break;
+                case SpectraData:
+                    xml = readXML(spectraDataMap.get(ID));
                     break;
 
                 default:

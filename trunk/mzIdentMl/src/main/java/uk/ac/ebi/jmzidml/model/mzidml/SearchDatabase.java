@@ -1,12 +1,15 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import java.io.Serializable;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.AnalysisSearchDatabaseAdapter;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.io.Serializable;
 
 
 /**
@@ -34,7 +37,8 @@ public class SearchDatabase
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(name = "SearchDatabase_ref")
-    protected String searchDatabaseRef;
+    @XmlJavaTypeAdapter(AnalysisSearchDatabaseAdapter.class)
+    protected AnalysisSearchDatabase searchDatabase;
 
     /**
      * Gets the value of the searchDatabaseRef property.
@@ -44,8 +48,8 @@ public class SearchDatabase
      *     {@link String }
      *     
      */
-    public String getSearchDatabaseRef() {
-        return searchDatabaseRef;
+    public AnalysisSearchDatabase getSearchDatabase() {
+        return searchDatabase;
     }
 
     /**
@@ -56,8 +60,8 @@ public class SearchDatabase
      *     {@link String }
      *     
      */
-    public void setSearchDatabaseRef(String value) {
-        this.searchDatabaseRef = value;
+    public void setSearchDatabase(AnalysisSearchDatabase value) {
+        this.searchDatabase = value;
     }
 
 }

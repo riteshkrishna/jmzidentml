@@ -1,15 +1,13 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.AnalysisSearchDatabaseAdapter;
+
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -60,7 +58,8 @@ public class DBSequence
     @XmlAttribute
     protected Integer length;
     @XmlAttribute(name = "SearchDatabase_ref", required = true)
-    protected String searchDatabaseRef;
+    @XmlJavaTypeAdapter(AnalysisSearchDatabaseAdapter.class)
+    protected AnalysisSearchDatabase searchDatabase;
     @XmlAttribute(required = true)
     protected String accession;
 
@@ -150,8 +149,8 @@ public class DBSequence
      *     {@link String }
      *     
      */
-    public String getSearchDatabaseRef() {
-        return searchDatabaseRef;
+    public AnalysisSearchDatabase getSearchDatabase() {
+        return searchDatabase;
     }
 
     /**
@@ -162,8 +161,8 @@ public class DBSequence
      *     {@link String }
      *     
      */
-    public void setSearchDatabaseRef(String value) {
-        this.searchDatabaseRef = value;
+    public void setSearchDatabaseRef(AnalysisSearchDatabase value) {
+        this.searchDatabase = value;
     }
 
     /**

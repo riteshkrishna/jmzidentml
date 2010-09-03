@@ -5,7 +5,7 @@
 
 package uk.ac.ebi;
 
-import uk.ac.ebi.jmzidml.model.mzidml.Person;
+import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentification;
 import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationItem;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
@@ -34,13 +34,52 @@ public class JmzIdentMLParser {
 //                System.out.println("contactRole: " + role.getContact().getAddress());
 
 
-                System.out.println("attempt to read Person");
-                Iterator<Person> personIter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/AuditCollection/Person", Person.class);
-                while (personIter.hasNext()) {
-                    Person person = personIter.next();
-                    System.out.println("person affiliation id: " + person.getAffiliations().get(0).getOrganization().getId());
-                    System.out.println("person affiliation name: " + person.getAffiliations().get(0).getOrganization().getName());
+//                System.out.println("attempt to read Person");
+//                Iterator<Person> personIter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/AuditCollection/Person", Person.class);
+//                while (personIter.hasNext()) {
+//                    Person person = personIter.next();
+//                    System.out.println("person affiliation id: " + person.getAffiliations().get(0).getOrganization().getId());
+//                    System.out.println("person affiliation name: " + person.getAffiliations().get(0).getOrganization().getName());
+//                }
+
+
+//                System.out.println("attempt to read Person");
+//                Iterator<Person> personIter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/AuditCollection/Person", Person.class);
+//                while (personIter.hasNext()) {
+//                    Person person = personIter.next();
+//                    System.out.println("person affiliation id: " + person.getAffiliations().get(0).getOrganization().getId());
+//                    System.out.println("person affiliation name: " + person.getAffiliations().get(0).getOrganization().getName());
+//                }
+
+//                System.out.println("attempt to read DBSequence");
+//                Iterator<DBSequence> seqIter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/SequenceCollection/DBSequence", DBSequence.class);
+//                while (seqIter.hasNext()) {
+//                    DBSequence dbseq = seqIter.next();
+//                    System.out.println("dbseq -> search db id: " + dbseq.getSearchDatabase().getId());
+//                    System.out.println("dbseq -> search db name: " + dbseq.getSearchDatabase().getName());
+//                }
+
+//                System.out.println("attempt to read SpectrumIdentification");
+//                Iterator<SpectrumIdentification> seqIter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/AnalysisCollection/SpectrumIdentification", SpectrumIdentification.class);
+//                while (seqIter.hasNext()) {
+//                    SpectrumIdentification ident = seqIter.next();
+//                    System.out.println("spectrum ident -> search db (1) id: " + ident.getSearchDatabase().get(0).getSearchDatabase().getId());
+//                }
+
+//                System.out.println("attempt to read SpectrumIdentificationResult");
+//                Iterator<SpectrumIdentificationResult> seqIter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/DataCollection/AnalysisData/SpectrumIdentificationList/SpectrumIdentificationResult", SpectrumIdentificationResult.class);
+//                while (seqIter.hasNext()) {
+//                    SpectrumIdentificationResult element = seqIter.next();
+//                    System.out.println("SpectrumIdentificationResult -> spectraData id: " + element.getSpectraData().getId());
+//                }
+
+                System.out.println("attempt to read SpectrumIdentification");
+                Iterator<SpectrumIdentification> seqIter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/AnalysisCollection/SpectrumIdentification", SpectrumIdentification.class);
+                while (seqIter.hasNext()) {
+                    SpectrumIdentification element = seqIter.next();
+                    System.out.println("SpectrumIdentification -> spectraData id: " + element.getInputSpectra().get(0).getSpectraData().getId());
                 }
+
 
 
    /*
