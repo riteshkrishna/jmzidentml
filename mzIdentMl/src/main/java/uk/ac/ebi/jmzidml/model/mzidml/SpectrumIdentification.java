@@ -1,14 +1,14 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.SpectrumIdentificationListAdapter;
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.SpectrumIdentificationProtocolAdapter;
+
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -53,9 +53,11 @@ public class SpectrumIdentification
     @XmlElement(name = "SearchDatabase", required = true)
     protected List<SearchDatabase> searchDatabase;
     @XmlAttribute(name = "SpectrumIdentificationProtocol_ref", required = true)
-    protected String spectrumIdentificationProtocolRef;
+    @XmlJavaTypeAdapter(SpectrumIdentificationProtocolAdapter.class)
+    protected SpectrumIdentificationProtocol spectrumIdentificationProtocol;
     @XmlAttribute(name = "SpectrumIdentificationList_ref", required = true)
-    protected String spectrumIdentificationListRef;
+    @XmlJavaTypeAdapter(SpectrumIdentificationListAdapter.class)
+    protected SpectrumIdentificationList spectrumIdentificationList;
 
     /**
      * Gets the value of the inputSpectra property.
@@ -123,8 +125,8 @@ public class SpectrumIdentification
      *     {@link String }
      *     
      */
-    public String getSpectrumIdentificationProtocolRef() {
-        return spectrumIdentificationProtocolRef;
+    public SpectrumIdentificationProtocol getSpectrumIdentificationProtocol() {
+        return spectrumIdentificationProtocol;
     }
 
     /**
@@ -135,8 +137,8 @@ public class SpectrumIdentification
      *     {@link String }
      *     
      */
-    public void setSpectrumIdentificationProtocolRef(String value) {
-        this.spectrumIdentificationProtocolRef = value;
+    public void setSpectrumIdentificationProtocol(SpectrumIdentificationProtocol value) {
+        this.spectrumIdentificationProtocol = value;
     }
 
     /**
@@ -147,8 +149,8 @@ public class SpectrumIdentification
      *     {@link String }
      *     
      */
-    public String getSpectrumIdentificationListRef() {
-        return spectrumIdentificationListRef;
+    public SpectrumIdentificationList getSpectrumIdentificationList() {
+        return spectrumIdentificationList;
     }
 
     /**
@@ -159,8 +161,8 @@ public class SpectrumIdentification
      *     {@link String }
      *     
      */
-    public void setSpectrumIdentificationListRef(String value) {
-        this.spectrumIdentificationListRef = value;
+    public void setSpectrumIdentificationList(SpectrumIdentificationList value) {
+        this.spectrumIdentificationList = value;
     }
 
 }
