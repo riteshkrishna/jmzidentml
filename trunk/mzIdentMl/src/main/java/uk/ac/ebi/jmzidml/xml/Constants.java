@@ -44,7 +44,10 @@ public class Constants {
         AnalysisSearchDatabase,
         SpectraData,
         SpectrumIdentificationList,
-        SpectrumIdentificationProtocol
+        SpectrumIdentificationProtocol,
+        ProteinDetectionList,
+        ProteinDetectionProtocol,
+        TranslationTable
     }
 
     private static Set<String> xpathsToIndex = new HashSet<String>();
@@ -77,9 +80,12 @@ public class Constants {
         xpathsToIndex.add("/mzIdentML/AnalysisCollection/SpectrumIdentification");
         xpathsToIndex.add("/mzIdentML/AnalysisCollection/SpectrumIdentification/InputSpectra");
         xpathsToIndex.add("/mzIdentML/AnalysisCollection/SpectrumIdentification/SearchDatabase");
+        xpathsToIndex.add("/mzIdentML/AnalysisCollection/ProteinDetection");
 
         xpathsToIndex.add("/mzIdentML/AnalysisProtocolCollection");
         xpathsToIndex.add("/mzIdentML/AnalysisProtocolCollection/SpectrumIdentificationProtocol");
+        xpathsToIndex.add("/mzIdentML/AnalysisProtocolCollection/SpectrumIdentificationProtocol/DatabaseTranslation");
+        xpathsToIndex.add("/mzIdentML/AnalysisProtocolCollection/SpectrumIdentificationProtocol/DatabaseTranslation/TranslationTable");
         xpathsToIndex.add("/mzIdentML/AnalysisProtocolCollection/ProteinDetectionProtocol");
 
         xpathsToIndex.add("/mzIdentML/DataCollection");

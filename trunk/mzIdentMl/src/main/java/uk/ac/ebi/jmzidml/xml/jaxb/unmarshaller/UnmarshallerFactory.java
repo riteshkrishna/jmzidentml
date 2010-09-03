@@ -105,6 +105,9 @@ public class UnmarshallerFactory {
             unmarshaller.setAdapter(new SpectrumIdentificationListAdapter(index, cache));
             unmarshaller.setAdapter(new SpectrumIdentificationProtocolAdapter(index, cache));
             unmarshaller.setAdapter(new AnalysisSoftwareAdapter(index, cache));
+            unmarshaller.setAdapter(new ProteinDetectionListAdapter(index, cache));
+            unmarshaller.setAdapter(new ProteinDetectionProtocolAdapter(index, cache));
+            unmarshaller.setAdapter(new TranslationTableAdapter(index, cache));
 
             //we don't have a validation handler yet
 //            unmarshaller.setEventHandler(new DefaultValidationEventHandler());

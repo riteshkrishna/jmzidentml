@@ -162,14 +162,21 @@
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.process.PeptideEvidenceType']">
             <jxb:class name="PeptideEvidence"/>
         </jxb:bindings>
-
-        <!-- Added by Ritesh -->
         <jxb:bindings
                 node="//xsd:complexType[@name='PSI-PI.analysis.process.PeptideEvidenceType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='DBSequence_Ref']">
             <jxb:property name="DBSequence">
                 <jxb:baseType>
                     <xjc:javaType name="DBSequence"
                                   adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.DBSequenceAdapter"/>
+                </jxb:baseType>
+            </jxb:property>
+        </jxb:bindings>
+        <jxb:bindings
+                node="//xsd:complexType[@name='PSI-PI.analysis.process.PeptideEvidenceType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='TranslationTable_ref']">
+            <jxb:property name="TranslationTable">
+                <jxb:baseType>
+                    <xjc:javaType name="TranslationTable"
+                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.TranslationTableAdapter"/>
                 </jxb:baseType>
             </jxb:property>
         </jxb:bindings>
@@ -182,8 +189,6 @@
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinDetectionHypothesisType']">
             <jxb:class name="ProteinDetectionHypothesis"/>
         </jxb:bindings>
-
-        <!-- Added by Ritesh-->
         <jxb:bindings
                 node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinDetectionHypothesisType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='DBSequence_ref']">
             <jxb:property name="DBSequence_ProteinDetection">
@@ -202,9 +207,36 @@
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinDetectionProtocolType']">
             <jxb:class name="ProteinDetectionProtocol"/>
         </jxb:bindings>
+        <jxb:bindings
+                node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinDetectionProtocolType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='AnalysisSoftware_ref']">
+            <jxb:property name="AnalysisSoftware">
+                <jxb:baseType>
+                    <xjc:javaType name="AnalysisSoftware"
+                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.AnalysisSoftwareAdapter"/>
+                </jxb:baseType>
+            </jxb:property>
+        </jxb:bindings>
 
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinDetectionType']">
             <jxb:class name="ProteinDetection"/>
+        </jxb:bindings>
+        <jxb:bindings
+                node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinDetectionType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='ProteinDetectionList_ref']">
+            <jxb:property name="proteinDetectionList">
+                <jxb:baseType>
+                    <xjc:javaType name="proteinDetectionList"
+                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.ProteinDetectionListAdapter"/>
+                </jxb:baseType>
+            </jxb:property>
+        </jxb:bindings>
+        <jxb:bindings
+                node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinDetectionType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='ProteinDetectionProtocol_ref']">
+            <jxb:property name="proteinDetectionProtocol">
+                <jxb:baseType>
+                    <xjc:javaType name="proteinDetectionProtocol"
+                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.ProteinDetectionProtocolAdapter"/>
+                </jxb:baseType>
+            </jxb:property>
         </jxb:bindings>
 
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.AnalysisSoftwareType']">

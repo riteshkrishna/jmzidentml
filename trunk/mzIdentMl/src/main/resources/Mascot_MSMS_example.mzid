@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mzIdentML id="" version="1.0.0"
-           xsi:schemaLocation="http://psidev.info/psi/pi/mzIdentML/1.0 ../schema/mzIdentML1.0.0.xsd"
+           xsi:schemaLocation="http://psidev.info/psi/pi/mzIdentML/1.0 ../resources/mzIdentML1.0.0.xsd"
            xmlns="http://psidev.info/psi/pi/mzIdentML/1.0"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            creationDate="2009-08-18T17:59:55">
@@ -998,6 +998,20 @@
                     </Include>
                 </Filter>
             </DatabaseFilters>
+            <DatabaseTranslation frames="3">
+                <TranslationTable id="id45" name="name177">
+                    <cvParam cvRef="cvRef91" accession="accession95" name="name179" value="value141" unitAccession="unitAccession141"
+                         unitName="unitName141" unitCvRef="unitCvRef141"/>
+                    <cvParam cvRef="cvRef93" accession="accession97" name="name181" value="value143" unitAccession="unitAccession143"
+                         unitName="unitName143" unitCvRef="unitCvRef143"/>
+                </TranslationTable>
+                <TranslationTable id="id47" name="name183">
+                    <cvParam cvRef="cvRef95" accession="accession99" name="name185" value="value145" unitAccession="unitAccession145"
+                         unitName="unitName145" unitCvRef="unitCvRef145"/>
+                    <cvParam cvRef="cvRef97" accession="accession101" name="name187" value="value147" unitAccession="unitAccession147"
+                         unitName="unitName147" unitCvRef="unitCvRef147"/>
+                </TranslationTable>
+            </DatabaseTranslation>
         </SpectrumIdentificationProtocol>
         <ProteinDetectionProtocol id="PDP_MascotParser_1" AnalysisSoftware_ref="AS_mascot_parser">
             <AnalysisParams>
@@ -1073,7 +1087,7 @@
                         <PeptideEvidence id="PE_1_1_HSP7C_ORYLA_0" start="160" end="171" pre="K" post="I"
                                          missedCleavages="0" isDecoy="false" DBSequence_Ref="DBSeq_HSP7C_ORYLA"/>
                         <PeptideEvidence id="PE_1_1_HSP7D_MANSE_0" start="160" end="171" pre="K" post="I"
-                                         missedCleavages="0" isDecoy="false" DBSequence_Ref="DBSeq_HSP7D_MANSE"/>
+                                         missedCleavages="0" isDecoy="false" DBSequence_Ref="DBSeq_HSP7D_MANSE" TranslationTable_ref="id45"/>
                         <cvParam accession="MS:1001171" name="mascot:score" cvRef="PSI-MS" value="62.72"/>
                         <cvParam accession="MS:1001172" name="mascot:expectation value" cvRef="PSI-MS"
                                  value="0.000863428353297988"/>

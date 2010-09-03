@@ -127,6 +127,15 @@ public abstract class AbstractResolvingAdapter<ValueType, BoundType> extends Xml
                 case AnalysisSoftware:
                      cls = AnalysisSoftware.class;
                      break;
+                case ProteinDetectionList:
+                     cls = ProteinDetectionList.class;
+                     break;
+                case ProteinDetectionProtocol:
+                     cls = ProteinDetectionProtocol.class;
+                     break;
+                case TranslationTable:
+                     cls = TranslationTable.class;
+                     break;
                 default:
                     throw new IllegalStateException("Unkonwn cache type: " + refType);
             }
