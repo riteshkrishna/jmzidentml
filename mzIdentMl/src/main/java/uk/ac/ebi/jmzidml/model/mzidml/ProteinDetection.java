@@ -1,14 +1,14 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.ProteinDetectionListAdapter;
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.ProteinDetectionProtocolAdapter;
+
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -49,9 +49,11 @@ public class ProteinDetection
     @XmlElement(name = "InputSpectrumIdentifications", required = true)
     protected List<InputSpectrumIdentifications> inputSpectrumIdentifications;
     @XmlAttribute(name = "ProteinDetectionList_ref", required = true)
-    protected String proteinDetectionListRef;
+    @XmlJavaTypeAdapter(ProteinDetectionListAdapter.class)
+    protected ProteinDetectionList proteinDetectionList;
     @XmlAttribute(name = "ProteinDetectionProtocol_ref", required = true)
-    protected String proteinDetectionProtocolRef;
+    @XmlJavaTypeAdapter(ProteinDetectionProtocolAdapter.class)
+    protected ProteinDetectionProtocol proteinDetectionProtocol;
 
     /**
      * Gets the value of the inputSpectrumIdentifications property.
@@ -90,8 +92,8 @@ public class ProteinDetection
      *     {@link String }
      *     
      */
-    public String getProteinDetectionListRef() {
-        return proteinDetectionListRef;
+    public ProteinDetectionList getProteinDetectionList() {
+        return proteinDetectionList;
     }
 
     /**
@@ -102,8 +104,8 @@ public class ProteinDetection
      *     {@link String }
      *     
      */
-    public void setProteinDetectionListRef(String value) {
-        this.proteinDetectionListRef = value;
+    public void setProteinDetectionList(ProteinDetectionList value) {
+        this.proteinDetectionList = value;
     }
 
     /**
@@ -114,8 +116,8 @@ public class ProteinDetection
      *     {@link String }
      *     
      */
-    public String getProteinDetectionProtocolRef() {
-        return proteinDetectionProtocolRef;
+    public ProteinDetectionProtocol getProteinDetectionProtocol() {
+        return proteinDetectionProtocol;
     }
 
     /**
@@ -126,8 +128,8 @@ public class ProteinDetection
      *     {@link String }
      *     
      */
-    public void setProteinDetectionProtocolRef(String value) {
-        this.proteinDetectionProtocolRef = value;
+    public void setProteinDetectionProtocol(ProteinDetectionProtocol value) {
+        this.proteinDetectionProtocol = value;
     }
 
 }

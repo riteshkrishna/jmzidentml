@@ -1,17 +1,14 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.DBSequenceAdapter;
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.TranslationTableAdapter;
+
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.DBSequenceAdapter;
 
 
 /**
@@ -85,7 +82,8 @@ public class PeptideEvidence
     @XmlAttribute
     protected String post;
     @XmlAttribute(name = "TranslationTable_ref")
-    protected String translationTableRef;
+    @XmlJavaTypeAdapter(TranslationTableAdapter.class)
+    protected TranslationTable translationTable;
     @XmlAttribute
     protected Integer frame;
     @XmlAttribute
@@ -251,8 +249,8 @@ public class PeptideEvidence
      *     {@link String }
      *     
      */
-    public String getTranslationTableRef() {
-        return translationTableRef;
+    public TranslationTable getTranslationTable() {
+        return translationTable;
     }
 
     /**
@@ -263,8 +261,8 @@ public class PeptideEvidence
      *     {@link String }
      *     
      */
-    public void setTranslationTableRef(String value) {
-        this.translationTableRef = value;
+    public void setTranslationTable(TranslationTable value) {
+        this.translationTable = value;
     }
 
     /**

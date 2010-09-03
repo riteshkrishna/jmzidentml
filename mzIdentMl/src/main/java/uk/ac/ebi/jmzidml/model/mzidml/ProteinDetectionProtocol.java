@@ -1,12 +1,11 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.AnalysisSoftwareAdapter;
+
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -48,7 +47,8 @@ public class ProteinDetectionProtocol
     @XmlElement(name = "Threshold", required = true)
     protected ParamAlternativeList threshold;
     @XmlAttribute(name = "AnalysisSoftware_ref", required = true)
-    protected String analysisSoftwareRef;
+    @XmlJavaTypeAdapter(AnalysisSoftwareAdapter.class)
+    protected AnalysisSoftware analysisSoftware;
 
     /**
      * Gets the value of the analysisParams property.
@@ -106,8 +106,8 @@ public class ProteinDetectionProtocol
      *     {@link String }
      *     
      */
-    public String getAnalysisSoftwareRef() {
-        return analysisSoftwareRef;
+    public AnalysisSoftware getAnalysisSoftware() {
+        return analysisSoftware;
     }
 
     /**
@@ -118,8 +118,8 @@ public class ProteinDetectionProtocol
      *     {@link String }
      *     
      */
-    public void setAnalysisSoftwareRef(String value) {
-        this.analysisSoftwareRef = value;
+    public void setAnalysisSoftware(AnalysisSoftware value) {
+        this.analysisSoftware = value;
     }
 
 }

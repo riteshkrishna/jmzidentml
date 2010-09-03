@@ -5,7 +5,7 @@
 
 package uk.ac.ebi;
 
-import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentification;
+import uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidence;
 import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationItem;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
@@ -73,14 +73,30 @@ public class JmzIdentMLParser {
 //                    System.out.println("SpectrumIdentificationResult -> spectraData id: " + element.getSpectraData().getId());
 //                }
 
-                System.out.println("attempt to read SpectrumIdentification");
-                Iterator<SpectrumIdentification> seqIter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/AnalysisCollection/SpectrumIdentification", SpectrumIdentification.class);
+//                System.out.println("attempt to read SpectrumIdentification");
+//                Iterator<SpectrumIdentification> seqIter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/AnalysisCollection/SpectrumIdentification", SpectrumIdentification.class);
+//                while (seqIter.hasNext()) {
+//                    SpectrumIdentification element = seqIter.next();
+//                    System.out.println("SpectrumIdentification -> spectraData id: " + element.getInputSpectra().get(0).getSpectraData().getId());
+//                }
+
+//                System.out.println("attempt to read ProteinDetection");
+//                Iterator<ProteinDetection> seqIter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/AnalysisCollection/ProteinDetection", ProteinDetection.class);
+//                while (seqIter.hasNext()) {
+//                    ProteinDetection element = seqIter.next();
+//                    System.out.println("ProteinDetection -> protocol name: " + element.getProteinDetectionProtocol().getName());
+//                    System.out.println("ProteinDetection -> list -> ambibuity group (0) id: " + element.getProteinDetectionList().getProteinAmbiguityGroup().get(0).getId());
+//                }
+
+                System.out.println("attempt to read PeptideEvidence");
+                Iterator<PeptideEvidence> seqIter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/DataCollection/AnalysisData/SpectrumIdentificationList/SpectrumIdentificationResult/SpectrumIdentificationItem/PeptideEvidence", PeptideEvidence.class);
                 while (seqIter.hasNext()) {
-                    SpectrumIdentification element = seqIter.next();
-                    System.out.println("SpectrumIdentification -> spectraData id: " + element.getInputSpectra().get(0).getSpectraData().getId());
+                    PeptideEvidence element = seqIter.next();
+                    System.out.println("PeptideEvidence id: " + element.getId());
+                    if (element.getId().equalsIgnoreCase("PE_1_1_HSP7D_MANSE_0")) {
+                        System.out.println("PeptideEvidence -> translation table: " + element.getTranslationTable());
+                    }
                 }
-
-
 
    /*
                 CvList list = unmarshaller.unmarshalFromXpath("/mzIdentML/cvList", CvList.class);

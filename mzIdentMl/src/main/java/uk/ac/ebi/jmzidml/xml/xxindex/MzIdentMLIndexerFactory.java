@@ -76,6 +76,9 @@ public class MzIdentMLIndexerFactory {
         private HashMap<String, IndexElement> spectraDataMap = new HashMap<String, IndexElement>();
         private HashMap<String, IndexElement> spectrumIdentificationListMap = new HashMap<String, IndexElement>();
         private HashMap<String, IndexElement> spectrumIdentificationProtocolMap = new HashMap<String, IndexElement>();
+        private HashMap<String, IndexElement> proteinDetectionListMap = new HashMap<String, IndexElement>();
+        private HashMap<String, IndexElement> proteinDetectionProtocolMap = new HashMap<String, IndexElement>();
+        private HashMap<String, IndexElement> translationTableMap = new HashMap<String, IndexElement>();
 
         private MzIdentMLIndexerImpl(File xmlFile) {
 
@@ -185,7 +188,19 @@ public class MzIdentMLIndexerFactory {
                 logger.info("Init SpectrumIdentificationProtocol cache");
                 initIdMapCache(spectrumIdentificationProtocolMap, "/AnalysisProtocolCollection/SpectrumIdentificationProtocol");
 
-                
+                //contact cache for ProteinDetectionList elements
+                logger.info("Init ProteinDetectionList cache");
+                initIdMapCache(proteinDetectionListMap, "/DataCollection/AnalysisData/ProteinDetectionList");
+
+                //contact cache for ProteinDetectionProtocol elements
+                logger.info("Init proteinDetectionProtocol cache");
+                initIdMapCache(proteinDetectionProtocolMap, "/AnalysisProtocolCollection/ProteinDetectionProtocol");
+
+                //contact cache for TranslationTable elements
+                logger.info("Init TranslationTable cache");
+                initIdMapCache(translationTableMap, "/AnalysisProtocolCollection/SpectrumIdentificationProtocol/DatabaseTranslation/TranslationTable");
+
+
                 //extract the MzIdentML attributes from the MzML start tag
                 //get start position
                 List<IndexElement> ie = index.getElements(root);
@@ -387,6 +402,15 @@ public class MzIdentMLIndexerFactory {
                     break;
                 case SpectrumIdentificationProtocol:
                     xml = readXML(spectrumIdentificationProtocolMap.get(ID));
+                    break;
+                case ProteinDetectionList:
+                    xml = readXML(proteinDetectionListMap.get(ID));
+                    break;
+                case ProteinDetectionProtocol:
+                    xml = readXML(proteinDetectionProtocolMap.get(ID));
+                    break;
+                case TranslationTable:
+                    xml = readXML(translationTableMap.get(ID));
                     break;
 
                 default:
