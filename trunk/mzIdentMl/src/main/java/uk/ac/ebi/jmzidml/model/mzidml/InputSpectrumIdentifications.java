@@ -41,7 +41,7 @@ public class InputSpectrumIdentifications
     protected SpectrumIdentificationList spectrumIdentificationList;
 
     /**
-     * Gets the value of the spectrumIdentificationListRef property.
+     * Gets the value of the spectrumIdentificationList property.
      * 
      * @return
      *     possible object is
@@ -53,7 +53,7 @@ public class InputSpectrumIdentifications
     }
 
     /**
-     * Sets the value of the spectrumIdentificationListRef property.
+     * Sets the value of the spectrumIdentificationList property.
      * 
      * @param value
      *     allowed object is

@@ -51,8 +51,8 @@ public class SpectrumIdentificationResult
     @XmlElement(name = "SpectrumIdentificationItem", required = true)
     protected List<SpectrumIdentificationItem> spectrumIdentificationItem;
     @XmlElements({
-        @XmlElement(name = "cvParam", type = CvParam.class),
-        @XmlElement(name = "userParam", type = UserParam.class)
+        @XmlElement(name = "userParam", type = UserParam.class),
+        @XmlElement(name = "cvParam", type = CvParam.class)
     })
     protected List<Param> paramGroup;
     @XmlAttribute(required = true)
@@ -108,8 +108,8 @@ public class SpectrumIdentificationResult
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link CvParam }
      * {@link UserParam }
+     * {@link CvParam }
      * 
      * 
      */
@@ -145,7 +145,7 @@ public class SpectrumIdentificationResult
     }
 
     /**
-     * Gets the value of the spectraDataRef property.
+     * Gets the value of the spectraData property.
      * 
      * @return
      *     possible object is
@@ -157,7 +157,7 @@ public class SpectrumIdentificationResult
     }
 
     /**
-     * Sets the value of the spectraDataRef property.
+     * Sets the value of the spectraData property.
      * 
      * @param value
      *     allowed object is

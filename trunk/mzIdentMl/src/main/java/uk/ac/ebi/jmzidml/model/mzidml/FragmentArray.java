@@ -75,7 +75,7 @@ public class FragmentArray
     }
 
     /**
-     * Gets the value of the measureRef property.
+     * Gets the value of the measure property.
      * 
      * @return
      *     possible object is
@@ -87,7 +87,7 @@ public class FragmentArray
     }
 
     /**
-     * Sets the value of the measureRef property.
+     * Sets the value of the measure property.
      * 
      * @param value
      *     allowed object is

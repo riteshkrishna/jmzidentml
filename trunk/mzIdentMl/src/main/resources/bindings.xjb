@@ -230,18 +230,18 @@
         </jxb:bindings>
         <jxb:bindings
                 node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinDetectionType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='ProteinDetectionList_ref']">
-            <jxb:property name="proteinDetectionList">
+            <jxb:property name="ProteinDetectionList">
                 <jxb:baseType>
-                    <xjc:javaType name="proteinDetectionList"
+                    <xjc:javaType name="ProteinDetectionList"
                                   adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.ProteinDetectionListAdapter"/>
                 </jxb:baseType>
             </jxb:property>
         </jxb:bindings>
         <jxb:bindings
                 node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinDetectionType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='ProteinDetectionProtocol_ref']">
-            <jxb:property name="proteinDetectionProtocol">
+            <jxb:property name="ProteinDetectionProtocol">
                 <jxb:baseType>
-                    <xjc:javaType name="proteinDetectionProtocol"
+                    <xjc:javaType name="ProteinDetectionProtocol"
                                   adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.ProteinDetectionProtocolAdapter"/>
                 </jxb:baseType>
             </jxb:property>
@@ -254,7 +254,7 @@
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.DBSequenceType']">
             <jxb:class name="DBSequence"/>
         </jxb:bindings>
-        <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.DBSequenceType']/xsd:attribute[@name='SearchDatabase_ref']">
+        <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.DBSequenceType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='SearchDatabase_ref']">
             <jxb:property name="AnalysisSearchDatabase">
                 <jxb:baseType>
                     <xjc:javaType name="AnalysisSearchDatabase"
@@ -404,6 +404,14 @@
         <jxb:bindings node="//xsd:complexType[@name='SearchDatabaseType']">
             <jxb:class name="SearchDatabase"/>
         </jxb:bindings>
+        <jxb:bindings node="//xsd:complexType[@name='SearchDatabaseType']/xsd:attribute[@name='SearchDatabase_ref']">
+            <jxb:property name="AnalysisSearchDatabase">
+                <jxb:baseType>
+                    <xjc:javaType name="AnalysisSearchDatabase"
+                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.AnalysisSearchDatabaseAdapter"/>
+                </jxb:baseType>
+            </jxb:property>
+        </jxb:bindings>
 
         <jxb:bindings node="//xsd:complexType[@name='SequenceCollectionType']">
             <jxb:class name="SequenceCollection"/>
@@ -529,7 +537,7 @@
             <jxb:class name="Person"/>
         </jxb:bindings>
         <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Audit.PersonType']/xsd:complexContent/xsd:extension/xsd:sequence/xsd:element[@name='affiliations']/xsd:complexType/xsd:attribute[@name='Organization_ref']">
-            <jxb:property name="Organisation">
+            <jxb:property name="Organization">
                 <jxb:baseType>
                     <xjc:javaType name="Organization"
                                   adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.OrganizationAdapter"/>

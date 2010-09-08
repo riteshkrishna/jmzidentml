@@ -1,15 +1,10 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -60,8 +55,8 @@ public abstract class Material
     @XmlElement(name = "ContactRole")
     protected List<ContactRole> contactRole;
     @XmlElements({
-        @XmlElement(name = "cvParam", type = CvParam.class),
-        @XmlElement(name = "userParam", type = UserParam.class)
+        @XmlElement(name = "userParam", type = UserParam.class),
+        @XmlElement(name = "cvParam", type = CvParam.class)
     })
     protected List<Param> paramGroup;
 
@@ -114,8 +109,8 @@ public abstract class Material
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link CvParam }
      * {@link UserParam }
+     * {@link CvParam }
      * 
      * 
      */

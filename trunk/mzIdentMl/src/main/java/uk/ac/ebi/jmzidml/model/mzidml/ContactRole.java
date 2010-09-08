@@ -84,7 +84,7 @@ public class ContactRole
     }
 
     /**
-     * Gets the value of the contactRef property.
+     * Gets the value of the contact property.
      * 
      * @return
      *     possible object is
@@ -96,7 +96,7 @@ public class ContactRole
     }
 
     /**
-     * Sets the value of the contactRef property.
+     * Sets the value of the contact property.
      * 
      * @param value
      *     allowed object is
