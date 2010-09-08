@@ -85,7 +85,7 @@ public class ProteinDetection
     }
 
     /**
-     * Gets the value of the proteinDetectionListRef property.
+     * Gets the value of the proteinDetectionList property.
      * 
      * @return
      *     possible object is
@@ -97,7 +97,7 @@ public class ProteinDetection
     }
 
     /**
-     * Sets the value of the proteinDetectionListRef property.
+     * Sets the value of the proteinDetectionList property.
      * 
      * @param value
      *     allowed object is
@@ -109,7 +109,7 @@ public class ProteinDetection
     }
 
     /**
-     * Gets the value of the proteinDetectionProtocolRef property.
+     * Gets the value of the proteinDetectionProtocol property.
      * 
      * @return
      *     possible object is
@@ -121,7 +121,7 @@ public class ProteinDetection
     }
 
     /**
-     * Sets the value of the proteinDetectionProtocolRef property.
+     * Sets the value of the proteinDetectionProtocol property.
      * 
      * @param value
      *     allowed object is

@@ -242,7 +242,7 @@ public class PeptideEvidence
     }
 
     /**
-     * Gets the value of the translationTableRef property.
+     * Gets the value of the translationTable property.
      * 
      * @return
      *     possible object is
@@ -254,7 +254,7 @@ public class PeptideEvidence
     }
 
     /**
-     * Sets the value of the translationTableRef property.
+     * Sets the value of the translationTable property.
      * 
      * @param value
      *     allowed object is

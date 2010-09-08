@@ -1,14 +1,10 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+
+import javax.xml.bind.annotation.*;
+import java.io.Serializable;
 
 
 /**
@@ -48,10 +44,10 @@ public abstract class MaterialMeasurement
 
     private final static long serialVersionUID = 100L;
     @XmlElements({
-        @XmlElement(name = "Range", type = Range.class),
-        @XmlElement(name = "AtomicValue", type = AtomicValue.class),
         @XmlElement(name = "BooleanValue", type = BooleanValue.class),
-        @XmlElement(name = "ComplexValue", type = ComplexValue.class)
+        @XmlElement(name = "ComplexValue", type = ComplexValue.class),
+        @XmlElement(name = "Range", type = Range.class),
+        @XmlElement(name = "AtomicValue", type = AtomicValue.class)
     })
     protected Measurement measurementGroup;
 
@@ -60,10 +56,10 @@ public abstract class MaterialMeasurement
      * 
      * @return
      *     possible object is
-     *     {@link Range }
-     *     {@link AtomicValue }
      *     {@link BooleanValue }
      *     {@link ComplexValue }
+     *     {@link Range }
+     *     {@link AtomicValue }
      *     
      */
     public Measurement getMeasurementGroup() {
@@ -75,10 +71,10 @@ public abstract class MaterialMeasurement
      * 
      * @param value
      *     allowed object is
-     *     {@link Range }
-     *     {@link AtomicValue }
      *     {@link BooleanValue }
      *     {@link ComplexValue }
+     *     {@link Range }
+     *     {@link AtomicValue }
      *     
      */
     public void setMeasurementGroup(Measurement value) {

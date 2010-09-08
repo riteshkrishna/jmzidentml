@@ -62,8 +62,8 @@ public class SpectrumIdentificationItem
     @XmlElement(name = "PeptideEvidence")
     protected List<PeptideEvidence> peptideEvidence;
     @XmlElements({
-        @XmlElement(name = "userParam", type = UserParam.class),
-        @XmlElement(name = "cvParam", type = CvParam.class)
+        @XmlElement(name = "cvParam", type = CvParam.class),
+        @XmlElement(name = "userParam", type = UserParam.class)
     })
     protected List<Param> paramGroup;
     @XmlElement(name = "Fragmentation")
@@ -137,8 +137,8 @@ public class SpectrumIdentificationItem
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link UserParam }
      * {@link CvParam }
+     * {@link UserParam }
      * 
      * 
      */
@@ -310,7 +310,7 @@ public class SpectrumIdentificationItem
     }
 
     /**
-     * Gets the value of the massTableRef property.
+     * Gets the value of the massTable property.
      * 
      * @return
      *     possible object is
@@ -322,7 +322,7 @@ public class SpectrumIdentificationItem
     }
 
     /**
-     * Sets the value of the massTableRef property.
+     * Sets the value of the massTable property.
      * 
      * @param value
      *     allowed object is
@@ -334,7 +334,7 @@ public class SpectrumIdentificationItem
     }
 
     /**
-     * Gets the value of the sampleRef property.
+     * Gets the value of the sample property.
      * 
      * @return
      *     possible object is
@@ -346,7 +346,7 @@ public class SpectrumIdentificationItem
     }
 
     /**
-     * Sets the value of the sampleRef property.
+     * Sets the value of the sample property.
      * 
      * @param value
      *     allowed object is

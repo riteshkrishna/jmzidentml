@@ -38,30 +38,30 @@ public class SearchDatabase
     private final static long serialVersionUID = 100L;
     @XmlAttribute(name = "SearchDatabase_ref")
     @XmlJavaTypeAdapter(AnalysisSearchDatabaseAdapter.class)
-    protected AnalysisSearchDatabase searchDatabase;
+    protected AnalysisSearchDatabase analysisSearchDatabase;
 
     /**
-     * Gets the value of the searchDatabaseRef property.
+     * Gets the value of the analysisSearchDatabase property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public AnalysisSearchDatabase getSearchDatabase() {
-        return searchDatabase;
+    public AnalysisSearchDatabase getAnalysisSearchDatabase() {
+        return analysisSearchDatabase;
     }
 
     /**
-     * Sets the value of the searchDatabaseRef property.
+     * Sets the value of the analysisSearchDatabase property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setSearchDatabase(AnalysisSearchDatabase value) {
-        this.searchDatabase = value;
+    public void setAnalysisSearchDatabase(AnalysisSearchDatabase value) {
+        this.analysisSearchDatabase = value;
     }
 
 }

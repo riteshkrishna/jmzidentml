@@ -1,13 +1,8 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -50,9 +45,9 @@ public abstract class Parameter
 
     private final static long serialVersionUID = 100L;
     @XmlElements({
-        @XmlElement(name = "AtomicValue", type = AtomicValue.class),
         @XmlElement(name = "BooleanValue", type = BooleanValue.class),
         @XmlElement(name = "Range", type = Range.class),
+        @XmlElement(name = "AtomicValue", type = AtomicValue.class),
         @XmlElement(name = "ComplexValue", type = ComplexValue.class)
     })
     protected Measurement measurementGroup;
@@ -62,9 +57,9 @@ public abstract class Parameter
      * 
      * @return
      *     possible object is
-     *     {@link AtomicValue }
      *     {@link BooleanValue }
      *     {@link Range }
+     *     {@link AtomicValue }
      *     {@link ComplexValue }
      *     
      */
@@ -77,9 +72,9 @@ public abstract class Parameter
      * 
      * @param value
      *     allowed object is
-     *     {@link AtomicValue }
      *     {@link BooleanValue }
      *     {@link Range }
+     *     {@link AtomicValue }
      *     {@link ComplexValue }
      *     
      */

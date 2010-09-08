@@ -118,7 +118,7 @@ public class SpectrumIdentification
     }
 
     /**
-     * Gets the value of the spectrumIdentificationProtocolRef property.
+     * Gets the value of the spectrumIdentificationProtocol property.
      * 
      * @return
      *     possible object is
@@ -130,7 +130,7 @@ public class SpectrumIdentification
     }
 
     /**
-     * Sets the value of the spectrumIdentificationProtocolRef property.
+     * Sets the value of the spectrumIdentificationProtocol property.
      * 
      * @param value
      *     allowed object is
@@ -142,7 +142,7 @@ public class SpectrumIdentification
     }
 
     /**
-     * Gets the value of the spectrumIdentificationListRef property.
+     * Gets the value of the spectrumIdentificationList property.
      * 
      * @return
      *     possible object is
@@ -154,7 +154,7 @@ public class SpectrumIdentification
     }
 
     /**
-     * Sets the value of the spectrumIdentificationListRef property.
+     * Sets the value of the spectrumIdentificationList property.
      * 
      * @param value
      *     allowed object is

@@ -195,7 +195,7 @@ public class Person
         protected Organization organization;
 
         /**
-         * Gets the value of the organizationRef property.
+         * Gets the value of the organization property.
          * 
          * @return
          *     possible object is
@@ -207,7 +207,7 @@ public class Person
         }
 
         /**
-         * Sets the value of the organizationRef property.
+         * Sets the value of the organization property.
          * 
          * @param value
          *     allowed object is

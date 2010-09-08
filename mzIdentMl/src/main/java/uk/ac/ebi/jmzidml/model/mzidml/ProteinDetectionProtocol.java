@@ -99,7 +99,7 @@ public class ProteinDetectionProtocol
     }
 
     /**
-     * Gets the value of the analysisSoftwareRef property.
+     * Gets the value of the analysisSoftware property.
      * 
      * @return
      *     possible object is
@@ -111,7 +111,7 @@ public class ProteinDetectionProtocol
     }
 
     /**
-     * Sets the value of the analysisSoftwareRef property.
+     * Sets the value of the analysisSoftware property.
      * 
      * @param value
      *     allowed object is
