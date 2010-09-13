@@ -49,7 +49,7 @@
                     </schemaIncludes>
                     <bindingDirectory>src/main/resources</bindingDirectory>
                     <bindingIncludes>
-                        <include>bindings.xjb</include>
+                        <include>bindings-slim.xjb</include>
                     </bindingIncludes>
                     <generateDirectory>src/main/java</generateDirectory>
                     <removeOldOutput>false</removeOldOutput>

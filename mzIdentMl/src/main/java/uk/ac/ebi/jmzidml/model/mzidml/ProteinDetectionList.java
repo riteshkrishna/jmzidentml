@@ -1,14 +1,10 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -73,7 +69,7 @@ public class ProteinDetectionList
      * Objects of the following type(s) are allowed in the list
      * {@link CvParam }
      * {@link UserParam }
-     * 
+     *
      * 
      */
     public List<Param> getParamGroup() {

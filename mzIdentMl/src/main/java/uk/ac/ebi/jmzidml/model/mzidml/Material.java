@@ -43,7 +43,6 @@ import java.util.List;
     "paramGroup"
 })
 @XmlSeeAlso({
-    GenericMaterial.class,
     Sample.class
 })
 public abstract class Material
@@ -111,7 +110,7 @@ public abstract class Material
      * Objects of the following type(s) are allowed in the list
      * {@link UserParam }
      * {@link CvParam }
-     * 
+     *
      * 
      */
     public List<Param> getParamGroup() {

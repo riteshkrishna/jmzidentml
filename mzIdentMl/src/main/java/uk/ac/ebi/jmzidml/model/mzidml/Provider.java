@@ -1,12 +1,11 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.AnalysisSoftwareAdapter;
+
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -46,7 +45,8 @@ public class Provider
     @XmlElement(name = "ContactRole")
     protected ContactRole contactRole;
     @XmlAttribute(name = "Software_ref")
-    protected String softwareRef;
+    @XmlJavaTypeAdapter(AnalysisSoftwareAdapter.class)
+    protected AnalysisSoftware analysisSoftware;
 
     /**
      * The Contact that provided the document instance.
@@ -73,27 +73,27 @@ public class Provider
     }
 
     /**
-     * Gets the value of the softwareRef property.
+     * Gets the value of the analysisSoftware property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getSoftwareRef() {
-        return softwareRef;
+    public AnalysisSoftware getAnalysisSoftware() {
+        return analysisSoftware;
     }
 
     /**
-     * Sets the value of the softwareRef property.
+     * Sets the value of the analysisSoftware property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setSoftwareRef(String value) {
-        this.softwareRef = value;
+    public void setAnalysisSoftware(AnalysisSoftware value) {
+        this.analysisSoftware = value;
     }
 
 }

@@ -1,7 +1,7 @@
 <!--
   Author: rcote
   Author: florian
-  File: bindings.xjb
+  File: bindings-slim.xjb
 
   jmzidentml is Copyright 2008 The European Bioinformatics Institute
 
@@ -444,7 +444,7 @@
     <!-- #####             FuGE light bindings                                   ##### -->
     <!-- ##### ##### ##### ##### ##### ##### ##### ##### ##### ##### ##### ##### ##### -->
 
-    <jxb:bindings schemaLocation="FuGElightv1.0.0.xsd" node="/xsd:schema">
+    <jxb:bindings schemaLocation="FuGElightv1.0.0-slim.xsd" node="/xsd:schema">
 
         <jxb:bindings node="//xsd:complexType[@name='FuGE.Bio.ConceptualMolecule.ConceptualMoleculeType']">
             <jxb:class name="ConceptualMolecule"/>
@@ -452,10 +452,6 @@
 
         <jxb:bindings node="//xsd:complexType[@name='FuGE.Bio.Data.DataType']">
             <jxb:class name="Data"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Protocol.GenericParameterType']">
-            <jxb:class name="GenericParameter"/>
         </jxb:bindings>
 
         <jxb:bindings node="//xsd:complexType[@name='FuGE.Bio.Data.ExternalDataType']">
@@ -474,20 +470,20 @@
             <jxb:class name="ProtocolApplication"/>
         </jxb:bindings>
 
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Protocol.SoftwareType']">
-            <jxb:class name="Software"/>
+        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Protocol.EquipmentType']">
+            <jxb:class name="Equipment"/>
         </jxb:bindings>
 
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.IdentifiableType']">
-            <jxb:class name="Identifiable"/>
+        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Protocol.SoftwareType']">
+            <jxb:class name="Software"/>
         </jxb:bindings>
 
         <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Protocol.ProtocolType']">
             <jxb:class name="Protocol"/>
         </jxb:bindings>
 
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Protocol.ParameterType']">
-            <jxb:class name="Parameter"/>
+        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.IdentifiableType']">
+            <jxb:class name="Identifiable"/>
         </jxb:bindings>
 
         <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Ontology.ParamType']">
@@ -502,6 +498,14 @@
             <jxb:class name="CvParam"/>
         </jxb:bindings>
 
+        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Ontology.PropertyValue']">
+            <jxb:class name="PropertyValue"/>
+        </jxb:bindings>
+
+        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Ontology.cvType']">
+            <jxb:class name="Cv"/>
+        </jxb:bindings>
+
         <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Audit.ContactRoleType']">
             <jxb:class name="ContactRole"/>
         </jxb:bindings>
@@ -513,24 +517,6 @@
                                   adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.ContactAdapter"/>
                 </jxb:baseType>
             </jxb:property>
-        </jxb:bindings>
-
-
-        <!--
-          the following FuGE elements are not used in the mzIdentML schema
-          !! double check that !!
-          -->
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Bio.Material.MaterialMeasurementType']">
-            <jxb:class name="MaterialMeasurement"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Bio.Material.GenericMaterialType']">
-            <jxb:class name="GenericMaterial"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Bio.Material.GenericMaterialMeasurementType']">
-            <jxb:class name="GenericMaterialMeasurement"/>
         </jxb:bindings>
 
         <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Audit.PersonType']">
@@ -561,110 +547,6 @@
             <jxb:class name="Contact"/>
         </jxb:bindings>
 
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.References.BibliographicReferenceType']">
-            <jxb:class name="BibliographicReference"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.References.DatabaseType']">
-            <jxb:class name="Database"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.References.DatabaseReferenceType']">
-            <jxb:class name="DatabaseReference"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Description.DescriptionType']">
-            <jxb:class name="Description"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Protocol.ParameterValueType']">
-            <jxb:class name="ParameterValue"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Protocol.EquipmentType']">
-            <jxb:class name="Equipment"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Protocol.EquipmentApplicationType']">
-            <jxb:class name="EquipmentApplication"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Protocol.SoftwareApplicationType']">
-            <jxb:class name="SoftwareApplication"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Protocol.ParameterizableApplicationType']">
-            <jxb:class name="ParameterizableApplication"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Protocol.ActionType']">
-            <jxb:class name="Action"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Protocol.ActionApplicationType']">
-            <jxb:class name="ActionApplication"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Protocol.GenericProtocolType']">
-            <jxb:class name="GenericProtocol"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Protocol.GenericActionType']">
-            <jxb:class name="GenericAction"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Protocol.GenericSoftwareType']">
-            <jxb:class name="GenericSoftware"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Protocol.GenericEquipmentType']">
-            <jxb:class name="GenericEquipment"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Protocol.GenericProtocolApplicationType']">
-            <jxb:class name="GenericProtocolApplication"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Protocol.ParameterPairType']">
-            <jxb:class name="ParameterPair"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Ontology.PropertyValue']">
-            <jxb:class name="PropertyValue"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Ontology.cvType']">
-            <jxb:class name="Cv"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Measurement.AtomicValueType']">
-            <jxb:class name="AtomicValue"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Measurement.BooleanValueType']">
-            <jxb:class name="BooleanValue"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Measurement.ComplexValueType']">
-            <jxb:class name="ComplexValue"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Measurement.RangeType']">
-            <jxb:class name="Range"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Measurement.MeasurementType']">
-            <jxb:class name="Measurement"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Collection.ReferenceableCollectionType']">
-            <jxb:class name="ReferenceableCollection"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Collection.AuditCollectionType']">
-            <jxb:class name="AuditCollection"/>
-        </jxb:bindings>
-
         <jxb:bindings node="//xsd:complexType[@name='FuGE.Collection.ProviderType']">
             <jxb:class name="Provider"/>
         </jxb:bindings>
@@ -678,6 +560,14 @@
             </jxb:property>
         </jxb:bindings>
 
+        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.References.BibliographicReferenceType']">
+            <jxb:class name="BibliographicReference"/>
+        </jxb:bindings>
+
+        <jxb:bindings node="//xsd:complexType[@name='FuGE.Collection.AuditCollectionType']">
+            <jxb:class name="AuditCollection"/>
+        </jxb:bindings>
+
         <jxb:bindings node="//xsd:complexType[@name='ParamType']">
             <jxb:class name="ParamAlternative"/>
         </jxb:bindings>
@@ -685,6 +575,11 @@
         <jxb:bindings node="//xsd:complexType[@name='ParamListType']">
             <jxb:class name="ParamAlternativeList"/>
         </jxb:bindings>
+
+        <!--
+          the following FuGE elements are not used in the mzIdentML schema
+          !! double check that !!
+          -->
 
     </jxb:bindings>
 

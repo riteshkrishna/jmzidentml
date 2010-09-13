@@ -9,7 +9,7 @@ Distributed under the Creative Commons license http://creativecommons.org/licens
             targetNamespace="http://psidev.info/psi/pi/mzIdentML/1.0"
             elementFormDefault="qualified"
             version="1.0.0">
-    <xsd:include schemaLocation="FuGElightv1.0.0.xsd"/>
+    <xsd:include schemaLocation="FuGElightv1.0.0-slim.xsd"/>
     <xsd:element name="mzIdentML" type="PSI-PI.Main.mzIdentMLType" abstract="false">
         <xsd:unique name="PK_SEQ">
             <xsd:selector xpath="./psi-pi:SequenceCollection/*"/>

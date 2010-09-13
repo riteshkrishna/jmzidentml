@@ -1,13 +1,10 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+
+import javax.xml.bind.annotation.*;
+import java.io.Serializable;
 
 
 /**
@@ -38,15 +35,12 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 @XmlType(name = "FuGE.Common.IdentifiableType")
 @XmlSeeAlso({
     MzIdentML.class,
-    Database.class,
     BibliographicReference.class,
     Provider.class,
     TranslationTable.class,
     Measure.class,
     SpectrumIdentificationItem.class,
     ProteinAmbiguityGroup.class,
-    ParameterizableApplication.class,
-    Parameter.class,
     ConceptualMolecule.class,
     ProteinDetectionHypothesis.class,
     Protocol.class,
@@ -55,7 +49,6 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
     MassTable.class,
     PeptideEvidence.class,
     Data.class,
-    Action.class,
     Software.class,
     SpectrumIdentificationResult.class,
     ProtocolApplication.class,
