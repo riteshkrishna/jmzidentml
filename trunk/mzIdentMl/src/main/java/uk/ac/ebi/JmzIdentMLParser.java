@@ -34,9 +34,9 @@ public class JmzIdentMLParser {
 
 
 //                System.out.println("attempt to read Person");
-//                Iterator<Person> personIter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/AuditCollection/Person", Person.class);
-//                while (personIter.hasNext()) {
-//                    Person person = personIter.next();
+//                Iterator<Person> person1Iter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/AuditCollection/Person", Person.class);
+//                while (person1Iter.hasNext()) {
+//                    Person person = person1Iter.next();
 //                    System.out.println("person affiliation id: " + person.getAffiliations().get(0).getOrganization().getId());
 //                    System.out.println("person affiliation name: " + person.getAffiliations().get(0).getOrganization().getName());
 //                }
@@ -51,46 +51,46 @@ public class JmzIdentMLParser {
 //                }
 
 //                System.out.println("attempt to read DBSequence");
-//                Iterator<DBSequence> seqIter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/SequenceCollection/DBSequence", DBSequence.class);
-//                while (seqIter.hasNext()) {
-//                    DBSequence dbseq = seqIter.next();
-//                    System.out.println("dbseq -> search db id: " + dbseq.getSearchDatabase().getId());
-//                    System.out.println("dbseq -> search db name: " + dbseq.getSearchDatabase().getName());
+//                Iterator<DBSequence> seq1Iter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/SequenceCollection/DBSequence", DBSequence.class);
+//                while (seq1Iter.hasNext()) {
+//                    DBSequence dbseq = seq1Iter.next();
+//                    System.out.println("dbseq -> search db id: " + dbseq.getAnalysisSearchDatabase().getId());
+//                    System.out.println("dbseq -> search db name: " + dbseq.getAnalysisSearchDatabase().getName());
 //                }
 
 //                System.out.println("attempt to read SpectrumIdentification");
-//                Iterator<SpectrumIdentification> seqIter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/AnalysisCollection/SpectrumIdentification", SpectrumIdentification.class);
-//                while (seqIter.hasNext()) {
-//                    SpectrumIdentification ident = seqIter.next();
-//                    System.out.println("spectrum ident -> search db (1) id: " + ident.getSearchDatabase().get(0).getSearchDatabase().getId());
+//                Iterator<SpectrumIdentification> seq2Iter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/AnalysisCollection/SpectrumIdentification", SpectrumIdentification.class);
+//                while (seq2Iter.hasNext()) {
+//                    SpectrumIdentification ident = seq2Iter.next();
+//                    System.out.println("spectrum ident -> search db (1) id: " + ident.getSearchDatabase().get(0).getAnalysisSearchDatabase().getId());
 //                }
 
 //                System.out.println("attempt to read SpectrumIdentificationResult");
-//                Iterator<SpectrumIdentificationResult> seqIter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/DataCollection/AnalysisData/SpectrumIdentificationList/SpectrumIdentificationResult", SpectrumIdentificationResult.class);
-//                while (seqIter.hasNext()) {
-//                    SpectrumIdentificationResult element = seqIter.next();
+//                Iterator<SpectrumIdentificationResult> seq3Iter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/DataCollection/AnalysisData/SpectrumIdentificationList/SpectrumIdentificationResult", SpectrumIdentificationResult.class);
+//                while (seq3Iter.hasNext()) {
+//                    SpectrumIdentificationResult element = seq3Iter.next();
 //                    System.out.println("SpectrumIdentificationResult -> spectraData id: " + element.getSpectraData().getId());
 //                }
 
 //                System.out.println("attempt to read SpectrumIdentification");
-//                Iterator<SpectrumIdentification> seqIter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/AnalysisCollection/SpectrumIdentification", SpectrumIdentification.class);
-//                while (seqIter.hasNext()) {
-//                    SpectrumIdentification element = seqIter.next();
+//                Iterator<SpectrumIdentification> seq4Iter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/AnalysisCollection/SpectrumIdentification", SpectrumIdentification.class);
+//                while (seq4Iter.hasNext()) {
+//                    SpectrumIdentification element = seq4Iter.next();
 //                    System.out.println("SpectrumIdentification -> spectraData id: " + element.getInputSpectra().get(0).getSpectraData().getId());
 //                }
 
 //                System.out.println("attempt to read ProteinDetection");
-//                Iterator<ProteinDetection> seqIter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/AnalysisCollection/ProteinDetection", ProteinDetection.class);
-//                while (seqIter.hasNext()) {
-//                    ProteinDetection element = seqIter.next();
+//                Iterator<ProteinDetection> seq5Iter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/AnalysisCollection/ProteinDetection", ProteinDetection.class);
+//                while (seq5Iter.hasNext()) {
+//                    ProteinDetection element = seq5Iter.next();
 //                    System.out.println("ProteinDetection -> protocol name: " + element.getProteinDetectionProtocol().getName());
 //                    System.out.println("ProteinDetection -> list -> ambibuity group (0) id: " + element.getProteinDetectionList().getProteinAmbiguityGroup().get(0).getId());
 //                }
 
 //                System.out.println("attempt to read PeptideEvidence");
-//                Iterator<PeptideEvidence> seqIter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/DataCollection/AnalysisData/SpectrumIdentificationList/SpectrumIdentificationResult/SpectrumIdentificationItem/PeptideEvidence", PeptideEvidence.class);
-//                while (seqIter.hasNext()) {
-//                    PeptideEvidence element = seqIter.next();
+//                Iterator<PeptideEvidence> seq6Iter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/DataCollection/AnalysisData/SpectrumIdentificationList/SpectrumIdentificationResult/SpectrumIdentificationItem/PeptideEvidence", PeptideEvidence.class);
+//                while (seq6Iter.hasNext()) {
+//                    PeptideEvidence element = seq6Iter.next();
 //                    System.out.println("PeptideEvidence id: " + element.getId());
 //                    if (element.getId().equalsIgnoreCase("PE_1_1_HSP7D_MANSE_0")) {
 //                        System.out.println("PeptideEvidence -> translation table: " + element.getTranslationTable());
@@ -98,9 +98,9 @@ public class JmzIdentMLParser {
 //                }
 
                 System.out.println("attempt to read SpectrumIdentificationItem");
-                Iterator<SpectrumIdentificationItem> seqIter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/DataCollection/AnalysisData/SpectrumIdentificationList/SpectrumIdentificationResult/SpectrumIdentificationItem", SpectrumIdentificationItem.class);
-                while (seqIter.hasNext()) {
-                    SpectrumIdentificationItem element = seqIter.next();
+                Iterator<SpectrumIdentificationItem> seq7Iter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/DataCollection/AnalysisData/SpectrumIdentificationList/SpectrumIdentificationResult/SpectrumIdentificationItem", SpectrumIdentificationItem.class);
+                while (seq7Iter.hasNext()) {
+                    SpectrumIdentificationItem element = seq7Iter.next();
                     System.out.println("SpectrumIdentificationResult -> spectraData id: " + element.getId());
                     if (element.getId().equalsIgnoreCase("SII_1_1")) {
                         System.out.println("mass table id: " + element.getMassTable().getId());

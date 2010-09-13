@@ -158,7 +158,7 @@ public class Peptide
      * Objects of the following type(s) are allowed in the list
      * {@link CvParam }
      * {@link UserParam }
-     * 
+     *
      * 
      */
     public List<Param> getParamGroup() {

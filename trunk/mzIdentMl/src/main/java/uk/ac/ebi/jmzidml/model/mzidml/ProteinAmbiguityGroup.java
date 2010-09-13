@@ -99,7 +99,7 @@ public class ProteinAmbiguityGroup
      * Objects of the following type(s) are allowed in the list
      * {@link UserParam }
      * {@link CvParam }
-     * 
+     *
      * 
      */
     public List<Param> getParamGroup() {

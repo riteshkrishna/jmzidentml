@@ -1,11 +1,10 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
+import java.io.Serializable;
 
 
 /**
@@ -37,9 +36,6 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "FuGE.Common.Protocol.EquipmentType", propOrder = {
     "make",
     "model"
-})
-@XmlSeeAlso({
-    GenericEquipment.class
 })
 public abstract class Equipment
     extends Identifiable
