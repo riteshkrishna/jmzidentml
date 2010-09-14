@@ -17,8 +17,6 @@ public class DBSequenceAdapter extends AbstractResolvingAdapter<String, DBSequen
 
     public DBSequence unmarshal(String refId) {
 
-        System.out.println("attempting to resolve DBSequence: " + refId);
-
         DBSequence retval;
         if (cache.getCachedObject(refId, DBSequence.class) != null) {
             // ToDo: unchecked cast, may produce runtime exception! check if we can get around this

@@ -20,8 +20,6 @@ public class PeptideEvidenceAdapter extends AbstractResolvingAdapter<String, Pep
 
     public PeptideEvidence unmarshal(String refId) {
 
-        System.out.println("attempting to resolve PeptideEvidence: " + refId);
-
         PeptideEvidence retval;
         if (cache.getCachedObject(refId, PeptideEvidence.class) != null) {
             // ToDo: unchecked cast, may produce runtime exception! check if we can get around this

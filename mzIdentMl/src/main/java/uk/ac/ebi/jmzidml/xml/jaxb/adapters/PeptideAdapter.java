@@ -35,8 +35,6 @@ public class PeptideAdapter extends AbstractResolvingAdapter<String, Peptide> {
 
     public Peptide unmarshal(String refId) {
 
-        System.out.println("attempting to resolve peptide: " + refId);
-
         Peptide retval;
         if (cache.getCachedObject(refId, Peptide.class) != null) {
             // ToDo: unchecked cast, may produce runtime exception! check if we can get around this

@@ -18,8 +18,6 @@ public class ContactAdapter extends AbstractResolvingAdapter<String, Contact> {
 
     public Contact unmarshal(String refId) {
 
-        System.out.println("attempting to resolve contact: " + refId);
-
         Contact retval;
         if (cache.getCachedObject(refId, Contact.class) != null) {
             // ToDo: unchecked cast, may produce runtime exception! check if we can get around this
