@@ -5,11 +5,11 @@
 
 package uk.ac.ebi;
 
+import uk.ac.ebi.jmzidml.model.mzidml.MzIdentML;
 import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationItem;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
 import java.net.URL;
-import java.util.Iterator;
 import java.util.List;
 
 public class JmzIdentMLParser {
@@ -26,6 +26,13 @@ public class JmzIdentMLParser {
                 boolean aUseSpectrumCache = true;
 
                 MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, aUseSpectrumCache);
+
+                MzIdentML mzIdentML_whole = unmarshaller.unmarshalFromXpath("/mzIdentML", MzIdentML.class);
+                System.out.println("mzIdentML id: " + mzIdentML_whole.getId());
+                System.out.println("mzIdentML creation time: " + mzIdentML_whole.getCreationDate().getTime().toString());
+                System.out.println("mzIdentML provider role: " + mzIdentML_whole.getProvider().getContactRole().getRole().getCvParam().getName());
+                System.out.println("mzIdentML protein ambiguity groups: " + mzIdentML_whole.getDataCollection().getAnalysisData().getProteinDetectionList().getProteinAmbiguityGroup().size());
+
 
 //                System.out.println("attempt to read contacts");
 //                ContactRole role = unmarshaller.unmarshalFromXpath("/mzIdentML/AnalysisSoftwareList/AnalysisSoftware/ContactRole", ContactRole.class);
@@ -97,15 +104,15 @@ public class JmzIdentMLParser {
 //                    }
 //                }
 
-                System.out.println("attempt to read SpectrumIdentificationItem");
-                Iterator<SpectrumIdentificationItem> seq7Iter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/DataCollection/AnalysisData/SpectrumIdentificationList/SpectrumIdentificationResult/SpectrumIdentificationItem", SpectrumIdentificationItem.class);
-                while (seq7Iter.hasNext()) {
-                    SpectrumIdentificationItem element = seq7Iter.next();
-                    System.out.println("SpectrumIdentificationResult -> spectraData id: " + element.getId());
-                    if (element.getId().equalsIgnoreCase("SII_1_1")) {
-                        System.out.println("mass table id: " + element.getMassTable().getId());
-                    }
-                }
+//                System.out.println("attempt to read SpectrumIdentificationItem");
+//                Iterator<SpectrumIdentificationItem> seq7Iter = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/DataCollection/AnalysisData/SpectrumIdentificationList/SpectrumIdentificationResult/SpectrumIdentificationItem", SpectrumIdentificationItem.class);
+//                while (seq7Iter.hasNext()) {
+//                    SpectrumIdentificationItem element = seq7Iter.next();
+//                    System.out.println("SpectrumIdentificationResult -> spectraData id: " + element.getId());
+//                    if (element.getId().equalsIgnoreCase("SII_1_1")) {
+//                        System.out.println("mass table id: " + element.getMassTable().getId());
+//                    }
+//                }
 
 
 

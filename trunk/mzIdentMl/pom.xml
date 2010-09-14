@@ -19,6 +19,17 @@
                 </configuration>
             </plugin>
             <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-source</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <configuration>
@@ -31,8 +42,8 @@
             <plugin>
                 <!-- you can use this plugin to generate the jaxb object model from
                      the schema and binding files specified below. Note: this will
-                     need an explicit maven goal call, since it is not intergrated
-                     into the standard mvn lifecycle. The goal to use is:
+                     need an explicit maven goal call, since it is not integrated
+                     into the standard mvn life cycle. The goal to use is:
                      org.jvnet.jaxb2.maven2:maven-jaxb2-plugin:0.6.3:generate
 
                      NOTE: the code generation may overwrite existing classes, so care
@@ -88,7 +99,7 @@
         <dependency>
             <groupId>psidev.psi.tools</groupId>
             <artifactId>xxindex</artifactId>
-            <version>0.7-SNAPSHOT</version>
+            <version>0.8</version>
         </dependency>
         <dependency>
             <groupId>commons-codec</groupId>
@@ -122,20 +133,19 @@
         </repository>
     </repositories>
 
-    <!-- Florian says - uncomment this -->
-        <pluginRepositories>
-            <pluginRepository>
-                <id>maven2-repository.dev.java.net</id>
-                <url>http://download.java.net/maven/2</url>
-            </pluginRepository>
-            <pluginRepository>
-                <id>maven-repository.dev.java.net</id>
-                <name>Java.net Maven 1 Repository (legacy)</name>
-                <url>http://download.java.net/maven/1</url>
-                <layout>legacy</layout>
-            </pluginRepository>
-        </pluginRepositories>
-     
+    <pluginRepositories>
+        <pluginRepository>
+            <id>maven2-repository.dev.java.net</id>
+            <url>http://download.java.net/maven/2</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>maven-repository.dev.java.net</id>
+            <name>Java.net Maven 1 Repository (legacy)</name>
+            <url>http://download.java.net/maven/1</url>
+            <layout>legacy</layout>
+        </pluginRepository>
+    </pluginRepositories>
+
 
     <distributionManagement>
         <repository>
