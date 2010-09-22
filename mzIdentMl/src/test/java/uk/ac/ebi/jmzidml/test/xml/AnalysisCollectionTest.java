@@ -15,9 +15,7 @@ import java.util.Iterator;
  */
 public class AnalysisCollectionTest extends TestCase {
 
-
-    Logger logger = Logger.getLogger(AnalysisCollectionTest.class);
-
+    private static final Logger log = Logger.getLogger(AnalysisCollectionTest.class);
 
     public void testAnalysisCollectionInformation() throws Exception {
 
@@ -37,56 +35,68 @@ public class AnalysisCollectionTest extends TestCase {
         assertNotNull(pd);
         assertNotNull(si);
 
-        System.out.println("Protein Detection : " + pd.getId() + "\t" + pd.getName());
+        log.debug("Protein Detection: " + pd.getId() + "\t" + pd.getName());
         ProteinDetectionList pdl = pd.getProteinDetectionList();
-        System.out.println("Protein Detection List: Name : " + pdl.getName()
+        log.debug("Protein Detection List: Name: " + pdl.getName()
                              + "\t Id : " + pdl.getId());
 
-        Iterator<ProteinAmbiguityGroup> pag =  pdl.getProteinAmbiguityGroup().iterator();
-        while(pag.hasNext()){
-            ProteinAmbiguityGroup pagInstance = pag.next();
-            System.out.println("Protein Ambiguity Group : Id : " + pagInstance.getId()
-                                + "\t Name :" + pagInstance.getName());
+        int pagCnt = pdl.getProteinAmbiguityGroup().size();
+        assertTrue(pagCnt == 5);
+        for (ProteinAmbiguityGroup proteinAmbiguityGroup : pdl.getProteinAmbiguityGroup()) {
+            log.debug("Protein Ambiguity Group: Id: " + proteinAmbiguityGroup.getId()
+                    + "\t Name: " + proteinAmbiguityGroup.getName());
 
-            Iterator<ProteinDetectionHypothesis>ph = pagInstance.getProteinDetectionHypothesis().iterator();
-            while(ph.hasNext()){
-                  ProteinDetectionHypothesis pdh = ph.next();
-                  System.out.println(" Protein Detection Hypothesis : DBSequence Accn" + pdh.getDBSequenceProteinDetection().getAccession()
-                                    + " seq length :"   + pdh.getDBSequenceProteinDetection().getLength());
 
-                  Iterator<PeptideHypothesis> peph = pdh.getPeptideHypothesis().iterator();
-                  while(peph.hasNext()){
-                       PeptideEvidence pepevd = peph.next().getPeptideEvidence();
-                       System.out.println("Peptide Evidence Name : " + pepevd.getName()
-                                        + "\t Pre : "+ pepevd.getPre()
-                                        + "\t Post :" + pepevd.getPost()
-                                        + "\t DBSeq Accn :" + pepevd.getDBSequence().getAccession());
-                  }
+            int pdhCnt = proteinAmbiguityGroup.getProteinDetectionHypothesis().size();
+            assertTrue(pdhCnt > 0);
+            for (ProteinDetectionHypothesis proteinDetectionHypothesis : proteinAmbiguityGroup.getProteinDetectionHypothesis()) {
+                log.debug(" Protein Detection Hypothesis: DBSequence Accn: " + proteinDetectionHypothesis.getDBSequenceProteinDetection().getAccession()
+                        + " seq length:" + proteinDetectionHypothesis.getDBSequenceProteinDetection().getLength());
+
+                int phCnt = proteinDetectionHypothesis.getPeptideHypothesis().size();
+                assertTrue(phCnt > 0);
+                for (PeptideHypothesis peptideHypothesis : proteinDetectionHypothesis.getPeptideHypothesis()) {
+                    PeptideEvidence pepevd = peptideHypothesis.getPeptideEvidence();
+                    assertNotNull(pepevd);
+                    assertNotNull(pepevd.getDBSequence());
+                    log.debug("Peptide Evidence Name: " + pepevd.getName()
+                            + "\t Pre: " + pepevd.getPre()
+                            + "\t Post:" + pepevd.getPost()
+                            + "\t DBSeq Accn:" + pepevd.getDBSequence().getAccession());
+                }
             }
         }
 
-        System.out.println("********************************************************** ");
-        System.out.println("**************** Spectrum Info *************************** ");
-        System.out.println("********************************************************** ");
+//        System.out.println("********************************************************** ");
+//        System.out.println("**************** Spectrum Info *************************** ");
+//        System.out.println("********************************************************** ");
 
         while(si.hasNext()){
 
             SpectrumIdentification sid = si.next();
-            System.out.println("SpectrumIdentification Id :" + sid.getId());
+            log.debug("SpectrumIdentification Id :" + sid.getId());
+            assertNotNull(sid.getId());
 
 
             SpectrumIdentificationProtocol sip = sid.getSpectrumIdentificationProtocol();
-            System.out.println("Software Name :" + sip.getAnalysisSoftware().getSoftwareName().getParamGroup().getName());
+            log.debug("Software Name :" + sip.getAnalysisSoftware().getSoftwareName().getCvParam().getName());
+            assertEquals("Mascot", sip.getAnalysisSoftware().getSoftwareName().getCvParam().getName());
 
             Iterator<InputSpectra> is = sid.getInputSpectra().iterator();
-            System.out.println("Input Spectra : " + is.next().getSpectraData().getId());
+            String spectraID = is.next().getSpectraData().getId();
+            log.debug("Input Spectra : " + spectraID);
+            assertNotNull(spectraID);
 
             Iterator<SearchDatabase> sdb  = sid.getSearchDatabase().iterator();
-            System.out.println("Search Database : " + sdb.next().getAnalysisSearchDatabase().getName());
+            String searchDBName = sdb.next().getAnalysisSearchDatabase().getName();
+            log.debug("Search Database : " + searchDBName);
+            assertEquals("SwissProt", searchDBName);
 
             SpectrumIdentificationList spl = sid.getSpectrumIdentificationList();
             Iterator<SpectrumIdentificationResult> sr  = spl.getSpectrumIdentificationResult().iterator();
-            System.out.println("SpectrumIdentificationResult Id : " + sr.next().getSpectrumID());
+            String identResultSpectraID = sr.next().getSpectrumID();
+            log.debug("SpectrumIdentificationResult Id : " + identResultSpectraID);
+            assertNotNull(identResultSpectraID);
             
         }
         

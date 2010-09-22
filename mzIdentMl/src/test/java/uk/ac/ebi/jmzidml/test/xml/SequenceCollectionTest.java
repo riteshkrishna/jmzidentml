@@ -6,7 +6,6 @@ import uk.ac.ebi.jmzidml.model.mzidml.*;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
 import java.net.URL;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -16,59 +15,64 @@ import java.util.List;
  */
 public class SequenceCollectionTest extends TestCase {
 
-    Logger logger = Logger.getLogger(SequenceCollectionTest.class);
+    Logger log = Logger.getLogger(SequenceCollectionTest.class);
 
     public void testSequenceCollectionInformation() throws Exception {
+        log.info("testing <SequenceCollection> content.");
 
-            URL xmlFileURL = SequenceCollectionTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-            assertNotNull(xmlFileURL);
+        URL xmlFileURL = SequenceCollectionTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
+        assertNotNull(xmlFileURL);
 
-            boolean aUseSpectrumCache = true;
+        boolean aUseSpectrumCache = true;
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, aUseSpectrumCache);
+        assertNotNull(unmarshaller);
 
-            MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, aUseSpectrumCache);
-            assertNotNull(unmarshaller);
+        // Number of Sequence collection
+        int totalSequenceCollection = unmarshaller.getObjectCountForXpath("/mzIdentML/SequenceCollection");
+        assertEquals(1, totalSequenceCollection);
 
-            // Number of Sequence collection
-            int totalSequenceCollection = unmarshaller.getObjectCountForXpath("/mzIdentML/SequenceCollection");
-            assertEquals(1,totalSequenceCollection);
+        SequenceCollection sc = unmarshaller.unmarshalFromXpath("/mzIdentML/SequenceCollection", SequenceCollection.class);
+        assertNotNull(sc);
 
-            SequenceCollection sc = unmarshaller.unmarshalFromXpath("/mzIdentML/SequenceCollection", SequenceCollection.class);
-            assertNotNull(sc);
 
-            List<DBSequence> dbsequence  = sc.getDBSequence();
-            List<Peptide> peptides       = sc.getPeptide();
+        List<DBSequence> dbsequence  = sc.getDBSequence();
+        assertEquals(46, dbsequence.size());
 
-            System.out.println("Total number of DBSequences = "+ dbsequence.size());
-            System.out.println("Total number of Peptides    = " + peptides.size());
+        // check one DBSequence
+        DBSequence dbseq = dbsequence.get(0);
+        assertNotNull(dbseq.getAccession());
+        assertEquals("SwissProt", dbseq.getAnalysisSearchDatabase().getName());
+        log.debug("DBSequence Acc:" + dbseq.getAccession()
+                + "Id:" + dbseq.getId()
+                + "Name:" + dbseq.getName()
+                + "Database name:" + dbseq.getAnalysisSearchDatabase().getName()
+                + "length:" + dbseq.getLength());
+        assertEquals(dbseq.getLength().intValue(), dbseq.getSeq().length());
 
-            DBSequence dbsequenceInstance = dbsequence.get(0);
-            System.out.println("DBSequence Accen : " + dbsequenceInstance.getAccession()
-                                + "\t Id : " + dbsequenceInstance.getId()
-                                + "\t Name : " + dbsequenceInstance.getName()
-                                + "\t Database name : " + dbsequenceInstance.getAnalysisSearchDatabase().getName()
-                                + "\t length :" + dbsequenceInstance.getLength());
-            System.out.println("Sequence : " + dbsequenceInstance.getSeq());
-            Iterator<Param> p = dbsequenceInstance.getParamGroup().iterator();
-            while(p.hasNext()){
-                Param param = p.next();
-                System.out.println("Param : " + param.getName()
-                                    + "\t" + param.getUnitAccession()
-                                    + "\t" + param.getValue()
-                                    + "\t" + param.getUnitCvRef());
-            }
+        assertEquals(3, dbseq.getParamGroup().size());
+        for (Param param : dbseq.getParamGroup()) {
+            log.debug("Param:" + param.getName()
+                    + " acc:" + param.getUnitAccession()
+                    + " value:" + param.getValue()
+                    + " unitCvRef:" + param.getUnitCvRef());
+        }
 
-            Peptide peptideInstance = peptides.get(0);
-            System.out.println("Peptide Id :" + peptideInstance.getId()
-                              +" Sequence : " + peptideInstance.getPeptideSequence());
-            Iterator <Modification> mods = peptideInstance.getModification().iterator();
-            while(mods.hasNext()){
-                Modification m = mods.next();
-                System.out.println("Mod location :" + m.getLocation()
-                                    + "\t Avg DeltaMass :" + m.getAvgMassDelta()
-                                    + "\t Mono Mass : " + m.getMonoisotopicMassDelta());
-                Iterator<String> res = m.getResidues().iterator();
-                while(res.hasNext())
-                    System.out.println("Residue :" + res.next());
-            }
+
+
+        List<Peptide> peptides       = sc.getPeptide();
+        assertEquals(40, peptides.size());
+        for (Peptide pep : peptides) {
+            assertTrue(pep.getId().startsWith("peptide_"));
+        }
+
+        // check modifications of first peptide
+        List<Modification> mods = peptides.get(0).getModification();
+        assertEquals(1, mods.size());
+        Modification mod = mods.get(0);
+        assertTrue(mod.getMonoisotopicMassDelta() > 1);
+        assertEquals(1, mod.getParamGroup().size());
+        assertTrue(mod.getParamGroup().get(0) instanceof CvParam);
+        CvParam cvparam = (CvParam) mod.getParamGroup().get(0);
+        assertTrue(cvparam.getAccession().startsWith("UNIMOD:"));
     }
 }

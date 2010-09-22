@@ -9,20 +9,19 @@ package uk.ac.ebi.jmzidml.test.xml;
 
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
-
-import java.net.URL;
-
 import uk.ac.ebi.jmzidml.model.mzidml.ContactRole;
 import uk.ac.ebi.jmzidml.model.mzidml.Provider;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
+import java.net.URL;
+
 public class ProviderTest extends TestCase{
 
-    Logger logger = Logger.getLogger(ProviderTest.class);
+    Logger log = Logger.getLogger(ProviderTest.class);
 
     
     public void testProviderInformation() throws Exception {
-
+        log.info("testing the <Provider> content.");
         URL xmlFileURL = ProviderTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
 
@@ -33,25 +32,22 @@ public class ProviderTest extends TestCase{
 
         // Number of providers
         int totalProvider = unmarshaller.getObjectCountForXpath("/mzIdentML/Provider");
-        assertEquals(1,totalProvider);
+        assertEquals(1, totalProvider);
 
-        Provider provider = unmarshaller.unmarshalFromXpath("/mzIdentML/Provider",Provider.class);
+        Provider provider = unmarshaller.unmarshalFromXpath("/mzIdentML/Provider", Provider.class);
         assertNotNull(provider);
 
-        System.out.println("Provider ID : " + provider.getId());
+        assertEquals("PROVIDER", provider.getId());
 
         ContactRole cr = provider.getContactRole();
         assertNotNull(cr);
+        assertEquals("researcher", cr.getRole().getCvParam().getName());
+        assertTrue(cr.getContact().getEmail().contains("@"));
 
-        System.out.println("\n Provider -> Contact Role info : " + "Name : " + cr.getContact().getName()
-                            + "\t" + "Role Name : "+ cr.getRole().getCvParam().getName()
-                            + "\t" + "Address : "+ cr.getContact().getAddress()
-                            + "\t" + "Emails : "+ cr.getContact().getEmail()
-                            + "\t" + "Phone : "+ cr.getContact().getPhone());
-
-        if (provider.getAnalysisSoftware() != null){
-            System.out.println("\n Provider -> Analysis Software :" + provider.getAnalysisSoftware().getName());
-        }
+        // ToDo: maybe with other (more extensive) test file
+//        if (provider.getAnalysisSoftware() != null){
+//            System.out.println("\n Provider -> Analysis Software :" + provider.getAnalysisSoftware().getName());
+//        }
 
     }
     

@@ -2,7 +2,6 @@ package uk.ac.ebi.jmzidml.test.xml;
 
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
-import uk.ac.ebi.jmzidml.model.mzidml.AnalysisProtocolCollection;
 import uk.ac.ebi.jmzidml.model.mzidml.BibliographicReference;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
@@ -15,7 +14,7 @@ import java.net.URL;
  */
 public class BibliographicTest extends TestCase {
 
-    Logger logger = Logger.getLogger(BibliographicTest.class);
+    Logger log = Logger.getLogger(BibliographicTest.class);
 
 
     public void testBibliographicInformation() throws Exception {
@@ -28,13 +27,14 @@ public class BibliographicTest extends TestCase {
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, aUseSpectrumCache);
         assertNotNull(unmarshaller);
 
+        log.debug("unmarshalling BibliographicReference and checking content.");
         BibliographicReference bib =  unmarshaller.unmarshalFromXpath("/mzIdentML/BibliographicReference", BibliographicReference.class);
         assertNotNull(bib);
 
-        System.out.println("Authors : " + bib.getAuthors()
-                            + "\t Editor : " + bib.getEditor()
-                            + "\t Publisher : " + bib.getPublisher()
-                            + "\t Title : "+ bib.getTitle());
+        assertEquals("Wiley VCH", bib.getPublisher());
+        assertEquals("3551-3567", bib.getPages());
+        assertEquals("Electrophoresis", bib.getPublication());
+        assertEquals(1999, bib.getYear().intValue());
 
     }
 

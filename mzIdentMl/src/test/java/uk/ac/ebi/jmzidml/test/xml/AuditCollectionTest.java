@@ -4,7 +4,6 @@ import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 import uk.ac.ebi.jmzidml.model.mzidml.AuditCollection;
 import uk.ac.ebi.jmzidml.model.mzidml.Contact;
-import uk.ac.ebi.jmzidml.model.mzidml.Organization;
 import uk.ac.ebi.jmzidml.model.mzidml.Person;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
@@ -18,8 +17,7 @@ import java.util.Iterator;
  */
 public class AuditCollectionTest extends TestCase {
 
-    Logger logger = Logger.getLogger(AuditCollectionTest.class);
-
+    Logger log = Logger.getLogger(AuditCollectionTest.class);
 
     public void testAuditCollectionInformation() throws Exception {
 
@@ -27,42 +25,43 @@ public class AuditCollectionTest extends TestCase {
         assertNotNull(xmlFileURL);
 
         boolean aUseSpectrumCache = true;
-
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, aUseSpectrumCache);
         assertNotNull(unmarshaller);
 
 
-        Iterator<AuditCollection> aci = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/AuditCollection",AuditCollection.class);
+        Iterator<AuditCollection> aci = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/AuditCollection", AuditCollection.class);
+        assertNotNull(aci);
+
         int count = 0;
         while(aci.hasNext()){
             AuditCollection ac = aci.next();
-            Iterator<Contact> contacti = ac.getContactGroup().iterator();
-            while(contacti.hasNext()){
-                Contact contact  = contacti.next();
-                System.out.println("Contact Count : " + (++count));
-                System.out.println("Audit Collection : Name " + contact.getName()
-                                    + " \t Address : " + contact.getAddress()
-                                    + " \t Email   : " + contact.getEmail()
-                                    + " \t Fax     : " + contact.getFax()
-                                    + " \t Id      : " + contact.getId());
+            assertNotNull(ac);
+            for (Contact contact : ac.getContactGroup()) {
+                assertNotNull(contact);
 
-                System.out.println("Contact Class Name :" + contact.getClass().getName());
+                log.debug("Contact Count: " + (count++) + " Name: " + contact.getName()
+                        + " Address: " + contact.getAddress() + " Email: " + contact.getEmail()
+                        + " Fax: " + contact.getFax() + " Id: " + contact.getId()
+                        + "Contact Class Name:" + contact.getClass().getName());
             }
         }
 
         // Resolve the organization_ref
         Iterator<Person> pi = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/AuditCollection/Person",Person.class);
         while(pi.hasNext()){
+            assertNotNull(pi);
             Person p = pi.next();
-            System.out.println("Person : first name : " + p.getFirstName() + "\t last name :" + p.getLastName());
-            Iterator <Person.Affiliations> afi = p.getAffiliations().iterator();
-            while(afi.hasNext()){
-                Person.Affiliations af = afi.next();
-                System.out.println("Person -> Affiliation Name : " + af.getOrganization().getName()
-                                    + "\t Address : " + af.getOrganization().getAddress());
+            assertNotNull(p);
+            log.debug("Person: first name: " + p.getFirstName() + " last name:" + p.getLastName());
+
+            assertEquals(1, p.getAffiliations().size()); // we expect one affiliation per person
+            for (Person.Affiliations affiliation : p.getAffiliations()) {
+                assertNotNull(affiliation);
+                log.debug("Person -> Affiliation Name: " + affiliation.getOrganization().getName()
+                        + " Address: " + affiliation.getOrganization().getAddress());
             }
 
         }
 
-    }    
+    }
 }
