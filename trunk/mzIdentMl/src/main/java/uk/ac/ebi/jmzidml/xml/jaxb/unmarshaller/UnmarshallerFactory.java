@@ -35,6 +35,7 @@ import uk.ac.ebi.jmzidml.model.utils.ModelConstants;
 import uk.ac.ebi.jmzidml.xml.jaxb.adapters.*;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.cache.AdapterObjectCache;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.filters.MzIdentMLNamespaceFilter;
+import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.listeners.RawXMLListener;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
 
 import javax.xml.bind.JAXBContext;
@@ -115,9 +116,9 @@ public class UnmarshallerFactory {
             //we don't have a validation handler yet
 //            unmarshaller.setEventHandler(new DefaultValidationEventHandler());
 
-//            this is used to post-process unmarshalled Java objects and convert param classes to appropriate
-//            sub-classes. This is not needed yet
-//            unmarshaller.setListener(new RawXMLListener());
+            // This is used to post-process unmarshalled Java objects and convert
+            // ParamAlternative classes to appropriate sub-classes (CvParam or UserParam).
+            unmarshaller.setListener(new RawXMLListener());
 
             UnmarshallerHandler uh = unmarshaller.getUnmarshallerHandler();
 

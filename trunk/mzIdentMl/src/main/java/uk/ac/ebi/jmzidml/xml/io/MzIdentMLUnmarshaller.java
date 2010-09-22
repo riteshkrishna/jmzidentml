@@ -31,16 +31,15 @@ import java.util.regex.Pattern;
 
 public class MzIdentMLUnmarshaller {
     private static final Logger logger = Logger.getLogger(MzIdentMLUnmarshaller.class);
-    private static final char[] HEX_CHARS = "0123456789abcdef".toCharArray();
+//    private static final char[] HEX_CHARS = "0123456789abcdef".toCharArray();
 
-    private final File mzIdentMLFile;
     private final MzIdentMLIndexer index;
     private final boolean useSpectrumCache;
 
     private final AdapterObjectCache cache = new AdapterObjectCache();
     //private IndexList indexList = null;
 
-    private boolean fileCorrupted = false;
+//    private boolean fileCorrupted = false;
 
     private final Pattern ID_PATTERN = Pattern.compile("id *= *\"([^\"]*)?\"", Pattern.CASE_INSENSITIVE);
     private final Pattern AC_PATTERN = Pattern.compile("accession *= *\"([^\"]*)?\"", Pattern.CASE_INSENSITIVE);
@@ -60,7 +59,6 @@ public class MzIdentMLUnmarshaller {
     }
 
     public MzIdentMLUnmarshaller(File mzIdentMLFile, boolean aUseSpectrumCache) {
-        this.mzIdentMLFile = mzIdentMLFile;
         index = MzIdentMLIndexerFactory.getInstance().buildIndex(mzIdentMLFile);
         useSpectrumCache = aUseSpectrumCache;
     }
