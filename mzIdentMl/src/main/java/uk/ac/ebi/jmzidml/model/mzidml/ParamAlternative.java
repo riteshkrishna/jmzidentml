@@ -37,32 +37,62 @@ public class ParamAlternative
         @XmlElement(name = "cvParam", type = CvParam.class),
         @XmlElement(name = "userParam", type = UserParam.class)
     })
-    protected Param paramGroup;
+    private Param paramGroup;
 
-    /**
-     * Gets the value of the paramGroup property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link CvParam }
-     *     {@link UserParam }
-     *     
-     */
-    public Param getParamGroup() {
-        return paramGroup;
+    @XmlTransient
+    private CvParam cvParam;
+    @XmlTransient
+    private UserParam userParam;
+
+
+    public CvParam getCvParam() {
+        return cvParam;
+    }
+
+    public UserParam getUserParam() {
+        return userParam;
+    }
+
+    public void setUserParam(UserParam userParam) {
+        this.userParam = userParam;
+    }
+
+    public void setCvParam(CvParam cvParam) {
+        this.cvParam = cvParam;
     }
 
     /**
-     * Sets the value of the paramGroup property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link CvParam }
-     *     {@link UserParam }
-     *     
+     * Operation after unmarshalling to provide access to specific type
+     * ParamAlternative implementations of CvParam or UserParam.
      */
-    public void setParamGroup(Param value) {
-        this.paramGroup = value;
+    public void afterUnmarshalOperation() {
+        if (paramGroup == null) return;
+        
+        if (paramGroup instanceof CvParam) {
+            cvParam = (CvParam) paramGroup;
+        }
+        if (paramGroup instanceof UserParam) {
+            userParam = (UserParam) paramGroup;
+        }
+    }
+
+    /**
+     * Method to assign the specific ParamAlternative implementation
+     * to the generic ParamAlternative value of the XML mapped paramGroup field.
+     */
+    public void beforeMarshalOperation() {
+        if (cvParam != null ) {
+            if (userParam != null) { // we are not supposed to have both a CvParam AND a UserParam!
+                throw new IllegalStateException("Found UserParam and CvParam where only either one was expected.");
+            } // else we only have a CvParam, so we assign that
+            paramGroup = cvParam;
+        } else {
+            // either userParam has a value or not. It does not make
+            // a difference since cvParam is null anyway.
+            paramGroup = userParam;
+        }
+    
+
     }
 
 }
