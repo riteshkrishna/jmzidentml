@@ -17,7 +17,7 @@ import java.util.Iterator;
 
 public class CvListTest extends TestCase {
 
-    Logger logger = Logger.getLogger(CvListTest.class);
+    Logger log = Logger.getLogger(CvListTest.class);
 
 
     public void testCvListInformation() throws Exception {
@@ -34,13 +34,15 @@ public class CvListTest extends TestCase {
         int totalCv = unmarshaller.getObjectCountForXpath("/mzIdentML/cvList");
         assertEquals(1,totalCv);
 
-        CvList cvlist = unmarshaller.unmarshalFromXpath("/mzIdentML/cvList",CvList.class);
-        Iterator <Cv> cvs = cvlist.getCv().iterator();
-        assertEquals(3,cvlist.getCv().size());
+        CvList cvList = unmarshaller.unmarshalFromXpath("/mzIdentML/cvList", CvList.class);
+        assertNotNull(cvList);
+        Iterator <Cv> cvs = cvList.getCv().iterator();
+        assertEquals(3, cvList.getCv().size());
 
         while(cvs.hasNext()){
             Cv cv = cvs.next();
-            System.out.println("Cv -> Name : " + cv.getFullName() + "\t URI : " + cv.getURI());
+            assertTrue(cv.getURI().endsWith(".obo"));
+            log.debug("Cv -> Name: " + cv.getFullName() + " ID: " + cv.getId() + " URI: " + cv.getURI());
         }
 
     }
