@@ -19,7 +19,7 @@ public class ProteinDetectionProtocolAdapter extends AbstractResolvingAdapter<St
     public ProteinDetectionProtocol unmarshal(String refId) {
 
         ProteinDetectionProtocol retval;
-        if (cache.getCachedObject(refId, AnalysisSearchDatabaseAdapter.class) != null) {
+        if (cache.getCachedObject(refId, ProteinDetectionProtocol.class) != null) {
             retval = (ProteinDetectionProtocol) cache.getCachedObject(refId, ProteinDetectionProtocol.class);
             logger.debug("used cached value for ID: " + refId);
         } else {

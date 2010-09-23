@@ -23,7 +23,7 @@ public class AnalysisSoftwareAdapter extends AbstractResolvingAdapter<String, An
     public AnalysisSoftware unmarshal(String refId) {
 
         AnalysisSoftware retval;
-        if (cache.getCachedObject(refId, AnalysisSearchDatabaseAdapter.class) != null) {
+        if (cache.getCachedObject(refId, AnalysisSoftware.class) != null) {
             retval = (AnalysisSoftware) cache.getCachedObject(refId, AnalysisSoftware.class);
             logger.debug("used cached value for ID: " + refId);
         } else {

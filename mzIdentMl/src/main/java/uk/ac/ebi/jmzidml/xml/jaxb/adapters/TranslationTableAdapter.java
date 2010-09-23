@@ -19,7 +19,7 @@ public class TranslationTableAdapter extends AbstractResolvingAdapter<String, Tr
     public TranslationTable unmarshal(String refId) {
 
         TranslationTable retval;
-        if (cache.getCachedObject(refId, AnalysisSearchDatabaseAdapter.class) != null) {
+        if (cache.getCachedObject(refId, TranslationTable.class) != null) {
             retval = (TranslationTable) cache.getCachedObject(refId, TranslationTable.class);
             logger.debug("used cached value for ID: " + refId);
         } else {
