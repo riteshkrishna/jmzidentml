@@ -118,7 +118,7 @@ public class UnmarshallerFactory {
 
             // This is used to post-process unmarshalled Java objects and convert
             // ParamAlternative classes to appropriate sub-classes (CvParam or UserParam).
-            unmarshaller.setListener(new RawXMLListener());
+            unmarshaller.setListener(new RawXMLListener(cache));
 
             UnmarshallerHandler uh = unmarshaller.getUnmarshallerHandler();
 
