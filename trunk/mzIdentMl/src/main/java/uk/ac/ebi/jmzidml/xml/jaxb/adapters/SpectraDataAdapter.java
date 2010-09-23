@@ -22,7 +22,7 @@ public class SpectraDataAdapter extends AbstractResolvingAdapter<String, Spectra
     public SpectraData unmarshal(String refId) {
 
         SpectraData retval;
-        if (cache.getCachedObject(refId, AnalysisSearchDatabaseAdapter.class) != null) {
+        if (cache.getCachedObject(refId, SpectraData.class) != null) {
             retval = (SpectraData) cache.getCachedObject(refId, SpectraData.class);
             logger.debug("used cached value for ID: " + refId);
         } else {

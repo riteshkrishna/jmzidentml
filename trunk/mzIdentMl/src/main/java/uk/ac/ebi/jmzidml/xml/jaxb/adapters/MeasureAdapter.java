@@ -19,7 +19,7 @@ public class MeasureAdapter extends AbstractResolvingAdapter<String, Measure> {
     public Measure unmarshal(String refId) {
 
         Measure retval;
-        if (cache.getCachedObject(refId, AnalysisSearchDatabaseAdapter.class) != null) {
+        if (cache.getCachedObject(refId, Measure.class) != null) {
             retval = (Measure) cache.getCachedObject(refId, Measure.class);
             logger.debug("used cached value for ID: " + refId);
         } else {

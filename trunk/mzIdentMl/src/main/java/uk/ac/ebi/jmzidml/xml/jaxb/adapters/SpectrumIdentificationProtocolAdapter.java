@@ -19,7 +19,7 @@ public class SpectrumIdentificationProtocolAdapter extends AbstractResolvingAdap
     public SpectrumIdentificationProtocol unmarshal(String refId) {
 
         SpectrumIdentificationProtocol retval;
-        if (cache.getCachedObject(refId, AnalysisSearchDatabaseAdapter.class) != null) {
+        if (cache.getCachedObject(refId, SpectrumIdentificationProtocol.class) != null) {
             retval = (SpectrumIdentificationProtocol) cache.getCachedObject(refId, SpectrumIdentificationProtocol.class);
             logger.debug("used cached value for ID: " + refId);
         } else {

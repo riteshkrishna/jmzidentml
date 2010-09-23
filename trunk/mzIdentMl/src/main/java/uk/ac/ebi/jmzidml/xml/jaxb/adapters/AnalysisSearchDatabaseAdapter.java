@@ -19,7 +19,7 @@ public class AnalysisSearchDatabaseAdapter extends AbstractResolvingAdapter<Stri
     public AnalysisSearchDatabase unmarshal(String refId) {
 
         AnalysisSearchDatabase retval;
-        if (cache.getCachedObject(refId, AnalysisSearchDatabaseAdapter.class) != null) {
+        if (cache.getCachedObject(refId, AnalysisSearchDatabase.class) != null) {
             retval = (AnalysisSearchDatabase) cache.getCachedObject(refId, AnalysisSearchDatabase.class);
             logger.debug("used cached value for ID: " + refId);
         } else {

@@ -19,7 +19,7 @@ public class SampleAdapter extends AbstractResolvingAdapter<String, Sample> {
     public Sample unmarshal(String refId) {
 
         Sample retval;
-        if (cache.getCachedObject(refId, AnalysisSearchDatabaseAdapter.class) != null) {
+        if (cache.getCachedObject(refId, Sample.class) != null) {
             retval = (Sample) cache.getCachedObject(refId, Sample.class);
             logger.debug("used cached value for ID: " + refId);
         } else {

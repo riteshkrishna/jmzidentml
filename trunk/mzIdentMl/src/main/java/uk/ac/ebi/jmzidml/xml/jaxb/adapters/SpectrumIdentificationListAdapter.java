@@ -19,7 +19,7 @@ public class SpectrumIdentificationListAdapter extends AbstractResolvingAdapter<
     public SpectrumIdentificationList unmarshal(String refId) {
 
         SpectrumIdentificationList retval;
-        if (cache.getCachedObject(refId, AnalysisSearchDatabaseAdapter.class) != null) {
+        if (cache.getCachedObject(refId, SpectrumIdentificationList.class) != null) {
             retval = (SpectrumIdentificationList) cache.getCachedObject(refId, SpectrumIdentificationList.class);
             logger.debug("used cached value for ID: " + refId);
         } else {

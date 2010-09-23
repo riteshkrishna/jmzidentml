@@ -19,7 +19,7 @@ public class MassTableAdapter extends AbstractResolvingAdapter<String, MassTable
     public MassTable unmarshal(String refId) {
 
         MassTable retval;
-        if (cache.getCachedObject(refId, AnalysisSearchDatabaseAdapter.class) != null) {
+        if (cache.getCachedObject(refId, MassTable.class) != null) {
             retval = (MassTable) cache.getCachedObject(refId, MassTable.class);
             logger.debug("used cached value for ID: " + refId);
         } else {

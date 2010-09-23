@@ -19,7 +19,7 @@ public class ProteinDetectionListAdapter extends AbstractResolvingAdapter<String
     public ProteinDetectionList unmarshal(String refId) {
 
         ProteinDetectionList retval;
-        if (cache.getCachedObject(refId, AnalysisSearchDatabaseAdapter.class) != null) {
+        if (cache.getCachedObject(refId, ProteinDetectionList.class) != null) {
             retval = (ProteinDetectionList) cache.getCachedObject(refId, ProteinDetectionList.class);
             logger.debug("used cached value for ID: " + refId);
         } else {
