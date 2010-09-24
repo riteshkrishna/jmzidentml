@@ -50,9 +50,9 @@ public class AnalysisSoftwareTest extends TestCase {
             assertNull("We don't expect a UserParam in the SoftwareName tag!", as.getSoftwareName().getUserParam());
             CvParam cvParam = as.getSoftwareName().getCvParam();
 
-            log.debug("cvParam name: " + cvParam.getName() + " acc: " + cvParam.getAccession() + "CV: " + cvParam.getCvRef());
+            log.debug("cvParam name: " + cvParam.getName() + " acc: " + cvParam.getAccession() + "CV: " + cvParam.getCv().getId());
             assertNotNull(cvParam.getAccession());
-            assertEquals("PSI-MS", cvParam.getCvRef());
+            assertEquals("PSI-MS", cvParam.getCv().getId());
 
         }
 
@@ -67,7 +67,7 @@ public class AnalysisSoftwareTest extends TestCase {
             assertNull("We don't expect a UserParam in the SoftwareName tag!", as.getSoftwareName().getUserParam());
             CvParam cvParam = as.getSoftwareName().getCvParam();
             assertNotNull(cvParam.getAccession());
-            assertEquals("PSI-MS", cvParam.getCvRef());
+            assertEquals("PSI-MS", cvParam.getCv().getId());
         }
 
     }

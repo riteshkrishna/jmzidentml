@@ -501,6 +501,14 @@
         <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Ontology.cvParamType']">
             <jxb:class name="CvParam"/>
         </jxb:bindings>
+        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Ontology.cvParamType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='cvRef']">
+            <jxb:property name="Cv">
+                <jxb:baseType>
+                    <xjc:javaType name="Cv"
+                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.CvAdapter"/>
+                </jxb:baseType>
+            </jxb:property>
+        </jxb:bindings>
 
         <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Audit.ContactRoleType']">
             <jxb:class name="ContactRole"/>
