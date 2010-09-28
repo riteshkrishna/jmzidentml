@@ -43,7 +43,6 @@ public class RawXMLListener extends Unmarshaller.Listener {
 
         // fix duplication problem for idrefed classes
         if (target instanceof Identifiable) {
-                target.getClass();
                 updateCacheForIDREFedObject(target, ((Identifiable) target).getId());
         }
     }
