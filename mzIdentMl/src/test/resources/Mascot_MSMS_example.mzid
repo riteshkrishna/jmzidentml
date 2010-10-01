@@ -853,6 +853,7 @@
             </ModificationParams>
             <Enzymes independent="0">
                 <Enzyme id="ENZ_0" CTermGain="OH" NTermGain="H" missedCleavages="1" semiSpecific="0">
+                    <SiteRegexp><![CDATA[(?<=[KR])(?!P)]]></SiteRegexp>
                     <EnzymeName>
                         <userParam name="Enzyme" value="CNBr+Trypsin"/>
                     </EnzymeName>

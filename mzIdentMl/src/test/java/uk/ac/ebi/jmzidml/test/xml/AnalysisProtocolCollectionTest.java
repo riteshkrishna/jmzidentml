@@ -46,7 +46,11 @@ public class AnalysisProtocolCollectionTest extends TestCase {
         assertNotNull("Enzyme can not be null.", enzyme);
         log.debug("Enzyme Id :" + enzyme.getId());
         assertEquals("ENZ_0", enzyme.getId());
-        
+
+        String siteRegex = enzyme.getSiteRegexp();
+        log.debug("Enzyme SiteRegex: " + siteRegex);
+        assertNotNull(siteRegex);
+
     }
 
 }
