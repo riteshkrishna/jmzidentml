@@ -43,6 +43,12 @@ public class AmbiguousResidue
         @XmlElement(name = "userParam", type = UserParam.class)
     })
     protected List<Param> paramGroup;
+
+    @XmlTransient
+    private List<CvParam> cvParams;
+    @XmlTransient
+    private List<UserParam> userParams;
+
     @XmlAttribute(name = "Code", required = true)
     protected String code;
 
@@ -76,6 +82,14 @@ public class AmbiguousResidue
         return this.paramGroup;
     }
 
+    public List<CvParam> getCvParams() {
+        return cvParams;
+    }
+
+    public List<UserParam> getUserParams() {
+        return userParams;
+    }
+
     /**
      * Gets the value of the code property.
      * 
@@ -99,5 +113,37 @@ public class AmbiguousResidue
     public void setCode(String value) {
         this.code = value;
     }
+
+    /**
+     * After unmarshalling, split the List of generic Params into
+     * a List of CvParams and a List of UserParams.
+     */
+    public void afterUnmarshalOperation() {
+        cvParams = new ArrayList<CvParam>();
+        userParams = new ArrayList<UserParam>();
+        for (Param param : getParamGroup()) {
+            if (param instanceof CvParam) {
+                cvParams.add((CvParam) param);
+            }
+            if (param instanceof UserParam) {
+                userParams.add((UserParam) param);
+            }
+        }
+    }
+
+    /**
+     * Before we marshall the XML, combine the CvParams and UserParams
+     * into the generic List of Params.
+     */
+    public void beforeMarshalOperation() {
+        paramGroup = new ArrayList<Param>();
+        for (CvParam cvParam : cvParams) {
+            paramGroup.add(cvParam);
+        }
+        for (UserParam userParam : userParams) {
+            paramGroup.add(userParam);
+        }
+    }
+
 
 }
