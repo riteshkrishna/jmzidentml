@@ -48,6 +48,50 @@ public class RawXMLListener extends Unmarshaller.Listener {
             log.debug("Calling ProteinDetectionHypothesis specific 'afterUnmarshalOperation'.");
             ((ProteinDetectionHypothesis) target).afterUnmarshalOperation();
         }
+        if (target instanceof AmbiguousResidue) {
+            log.debug("Calling AmbiguousResidue specific 'afterUnmarshalOperation'.");
+            ((AmbiguousResidue) target).afterUnmarshalOperation();
+        }
+        if (target instanceof MassTable) {
+            log.debug("Calling MassTable specific 'afterUnmarshalOperation'.");
+            ((MassTable) target).afterUnmarshalOperation();
+        }
+        if (target instanceof Modification) {
+            log.debug("Calling Modification specific 'afterUnmarshalOperation'.");
+            ((Modification) target).afterUnmarshalOperation();
+        }
+        if (target instanceof Peptide) {
+            log.debug("Calling Peptide specific 'afterUnmarshalOperation'.");
+            ((Peptide) target).afterUnmarshalOperation();
+        }
+        if (target instanceof PeptideEvidence) {
+            log.debug("Calling PeptideEvidence specific 'afterUnmarshalOperation'.");
+            ((PeptideEvidence) target).afterUnmarshalOperation();
+        }
+        if (target instanceof ProteinAmbiguityGroup) {
+            log.debug("Calling ProteinAmbiguityGroup specific 'afterUnmarshalOperation'.");
+            ((ProteinAmbiguityGroup) target).afterUnmarshalOperation();
+        }
+        if (target instanceof ProteinDetectionList) {
+            log.debug("Calling ProteinDetectionList specific 'afterUnmarshalOperation'.");
+            ((ProteinDetectionList) target).afterUnmarshalOperation();
+        }
+        if (target instanceof SourceFile) {
+            log.debug("Calling SourceFile specific 'afterUnmarshalOperation'.");
+            ((SourceFile) target).afterUnmarshalOperation();
+        }
+        if (target instanceof SpectrumIdentificationItem) {
+            log.debug("Calling SpectrumIdentificationItem specific 'afterUnmarshalOperation'.");
+            ((SpectrumIdentificationItem) target).afterUnmarshalOperation();
+        }
+        if (target instanceof SpectrumIdentificationList) {
+            log.debug("Calling SpectrumIdentificationList specific 'afterUnmarshalOperation'.");
+            ((SpectrumIdentificationList) target).afterUnmarshalOperation();
+        }
+        if (target instanceof SpectrumIdentificationResult) {
+            log.debug("Calling SpectrumIdentificationResult specific 'afterUnmarshalOperation'.");
+            ((SpectrumIdentificationResult) target).afterUnmarshalOperation();
+        }
 
         // fix duplication problem for idrefed classes
         if (target instanceof Identifiable) {

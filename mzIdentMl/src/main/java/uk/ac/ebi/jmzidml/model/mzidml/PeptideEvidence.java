@@ -70,6 +70,12 @@ public class PeptideEvidence
         @XmlElement(name = "cvParam", type = CvParam.class)
     })
     protected List<Param> paramGroup;
+
+    @XmlTransient
+    private List<CvParam> cvParams;
+    @XmlTransient
+    private List<UserParam> userParams;
+
     @XmlAttribute(name = "DBSequence_Ref", required = true)
     @XmlJavaTypeAdapter(DBSequenceAdapter.class)
     protected DBSequence dbSequence;
@@ -119,6 +125,14 @@ public class PeptideEvidence
             paramGroup = new ArrayList<Param>();
         }
         return this.paramGroup;
+    }
+
+    public List<CvParam> getCvParams() {
+        return cvParams;
+    }
+
+    public List<UserParam> getUserParams() {
+        return userParams;
     }
 
     /**
@@ -340,5 +354,37 @@ public class PeptideEvidence
     public void setMissedCleavages(Integer value) {
         this.missedCleavages = value;
     }
+
+    /**
+     * After unmarshalling, split the List of generic Params into
+     * a List of CvParams and a List of UserParams.
+     */
+    public void afterUnmarshalOperation() {
+        cvParams = new ArrayList<CvParam>();
+        userParams = new ArrayList<UserParam>();
+        for (Param param : getParamGroup()) {
+            if (param instanceof CvParam) {
+                cvParams.add((CvParam) param);
+            }
+            if (param instanceof UserParam) {
+                userParams.add((UserParam) param);
+            }
+        }
+    }
+
+    /**
+     * Before we marshall the XML, combine the CvParams and UserParams
+     * into the generic List of Params.
+     */
+    public void beforeMarshalOperation() {
+        paramGroup = new ArrayList<Param>();
+        for (CvParam cvParam : cvParams) {
+            paramGroup.add(cvParam);
+        }
+        for (UserParam userParam : userParams) {
+            paramGroup.add(userParam);
+        }
+    }
+
 
 }

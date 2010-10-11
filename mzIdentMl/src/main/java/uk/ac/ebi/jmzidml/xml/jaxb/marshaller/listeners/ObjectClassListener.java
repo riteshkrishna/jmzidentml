@@ -37,7 +37,50 @@ public class ObjectClassListener extends Marshaller.Listener {
             log.debug("Calling ProteinDetectionHypothesis specific 'beforeMarshalOperation'.");
             ((ProteinDetectionHypothesis) source).beforeMarshalOperation();
         }
-
+        if (source instanceof AmbiguousResidue) {
+            log.debug("Calling AmbiguousResidue specific 'beforeMarshalOperation'.");
+            ((AmbiguousResidue) source).beforeMarshalOperation();
+        }
+        if (source instanceof MassTable) {
+            log.debug("Calling MassTable specific 'beforeMarshalOperation'.");
+            ((MassTable) source).beforeMarshalOperation();
+        }
+        if (source instanceof Modification) {
+            log.debug("Calling Modification specific 'beforeMarshalOperation'.");
+            ((Modification) source).beforeMarshalOperation();
+        }
+        if (source instanceof Peptide) {
+            log.debug("Calling Peptide specific 'beforeMarshalOperation'.");
+            ((Peptide) source).beforeMarshalOperation();
+        }
+        if (source instanceof PeptideEvidence) {
+            log.debug("Calling PeptideEvidence specific 'beforeMarshalOperation'.");
+            ((PeptideEvidence) source).beforeMarshalOperation();
+        }
+        if (source instanceof ProteinAmbiguityGroup) {
+            log.debug("Calling ProteinAmbiguityGroup specific 'beforeMarshalOperation'.");
+            ((ProteinAmbiguityGroup) source).beforeMarshalOperation();
+        }
+        if (source instanceof ProteinDetectionList) {
+            log.debug("Calling v specific 'beforeMarshalOperation'.");
+            ((ProteinDetectionList) source).beforeMarshalOperation();
+        }
+        if (source instanceof SourceFile) {
+            log.debug("Calling SourceFile specific 'beforeMarshalOperation'.");
+            ((SourceFile) source).beforeMarshalOperation();
+        }
+        if (source instanceof SpectrumIdentificationItem) {
+            log.debug("Calling SpectrumIdentificationItem specific 'beforeMarshalOperation'.");
+            ((SpectrumIdentificationItem) source).beforeMarshalOperation();
+        }
+        if (source instanceof SpectrumIdentificationList) {
+            log.debug("Calling SpectrumIdentificationList specific 'beforeMarshalOperation'.");
+            ((SpectrumIdentificationList) source).beforeMarshalOperation();
+        }
+        if (source instanceof SpectrumIdentificationResult) {
+            log.debug("Calling SpectrumIdentificationResult specific 'beforeMarshalOperation'.");
+            ((SpectrumIdentificationResult) source).beforeMarshalOperation();
+        }
     }
 
 }
