@@ -1,9 +1,7 @@
 package uk.ac.ebi.jmzidml.xml.jaxb.marshaller.listeners;
 
 import org.apache.log4j.Logger;
-import uk.ac.ebi.jmzidml.model.mzidml.ParamAlternative;
-import uk.ac.ebi.jmzidml.model.mzidml.ParamAlternativeList;
-import uk.ac.ebi.jmzidml.model.mzidml.Sample;
+import uk.ac.ebi.jmzidml.model.mzidml.*;
 
 import javax.xml.bind.Marshaller;
 
@@ -31,6 +29,15 @@ public class ObjectClassListener extends Marshaller.Listener {
             log.debug("Calling Sample specific 'beforeMarshalOperation'.");
             ((Sample)source).beforeMarshalOperation();
         }
+        if (source instanceof DBSequence) {
+            log.debug("Calling DBSequence specific 'beforeMarshalOperation'.");
+            ((DBSequence) source).beforeMarshalOperation();
+        }
+        if (source instanceof ProteinDetectionHypothesis) {
+            log.debug("Calling ProteinDetectionHypothesis specific 'beforeMarshalOperation'.");
+            ((ProteinDetectionHypothesis) source).beforeMarshalOperation();
+        }
+
     }
 
 }

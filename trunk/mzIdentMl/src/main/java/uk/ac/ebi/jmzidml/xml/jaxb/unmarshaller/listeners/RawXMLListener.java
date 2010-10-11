@@ -40,6 +40,14 @@ public class RawXMLListener extends Unmarshaller.Listener {
             log.debug("Calling Sample specific 'afterUnmarshalOperation'.");
             ((Sample) target).afterUnmarshalOperation();
         }
+        if (target instanceof DBSequence) {
+            log.debug("Calling DBSequence specific 'afterUnmarshalOperation'.");
+            ((DBSequence) target).afterUnmarshalOperation();
+        }
+        if (target instanceof ProteinDetectionHypothesis) {
+            log.debug("Calling ProteinDetectionHypothesis specific 'afterUnmarshalOperation'.");
+            ((ProteinDetectionHypothesis) target).afterUnmarshalOperation();
+        }
 
         // fix duplication problem for idrefed classes
         if (target instanceof Identifiable) {
