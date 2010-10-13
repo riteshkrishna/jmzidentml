@@ -59,12 +59,6 @@ public class MzIdentMLIndexerFactory {
         private HashMap<String, IndexElement> cvIdMap = new HashMap<String, IndexElement>();
         private HashMap<String, IndexElement> analysisSoftwareMap = new HashMap<String, IndexElement>();
         private HashMap<String, IndexElement> providerMap = new HashMap<String, IndexElement>();
-        private HashMap<String, IndexElement> auditCollectionMap = new HashMap<String, IndexElement>();
-        private HashMap<String, IndexElement> analysisSampleCollectionMap = new HashMap<String, IndexElement>();
-        private HashMap<String, IndexElement> sequenceCollectionMap = new HashMap<String, IndexElement>();
-        private HashMap<String, IndexElement> analysisCollectionMap = new HashMap<String, IndexElement>();
-        private HashMap<String, IndexElement> analysisProtocolCollectionMap = new HashMap<String, IndexElement>();
-        private HashMap<String, IndexElement> dataCollectionMap = new HashMap<String, IndexElement>();
         private HashMap<String, IndexElement> peptideMap = new HashMap<String, IndexElement>();
         private HashMap<String, IndexElement> bibliographicReferenceMap = new HashMap<String, IndexElement>();
 
@@ -112,7 +106,7 @@ public class MzIdentMLIndexerFactory {
                 root = "/mzIdentML";
                 // check if the xxindex contains this root
                 if (!index.containsXpath(root)) {
-                    logger.info("We are dealing with an mzIndentML file!");
+                    logger.info("We are not dealing with an mzIndentML file!");
                     throw new IllegalStateException("Invalid XML - /mzIndentML not found!");
                 }
 
@@ -127,30 +121,6 @@ public class MzIdentMLIndexerFactory {
                 //provider cache
                 logger.info("Init Provider cache");
                 initIdMapCache(providerMap, "/Provider");
-
-                //auditCollection cache
-                logger.info("Init AuditCollection cache");
-                initIdMapCache(auditCollectionMap, "/AuditCollection");
-
-                //AnalysisSampleCollection cache
-                logger.info("Init AnalysisSampleCollection cache");
-                initIdMapCache(analysisSampleCollectionMap, "/AnalysisSampleCollection");
-
-                //SequenceCollection cache
-                logger.info("Init sequenceCollection cache");
-                initIdMapCache(sequenceCollectionMap, "/SequenceCollection");
-
-                //analysisCollection cache
-                logger.info("Init AnalysisCollection cache");
-                initIdMapCache(analysisCollectionMap, "/AnalysisCollection");
-
-                //analysisProtocolCollection cache
-                logger.info("Init AnalysisProtocolCollection cache");
-                initIdMapCache(analysisProtocolCollectionMap, "/AnalysisProtocolCollection");
-
-                //dataCollection cache
-                logger.info("Init DataCollection cache");
-                initIdMapCache(dataCollectionMap, "/DataCollection");
 
                 //bibliographicReferenceMap cache
                 logger.info("Init BibliographicReference cache");
@@ -251,7 +221,11 @@ public class MzIdentMLIndexerFactory {
         private void initIdMapCache(HashMap<String, IndexElement> idMap, String xpath) throws IOException {
             List<IndexElement> ranges = index.getElements(root + xpath);
             for (IndexElement byteRange : ranges) {
-                String xml = readXML(byteRange);
+                // in some cases the XML element can be extremely big (for example: /mzIdentML/DataCollection)
+                // and cause memory problems. Since we only need the id attribute (which usually follows just
+                // behind the element opening tag, we don't need to read the whole XML element. We read the
+                // first 100 characters of the XML element, which should be enough to extract the id.
+                String xml = readXML(byteRange, 500);
                 String id = getIdFromRawXML(xml);
                 if (id != null) {
                     idMap.put(id, byteRange);
@@ -302,9 +276,22 @@ public class MzIdentMLIndexerFactory {
         }
 
         private String readXML(IndexElement byteRange) {
+            return readXML(byteRange, 0);
+        }
+
+        private String readXML(IndexElement byteRange, int maxChars) {
             try {
                 if (byteRange != null) {
-                    return xmlExtractor.readString(byteRange.getStart(), byteRange.getStop(), xmlFile);
+                    long stop; // where we will stop reading
+                    long limitedStop = byteRange.getStart() + maxChars; // the potential end-point of reading
+                    // if a limit was specified and the XML element length is longer
+                    // than the limit, we only read up to the provided limit
+                    if (maxChars > 0 && byteRange.getStop() > limitedStop) {
+                        stop = limitedStop;
+                    } else { // otherwise we will read up to the end of the XML element
+                        stop = byteRange.getStop();
+                    }
+                    return xmlExtractor.readString(byteRange.getStart(), stop, xmlFile);
                 } else {
                     throw new IllegalStateException("Attempting to read NULL ByteRange");
                 }
@@ -365,24 +352,6 @@ public class MzIdentMLIndexerFactory {
                     break;
                 case Provider:
                     xml = readXML(providerMap.get(ID));
-                    break;
-                case AuditCollection:
-                    xml = readXML(auditCollectionMap.get(ID));
-                    break;
-                case AnalysisSampleCollection:
-                    xml = readXML(analysisSampleCollectionMap.get(ID));
-                    break;
-                case SequenceCollection:
-                    xml = readXML(sequenceCollectionMap.get(ID));
-                    break;
-                case AnalysisCollection:
-                    xml = readXML(analysisCollectionMap.get(ID));
-                    break;
-                case AnalysisProtocolCollection:
-                    xml = readXML(analysisProtocolCollectionMap.get(ID));
-                    break;
-                case DataCollection:
-                    xml = readXML(dataCollectionMap.get(ID));
                     break;
                 case BibliographicReference:
                     xml = readXML(bibliographicReferenceMap.get(ID));
