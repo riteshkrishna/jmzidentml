@@ -56,6 +56,7 @@ public class SpectrumIdentificationList
 
     @XmlElement(name = "FragmentationTable")
     protected FragmentationTable fragmentationTable;
+    // ToDo: the List of SpectrumIdentificationResults may be too big to fit into memory! We may not want to load the full data automatically
     @XmlElement(name = "SpectrumIdentificationResult", required = true)
     protected List<SpectrumIdentificationResult> spectrumIdentificationResult;
     @XmlAttribute

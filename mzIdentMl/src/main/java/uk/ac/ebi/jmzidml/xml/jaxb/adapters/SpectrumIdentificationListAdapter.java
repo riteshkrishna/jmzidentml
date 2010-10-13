@@ -16,6 +16,8 @@ public class SpectrumIdentificationListAdapter extends AbstractResolvingAdapter<
         super(index, cache);
     }
 
+    // ToDo: the referenced list might be too big to fit into memory!! We may not want to automatically resolve this reference!
+
     public SpectrumIdentificationList unmarshal(String refId) {
 
         SpectrumIdentificationList retval;

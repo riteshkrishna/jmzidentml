@@ -224,11 +224,14 @@ public class MzIdentMLIndexerFactory {
                 // in some cases the XML element can be extremely big (for example: /mzIdentML/DataCollection)
                 // and cause memory problems. Since we only need the id attribute (which usually follows just
                 // behind the element opening tag, we don't need to read the whole XML element. We read the
-                // first 100 characters of the XML element, which should be enough to extract the id.
+                // first 500 characters of the XML element, which should be enough to extract the id.
+                // ToDo: find better way to determine how long to read! Some elements have multiple long attributes. Ideally only read the full start tag!
                 String xml = readXML(byteRange, 500);
                 String id = getIdFromRawXML(xml);
                 if (id != null) {
                     idMap.put(id, byteRange);
+                } else {
+                    throw new IllegalStateException("Error initializing ID cache: No id attribute found for element " + xml);
                 }
             }
         }
