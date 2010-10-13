@@ -16,7 +16,11 @@ public class ProteinDetectionListAdapter extends AbstractResolvingAdapter<String
         super(index, cache);
     }
 
+    // ToDo: the referenced list might be too big to fit into memory!! We may not want to automatically resolve this reference!
+
     public ProteinDetectionList unmarshal(String refId) {
+
+        // ToDo: maybe change to return 'hollow' ProteinDetectionList object with attributes filled in, but ProteinAmbiguityGroups missing (only accessible on manual load)
 
         ProteinDetectionList retval;
         if (cache.getCachedObject(refId, ProteinDetectionList.class) != null) {

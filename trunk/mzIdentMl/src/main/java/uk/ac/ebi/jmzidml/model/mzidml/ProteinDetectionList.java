@@ -51,6 +51,7 @@ public class ProteinDetectionList
     @XmlTransient
     private List<UserParam> userParams;
 
+    // ToDo: the List of ProteinAmbiguityGroups may be too big to fit into memory! We may not want to load the full data automatically 
     @XmlElement(name = "ProteinAmbiguityGroup")
     protected List<ProteinAmbiguityGroup> proteinAmbiguityGroup;
 
