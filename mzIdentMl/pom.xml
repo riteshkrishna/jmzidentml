@@ -8,6 +8,21 @@
     <version>0.2-SNAPSHOT</version>
     <name>mzIdentML Java core API</name>
 
+    <developers>
+        <developer>
+            <name>Ritesh Krishna</name>
+            <id>ritesh</id>
+            <email>ritesh.krishna@liverpool.ac.uk</email>
+            <organization>University of Liverpool, UK</organization>
+        </developer>
+        <developer>
+            <name>Florian Reisinger</name>
+            <id>florian</id>
+            <email>florian@ebi.ac.uk</email>
+            <organization>Proteomics Services Team, PANDA Group, EMBL-European Bioinformatics Institute</organization>
+        </developer>
+    </developers>
+    
     <build>
         <plugins>
             <plugin>
