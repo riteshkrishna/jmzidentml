@@ -1,13 +1,10 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+
+import javax.xml.bind.annotation.*;
+import java.io.Serializable;
 
 
 /**
@@ -54,6 +51,17 @@ public abstract class Param implements Serializable, MzIdentMLObject
     protected String unitName;
     @XmlAttribute
     protected String unitCvRef;
+
+    @Override
+    public String toString() {
+        return "Param{" +
+                "name='" + name + '\'' +
+                ", value='" + value + '\'' +
+                ", unitAccession='" + unitAccession + '\'' +
+                ", unitName='" + unitName + '\'' +
+                ", unitCvRef='" + unitCvRef + '\'' +
+                '}';
+    }
 
     /**
      * Gets the value of the name property.

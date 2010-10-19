@@ -82,11 +82,17 @@ public class AmbiguousResidue
         return this.paramGroup;
     }
 
-    public List<CvParam> getCvParams() {
+    public List<CvParam> getCvParam() {
+        if (cvParams == null) {
+            cvParams = new ArrayList<CvParam>();
+        }
         return cvParams;
     }
 
-    public List<UserParam> getUserParams() {
+    public List<UserParam> getUserParam() {
+        if (userParams == null) {
+            userParams = new ArrayList<UserParam>();
+        }
         return userParams;
     }
 

@@ -126,11 +126,11 @@ public class SpectrumIdentificationResult
         return this.paramGroup;
     }
 
-    public List<CvParam> getCvParams() {
+    public List<CvParam> getCvParam() {
         return cvParams;
     }
 
-    public List<UserParam> getUserParams() {
+    public List<UserParam> getUserParam() {
         return userParams;
     }
 

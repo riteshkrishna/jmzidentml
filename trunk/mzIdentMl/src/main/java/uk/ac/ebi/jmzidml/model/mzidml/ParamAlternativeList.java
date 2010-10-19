@@ -46,11 +46,11 @@ public class ParamAlternativeList
     @XmlTransient
     private List<UserParam> userParams;
 
-    public List<CvParam> getCvParams() {
+    public List<CvParam> getCvParam() {
         return cvParams;
     }
 
-    public List<UserParam> getUserParams() {
+    public List<UserParam> getUserParam() {
         return userParams;
     }
 

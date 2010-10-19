@@ -41,15 +41,15 @@ public class AnalysisSampleCollectionTest extends TestCase {
             }
 
 
-            assertEquals("We expect one CvParam.", 1, sample.getCvParams().size());
-            assertEquals("We expect one UserParam.", 1, sample.getUserParams().size());
+            assertEquals("We expect one CvParam.", 1, sample.getCvParam().size());
+            assertEquals("We expect one UserParam.", 1, sample.getUserParam().size());
 
-            sample.getCvParams().add(new CvParam());        // add a new CvParam
-            assertEquals(2, sample.getCvParams().size());   // now there are two CvParams
-            assertEquals(1, sample.getUserParams().size()); // still only one UserParam
-            sample.getUserParams().add(new UserParam());    // add a new UserParam
-            assertEquals(2, sample.getUserParams().size()); // now there are two UserParams
-            assertEquals(2, sample.getCvParams().size());   // still only two CvParams
+            sample.getCvParam().add(new CvParam());        // add a new CvParam
+            assertEquals(2, sample.getCvParam().size());   // now there are two CvParams
+            assertEquals(1, sample.getUserParam().size()); // still only one UserParam
+            sample.getUserParam().add(new UserParam());    // add a new UserParam
+            assertEquals(2, sample.getUserParam().size()); // now there are two UserParams
+            assertEquals(2, sample.getCvParam().size());   // still only two CvParams
         }
     }
 
