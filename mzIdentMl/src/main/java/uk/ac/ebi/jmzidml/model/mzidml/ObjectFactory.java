@@ -317,11 +317,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ExternalData.FileFormat }
+     * Create an instance of {@link uk.ac.ebi.jmzidml.model.mzidml.FileFormat }
      * 
      */
-    public ExternalData.FileFormat createExternalDataFileFormat() {
-        return new ExternalData.FileFormat();
+    public FileFormat createExternalDataFileFormat() {
+        return new FileFormat();
     }
 
     /**
@@ -469,11 +469,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ContactRole.Role }
+     * Create an instance of {@link Role }
      * 
      */
-    public ContactRole.Role createContactRoleRole() {
-        return new ContactRole.Role();
+    public Role createContactRoleRole() {
+        return new Role();
     }
 
     /**

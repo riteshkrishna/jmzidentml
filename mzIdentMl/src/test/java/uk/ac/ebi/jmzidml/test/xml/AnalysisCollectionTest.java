@@ -3,6 +3,7 @@ package uk.ac.ebi.jmzidml.test.xml;
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 import uk.ac.ebi.jmzidml.model.mzidml.*;
+import uk.ac.ebi.jmzidml.model.mzidml.params.AnalysisSearchDatabaseCvParam;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
 import java.net.URL;
@@ -67,9 +68,7 @@ public class AnalysisCollectionTest extends TestCase {
             }
         }
 
-//        System.out.println("********************************************************** ");
-//        System.out.println("**************** Spectrum Info *************************** ");
-//        System.out.println("********************************************************** ");
+        // *************** Spectrum Info ***************
 
         while(si.hasNext()){
 
@@ -88,9 +87,16 @@ public class AnalysisCollectionTest extends TestCase {
             assertNotNull(spectraID);
 
             Iterator<SearchDatabase> sdb  = sid.getSearchDatabase().iterator();
-            String searchDBName = sdb.next().getAnalysisSearchDatabase().getName();
+            AnalysisSearchDatabase searchDB = sdb.next().getAnalysisSearchDatabase();
+            String searchDBName = searchDB.getName();
             log.debug("Search Database : " + searchDBName);
             assertEquals("SwissProt", searchDBName);
+
+            // quickly check the sub-classing of the CvParams
+            assertTrue(searchDB.getCvParam().size() > 0);
+            for (CvParam cvParam : searchDB.getCvParam()) {
+                assertTrue("Cv params have to be sub-classed.", (cvParam instanceof AnalysisSearchDatabaseCvParam) );
+            }
 
             SpectrumIdentificationList spl = sid.getSpectrumIdentificationList();
             Iterator<SpectrumIdentificationResult> sr  = spl.getSpectrumIdentificationResult().iterator();

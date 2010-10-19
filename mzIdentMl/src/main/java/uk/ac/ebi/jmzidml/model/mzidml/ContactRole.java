@@ -54,7 +54,7 @@ public class ContactRole
 
     private final static long serialVersionUID = 100L;
     @XmlElement(required = true)
-    protected ContactRole.Role role;
+    protected Role role;
     @XmlAttribute(name = "Contact_ref", required = true)
     @XmlJavaTypeAdapter(ContactAdapter.class)
     protected Contact contact;
@@ -64,10 +64,10 @@ public class ContactRole
      * 
      * @return
      *     possible object is
-     *     {@link ContactRole.Role }
+     *     {@link Role }
      *     
      */
-    public ContactRole.Role getRole() {
+    public Role getRole() {
         return role;
     }
 
@@ -76,10 +76,10 @@ public class ContactRole
      * 
      * @param value
      *     allowed object is
-     *     {@link ContactRole.Role }
+     *     {@link Role }
      *     
      */
-    public void setRole(ContactRole.Role value) {
+    public void setRole(Role value) {
         this.role = value;
     }
 
@@ -105,64 +105,6 @@ public class ContactRole
      */
     public void setContact(Contact value) {
         this.contact = value;
-    }
-
-
-    /**
-     * <p>Java class for anonymous complex type.
-     * 
-     * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
-     * <pre>
-     * &lt;complexType>
-     *   &lt;complexContent>
-     *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-     *       &lt;sequence>
-     *         &lt;element ref="{http://psidev.info/psi/pi/mzIdentML/1.0}cvParam"/>
-     *       &lt;/sequence>
-     *     &lt;/restriction>
-     *   &lt;/complexContent>
-     * &lt;/complexType>
-     * </pre>
-     * 
-     * 
-     */
-    @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "", propOrder = {
-        "cvParam"
-    })
-    public static class Role
-        implements Serializable, MzIdentMLObject
-    {
-
-        private final static long serialVersionUID = 100L;
-        @XmlElement(required = true)
-        protected CvParam cvParam;
-
-        /**
-         * Gets the value of the cvParam property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link CvParam }
-         *     
-         */
-        public CvParam getCvParam() {
-            return cvParam;
-        }
-
-        /**
-         * Sets the value of the cvParam property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link CvParam }
-         *     
-         */
-        public void setCvParam(CvParam value) {
-            this.cvParam = value;
-        }
-
     }
 
 }
