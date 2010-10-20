@@ -46,7 +46,7 @@ public class ModelConstants {
 
     static {
         modelQNames.put(CvList.class, new QName(MZIDML_NS, "cvList"));
-
+        modelQNames.put(MzIdentML.class, new QName(MZIDML_NS,"mzIdentML"));
         //now make set unmodifiable
         modelQNames = Collections.unmodifiableMap(modelQNames);
 
