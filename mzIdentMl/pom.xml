@@ -45,14 +45,23 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <configuration>
-                    <outputDirectory>${basedir}/lib</outputDirectory>
-                    <overWriteReleases>true</overWriteReleases>
-                    <overWriteSnapshots>true</overWriteSnapshots>
-                    <excludeTransitive>false</excludeTransitive>
-                </configuration>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-dependency-plugin</artifactId>
+               <executions>
+                 <execution>
+                   <id>copy-dependencies</id>
+                   <phase>package</phase>
+                   <goals>
+                     <goal>copy-dependencies</goal>
+                   </goals>
+                   <configuration>
+                     <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                     <overWriteReleases>false</overWriteReleases>
+                     <overWriteSnapshots>true</overWriteSnapshots>
+                     <overWriteIfNewer>true</overWriteIfNewer>
+                   </configuration>
+                 </execution>
+               </executions>
             </plugin>
             <plugin>
                 <!-- you can use this plugin to generate the jaxb object model from
