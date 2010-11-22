@@ -2,13 +2,8 @@
 package uk.ac.ebi.jmzidml.model.mzidml;
 
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.MeasureAdapter;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +37,21 @@ public class FragmentArray
     @XmlAttribute(required = true)
     protected List<Float> values;
     @XmlAttribute(name = "Measure_ref", required = true)
-    @XmlJavaTypeAdapter(MeasureAdapter.class)
-    protected Measure measure;
+    protected String measureRef;
+
+    @XmlTransient
+    private Measure measure;
+
+    public Measure getMeasure() {
+        return measure;
+    }
+
+    public void setMeasure(Measure measure) {
+        this.measure = measure;
+        if (measure != null) {
+            this.setMeasureRef(measure.getId());
+        }
+    }
 
     /**
      * Gets the value of the values property.
@@ -75,27 +83,27 @@ public class FragmentArray
     }
 
     /**
-     * Gets the value of the measure property.
+     * Gets the value of the measureRef property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public Measure getMeasure() {
-        return measure;
+    public String getMeasureRef() {
+        return measureRef;
     }
 
     /**
-     * Sets the value of the measure property.
+     * Sets the value of the measureRef property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setMeasure(Measure value) {
-        this.measure = value;
+    public void setMeasureRef(String value) {
+        this.measureRef = value;
     }
 
 }

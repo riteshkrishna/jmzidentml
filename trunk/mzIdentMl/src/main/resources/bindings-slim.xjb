@@ -27,8 +27,7 @@
         <jxb:serializable uid="100"/>
         <!-- this interface will be used to ensure type safety in generified methods -->
         <xjc:superInterface name="uk.ac.ebi.jmzidml.model.MzIdentMLObject"/>
-        <xjc:javaType name="java.util.Calendar" xmlType="xsd:dateTime"
-                      adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.CalendarAdapter"/>
+        <xjc:javaType name="java.util.Calendar" xmlType="xsd:dateTime" adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.CalendarAdapter"/>
     </jxb:globalBindings>
 
 
@@ -41,11 +40,6 @@
         <jxb:schemaBindings>
             <jxb:package name="uk.ac.ebi.jmzidml.model.mzidml"/>
         </jxb:schemaBindings>
-
-        <!-- ToDo: check if the following is still true for jmzidml -->
-        <!-- ATTENTION: Some code in the JMZIdentML library may expect that the class names are the same
-             as the element names of the mzIdentML XML.
-             -->
 
         <jxb:bindings node="//xsd:complexType[@name='AmbiguousResidueType']">
             <jxb:class name="AmbiguousResidue"/>
@@ -94,14 +88,14 @@
         <jxb:bindings node="//xsd:complexType[@name='FragmentArrayType']">
             <jxb:class name="FragmentArray"/>
         </jxb:bindings>
-        <jxb:bindings node="//xsd:complexType[@name='FragmentArrayType']/xsd:attribute[@name='Measure_ref']">
-            <jxb:property name="Measure">
-                <jxb:baseType>
-                    <xjc:javaType name="Measure"
-                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.MeasureAdapter"/>
-                </jxb:baseType>
-            </jxb:property>
-        </jxb:bindings>
+        <!--<jxb:bindings node="//xsd:complexType[@name='FragmentArrayType']/xsd:attribute[@name='Measure_ref']">-->
+            <!--<jxb:property name="Measure">-->
+                <!--<jxb:baseType>-->
+                    <!--<xjc:javaType name="Measure"-->
+                                  <!--adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.MeasureAdapter"/>-->
+                <!--</jxb:baseType>-->
+            <!--</jxb:property>-->
+        <!--</jxb:bindings>-->
 
         <jxb:bindings node="//xsd:complexType[@name='FragmentationTableType']">
             <jxb:class name="FragmentationTable"/>
@@ -114,26 +108,26 @@
         <jxb:bindings node="//xsd:complexType[@name='InputSpectraType']">
             <jxb:class name="InputSpectra"/>
         </jxb:bindings>
-        <jxb:bindings node="//xsd:complexType[@name='InputSpectraType']/xsd:attribute[@name='SpectraData_ref']">
-            <jxb:property name="SpectraData">
-                <jxb:baseType>
-                    <xjc:javaType name="SpectraData"
-                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.SpectraDataAdapter"/>
-                </jxb:baseType>
-            </jxb:property>
-        </jxb:bindings>
+        <!--<jxb:bindings node="//xsd:complexType[@name='InputSpectraType']/xsd:attribute[@name='SpectraData_ref']">-->
+            <!--<jxb:property name="SpectraData">-->
+                <!--<jxb:baseType>-->
+                    <!--<xjc:javaType name="SpectraData"-->
+                                  <!--adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.SpectraDataAdapter"/>-->
+                <!--</jxb:baseType>-->
+            <!--</jxb:property>-->
+        <!--</jxb:bindings>-->
 
         <jxb:bindings node="//xsd:complexType[@name='InputSpectrumIdentificationsType']">
             <jxb:class name="InputSpectrumIdentifications"/>
         </jxb:bindings>
-        <jxb:bindings node="//xsd:complexType[@name='InputSpectrumIdentificationsType']/xsd:attribute[@name='SpectrumIdentificationList_ref']">
-                <jxb:property name="SpectrumIdentificationList">
-                    <jxb:baseType>
-                        <xjc:javaType name="SpectrumIdentificationList"
-                                      adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.SpectrumIdentificationListAdapter"/>
-                    </jxb:baseType>
-                </jxb:property>
-            </jxb:bindings>
+        <!--<jxb:bindings node="//xsd:complexType[@name='InputSpectrumIdentificationsType']/xsd:attribute[@name='SpectrumIdentificationList_ref']">-->
+                <!--<jxb:property name="SpectrumIdentificationList">-->
+                    <!--<jxb:baseType>-->
+                        <!--<xjc:javaType name="SpectrumIdentificationList"-->
+                                      <!--adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.SpectrumIdentificationListAdapter"/>-->
+                    <!--</jxb:baseType>-->
+                <!--</jxb:property>-->
+            <!--</jxb:bindings>-->
 
         <jxb:bindings node="//xsd:complexType[@name='InputsType']">
             <jxb:class name="Inputs"/>
@@ -154,40 +148,38 @@
         <jxb:bindings node="//xsd:complexType[@name='PeptideHypothesisType']">
             <jxb:class name="PeptideHypothesis"/>
         </jxb:bindings>
-
-        <!-- Added by Ritesh -->
-        <jxb:bindings
-                node="//xsd:complexType[@name='PeptideHypothesisType']/xsd:attribute[@name='PeptideEvidence_Ref']">
-            <jxb:property name="PeptideEvidence">
-                <jxb:baseType>
-                    <xjc:javaType name="PeptideEvidence"
-                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.PeptideEvidenceAdapter"/>
-                </jxb:baseType>
-            </jxb:property>
-        </jxb:bindings>
+        <!--<jxb:bindings-->
+                <!--node="//xsd:complexType[@name='PeptideHypothesisType']/xsd:attribute[@name='PeptideEvidence_Ref']">-->
+            <!--<jxb:property name="PeptideEvidence">-->
+                <!--<jxb:baseType>-->
+                    <!--<xjc:javaType name="PeptideEvidence"-->
+                                  <!--adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.PeptideEvidenceAdapter"/>-->
+                <!--</jxb:baseType>-->
+            <!--</jxb:property>-->
+        <!--</jxb:bindings>-->
 	 
 	
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.process.PeptideEvidenceType']">
             <jxb:class name="PeptideEvidence"/>
         </jxb:bindings>
-        <jxb:bindings
-                node="//xsd:complexType[@name='PSI-PI.analysis.process.PeptideEvidenceType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='DBSequence_Ref']">
-            <jxb:property name="DBSequence">
-                <jxb:baseType>
-                    <xjc:javaType name="DBSequence"
-                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.DBSequenceAdapter"/>
-                </jxb:baseType>
-            </jxb:property>
-        </jxb:bindings>
-        <jxb:bindings
-                node="//xsd:complexType[@name='PSI-PI.analysis.process.PeptideEvidenceType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='TranslationTable_ref']">
-            <jxb:property name="TranslationTable">
-                <jxb:baseType>
-                    <xjc:javaType name="TranslationTable"
-                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.TranslationTableAdapter"/>
-                </jxb:baseType>
-            </jxb:property>
-        </jxb:bindings>
+        <!--<jxb:bindings-->
+                <!--node="//xsd:complexType[@name='PSI-PI.analysis.process.PeptideEvidenceType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='DBSequence_Ref']">-->
+            <!--<jxb:property name="DBSequence">-->
+                <!--<jxb:baseType>-->
+                    <!--<xjc:javaType name="DBSequence"-->
+                                  <!--adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.DBSequenceAdapter"/>-->
+                <!--</jxb:baseType>-->
+            <!--</jxb:property>-->
+        <!--</jxb:bindings>-->
+        <!--<jxb:bindings-->
+                <!--node="//xsd:complexType[@name='PSI-PI.analysis.process.PeptideEvidenceType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='TranslationTable_ref']">-->
+            <!--<jxb:property name="TranslationTable">-->
+                <!--<jxb:baseType>-->
+                    <!--<xjc:javaType name="TranslationTable"-->
+                                  <!--adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.TranslationTableAdapter"/>-->
+                <!--</jxb:baseType>-->
+            <!--</jxb:property>-->
+        <!--</jxb:bindings>-->
 
 
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinAmbiguityGroupType']">
@@ -197,15 +189,15 @@
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinDetectionHypothesisType']">
             <jxb:class name="ProteinDetectionHypothesis"/>
         </jxb:bindings>
-        <jxb:bindings
-                node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinDetectionHypothesisType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='DBSequence_ref']">
-            <jxb:property name="DBSequence_ProteinDetection">
-                <jxb:baseType>
-                    <xjc:javaType name="DBSequence"
-                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.DBSequenceAdapter"/>
-                </jxb:baseType>
-            </jxb:property>
-        </jxb:bindings>
+        <!--<jxb:bindings-->
+                <!--node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinDetectionHypothesisType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='DBSequence_ref']">-->
+            <!--<jxb:property name="DBSequence_ProteinDetection">-->
+                <!--<jxb:baseType>-->
+                    <!--<xjc:javaType name="DBSequence"-->
+                                  <!--adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.DBSequenceAdapter"/>-->
+                <!--</jxb:baseType>-->
+            <!--</jxb:property>-->
+        <!--</jxb:bindings>-->
 
 
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinDetectionListType']">
@@ -215,37 +207,37 @@
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinDetectionProtocolType']">
             <jxb:class name="ProteinDetectionProtocol"/>
         </jxb:bindings>
-        <jxb:bindings
-                node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinDetectionProtocolType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='AnalysisSoftware_ref']">
-            <jxb:property name="AnalysisSoftware">
-                <jxb:baseType>
-                    <xjc:javaType name="AnalysisSoftware"
-                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.AnalysisSoftwareAdapter"/>
-                </jxb:baseType>
-            </jxb:property>
-        </jxb:bindings>
+        <!--<jxb:bindings-->
+                <!--node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinDetectionProtocolType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='AnalysisSoftware_ref']">-->
+            <!--<jxb:property name="AnalysisSoftware">-->
+                <!--<jxb:baseType>-->
+                    <!--<xjc:javaType name="AnalysisSoftware"-->
+                                  <!--adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.AnalysisSoftwareAdapter"/>-->
+                <!--</jxb:baseType>-->
+            <!--</jxb:property>-->
+        <!--</jxb:bindings>-->
 
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinDetectionType']">
             <jxb:class name="ProteinDetection"/>
         </jxb:bindings>
-        <jxb:bindings
-                node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinDetectionType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='ProteinDetectionList_ref']">
-            <jxb:property name="ProteinDetectionList">
-                <jxb:baseType>
-                    <xjc:javaType name="ProteinDetectionList"
-                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.ProteinDetectionListAdapter"/>
-                </jxb:baseType>
-            </jxb:property>
-        </jxb:bindings>
-        <jxb:bindings
-                node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinDetectionType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='ProteinDetectionProtocol_ref']">
-            <jxb:property name="ProteinDetectionProtocol">
-                <jxb:baseType>
-                    <xjc:javaType name="ProteinDetectionProtocol"
-                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.ProteinDetectionProtocolAdapter"/>
-                </jxb:baseType>
-            </jxb:property>
-        </jxb:bindings>
+        <!--<jxb:bindings-->
+                <!--node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinDetectionType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='ProteinDetectionList_ref']">-->
+            <!--<jxb:property name="ProteinDetectionList">-->
+                <!--<jxb:baseType>-->
+                    <!--<xjc:javaType name="ProteinDetectionList"-->
+                                  <!--adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.ProteinDetectionListAdapter"/>-->
+                <!--</jxb:baseType>-->
+            <!--</jxb:property>-->
+        <!--</jxb:bindings>-->
+        <!--<jxb:bindings-->
+                <!--node="//xsd:complexType[@name='PSI-PI.analysis.process.ProteinDetectionType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='ProteinDetectionProtocol_ref']">-->
+            <!--<jxb:property name="ProteinDetectionProtocol">-->
+                <!--<jxb:baseType>-->
+                    <!--<xjc:javaType name="ProteinDetectionProtocol"-->
+                                  <!--adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.ProteinDetectionProtocolAdapter"/>-->
+                <!--</jxb:baseType>-->
+            <!--</jxb:property>-->
+        <!--</jxb:bindings>-->
 
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.AnalysisSoftwareType']">
             <jxb:class name="AnalysisSoftware"/>
@@ -254,14 +246,14 @@
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.DBSequenceType']">
             <jxb:class name="DBSequence"/>
         </jxb:bindings>
-        <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.DBSequenceType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='SearchDatabase_ref']">
-            <jxb:property name="AnalysisSearchDatabase">
-                <jxb:baseType>
-                    <xjc:javaType name="AnalysisSearchDatabase"
-                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.AnalysisSearchDatabaseAdapter"/>
-                </jxb:baseType>
-            </jxb:property>
-        </jxb:bindings>
+        <!--<jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.DBSequenceType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='SearchDatabase_ref']">-->
+            <!--<jxb:property name="AnalysisSearchDatabase">-->
+                <!--<jxb:baseType>-->
+                    <!--<xjc:javaType name="AnalysisSearchDatabase"-->
+                                  <!--adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.AnalysisSearchDatabaseAdapter"/>-->
+                <!--</jxb:baseType>-->
+            <!--</jxb:property>-->
+        <!--</jxb:bindings>-->
 
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.EnzymesType']">
             <jxb:class name="Enzymes"/>
@@ -290,33 +282,33 @@
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationItemType']">
             <jxb:class name="SpectrumIdentificationItem"/>
         </jxb:bindings>
-        <jxb:bindings
-                node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationItemType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='Peptide_ref']">
-            <jxb:property name="Peptide">
-                <jxb:baseType>
-                    <xjc:javaType name="Peptide"
-                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.PeptideAdapter"/>
-                </jxb:baseType>
-            </jxb:property>
-        </jxb:bindings>
-        <jxb:bindings
-                node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationItemType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='MassTable_ref']">
-            <jxb:property name="MassTable">
-                <jxb:baseType>
-                    <xjc:javaType name="MassTable"
-                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.MassTableAdapter"/>
-                </jxb:baseType>
-            </jxb:property>
-        </jxb:bindings>
-        <jxb:bindings
-                node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationItemType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='Sample_ref']">
-            <jxb:property name="Sample">
-                <jxb:baseType>
-                    <xjc:javaType name="Sample"
-                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.SampleAdapter"/>
-                </jxb:baseType>
-            </jxb:property>
-        </jxb:bindings>
+        <!--<jxb:bindings-->
+                <!--node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationItemType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='Peptide_ref']">-->
+            <!--<jxb:property name="Peptide">-->
+                <!--<jxb:baseType>-->
+                    <!--<xjc:javaType name="Peptide"-->
+                                  <!--adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.PeptideAdapter"/>-->
+                <!--</jxb:baseType>-->
+            <!--</jxb:property>-->
+        <!--</jxb:bindings>-->
+        <!--<jxb:bindings-->
+                <!--node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationItemType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='MassTable_ref']">-->
+            <!--<jxb:property name="MassTable">-->
+                <!--<jxb:baseType>-->
+                    <!--<xjc:javaType name="MassTable"-->
+                                  <!--adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.MassTableAdapter"/>-->
+                <!--</jxb:baseType>-->
+            <!--</jxb:property>-->
+        <!--</jxb:bindings>-->
+        <!--<jxb:bindings-->
+                <!--node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationItemType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='Sample_ref']">-->
+            <!--<jxb:property name="Sample">-->
+                <!--<jxb:baseType>-->
+                    <!--<xjc:javaType name="Sample"-->
+                                  <!--adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.SampleAdapter"/>-->
+                <!--</jxb:baseType>-->
+            <!--</jxb:property>-->
+        <!--</jxb:bindings>-->
 
 
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationListType']">
@@ -326,48 +318,48 @@
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationProtocolType']">
             <jxb:class name="SpectrumIdentificationProtocol"/>
         </jxb:bindings>
-        <jxb:bindings
-                node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationProtocolType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='AnalysisSoftware_ref']">
-            <jxb:property name="AnalysisSoftware">
-                <jxb:baseType>
-                    <xjc:javaType name="AnalysisSoftware"
-                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.AnalysisSoftwareAdapter"/>
-                </jxb:baseType>
-            </jxb:property>
-        </jxb:bindings>
+        <!--<jxb:bindings-->
+                <!--node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationProtocolType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='AnalysisSoftware_ref']">-->
+            <!--<jxb:property name="AnalysisSoftware">-->
+                <!--<jxb:baseType>-->
+                    <!--<xjc:javaType name="AnalysisSoftware"-->
+                                  <!--adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.AnalysisSoftwareAdapter"/>-->
+                <!--</jxb:baseType>-->
+            <!--</jxb:property>-->
+        <!--</jxb:bindings>-->
 
 
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationResultType']">
             <jxb:class name="SpectrumIdentificationResult"/>
         </jxb:bindings>
-        <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationResultType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='SpectraData_ref']">
-            <jxb:property name="SpectraData">
-                <jxb:baseType>
-                    <xjc:javaType name="SpectraData"
-                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.SpectraDataAdapter"/>
-                </jxb:baseType>
-            </jxb:property>
-        </jxb:bindings>
+        <!--<jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationResultType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='SpectraData_ref']">-->
+            <!--<jxb:property name="SpectraData">-->
+                <!--<jxb:baseType>-->
+                    <!--<xjc:javaType name="SpectraData"-->
+                                  <!--adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.SpectraDataAdapter"/>-->
+                <!--</jxb:baseType>-->
+            <!--</jxb:property>-->
+        <!--</jxb:bindings>-->
 
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationType']">
             <jxb:class name="SpectrumIdentification"/>
         </jxb:bindings>
-        <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='SpectrumIdentificationProtocol_ref']">
-            <jxb:property name="SpectrumIdentificationProtocol">
-                <jxb:baseType>
-                    <xjc:javaType name="SpectrumIdentificationProtocol"
-                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.SpectrumIdentificationProtocolAdapter"/>
-                </jxb:baseType>
-            </jxb:property>
-        </jxb:bindings>
-        <jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='SpectrumIdentificationList_ref']">
-            <jxb:property name="SpectrumIdentificationList">
-                <jxb:baseType>
-                    <xjc:javaType name="SpectrumIdentificationList"
-                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.SpectrumIdentificationListAdapter"/>
-                </jxb:baseType>
-            </jxb:property>
-        </jxb:bindings>
+        <!--<jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='SpectrumIdentificationProtocol_ref']">-->
+            <!--<jxb:property name="SpectrumIdentificationProtocol">-->
+                <!--<jxb:baseType>-->
+                    <!--<xjc:javaType name="SpectrumIdentificationProtocol"-->
+                                  <!--adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.SpectrumIdentificationProtocolAdapter"/>-->
+                <!--</jxb:baseType>-->
+            <!--</jxb:property>-->
+        <!--</jxb:bindings>-->
+        <!--<jxb:bindings node="//xsd:complexType[@name='PSI-PI.analysis.search.SpectrumIdentificationType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='SpectrumIdentificationList_ref']">-->
+            <!--<jxb:property name="SpectrumIdentificationList">-->
+                <!--<jxb:baseType>-->
+                    <!--<xjc:javaType name="SpectrumIdentificationList"-->
+                                  <!--adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.SpectrumIdentificationListAdapter"/>-->
+                <!--</jxb:baseType>-->
+            <!--</jxb:property>-->
+        <!--</jxb:bindings>-->
 
         <jxb:bindings node="//xsd:complexType[@name='PSI-PI.Main.mzIdentMLType']">
             <jxb:class name="MzIdentML"/>
@@ -404,14 +396,14 @@
         <jxb:bindings node="//xsd:complexType[@name='SearchDatabaseType']">
             <jxb:class name="SearchDatabase"/>
         </jxb:bindings>
-        <jxb:bindings node="//xsd:complexType[@name='SearchDatabaseType']/xsd:attribute[@name='SearchDatabase_ref']">
-            <jxb:property name="AnalysisSearchDatabase">
-                <jxb:baseType>
-                    <xjc:javaType name="AnalysisSearchDatabase"
-                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.AnalysisSearchDatabaseAdapter"/>
-                </jxb:baseType>
-            </jxb:property>
-        </jxb:bindings>
+        <!--<jxb:bindings node="//xsd:complexType[@name='SearchDatabaseType']/xsd:attribute[@name='SearchDatabase_ref']">-->
+            <!--<jxb:property name="AnalysisSearchDatabase">-->
+                <!--<jxb:baseType>-->
+                    <!--<xjc:javaType name="AnalysisSearchDatabase"-->
+                                  <!--adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.AnalysisSearchDatabaseAdapter"/>-->
+                <!--</jxb:baseType>-->
+            <!--</jxb:property>-->
+        <!--</jxb:bindings>-->
 
         <jxb:bindings node="//xsd:complexType[@name='SequenceCollectionType']">
             <jxb:class name="SequenceCollection"/>
@@ -458,6 +450,10 @@
             <jxb:class name="ExternalData"/>
         </jxb:bindings>
 
+        <jxb:bindings node="//xsd:complexType[@name='FuGE.Bio.Data.FileFormatType']">
+            <jxb:class name="FileFormat"/>
+        </jxb:bindings>
+
         <jxb:bindings node="//xsd:complexType[@name='FuGE.Bio.Data.InternalDataType']">
             <jxb:class name="InternalData"/>
         </jxb:bindings>
@@ -497,14 +493,14 @@
         <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Ontology.cvParamType']">
             <jxb:class name="CvParam"/>
         </jxb:bindings>
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Ontology.cvParamType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='cvRef']">
-            <jxb:property name="Cv">
-                <jxb:baseType>
-                    <xjc:javaType name="Cv"
-                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.CvAdapter"/>
-                </jxb:baseType>
-            </jxb:property>
-        </jxb:bindings>
+        <!--<jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Ontology.cvParamType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='cvRef']">-->
+            <!--<jxb:property name="Cv">-->
+                <!--<jxb:baseType>-->
+                    <!--<xjc:javaType name="Cv"-->
+                                  <!--adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.CvAdapter"/>-->
+                <!--</jxb:baseType>-->
+            <!--</jxb:property>-->
+        <!--</jxb:bindings>-->
 
         <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Ontology.PropertyValue']">
             <jxb:class name="PropertyValue"/>
@@ -517,39 +513,47 @@
         <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Audit.ContactRoleType']">
             <jxb:class name="ContactRole"/>
         </jxb:bindings>
-        <jxb:bindings
-                node="//xsd:complexType[@name='FuGE.Common.Audit.ContactRoleType']/xsd:attribute[@name='Contact_ref']">
-            <jxb:property name="Contact">
-                <jxb:baseType>
-                    <xjc:javaType name="Contact"
-                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.ContactAdapter"/>
-                </jxb:baseType>
-            </jxb:property>
+        <!--<jxb:bindings-->
+                <!--node="//xsd:complexType[@name='FuGE.Common.Audit.ContactRoleType']/xsd:attribute[@name='Contact_ref']">-->
+            <!--<jxb:property name="Contact">-->
+                <!--<jxb:baseType>-->
+                    <!--<xjc:javaType name="Contact"-->
+                                  <!--adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.ContactAdapter"/>-->
+                <!--</jxb:baseType>-->
+            <!--</jxb:property>-->
+        <!--</jxb:bindings>-->
+
+        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Audit.RoleType']">
+            <jxb:class name="Role"/>
         </jxb:bindings>
 
         <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Audit.PersonType']">
             <jxb:class name="Person"/>
         </jxb:bindings>
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Audit.PersonType']/xsd:complexContent/xsd:extension/xsd:sequence/xsd:element[@name='affiliations']/xsd:complexType/xsd:attribute[@name='Organization_ref']">
-            <jxb:property name="Organization">
-                <jxb:baseType>
-                    <xjc:javaType name="Organization"
-                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.OrganizationAdapter"/>
-                </jxb:baseType>
-            </jxb:property>
+        <!--<jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Audit.PersonType']/xsd:complexContent/xsd:extension/xsd:sequence/xsd:element[@name='affiliations']/xsd:complexType/xsd:attribute[@name='Organization_ref']">-->
+            <!--<jxb:property name="Organization">-->
+                <!--<jxb:baseType>-->
+                    <!--<xjc:javaType name="Organization"-->
+                                  <!--adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.OrganizationAdapter"/>-->
+                <!--</jxb:baseType>-->
+            <!--</jxb:property>-->
+        <!--</jxb:bindings>-->
+
+        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Audit.AffiliationsType']">
+            <jxb:class name="Affiliations"/>
         </jxb:bindings>
 
         <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Audit.OrganizationType']">
             <jxb:class name="Organization"/>
         </jxb:bindings>
-        <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Audit.OrganizationType']/xsd:complexContent/xsd:extension/xsd:sequence/xsd:element[@name='parent']/xsd:complexType/xsd:attribute[@name='Organization_ref']">
-            <jxb:property name="Organization">
-                <jxb:baseType>
-                    <xjc:javaType name="Organization"
-                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.OrganizationAdapter"/>
-                </jxb:baseType>
-            </jxb:property>
-        </jxb:bindings>
+        <!--<jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Audit.OrganizationType']/xsd:complexContent/xsd:extension/xsd:sequence/xsd:element[@name='parent']/xsd:complexType/xsd:attribute[@name='Organization_ref']">-->
+            <!--<jxb:property name="Organization">-->
+                <!--<jxb:baseType>-->
+                    <!--<xjc:javaType name="Organization"-->
+                                  <!--adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.OrganizationAdapter"/>-->
+                <!--</jxb:baseType>-->
+            <!--</jxb:property>-->
+        <!--</jxb:bindings>-->
 
         <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.Audit.ContactType']">
             <jxb:class name="Contact"/>
@@ -558,15 +562,15 @@
         <jxb:bindings node="//xsd:complexType[@name='FuGE.Collection.ProviderType']">
             <jxb:class name="Provider"/>
         </jxb:bindings>
-        <jxb:bindings
-                node="//xsd:complexType[@name='FuGE.Collection.ProviderType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='Software_ref']">
-            <jxb:property name="AnalysisSoftware">
-                <jxb:baseType>
-                    <xjc:javaType name="AnalysisSoftware"
-                                  adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.AnalysisSoftwareAdapter"/>
-                </jxb:baseType>
-            </jxb:property>
-        </jxb:bindings>
+        <!--<jxb:bindings-->
+                <!--node="//xsd:complexType[@name='FuGE.Collection.ProviderType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='Software_ref']">-->
+            <!--<jxb:property name="AnalysisSoftware">-->
+                <!--<jxb:baseType>-->
+                    <!--<xjc:javaType name="AnalysisSoftware"-->
+                                  <!--adapter="uk.ac.ebi.jmzidml.xml.jaxb.adapters.AnalysisSoftwareAdapter"/>-->
+                <!--</jxb:baseType>-->
+            <!--</jxb:property>-->
+        <!--</jxb:bindings>-->
 
         <jxb:bindings node="//xsd:complexType[@name='FuGE.Common.References.BibliographicReferenceType']">
             <jxb:class name="BibliographicReference"/>
@@ -583,11 +587,6 @@
         <jxb:bindings node="//xsd:complexType[@name='ParamListType']">
             <jxb:class name="ParamAlternativeList"/>
         </jxb:bindings>
-
-        <!--
-          the following FuGE elements are not used in the mzIdentML schema
-          !! double check that !!
-          -->
 
     </jxb:bindings>
 

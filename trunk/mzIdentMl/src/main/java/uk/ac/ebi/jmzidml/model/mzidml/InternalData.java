@@ -1,11 +1,12 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
+
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -39,9 +40,61 @@ import javax.xml.bind.annotation.XmlType;
 })
 public abstract class InternalData
     extends Data
-    implements Serializable
+    implements Serializable, ParamGroupCapable
 {
 
     private final static long serialVersionUID = 100L;
+
+    @XmlTransient
+    private List<CvParam> cvParams;
+    @XmlTransient
+    private List<UserParam> userParams;
+
+
+
+    public List<CvParam> getCvParam() {
+        if (cvParams == null) {
+            cvParams = new ArrayList<CvParam>();
+        }
+        return cvParams;
+    }
+
+    public List<UserParam> getUserParam() {
+        if (userParams == null) {
+            userParams = new ArrayList<UserParam>();
+        }
+        return userParams;
+    }
+
+    public void splitParamList() {
+        if (getCvParam() == null || getCvParam().size() != 0) {
+            throw new IllegalStateException("Error in initialisation. List of CvParam objects should be not null and empty in afterUnmarshal operation!");
+        }
+        if (getUserParam() == null || getUserParam().size() != 0) {
+            throw new IllegalStateException("Error in initialisation. List of UserParam objects should be not null and empty in afterUnmarshal operation!");
+        }
+        for (Param param : getParamGroup()) {
+            if (param instanceof CvParam) {
+                getCvParam().add((CvParam) param);
+            }
+            if (param instanceof UserParam) {
+                getUserParam().add((UserParam) param);
+            }
+        }
+    }
+
+    public void updateParamList() {
+        // whatever we had in the List of Params, we only
+        // consider what is in the CvParam/UserParam lists now.
+        getParamGroup().clear();
+        // combine the List<CvParam> and List<UserParam> in the one List<Param> that will be marshalled.
+        for (CvParam cvParam : getCvParam()) {
+            getParamGroup().add(cvParam);
+        }
+        for (UserParam userParam : getUserParam()) {
+            getParamGroup().add(userParam);
+        }
+    }
+
 
 }

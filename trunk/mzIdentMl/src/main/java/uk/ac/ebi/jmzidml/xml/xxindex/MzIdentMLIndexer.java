@@ -8,7 +8,6 @@ package uk.ac.ebi.jmzidml.xml.xxindex;
 
 
 import psidev.psi.tools.xxindex.index.IndexElement;
-import uk.ac.ebi.jmzidml.xml.Constants;
 
 import java.util.Iterator;
 import java.util.List;
@@ -19,11 +18,11 @@ public interface MzIdentMLIndexer {
 
     public Iterator<String> getXmlStringIterator(String xpathExpression);
 
-    public String getXmlString(String ID, Constants.ReferencedType type);
+//    public String getXmlString(String ID, Constants.ReferencedType type);
 
     public int getCount(String xpathExpression);
 
-    public String getXmlString(String xpath, long offset);
+    public String getXmlString(String ID, Class clazz);
 
     public List<IndexElement> getIndexElements(String xpathExpression);
 

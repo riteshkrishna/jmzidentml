@@ -1,6 +1,8 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import uk.ac.ebi.jmzidml.model.AbstractIdentifiableParamGroup;
+
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -37,7 +39,7 @@ import java.util.List;
     "paramGroup"
 })
 public class ProteinAmbiguityGroup
-    extends Identifiable
+    extends AbstractIdentifiableParamGroup
     implements Serializable
 {
 
@@ -45,16 +47,10 @@ public class ProteinAmbiguityGroup
     @XmlElement(name = "ProteinDetectionHypothesis", required = true)
     protected List<ProteinDetectionHypothesis> proteinDetectionHypothesis;
     @XmlElements({
-        @XmlElement(name = "userParam", type = UserParam.class),
-        @XmlElement(name = "cvParam", type = CvParam.class)
+        @XmlElement(name = "cvParam", type = CvParam.class),
+        @XmlElement(name = "userParam", type = UserParam.class)
     })
     protected List<Param> paramGroup;
-
-    @XmlTransient
-    private List<CvParam> cvParams;
-    @XmlTransient
-    private List<UserParam> userParams;
-
 
     /**
      * Gets the value of the proteinDetectionHypothesis property.
@@ -103,9 +99,9 @@ public class ProteinAmbiguityGroup
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link UserParam }
      * {@link CvParam }
-     *
+     * {@link UserParam }
+     * 
      * 
      */
     public List<Param> getParamGroup() {
@@ -115,44 +111,4 @@ public class ProteinAmbiguityGroup
         return this.paramGroup;
     }
 
-    public List<CvParam> getCvParam() {
-        return cvParams;
-    }
-
-    public List<UserParam> getUserParam() {
-        return userParams;
-    }
-
-    /**
-     * After unmarshalling, split the List of generic Params into
-     * a List of CvParams and a List of UserParams.
-     */
-    public void afterUnmarshalOperation() {
-        cvParams = new ArrayList<CvParam>();
-        userParams = new ArrayList<UserParam>();
-        for (Param param : getParamGroup()) {
-            if (param instanceof CvParam) {
-                cvParams.add((CvParam) param);
-            }
-            if (param instanceof UserParam) {
-                userParams.add((UserParam) param);
-            }
-        }
-    }
-
-    /**
-     * Before we marshall the XML, combine the CvParams and UserParams
-     * into the generic List of Params.
-     */
-    public void beforeMarshalOperation() {
-        paramGroup = new ArrayList<Param>();
-        for (CvParam cvParam : cvParams) {
-            paramGroup.add(cvParam);
-        }
-        for (UserParam userParam : userParams) {
-            paramGroup.add(userParam);
-        }
-    }
-
- 
 }

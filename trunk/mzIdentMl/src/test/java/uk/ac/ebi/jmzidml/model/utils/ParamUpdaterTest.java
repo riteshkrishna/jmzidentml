@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * @author Florian Reisinger
  *         Date: 18-Oct-2010
- * @since $version
+ * @since 1.0
  */
 public class ParamUpdaterTest {
 

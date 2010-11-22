@@ -2,9 +2,8 @@ package uk.ac.ebi.jmzidml.test.xml;
 
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
-import uk.ac.ebi.jmzidml.model.mzidml.AuditCollection;
-import uk.ac.ebi.jmzidml.model.mzidml.Contact;
-import uk.ac.ebi.jmzidml.model.mzidml.Person;
+import uk.ac.ebi.jmzidml.MzIdentMLElement;
+import uk.ac.ebi.jmzidml.model.mzidml.*;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
 import java.net.URL;
@@ -24,41 +23,44 @@ public class AuditCollectionTest extends TestCase {
         URL xmlFileURL = AuditCollectionTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
 
-        boolean aUseSpectrumCache = true;
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, aUseSpectrumCache);
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         assertNotNull(unmarshaller);
 
-
-        Iterator<AuditCollection> aci = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/AuditCollection", AuditCollection.class);
+        Iterator<AuditCollection> aci = unmarshaller.unmarshalCollectionFromXpath(MzIdentMLElement.AuditCollection);
         assertNotNull(aci);
 
-        int count = 0;
         while(aci.hasNext()){
             AuditCollection ac = aci.next();
             assertNotNull(ac);
             for (Contact contact : ac.getContactGroup()) {
                 assertNotNull(contact);
-
-                log.debug("Contact Count: " + (count++) + " Name: " + contact.getName()
-                        + " Address: " + contact.getAddress() + " Email: " + contact.getEmail()
-                        + " Fax: " + contact.getFax() + " Id: " + contact.getId()
-                        + "Contact Class Name:" + contact.getClass().getName());
+                assertNotNull(contact.getId());
+                if (contact.getEmail() != null) {
+                    assertTrue(contact.getEmail().contains("@"));
+                }
             }
         }
 
         // Resolve the organization_ref
-        Iterator<Person> pi = unmarshaller.unmarshalCollectionFromXpath("/mzIdentML/AuditCollection/Person",Person.class);
+        Iterator<Person> pi = unmarshaller.unmarshalCollectionFromXpath(MzIdentMLElement.Person);
         while(pi.hasNext()){
             assertNotNull(pi);
             Person p = pi.next();
             assertNotNull(p);
-            log.debug("Person: first name: " + p.getFirstName() + " last name:" + p.getLastName());
-
             assertEquals(1, p.getAffiliations().size()); // we expect one affiliation per person
-            for (Person.Affiliations affiliation : p.getAffiliations()) {
+            for (Affiliations affiliation : p.getAffiliations()) {
                 assertNotNull(affiliation);
-                log.debug("Person -> Affiliation Name: " + affiliation.getOrganization().getName()
-                        + " Address: " + affiliation.getOrganization().getAddress());
+                if (MzIdentMLElement.Affiliations.isAutoRefResolving() && affiliation.getOrganizationRef() != null) {
+                    Organization org = affiliation.getOrganization();
+                    assertNotNull(org);
+                    assertNotNull(org.getId());
+                    if (org.getEmail() != null) {
+                        assertTrue(org.getEmail().contains("@"));
+                    }
+                } else {
+                    System.out.println("Affiliation is not auto-resolving or does not contain a Organization reference.");
+                    assertNull(affiliation.getOrganization());
+                }
             }
 
         }

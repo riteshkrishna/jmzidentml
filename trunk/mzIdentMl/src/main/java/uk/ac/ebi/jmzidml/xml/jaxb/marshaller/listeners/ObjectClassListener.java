@@ -1,7 +1,8 @@
 package uk.ac.ebi.jmzidml.xml.jaxb.marshaller.listeners;
 
 import org.apache.log4j.Logger;
-import uk.ac.ebi.jmzidml.model.mzidml.*;
+import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
+import uk.ac.ebi.jmzidml.model.mzidml.ParamAlternative;
 
 import javax.xml.bind.Marshaller;
 
@@ -16,71 +17,20 @@ public class ObjectClassListener extends Marshaller.Listener {
     private static final Logger log = Logger.getLogger(ObjectClassListener.class);
 
     public void beforeMarshal(Object source) {
-        log.debug("marshalling: " + source.getClass());
-        if(source instanceof ParamAlternative) {
-            log.debug("Calling ParamAlternative specific 'beforeMarshalOperation'.");
+        log.debug("Handling " + source.getClass() + " in beforeMarshal.");
+
+        // Handle the cases were we have ParamGroups, CvParams, UserParams, etc...
+        if (source instanceof ParamAlternative) {
             ((ParamAlternative)source).beforeMarshalOperation();
+        } else if (source instanceof ParamGroupCapable) {
+            ParamGroupCapable apg = (ParamGroupCapable) source;
+            // we have to re-unite the CvParam and UserParam we split in the unmarshall process
+            apg.updateParamList();
         }
-        if(source instanceof ParamAlternativeList) {
-            log.debug("Calling ParamAlternativeList specific 'beforeMarshalOperation'.");
-            ((ParamAlternativeList)source).beforeMarshalOperation();
-        }
-        if(source instanceof Sample) {
-            log.debug("Calling Sample specific 'beforeMarshalOperation'.");
-            ((Sample)source).beforeMarshalOperation();
-        }
-        if (source instanceof DBSequence) {
-            log.debug("Calling DBSequence specific 'beforeMarshalOperation'.");
-            ((DBSequence) source).beforeMarshalOperation();
-        }
-        if (source instanceof ProteinDetectionHypothesis) {
-            log.debug("Calling ProteinDetectionHypothesis specific 'beforeMarshalOperation'.");
-            ((ProteinDetectionHypothesis) source).beforeMarshalOperation();
-        }
-        if (source instanceof AmbiguousResidue) {
-            log.debug("Calling AmbiguousResidue specific 'beforeMarshalOperation'.");
-            ((AmbiguousResidue) source).beforeMarshalOperation();
-        }
-        if (source instanceof MassTable) {
-            log.debug("Calling MassTable specific 'beforeMarshalOperation'.");
-            ((MassTable) source).beforeMarshalOperation();
-        }
-        if (source instanceof Modification) {
-            log.debug("Calling Modification specific 'beforeMarshalOperation'.");
-            ((Modification) source).beforeMarshalOperation();
-        }
-        if (source instanceof Peptide) {
-            log.debug("Calling Peptide specific 'beforeMarshalOperation'.");
-            ((Peptide) source).beforeMarshalOperation();
-        }
-        if (source instanceof PeptideEvidence) {
-            log.debug("Calling PeptideEvidence specific 'beforeMarshalOperation'.");
-            ((PeptideEvidence) source).beforeMarshalOperation();
-        }
-        if (source instanceof ProteinAmbiguityGroup) {
-            log.debug("Calling ProteinAmbiguityGroup specific 'beforeMarshalOperation'.");
-            ((ProteinAmbiguityGroup) source).beforeMarshalOperation();
-        }
-        if (source instanceof ProteinDetectionList) {
-            log.debug("Calling v specific 'beforeMarshalOperation'.");
-            ((ProteinDetectionList) source).beforeMarshalOperation();
-        }
-        if (source instanceof SourceFile) {
-            log.debug("Calling SourceFile specific 'beforeMarshalOperation'.");
-            ((SourceFile) source).beforeMarshalOperation();
-        }
-        if (source instanceof SpectrumIdentificationItem) {
-            log.debug("Calling SpectrumIdentificationItem specific 'beforeMarshalOperation'.");
-            ((SpectrumIdentificationItem) source).beforeMarshalOperation();
-        }
-        if (source instanceof SpectrumIdentificationList) {
-            log.debug("Calling SpectrumIdentificationList specific 'beforeMarshalOperation'.");
-            ((SpectrumIdentificationList) source).beforeMarshalOperation();
-        }
-        if (source instanceof SpectrumIdentificationResult) {
-            log.debug("Calling SpectrumIdentificationResult specific 'beforeMarshalOperation'.");
-            ((SpectrumIdentificationResult) source).beforeMarshalOperation();
-        }
+
+        // Since the ID of a referenced object is updated when the referenced object is updated/added
+        // and the object is not taken into account for the marshalling process, we don't really need
+        // to do anything else here (regarding the automatic reference resolving).
     }
 
 }

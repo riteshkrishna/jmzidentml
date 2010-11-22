@@ -2,7 +2,9 @@ package uk.ac.ebi.jmzidml.test.xml;
 
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
+import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.*;
+import uk.ac.ebi.jmzidml.model.mzidml.params.SampleCvParam;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
 import java.net.URL;
@@ -22,27 +24,35 @@ public class AnalysisSampleCollectionTest extends TestCase {
         URL xmlFileURL = AnalysisSampleCollectionTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
 
-        boolean aUseSpectrumCache = true;
-
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, aUseSpectrumCache);
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         assertNotNull(unmarshaller);
 
-        AnalysisSampleCollection asc =  unmarshaller.unmarshalFromXpath("/mzIdentML/AnalysisSampleCollection", AnalysisSampleCollection.class);
+        AnalysisSampleCollection asc =  unmarshaller.unmarshal(AnalysisSampleCollection.class);
         assertNotNull(asc);
 
         assertEquals(1, asc.getSample().size());
         for (Sample sample : asc.getSample()) {
             log.debug("Analysis Sample : Name = " + sample.getName());
             for (ContactRole contactRole : sample.getContactRole()) {
-                assertNotNull(contactRole.getContact().getName());
-                log.debug("Analysis Sample -> Contact Role : Name = " + contactRole.getContact().getName()
-                        + " \t Address : " + contactRole.getContact().getAddress()
-                        + " \t Role Accession : " + contactRole.getRole().getCvParam().getAccession());
+                if (MzIdentMLElement.ContactRole.isAutoRefResolving() && contactRole.getContactRef() != null) {
+                    assertNotNull(contactRole.getContact());
+                    log.debug("Analysis Sample -> Contact Role : Name = " + contactRole.getContact().getName()
+                            + " \t Address : " + contactRole.getContact().getAddress()
+                            + " \t Role Accession : " + contactRole.getRole().getCvParam().getAccession());
+                    assertNotNull(contactRole.getContact().getName());
+                    assertNotNull(contactRole.getRole());
+                } else {
+                    System.out.println("ContactRole is not auto-resolving or does not contain a Contact reference.");
+                    assertNull(contactRole.getContact());
+                }
             }
 
 
             assertEquals("We expect one CvParam.", 1, sample.getCvParam().size());
             assertEquals("We expect one UserParam.", 1, sample.getUserParam().size());
+            CvParam param = sample.getCvParam().get(0);
+            assertNotNull(param);
+            assertTrue(param instanceof SampleCvParam);
 
             sample.getCvParam().add(new CvParam());        // add a new CvParam
             assertEquals(2, sample.getCvParam().size());   // now there are two CvParams

@@ -1,14 +1,10 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.OrganizationAdapter;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,15 +22,7 @@ import java.util.List;
  *   &lt;complexContent>
  *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Common.Audit.ContactType">
  *       &lt;sequence>
- *         &lt;element name="affiliations" maxOccurs="unbounded" minOccurs="0">
- *           &lt;complexType>
- *             &lt;complexContent>
- *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                 &lt;attribute name="Organization_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *               &lt;/restriction>
- *             &lt;/complexContent>
- *           &lt;/complexType>
- *         &lt;/element>
+ *         &lt;element name="affiliations" type="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Common.Audit.AffiliationsType" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="lastName" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="firstName" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -56,7 +44,7 @@ public class Person
 {
 
     private final static long serialVersionUID = 100L;
-    protected List<Person.Affiliations> affiliations;
+    protected List<Affiliations> affiliations;
     @XmlAttribute
     protected String lastName;
     @XmlAttribute
@@ -82,13 +70,13 @@ public class Person
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Person.Affiliations }
+     * {@link Affiliations }
      * 
      * 
      */
-    public List<Person.Affiliations> getAffiliations() {
+    public List<Affiliations> getAffiliations() {
         if (affiliations == null) {
-            affiliations = new ArrayList<Person.Affiliations>();
+            affiliations = new ArrayList<Affiliations>();
         }
         return this.affiliations;
     }
@@ -163,61 +151,6 @@ public class Person
      */
     public void setMidInitials(String value) {
         this.midInitials = value;
-    }
-
-
-    /**
-     * <p>Java class for anonymous complex type.
-     * 
-     * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
-     * <pre>
-     * &lt;complexType>
-     *   &lt;complexContent>
-     *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-     *       &lt;attribute name="Organization_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *     &lt;/restriction>
-     *   &lt;/complexContent>
-     * &lt;/complexType>
-     * </pre>
-     * 
-     * 
-     */
-    @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "")
-    public static class Affiliations
-        implements Serializable, MzIdentMLObject
-    {
-
-        private final static long serialVersionUID = 100L;
-        @XmlAttribute(name = "Organization_ref", required = true)
-        @XmlJavaTypeAdapter(OrganizationAdapter.class)
-        protected Organization organization;
-
-        /**
-         * Gets the value of the organization property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
-         */
-        public Organization getOrganization() {
-            return organization;
-        }
-
-        /**
-         * Sets the value of the organization property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
-         */
-        public void setOrganization(Organization value) {
-            this.organization = value;
-        }
-
     }
 
 }

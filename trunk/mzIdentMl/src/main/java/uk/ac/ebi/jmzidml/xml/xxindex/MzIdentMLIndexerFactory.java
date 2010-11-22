@@ -1,19 +1,15 @@
-/*
-* Date: 26/5/2010
-* Adopted by - Ritesh
-*
-*/
-
-
 package uk.ac.ebi.jmzidml.xml.xxindex;
 
 import org.apache.log4j.Logger;
-import psidev.psi.tools.xxindex.StandardXmlElementExtractor;
+import psidev.psi.tools.xxindex.SimpleXmlElementExtractor;
 import psidev.psi.tools.xxindex.StandardXpathAccess;
 import psidev.psi.tools.xxindex.XmlElementExtractor;
 import psidev.psi.tools.xxindex.XpathAccess;
 import psidev.psi.tools.xxindex.index.IndexElement;
 import psidev.psi.tools.xxindex.index.XpathIndex;
+import uk.ac.ebi.jmzidml.MzIdentMLElement;
+import uk.ac.ebi.jmzidml.model.IdentifiableMzIdentMLObject;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 import uk.ac.ebi.jmzidml.xml.Constants;
 
 import java.io.File;
@@ -50,32 +46,12 @@ public class MzIdentMLIndexerFactory {
         private XpathAccess xpathAccess = null;
         private XmlElementExtractor xmlExtractor = null;
         private XpathIndex index = null;
-        private String root = null;
         private String mzIdentMLAttributeXMLString = null;
+        // a unified cache of all the id maps
+        private HashMap<Class, HashMap<String, IndexElement>> idMapCache = new HashMap<Class, HashMap<String, IndexElement>>();
 
-        // Ritesh - Suggestions :
-        // Some maps like auditCollectionMap, bibliographicReferenceMap may not be required. Instead we can include
-        // maps for spectrumIdentificationItems, peptide_ref etc which will be more looked at.
-        private HashMap<String, IndexElement> cvIdMap = new HashMap<String, IndexElement>();
-        private HashMap<String, IndexElement> analysisSoftwareMap = new HashMap<String, IndexElement>();
-        private HashMap<String, IndexElement> providerMap = new HashMap<String, IndexElement>();
-        private HashMap<String, IndexElement> peptideMap = new HashMap<String, IndexElement>();
-        private HashMap<String, IndexElement> bibliographicReferenceMap = new HashMap<String, IndexElement>();
-
-        private HashMap<String, IndexElement> dbSequenceMap = new HashMap<String, IndexElement>();
-        private HashMap<String, IndexElement> peptideEvidenceMap = new HashMap<String, IndexElement>();
-        private HashMap<String, IndexElement> personMap = new HashMap<String, IndexElement>();
-        private HashMap<String, IndexElement> organizationMap = new HashMap<String, IndexElement>();
-        private HashMap<String, IndexElement> analysisSearchDatabaseMap = new HashMap<String, IndexElement>();
-        private HashMap<String, IndexElement> spectraDataMap = new HashMap<String, IndexElement>();
-        private HashMap<String, IndexElement> spectrumIdentificationListMap = new HashMap<String, IndexElement>();
-        private HashMap<String, IndexElement> spectrumIdentificationProtocolMap = new HashMap<String, IndexElement>();
-        private HashMap<String, IndexElement> proteinDetectionListMap = new HashMap<String, IndexElement>();
-        private HashMap<String, IndexElement> proteinDetectionProtocolMap = new HashMap<String, IndexElement>();
-        private HashMap<String, IndexElement> translationTableMap = new HashMap<String, IndexElement>();
-        private HashMap<String, IndexElement> massTableMap = new HashMap<String, IndexElement>();
-        private HashMap<String, IndexElement> sampleMap = new HashMap<String, IndexElement>();
-        private HashMap<String, IndexElement> measureMap = new HashMap<String, IndexElement>();
+        ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
+        // Constructor
 
         private MzIdentMLIndexerImpl(File xmlFile) {
 
@@ -86,197 +62,101 @@ public class MzIdentMLIndexerFactory {
                 throw new IllegalStateException("XML File to index does not exist: " + xmlFile.getAbsolutePath());
             }
 
+            //store file reference
+            this.xmlFile = xmlFile;
+
             try {
-
-                //store file reference
-                this.xmlFile = xmlFile;
-
-                //generate XXINDEX
+                // generate XXINDEX
                 logger.info("Creating index: ");
                 xpathAccess = new StandardXpathAccess(xmlFile, Constants.XML_INDEXED_XPATHS);
                 logger.debug("done!");
 
-                //create xml element extractor
-                xmlExtractor = new StandardXmlElementExtractor();
+                // create xml element extractor
+                xmlExtractor = new SimpleXmlElementExtractor();
                 xmlExtractor.setEncoding(xmlExtractor.detectFileEncoding(xmlFile.toURI().toURL()));
 
-                //create index
+                // create index
                 index = xpathAccess.getIndex();
 
-                root = "/mzIdentML";
                 // check if the xxindex contains this root
-                if (!index.containsXpath(root)) {
-                    logger.info("We are not dealing with an mzIndentML file!");
-                    throw new IllegalStateException("Invalid XML - /mzIndentML not found!");
+                if (!index.containsXpath(MzIdentMLElement.MzIdentML.getXpath())) {
+                    logger.info("Index does not contain mzIdentML root! We are not dealing with an mzIndentML file!");
+                    throw new IllegalStateException("Index does not contain mzIdentML root!");
                 }
 
-                //cv cache
-                logger.info("Init CV cache");
-                initIdMapCache(cvIdMap, "/cvList/cv");
+                // initialize the ID maps
+                initIdMaps();
 
-                //dataProcessing cache
-                logger.info("Init AnalysisSoftware cache");
-                initIdMapCache(analysisSoftwareMap, "/AnalysisSoftwareList/AnalysisSoftware");
+                // extract the MzIdentML attributes from the MzIdentML start tag
+                mzIdentMLAttributeXMLString = extractMzIdentMLStartTag(xmlFile);
 
-                //provider cache
-                logger.info("Init Provider cache");
-                initIdMapCache(providerMap, "/Provider");
-
-                //bibliographicReferenceMap cache
-                logger.info("Init BibliographicReference cache");
-                initIdMapCache(bibliographicReferenceMap, "/BibliographicReference");
-
-                //peptide cache
-                logger.info("Init Peptide cache");
-                initIdMapCache(peptideMap, "/SequenceCollection/Peptide");
-
-                //DBSequence cache
-                logger.info("Init DBSequence cache");
-                initIdMapCache(dbSequenceMap, "/SequenceCollection/DBSequence");
-                
-                //PeptideEvidenceMap cache
-                logger.info("Init PeptideEvidence cache");
-                initIdMapCache(peptideEvidenceMap, "/DataCollection/AnalysisData/SpectrumIdentificationList/SpectrumIdentificationResult/SpectrumIdentificationItem/PeptideEvidence");
-                
-                //contact cache for Person elements
-                logger.info("Init Person cache");
-                initIdMapCache(personMap, "/AuditCollection/Person");
-                //contact cache for Organisation elements
-                logger.info("Init Organization cache");
-                initIdMapCache(organizationMap, "/AuditCollection/Organization");
-
-                //contact cache for SearchDatabase elements
-                logger.info("Init SearchDatabase cache");
-                initIdMapCache(analysisSearchDatabaseMap, "/DataCollection/Inputs/SearchDatabase");
-
-                //contact cache for SpectraData elements
-                logger.info("Init SpectraData cache");
-                initIdMapCache(spectraDataMap, "/DataCollection/Inputs/SpectraData");
-
-                //contact cache for SpectrumIdentificationList elements
-                logger.info("Init SpectrumIdentificationList cache");
-                initIdMapCache(spectrumIdentificationListMap, "/DataCollection/AnalysisData/SpectrumIdentificationList");
-
-                //contact cache for SpectrumIdentificationProtocol elements
-                logger.info("Init SpectrumIdentificationProtocol cache");
-                initIdMapCache(spectrumIdentificationProtocolMap, "/AnalysisProtocolCollection/SpectrumIdentificationProtocol");
-
-                //contact cache for ProteinDetectionList elements
-                logger.info("Init ProteinDetectionList cache");
-                initIdMapCache(proteinDetectionListMap, "/DataCollection/AnalysisData/ProteinDetectionList");
-
-                //contact cache for ProteinDetectionProtocol elements
-                logger.info("Init proteinDetectionProtocol cache");
-                initIdMapCache(proteinDetectionProtocolMap, "/AnalysisProtocolCollection/ProteinDetectionProtocol");
-
-                //contact cache for TranslationTable elements
-                logger.info("Init TranslationTable cache");
-                initIdMapCache(translationTableMap, "/AnalysisProtocolCollection/SpectrumIdentificationProtocol/DatabaseTranslation/TranslationTable");
-
-                //contact cache for MassTable elements
-                logger.info("Init MassTable cache");
-                initIdMapCache(massTableMap, "/AnalysisProtocolCollection/SpectrumIdentificationProtocol/MassTable");
-
-                //contact cache for Sample elements
-                logger.info("Init Sample cache");
-                initIdMapCache(sampleMap, "/AnalysisSampleCollection/Sample");
-
-                //contact cache for Measure elements
-                logger.info("Init Measure cache");
-                initIdMapCache(measureMap, "/DataCollection/AnalysisData/SpectrumIdentificationList/FragmentationTable/Measure");
-
-
-                //extract the MzIdentML attributes from the MzML start tag
-                //get start position
-                List<IndexElement> ie = index.getElements(root);
-                //there is only one root
-                IndexElement rootEl = ie.get(0);
-                long startPos = rootEl.getStart();
-
-                //get end position - this is the start position of the next tag
-                ie = index.getElements(root + "/cvList");
-                //there will always be one and only one cvList
-                IndexElement cvListEl = ie.get(0);
-
-                long stopPos = cvListEl.getStart() - 1;
-
-                //get mzML start tag content
-                mzIdentMLAttributeXMLString = xmlExtractor.readString(startPos, stopPos, xmlFile);
-                if (mzIdentMLAttributeXMLString != null) {
-                    //strip newlines that might interfere with later on regex matching
-                    mzIdentMLAttributeXMLString = mzIdentMLAttributeXMLString.replace("\n", "");
-                }
             } catch (IOException e) {
                 logger.error("MzMLIndexerFactory$MzMlIndexerImpl.MzMlIndexerImpl", e);
-                throw new IllegalStateException("Could not generate index file for: " + xmlFile);
+                throw new IllegalStateException("Could not generate MzIdentML index for file: " + xmlFile);
             }
 
         }
 
+        ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
+        // public methods
 
         public String getMzIdentMLAttributeXMLString() {
             return mzIdentMLAttributeXMLString;
         }
 
-        private void initIdMapCache(HashMap<String, IndexElement> idMap, String xpath) throws IOException {
-            List<IndexElement> ranges = index.getElements(root + xpath);
-            for (IndexElement byteRange : ranges) {
-                // in some cases the XML element can be extremely big (for example: /mzIdentML/DataCollection)
-                // and cause memory problems. Since we only need the id attribute (which usually follows just
-                // behind the element opening tag, we don't need to read the whole XML element. We read the
-                // first 500 characters of the XML element, which should be enough to extract the id.
-                // ToDo: find better way to determine how long to read! Some elements have multiple long attributes. Ideally only read the full start tag!
-                String xml = readXML(byteRange, 500);
-                String id = getIdFromRawXML(xml);
-                if (id != null) {
-                    idMap.put(id, byteRange);
-                } else {
-                    throw new IllegalStateException("Error initializing ID cache: No id attribute found for element " + xml);
+        public Iterator<String> getXmlStringIterator(String xpathExpression) {
+            if ( index.containsXpath(xpathExpression) ) {
+                return xpathAccess.getXmlSnippetIterator(xpathExpression);
+            } else {
+                return null;
+            }
+        }
+
+        public int getCount(String xpathExpression) {
+            int retval = 0;
+            if (index.containsXpath(xpathExpression)) {
+                List<IndexElement> tmpList = index.getElements(xpathExpression);
+                if (tmpList != null) {
+                    retval = tmpList.size();
                 }
             }
+            return retval;
         }
 
-        private String getIdFromRawXML(String xml) {
-            Matcher match = ID_PATTERN.matcher(xml);
-            if (match.find()) {
-                return match.group(1).intern();
-            } else {
-                throw new IllegalStateException("Invalid ID in xml: " + xml);
+        public List<IndexElement> getIndexElements(String xpath) {
+            return index.getElements(xpath);
+        }
+
+        public Set<String> getXpath() {
+            return index.getKeys();
+        }
+
+        public String getXmlString(String ID, Class clazz) {
+            logger.debug("Getting cached ID: " + ID + " from cache: " + clazz);
+
+            HashMap<String, IndexElement> idMap = idMapCache.get(clazz);
+            IndexElement element = idMap.get(ID);
+
+            String xmlSnippet = null;
+            if (element != null) {
+                xmlSnippet = readXML(element);
+                if (logger.isTraceEnabled()) {
+                    logger.trace("Retrieved xml for class " + clazz + " with ID " + ID + ": " + xmlSnippet);
+                }
             }
+            return xmlSnippet;
+
         }
 
-
-        //
-        // Ritesh - We may not need /indexedmzML altogether
-        //
-        public Iterator<String> getXmlStringIterator(String xpathExpression) {
-            // check if we are required to provide the indexList of the indexedmzML
-            if (xpathExpression.contains("indexList") || xpathExpression.contains("fileChecksum")) {
-                // we can not use the root "mzML", since the mzML index list is outside the mzML!
-                return xpathAccess.getXmlSnippetIterator("/indexedmzML" + checkRoot(xpathExpression));
-            } else {
-                // Note: ! root is always the mzML element (even if we are dealing with indexedmzML) !
-                return xpathAccess.getXmlSnippetIterator(root + checkRoot(xpathExpression));
-            }
+        public <T extends MzIdentMLObject> Set<String> getElementIDs(Class<T> clazz) {
+            if (idMapCache == null) { return null; }
+            HashMap<String, IndexElement> classCache = idMapCache.get(clazz);
+            if (classCache == null) { return null; }
+            return classCache.keySet();
         }
 
-        private String checkRoot(String xpathExpression) {
-            // since we're appending the root we've already checked, make
-            // sure that the xpath doesn't erroneously contain that root
-
-            // get rid of possible '/indexedmzML' root
-            String unrootedXpath = xpathExpression;
-//            if (unrootedXpath.startsWith("/indexedmzML")) {
-//                unrootedXpath = unrootedXpath.substring("/indexedmzML".length());
-//                logger.debug("removed /indexedmzML root expression");
-//            }
-            // get rid of possible '/mzML' root
-            if (unrootedXpath.startsWith("/mzIdentML")) {
-                unrootedXpath = unrootedXpath.substring("/mzIdentML".length());
-                logger.debug("removed /mzIdentML root expression");
-            }
-            return unrootedXpath;
-        }
+        ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
+        // private methods
 
         private String readXML(IndexElement byteRange) {
             return readXML(byteRange, 0);
@@ -304,119 +184,85 @@ public class MzIdentMLIndexerFactory {
             }
         }
 
-        public int getCount(String xpathExpression) {
-            int retval = 0;
-            List<IndexElement> tmpList = index.getElements(root + checkRoot(xpathExpression));
-            if (tmpList != null) {
-                retval = tmpList.size();
+        private String extractMzIdentMLStartTag(File xmlFile) throws IOException {
+            // get start position of the mzIdentML element
+            List<IndexElement> ie = index.getElements(MzIdentMLElement.MzIdentML.getXpath());
+            // there is only one root
+            long startPos = ie.get(0).getStart();
+
+            // get end position of the mzIdentML start tag
+            // this is the start position of the next tag (cvList)
+            ie = index.getElements(MzIdentMLElement.CvList.getXpath());
+            // there will always be one and only one cvList
+            long stopPos = ie.get(0).getStart() - 1;
+
+            // get mzML start tag content
+            String startTag = xmlExtractor.readString(startPos, stopPos, xmlFile);
+            if (startTag != null) {
+                //strip newlines that might interfere with later on regex matching
+                startTag = startTag.replace("\n", "");
             }
-            return retval;
+            return startTag;
         }
 
-        public String getXmlString(String xpath, long offset) {
-            String retVal = null;
-            List<IndexElement> indexElements = index.getElements(xpath);
-            for (IndexElement indexElement : indexElements) {
-                if (indexElement.getStart() == offset) {
-                    // found what we are looking for
-                    try {
-                        retVal = xmlExtractor.readString(indexElement.getStart(), indexElement.getStop(), xmlFile);
-                    } catch (IOException ioe) {
-                        logger.error("MzIdentMLIndexerFactory$MzMlIndexerImpl.getXmlString(xpath, offset)", ioe);
-                        throw new IllegalStateException("Could not extract XML from file: " + xmlFile);
+        /**
+         * Method to generate and populate ID maps for the XML elements that should be
+         * mapped to a unique ID. This will require that these elements are indexes and
+         * that they extend the Identifiable class to make sure they have a unique ID.
+         *
+         * @see uk.ac.ebi.jmzidml.MzIdentMLElement
+         * @throws IOException in case of a read error from the underlying XML file.
+         */
+        private void initIdMaps() throws IOException {
+            for (MzIdentMLElement element : MzIdentMLElement.values()) {
+                // only for elements were a ID map is needed and a xpath is given
+                if (element.isIdMapped() && element.isIndexed()) {
+                    logger.debug("Initialising ID map for " + element.getClazz().getName());
+                    // check if the according class is a sub-class of Identifiable
+                    if (!IdentifiableMzIdentMLObject.class.isAssignableFrom(element.getClazz())) {
+                        throw new IllegalStateException("Attempt to create ID map for not Identifiable element: " + element.getClazz());
                     }
-                    break; // there will only be max one element with a specific offset,
-                    // but it does not harm to step out of the loop manually
+                    // so far so good, now generate the ID map (if not already present) and populate it
+                    HashMap<String, IndexElement> map = idMapCache.get(element.getClazz());
+                    if (map == null) {
+                        map = new HashMap<String, IndexElement>();
+                        idMapCache.put(element.getClazz(), map);
+                    }
+                    initIdMapCache(map, element.getXpath());
                 }
             }
-            return retVal;
         }
 
-        public List<IndexElement> getIndexElements(String xpathExpression) {
-            return index.getElements(xpathExpression);
-        }
-
-        public Set<String> getXpath() {
-            return index.getKeys();
-        }
-
-        public String getXmlString(String ID, Constants.ReferencedType type) {
-
-            logger.debug("Getting cached ID: " + ID + " from cache: " + type);
-
-            String xml = null;
-            switch (type) {
-
-                case CV:
-                    xml = readXML(cvIdMap.get(ID));
-                    break;
-                case AnalysisSoftware:
-                    xml = readXML(analysisSoftwareMap.get(ID));
-                    break;
-                case Provider:
-                    xml = readXML(providerMap.get(ID));
-                    break;
-                case BibliographicReference:
-                    xml = readXML(bibliographicReferenceMap.get(ID));
-                    break;
-                case Peptide:
-                    xml = readXML(peptideMap.get(ID));
-                    break;
-                case DBSequence:
-                    xml = readXML(dbSequenceMap.get(ID));
-                    break;
-                case PeptideEvidence:
-                    xml = readXML(peptideEvidenceMap.get(ID));
-                    break;    
-                case Person:
-                    IndexElement personElement = personMap.get(ID);
-                    if (personElement == null) break; // if there it no entry for the ID we break here and return null
-                    xml = readXML(personElement);
-                    break;
-                case Organization:
-                    IndexElement organizationElement = organizationMap.get(ID);
-                    if (organizationElement == null) break; // if there it no entry for the ID we break here and return null
-                    xml = readXML(organizationElement);
-                    break;
-                case AnalysisSearchDatabase:
-                    xml = readXML(analysisSearchDatabaseMap.get(ID));
-                    break;
-                case SpectraData:
-                    xml = readXML(spectraDataMap.get(ID));
-                    break;
-                case SpectrumIdentificationList:
-                    xml = readXML(spectrumIdentificationListMap.get(ID));
-                    break;
-                case SpectrumIdentificationProtocol:
-                    xml = readXML(spectrumIdentificationProtocolMap.get(ID));
-                    break;
-                case ProteinDetectionList:
-                    xml = readXML(proteinDetectionListMap.get(ID));
-                    break;
-                case ProteinDetectionProtocol:
-                    xml = readXML(proteinDetectionProtocolMap.get(ID));
-                    break;
-                case TranslationTable:
-                    xml = readXML(translationTableMap.get(ID));
-                    break;
-                case MassTable:
-                    xml = readXML(massTableMap.get(ID));
-                    break;
-                case Sample:
-                    xml = readXML(sampleMap.get(ID));
-                    break;
-                case Measure:
-                    xml = readXML(measureMap.get(ID));
-                    break;
-
-                default:
-                    throw new IllegalStateException("Unkonwn cache type: " + type);
-
+        // ToDo: optimise this! it could break as it is now!
+        private void initIdMapCache(HashMap<String, IndexElement> idMap, String xpath) throws IOException {
+            List<IndexElement> ranges = index.getElements(xpath);
+            for (IndexElement byteRange : ranges) {
+                // in some cases the XML element can be extremely big (for example: /mzIdentML/DataCollection)
+                // and cause memory problems. Since we only need the id attribute (which usually follows just
+                // behind the element opening tag, we don't need to read the whole XML element. We read the
+                // first 500 characters of the XML element, which should be enough to extract the id.
+                // ToDo: find better way to determine how long to read! Some elements have multiple long attributes. Ideally only read the full start tag!
+                // ToDo: position stream at beginning of element and read until the next stop signal ('>').
+                String xml = readXML(byteRange, 500);
+                String id = getIdFromRawXML(xml);
+                if (id != null) {
+                    idMap.put(id, byteRange);
+                } else {
+                    throw new IllegalStateException("Error initializing ID cache: No id attribute found for element " + xml);
+                }
             }
-
-            return xml;
-
         }
+
+        private String getIdFromRawXML(String xml) {
+            Matcher match = ID_PATTERN.matcher(xml);
+            if (match.find()) {
+                return match.group(1).intern();
+            } else {
+                throw new IllegalStateException("Invalid ID in xml: " + xml);
+            }
+        }
+
+
 
 
     }

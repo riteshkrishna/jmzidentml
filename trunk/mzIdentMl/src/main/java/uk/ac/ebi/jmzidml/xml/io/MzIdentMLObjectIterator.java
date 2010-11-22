@@ -24,9 +24,10 @@ package uk.ac.ebi.jmzidml.xml.io;
 
 import org.apache.log4j.Logger;
 import org.xml.sax.InputSource;
+import uk.ac.ebi.jmzidml.MzIdentMLElement;
+import uk.ac.ebi.jmzidml.model.IdentifiableMzIdentMLObject;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.UnmarshallerFactory;
-import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.cache.AdapterObjectCache;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.filters.MzIdentMLNamespaceFilter;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
 
@@ -37,30 +38,23 @@ import javax.xml.transform.sax.SAXSource;
 import java.io.StringReader;
 import java.util.Iterator;
 
-public class MzIdentMLObjectIterator<X extends MzIdentMLObject> implements Iterator<X> {
+public class MzIdentMLObjectIterator<T extends MzIdentMLObject> implements Iterator<T> {
 
     private static Logger logger = Logger.getLogger(MzIdentMLObjectIterator.class);
 
-    private MzIdentMLIndexer index;
-
     private Iterator<String> innerXpathIterator;
     private String xpath;
-    private Class cls;
-    private AdapterObjectCache cache;
-    private boolean useSpectrumCache = true;
+    private Class<T> cls;
+    private MzIdentMLIndexer index;
+    private MzIdentMLObjectCache cache;
 
-    //package level constructor!
-    MzIdentMLObjectIterator(String xpath, Class cls, MzIdentMLIndexer index, AdapterObjectCache cache) {
-        this(xpath, cls, index, cache, true);
-    }
 
-    MzIdentMLObjectIterator(String xpath, Class cls, MzIdentMLIndexer index, AdapterObjectCache cache, boolean aUseSpectrumCache) {
-        innerXpathIterator = index.getXmlStringIterator(xpath);
-        this.xpath = xpath;
-        this.cls = cls;
+    MzIdentMLObjectIterator(MzIdentMLElement element, MzIdentMLIndexer index, MzIdentMLObjectCache cache) {
+        innerXpathIterator = index.getXmlStringIterator(element.getXpath());
+        this.xpath = element.getXpath();
+        this.cls = element.getClazz();
         this.index = index;
         this.cache = cache;
-        this.useSpectrumCache = aUseSpectrumCache;
     }
 
 
@@ -68,7 +62,13 @@ public class MzIdentMLObjectIterator<X extends MzIdentMLObject> implements Itera
         return innerXpathIterator.hasNext();
     }
 
-    public X next() {
+    @SuppressWarnings("unchecked")
+    public T next() {
+        T retval;
+        // ToDo: take cache into account: for that we need ot look up the index and retrieve all the ID for the elements
+        // ToDo: if that is not possible (because caching or the ID map is not enabled) we have to revert to using the XML
+
+        // ToDo: cache or pull into Unmarshaller to re-use method! 
 
         try {
             String xmlSt = innerXpathIterator.next();
@@ -80,22 +80,45 @@ public class MzIdentMLObjectIterator<X extends MzIdentMLObject> implements Itera
             //required for the addition of namespaces to top-level objects
             MzIdentMLNamespaceFilter xmlFilter = new MzIdentMLNamespaceFilter();
             //initializeUnmarshaller will assign the proper reader to the xmlFilter
-            Unmarshaller unmarshaller = UnmarshallerFactory.getInstance().initializeUnmarshaller(index, xmlFilter, cache, useSpectrumCache);
+            Unmarshaller unmarshaller = UnmarshallerFactory.getInstance().initializeUnmarshaller(index, cache, xmlFilter);
             //unmarshall the desired object
-            JAXBElement<X> holder = unmarshaller.unmarshal(new SAXSource(xmlFilter, new InputSource(new StringReader(xmlSt))), cls);
+            JAXBElement<T> holder = unmarshaller.unmarshal(new SAXSource(xmlFilter, new InputSource(new StringReader(xmlSt))), cls);
 
-            X retval = holder.getValue();
+            retval = holder.getValue();
 
             if (logger.isDebugEnabled()) {
                 logger.debug("unmarshalled object = " + retval);
             }
 
-            return retval;
         } catch (JAXBException e) {
             logger.error("MzMLObjectIterator.next", e);
             throw new IllegalStateException("Could not unmarshal object at xpath:" + xpath);
         }
 
+
+        // ToDo: check this with Richard!
+        // Not all the elements of this type are cached (otherwise we would
+        // iterate over the cache instead of unmarshalling the elements here).
+        // Now some of the Objects could be cached, in which case we rather
+        // want to return those and discard the generated ones (to save memory).
+        // We also don't want to compromise the cache by storing the same Object
+        // twice or replacing the old entry with a new one.
+        // So here we check if the umarshalled Object has a representative in
+        // the cache (e.g. an Object with the same ID), if so we return that
+        // if not, we cache the new Object and return that.
+        if (cache != null && retval instanceof IdentifiableMzIdentMLObject) {
+            IdentifiableMzIdentMLObject object = (IdentifiableMzIdentMLObject) retval;
+            T cachedObject = (T) cache.getCachedObject(object.getId(), object.getClass());
+            if (cachedObject != null) {
+                // discard the unmarshalled object and return the cached version
+                retval = cachedObject;
+            } else {
+                // not in cache yet, so put it in
+                cache.putInCache(object);
+            }
+        }
+
+        return retval;
     }
 
     public void remove() {

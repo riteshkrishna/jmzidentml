@@ -2,13 +2,8 @@
 package uk.ac.ebi.jmzidml.model.mzidml;
 
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.AnalysisSearchDatabaseAdapter;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 
 
@@ -37,31 +32,44 @@ public class SearchDatabase
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(name = "SearchDatabase_ref")
-    @XmlJavaTypeAdapter(AnalysisSearchDatabaseAdapter.class)
-    protected AnalysisSearchDatabase analysisSearchDatabase;
+    protected String searchDatabaseRef;
+
+    @XmlTransient
+    private AnalysisSearchDatabase analysisSearchDatabase;
+
+    public AnalysisSearchDatabase getSearchDatabase() {
+        return analysisSearchDatabase;
+    }
+
+    public void setSearchDatabase(AnalysisSearchDatabase analysisSearchDatabase) {
+        this.analysisSearchDatabase = analysisSearchDatabase;
+        if (analysisSearchDatabase != null) {
+            this.setSearchDatabaseRef(analysisSearchDatabase.getId());
+        }
+    }
 
     /**
-     * Gets the value of the analysisSearchDatabase property.
+     * Gets the value of the searchDatabaseRef property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public AnalysisSearchDatabase getAnalysisSearchDatabase() {
-        return analysisSearchDatabase;
+    public String getSearchDatabaseRef() {
+        return searchDatabaseRef;
     }
 
     /**
-     * Sets the value of the analysisSearchDatabase property.
+     * Sets the value of the searchDatabaseRef property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setAnalysisSearchDatabase(AnalysisSearchDatabase value) {
-        this.analysisSearchDatabase = value;
+    public void setSearchDatabaseRef(String value) {
+        this.searchDatabaseRef = value;
     }
 
 }

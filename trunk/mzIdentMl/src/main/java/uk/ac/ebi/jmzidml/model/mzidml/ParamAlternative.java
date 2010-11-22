@@ -37,13 +37,12 @@ public class ParamAlternative
         @XmlElement(name = "cvParam", type = CvParam.class),
         @XmlElement(name = "userParam", type = UserParam.class)
     })
-    private Param paramGroup;
+    protected Param paramGroup;
 
     @XmlTransient
     private CvParam cvParam;
     @XmlTransient
     private UserParam userParam;
-
 
     public CvParam getCvParam() {
         return cvParam;
@@ -67,7 +66,7 @@ public class ParamAlternative
      */
     public void afterUnmarshalOperation() {
         if (paramGroup == null) return;
-        
+
         if (paramGroup instanceof CvParam) {
             cvParam = (CvParam) paramGroup;
         }
@@ -91,7 +90,7 @@ public class ParamAlternative
             // a difference since cvParam is null anyway.
             paramGroup = userParam;
         }
-    
+
 
     }
 

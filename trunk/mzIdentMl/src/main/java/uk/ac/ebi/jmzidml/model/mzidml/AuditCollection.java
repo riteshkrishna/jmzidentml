@@ -65,7 +65,7 @@ public class AuditCollection
      * Objects of the following type(s) are allowed in the list
      * {@link Person }
      * {@link Organization }
-     *
+     * 
      * 
      */
     public List<Contact> getContactGroup() {

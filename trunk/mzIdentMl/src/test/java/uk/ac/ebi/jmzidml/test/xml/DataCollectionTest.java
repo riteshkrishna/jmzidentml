@@ -2,7 +2,9 @@ package uk.ac.ebi.jmzidml.test.xml;
 
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
+import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.*;
+import uk.ac.ebi.jmzidml.model.mzidml.params.FileFormatCvParam;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
 import java.net.URL;
@@ -23,17 +25,14 @@ public class DataCollectionTest extends TestCase {
         URL xmlFileURL = DataCollectionTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
 
-        boolean aUseSpectrumCache = true;
-
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, aUseSpectrumCache);
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         assertNotNull(unmarshaller);
 
-        DataCollection dc =  unmarshaller.unmarshalFromXpath("/mzIdentML/DataCollection", DataCollection.class);
+        DataCollection dc =  unmarshaller.unmarshal(DataCollection.class);
         assertNotNull(dc);
 
         Inputs dcInputs = dc.getInputs();
         assertNotNull(dcInputs);
-
 
         assertEquals(1, dcInputs.getSearchDatabase().size());
         AnalysisSearchDatabase asd = dcInputs.getSearchDatabase().get(0);
@@ -45,10 +44,14 @@ public class DataCollectionTest extends TestCase {
         assertEquals("SwissProt_51.6.fasta", asd.getVersion());
         log.debug("Inout -> SearchDatabase Location:" + asd.getLocation() + " Id:" + asd.getId()
                 + " Name:" + asd.getName() + " Version:" + asd.getVersion());
+
         assertNotNull(asd.getFileFormat());
         CvParam cvParam = asd.getFileFormat().getCvParam();
         assertNotNull(cvParam);
         assertEquals("MS:1001348", cvParam.getAccession());
+        // test the sub-classing of a CvParamCapable (with only one CvParam)
+        assertTrue(cvParam instanceof FileFormatCvParam);
+
 
         assertEquals(1, dcInputs.getSourceFile().size());
         SourceFile sourceFile = dcInputs.getSourceFile().get(0);
@@ -63,7 +66,6 @@ public class DataCollectionTest extends TestCase {
         assertEquals("Mascot query number", spectraData.getSpectrumIDFormat().getCvParam().getName());
 
 
-        //**********************************************************
         //**************** Analysis Data ***************************
 
         AnalysisData ad = dc.getAnalysisData();
@@ -73,6 +75,7 @@ public class DataCollectionTest extends TestCase {
         assertNotNull(pdl);
         assertEquals("PDL_1", pdl.getId());
 
+        // check ProteinAmbiguityGroup
         assertEquals(5, pdl.getProteinAmbiguityGroup().size());
         for (ProteinAmbiguityGroup proteinAmbiguityGroup : pdl.getProteinAmbiguityGroup()) {
             assertTrue(proteinAmbiguityGroup.getId().startsWith("PAG_hit_"));
@@ -80,17 +83,42 @@ public class DataCollectionTest extends TestCase {
             assertTrue(proteinAmbiguityGroup.getProteinDetectionHypothesis().size() > 0);
             for (ProteinDetectionHypothesis proteinDetectionHypothesis : proteinAmbiguityGroup.getProteinDetectionHypothesis()) {
                 assertNotNull(proteinDetectionHypothesis.getId());
-                assertNotNull(proteinDetectionHypothesis.getDBSequenceProteinDetection().getAnalysisSearchDatabase().getName());
-                assertEquals(searchDB, proteinDetectionHypothesis.getDBSequenceProteinDetection().getAnalysisSearchDatabase().getId());
-                assertEquals(searchDBName, proteinDetectionHypothesis.getDBSequenceProteinDetection().getAnalysisSearchDatabase().getName());
+                if (MzIdentMLElement.ProteinDetectionHypothesis.isAutoRefResolving() && proteinDetectionHypothesis.getDBSequenceRef() != null) {
+                    DBSequence seq = proteinDetectionHypothesis.getDBSequence();
+                    assertNotNull(seq);
+                    if (MzIdentMLElement.DBSequence.isAutoRefResolving() && seq.getSearchDatabaseRef() != null) {
+                        assertNotNull(seq.getSearchDatabase());
+                        assertNotNull(seq.getSearchDatabase().getName());
+                        assertEquals(searchDB, seq.getSearchDatabase().getId());
+                        assertEquals(searchDBName, seq.getSearchDatabase().getName());
+                    } else {
+                        System.out.println("DBSequence is not auto-resolving or does not contain a SearchDatabase reference.");
+                        assertNull(seq.getSearchDatabase());
+                    }
+                } else {
+                    System.out.println("ProteinDetectionHypothesis is not auto-resolving or does not contain a DBSequence reference.");
+                    assertNull(proteinDetectionHypothesis.getDBSequence());
+                }
 
                 for (PeptideHypothesis peptideHypothesis : proteinDetectionHypothesis.getPeptideHypothesis()) {
-                    assertNotNull(peptideHypothesis.getPeptideEvidence());
-                    assertTrue(peptideHypothesis.getPeptideEvidence().getId().startsWith("PE"));
-                    assertTrue(peptideHypothesis.getPeptideEvidence().getDBSequence().getSeq().length() > 5);
-                }
-            }
-        }
+                    if (MzIdentMLElement.PeptideHypothesis.isAutoRefResolving() && peptideHypothesis.getPeptideEvidenceRef() != null) {
+                        PeptideEvidence evd = peptideHypothesis.getPeptideEvidence();
+                        assertNotNull(evd);
+                        assertTrue(evd.getId().startsWith("PE"));
+                        if (MzIdentMLElement.PeptideEvidence.isAutoRefResolving() && evd.getDBSequenceRef() != null) {
+                            assertNotNull(evd.getDBSequence());
+                            assertTrue(evd.getDBSequence().getSeq().length() > 5);
+                        } else {
+                            System.out.println("PeptideEvidence is not auto-resolving or does not contain a DBSequence reference.");
+                            assertNull(evd.getDBSequence());
+                        }
+                    } else {
+                        System.out.println("PeptideHypothesis is not auto-resolving or does not contain a PeptideEvidence reference.");
+                        assertNull(peptideHypothesis.getPeptideEvidence());
+                    }
+                } // end for-all PeptideHypothesis
+            } // end for-all ProteinDetectionHypothesis
+        } // end for-all ProteinAmbiguityGroup
 
 
         List<SpectrumIdentificationList> sil = ad.getSpectrumIdentificationList();
@@ -112,13 +140,38 @@ public class DataCollectionTest extends TestCase {
                 assertEquals(10, spectrumIdentResult.getSpectrumIdentificationItem().size());
                 for (SpectrumIdentificationItem spectrumIdentItem : spectrumIdentResult.getSpectrumIdentificationItem()) {
                     assertTrue(spectrumIdentItem.getId().startsWith("SII_"));
-                    int seqLength = spectrumIdentItem.getPeptide().getPeptideSequence().length();
-                    assertTrue(seqLength > 5 && seqLength < 20); // peptide seq length is much shorter than the peptide evidence seq length
+
+                    if (MzIdentMLElement.SpectrumIdentificationItem.isAutoRefResolving() && spectrumIdentItem.getPeptideRef() != null) {
+                        Peptide peptide = spectrumIdentItem.getPeptide();
+                        assertNotNull(peptide);
+                        int seqLength = peptide.getPeptideSequence().length();
+                        assertTrue(seqLength > 5 && seqLength < 20); // peptide seq length is much shorter than the peptide evidence seq length
+                    } else {
+                        System.out.println("SpectrumIdentificationItem is not auto-resolving or does not contain a Peptide reference.");
+                        assertNull(spectrumIdentItem.getPeptide());
+                    }
 
                     for (PeptideEvidence peptideEvidence : spectrumIdentItem.getPeptideEvidence()) {
-                        assertTrue(peptideEvidence.getDBSequence().getSeq().length() > 30);
+                        if (MzIdentMLElement.PeptideEvidence.isAutoRefResolving() && peptideEvidence.getDBSequenceRef() != null) {
+                            assertNotNull(peptideEvidence.getDBSequence());
+                            assertTrue(peptideEvidence.getDBSequence().getSeq().length() > 30);
+                        } else {
+                            System.out.println("PeptideEvidence is not auto-resolving or does not contain a DBSequence reference.");
+                            assertNull(peptideEvidence.getDBSequence());
+                        }
                     }
                 } // end spectrum identification items
+                // check SpectrumIdentificationResult.spectraData
+                if (MzIdentMLElement.SpectrumIdentificationResult.isAutoRefResolving() && spectrumIdentResult.getSpectraDataRef() != null) {
+                    SpectraData specData = spectrumIdentResult.getSpectraData();
+                    assertNotNull(specData);
+                    assertNotNull(specData.getId());
+                } else {
+                    System.out.println("SpectrumIdentificationResult is not auto-resolving or does not contain a SpectraData reference.");
+                    assertNull(spectrumIdentResult.getSpectraData());
+                }
+
+
             } // end spectrum identification results
 
         } // end spectrum identifications

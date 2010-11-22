@@ -1,12 +1,9 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.MassTableAdapter;
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.PeptideAdapter;
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.SampleAdapter;
+import uk.ac.ebi.jmzidml.model.AbstractIdentifiableParamGroup;
 
 import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +51,7 @@ import java.util.List;
     "fragmentation"
 })
 public class SpectrumIdentificationItem
-    extends Identifiable
+    extends AbstractIdentifiableParamGroup
     implements Serializable
 {
 
@@ -62,16 +59,10 @@ public class SpectrumIdentificationItem
     @XmlElement(name = "PeptideEvidence")
     protected List<PeptideEvidence> peptideEvidence;
     @XmlElements({
-        @XmlElement(name = "cvParam", type = CvParam.class),
-        @XmlElement(name = "userParam", type = UserParam.class)
+        @XmlElement(name = "userParam", type = UserParam.class),
+        @XmlElement(name = "cvParam", type = CvParam.class)
     })
     protected List<Param> paramGroup;
-
-    @XmlTransient
-    private List<CvParam> cvParams;
-    @XmlTransient
-    private List<UserParam> userParams;
-
     @XmlElement(name = "Fragmentation")
     protected Fragmentation fragmentation;
     @XmlAttribute(required = true)
@@ -83,18 +74,55 @@ public class SpectrumIdentificationItem
     @XmlAttribute
     protected Float calculatedPI;
     @XmlAttribute(name = "Peptide_ref")
-    @XmlJavaTypeAdapter(PeptideAdapter.class)
-    protected Peptide peptide;
+    protected String peptideRef;
     @XmlAttribute(required = true)
     protected int rank;
     @XmlAttribute(required = true)
     protected boolean passThreshold;
     @XmlAttribute(name = "MassTable_ref")
-    @XmlJavaTypeAdapter(MassTableAdapter.class)
-    protected MassTable massTable;
+    protected String massTableRef;
     @XmlAttribute(name = "Sample_ref")
-    @XmlJavaTypeAdapter(SampleAdapter.class)
-    protected Sample sample;
+    protected String sampleRef;
+
+    @XmlTransient
+    private Peptide peptide;
+    @XmlTransient
+    private MassTable massTable;
+    @XmlTransient
+    private Sample sample;
+
+    public Peptide getPeptide() {
+        return peptide;
+    }
+
+    public void setPeptide(Peptide peptide) {
+        this.peptide = peptide;
+        if (peptide != null) {
+            this.setPeptideRef(peptide.getId());
+        }
+    }
+
+    public MassTable getMassTable() {
+        return massTable;
+    }
+
+    public void setMassTable(MassTable massTable) {
+        this.massTable = massTable;
+        if (massTable != null) {
+            this.setMassTableRef(massTable.getId());
+        }
+    }
+
+    public Sample getSample() {
+        return sample;
+    }
+
+    public void setSample(Sample sample) {
+        this.sample = sample;
+        if (sample != null) {
+            this.setSampleRef(sample.getId());
+        }
+    }
 
     /**
      * Gets the value of the peptideEvidence property.
@@ -143,8 +171,8 @@ public class SpectrumIdentificationItem
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link CvParam }
      * {@link UserParam }
+     * {@link CvParam }
      * 
      * 
      */
@@ -153,14 +181,6 @@ public class SpectrumIdentificationItem
             paramGroup = new ArrayList<Param>();
         }
         return this.paramGroup;
-    }
-
-    public List<CvParam> getCvParam() {
-        return cvParams;
-    }
-
-    public List<UserParam> getUserParam() {
-        return userParams;
     }
 
     /**
@@ -268,27 +288,27 @@ public class SpectrumIdentificationItem
     }
 
     /**
-     * Gets the value of the peptide property.
+     * Gets the value of the peptideRef property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public Peptide getPeptide() {
-        return peptide;
+    public String getPeptideRef() {
+        return peptideRef;
     }
 
     /**
-     * Sets the value of the peptide property.
+     * Sets the value of the peptideRef property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setPeptide(Peptide value) {
-        this.peptide = value;
+    public void setPeptideRef(String value) {
+        this.peptideRef = value;
     }
 
     /**
@@ -324,82 +344,51 @@ public class SpectrumIdentificationItem
     }
 
     /**
-     * Gets the value of the massTable property.
+     * Gets the value of the massTableRef property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public MassTable getMassTable() {
-        return massTable;
+    public String getMassTableRef() {
+        return massTableRef;
     }
 
     /**
-     * Sets the value of the massTable property.
+     * Sets the value of the massTableRef property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setMassTable(MassTable value) {
-        this.massTable = value;
+    public void setMassTableRef(String value) {
+        this.massTableRef = value;
     }
 
     /**
-     * Gets the value of the sample property.
+     * Gets the value of the sampleRef property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public Sample getSample() {
-        return sample;
+    public String getSampleRef() {
+        return sampleRef;
     }
 
     /**
-     * Sets the value of the sample property.
+     * Sets the value of the sampleRef property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setSample(Sample value) {
-        this.sample = value;
-    }
-
-    /**
-     * After unmarshalling, split the List of generic Params into
-     * a List of CvParams and a List of UserParams.
-     */
-    public void afterUnmarshalOperation() {
-        cvParams = new ArrayList<CvParam>();
-        userParams = new ArrayList<UserParam>();
-        for (Param param : getParamGroup()) {
-            if (param instanceof CvParam) {
-                cvParams.add((CvParam) param);
-            }
-            if (param instanceof UserParam) {
-                userParams.add((UserParam) param);
-            }
-        }
-    }
-
-    /**
-     * Before we marshall the XML, combine the CvParams and UserParams
-     * into the generic List of Params.
-     */
-    public void beforeMarshalOperation() {
-        paramGroup = new ArrayList<Param>();
-        for (CvParam cvParam : cvParams) {
-            paramGroup.add(cvParam);
-        }
-        for (UserParam userParam : userParams) {
-            paramGroup.add(userParam);
-        }
+    public void setSampleRef(String value) {
+        this.sampleRef = value;
     }
 
 }

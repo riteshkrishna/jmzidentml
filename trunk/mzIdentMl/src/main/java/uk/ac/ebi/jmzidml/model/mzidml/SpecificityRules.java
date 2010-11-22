@@ -1,14 +1,16 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import uk.ac.ebi.jmzidml.model.CvParamListCapable;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -35,7 +37,7 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
     "cvParam"
 })
 public class SpecificityRules
-    implements Serializable, MzIdentMLObject
+    implements Serializable, MzIdentMLObject, CvParamListCapable
 {
 
     private final static long serialVersionUID = 100L;

@@ -2,10 +2,8 @@
 package uk.ac.ebi.jmzidml.model.mzidml;
 
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.ContactAdapter;
 
 import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 
 
@@ -24,17 +22,7 @@ import java.io.Serializable;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="role">
- *           &lt;complexType>
- *             &lt;complexContent>
- *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                 &lt;sequence>
- *                   &lt;element ref="{http://psidev.info/psi/pi/mzIdentML/1.0}cvParam"/>
- *                 &lt;/sequence>
- *               &lt;/restriction>
- *             &lt;/complexContent>
- *           &lt;/complexType>
- *         &lt;/element>
+ *         &lt;element name="role" type="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Common.Audit.RoleType"/>
  *       &lt;/sequence>
  *       &lt;attribute name="Contact_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
@@ -56,8 +44,28 @@ public class ContactRole
     @XmlElement(required = true)
     protected Role role;
     @XmlAttribute(name = "Contact_ref", required = true)
-    @XmlJavaTypeAdapter(ContactAdapter.class)
-    protected Contact contact;
+    protected String contactRef;
+
+    @XmlTransient
+    private Contact contact;
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    /**
+     * Note: setting a Contact object will update the contactRef element with
+     * the id from the new Contact object.
+     *
+     * @see #contactRef
+     * @param contact the Contact to reference from this ContactRole.
+     */
+    public void setContact(Contact contact) {
+        this.contact = contact;
+        if (contact != null) {
+            this.setContactRef( contact.getId() );
+        }
+    }
 
     /**
      * Gets the value of the role property.
@@ -84,27 +92,27 @@ public class ContactRole
     }
 
     /**
-     * Gets the value of the contact property.
+     * Gets the value of the contactRef property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public Contact getContact() {
-        return contact;
+    public String getContactRef() {
+        return contactRef;
     }
 
     /**
-     * Sets the value of the contact property.
+     * Sets the value of the contactRef property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setContact(Contact value) {
-        this.contact = value;
+    public void setContactRef(String value) {
+        this.contactRef = value;
     }
 
 }

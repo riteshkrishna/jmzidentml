@@ -1,16 +1,10 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.AnalysisSoftwareAdapter;
 
 
 /**
@@ -84,8 +78,21 @@ public class SpectrumIdentificationProtocol
     @XmlElement(name = "DatabaseTranslation")
     protected DatabaseTranslation databaseTranslation;
     @XmlAttribute(name = "AnalysisSoftware_ref", required = true)
-    @XmlJavaTypeAdapter(AnalysisSoftwareAdapter.class)
-    protected AnalysisSoftware analysisSoftware;
+    protected String analysisSoftwareRef;
+
+    @XmlTransient
+    private AnalysisSoftware analysisSoftware;
+
+    public AnalysisSoftware getAnalysisSoftware() {
+        return analysisSoftware;
+    }
+
+    public void setAnalysisSoftware(AnalysisSoftware analysisSoftware) {
+        this.analysisSoftware = analysisSoftware;
+        if (analysisSoftware != null) {
+            this.setAnalysisSoftwareRef(analysisSoftware.getId());
+        }
+    }
 
     /**
      * Gets the value of the searchType property.
@@ -333,27 +340,27 @@ public class SpectrumIdentificationProtocol
     }
 
     /**
-     * Gets the value of the analysisSoftware property.
+     * Gets the value of the analysisSoftwareRef property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public AnalysisSoftware getAnalysisSoftware() {
-        return analysisSoftware;
+    public String getAnalysisSoftwareRef() {
+        return analysisSoftwareRef;
     }
 
     /**
-     * Sets the value of the analysisSoftware property.
+     * Sets the value of the analysisSoftwareRef property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setAnalysisSoftware(AnalysisSoftware value) {
-        this.analysisSoftware = value;
+    public void setAnalysisSoftwareRef(String value) {
+        this.analysisSoftwareRef = value;
     }
 
 }

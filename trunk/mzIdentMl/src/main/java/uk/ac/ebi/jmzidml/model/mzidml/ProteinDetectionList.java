@@ -41,17 +41,10 @@ public class ProteinDetectionList
 
     private final static long serialVersionUID = 100L;
     @XmlElements({
-        @XmlElement(name = "cvParam", type = CvParam.class),
-        @XmlElement(name = "userParam", type = UserParam.class)
+        @XmlElement(name = "userParam", type = UserParam.class),
+        @XmlElement(name = "cvParam", type = CvParam.class)
     })
     protected List<Param> paramGroup;
-
-    @XmlTransient
-    private List<CvParam> cvParams;
-    @XmlTransient
-    private List<UserParam> userParams;
-
-    // ToDo: the List of ProteinAmbiguityGroups may be too big to fit into memory! We may not want to load the full data automatically 
     @XmlElement(name = "ProteinAmbiguityGroup")
     protected List<ProteinAmbiguityGroup> proteinAmbiguityGroup;
 
@@ -74,9 +67,9 @@ public class ProteinDetectionList
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link CvParam }
      * {@link UserParam }
-     *
+     * {@link CvParam }
+     * 
      * 
      */
     public List<Param> getParamGroup() {
@@ -84,14 +77,6 @@ public class ProteinDetectionList
             paramGroup = new ArrayList<Param>();
         }
         return this.paramGroup;
-    }
-
-    public List<CvParam> getCvParam() {
-        return cvParams;
-    }
-
-    public List<UserParam> getUserParam() {
-        return userParams;
     }
 
     /**
@@ -122,37 +107,5 @@ public class ProteinDetectionList
         }
         return this.proteinAmbiguityGroup;
     }
-
-    /**
-     * After unmarshalling, split the List of generic Params into
-     * a List of CvParams and a List of UserParams.
-     */
-    public void afterUnmarshalOperation() {
-        cvParams = new ArrayList<CvParam>();
-        userParams = new ArrayList<UserParam>();
-        for (Param param : getParamGroup()) {
-            if (param instanceof CvParam) {
-                cvParams.add((CvParam) param);
-            }
-            if (param instanceof UserParam) {
-                userParams.add((UserParam) param);
-            }
-        }
-    }
-
-    /**
-     * Before we marshall the XML, combine the CvParams and UserParams
-     * into the generic List of Params.
-     */
-    public void beforeMarshalOperation() {
-        paramGroup = new ArrayList<Param>();
-        for (CvParam cvParam : cvParams) {
-            paramGroup.add(cvParam);
-        }
-        for (UserParam userParam : userParams) {
-            paramGroup.add(userParam);
-        }
-    }
-
 
 }

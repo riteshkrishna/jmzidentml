@@ -1,13 +1,11 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import uk.ac.ebi.jmzidml.model.IdentifiableMzIdentMLObject;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+
+import javax.xml.bind.annotation.*;
+import java.io.Serializable;
 
 
 /**
@@ -35,7 +33,7 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Common.Ontology.cvType")
 public class Cv
-    implements Serializable, MzIdentMLObject
+    implements Serializable, MzIdentMLObject, IdentifiableMzIdentMLObject
 {
 
     private final static long serialVersionUID = 100L;

@@ -52,17 +52,6 @@ public abstract class Param implements Serializable, MzIdentMLObject
     @XmlAttribute
     protected String unitCvRef;
 
-    @Override
-    public String toString() {
-        return "Param{" +
-                "name='" + name + '\'' +
-                ", value='" + value + '\'' +
-                ", unitAccession='" + unitAccession + '\'' +
-                ", unitName='" + unitName + '\'' +
-                ", unitCvRef='" + unitCvRef + '\'' +
-                '}';
-    }
-
     /**
      * Gets the value of the name property.
      * 

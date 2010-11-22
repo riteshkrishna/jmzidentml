@@ -9,8 +9,8 @@ package uk.ac.ebi.jmzidml.test.xml;
 
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
-import uk.ac.ebi.jmzidml.model.mzidml.ContactRole;
-import uk.ac.ebi.jmzidml.model.mzidml.Provider;
+import uk.ac.ebi.jmzidml.MzIdentMLElement;
+import uk.ac.ebi.jmzidml.model.mzidml.*;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
 import java.net.URL;
@@ -25,29 +25,53 @@ public class ProviderTest extends TestCase{
         URL xmlFileURL = ProviderTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
 
-        boolean aUseSpectrumCache = true;
-
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, aUseSpectrumCache);
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         assertNotNull(unmarshaller);
 
         // Number of providers
-        int totalProvider = unmarshaller.getObjectCountForXpath("/mzIdentML/Provider");
+        int totalProvider = unmarshaller.getObjectCountForXpath(MzIdentMLElement.Provider.getXpath());
         assertEquals(1, totalProvider);
 
-        Provider provider = unmarshaller.unmarshalFromXpath("/mzIdentML/Provider", Provider.class);
+        Provider provider = unmarshaller.unmarshal(MzIdentMLElement.Provider);
         assertNotNull(provider);
 
         assertEquals("PROVIDER", provider.getId());
+        if (MzIdentMLElement.Provider.isAutoRefResolving() && provider.getSoftwareRef() != null) {
+            AnalysisSoftware software = provider.getSoftware();
+            assertNotNull(software);
+            assertNotNull(software.getId());
+        } else {
+            System.out.println("Provider is not auto-resolving or does not contain a Software reference.");
+            assertNull(provider.getSoftware());
+        }
 
         ContactRole cr = provider.getContactRole();
         assertNotNull(cr);
-        assertEquals("researcher", cr.getRole().getCvParam().getName());
-        assertTrue(cr.getContact().getEmail().contains("@"));
+        if (MzIdentMLElement.ContactRole.isAutoRefResolving() && cr.getContactRef() != null) {
+            Contact contact = cr.getContact();
+            assertNotNull("There should be a contact!", contact);
+            assertEquals(cr.getContactRef(), contact.getId());
+            assertTrue(cr.getContact().getEmail().contains("@"));
+            assertTrue("The contact should be a Person!", contact instanceof Person);
+            Person p = (Person) contact;
+            assertNotNull(p);
+            assertEquals("The person should have one affiliation!", 1, p.getAffiliations().size());
+            Affiliations aff = p.getAffiliations().get(0);
+            assertNotNull(aff);
+            if (MzIdentMLElement.Affiliations.isAutoRefResolving() && aff.getOrganizationRef() != null) {
+                assertNotNull(aff.getOrganization());
+                assertEquals(aff.getOrganizationRef(), aff.getOrganization().getId());
+            } else {
+                System.out.println("Affiliations is not auto-resolving or does not contain a Organization reference.");
+                assertNull(aff.getOrganization());
+            }
+        } else {
+            System.out.println("ContactRole is not auto-resolving or does not contain a Contact reference.");
+            assertNull(cr.getContact());
+        }
 
-        // ToDo: maybe with other (more extensive) test file
-//        if (provider.getAnalysisSoftware() != null){
-//            System.out.println("\n Provider -> Analysis Software :" + provider.getAnalysisSoftware().getName());
-//        }
+        
+        assertEquals("researcher", cr.getRole().getCvParam().getName());
 
     }
     

@@ -22,13 +22,11 @@ public class BibliographicTest extends TestCase {
         URL xmlFileURL = BibliographicTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
 
-        boolean aUseSpectrumCache = true;
-
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, aUseSpectrumCache);
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         assertNotNull(unmarshaller);
 
         log.debug("unmarshalling BibliographicReference and checking content.");
-        BibliographicReference bib =  unmarshaller.unmarshalFromXpath("/mzIdentML/BibliographicReference", BibliographicReference.class);
+        BibliographicReference bib =  unmarshaller.unmarshal(BibliographicReference.class);
         assertNotNull(bib);
 
         assertEquals("Wiley VCH", bib.getPublisher());

@@ -3,7 +3,6 @@ package uk.ac.ebi.jmzidml.xml.jaxb.marshaller;
 import org.apache.log4j.Logger;
 import uk.ac.ebi.jmzidml.model.utils.ModelConstants;
 import uk.ac.ebi.jmzidml.xml.Constants;
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.*;
 import uk.ac.ebi.jmzidml.xml.jaxb.marshaller.listeners.ObjectClassListener;
 
 import javax.xml.bind.JAXBContext;
@@ -39,31 +38,6 @@ public class MarshallerFactory {
             Marshaller marshaller = jc.createMarshaller();
             marshaller.setProperty(Constants.JAXB_ENCODING_PROPERTY, "UTF-8");
             marshaller.setProperty(Constants.JAXB_FORMATTING_PROPERTY, true);
-
-            // set adapters so that jaxb can write the proper IDREF tags in the XML
-            // note that for marshalling the Adapters don't need the index or cache!
-            marshaller.setAdapter(new CvAdapter(null, null));
-            marshaller.setAdapter(new PeptideAdapter(null, null));
-
-            marshaller.setAdapter(new DBSequenceAdapter(null, null));
-            marshaller.setAdapter(new PeptideEvidenceAdapter(null, null));
-            marshaller.setAdapter(new ContactAdapter(null, null));
-            marshaller.setAdapter(new OrganizationAdapter(null, null));
-            marshaller.setAdapter(new AnalysisSearchDatabaseAdapter(null, null));
-            marshaller.setAdapter(new SpectraDataAdapter(null, null));
-            marshaller.setAdapter(new SpectrumIdentificationListAdapter(null, null));
-            marshaller.setAdapter(new SpectrumIdentificationProtocolAdapter(null, null));
-            marshaller.setAdapter(new AnalysisSoftwareAdapter(null, null));
-            marshaller.setAdapter(new ProteinDetectionListAdapter(null, null));
-            marshaller.setAdapter(new ProteinDetectionProtocolAdapter(null, null));
-            marshaller.setAdapter(new TranslationTableAdapter(null, null));
-            marshaller.setAdapter(new MassTableAdapter(null, null));
-            marshaller.setAdapter(new SampleAdapter(null, null));
-            marshaller.setAdapter(new MeasureAdapter(null, null));
-
-
-            // ToDo: why this?
-//            marshaller.setEventHandler(new DefaultValidationEventHandler());
 
             // Register a listener that calls before/afterMarshalOperation on ParamAlternative/-List objects.
             // See: ParamAlternative.beforeMarshalOperation and ParamAlternativeList.beforeMarshalOperation

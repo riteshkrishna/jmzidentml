@@ -1,6 +1,8 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
+
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,13 +36,13 @@ import java.util.List;
 })
 public class SourceFile
     extends ExternalData
-    implements Serializable
+    implements Serializable, ParamGroupCapable
 {
 
     private final static long serialVersionUID = 100L;
     @XmlElements({
-        @XmlElement(name = "userParam", type = UserParam.class),
-        @XmlElement(name = "cvParam", type = CvParam.class)
+        @XmlElement(name = "cvParam", type = CvParam.class),
+        @XmlElement(name = "userParam", type = UserParam.class)
     })
     protected List<Param> paramGroup;
 
@@ -48,6 +50,52 @@ public class SourceFile
     private List<CvParam> cvParams;
     @XmlTransient
     private List<UserParam> userParams;
+
+
+
+    public List<CvParam> getCvParam() {
+        if (cvParams == null) {
+            cvParams = new ArrayList<CvParam>();
+        }
+        return cvParams;
+    }
+
+    public List<UserParam> getUserParam() {
+        if (userParams == null) {
+            userParams = new ArrayList<UserParam>();
+        }
+        return userParams;
+    }
+
+    public void splitParamList() {
+        if (getCvParam() == null || getCvParam().size() != 0) {
+            throw new IllegalStateException("Error in initialisation. List of CvParam objects should be not null and empty in afterUnmarshal operation!");
+        }
+        if (getUserParam() == null || getUserParam().size() != 0) {
+            throw new IllegalStateException("Error in initialisation. List of UserParam objects should be not null and empty in afterUnmarshal operation!");
+        }
+        for (Param param : getParamGroup()) {
+            if (param instanceof CvParam) {
+                getCvParam().add((CvParam) param);
+            }
+            if (param instanceof UserParam) {
+                getUserParam().add((UserParam) param);
+            }
+        }
+    }
+
+    public void updateParamList() {
+        // whatever we had in the List of Params, we only
+        // consider what is in the CvParam/UserParam lists now.
+        getParamGroup().clear();
+        // combine the List<CvParam> and List<UserParam> in the one List<Param> that will be marshalled.
+        for (CvParam cvParam : getCvParam()) {
+            getParamGroup().add(cvParam);
+        }
+        for (UserParam userParam : getUserParam()) {
+            getParamGroup().add(userParam);
+        }
+    }
 
 
     /**
@@ -68,9 +116,9 @@ public class SourceFile
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link UserParam }
      * {@link CvParam }
-     *
+     * {@link UserParam }
+     * 
      * 
      */
     public List<Param> getParamGroup() {
@@ -78,45 +126,6 @@ public class SourceFile
             paramGroup = new ArrayList<Param>();
         }
         return this.paramGroup;
-    }
-
-    public List<CvParam> getCvParam() {
-        return cvParams;
-    }
-
-    public List<UserParam> getUserParam() {
-        return userParams;
-    }
-
-    /**
-     * After unmarshalling, split the List of generic Params into
-     * a List of CvParams and a List of UserParams.
-     */
-    public void afterUnmarshalOperation() {
-        cvParams = new ArrayList<CvParam>();
-        userParams = new ArrayList<UserParam>();
-        for (Param param : getParamGroup()) {
-            if (param instanceof CvParam) {
-                cvParams.add((CvParam) param);
-            }
-            if (param instanceof UserParam) {
-                userParams.add((UserParam) param);
-            }
-        }
-    }
-
-    /**
-     * Before we marshall the XML, combine the CvParams and UserParams
-     * into the generic List of Params.
-     */
-    public void beforeMarshalOperation() {
-        paramGroup = new ArrayList<Param>();
-        for (CvParam cvParam : cvParams) {
-            paramGroup.add(cvParam);
-        }
-        for (UserParam userParam : userParams) {
-            paramGroup.add(userParam);
-        }
     }
 
 }

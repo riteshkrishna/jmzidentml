@@ -21,6 +21,7 @@ public class ParamUpdater {
             // copy fields
             newParam.setAccession( input.getAccession() );
             newParam.setCv( input.getCv() );
+            newParam.setCvRef( input.getCvRef() );
             newParam.setName( input.getName() );
             newParam.setValue( input.getValue() );
             newParam.setUnitAccession( input.getUnitAccession() );

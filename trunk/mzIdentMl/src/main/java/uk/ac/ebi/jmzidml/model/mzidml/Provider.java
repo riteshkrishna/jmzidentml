@@ -1,10 +1,7 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.AnalysisSoftwareAdapter;
-
 import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 
 
@@ -45,8 +42,29 @@ public class Provider
     @XmlElement(name = "ContactRole")
     protected ContactRole contactRole;
     @XmlAttribute(name = "Software_ref")
-    @XmlJavaTypeAdapter(AnalysisSoftwareAdapter.class)
-    protected AnalysisSoftware analysisSoftware;
+    protected String softwareRef;
+
+    @XmlTransient
+    private AnalysisSoftware software;
+
+    public AnalysisSoftware getSoftware() {
+        return software;
+    }
+
+    /**
+     * Note: setting a Software object will update the softwareRef element with
+     * the id from the new Software object.
+     *
+     * @see uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftware#getId()
+     * @see #softwareRef
+     * @param software the Software to reference from this Provider.
+     */
+    public void setSoftware(AnalysisSoftware software) {
+        this.software = software;
+        if (software != null) {
+            this.setSoftwareRef(software.getId());
+        }
+    }
 
     /**
      * The Contact that provided the document instance.
@@ -73,27 +91,27 @@ public class Provider
     }
 
     /**
-     * Gets the value of the analysisSoftware property.
+     * Gets the value of the softwareRef property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public AnalysisSoftware getAnalysisSoftware() {
-        return analysisSoftware;
+    public String getSoftwareRef() {
+        return softwareRef;
     }
 
     /**
-     * Sets the value of the analysisSoftware property.
+     * Sets the value of the softwareRef property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setAnalysisSoftware(AnalysisSoftware value) {
-        this.analysisSoftware = value;
+    public void setSoftwareRef(String value) {
+        this.softwareRef = value;
     }
 
 }

@@ -32,8 +32,7 @@ import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import uk.ac.ebi.jmzidml.model.utils.ModelConstants;
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.*;
-import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.cache.AdapterObjectCache;
+import uk.ac.ebi.jmzidml.xml.io.MzIdentMLObjectCache;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.filters.MzIdentMLNamespaceFilter;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.listeners.RawXMLListener;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
@@ -60,11 +59,7 @@ public class UnmarshallerFactory {
     private UnmarshallerFactory() {
     }
 
-    public Unmarshaller initializeUnmarshaller(MzIdentMLIndexer index, MzIdentMLNamespaceFilter xmlFilter, AdapterObjectCache cache) {
-        return initializeUnmarshaller(index, xmlFilter, cache, true);
-    }
-
-    public Unmarshaller initializeUnmarshaller(MzIdentMLIndexer index, MzIdentMLNamespaceFilter xmlFilter, AdapterObjectCache cache, boolean useCacheForSpectra) {
+    public Unmarshaller initializeUnmarshaller(MzIdentMLIndexer index, MzIdentMLObjectCache cache, MzIdentMLNamespaceFilter xmlFilter) {
 
         try {
             // Lazy caching of the JAXB Context.
@@ -93,32 +88,12 @@ public class UnmarshallerFactory {
             //when trying to unmarshall a referenced object from within a
             //parent object.
 
-            //create a cache object that will be common to all adapters in this unmarshaller
-            unmarshaller.setAdapter(new CvAdapter(index, cache));
-            unmarshaller.setAdapter(new PeptideAdapter(index, cache));
-            
-            unmarshaller.setAdapter(new DBSequenceAdapter(index, cache));
-            unmarshaller.setAdapter(new PeptideEvidenceAdapter(index, cache));
-            unmarshaller.setAdapter(new ContactAdapter(index, cache));
-            unmarshaller.setAdapter(new OrganizationAdapter(index, cache));
-            unmarshaller.setAdapter(new AnalysisSearchDatabaseAdapter(index, cache));
-            unmarshaller.setAdapter(new SpectraDataAdapter(index, cache));
-            unmarshaller.setAdapter(new SpectrumIdentificationListAdapter(index, cache));
-            unmarshaller.setAdapter(new SpectrumIdentificationProtocolAdapter(index, cache));
-            unmarshaller.setAdapter(new AnalysisSoftwareAdapter(index, cache));
-            unmarshaller.setAdapter(new ProteinDetectionListAdapter(index, cache));
-            unmarshaller.setAdapter(new ProteinDetectionProtocolAdapter(index, cache));
-            unmarshaller.setAdapter(new TranslationTableAdapter(index, cache));
-            unmarshaller.setAdapter(new MassTableAdapter(index, cache));
-            unmarshaller.setAdapter(new SampleAdapter(index, cache));
-            unmarshaller.setAdapter(new MeasureAdapter(index, cache));
-
             //we don't have a validation handler yet
 //            unmarshaller.setEventHandler(new DefaultValidationEventHandler());
 
             // This is used to post-process unmarshalled Java objects and convert
             // ParamAlternative classes to appropriate sub-classes (CvParam or UserParam).
-            unmarshaller.setListener(new RawXMLListener(cache));
+            unmarshaller.setListener(new RawXMLListener(index, cache));
 
             UnmarshallerHandler uh = unmarshaller.getUnmarshallerHandler();
 

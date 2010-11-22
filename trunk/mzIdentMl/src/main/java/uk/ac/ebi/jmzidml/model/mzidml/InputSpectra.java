@@ -1,14 +1,10 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.SpectraDataAdapter;
+
+import javax.xml.bind.annotation.*;
+import java.io.Serializable;
 
 
 /**
@@ -39,31 +35,44 @@ public class InputSpectra
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(name = "SpectraData_ref")
-    @XmlJavaTypeAdapter(SpectraDataAdapter.class)
-    protected SpectraData spectraData;
+    protected String spectraDataRef;
+
+    @XmlTransient
+    private SpectraData spectraData;
+
+    public SpectraData getSpectraData() {
+        return spectraData;
+    }
+
+    public void setSpectraData(SpectraData spectraData) {
+        this.spectraData = spectraData;
+        if (spectraData != null) {
+            this.setSpectraDataRef(spectraData.getId());
+        }
+    }
 
     /**
-     * Gets the value of the spectraData property.
+     * Gets the value of the spectraDataRef property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public SpectraData getSpectraData() {
-        return spectraData;
+    public String getSpectraDataRef() {
+        return spectraDataRef;
     }
 
     /**
-     * Sets the value of the spectraData property.
+     * Sets the value of the spectraDataRef property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setSpectraData(SpectraData value) {
-        this.spectraData = value;
+    public void setSpectraDataRef(String value) {
+        this.spectraDataRef = value;
     }
 
 }

@@ -1,13 +1,15 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import uk.ac.ebi.jmzidml.model.CvParamListCapable;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -35,7 +37,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class Measure
     extends Identifiable
-    implements Serializable
+    implements Serializable, CvParamListCapable
 {
 
     private final static long serialVersionUID = 100L;

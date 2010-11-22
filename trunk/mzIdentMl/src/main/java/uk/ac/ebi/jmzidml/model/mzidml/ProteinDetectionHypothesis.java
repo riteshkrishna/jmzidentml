@@ -1,10 +1,9 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.DBSequenceAdapter;
+import uk.ac.ebi.jmzidml.model.AbstractIdentifiableParamGroup;
 
 import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +39,7 @@ import java.util.List;
     "paramGroup"
 })
 public class ProteinDetectionHypothesis
-    extends Identifiable
+    extends AbstractIdentifiableParamGroup
     implements Serializable
 {
 
@@ -52,17 +51,24 @@ public class ProteinDetectionHypothesis
         @XmlElement(name = "cvParam", type = CvParam.class)
     })
     protected List<Param> paramGroup;
-
-    @XmlTransient
-    private List<CvParam> cvParams;
-    @XmlTransient
-    private List<UserParam> userParams;
-
     @XmlAttribute(name = "DBSequence_ref")
-    @XmlJavaTypeAdapter(DBSequenceAdapter.class)
-    protected DBSequence dbSequenceProteinDetection;
+    protected String dbSequenceRef;
     @XmlAttribute(required = true)
     protected boolean passThreshold;
+
+    @XmlTransient
+    private DBSequence dbSequence;
+
+    public DBSequence getDBSequence() {
+        return dbSequence;
+    }
+
+    public void setDBSequence(DBSequence dbSequence) {
+        this.dbSequence = dbSequence;
+        if (dbSequence != null) {
+            this.setDBSequenceRef(dbSequence.getId());
+        }
+    }
 
     /**
      * Gets the value of the peptideHypothesis property.
@@ -123,36 +129,28 @@ public class ProteinDetectionHypothesis
         return this.paramGroup;
     }
 
-    public List<CvParam> getCvParam() {
-        return cvParams;
-    }
-
-    public List<UserParam> getUserParam() {
-        return userParams;
-    }
-
     /**
-     * Gets the value of the dbSequenceProteinDetection property.
+     * Gets the value of the dbSequenceRef property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public DBSequence getDBSequenceProteinDetection() {
-        return dbSequenceProteinDetection;
+    public String getDBSequenceRef() {
+        return dbSequenceRef;
     }
 
     /**
-     * Sets the value of the dbSequenceProteinDetection property.
+     * Sets the value of the dbSequenceRef property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setDBSequenceProteinDetection(DBSequence value) {
-        this.dbSequenceProteinDetection = value;
+    public void setDBSequenceRef(String value) {
+        this.dbSequenceRef = value;
     }
 
     /**
@@ -169,37 +167,6 @@ public class ProteinDetectionHypothesis
      */
     public void setPassThreshold(boolean value) {
         this.passThreshold = value;
-    }
-
-    /**
-     * After unmarshalling, split the List of generic Params into
-     * a List of CvParams and a List of UserParams.
-     */
-    public void afterUnmarshalOperation() {
-        cvParams = new ArrayList<CvParam>();
-        userParams = new ArrayList<UserParam>();
-        for (Param param : getParamGroup()) {
-            if (param instanceof CvParam) {
-                cvParams.add((CvParam) param);
-            }
-            if (param instanceof UserParam) {
-                userParams.add((UserParam) param);
-            }
-        }
-    }
-
-    /**
-     * Before we write the XML, combine the CvParams and UserParams
-     * into the generic List of Params.
-     */
-    public void beforeMarshalOperation() {
-        paramGroup = new ArrayList<Param>();
-        for (CvParam cvParam : cvParams) {
-            paramGroup.add(cvParam);
-        }
-        for (UserParam userParam : userParams) {
-            paramGroup.add(userParam);
-        }
     }
 
 }

@@ -25,9 +25,9 @@ public class JmzIdentMLParser {
 
                 boolean aUseSpectrumCache = true;
 
-                MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, aUseSpectrumCache);
+                MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
 
-                MzIdentML mzIdentML_whole = unmarshaller.unmarshalFromXpath("/mzIdentML", MzIdentML.class);
+                MzIdentML mzIdentML_whole = (MzIdentML)unmarshaller.unmarshal(MzIdentML.class);
                 System.out.println("mzIdentML id: " + mzIdentML_whole.getId());
                 System.out.println("mzIdentML creation time: " + mzIdentML_whole.getCreationDate().getTime().toString());
                 System.out.println("mzIdentML provider role: " + mzIdentML_whole.getProvider().getContactRole().getRole().getCvParam().getName());
