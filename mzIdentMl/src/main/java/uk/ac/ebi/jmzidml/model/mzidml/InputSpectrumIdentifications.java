@@ -2,13 +2,8 @@
 package uk.ac.ebi.jmzidml.model.mzidml;
 
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.SpectrumIdentificationListAdapter;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 
 
@@ -37,31 +32,44 @@ public class InputSpectrumIdentifications
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(name = "SpectrumIdentificationList_ref", required = true)
-    @XmlJavaTypeAdapter(SpectrumIdentificationListAdapter.class)
-    protected SpectrumIdentificationList spectrumIdentificationList;
+    protected String spectrumIdentificationListRef;
+
+    @XmlTransient
+    private SpectrumIdentificationList spectrumIdentificationList;
+
+    public SpectrumIdentificationList getSpectrumIdentificationList() {
+        return spectrumIdentificationList;
+    }
+
+    public void setSpectrumIdentificationList(SpectrumIdentificationList spectrumIdentificationList) {
+        this.spectrumIdentificationList = spectrumIdentificationList;
+        if (spectrumIdentificationList != null) {
+            this.setSpectrumIdentificationListRef(spectrumIdentificationList.getId());
+        }
+    }
 
     /**
-     * Gets the value of the spectrumIdentificationList property.
+     * Gets the value of the spectrumIdentificationListRef property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public SpectrumIdentificationList getSpectrumIdentificationList() {
-        return spectrumIdentificationList;
+    public String getSpectrumIdentificationListRef() {
+        return spectrumIdentificationListRef;
     }
 
     /**
-     * Sets the value of the spectrumIdentificationList property.
+     * Sets the value of the spectrumIdentificationListRef property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setSpectrumIdentificationList(SpectrumIdentificationList value) {
-        this.spectrumIdentificationList = value;
+    public void setSpectrumIdentificationListRef(String value) {
+        this.spectrumIdentificationListRef = value;
     }
 
 }

@@ -1,11 +1,7 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.ProteinDetectionListAdapter;
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.ProteinDetectionProtocolAdapter;
-
 import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,11 +45,36 @@ public class ProteinDetection
     @XmlElement(name = "InputSpectrumIdentifications", required = true)
     protected List<InputSpectrumIdentifications> inputSpectrumIdentifications;
     @XmlAttribute(name = "ProteinDetectionList_ref", required = true)
-    @XmlJavaTypeAdapter(ProteinDetectionListAdapter.class)
-    protected ProteinDetectionList proteinDetectionList;
+    protected String proteinDetectionListRef;
     @XmlAttribute(name = "ProteinDetectionProtocol_ref", required = true)
-    @XmlJavaTypeAdapter(ProteinDetectionProtocolAdapter.class)
-    protected ProteinDetectionProtocol proteinDetectionProtocol;
+    protected String proteinDetectionProtocolRef;
+
+    @XmlTransient
+    private ProteinDetectionList proteinDetectionList;
+    @XmlTransient
+    private ProteinDetectionProtocol proteinDetectionProtocol;
+
+    public ProteinDetectionList getProteinDetectionList() {
+        return proteinDetectionList;
+    }
+
+    public void setProteinDetectionList(ProteinDetectionList proteinDetectionList) {
+        this.proteinDetectionList = proteinDetectionList;
+        if (proteinDetectionList != null) {
+            this.setProteinDetectionListRef(proteinDetectionList.getId());
+        }
+    }
+
+    public ProteinDetectionProtocol getProteinDetectionProtocol() {
+        return proteinDetectionProtocol;
+    }
+
+    public void setProteinDetectionProtocol(ProteinDetectionProtocol proteinDetectionProtocol) {
+        this.proteinDetectionProtocol = proteinDetectionProtocol;
+        if (proteinDetectionProtocol != null) {
+            this.setProteinDetectionProtocolRef(proteinDetectionProtocol.getId());
+        }
+    }
 
     /**
      * Gets the value of the inputSpectrumIdentifications property.
@@ -85,51 +106,51 @@ public class ProteinDetection
     }
 
     /**
-     * Gets the value of the proteinDetectionList property.
+     * Gets the value of the proteinDetectionListRef property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public ProteinDetectionList getProteinDetectionList() {
-        return proteinDetectionList;
+    public String getProteinDetectionListRef() {
+        return proteinDetectionListRef;
     }
 
     /**
-     * Sets the value of the proteinDetectionList property.
+     * Sets the value of the proteinDetectionListRef property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setProteinDetectionList(ProteinDetectionList value) {
-        this.proteinDetectionList = value;
+    public void setProteinDetectionListRef(String value) {
+        this.proteinDetectionListRef = value;
     }
 
     /**
-     * Gets the value of the proteinDetectionProtocol property.
+     * Gets the value of the proteinDetectionProtocolRef property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public ProteinDetectionProtocol getProteinDetectionProtocol() {
-        return proteinDetectionProtocol;
+    public String getProteinDetectionProtocolRef() {
+        return proteinDetectionProtocolRef;
     }
 
     /**
-     * Sets the value of the proteinDetectionProtocol property.
+     * Sets the value of the proteinDetectionProtocolRef property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setProteinDetectionProtocol(ProteinDetectionProtocol value) {
-        this.proteinDetectionProtocol = value;
+    public void setProteinDetectionProtocolRef(String value) {
+        this.proteinDetectionProtocolRef = value;
     }
 
 }

@@ -2,6 +2,7 @@ package uk.ac.ebi.jmzidml.test.xml;
 
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
+import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.*;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
@@ -23,15 +24,14 @@ public class SequenceCollectionTest extends TestCase {
         URL xmlFileURL = SequenceCollectionTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
 
-        boolean aUseSpectrumCache = true;
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, aUseSpectrumCache);
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         assertNotNull(unmarshaller);
 
         // Number of Sequence collection
-        int totalSequenceCollection = unmarshaller.getObjectCountForXpath("/mzIdentML/SequenceCollection");
+        int totalSequenceCollection = unmarshaller.getObjectCountForXpath(MzIdentMLElement.SequenceCollection.getXpath());
         assertEquals(1, totalSequenceCollection);
 
-        SequenceCollection sc = unmarshaller.unmarshalFromXpath("/mzIdentML/SequenceCollection", SequenceCollection.class);
+        SequenceCollection sc = unmarshaller.unmarshal(SequenceCollection.class);
         assertNotNull(sc);
 
 
@@ -41,12 +41,19 @@ public class SequenceCollectionTest extends TestCase {
         // check one DBSequence
         DBSequence dbseq = dbsequence.get(0);
         assertNotNull(dbseq.getAccession());
-        assertEquals("SwissProt", dbseq.getAnalysisSearchDatabase().getName());
-        log.debug("DBSequence Acc:" + dbseq.getAccession()
-                + "Id:" + dbseq.getId()
-                + "Name:" + dbseq.getName()
-                + "Database name:" + dbseq.getAnalysisSearchDatabase().getName()
-                + "length:" + dbseq.getLength());
+        if (MzIdentMLElement.DBSequence.isAutoRefResolving() && dbseq.getSearchDatabaseRef() != null) {
+            assertNotNull(dbseq.getSearchDatabase());
+            assertEquals("SwissProt", dbseq.getSearchDatabase().getName());
+            log.debug("DBSequence Acc:" + dbseq.getAccession()
+                    + "Id:" + dbseq.getId()
+                    + "Name:" + dbseq.getName()
+                    + "Database name:" + dbseq.getSearchDatabase().getName()
+                    + "length:" + dbseq.getLength());
+        } else {
+            System.out.println("DBSequence is not auto-resolving or does not contain a SearchDatabase reference");
+            assertNull(dbseq.getSearchDatabase());
+        }
+
         assertEquals(dbseq.getLength().intValue(), dbseq.getSeq().length());
 
         assertEquals(3, dbseq.getParamGroup().size());
@@ -59,7 +66,7 @@ public class SequenceCollectionTest extends TestCase {
 
 
 
-        List<Peptide> peptides       = sc.getPeptide();
+        List<Peptide> peptides = sc.getPeptide();
         assertEquals(40, peptides.size());
         for (Peptide pep : peptides) {
             assertTrue(pep.getId().startsWith("peptide_"));

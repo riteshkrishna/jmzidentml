@@ -1,13 +1,7 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.CvAdapter;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 
 
@@ -39,34 +33,47 @@ public class CvParam
 {
 
     private final static long serialVersionUID = 100L;
-    @XmlAttribute(name = "cvRef", required = true)
-    @XmlJavaTypeAdapter(CvAdapter.class)
-    protected Cv cv;
+    @XmlAttribute(required = true)
+    protected String cvRef;
     @XmlAttribute(required = true)
     protected String accession;
 
+    @XmlTransient
+    Cv cv;
+
+    public Cv getCv() {
+        return cv;
+    }
+
+    public void setCv(Cv cv) {
+        this.cv = cv;
+        if (cv != null) {
+            this.setCvRef(cv.getId());
+        }
+    }
+
     /**
-     * Gets the value of the cv property.
+     * Gets the value of the cvRef property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public Cv getCv() {
-        return cv;
+    public String getCvRef() {
+        return cvRef;
     }
 
     /**
-     * Sets the value of the cv property.
+     * Sets the value of the cvRef property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setCv(Cv value) {
-        this.cv = value;
+    public void setCvRef(String value) {
+        this.cvRef = value;
     }
 
     /**

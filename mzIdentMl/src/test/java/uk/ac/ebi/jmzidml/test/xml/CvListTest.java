@@ -2,12 +2,13 @@ package uk.ac.ebi.jmzidml.test.xml;
 
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
+import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.Cv;
 import uk.ac.ebi.jmzidml.model.mzidml.CvList;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
 import java.net.URL;
-import java.util.Iterator;
+import java.util.List;
 
 /**
  * Package  : uk.ac.ebi.jmzidml.test.xml
@@ -25,24 +26,22 @@ public class CvListTest extends TestCase {
         URL xmlFileURL = CvListTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
 
-        boolean aUseSpectrumCache = true;
-
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, aUseSpectrumCache);
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         assertNotNull(unmarshaller);
 
+        log.debug("Checking CvList element.");
         // Number of providers
-        int totalCv = unmarshaller.getObjectCountForXpath("/mzIdentML/cvList");
+        int totalCv = unmarshaller.getObjectCountForXpath(MzIdentMLElement.CvList.getXpath());
         assertEquals(1,totalCv);
 
-        CvList cvList = unmarshaller.unmarshalFromXpath("/mzIdentML/cvList", CvList.class);
+        CvList cvList = unmarshaller.unmarshal(CvList.class);
         assertNotNull(cvList);
-        Iterator <Cv> cvs = cvList.getCv().iterator();
-        assertEquals(3, cvList.getCv().size());
+        List<Cv> cvs = cvList.getCv();
+        assertNotNull(cvs);
+        assertEquals(3, cvs.size());
 
-        while(cvs.hasNext()){
-            Cv cv = cvs.next();
+        for (Cv cv : cvs) {
             assertTrue(cv.getURI().endsWith(".obo"));
-            log.debug("Cv -> Name: " + cv.getFullName() + " ID: " + cv.getId() + " URI: " + cv.getURI());
         }
 
     }

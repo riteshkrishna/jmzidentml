@@ -1,10 +1,7 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.AnalysisSearchDatabaseAdapter;
-
 import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,19 +52,26 @@ public class DBSequence
         @XmlElement(name = "userParam", type = UserParam.class)
     })
     protected List<Param> paramGroup;
-
-    @XmlTransient
-    private List<CvParam> cvParams;
-    @XmlTransient
-    private List<UserParam> userParams;
-
     @XmlAttribute
     protected Integer length;
     @XmlAttribute(name = "SearchDatabase_ref", required = true)
-    @XmlJavaTypeAdapter(AnalysisSearchDatabaseAdapter.class)
-    protected AnalysisSearchDatabase analysisSearchDatabase;
+    protected String searchDatabaseRef;
     @XmlAttribute(required = true)
     protected String accession;
+
+    @XmlTransient
+    private AnalysisSearchDatabase analysisSearchDatabase;
+
+    public AnalysisSearchDatabase getSearchDatabase() {
+        return analysisSearchDatabase;
+    }
+
+    public void setSearchDatabase(AnalysisSearchDatabase analysisSearchDatabase) {
+        this.analysisSearchDatabase = analysisSearchDatabase;
+        if (analysisSearchDatabase != null) {
+            this.setSearchDatabaseRef(analysisSearchDatabase.getId());
+        }
+    }
 
     /**
      * Gets the value of the seq property.
@@ -113,7 +117,7 @@ public class DBSequence
      * Objects of the following type(s) are allowed in the list
      * {@link CvParam }
      * {@link UserParam }
-     *
+     * 
      * 
      */
     public List<Param> getParamGroup() {
@@ -121,14 +125,6 @@ public class DBSequence
             paramGroup = new ArrayList<Param>();
         }
         return this.paramGroup;
-    }
-
-    public List<CvParam> getCvParam() {
-        return cvParams;
-    }
-
-    public List<UserParam> getUserParam() {
-        return userParams;
     }
 
     /**
@@ -156,27 +152,27 @@ public class DBSequence
     }
 
     /**
-     * Gets the value of the analysisSearchDatabase property.
+     * Gets the value of the searchDatabaseRef property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public AnalysisSearchDatabase getAnalysisSearchDatabase() {
-        return analysisSearchDatabase;
+    public String getSearchDatabaseRef() {
+        return searchDatabaseRef;
     }
 
     /**
-     * Sets the value of the analysisSearchDatabase property.
+     * Sets the value of the searchDatabaseRef property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setAnalysisSearchDatabase(AnalysisSearchDatabase value) {
-        this.analysisSearchDatabase = value;
+    public void setSearchDatabaseRef(String value) {
+        this.searchDatabaseRef = value;
     }
 
     /**
@@ -202,37 +198,5 @@ public class DBSequence
     public void setAccession(String value) {
         this.accession = value;
     }
-
-    /**
-     * After unmarshalling, split the List of generic Params into
-     * a List of CvParams and a List of UserParams.
-     */
-    public void afterUnmarshalOperation() {
-        cvParams = new ArrayList<CvParam>();
-        userParams = new ArrayList<UserParam>();
-        for (Param param : getParamGroup()) {
-            if (param instanceof CvParam) {
-                cvParams.add((CvParam) param);
-            }
-            if (param instanceof UserParam) {
-                userParams.add((UserParam) param);
-            }
-        }
-    }
-
-    /**
-     * Before we marshall the XML, combine the CvParams and UserParams
-     * into the generic List of Params.
-     */
-    public void beforeMarshalOperation() {
-        paramGroup = new ArrayList<Param>();
-        for (CvParam cvParam : cvParams) {
-            paramGroup.add(cvParam);
-        }
-        for (UserParam userParam : userParams) {
-            paramGroup.add(userParam);
-        }
-    }
-
 
 }

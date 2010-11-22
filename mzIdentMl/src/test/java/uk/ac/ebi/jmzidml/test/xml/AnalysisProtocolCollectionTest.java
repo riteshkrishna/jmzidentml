@@ -2,6 +2,7 @@ package uk.ac.ebi.jmzidml.test.xml;
 
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
+import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.AnalysisProtocolCollection;
 import uk.ac.ebi.jmzidml.model.mzidml.Enzyme;
 import uk.ac.ebi.jmzidml.model.mzidml.ProteinDetectionProtocol;
@@ -27,18 +28,21 @@ public class AnalysisProtocolCollectionTest extends TestCase {
         URL xmlFileURL = AnalysisProtocolCollectionTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
 
-        boolean aUseSpectrumCache = true;
-
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, aUseSpectrumCache);
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         assertNotNull(unmarshaller);
 
-        AnalysisProtocolCollection apc =  unmarshaller.unmarshalFromXpath("/mzIdentML/AnalysisProtocolCollection", AnalysisProtocolCollection.class);
+        AnalysisProtocolCollection apc =  unmarshaller.unmarshal(AnalysisProtocolCollection.class);
         assertNotNull("AnalysisProtocolCollection can not be null.", apc);
 
         ProteinDetectionProtocol pdp = apc.getProteinDetectionProtocol();
         assertNotNull("ProteinDetectionProtocol can not be null.", pdp);
-        log.debug("ProteinDetectionProtocol Software Name : " + pdp.getAnalysisSoftware().getName());
-        assertEquals("Mascot Parser", pdp.getAnalysisSoftware().getName());
+        if (MzIdentMLElement.ProteinDetectionProtocol.isAutoRefResolving() && pdp.getAnalysisSoftwareRef() != null) {
+            assertNotNull(pdp.getAnalysisSoftware());
+            assertEquals("Mascot Parser", pdp.getAnalysisSoftware().getName());
+        } else {
+            System.out.println("ProteinDetectionProtocol is not auto-resolving or does not contain a AnalysisSoftware reference.");
+            assertNull(pdp.getAnalysisSoftware());
+        }
 
         Iterator<SpectrumIdentificationProtocol> sip = apc.getSpectrumIdentificationProtocol().iterator();
         assertNotNull("SpectrumIdentificationProtocol can not be null.", sip);

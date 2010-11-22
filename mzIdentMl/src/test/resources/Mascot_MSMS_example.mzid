@@ -42,7 +42,7 @@
             </Customizations>
         </AnalysisSoftware>
     </AnalysisSoftwareList>
-    <Provider id="PROVIDER">
+    <Provider id="PROVIDER" Software_ref="AS_mascot_parser">
         <ContactRole Contact_ref="PERSON_DOC_OWNER">
             <role>
                 <cvParam accession="MS:1001271" name="researcher" cvRef="PSI-MS"/>

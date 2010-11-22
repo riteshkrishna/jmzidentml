@@ -43,16 +43,12 @@
                             </xsd:documentation>
                         </xsd:annotation>
                     </xsd:element>
-                    <xsd:element name="fileFormat" minOccurs="0">
+                    <xsd:element name="fileFormat" type="FuGE.Bio.Data.FileFormatType" minOccurs="0">
+                        <!-- ToDo: why not: <xsd:element name="fileFormat" type="FuGE.Common.Ontology.cvParamType" .../> -->
                         <xsd:annotation>
                             <xsd:documentation>The format of the ExternalData file, for example "tiff" for image files.
                             </xsd:documentation>
                         </xsd:annotation>
-                        <xsd:complexType>
-                            <xsd:sequence>
-                                <xsd:element ref="cvParam"/>
-                            </xsd:sequence>
-                        </xsd:complexType>
                     </xsd:element>
                 </xsd:sequence>
                 <xsd:attribute name="location" type="xsd:anyURI" use="required">
@@ -62,6 +58,12 @@
                 </xsd:attribute>
             </xsd:extension>
         </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="FuGE.Bio.Data.FileFormatType" >
+        <!-- ToDo: why is this a separate type?? -->
+        <xsd:sequence>
+            <xsd:element ref="cvParam"/>
+        </xsd:sequence>
     </xsd:complexType>
     <xsd:complexType name="FuGE.Bio.Data.InternalDataType" abstract="true">
         <xsd:annotation>
@@ -114,14 +116,10 @@
         <xsd:complexContent>
             <xsd:extension base="FuGE.Common.Audit.ContactType">
                 <xsd:sequence>
-                    <xsd:element name="affiliations" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:element name="affiliations" type="FuGE.Common.Audit.AffiliationsType" minOccurs="0" maxOccurs="unbounded">
                         <xsd:annotation>
                             <xsd:documentation>The organization a person belongs to.</xsd:documentation>
                         </xsd:annotation>
-                        <xsd:complexType>
-                            <xsd:attribute name="Organization_ref" type="xsd:string" use="required"
-                            />
-                        </xsd:complexType>
                     </xsd:element>
                 </xsd:sequence>
                 <xsd:attribute name="lastName" type="xsd:string">
@@ -141,6 +139,9 @@
                 </xsd:attribute>
             </xsd:extension>
         </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="FuGE.Common.Audit.AffiliationsType">
+        <xsd:attribute name="Organization_ref" type="xsd:string" use="required"/>
     </xsd:complexType>
     <xsd:complexType name="FuGE.Common.Audit.OrganizationType" abstract="false">
         <xsd:annotation>
@@ -210,16 +211,12 @@
             </xsd:documentation>
         </xsd:annotation>
         <xsd:sequence>
-            <xsd:element name="role">
+            <xsd:element name="role" type="FuGE.Common.Audit.RoleType">
+                <!-- ToDo: why not: <xsd:element name="role" type="FuGE.Common.Ontology.cvParamType"/> -->
                 <xsd:annotation>
                     <xsd:documentation>The roles (lab equipment sales, contractor, etc.) the Contact fills.
                     </xsd:documentation>
                 </xsd:annotation>
-                <xsd:complexType>
-                    <xsd:sequence>
-                        <xsd:element ref="cvParam"/>
-                    </xsd:sequence>
-                </xsd:complexType>
             </xsd:element>
         </xsd:sequence>
         <xsd:attribute name="Contact_ref" type="xsd:string" use="required">
@@ -228,6 +225,12 @@
                 </xsd:documentation>
             </xsd:annotation>
         </xsd:attribute>
+    </xsd:complexType>
+    <xsd:complexType name="FuGE.Common.Audit.RoleType">
+        <!-- ToDo: why is this a separate type?? -->
+        <xsd:sequence>
+            <xsd:element ref="cvParam"/>
+        </xsd:sequence>
     </xsd:complexType>
     <xsd:complexType name="FuGE.Common.References.BibliographicReferenceType" abstract="false">
         <xsd:annotation>

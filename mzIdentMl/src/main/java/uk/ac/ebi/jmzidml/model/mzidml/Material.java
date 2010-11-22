@@ -1,6 +1,8 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import uk.ac.ebi.jmzidml.model.AbstractIdentifiableParamGroup;
+
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,12 +18,12 @@ import java.util.List;
  *                 ProtocolApplication(s)). Sub-component materials can be represented by the self-association on Material
  *                 (e.g. Wells within a array). These associations are abstract and should be extended to represent these
  *                 semantics for extensions of ProtocolApplication and Material.
- *
- *
+ *             
+ * 
  * <p>Java class for FuGE.Bio.Material.MaterialType complex type.
- *
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * 
  * <pre>
  * &lt;complexType name="FuGE.Bio.Material.MaterialType">
  *   &lt;complexContent>
@@ -34,59 +36,54 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FuGE.Bio.Material.MaterialType", propOrder = {
-        "contactRole",
-        "paramGroup"
+    "contactRole",
+    "paramGroup"
 })
 @XmlSeeAlso({
-        Sample.class
+    Sample.class
 })
 public abstract class Material
-        extends Identifiable
-        implements Serializable
+    extends AbstractIdentifiableParamGroup
+    implements Serializable
 {
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "ContactRole")
     protected List<ContactRole> contactRole;
     @XmlElements({
-            @XmlElement(name = "userParam", type = UserParam.class),
-            @XmlElement(name = "cvParam", type = CvParam.class)
+        @XmlElement(name = "userParam", type = UserParam.class),
+        @XmlElement(name = "cvParam", type = CvParam.class)
     })
-    private List<Param> paramGroup;
-
-    @XmlTransient
-    private List<CvParam> cvParams;
-    @XmlTransient
-    private List<UserParam> userParams;
+    protected List<Param> paramGroup;
 
     /**
      * Contact details for the Material. The association to ContactRole could
      *                                 specify, for example, the creator or provider of the Material.
      *                             Gets the value of the contactRole property.
-     *
+     * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the contactRole property.
-     *
+     * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getContactRole().add(newItem);
      * </pre>
-     *
-     *
+     * 
+     * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link ContactRole }
-     *
-     *  @return the list of contact roles.
+     * 
+     * 
      */
     public List<ContactRole> getContactRole() {
         if (contactRole == null) {
@@ -95,52 +92,34 @@ public abstract class Material
         return this.contactRole;
     }
 
-    public List<CvParam> getCvParam() {
-        
-        return cvParams;
-    }
-
-    public List<UserParam> getUserParam() {
-        return userParams;
-    }
-
-    private List<Param> getParamGroup() {
+    /**
+     * The characteristics of a Material.Gets the value of the paramGroup property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the paramGroup property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getParamGroup().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link UserParam }
+     * {@link CvParam }
+     * 
+     * 
+     */
+    public List<Param> getParamGroup() {
         if (paramGroup == null) {
             paramGroup = new ArrayList<Param>();
         }
-        return paramGroup;
-    }
-
-    /**
-     * After unmarshalling, split the List of generic Params into
-     * a List of CvParams and a List of UserParams.
-     */
-    public void afterUnmarshalOperation() {
-        cvParams = new ArrayList<CvParam>();
-        userParams = new ArrayList<UserParam>();
-        for (Param param : getParamGroup()) {
-            if (param instanceof CvParam) {
-                cvParams.add((CvParam) param);
-            } else if (param instanceof UserParam) {
-                userParams.add((UserParam) param);
-            } else {
-                throw new IllegalArgumentException("Found a unrecognized sub-class of Param.");
-            }
-        }
-    }
-
-    /**
-     * Before we write the XML, combine the CvParams and UserParams
-     * into the generic List of Params.
-     */
-    public void beforeMarshalOperation() {
-        paramGroup = new ArrayList<Param>();
-        for (CvParam cvParam : cvParams) {
-            paramGroup.add(cvParam);
-        }
-        for (UserParam userParam : userParams) {
-            paramGroup.add(userParam);
-        }
+        return this.paramGroup;
     }
 
 }

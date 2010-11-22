@@ -2,13 +2,8 @@
 package uk.ac.ebi.jmzidml.model.mzidml;
 
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.PeptideEvidenceAdapter;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 
 
@@ -37,31 +32,44 @@ public class PeptideHypothesis
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(name = "PeptideEvidence_Ref", required = true)
-    @XmlJavaTypeAdapter(PeptideEvidenceAdapter.class)
-    protected PeptideEvidence peptideEvidence;
+    protected String peptideEvidenceRef;
+
+    @XmlTransient
+    PeptideEvidence peptideEvidence;
+
+    public PeptideEvidence getPeptideEvidence() {
+        return peptideEvidence;
+    }
+
+    public void setPeptideEvidence(PeptideEvidence peptideEvidence) {
+        this.peptideEvidence = peptideEvidence;
+        if (peptideEvidence != null) {
+            this.setPeptideEvidenceRef(peptideEvidence.getId());
+        }
+    }
 
     /**
-     * Gets the value of the peptideEvidence property.
+     * Gets the value of the peptideEvidenceRef property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public PeptideEvidence getPeptideEvidence() {
-        return peptideEvidence;
+    public String getPeptideEvidenceRef() {
+        return peptideEvidenceRef;
     }
 
     /**
-     * Sets the value of the peptideEvidence property.
+     * Sets the value of the peptideEvidenceRef property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setPeptideEvidence(PeptideEvidence value) {
-        this.peptideEvidence = value;
+    public void setPeptideEvidenceRef(String value) {
+        this.peptideEvidenceRef = value;
     }
 
 }

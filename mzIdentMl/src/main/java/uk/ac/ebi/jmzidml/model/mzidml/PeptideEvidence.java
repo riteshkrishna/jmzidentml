@@ -1,11 +1,9 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.DBSequenceAdapter;
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.TranslationTableAdapter;
+import uk.ac.ebi.jmzidml.model.AbstractIdentifiableParamGroup;
 
 import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +58,7 @@ import java.util.List;
     "paramGroup"
 })
 public class PeptideEvidence
-    extends Identifiable
+    extends AbstractIdentifiableParamGroup
     implements Serializable
 {
 
@@ -70,15 +68,8 @@ public class PeptideEvidence
         @XmlElement(name = "cvParam", type = CvParam.class)
     })
     protected List<Param> paramGroup;
-
-    @XmlTransient
-    private List<CvParam> cvParams;
-    @XmlTransient
-    private List<UserParam> userParams;
-
     @XmlAttribute(name = "DBSequence_Ref", required = true)
-    @XmlJavaTypeAdapter(DBSequenceAdapter.class)
-    protected DBSequence dbSequence;
+    protected String dbSequenceRef;
     @XmlAttribute
     protected Integer start;
     @XmlAttribute
@@ -88,14 +79,40 @@ public class PeptideEvidence
     @XmlAttribute
     protected String post;
     @XmlAttribute(name = "TranslationTable_ref")
-    @XmlJavaTypeAdapter(TranslationTableAdapter.class)
-    protected TranslationTable translationTable;
+    protected String translationTableRef;
     @XmlAttribute
     protected Integer frame;
     @XmlAttribute
     protected Boolean isDecoy;
     @XmlAttribute
     protected Integer missedCleavages;
+
+    @XmlTransient
+    private DBSequence dbSequence;
+    @XmlTransient
+    private TranslationTable translationTable;
+
+    public DBSequence getDBSequence() {
+        return dbSequence;
+    }
+
+    public void setDBSequence(DBSequence dbSequence) {
+        this.dbSequence = dbSequence;
+        if (dbSequence != null) {
+            this.setDBSequenceRef(dbSequence.getId());
+        }
+    }
+
+    public TranslationTable getTranslationTable() {
+        return translationTable;
+    }
+
+    public void setTranslationTable(TranslationTable translationTable) {
+        this.translationTable = translationTable;
+        if (translationTable != null) {
+            this.setTranslationTableRef(translationTable.getId());
+        }
+    }
 
     /**
      * Gets the value of the paramGroup property.
@@ -117,7 +134,7 @@ public class PeptideEvidence
      * Objects of the following type(s) are allowed in the list
      * {@link UserParam }
      * {@link CvParam }
-     *
+     * 
      * 
      */
     public List<Param> getParamGroup() {
@@ -127,36 +144,28 @@ public class PeptideEvidence
         return this.paramGroup;
     }
 
-    public List<CvParam> getCvParam() {
-        return cvParams;
-    }
-
-    public List<UserParam> getUserParam() {
-        return userParams;
-    }
-
     /**
-     * Gets the value of the dbSequence property.
+     * Gets the value of the dbSequenceRef property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public DBSequence getDBSequence() {
-        return dbSequence;
+    public String getDBSequenceRef() {
+        return dbSequenceRef;
     }
 
     /**
-     * Sets the value of the dbSequence property.
+     * Sets the value of the dbSequenceRef property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setDBSequence(DBSequence value) {
-        this.dbSequence = value;
+    public void setDBSequenceRef(String value) {
+        this.dbSequenceRef = value;
     }
 
     /**
@@ -256,27 +265,27 @@ public class PeptideEvidence
     }
 
     /**
-     * Gets the value of the translationTable property.
+     * Gets the value of the translationTableRef property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public TranslationTable getTranslationTable() {
-        return translationTable;
+    public String getTranslationTableRef() {
+        return translationTableRef;
     }
 
     /**
-     * Sets the value of the translationTable property.
+     * Sets the value of the translationTableRef property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setTranslationTable(TranslationTable value) {
-        this.translationTable = value;
+    public void setTranslationTableRef(String value) {
+        this.translationTableRef = value;
     }
 
     /**
@@ -354,37 +363,5 @@ public class PeptideEvidence
     public void setMissedCleavages(Integer value) {
         this.missedCleavages = value;
     }
-
-    /**
-     * After unmarshalling, split the List of generic Params into
-     * a List of CvParams and a List of UserParams.
-     */
-    public void afterUnmarshalOperation() {
-        cvParams = new ArrayList<CvParam>();
-        userParams = new ArrayList<UserParam>();
-        for (Param param : getParamGroup()) {
-            if (param instanceof CvParam) {
-                cvParams.add((CvParam) param);
-            }
-            if (param instanceof UserParam) {
-                userParams.add((UserParam) param);
-            }
-        }
-    }
-
-    /**
-     * Before we marshall the XML, combine the CvParams and UserParams
-     * into the generic List of Params.
-     */
-    public void beforeMarshalOperation() {
-        paramGroup = new ArrayList<Param>();
-        for (CvParam cvParam : cvParams) {
-            paramGroup.add(cvParam);
-        }
-        for (UserParam userParam : userParams) {
-            paramGroup.add(userParam);
-        }
-    }
-
 
 }

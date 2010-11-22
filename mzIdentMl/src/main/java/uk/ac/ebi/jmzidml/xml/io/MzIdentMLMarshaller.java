@@ -78,8 +78,6 @@ public class MzIdentMLMarshaller {
 
     }
 
-    // ToDo: default marshaller can only cope with mzML or sub-elements
-    // ToDo: ?? new marshal method to create indexedmzML (with parameter specifying the elements to index)
 
 
 

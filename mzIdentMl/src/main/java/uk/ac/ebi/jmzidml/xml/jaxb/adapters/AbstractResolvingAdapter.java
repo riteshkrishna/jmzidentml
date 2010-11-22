@@ -64,9 +64,6 @@ public abstract class AbstractResolvingAdapter<ValueType, BoundType> extends Xml
         this.useSpectrumCache = aUseSpectrumCache;
     }
 
-
-    // ToDo: why use reference type enum and not class ??
-
     public <BoundType> BoundType unmarshal(String refId, Constants.ReferencedType refType) {
 
         logger.debug("AbstractResolvingAdapter.unmarshal for id: " + refId);
@@ -76,9 +73,9 @@ public abstract class AbstractResolvingAdapter<ValueType, BoundType> extends Xml
         // special case for Contact.class as we can either have a Person.class or a Organisation.class
         if (refType == Constants.ReferencedType.Contact) {
             // see if the ID fits a Person
-            String personXML = index.getXmlString(refId, Constants.ReferencedType.Person);
+            String personXML = index.getXmlString(refId, Person.class);
             // see if the ID fits an Organisation
-            String organisationXML = index.getXmlString(refId, Constants.ReferencedType.Organization);
+            String organisationXML = index.getXmlString(refId, Organization.class);
             //toDo: check if not found xml is null or throws exception
             if (personXML != null && organisationXML == null) {
                 xml = personXML;
@@ -90,8 +87,6 @@ public abstract class AbstractResolvingAdapter<ValueType, BoundType> extends Xml
                 throw new IllegalStateException("Could not uniquely resolve Contact reference " + refId);
             }
         } else {
-            xml = index.getXmlString(refId, refType);
-
             switch (refType) {
 
                 case CV:
@@ -148,6 +143,8 @@ public abstract class AbstractResolvingAdapter<ValueType, BoundType> extends Xml
                 default:
                     throw new IllegalStateException("Unkonwn cache type: " + refType);
             }
+            xml = index.getXmlString(refId, cls);
+
         }
 
         if (logger.isDebugEnabled()) {
@@ -163,7 +160,7 @@ public abstract class AbstractResolvingAdapter<ValueType, BoundType> extends Xml
             //initializeUnmarshaller will assign the proper reader to the xmlFilter
             //this also propagates the cache so that any associated IDREF calls
             //are handled efficiently if possible
-            Unmarshaller unmarshaller = UnmarshallerFactory.getInstance().initializeUnmarshaller(index, xmlFilter, cache, useSpectrumCache);
+            Unmarshaller unmarshaller = UnmarshallerFactory.getInstance().initializeUnmarshaller(index, cache, xmlFilter);
 
             //need to do it this way because snippet does not have a XmlRootElement annotation
             JAXBElement<BoundType> holder = unmarshaller.unmarshal(new SAXSource(xmlFilter, new InputSource(new StringReader(xml))), cls);

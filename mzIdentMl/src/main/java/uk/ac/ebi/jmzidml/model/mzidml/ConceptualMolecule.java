@@ -1,11 +1,14 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import java.io.Serializable;
+import uk.ac.ebi.jmzidml.model.AbstractIdentifiableParamGroup;
+import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
+import java.io.Serializable;
 
 
 /**
@@ -35,8 +38,8 @@ import javax.xml.bind.annotation.XmlType;
     Peptide.class
 })
 public abstract class ConceptualMolecule
-    extends Identifiable
-    implements Serializable
+    extends AbstractIdentifiableParamGroup
+    implements Serializable, ParamGroupCapable
 {
 
     private final static long serialVersionUID = 100L;

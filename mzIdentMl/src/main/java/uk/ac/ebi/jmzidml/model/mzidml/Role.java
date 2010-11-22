@@ -1,5 +1,7 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import uk.ac.ebi.jmzidml.model.CvParamCapable;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,19 +10,14 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import java.io.Serializable;
 
-/**
- * @author Florian Reisinger
- *         Date: 14-Oct-2010
- * @since 0.2
- */
 
 /**
- * <p>Java class for anonymous complex type.
- *
+ * <p>Java class for FuGE.Common.Audit.RoleType complex type.
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * 
  * <pre>
- * &lt;complexType>
+ * &lt;complexType name="FuGE.Common.Audit.RoleType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
@@ -30,15 +27,15 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
+@XmlType(name = "FuGE.Common.Audit.RoleType", propOrder = {
     "cvParam"
 })
 public class Role
-    implements Serializable, MzIdentMLObject
+    implements Serializable, MzIdentMLObject, CvParamCapable
 {
 
     private final static long serialVersionUID = 100L;
@@ -47,11 +44,11 @@ public class Role
 
     /**
      * Gets the value of the cvParam property.
-     *
+     * 
      * @return
      *     possible object is
      *     {@link CvParam }
-     *
+     *     
      */
     public CvParam getCvParam() {
         return cvParam;
@@ -59,11 +56,11 @@ public class Role
 
     /**
      * Sets the value of the cvParam property.
-     *
+     * 
      * @param value
      *     allowed object is
      *     {@link CvParam }
-     *
+     *     
      */
     public void setCvParam(CvParam value) {
         this.cvParam = value;

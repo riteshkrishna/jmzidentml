@@ -1,10 +1,7 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.AnalysisSoftwareAdapter;
-
 import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 
 
@@ -47,8 +44,21 @@ public class ProteinDetectionProtocol
     @XmlElement(name = "Threshold", required = true)
     protected ParamAlternativeList threshold;
     @XmlAttribute(name = "AnalysisSoftware_ref", required = true)
-    @XmlJavaTypeAdapter(AnalysisSoftwareAdapter.class)
-    protected AnalysisSoftware analysisSoftware;
+    protected String analysisSoftwareRef;
+
+    @XmlTransient
+    private AnalysisSoftware analysisSoftware;
+
+    public AnalysisSoftware getAnalysisSoftware() {
+        return analysisSoftware;
+    }
+
+    public void setAnalysisSoftware(AnalysisSoftware analysisSoftware) {
+        this.analysisSoftware = analysisSoftware;
+        if (analysisSoftware != null) {
+            this.setAnalysisSoftwareRef(analysisSoftware.getId());
+        }
+    }
 
     /**
      * Gets the value of the analysisParams property.
@@ -99,27 +109,27 @@ public class ProteinDetectionProtocol
     }
 
     /**
-     * Gets the value of the analysisSoftware property.
+     * Gets the value of the analysisSoftwareRef property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public AnalysisSoftware getAnalysisSoftware() {
-        return analysisSoftware;
+    public String getAnalysisSoftwareRef() {
+        return analysisSoftwareRef;
     }
 
     /**
-     * Sets the value of the analysisSoftware property.
+     * Sets the value of the analysisSoftwareRef property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setAnalysisSoftware(AnalysisSoftware value) {
-        this.analysisSoftware = value;
+    public void setAnalysisSoftwareRef(String value) {
+        this.analysisSoftwareRef = value;
     }
 
 }

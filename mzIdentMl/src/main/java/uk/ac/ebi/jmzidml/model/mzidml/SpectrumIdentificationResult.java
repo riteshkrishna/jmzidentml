@@ -1,10 +1,9 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.SpectraDataAdapter;
+import uk.ac.ebi.jmzidml.model.AbstractIdentifiableParamGroup;
 
 import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +42,7 @@ import java.util.List;
     "paramGroup"
 })
 public class SpectrumIdentificationResult
-    extends Identifiable
+    extends AbstractIdentifiableParamGroup
     implements Serializable
 {
 
@@ -51,21 +50,28 @@ public class SpectrumIdentificationResult
     @XmlElement(name = "SpectrumIdentificationItem", required = true)
     protected List<SpectrumIdentificationItem> spectrumIdentificationItem;
     @XmlElements({
-        @XmlElement(name = "userParam", type = UserParam.class),
-        @XmlElement(name = "cvParam", type = CvParam.class)
+        @XmlElement(name = "cvParam", type = CvParam.class),
+        @XmlElement(name = "userParam", type = UserParam.class)
     })
     protected List<Param> paramGroup;
-
-    @XmlTransient
-    private List<CvParam> cvParams;
-    @XmlTransient
-    private List<UserParam> userParams;
-
     @XmlAttribute(required = true)
     protected String spectrumID;
     @XmlAttribute(name = "SpectraData_ref", required = true)
-    @XmlJavaTypeAdapter(SpectraDataAdapter.class)
-    protected SpectraData spectraData;
+    protected String spectraDataRef;
+
+    @XmlTransient
+    private SpectraData spectraData;
+
+    public SpectraData getSpectraData() {
+        return spectraData;
+    }
+
+    public void setSpectraData(SpectraData spectraData) {
+        this.spectraData = spectraData;
+        if (spectraData != null) {
+            this.setSpectraDataRef(spectraData.getId());
+        }
+    }
 
     /**
      * Gets the value of the spectrumIdentificationItem property.
@@ -114,9 +120,9 @@ public class SpectrumIdentificationResult
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link UserParam }
      * {@link CvParam }
-     *
+     * {@link UserParam }
+     * 
      * 
      */
     public List<Param> getParamGroup() {
@@ -124,14 +130,6 @@ public class SpectrumIdentificationResult
             paramGroup = new ArrayList<Param>();
         }
         return this.paramGroup;
-    }
-
-    public List<CvParam> getCvParam() {
-        return cvParams;
-    }
-
-    public List<UserParam> getUserParam() {
-        return userParams;
     }
 
     /**
@@ -159,58 +157,27 @@ public class SpectrumIdentificationResult
     }
 
     /**
-     * Gets the value of the spectraData property.
+     * Gets the value of the spectraDataRef property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public SpectraData getSpectraData() {
-        return spectraData;
+    public String getSpectraDataRef() {
+        return spectraDataRef;
     }
 
     /**
-     * Sets the value of the spectraData property.
+     * Sets the value of the spectraDataRef property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setSpectraData(SpectraData value) {
-        this.spectraData = value;
-    }
-
-    /**
-     * After unmarshalling, split the List of generic Params into
-     * a List of CvParams and a List of UserParams.
-     */
-    public void afterUnmarshalOperation() {
-        cvParams = new ArrayList<CvParam>();
-        userParams = new ArrayList<UserParam>();
-        for (Param param : getParamGroup()) {
-            if (param instanceof CvParam) {
-                cvParams.add((CvParam) param);
-            }
-            if (param instanceof UserParam) {
-                userParams.add((UserParam) param);
-            }
-        }
-    }
-
-    /**
-     * Before we marshall the XML, combine the CvParams and UserParams
-     * into the generic List of Params.
-     */
-    public void beforeMarshalOperation() {
-        paramGroup = new ArrayList<Param>();
-        for (CvParam cvParam : cvParams) {
-            paramGroup.add(cvParam);
-        }
-        for (UserParam userParam : userParams) {
-            paramGroup.add(userParam);
-        }
+    public void setSpectraDataRef(String value) {
+        this.spectraDataRef = value;
     }
 
 }

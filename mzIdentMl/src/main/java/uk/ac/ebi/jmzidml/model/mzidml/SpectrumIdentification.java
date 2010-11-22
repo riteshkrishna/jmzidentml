@@ -1,11 +1,7 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.SpectrumIdentificationListAdapter;
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.SpectrumIdentificationProtocolAdapter;
-
 import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,11 +49,36 @@ public class SpectrumIdentification
     @XmlElement(name = "SearchDatabase", required = true)
     protected List<SearchDatabase> searchDatabase;
     @XmlAttribute(name = "SpectrumIdentificationProtocol_ref", required = true)
-    @XmlJavaTypeAdapter(SpectrumIdentificationProtocolAdapter.class)
-    protected SpectrumIdentificationProtocol spectrumIdentificationProtocol;
+    protected String spectrumIdentificationProtocolRef;
     @XmlAttribute(name = "SpectrumIdentificationList_ref", required = true)
-    @XmlJavaTypeAdapter(SpectrumIdentificationListAdapter.class)
-    protected SpectrumIdentificationList spectrumIdentificationList;
+    protected String spectrumIdentificationListRef;
+
+    @XmlTransient
+    private SpectrumIdentificationList spectrumIdentificationList;
+    @XmlTransient
+    private SpectrumIdentificationProtocol spectrumIdentificationProtocol;
+
+    public SpectrumIdentificationList getSpectrumIdentificationList() {
+        return spectrumIdentificationList;
+    }
+
+    public void setSpectrumIdentificationList(SpectrumIdentificationList spectrumIdentificationList) {
+        this.spectrumIdentificationList = spectrumIdentificationList;
+        if (spectrumIdentificationList != null) {
+            this.setSpectrumIdentificationListRef(spectrumIdentificationList.getId());
+        }
+    }
+
+    public SpectrumIdentificationProtocol getSpectrumIdentificationProtocol() {
+        return spectrumIdentificationProtocol;
+    }
+
+    public void setSpectrumIdentificationProtocol(SpectrumIdentificationProtocol spectrumIdentificationProtocol) {
+        this.spectrumIdentificationProtocol = spectrumIdentificationProtocol;
+        if (spectrumIdentificationProtocol != null) {
+            this.setSpectrumIdentificationProtocolRef(spectrumIdentificationProtocol.getId());
+        }
+    }
 
     /**
      * Gets the value of the inputSpectra property.
@@ -118,51 +139,51 @@ public class SpectrumIdentification
     }
 
     /**
-     * Gets the value of the spectrumIdentificationProtocol property.
+     * Gets the value of the spectrumIdentificationProtocolRef property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public SpectrumIdentificationProtocol getSpectrumIdentificationProtocol() {
-        return spectrumIdentificationProtocol;
+    public String getSpectrumIdentificationProtocolRef() {
+        return spectrumIdentificationProtocolRef;
     }
 
     /**
-     * Sets the value of the spectrumIdentificationProtocol property.
+     * Sets the value of the spectrumIdentificationProtocolRef property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setSpectrumIdentificationProtocol(SpectrumIdentificationProtocol value) {
-        this.spectrumIdentificationProtocol = value;
+    public void setSpectrumIdentificationProtocolRef(String value) {
+        this.spectrumIdentificationProtocolRef = value;
     }
 
     /**
-     * Gets the value of the spectrumIdentificationList property.
+     * Gets the value of the spectrumIdentificationListRef property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public SpectrumIdentificationList getSpectrumIdentificationList() {
-        return spectrumIdentificationList;
+    public String getSpectrumIdentificationListRef() {
+        return spectrumIdentificationListRef;
     }
 
     /**
-     * Sets the value of the spectrumIdentificationList property.
+     * Sets the value of the spectrumIdentificationListRef property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setSpectrumIdentificationList(SpectrumIdentificationList value) {
-        this.spectrumIdentificationList = value;
+    public void setSpectrumIdentificationListRef(String value) {
+        this.spectrumIdentificationListRef = value;
     }
 
 }

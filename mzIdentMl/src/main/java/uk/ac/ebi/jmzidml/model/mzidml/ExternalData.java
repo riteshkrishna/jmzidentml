@@ -20,17 +20,7 @@ import java.io.Serializable;
  *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Bio.Data.DataType">
  *       &lt;sequence>
  *         &lt;element name="externalFormatDocumentation" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
- *         &lt;element name="fileFormat" minOccurs="0">
- *           &lt;complexType>
- *             &lt;complexContent>
- *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                 &lt;sequence>
- *                   &lt;element ref="{http://psidev.info/psi/pi/mzIdentML/1.0}cvParam"/>
- *                 &lt;/sequence>
- *               &lt;/restriction>
- *             &lt;/complexContent>
- *           &lt;/complexType>
- *         &lt;/element>
+ *         &lt;element name="fileFormat" type="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Bio.Data.FileFormatType" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="location" use="required" type="{http://www.w3.org/2001/XMLSchema}anyURI" />
  *     &lt;/extension>
@@ -46,9 +36,9 @@ import java.io.Serializable;
     "fileFormat"
 })
 @XmlSeeAlso({
-    SpectraData.class,
     SourceFile.class,
-    AnalysisSearchDatabase.class
+    AnalysisSearchDatabase.class,
+    SpectraData.class
 })
 public class ExternalData
     extends Data
@@ -92,7 +82,7 @@ public class ExternalData
      * 
      * @return
      *     possible object is
-     *     {@link uk.ac.ebi.jmzidml.model.mzidml.FileFormat }
+     *     {@link FileFormat }
      *     
      */
     public FileFormat getFileFormat() {
@@ -104,7 +94,7 @@ public class ExternalData
      * 
      * @param value
      *     allowed object is
-     *     {@link uk.ac.ebi.jmzidml.model.mzidml.FileFormat }
+     *     {@link FileFormat }
      *     
      */
     public void setFileFormat(FileFormat value) {
@@ -134,6 +124,5 @@ public class ExternalData
     public void setLocation(String value) {
         this.location = value;
     }
-
 
 }

@@ -1,6 +1,7 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import uk.ac.ebi.jmzidml.model.IdentifiableMzIdentMLObject;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 import javax.xml.bind.annotation.*;
@@ -38,23 +39,23 @@ import java.io.Serializable;
     BibliographicReference.class,
     Provider.class,
     TranslationTable.class,
-    Measure.class,
-    SpectrumIdentificationItem.class,
-    ProteinAmbiguityGroup.class,
     ConceptualMolecule.class,
     ProteinDetectionHypothesis.class,
     Protocol.class,
+    Measure.class,
+    SpectrumIdentificationItem.class,
     Material.class,
     Contact.class,
     MassTable.class,
+    ProteinAmbiguityGroup.class,
     PeptideEvidence.class,
     Data.class,
     Software.class,
     SpectrumIdentificationResult.class,
-    ProtocolApplication.class,
-    Equipment.class
+    Equipment.class,
+    ProtocolApplication.class
 })
-public abstract class Identifiable implements Serializable, MzIdentMLObject
+public abstract class Identifiable implements Serializable, MzIdentMLObject, IdentifiableMzIdentMLObject
 {
 
     private final static long serialVersionUID = 100L;
