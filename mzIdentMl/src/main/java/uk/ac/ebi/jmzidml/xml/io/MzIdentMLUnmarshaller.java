@@ -50,10 +50,12 @@ public class MzIdentMLUnmarshaller {
 
     }
 
+    @Deprecated
     public MzIdentMLUnmarshaller(URL mzIdentMLFileURL, MzIdentMLObjectCache cache) {
         this(FileUtils.getFileFromURL(mzIdentMLFileURL), cache);
     }
 
+    @Deprecated
     public MzIdentMLUnmarshaller(File mzIdentMLFile, MzIdentMLObjectCache cache) {
         this.index = MzIdentMLIndexerFactory.getInstance().buildIndex(mzIdentMLFile);
         this.cache = cache;
