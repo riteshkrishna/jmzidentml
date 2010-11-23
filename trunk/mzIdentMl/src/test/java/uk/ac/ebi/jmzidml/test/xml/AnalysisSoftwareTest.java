@@ -6,9 +6,7 @@ import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftware;
 import uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftwareList;
 import uk.ac.ebi.jmzidml.model.mzidml.CvParam;
-import uk.ac.ebi.jmzidml.xml.io.MzIdentMLObjectCache;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
-import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.cache.AdapterObjectCache;
 
 import java.net.URL;
 import java.util.Iterator;
@@ -27,14 +25,16 @@ public class AnalysisSoftwareTest extends TestCase {
         URL xmlFileURL = AnalysisSoftwareTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
 
-        MzIdentMLObjectCache cache = new AdapterObjectCache();
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, cache);
+//        MzIdentMLObjectCache cache = new AdapterObjectCache();
+//        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, cache);
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         assertNotNull(unmarshaller);
 
         // Number of Analysis Software
         int totalAnalysisSoftware = unmarshaller.getObjectCountForXpath(MzIdentMLElement.AnalysisSoftwareList.getXpath());
-        AnalysisSoftwareList list = unmarshaller.unmarshal(MzIdentMLElement.AnalysisSoftwareList);
         assertEquals(1,totalAnalysisSoftware);
+        AnalysisSoftwareList list = unmarshaller.unmarshal(MzIdentMLElement.AnalysisSoftwareList);
+        assertNotNull(list);
 
         Iterator<AnalysisSoftware> asl = unmarshaller.unmarshalCollectionFromXpath(MzIdentMLElement.AnalysisSoftware);
         assertNotNull(asl);

@@ -5,9 +5,7 @@ import org.apache.log4j.Logger;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.*;
 import uk.ac.ebi.jmzidml.model.mzidml.params.AnalysisSearchDatabaseCvParam;
-import uk.ac.ebi.jmzidml.xml.io.MzIdentMLObjectCache;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
-import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.cache.AdapterObjectCache;
 
 import java.net.URL;
 import java.util.Iterator;
@@ -27,8 +25,9 @@ public class AnalysisCollectionTest extends TestCase {
         URL xmlFileURL = AnalysisCollectionTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
 
-        MzIdentMLObjectCache cache = new AdapterObjectCache();
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, cache);
+//        MzIdentMLObjectCache cache = new AdapterObjectCache();
+//        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, cache);
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         assertNotNull(unmarshaller);
 
         AnalysisCollection asc =  unmarshaller.unmarshal(AnalysisCollection.class);
