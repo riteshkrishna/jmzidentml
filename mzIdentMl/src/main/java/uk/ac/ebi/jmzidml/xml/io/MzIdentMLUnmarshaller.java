@@ -125,16 +125,13 @@ public class MzIdentMLUnmarshaller {
      */
     public <T extends MzIdentMLObject> T unmarshal(Class<T> clazz) {
         String xpath = MzIdentMLElement.getType(clazz).getXpath();
-        return doStuff(clazz, xpath);
+        return unmarshal(clazz, xpath);
     }
 
     public <T extends MzIdentMLObject> T unmarshal(String xpath) {
         Class<T> clazz = MzIdentMLElement.getType(xpath).getClazz();
-        return doStuff(clazz, xpath);
+        return unmarshal(clazz, xpath);
     }
-
-
-
 
     /**
      * Unmarshals one element of the type defined by the MzIdentMLElement.
@@ -154,10 +151,10 @@ public class MzIdentMLUnmarshaller {
         String xpath = element.getXpath();
 
         // first check if we have an element(s) for this Class in the cache
-        return doStuff(clazz, xpath);
+        return unmarshal(clazz, xpath);
     }
 
-    private <T extends MzIdentMLObject> T doStuff(Class<T> clazz, String xpath) {
+    private <T extends MzIdentMLObject> T unmarshal(Class<T> clazz, String xpath) {
         T retval = null;
 //        if (cache != null && cache.hasEntry(clazz)) {
 //            retval = cache.getEntries(clazz).get(0);
