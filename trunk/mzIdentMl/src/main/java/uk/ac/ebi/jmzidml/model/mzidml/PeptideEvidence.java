@@ -99,7 +99,7 @@ public class PeptideEvidence
     public void setDBSequence(DBSequence dbSequence) {
         this.dbSequence = dbSequence;
         if (dbSequence != null) {
-            this.setDBSequenceRef(dbSequence.getId());
+            this.dbSequenceRef = dbSequence.getId();
         }
     }
 
@@ -110,7 +110,7 @@ public class PeptideEvidence
     public void setTranslationTable(TranslationTable translationTable) {
         this.translationTable = translationTable;
         if (translationTable != null) {
-            this.setTranslationTableRef(translationTable.getId());
+            this.translationTableRef = translationTable.getId();
         }
     }
 
@@ -166,6 +166,9 @@ public class PeptideEvidence
      */
     public void setDBSequenceRef(String value) {
         this.dbSequenceRef = value;
+        if ( dbSequence != null && !dbSequence.getId().equals(value) ) {
+            dbSequence = null;
+        }
     }
 
     /**
@@ -286,6 +289,9 @@ public class PeptideEvidence
      */
     public void setTranslationTableRef(String value) {
         this.translationTableRef = value;
+        if ( translationTable != null && !translationTable.getId().equals(value) ) {
+            translationTable = null;
+        }
     }
 
     /**

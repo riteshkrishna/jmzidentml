@@ -37,14 +37,31 @@ public class Affiliations
     @XmlTransient
     private Organization organization;
 
+    /**
+     * Gets the value of the organisation property.
+     * Note: this property may be populated automatically at unmarshal
+     * time with the Object referenced with the contactRef property.
+     *
+     * @see uk.ac.ebi.jmzidml.MzIdentMLElement#isAutoRefResolving()
+     * @return Valid values are Organisation objects.
+     */
     public Organization getOrganization() {
         return organization;
     }
 
+    /**
+     * Sets a Organization reference. Setting a Organization object will update
+     * the organizationRef element with the id from the new Organization object.
+     * Note: if the contact object is null, the organizationRef ID is NOT
+     * changed, only the object reference is set to null.
+     *
+     * @see #organizationRef
+     * @param organization the Organization to reference from this Affiliation.
+     */
     public void setOrganization(Organization organization) {
         this.organization = organization;
         if (organization != null) {
-            this.setOrganizationRef( organization.getId() );
+            this.organizationRef = organization.getId();
         }
     }
 
@@ -70,6 +87,9 @@ public class Affiliations
      */
     public void setOrganizationRef(String value) {
         this.organizationRef = value;
+        if ( organization != null && !organization.getId().equals(value) ) {
+            organization = null;
+        }
     }
 
 }

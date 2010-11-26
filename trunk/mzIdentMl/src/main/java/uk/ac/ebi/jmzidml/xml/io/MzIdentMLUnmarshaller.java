@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.StringReader;
 import java.net.URL;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -62,7 +63,7 @@ public class MzIdentMLUnmarshaller {
     }
 
     ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
-    // Methods
+    // public Methods
 
     public String getMzIdentMLVersion() {
         Matcher match = VERSION_PATTERN.matcher(index.getMzIdentMLAttributeXMLString());
@@ -93,26 +94,18 @@ public class MzIdentMLUnmarshaller {
 
     // ToDo: methods with xpath or with class or MzIdentMLElement or all?
 
-    public int getObjectCountForXpath(String xpath) {
-        // ToDo: add check that the specified xpath is known
-        return index.getCount(xpath);
-    }
-
     /**
-     * Retrieves the number of XML elements defined by the specified class.
-     *
-     * @param clazz the Class defining the XML element.
-     * @return the number of elements associated with this class.
-     * @throws XPathException if the specified Class can not be mapped to a unique xpath in the XML.
+     * @see uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer#getCount(String)  
+     * @param xpath the xpath defining the XML element.
+     * @return the number of XML elements matching the xpath or -1
+     *         if no elements were found for the specified xpath.
      */
-    public int getObjectCountForClass(Class clazz) throws XPathException {
-        String xpath = MzIdentMLElement.getType(clazz).getXpath();
-        return getObjectCountForXpath(xpath);
-    }
-
-    public int getObjectCount(MzIdentMLElement element) {
-        String xpath = element.getXpath();
-        return getObjectCountForXpath(xpath);
+    public int getObjectCountForXpath(String xpath) {
+        if (xpath != null) {
+            return index.getCount(xpath);
+        } else {
+            return -1;
+        }
     }
 
     /**
@@ -153,6 +146,28 @@ public class MzIdentMLUnmarshaller {
         // first check if we have an element(s) for this Class in the cache
         return unmarshal(clazz, xpath);
     }
+
+    public <T extends MzIdentMLObject> Iterator<T> unmarshalCollectionFromXpath(MzIdentMLElement element) {
+        // toDo: Check with Richard!!
+//        int indexCnt = getObjectCount(element);
+//
+//        if (cache != null) {
+//            List<MzIdentMLObject> list = cache.getEntries(element.getClazz());
+//            if (list != null) {
+//                int cacheCnt = list.size();
+//                if (indexCnt == cacheCnt) {
+//                    // all elements are already cached
+//                    return cache.getEntries(element.<T>getClazz()).iterator();
+//                }
+//            }
+//        }
+
+        // we have to iterate over the XML elements
+        return new MzIdentMLObjectIterator<T>(element, index, cache);
+    }
+
+    ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
+    // private Methods
 
     private <T extends MzIdentMLObject> T unmarshal(Class<T> clazz, String xpath) {
         T retval = null;
@@ -210,25 +225,6 @@ public class MzIdentMLUnmarshaller {
             throw new IllegalStateException("Could not unmarshal object at xpath:" + xpath);
         }
         return retval;
-    }
-
-    public <T extends MzIdentMLObject> Iterator<T> unmarshalCollectionFromXpath(MzIdentMLElement element) {
-        // toDo: Check with Richard!!
-//        int indexCnt = getObjectCount(element);
-//
-//        if (cache != null) {
-//            List<MzIdentMLObject> list = cache.getEntries(element.getClazz());
-//            if (list != null) {
-//                int cacheCnt = list.size();
-//                if (indexCnt == cacheCnt) {
-//                    // all elements are already cached
-//                    return cache.getEntries(element.<T>getClazz()).iterator();
-//                }
-//            }
-//        }
-
-        // we have to iterate over the XML elements
-        return new MzIdentMLObjectIterator<T>(element, index, cache);
     }
 
 

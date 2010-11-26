@@ -65,7 +65,7 @@ public class SpectrumIdentification
     public void setSpectrumIdentificationList(SpectrumIdentificationList spectrumIdentificationList) {
         this.spectrumIdentificationList = spectrumIdentificationList;
         if (spectrumIdentificationList != null) {
-            this.setSpectrumIdentificationListRef(spectrumIdentificationList.getId());
+            this.spectrumIdentificationListRef = spectrumIdentificationList.getId();
         }
     }
 
@@ -76,7 +76,7 @@ public class SpectrumIdentification
     public void setSpectrumIdentificationProtocol(SpectrumIdentificationProtocol spectrumIdentificationProtocol) {
         this.spectrumIdentificationProtocol = spectrumIdentificationProtocol;
         if (spectrumIdentificationProtocol != null) {
-            this.setSpectrumIdentificationProtocolRef(spectrumIdentificationProtocol.getId());
+            this.spectrumIdentificationProtocolRef = spectrumIdentificationProtocol.getId();
         }
     }
 
@@ -160,6 +160,9 @@ public class SpectrumIdentification
      */
     public void setSpectrumIdentificationProtocolRef(String value) {
         this.spectrumIdentificationProtocolRef = value;
+        if ( spectrumIdentificationProtocol != null && !spectrumIdentificationProtocol.getId().equals(value) ) {
+            spectrumIdentificationProtocol = null;
+        }
     }
 
     /**
@@ -184,6 +187,9 @@ public class SpectrumIdentification
      */
     public void setSpectrumIdentificationListRef(String value) {
         this.spectrumIdentificationListRef = value;
+        if ( spectrumIdentificationList != null && !spectrumIdentificationList.getId().equals(value) ) {
+            spectrumIdentificationList = null;
+        }
     }
 
 }

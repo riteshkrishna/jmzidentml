@@ -118,7 +118,7 @@
         <dependency>
             <groupId>psidev.psi.tools</groupId>
             <artifactId>xxindex</artifactId>
-            <version>0.10</version>
+            <version>0.11</version>
         </dependency>
     </dependencies>
 
@@ -159,7 +159,6 @@
             <layout>legacy</layout>
         </pluginRepository>
     </pluginRepositories>
-
 
     <distributionManagement>
         <repository>

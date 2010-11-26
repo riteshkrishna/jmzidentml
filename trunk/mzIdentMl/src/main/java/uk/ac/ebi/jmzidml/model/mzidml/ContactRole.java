@@ -49,13 +49,23 @@ public class ContactRole
     @XmlTransient
     private Contact contact;
 
+    /**
+     * Gets the value of the contact property.
+     * Note: this property may be populated automatically at unmarshal
+     * time with the Object referenced with the contactRef property.
+     *
+     * @see uk.ac.ebi.jmzidml.MzIdentMLElement#isAutoRefResolving()
+     * @return Valid values are Person or Organisation objects.
+     */
     public Contact getContact() {
         return contact;
     }
 
     /**
-     * Note: setting a Contact object will update the contactRef element with
-     * the id from the new Contact object.
+     * Sets a Contact reference. Setting a Contact object will update
+     * the contactRef element with the id from the new Contact object.
+     * Note: if the contact object is null, the contactRef ID is NOT
+     * changed, only the object reference is set to null.
      *
      * @see #contactRef
      * @param contact the Contact to reference from this ContactRole.
@@ -63,7 +73,7 @@ public class ContactRole
     public void setContact(Contact contact) {
         this.contact = contact;
         if (contact != null) {
-            this.setContactRef( contact.getId() );
+            this.contactRef = contact.getId();
         }
     }
 
@@ -112,7 +122,10 @@ public class ContactRole
      *     
      */
     public void setContactRef(String value) {
-        this.contactRef = value;
+        contactRef = value;
+        if ( contact != null && !contact.getId().equals(value) ) {
+            contact = null;
+        }
     }
 
 }

@@ -98,7 +98,7 @@ public class SpectrumIdentificationItem
     public void setPeptide(Peptide peptide) {
         this.peptide = peptide;
         if (peptide != null) {
-            this.setPeptideRef(peptide.getId());
+            this.peptideRef = peptide.getId();
         }
     }
 
@@ -109,7 +109,7 @@ public class SpectrumIdentificationItem
     public void setMassTable(MassTable massTable) {
         this.massTable = massTable;
         if (massTable != null) {
-            this.setMassTableRef(massTable.getId());
+            this.massTableRef = massTable.getId();
         }
     }
 
@@ -120,7 +120,7 @@ public class SpectrumIdentificationItem
     public void setSample(Sample sample) {
         this.sample = sample;
         if (sample != null) {
-            this.setSampleRef(sample.getId());
+            this.sampleRef = sample.getId();
         }
     }
 
@@ -309,6 +309,9 @@ public class SpectrumIdentificationItem
      */
     public void setPeptideRef(String value) {
         this.peptideRef = value;
+        if ( peptide != null && !peptide.getId().equals(value) ) {
+            peptide = null;
+        }
     }
 
     /**
@@ -365,6 +368,9 @@ public class SpectrumIdentificationItem
      */
     public void setMassTableRef(String value) {
         this.massTableRef = value;
+        if ( massTable != null && !massTable.getId().equals(value) ) {
+            massTable = null;
+        }
     }
 
     /**
@@ -389,6 +395,9 @@ public class SpectrumIdentificationItem
      */
     public void setSampleRef(String value) {
         this.sampleRef = value;
+        if ( sample != null && !sample.getId().equals(value) ) {
+            sample = null;
+        }
     }
 
 }
