@@ -47,7 +47,7 @@ public class InputSpectra
     public void setSpectraData(SpectraData spectraData) {
         this.spectraData = spectraData;
         if (spectraData != null) {
-            this.setSpectraDataRef(spectraData.getId());
+            this.spectraDataRef = spectraData.getId();
         }
     }
 
@@ -73,6 +73,9 @@ public class InputSpectra
      */
     public void setSpectraDataRef(String value) {
         this.spectraDataRef = value;
+        if ( spectraData != null && !spectraData.getId().equals(value) ) {
+            spectraData = null;
+        }
     }
 
 }

@@ -44,7 +44,7 @@ public class SearchDatabase
     public void setSearchDatabase(AnalysisSearchDatabase analysisSearchDatabase) {
         this.analysisSearchDatabase = analysisSearchDatabase;
         if (analysisSearchDatabase != null) {
-            this.setSearchDatabaseRef(analysisSearchDatabase.getId());
+            this.searchDatabaseRef = analysisSearchDatabase.getId();
         }
     }
 
@@ -70,6 +70,9 @@ public class SearchDatabase
      */
     public void setSearchDatabaseRef(String value) {
         this.searchDatabaseRef = value;
+        if ( analysisSearchDatabase != null && !analysisSearchDatabase.getId().equals(value) ) {
+            analysisSearchDatabase = null;
+        }
     }
 
 }

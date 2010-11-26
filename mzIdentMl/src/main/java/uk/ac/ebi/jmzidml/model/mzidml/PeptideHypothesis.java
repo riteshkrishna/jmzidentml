@@ -44,7 +44,7 @@ public class PeptideHypothesis
     public void setPeptideEvidence(PeptideEvidence peptideEvidence) {
         this.peptideEvidence = peptideEvidence;
         if (peptideEvidence != null) {
-            this.setPeptideEvidenceRef(peptideEvidence.getId());
+            this.peptideEvidenceRef = peptideEvidence.getId();
         }
     }
 
@@ -70,6 +70,9 @@ public class PeptideHypothesis
      */
     public void setPeptideEvidenceRef(String value) {
         this.peptideEvidenceRef = value;
+        if ( peptideEvidence != null && !peptideEvidence.getId().equals(value) ) {
+            peptideEvidence = null;
+        }
     }
 
 }

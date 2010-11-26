@@ -19,6 +19,10 @@ import javax.xml.transform.sax.SAXSource;
 import java.io.StringReader;
 
 /**
+ * Abstract base class for the reference resolver classes.
+ * It provides basic functionality to resolve a ID reference and unmarshal
+ * the according MzIdentMLObject.
+ *
  * @author Florian Reisinger
  *         Date: 12-Nov-2010
  * @since 1.0
@@ -56,7 +60,7 @@ public abstract class AbstractReferenceResolver<T extends MzIdentMLObject> exten
             String xml;
             // special case for Contact.class as we can either have a Person.class or a Organisation.class
             if (cls ==  Contact.class) {
-                System.out.println("SPECIAL CASE: Contact");
+                log.debug("SPECIAL CASE: Contact");
                 // see if the ID fits a Person
                 String personXML = index.getXmlString(refId, Person.class);
                 // see if the ID fits an Organisation
@@ -105,5 +109,6 @@ public abstract class AbstractReferenceResolver<T extends MzIdentMLObject> exten
     public abstract void updateObject(T object);
 
     public abstract void checkRefID(T object);
-
+    
+    // ToDo: update all the resolver and corresponding classes with id consistency methods
 }

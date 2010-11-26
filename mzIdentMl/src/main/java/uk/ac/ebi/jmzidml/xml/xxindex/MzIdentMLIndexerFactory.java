@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 import psidev.psi.tools.xxindex.SimpleXmlElementExtractor;
 import psidev.psi.tools.xxindex.StandardXpathAccess;
 import psidev.psi.tools.xxindex.XmlElementExtractor;
-import psidev.psi.tools.xxindex.XpathAccess;
 import psidev.psi.tools.xxindex.index.IndexElement;
 import psidev.psi.tools.xxindex.index.XpathIndex;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
@@ -43,7 +42,7 @@ public class MzIdentMLIndexerFactory {
     private class MzIdentMLIndexerImpl implements MzIdentMLIndexer {
 
         private File xmlFile = null;
-        private XpathAccess xpathAccess = null;
+        private StandardXpathAccess xpathAccess = null;
         private XmlElementExtractor xmlExtractor = null;
         private XpathIndex index = null;
         private String mzIdentMLAttributeXMLString = null;
@@ -112,15 +111,21 @@ public class MzIdentMLIndexerFactory {
             }
         }
 
+        /**
+         *
+         * @param xpathExpression the xpath defining the XML element.
+         * @return the number of XML elements matching the xpath or -1
+         *         if no elements were found for the specified xpath.
+         */
         public int getCount(String xpathExpression) {
-            int retval = 0;
+            int retValue = -1;
             if (index.containsXpath(xpathExpression)) {
                 List<IndexElement> tmpList = index.getElements(xpathExpression);
                 if (tmpList != null) {
-                    retval = tmpList.size();
+                    retValue = tmpList.size();
                 }
             }
-            return retval;
+            return retValue;
         }
 
         public List<IndexElement> getIndexElements(String xpath) {
@@ -131,6 +136,7 @@ public class MzIdentMLIndexerFactory {
             return index.getKeys();
         }
 
+        // ToDo: maybe generify to <T extends IdentifiableMzIdentMLObject>  Class<T>  ??
         public String getXmlString(String ID, Class clazz) {
             logger.debug("Getting cached ID: " + ID + " from cache: " + clazz);
 
@@ -146,6 +152,28 @@ public class MzIdentMLIndexerFactory {
             }
             return xmlSnippet;
 
+        }
+
+        public String getStartTag(String id, Class clazz) {
+            logger.debug("Getting start tag of element with id: " + id + " for class: " + clazz);
+            String tag = null;
+
+            HashMap<String, IndexElement> idMap = idMapCache.get(clazz);
+            if (idMap != null) {
+                IndexElement element = idMap.get(id);
+                if (element != null) {
+                    try {
+                        tag = xpathAccess.getStartTag(element);
+                    } catch (IOException e) {
+                        // ToDo: proper handling
+                        e.printStackTrace();
+                    }
+                } else {
+                    // ToDo: what if the element exists, but its id was not cached?
+                    // ToDo: throw an exception?
+                }
+            }
+            return tag;
         }
 
         public <T extends MzIdentMLObject> Set<String> getElementIDs(Class<T> clazz) {
@@ -237,13 +265,7 @@ public class MzIdentMLIndexerFactory {
         private void initIdMapCache(HashMap<String, IndexElement> idMap, String xpath) throws IOException {
             List<IndexElement> ranges = index.getElements(xpath);
             for (IndexElement byteRange : ranges) {
-                // in some cases the XML element can be extremely big (for example: /mzIdentML/DataCollection)
-                // and cause memory problems. Since we only need the id attribute (which usually follows just
-                // behind the element opening tag, we don't need to read the whole XML element. We read the
-                // first 500 characters of the XML element, which should be enough to extract the id.
-                // ToDo: find better way to determine how long to read! Some elements have multiple long attributes. Ideally only read the full start tag!
-                // ToDo: position stream at beginning of element and read until the next stop signal ('>').
-                String xml = readXML(byteRange, 500);
+                String xml = xpathAccess.getStartTag(byteRange);
                 String id = getIdFromRawXML(xml);
                 if (id != null) {
                     idMap.put(id, byteRange);
@@ -255,13 +277,14 @@ public class MzIdentMLIndexerFactory {
 
         private String getIdFromRawXML(String xml) {
             Matcher match = ID_PATTERN.matcher(xml);
+
+            // ToDo: more checks: if no id found or more than one match, ...
             if (match.find()) {
                 return match.group(1).intern();
             } else {
                 throw new IllegalStateException("Invalid ID in xml: " + xml);
             }
         }
-
 
 
 

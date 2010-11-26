@@ -66,7 +66,7 @@ public class ProteinDetectionHypothesis
     public void setDBSequence(DBSequence dbSequence) {
         this.dbSequence = dbSequence;
         if (dbSequence != null) {
-            this.setDBSequenceRef(dbSequence.getId());
+            this.dbSequenceRef = dbSequence.getId();
         }
     }
 
@@ -151,6 +151,9 @@ public class ProteinDetectionHypothesis
      */
     public void setDBSequenceRef(String value) {
         this.dbSequenceRef = value;
+        if ( dbSequence != null && !dbSequence.getId().equals(value) ) {
+            dbSequence = null;
+        }
     }
 
     /**

@@ -90,7 +90,7 @@ public class SpectrumIdentificationProtocol
     public void setAnalysisSoftware(AnalysisSoftware analysisSoftware) {
         this.analysisSoftware = analysisSoftware;
         if (analysisSoftware != null) {
-            this.setAnalysisSoftwareRef(analysisSoftware.getId());
+            this.analysisSoftwareRef = analysisSoftware.getId();
         }
     }
 
@@ -361,6 +361,9 @@ public class SpectrumIdentificationProtocol
      */
     public void setAnalysisSoftwareRef(String value) {
         this.analysisSoftwareRef = value;
+        if ( analysisSoftware != null && !analysisSoftware.getId().equals(value) ) {
+            analysisSoftware = null;
+        }
     }
 
 }

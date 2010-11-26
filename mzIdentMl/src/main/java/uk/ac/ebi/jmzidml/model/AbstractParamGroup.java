@@ -9,12 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ *
  * @author Florian Reisinger
  *         Date: 08-Nov-2010
- * @since $version
+ * @since 1.0
  */
 public abstract class AbstractParamGroup implements ParamGroupCapable {
 
+    // ToDo: ?? perhaps solve in getter methods (without storing in separate lists) ??
     @XmlTransient
     private List<CvParam> cvParams;
     @XmlTransient
@@ -53,6 +55,7 @@ public abstract class AbstractParamGroup implements ParamGroupCapable {
         }
     }
 
+    // ToDo: document that the List<Param> is cleared on marshalling!
     public void updateParamList() {
         // whatever we had in the List of Params, we only
         // consider what is in the CvParam/UserParam lists now.

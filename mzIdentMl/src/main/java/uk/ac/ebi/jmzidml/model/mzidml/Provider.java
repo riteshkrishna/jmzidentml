@@ -62,7 +62,7 @@ public class Provider
     public void setSoftware(AnalysisSoftware software) {
         this.software = software;
         if (software != null) {
-            this.setSoftwareRef(software.getId());
+            this.softwareRef = software.getId();
         }
     }
 
@@ -112,6 +112,9 @@ public class Provider
      */
     public void setSoftwareRef(String value) {
         this.softwareRef = value;
+        if ( software != null && !software.getId().equals(value) ) {
+            software = null;
+        }
     }
 
 }

@@ -44,7 +44,7 @@ public class InputSpectrumIdentifications
     public void setSpectrumIdentificationList(SpectrumIdentificationList spectrumIdentificationList) {
         this.spectrumIdentificationList = spectrumIdentificationList;
         if (spectrumIdentificationList != null) {
-            this.setSpectrumIdentificationListRef(spectrumIdentificationList.getId());
+            this.spectrumIdentificationListRef = spectrumIdentificationList.getId();
         }
     }
 
@@ -70,6 +70,9 @@ public class InputSpectrumIdentifications
      */
     public void setSpectrumIdentificationListRef(String value) {
         this.spectrumIdentificationListRef = value;
+        if ( spectrumIdentificationList != null && !spectrumIdentificationList.getId().equals(value) ) {
+            spectrumIdentificationList = null;
+        }
     }
 
 }

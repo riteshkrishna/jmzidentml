@@ -61,7 +61,7 @@ public class ProteinDetection
     public void setProteinDetectionList(ProteinDetectionList proteinDetectionList) {
         this.proteinDetectionList = proteinDetectionList;
         if (proteinDetectionList != null) {
-            this.setProteinDetectionListRef(proteinDetectionList.getId());
+            this.proteinDetectionListRef = proteinDetectionList.getId();
         }
     }
 
@@ -72,7 +72,7 @@ public class ProteinDetection
     public void setProteinDetectionProtocol(ProteinDetectionProtocol proteinDetectionProtocol) {
         this.proteinDetectionProtocol = proteinDetectionProtocol;
         if (proteinDetectionProtocol != null) {
-            this.setProteinDetectionProtocolRef(proteinDetectionProtocol.getId());
+            this.proteinDetectionProtocolRef = proteinDetectionProtocol.getId();
         }
     }
 
@@ -127,6 +127,9 @@ public class ProteinDetection
      */
     public void setProteinDetectionListRef(String value) {
         this.proteinDetectionListRef = value;
+        if ( proteinDetectionList != null && !proteinDetectionList.getId().equals(value) ) {
+            proteinDetectionList = null;
+        }
     }
 
     /**
@@ -151,6 +154,9 @@ public class ProteinDetection
      */
     public void setProteinDetectionProtocolRef(String value) {
         this.proteinDetectionProtocolRef = value;
+        if ( proteinDetectionProtocol != null && !proteinDetectionProtocol.getId().equals(value) ) {
+            proteinDetectionProtocol = null;
+        }
     }
 
 }

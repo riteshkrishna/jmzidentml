@@ -48,7 +48,7 @@ public class CvParam
     public void setCv(Cv cv) {
         this.cv = cv;
         if (cv != null) {
-            this.setCvRef(cv.getId());
+            this.cvRef = cv.getId();
         }
     }
 
@@ -74,6 +74,9 @@ public class CvParam
      */
     public void setCvRef(String value) {
         this.cvRef = value;
+        if ( cv != null && !cv.getId().equals(value) ) {
+            cv = null;
+        }
     }
 
     /**

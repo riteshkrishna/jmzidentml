@@ -49,7 +49,7 @@ public class FragmentArray
     public void setMeasure(Measure measure) {
         this.measure = measure;
         if (measure != null) {
-            this.setMeasureRef(measure.getId());
+            this.measureRef = measure.getId();
         }
     }
 
@@ -104,6 +104,9 @@ public class FragmentArray
      */
     public void setMeasureRef(String value) {
         this.measureRef = value;
+        if ( measure != null && !measure.getId().equals(value) ) {
+            measure = null;
+        }
     }
 
 }
