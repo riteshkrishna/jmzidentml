@@ -19,10 +19,10 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.sax.SAXSource;
-import javax.xml.xpath.XPathException;
 import java.io.File;
 import java.io.StringReader;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -35,9 +35,11 @@ public class MzIdentMLUnmarshaller {
     private final MzIdentMLIndexer index;
     private final MzIdentMLObjectCache cache;
 
-    private final Pattern ID_PATTERN = Pattern.compile("id *= *\"([^\"]*)?\"", Pattern.CASE_INSENSITIVE);
-    private final Pattern AC_PATTERN = Pattern.compile("accession *= *\"([^\"]*)?\"", Pattern.CASE_INSENSITIVE);
-    private final Pattern VERSION_PATTERN = Pattern.compile("version *= *\"([^\"]*)?\"", Pattern.CASE_INSENSITIVE);
+    // ToDo: update pattern to be XML spec compliant (e.g. allow any kind of white space and allow single or double quotes)
+    private static final Pattern ID_PATTERN = Pattern.compile("id *= *\"([^\"]*)?\"", Pattern.CASE_INSENSITIVE);
+    private static final Pattern VERSION_PATTERN = Pattern.compile("version *= *\"([^\"]*)?\"", Pattern.CASE_INSENSITIVE);
+    // ToDo: this pattern may be a little too generic... try to find a better one!
+    private static final Pattern XML_ATT_PATTERN = Pattern.compile("\\s+([A-Za-z:]+)\\s*=\\s*[\"'](.+?)[\"']", Pattern.DOTALL);
 
     ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
     // Constructor
@@ -74,15 +76,6 @@ public class MzIdentMLUnmarshaller {
         }
     }
 
-    public String getMzIdentMLAccession() {
-        Matcher match = AC_PATTERN.matcher(index.getMzIdentMLAttributeXMLString());
-        if (match.find()) {
-            return match.group(1);
-        } else {
-            return null;
-        }
-    }
-
     public String getMzIdentMLId() {
         Matcher match = ID_PATTERN.matcher(index.getMzIdentMLAttributeXMLString());
         if (match.find()) {
@@ -92,7 +85,40 @@ public class MzIdentMLUnmarshaller {
         }
     }
 
-    // ToDo: methods with xpath or with class or MzIdentMLElement or all?
+    /**
+     * Method to retrieve attribute name-value pairs for a XML element
+     * defined by it's id and Class.
+     *
+     * @param id the value of the 'id' attribute of the XML element.
+     * @param clazz the Class representing the XML element.
+     * @return A map of all the found name-value attribute pairs or
+     *         null if no element with the specified id was found.
+     */
+    public Map<String, String> getElementAttributes(String id, Class clazz) {
+        Map<String, String> attributes = new HashMap<String, String>();
+        // retrieve the start tag of the corresponding XML element
+        String tag = index.getStartTag(id, clazz);
+        if (tag == null) {
+            return null;
+        }
+
+        // parse the tag for attributes
+        Matcher match = XML_ATT_PATTERN.matcher(tag);
+        while (match.find()) {
+            if (match.groupCount() == 2) {
+                // found name - value pair
+                String name = match.group(1);
+                String value = match.group(2);
+                // stick the found attributes in the map
+                attributes.put(name, value);
+            } else {
+                // not a name - value pair, something is wrong!
+                System.out.println("Unexpected number of groups for XML attribute: " + match.groupCount() + " in tag: " + tag);
+            }
+
+        }
+        return attributes;
+    }
 
     /**
      * @see uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer#getCount(String)  
@@ -133,7 +159,6 @@ public class MzIdentMLUnmarshaller {
      *       no order is guaranteed! Use appropriate methods to check that there is only
      *       one such element or to deal with a collection of elements.
      *
-     * @see #getObjectCount(uk.ac.ebi.jmzidml.MzIdentMLElement)
      * @see #unmarshalCollectionFromXpath(uk.ac.ebi.jmzidml.MzIdentMLElement)
      * @param element The MzIdentMLElement defining the type of element to unmarshal.
      * @return A MzIdentMLObject according to the type defined by the MzIdentMLElement.
