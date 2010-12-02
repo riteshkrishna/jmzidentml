@@ -35,11 +35,10 @@ public class MzIdentMLUnmarshaller {
     private final MzIdentMLIndexer index;
     private final MzIdentMLObjectCache cache;
 
-    // ToDo: update pattern to be XML spec compliant (e.g. allow any kind of white space and allow single or double quotes)
-    private static final Pattern ID_PATTERN = Pattern.compile("id *= *\"([^\"]*)?\"", Pattern.CASE_INSENSITIVE);
-    private static final Pattern VERSION_PATTERN = Pattern.compile("version *= *\"([^\"]*)?\"", Pattern.CASE_INSENSITIVE);
-    // ToDo: this pattern may be a little too generic... try to find a better one!
-    private static final Pattern XML_ATT_PATTERN = Pattern.compile("\\s+([A-Za-z:]+)\\s*=\\s*[\"'](.+?)[\"']", Pattern.DOTALL);
+    // maybe those pattern are a bit too generic, but it works fine for now
+    private static final Pattern ID_PATTERN = Pattern.compile("id\\s*=\\s*[\"']([^\"'>]*)?[\"']", Pattern.CASE_INSENSITIVE);
+    private static final Pattern VERSION_PATTERN = Pattern.compile("version\\s*=\\s*[\"']([^\"'>]*)?[\"']", Pattern.CASE_INSENSITIVE);
+    private static final Pattern XML_ATT_PATTERN = Pattern.compile("\\s+([A-Za-z:]+)\\s*=\\s*[\"']([^\"'>]+?)[\"']", Pattern.DOTALL);
 
     ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
     // Constructor
