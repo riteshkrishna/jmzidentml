@@ -172,7 +172,7 @@ public class MzIdentMLUnmarshaller {
     }
 
     public <T extends MzIdentMLObject> Iterator<T> unmarshalCollectionFromXpath(MzIdentMLElement element) {
-        // toDo: Check with Richard!!
+        // caching deactivated
 //        int indexCnt = getObjectCount(element);
 //
 //        if (cache != null) {

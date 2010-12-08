@@ -15,6 +15,9 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author Florian Reisinger
@@ -47,6 +50,7 @@ public class MzIdentMLMarshaller {
         this.marshall(object, new OutputStreamWriter(os));
     }
 
+    @SuppressWarnings("unchecked")
     public <T extends MzIdentMLObject> void marshall(T object, Writer out) {
 
         if (object == null) {
@@ -79,6 +83,98 @@ public class MzIdentMLMarshaller {
     }
 
 
+    public String createXmlHeader() {
+        String encoding = System.getProperty("file.encoding");
+        return "<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>";
+    }
 
+    public String createMzIdentMLStartTag(String id) {
+        StringBuffer sb = new StringBuffer();
+
+        // tag opening plus id attribute
+        sb.append("<mzIdentML id=\"").append(id).append("\"");
+        // further attributes
+        sb.append(" version=\"1.0.0\"");
+        sb.append(" xmlns=\"http://psidev.info/psi/pi/mzIdentML/1.0\"");
+        sb.append(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"");
+        sb.append(" xsi:schemaLocation=\"http://psidev.info/psi/pi/mzIdentML/1.0 http://www.psidev.info/files/mzIdentML1.0.0.xsd\"");
+        DateFormat dfm = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
+        sb.append(" creationDate=\"").append( dfm.format(new Date()) ).append("\"");
+        // finally close the tag
+        sb.append(" >");
+
+        return sb.toString();
+    }
+
+    public String createMzIdentMLClosingTag() {
+        return "</mzIdentML>";
+    }
+
+    public String createDataCollectionStartTag() {
+        return "<DataCollection>";
+    }
+
+    public String createDataCollectionClosingTag() {
+        return "</DataCollection>";
+    }
+
+    public String createAnalysisDataStartTag() {
+        return "<AnalysisData>";
+    }
+
+    public String createAnalysisDataClosingTag() {
+        return "</AnalysisData>";
+    }
+
+    public String createProteinDetectionListStartTag(String id, String name) {
+        if (id == null) {
+            throw new IllegalArgumentException("The 'id' attribute must not be null!");
+        }
+        // allowed attributes: 'id', 'name'
+
+        StringBuffer sb = new StringBuffer();
+
+        // tag opening plus id attribute
+        sb.append("<ProteinDetectionList id=\"").append(id).append("\"");
+        // the 'name' attribute, if provided
+        if (name != null) {
+            sb.append(" name=\"").append(name).append("\"");
+        }
+        // finally close the tag
+        sb.append(" >");
+
+        return sb.toString();
+    }
+
+    public String createProteinDetectionListClosingTag() {
+        return "</ProteinDetectionList>";
+    }
+
+    public String createSpectrumIdentificationListStartTag(String id, String name, Long numSeqSearched) {
+        if (id == null) {
+            throw new IllegalArgumentException("The 'id' attribute must not be null!");
+        }
+        // allowed attributes: 'id', 'name', 'numSequencesSearched'
+
+        StringBuffer sb = new StringBuffer();
+
+        // tag opening plus id attribute
+        sb.append("<SpectrumIdentificationList id=\"").append(id).append("\"");
+        // the attributes, if provided
+        if (name != null) {
+            sb.append(" name=\"").append(name).append("\"");
+        }
+        if (numSeqSearched != null) {
+            sb.append(" numSequencesSearched=\"").append(numSeqSearched).append("\"");
+        }
+        // finally close the tag
+        sb.append(" >");
+
+        return sb.toString();
+    }
+
+    public String createSpectrumIdentificationListClosingTag() {
+        return "</SpectrumIdentificationList>";
+    }
 
 }
