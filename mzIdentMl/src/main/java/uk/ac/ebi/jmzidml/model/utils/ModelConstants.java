@@ -22,7 +22,7 @@
 
 package uk.ac.ebi.jmzidml.model.utils;
 
-import uk.ac.ebi.jmzidml.model.mzidml.CvList;
+import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.MzIdentML;
 
 import javax.xml.namespace.QName;
@@ -45,8 +45,11 @@ public class ModelConstants {
     private static Map<Class, QName> modelQNames = new HashMap<Class, QName>();
 
     static {
-        modelQNames.put(CvList.class, new QName(MZIDML_NS, "cvList"));
-        modelQNames.put(MzIdentML.class, new QName(MZIDML_NS,"mzIdentML"));
+        for (MzIdentMLElement element : MzIdentMLElement.values()) {
+            if (element.getTagName() != null) {
+                modelQNames.put(element.getClazz(), new QName(MZIDML_NS, element.getTagName()));
+            }
+        }
         //now make set unmodifiable
         modelQNames = Collections.unmodifiableMap(modelQNames);
 

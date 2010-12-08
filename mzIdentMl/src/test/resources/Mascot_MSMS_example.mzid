@@ -7,10 +7,10 @@
     <cvList>
         <cv id="PSI-MS" fullName="Proteomics Standards Initiative Mass Spectrometry Vocabularies"
             URI="http://psidev.cvs.sourceforge.net/viewvc/*checkout*/psidev/psi/psi-ms/mzML/controlledVocabulary/psi-ms.obo"
-            version="2.25.0"></cv>
-        <cv id="UNIMOD" fullName="UNIMOD" URI="http://www.unimod.org/obo/unimod.obo"></cv>
+            version="2.25.0"/>
+        <cv id="UNIMOD" fullName="UNIMOD" URI="http://www.unimod.org/obo/unimod.obo"/>
         <cv id="UO" fullName="UNIT-ONTOLOGY"
-            URI="http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/phenotype/unit.obo"></cv>
+            URI="http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/phenotype/unit.obo"/>
     </cvList>
     <AnalysisSoftwareList>
         <AnalysisSoftware id="AS_mascot_server" name="Mascot Server" version="2.2.03"
