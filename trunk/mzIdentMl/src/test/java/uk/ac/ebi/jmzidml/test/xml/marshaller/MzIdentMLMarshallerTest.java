@@ -1,5 +1,6 @@
 package uk.ac.ebi.jmzidml.test.xml.marshaller;
 
+import org.junit.Test;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.*;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLMarshaller;
@@ -24,6 +25,7 @@ import static junit.framework.Assert.assertNotNull;
 public class MzIdentMLMarshallerTest {
 
 
+    @Test
     public void testIncrementalMarshalling() throws IOException {
 
         URL xmlFileURL = MzIdentMLMarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
