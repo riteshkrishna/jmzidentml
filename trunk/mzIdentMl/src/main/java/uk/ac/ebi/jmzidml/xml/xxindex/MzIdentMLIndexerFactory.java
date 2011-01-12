@@ -176,6 +176,14 @@ public class MzIdentMLIndexerFactory {
             return tag;
         }
 
+        public boolean isIDmapped(String id, Class clazz) {
+            if (clazz == null) {
+                return false;
+            }
+            HashMap<String, IndexElement> idMap = idMapCache.get(clazz);
+            return idMap != null && idMap.containsKey(id);
+        }
+
         public <T extends MzIdentMLObject> Set<String> getElementIDs(Class<T> clazz) {
             if (idMapCache == null) { return null; }
             HashMap<String, IndexElement> classCache = idMapCache.get(clazz);
@@ -261,7 +269,6 @@ public class MzIdentMLIndexerFactory {
             }
         }
 
-        // ToDo: optimise this! it could break as it is now!
         private void initIdMapCache(HashMap<String, IndexElement> idMap, String xpath) throws IOException {
             List<IndexElement> ranges = index.getElements(xpath);
             for (IndexElement byteRange : ranges) {

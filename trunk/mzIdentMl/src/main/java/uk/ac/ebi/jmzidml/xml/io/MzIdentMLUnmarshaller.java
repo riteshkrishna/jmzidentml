@@ -190,6 +190,15 @@ public class MzIdentMLUnmarshaller {
         return new MzIdentMLObjectIterator<T>(element, index, cache);
     }
 
+    public <T extends MzIdentMLObject> T unmarshall(Class<T> clazz, String id) throws JAXBException {
+        if (!index.isIDmapped(id, clazz)) {
+            throw new IllegalArgumentException("No entry found for ID: " + id + " and Class: " + clazz
+                    + ". Make sure the element you are looking for has an ID attribute and is id-mapped!");
+        }
+        String xmlSt = index.getXmlString(id, clazz);
+        return generateObject(clazz, xmlSt);
+    }
+
     ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
     // private Methods
 
@@ -223,24 +232,7 @@ public class MzIdentMLUnmarshaller {
 
                 String xmlSt = xpathIter.next();
 
-                if (logger.isDebugEnabled()) {
-                    logger.trace("XML to unmarshal: " + xmlSt);
-                }
-
-                // Create a filter to intercept events -- and patch the missing namespace
-                MzIdentMLNamespaceFilter xmlFilter = new MzIdentMLNamespaceFilter();
-
-                //required for the addition of namespaces to top-level objects
-                //MzMLNamespaceFilter xmlFilter = new MzMLNamespaceFilter();
-                //initializeUnmarshaller will assign the proper reader to the xmlFilter
-                Unmarshaller unmarshaller = UnmarshallerFactory.getInstance().initializeUnmarshaller(index, cache, xmlFilter);
-                //unmarshall the desired object
-                JAXBElement<T> holder = unmarshaller.unmarshal(new SAXSource(xmlFilter, new InputSource(new StringReader(xmlSt))), cls);
-                retval = holder.getValue();
-
-                if (logger.isDebugEnabled()) {
-                    logger.debug("unmarshalled object = " + retval);
-                }
+                retval = generateObject(cls, xmlSt);
 
             }
 
@@ -251,7 +243,28 @@ public class MzIdentMLUnmarshaller {
         return retval;
     }
 
+    private <T extends MzIdentMLObject> T generateObject(Class<T> cls, String xmlSt) throws JAXBException {
+        T retval;
+        if (logger.isDebugEnabled()) {
+            logger.trace("XML to unmarshal: " + xmlSt);
+        }
 
-    
+        // Create a filter to intercept events -- and patch the missing namespace
+        MzIdentMLNamespaceFilter xmlFilter = new MzIdentMLNamespaceFilter();
+
+        //required for the addition of namespaces to top-level objects
+        //MzMLNamespaceFilter xmlFilter = new MzMLNamespaceFilter();
+        //initializeUnmarshaller will assign the proper reader to the xmlFilter
+        Unmarshaller unmarshaller = UnmarshallerFactory.getInstance().initializeUnmarshaller(index, cache, xmlFilter);
+        //unmarshall the desired object
+        JAXBElement<T> holder = unmarshaller.unmarshal(new SAXSource(xmlFilter, new InputSource(new StringReader(xmlSt))), cls);
+        retval = holder.getValue();
+
+        if (logger.isDebugEnabled()) {
+            logger.debug("unmarshalled object = " + retval);
+        }
+        return retval;
+    }
+
 
 }
