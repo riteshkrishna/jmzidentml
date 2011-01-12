@@ -52,4 +52,6 @@ public interface MzIdentMLIndexer {
     public String getStartTag(String id, Class clazz);
 
     public String getMzIdentMLAttributeXMLString();
+
+    public boolean isIDmapped(String id, Class clazz);
 }
