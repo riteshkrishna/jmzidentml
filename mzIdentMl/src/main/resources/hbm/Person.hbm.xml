@@ -1,0 +1,7 @@
+<hibernate-mapping>
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Person" table="Person" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.Contact">
+        <property name="lastName" type="java.lang.String"/>
+        <property name="firstName" type="java.lang.String"/>
+        <property name="midInitials" type="java.lang.String"/>
+    </union-subclass>
+</hibernate-mapping>

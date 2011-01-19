@@ -1,0 +1,9 @@
+<hibernate-mapping>
+    <class name="uk.ac.ebi.jmzidml.model.mzidml.IonType" table="IonType" catalog="mzidentml">
+        <id name="hid" type="java.lang.Long">
+            <column name="hid"/>
+            <generator class="sequence"/>
+        </id>
+        <property name="charge" type="java.lang.Integer"/>
+    </class>
+</hibernate-mapping>

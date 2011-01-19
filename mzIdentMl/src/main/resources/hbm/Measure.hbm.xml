@@ -1,0 +1,4 @@
+<hibernate-mapping>
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Measure" table="Measure" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
+    </union-subclass>
+</hibernate-mapping>

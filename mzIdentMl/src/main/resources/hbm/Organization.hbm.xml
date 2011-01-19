@@ -1,0 +1,4 @@
+<hibernate-mapping>
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Organization" table="Organization" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.Contact">
+    </union-subclass>
+</hibernate-mapping>

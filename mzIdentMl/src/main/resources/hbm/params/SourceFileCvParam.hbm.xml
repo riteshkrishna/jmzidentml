@@ -1,0 +1,4 @@
+<hibernate-mapping>
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.params.SourceFileCvParam" table="SourceFileCvParam" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.CvParam">
+    </union-subclass>
+</hibernate-mapping>

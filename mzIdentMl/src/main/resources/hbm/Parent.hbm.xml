@@ -1,0 +1,9 @@
+<hibernate-mapping>
+    <class name="uk.ac.ebi.jmzidml.model.mzidml.Parent" table="Parent" catalog="mzidentml">
+        <id name="hid" type="java.lang.Long">
+            <column name="hid"/>
+            <generator class="sequence"/>
+        </id>
+        <property name="organizationRef" type="java.lang.String"/>
+    </class>
+</hibernate-mapping>

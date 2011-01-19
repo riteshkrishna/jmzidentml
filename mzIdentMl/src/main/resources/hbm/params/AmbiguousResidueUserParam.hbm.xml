@@ -1,0 +1,4 @@
+<hibernate-mapping>
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.params.AmbiguousResidueUserParam" table="AmbiguousResidueUserParam" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.UserParam">
+    </union-subclass>
+</hibernate-mapping>
