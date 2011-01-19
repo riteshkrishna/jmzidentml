@@ -1,0 +1,5 @@
+<hibernate-mapping>
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Peptide" table="Peptide" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.ConceptualMolecule">
+        <property name="peptideSequence" type="java.lang.String"/>
+    </union-subclass>
+</hibernate-mapping>

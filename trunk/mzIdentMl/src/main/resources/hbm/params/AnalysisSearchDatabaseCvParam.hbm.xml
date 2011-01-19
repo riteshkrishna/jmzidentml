@@ -1,0 +1,4 @@
+<hibernate-mapping>
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.params.AnalysisSearchDatabaseCvParam" table="AnalysisSearchDatabaseCvParam" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.CvParam">
+    </union-subclass>
+</hibernate-mapping>

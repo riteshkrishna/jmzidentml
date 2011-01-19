@@ -1,0 +1,4 @@
+<hibernate-mapping>
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.ProteinAmbiguityGroup" table="ProteinAmbiguityGroup" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.AbstractIdentifiableParamGroup">
+    </union-subclass>
+</hibernate-mapping>

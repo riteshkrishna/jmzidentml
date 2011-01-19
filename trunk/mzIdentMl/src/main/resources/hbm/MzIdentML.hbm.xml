@@ -1,0 +1,13 @@
+<hibernate-mapping>
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.MzIdentML" table="MzIdentML" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
+        <id name="hid" type="java.lang.Long">
+            <column name="hid"/>
+            <generator class="sequence"/>
+        </id>
+        <property name="id" type="java.lang.String">
+            <column name="table_id"/>
+        </property>
+        <property name="name" type="java.lang.String"/>
+        <property name="version" type="java.lang.String"/>
+    </union-subclass>
+</hibernate-mapping>

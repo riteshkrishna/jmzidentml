@@ -1,0 +1,8 @@
+<hibernate-mapping>
+    <class name="uk.ac.ebi.jmzidml.model.mzidml.AbstractParamGroup" catalog="mzidentml" abstract="true">
+        <id name="hid" type="java.lang.Long">
+            <column name="hid"/>
+            <generator class="sequence"/>
+        </id>
+        </class>
+</hibernate-mapping>

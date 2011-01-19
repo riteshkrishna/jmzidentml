@@ -1,0 +1,16 @@
+<hibernate-mapping>
+    <class name="uk.ac.ebi.jmzidml.model.mzidml.Modification" table="Modification" catalog="mzidentml">
+        <id name="hid" type="java.lang.Long">
+            <column name="hid"/>
+            <generator class="sequence"/>
+        </id>
+        <property name="location" type="java.lang.Integer"/>
+        <property name="avgMassDelta" type="java.lang.Double"/>
+        <property name="monoisotopicMassDelta" type="java.lang.Double"/>
+        <list name="residues" table="ModParam_residues">
+	        <key column="ModParam_hid" />
+	        <list-index column="index" />
+	        <element type="java.lang.String"/>
+        </list>
+    </class>
+</hibernate-mapping>

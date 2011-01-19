@@ -1,0 +1,12 @@
+<hibernate-mapping>
+    <class name="uk.ac.ebi.jmzidml.model.mzidml.Identifiable" catalog="mzidentml" abstract="true">
+        <id name="hid" type="java.lang.Long">
+            <column name="hid"/>
+            <generator class="sequence"/>
+        </id>
+        <property name="id" type="java.lang.String">
+            <column name="table_id"/>
+        </property>
+        <property name="name" type="java.lang.String"/>
+    </class>
+</hibernate-mapping>

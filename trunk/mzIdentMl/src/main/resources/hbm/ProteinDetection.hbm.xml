@@ -1,0 +1,7 @@
+<hibernate-mapping>
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.ProteinDetection" table="ProteinDetection" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.ProtocolApplication">
+        <property name="proteinDetectionListRef" type="java.lang.String"/>
+        <property name="proteinDetectionProtocolRef" type="java.lang.String"/>
+        
+    </union-subclass>
+</hibernate-mapping>
