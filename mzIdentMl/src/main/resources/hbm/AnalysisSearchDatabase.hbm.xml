@@ -10,7 +10,8 @@
         <property name="numDatabaseSequences" type="java.lang.Long"/>
         <property name="numResidues" type="java.lang.Long"/>
         <property name="databaseName" type="uk.ac.ebi.jmzidml.model.mzidml.ParamAlternative"/>
-        <many-to-one name="databaseName" cascade="all" class="uk.ac.ebi.jmzidml.model.mzidml.ParamAlternative"/>
+
+
         <list name="cvParam" cascade="all">
                 <key column="hid"/>
                 <index column="idx"/>
