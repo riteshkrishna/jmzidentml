@@ -4,5 +4,7 @@
             <column name="hid"/>
             <generator class="sequence"/>
         </id>
+        <many-to-one name="cvParam" class="uk.ac.ebi.jmzidml.model.mzidml.CvParam" cascade="all"/>
+        <many-to-one name="userParam" class="uk.ac.ebi.jmzidml.model.mzidml.UserParam" cascade="all"/>
     </class>
 </hibernate-mapping>

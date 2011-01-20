@@ -1,5 +1,4 @@
 <hibernate-mapping>
-    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.AbstractIdentifiableParamGroup" catalog="mzidentml" abstract="true">
-        <property name="name" type="java.lang.String"/>
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.AbstractIdentifiableParamGroup" extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable" catalog="mzidentml" abstract="true">
     </union-subclass>
 </hibernate-mapping>

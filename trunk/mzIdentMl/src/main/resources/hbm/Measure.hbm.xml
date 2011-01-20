@@ -1,4 +1,10 @@
 <hibernate-mapping>
-    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Measure" table="Measure" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Measure" table="Measure" catalog="mzidentml"
+                    extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
+        <list name="cvParam" cascade="all">
+            <key column="cvParam_hid"/>
+            <index column="cvParam_idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.CvParam"/>
+        </list>
     </union-subclass>
 </hibernate-mapping>

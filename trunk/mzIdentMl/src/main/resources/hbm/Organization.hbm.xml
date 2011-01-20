@@ -1,4 +1,6 @@
 <hibernate-mapping>
-    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Organization" table="Organization" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.Contact">
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Organization" table="Organization" catalog="mzidentml"
+                    extends="uk.ac.ebi.jmzidml.model.mzidml.Contact">
+        <many-to-one name="parent" class="uk.ac.ebi.jmzidml.model.mzidml.Organization.Parent" cascade="all"/>
     </union-subclass>
 </hibernate-mapping>

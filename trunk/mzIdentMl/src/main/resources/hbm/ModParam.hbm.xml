@@ -5,8 +5,8 @@
             <generator class="sequence"/>
         </id>
         <property name="massDelta" type="java.lang.Float"/>
-        <list name="residues" table="ModParam_residues">
-	        <key column="ModParam_hid" />
+        <list name="residues">
+	        <key column="hid" />
 	        <list-index column="index" />
 	        <element type="java.lang.String"/>
         </list>
