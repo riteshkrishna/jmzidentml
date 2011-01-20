@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="uk.ac.ebi.jmzidml.model.mzidml.ContactRole" table="ContactRole" catalog="mzidentml">
+        <id name="hid" type="java.lang.Long">
+            <column name="hid" />
+            <generator class="sequence" />
+        </id>
+        <property name="role" type="uk.ac.ebi.jmzidml.model.mzidml.Role"/>
+        <property name="contact" type="uk.ac.ebi.jmzidml.model.mzidml.Contact"/>
+        <property name="contactRef" type="java.lang.String"/>
+    </class>
+</hibernate-mapping>

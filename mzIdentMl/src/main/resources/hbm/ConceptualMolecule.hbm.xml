@@ -1,0 +1,4 @@
+<hibernate-mapping>
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.ConceptualMolecule" table="ConceptualMolecule" catalog="mzidentml" abstract="true" extends="uk.ac.ebi.jmzidml.model.AbstractIdentifiableParamGroup">
+    </union-subclass>
+</hibernate-mapping>

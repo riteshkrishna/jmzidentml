@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.DBSequence" table="DBSequence" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.ConceptualMolecule">
+        <property name="seq" type="java.lang.String" >
+
+        </property>
+        <property name="length" type="java.lang.Integer"/>
+        <property name="name" type="java.lang.String"/>
+        <property name="accession" type="java.lang.String"/>
+        <property name="analysisSearchDatabase" type="uk.ac.ebi.jmzidml.model.mzidml.AnalysisSearchDatabase"/>
+         <list name="paramGroup" cascade="all">
+            <key column="hid"/>
+            <index column="idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.Param"/>
+        </list>
+    </union-subclass>
+</hibernate-mapping>

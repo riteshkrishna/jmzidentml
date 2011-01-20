@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="uk.ac.ebi.jmzidml.model.mzidml.AuditCollection" table="AuditCollection" catalog="mzidentml">
+        <id name="hid" type="java.lang.Long">
+            <generator class="sequence" />
+        </id>
+
+    <list name="contactGroup" cascade="all">
+            <key column="hid"/>
+            <index column="idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.Contact"/>
+    </list>
+    </class>
+</hibernate-mapping>

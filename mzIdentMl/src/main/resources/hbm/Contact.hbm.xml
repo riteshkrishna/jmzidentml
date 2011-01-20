@@ -1,0 +1,9 @@
+<hibernate-mapping>
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Contact" abstract="true" table="Contact" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
+    <property name="address" type="java.lang.String"/>
+    <property name="phone" type="java.lang.String"/>
+    <property name="email" type="java.lang.String"/>
+    <property name="fax" type="java.lang.String"/>
+    <property name="tollFreePhone" type="java.lang.String"/>
+    </union-subclass>
+</hibernate-mapping>
