@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationItem" table="SpectrumIdentification"
+                    catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
+
+        <list name="peptideEvidence" cascade="all">
+            <key column="peptideEvidence_hid"/>
+            <index column="peptideEvidence_idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidence"/>
+        </list>
+
+        <list name="cvParam" cascade="all" inverse="true">
+            <key column="cvParam_hid" not-null="true"/>
+            <index column="cvParam_idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.CvParam"/>
+        </list>
+
+        <list name="userParam" inverse="true" cascade="all">
+            <key column="userParam_hid" not-null="true"/>
+            <index column="userParam_idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.UserParam"/>
+        </list>
+
+        <many-to-one name="fragmentation" class="uk.ac.ebi.jmzidml.model.mzidml.Fragmentation" cascade="all"/>
+
+        <many-to-one name="peptide" class="uk.ac.ebi.jmzidml.model.mzidml.Peptide" cascade="all"/>
+
+        <many-to-one name="massTable" class="uk.ac.ebi.jmzidml.model.mzidml.MassTable" cascade="all"/>
+
+        <many-to-one name="sample" class="uk.ac.ebi.jmzidml.model.mzidml.Sample" cascade="all"/>
+
+        <property name="chargeState" type="java.lang.Integer"/>
+
+        <property name="calculatedPI" type="java.lang.Float"/>
+
+        <property name="calculatedMassToCharge" type="java.lang.Double"/>
+
+        <property name="experimentalMassToCharge" type="java.lang.Double"/>
+
+        <property name="passThreshold" type="java.lang.Boolean"/>
+
+    </union-subclass>
+</hibernate-mapping>

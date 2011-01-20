@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Provider" table="Provider" catalog="mzidentml"
+                    extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
+
+        <many-to-one name="analysisSoftware" class="uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftware" cascade="all"
+                     column="analysisSoftware_hid"/>
+
+        <many-to-one name="contactRole" class="uk.ac.ebi.jmzidml.model.mzidml.ContactRole" cascade="all"
+                     column="contactRole_hid"/>
+
+    </union-subclass>
+</hibernate-mapping>

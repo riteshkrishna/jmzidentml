@@ -1,7 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
 <hibernate-mapping>
-    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.ProteinDetection" table="ProteinDetection" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.ProtocolApplication">
-        <property name="proteinDetectionListRef" type="java.lang.String"/>
-        <property name="proteinDetectionProtocolRef" type="java.lang.String"/>
-        
-    </union-subclass>
+	<union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.ProteinDetection"
+		table="ProteinDetection" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.ProtocolApplication">
+
+		<!--<many-to-one name="proteinAmbiguityGroup" cascade="all"-->
+			<!--column="proteinAmbiguityGroup_hid" not-null="true"-->
+			<!--class="uk.ac.ebi.jmzidml.model.mzidml.ProteinAmbiguityGroup" />-->
+
+		<many-to-one name="proteinDetectionProtocol" cascade="all"
+			column="proteinDetectionProtocol_hid" not-null="true"
+			class="uk.ac.ebi.jmzidml.model.mzidml.ProteinDetectionProtocol" />
+
+		<many-to-one name="proteinDetectionList" cascade="all"
+			column="proteinDetectionProtocol_hid" not-null="true"
+			class="uk.ac.ebi.jmzidml.model.mzidml.ProteinDetectionList" />
+
+		<list name="inputSpectrumIdentifications" inverse="true" cascade="all">
+			<key column="inputspectrumidentifications_hid" not-null="true" />
+			<index column="inputSpectrumIdentificationsidx" />
+			<one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.InputSpectrumIdentifications" />
+		</list>
+
+	</union-subclass>
 </hibernate-mapping>
