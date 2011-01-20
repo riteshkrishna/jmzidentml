@@ -2,10 +2,8 @@
 package uk.ac.ebi.jmzidml.model.mzidml;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
@@ -47,6 +45,17 @@ public class Filter
     protected ParamAlternativeList include;
     @XmlElement(name = "Exclude")
     protected ParamAlternativeList exclude;
+
+    @XmlTransient
+    protected Long hid;
+
+    public Long getHid() {
+        return hid;
+    }
+
+    public void setHid(Long hid) {
+        this.hid = hid;
+    }
 
     /**
      * Gets the value of the filterType property.

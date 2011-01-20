@@ -2,11 +2,8 @@
 package uk.ac.ebi.jmzidml.model.mzidml;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
@@ -84,6 +81,17 @@ public class Enzyme
     protected Integer missedCleavages;
     @XmlAttribute
     protected Integer minDistance;
+
+    @XmlTransient
+    protected Long hid;
+
+    public Long getHid() {
+        return hid;
+    }
+
+    public void setHid(Long hid) {
+        this.hid = hid;
+    }
 
     /**
      * Gets the value of the siteRegexp property.
@@ -214,6 +222,19 @@ public class Enzyme
      *     
      */
     public Boolean isSemiSpecific() {
+        return semiSpecific;
+    }
+
+    /**
+     * Gets the value of the semiSpecific property. Hibernate hbm files dont seem to recognise isSemiSpecific
+     * so this method was added.
+     *
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *
+     */
+    public Boolean getSemiSpecific() {
         return semiSpecific;
     }
 

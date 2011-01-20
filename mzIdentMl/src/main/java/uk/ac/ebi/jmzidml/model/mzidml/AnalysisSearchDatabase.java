@@ -50,6 +50,15 @@ public class AnalysisSearchDatabase
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "DatabaseName", required = true)
     protected ParamAlternative databaseName;
+
+    public List<CvParam> getCvParam() {
+        return cvParam;
+    }
+
+    public void setCvParam(List<CvParam> cvParam) {
+        this.cvParam = cvParam;
+    }
+
     protected List<CvParam> cvParam;
     @XmlAttribute
     protected String version;
@@ -106,7 +115,7 @@ public class AnalysisSearchDatabase
      * 
      * 
      */
-    public List<CvParam> getCvParam() {
+    public List<CvParam> getCvParams() {
         if (cvParam == null) {
             cvParam = new ArrayList<CvParam>();
         }
