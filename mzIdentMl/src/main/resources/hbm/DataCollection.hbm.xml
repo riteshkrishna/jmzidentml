@@ -8,8 +8,11 @@
             <column name="hid" />
             <generator class="sequence" />
         </id>
-        <many-to-one name="inputs" cascade="all" class="uk.ac.ebi.jmzidml.model.mzidml.Inputs"/>
+<!--         <many-to-one name="inputs" cascade="all" class="uk.ac.ebi.jmzidml.model.mzidml.Inputs"/>
         <many-to-one name="analysisData" cascade="all" class="uk.ac.ebi.jmzidml.model.mzidml.AnalysisData"/>
+     -->
+        <property name="inputs" type="uk.ac.ebi.jmzidml.model.mzidml.Inputs"/>
+        <property name="analysisData" type="uk.ac.ebi.jmzidml.model.mzidml.AnalysisData"/>
     </class>
 
 
