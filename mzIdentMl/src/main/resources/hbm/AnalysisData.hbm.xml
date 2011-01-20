@@ -14,5 +14,8 @@
             <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentification"/>
         </list>
         <many-to-one name="proteinDetectionList" cascade="all" class="uk.ac.ebi.jmzidml.model.mzidml.ProteinDetection"/>
+
+        <!-- <many-to-one name="proteinDetectionList" cascade="all" class="uk.ac.ebi.jmzidml.model.mzidml.ProteinDetection"/> -->
+        <property name="proteinDetectionList" type="uk.ac.ebi.jmzidml.model.mzidml.ProteinDetectionList"/>
     </class>
 </hibernate-mapping>
