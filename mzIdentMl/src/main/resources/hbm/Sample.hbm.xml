@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Sample" table="Sample" catalog="mzidentml"
+                    extends="uk.ac.ebi.jmzidml.model.mzidml.Material">
+
+        <list name="subSample" cascade="all">
+            <key column="subSample_hid"/>
+            <index column="subColumn_idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.SubSample"/>
+        </list>
+
+    </union-subclass>
+</hibernate-mapping>

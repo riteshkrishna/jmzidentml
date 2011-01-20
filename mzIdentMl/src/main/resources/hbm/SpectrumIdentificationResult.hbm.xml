@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationResult"
+                    table="SpectrumIdentificationResult" catalog="mzidentml"
+                    extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
+
+        <property name="spectrumID" type="java.lang.String">
+            <column name="spectrumid"/>
+        </property>
+        <!--<property name="spectraDataRef" type="java.lang.String">-->
+        <!--<column name="spectradata_hid" />-->
+        <!--</property>-->
+        <list name="cvParam" inverse="true" cascade="all">
+            <key column="cvParams_hid" not-null="true"/>
+            <index column="cvParam_idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.CvParam"/>
+        </list>
+        <list name="userParam" inverse="true" cascade="all">
+            <key column="userParams_hid" not-null="true"/>
+            <index column="userParam_idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.UserParam"/>
+        </list>
+        <list name="spectrumIdentificationItem" cascade="all">
+            <key column="spectrumIdentificationItem_hid" not-null="true"/>
+            <index column="spectrumIdentificationItem_idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationItem"/>
+        </list>
+    </union-subclass>
+</hibernate-mapping>

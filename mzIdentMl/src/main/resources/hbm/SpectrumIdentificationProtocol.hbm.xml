@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationProtocol"
+                    table="SpectrumIdentificationProtocol" catalog="mzidentml"
+                    extends="uk.ac.ebi.jmzidml.model.mzidml.Protocol">
+
+        <many-to-one name="additionalSearchParams" class="uk.ac.ebi.jmzidml.model.mzidml.ParamAlternativeList"
+                     cascade="all">
+            <column name="additionalsearchparams_hid"/>
+        </many-to-one>
+        <many-to-one name="databaseFilters" class="uk.ac.ebi.jmzidml.model.mzidml.DatabaseFilters" cascade="all">
+            <column name="databaseFilters_hid"/>
+        </many-to-one>
+        <many-to-one name="databaseTranslation" class="uk.ac.ebi.jmzidml.model.mzidml.DatabaseTranslation"
+                     cascade="all">
+            <column name="databaseTranslation_hid"/>
+        </many-to-one>
+        <many-to-one name="enzymes" class="uk.ac.ebi.jmzidml.model.mzidml.Enzymes">
+            <column name="enzymes_hid"/>
+        </many-to-one>
+        <many-to-one name="fragmentTolerance" class="uk.ac.ebi.jmzidml.model.mzidml.Tolerance" cascade="all">
+            <column name="fragmentTolerance_hid"/>
+        </many-to-one>
+        <many-to-one name="modificationParams" class="uk.ac.ebi.jmzidml.model.mzidml.ModificationParams" cascade="all">
+            <column name="modificationParams_hid"/>
+        </many-to-one>
+        <many-to-one name="parentTolerance" class="uk.ac.ebi.jmzidml.model.mzidml.Tolerance" cascade="all">
+            <column name="parentTolerance_hid"/>
+        </many-to-one>
+        <many-to-one name="searchType" class="uk.ac.ebi.jmzidml.model.mzidml.ParamAlternative" cascade="all">
+            <column name="searcType_hid"/>
+        </many-to-one>
+        <many-to-one name="threshold" class="uk.ac.ebi.jmzidml.model.mzidml.ParamAlternativeList" cascade="all">
+            <column name="threshold_hid"/>
+        </many-to-one>
+
+        <list name="massTable" inverse="true" cascade="all">
+            <key column="massTable_id"/>
+            <index column="massTable_idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.MassTable"/>
+        </list>
+    </union-subclass>
+</hibernate-mapping>

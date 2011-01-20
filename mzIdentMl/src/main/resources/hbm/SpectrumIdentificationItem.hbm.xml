@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationItem" table="SpectrumIdentificationItem"
+                    catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
+
+        <property name="calculatedMassToCharge" type="java.lang.Double">
+            <column name="calculatedmasstocharge" precision="22" scale="0"/>
+        </property>
+        <property name="calculatedPI" type="java.lang.Float">
+            <column name="calculatedpi" precision="12" scale="0"/>
+        </property>
+        <property name="chargeState" type="java.lang.Integer">
+            <column name="chargestate" not-null="true"/>
+        </property>
+        <property name="experimentalMassToCharge" type="java.lang.Double">
+            <column name="experimentalmasstocharge" precision="22" scale="0" not-null="true"/>
+        </property>
+        <property name="passThreshold" type="java.lang.Boolean">
+            <column name="passthreshold" not-null="true"/>
+        </property>
+        <property name="rank" type="java.lang.Integer">
+            <column name="rank" not-null="true"/>
+        </property>
+
+    </union-subclass>
+</hibernate-mapping>

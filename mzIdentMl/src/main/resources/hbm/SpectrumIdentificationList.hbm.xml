@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationList" table="SpectrumIdentificationList"
+                    catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.InternalData">
+
+        <list name="cvParam" cascade="all" inverse="true">
+            <key column="cvParam_hid" not-null="true"/>
+            <index column="cvParam_idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.CvParam"/>
+        </list>
+
+        <list name="userParam" inverse="true" cascade="all">
+            <key column="userParam_hid" not-null="true"/>
+            <index column="userParam_idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.UserParam"/>
+        </list>
+
+        <many-to-one name="fragmentationTable" class="uk.ac.ebi.jmzidml.model.mzidml.FragmentationTable"
+                     column="fragramentationTable_hid" cascade="all"/>
+
+        <list name="spectrumIdentificationResult" cascade="all">
+            <key column="spectrumIdentificationResult_hid"/>
+            <index column="spectrumIdentificationResult_idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationResult"/>
+        </list>
+
+        <property name="numSequencesSearched" type="java.lang.Long"/>
+
+    </union-subclass>
+</hibernate-mapping>
