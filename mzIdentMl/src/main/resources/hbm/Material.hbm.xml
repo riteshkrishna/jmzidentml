@@ -1,4 +1,15 @@
 <hibernate-mapping>
-    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Material" abstract="true" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.AbstractIdentifiableParamGroup">
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Material" abstract="true" catalog="mzidentml"
+                    extends="uk.ac.ebi.jmzidml.model.mzidml.AbstractIdentifiableParamGroup">
+        <list name="contactRole" cascade="all">
+            <key column="contactRole_hid"/>
+            <index column="contactRole_idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.ContactRole"/>
+        </list>
+        <list name="paramGroup" cascade="all">
+            <key column="paramGroup_hid"/>
+            <index column="paramGroup_idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.Param"/>
+        </list>
     </union-subclass>
 </hibernate-mapping>

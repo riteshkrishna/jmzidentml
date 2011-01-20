@@ -4,5 +4,10 @@
             <column name="hid"/>
             <generator class="sequence"/>
         </id>
+        <list name="searchModification" cascade="all">
+            <key column="searchModification_hid"/>
+            <index column="searchModification_idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.SearchModification"/>
+        </list>
     </class>
 </hibernate-mapping>

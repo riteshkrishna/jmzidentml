@@ -1,4 +1,15 @@
 <hibernate-mapping>
-    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.ProteinAmbiguityGroup" table="ProteinAmbiguityGroup" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.AbstractIdentifiableParamGroup">
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.ProteinAmbiguityGroup" table="ProteinAmbiguityGroup"
+                    catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.AbstractIdentifiableParamGroup">
+        <list name="proteinDetectionHypothesis" cascade="all">
+            <key column="proteinDetectionHypothesis_hid"/>
+            <index column="proteinDetectionHypothesis_idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.ProteinDetectionHypothesis"/>
+        </list>
+        <list name="paramGroup" cascade="all">
+            <key column="paramGroup_hid"/>
+            <index column="paramGroup_idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.Param"/>
+        </list>
     </union-subclass>
 </hibernate-mapping>

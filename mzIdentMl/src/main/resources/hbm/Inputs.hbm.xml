@@ -4,5 +4,20 @@
             <column name="hid"/>
             <generator class="sequence"/>
         </id>
+        <list name="sourceFile" cascade="all">
+            <key column="sourceFile_hid"/>
+            <index column="sourceFile_idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.SourceFile"/>
+        </list>
+        <list name="searchDatabase" cascade="all">
+            <key column="searchDatabase_hid"/>
+            <index column="searchDatabase_idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.AnalysisSearchDatabase"/>
+        </list>
+        <list name="spectraData" cascade="all">
+            <key column="spectraData_hid"/>
+            <index column="spectraData_idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.SpectraData"/>
+        </list>
     </class>
 </hibernate-mapping>

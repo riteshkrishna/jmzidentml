@@ -4,5 +4,15 @@
             <column name="hid"/>
             <generator class="sequence"/>
         </id>
+        <list name="cvParams" cascade="all">
+            <key column="cvParams_hid"/>
+            <index column="cvParams_idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.CvParam"/>
+        </list>
+        <list name="userParam" cascade="all">
+            <key column="userParam_hid"/>
+            <index column="userParam_idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.UserParam"/>
+        </list>
         </class>
 </hibernate-mapping>

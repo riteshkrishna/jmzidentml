@@ -7,10 +7,15 @@
         <property name="location" type="java.lang.Integer"/>
         <property name="avgMassDelta" type="java.lang.Double"/>
         <property name="monoisotopicMassDelta" type="java.lang.Double"/>
-        <list name="residues" table="ModParam_residues">
-	        <key column="ModParam_hid" />
-	        <list-index column="index" />
-	        <element type="java.lang.String"/>
+        <list name="paramGroup" cascade="all">
+            <key column="paramGroup_hid"/>
+            <index column="paramGroup_idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.Param"/>
+        </list>
+        <list name="residues">
+            <key column="hid"/>
+            <list-index column="modification_index"/>
+            <element type="java.lang.String"/>
         </list>
     </class>
 </hibernate-mapping>
