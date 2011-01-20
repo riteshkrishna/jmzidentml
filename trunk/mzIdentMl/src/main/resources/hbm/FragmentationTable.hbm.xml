@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="uk.ac.ebi.jmzidml.model.mzidml.FragmentationTable" table="FragmentationTable" catalog="mzidentml">
+        <id name="hid" type="java.lang.Long">
+            <column name="hid" />
+            <generator class="assigned" />
+        </id>
+        <list name="measure" cascade="all">
+                <key column="hid"/>
+                <index column="idx"/>
+                <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.Measure"/>
+        </list>
+    </class>
+</hibernate-mapping>

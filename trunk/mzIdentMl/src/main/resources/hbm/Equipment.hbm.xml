@@ -1,0 +1,6 @@
+<hibernate-mapping>
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Equipment" table="Equipment" abstract="true" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
+        <many-to-one name="make" cascade="all" class="uk.ac.ebi.jmzidml.model.mzidml.ParamAlternative"/>
+        <many-to-one name="model" cascade="all" class="uk.ac.ebi.jmzidml.model.mzidml.ParamAlternative"/>
+    </union-subclass>
+</hibernate-mapping>

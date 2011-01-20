@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="uk.ac.ebi.jmzidml.model.mzidml.Enzyme" table="Enzyme" catalog="mzidentml">
+        <id name="hid" type="java.lang.Long">
+            <column name="hid" />
+            <generator class="sequence" />
+        </id>
+        <property name="id" type="java.lang.String">
+        <column name="table_id"/>
+        </property>
+        <property name="siteRegexp" type="java.lang.String"/>
+        <property name="NTermGain" type="java.lang.String"/>
+        <property name="CTermGain" type="java.lang.String"/>
+        <property name="missedCleavages" type="java.lang.Integer"/>
+        <property name="semiSpecific" type="java.lang.Boolean"/>
+        <property name="minDistance" type="java.lang.Integer"/>
+        <many-to-one name="enzymeName" cascade="all" class="uk.ac.ebi.jmzidml.model.mzidml.ParamAlternativeList"/>
+
+    </class>
+</hibernate-mapping>
