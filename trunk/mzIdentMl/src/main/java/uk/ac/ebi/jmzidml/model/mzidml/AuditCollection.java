@@ -37,6 +37,16 @@ import java.util.List;
 public class AuditCollection
     implements Serializable, MzIdentMLObject
 {
+    @XmlTransient
+    protected Long hid;
+
+    public Long getHid() {
+        return hid;
+    }
+
+    public void setHid(Long hid) {
+        this.hid = hid;
+    }
 
     private final static long serialVersionUID = 100L;
     @XmlElements({

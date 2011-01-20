@@ -35,6 +35,16 @@ import java.io.Serializable;
 public class Cv
     implements Serializable, MzIdentMLObject, IdentifiableMzIdentMLObject
 {
+    @XmlTransient
+    protected Long hid;
+
+    public Long getHid() {
+        return hid;
+    }
+
+    public void setHid(Long hid) {
+        this.hid = hid;
+    }
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(required = true)

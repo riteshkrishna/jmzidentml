@@ -42,6 +42,18 @@ public class FragmentArray
     @XmlTransient
     private Measure measure;
 
+    @XmlTransient
+    protected Long hid;
+
+    public Long getHid() {
+        return hid;
+    }
+
+    public void setHid(Long hid) {
+        this.hid = hid;
+    }
+
+
     public Measure getMeasure() {
         return measure;
     }

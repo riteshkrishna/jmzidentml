@@ -59,6 +59,14 @@ public class DBSequence
     @XmlAttribute(required = true)
     protected String accession;
 
+    public AnalysisSearchDatabase getAnalysisSearchDatabase() {
+        return analysisSearchDatabase;
+    }
+
+    public void setAnalysisSearchDatabase(AnalysisSearchDatabase analysisSearchDatabase) {
+        this.analysisSearchDatabase = analysisSearchDatabase;
+    }
+
     @XmlTransient
     private AnalysisSearchDatabase analysisSearchDatabase;
 

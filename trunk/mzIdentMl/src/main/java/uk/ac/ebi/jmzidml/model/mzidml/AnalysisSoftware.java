@@ -48,6 +48,15 @@ public class AnalysisSoftware
     protected ParamAlternative softwareName;
     @XmlElement(name = "Customizations")
     protected String customizations;
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
     @XmlAttribute(name = "URI")
     @XmlSchemaType(name = "anyURI")
     protected String uri;
