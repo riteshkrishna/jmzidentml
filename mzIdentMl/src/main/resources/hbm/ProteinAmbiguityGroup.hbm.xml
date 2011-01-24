@@ -1,6 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.ProteinAmbiguityGroup" table="ProteinAmbiguityGroup"
-                    catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.AbstractIdentifiableParamGroup">
+                    catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.AbstractIdentifiableParamGroup">
         <list name="proteinDetectionHypothesis" cascade="all">
             <key column="proteinDetectionHypothesis_hid"/>
             <index column="proteinDetectionHypothesis_idx"/>

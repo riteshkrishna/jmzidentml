@@ -3,8 +3,12 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Protocol"
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Software"
                     catalog="mzidentml" abstract="true"
                     extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
+        <many-to-one name="contactRole"
+                     class="uk.ac.ebi.jmzidml.model.mzidml.ContactRole" column="contactRole_hid"
+                     not-null="true"/>
+        <property name="version" type="java.lang.String"/>
     </union-subclass>
 </hibernate-mapping>

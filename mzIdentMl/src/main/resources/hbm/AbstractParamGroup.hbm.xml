@@ -1,5 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="uk.ac.ebi.jmzidml.model.mzidml.AbstractParamGroup" catalog="mzidentml" abstract="true">
+    <class name="uk.ac.ebi.jmzidml.model.AbstractParamGroup" catalog="mzidentml" abstract="true">
         <id name="hid" type="java.lang.Long">
             <column name="hid"/>
             <generator class="sequence"/>
@@ -9,7 +12,7 @@
             <index column="cvParams_idx"/>
             <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.CvParam"/>
         </list>
-        <list name="userParam" cascade="all">
+        <list name="userParams" cascade="all">
             <key column="userParam_hid"/>
             <index column="userParam_idx"/>
             <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.UserParam"/>
