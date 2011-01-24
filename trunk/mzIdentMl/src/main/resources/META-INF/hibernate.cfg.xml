@@ -29,6 +29,46 @@
 
             <property name="hibernate.ejb.naming_strategy">uk.ac.ebi.jmzidml.persistence.hibernate.TestNamingStrategy</property>
       <!-- Mapping files -->
-      <mapping jar="hbmconfigs.jar"/>
+
+
+
+    <mapping resource="hbm/ModParam.hbm.xml"/>
+    <mapping resource="hbm/MzIdentML.hbm.xml"/>
+    <mapping resource="hbm/Organization.hbm.xml"/>
+    <mapping resource="hbm/Param.hbm.xml"/>
+    <mapping resource="hbm/ParamAlternative.hbm.xml"/>
+    <mapping resource="hbm/ParamAlternativeList.hbm.xml"/>
+    <mapping resource="hbm/Parent.hbm.xml"/>
+    <mapping resource="hbm/Peptide.hbm.xml"/>
+    <mapping resource="hbm/PeptideEvidence.hbm.xml"/>
+    <mapping resource="hbm/PeptideHypothesis.hbm.xml"/>
+    <mapping resource="hbm/Person.hbm.xml"/>
+    <mapping resource="hbm/PropertyValue.hbm.xml"/>
+    <mapping resource="hbm/ProteinAmbiguityGroup.hbm.xml"/>
+    <mapping resource="hbm/ProteinDetection.hbm.xml"/>
+    <mapping resource="hbm/ProteinDetectionHypothesis.hbm.xml"/>
+    <mapping resource="hbm/ProteinDetectionList.hbm.xml"/>
+    <mapping resource="hbm/Protocol.hbm.xml"/>
+    <mapping resource="hbm/ProtocolApplication.hbm.xml"/>
+    <mapping resource="hbm/Provider.hbm.xml"/>
+    <mapping resource="hbm/Residue.hbm.xml"/>
+    <mapping resource="hbm/Sample.hbm.xml"/>
+    <mapping resource="hbm/SearchDatabase.hbm.xml"/>
+    <mapping resource="hbm/SearchModification.hbm.xml"/>
+    <mapping resource="hbm/SequenceCollection.hbm.xml"/>
+    <mapping resource="hbm/SourceFile.hbm.xml"/>
+    <mapping resource="hbm/SpecificityRules.hbm.xml"/>
+    <mapping resource="hbm/SpectraData.hbm.xml"/>
+    <mapping resource="hbm/SpectrumIdentification.hbm.xml"/>
+    <mapping resource="hbm/SpectrumIdentificationItem.hbm.xml"/>
+    <mapping resource="hbm/SpectrumIdentificationList.hbm.xml"/>
+    <mapping resource="hbm/SpectrumIdentificationProtocol.hbm.xml"/>
+    <mapping resource="hbm/SpectrumIdentificationResult.hbm.xml"/>
+    <mapping resource="hbm/SpectrumIDformat.hbm.xml"/>
+    <mapping resource="hbm/SubSample.hbm.xml"/>
+    <mapping resource="hbm/SubstitutionModification.hbm.xml"/>
+    <mapping resource="hbm/Tolerance.hbm.xml"/>
+    <mapping resource="hbm/TranslationTable.hbm.xml"/>
+    <mapping resource="hbm/UserParam.hbm.xml"/>
 </session-factory>
 </hibernate-configuration>
