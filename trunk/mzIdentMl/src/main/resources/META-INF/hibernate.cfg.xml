@@ -70,5 +70,28 @@
     <mapping resource="hbm/Tolerance.hbm.xml"/>
     <mapping resource="hbm/TranslationTable.hbm.xml"/>
     <mapping resource="hbm/UserParam.hbm.xml"/>
+
+    <mapping resource="hbm/params/AmbiguousResidueCvParam.hbm.xml"/>
+    <mapping resource="hbm/params/AmbiguousResidueUserParam.hbm.xml"/>
+    <mapping resource="hbm/params/AnalysisSearchDatabaseCvParam.hbm.xml"/>
+    <mapping resource="hbm/params/DBSequenceCvParam.hbm.xml"/>
+    <mapping resource="hbm/params/DBSequenceUserParam.hbm.xml"/>
+    <mapping resource="hbm/params/FileFormatCvParam.hbm.xml"/>
+    <mapping resource="hbm/params/IonTypeCvParam.hbm.xml"/>
+    <mapping resource="hbm/params/MassTableCvParam.hbm.xml"/>
+    <mapping resource="hbm/params/MassTableUserParam.hbm.xml"/>
+    <mapping resource="hbm/params/MeasureCvParam.hbm.xml"/>
+    <mapping resource="hbm/params/ModificationCvParam.hbm.xml"/>
+    <mapping resource="hbm/params/ModificationUserParam.hbm.xml"/>
+    <mapping resource="hbm/params/ModParamCvParam.hbm.xml"/>
+    <mapping resource="hbm/params/PeptideCvParam.hbm.xml"/>
+    <mapping resource="hbm/params/PeptideEvidenceCvParam.hbm.xml"/>
+    <mapping resource="hbm/params/PeptideEvidenceUserParam.hbm.xml"/>
+    <mapping resource="hbm/params/PeptideUserParam.hbm.xml"/>
+    <mapping resource="hbm/params/ProteinAmbiguityGroupCvParam.hbm.xml"/>
+    <mapping resource="hbm/params/ProteinAmbiguityGroupUserParam.hbm.xml"/>
+
+
+
 </session-factory>
 </hibernate-configuration>
