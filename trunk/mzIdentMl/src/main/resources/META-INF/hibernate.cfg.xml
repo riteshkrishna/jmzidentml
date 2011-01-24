@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-configuration PUBLIC
         "-//Hibernate/Hibernate Configuration DTD//EN"
-        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
     <session-factory name="oracle10g_manager">
@@ -99,6 +99,7 @@
         <mapping resource="hbm/SearchDatabase.hbm.xml"/>
         <mapping resource="hbm/SearchModification.hbm.xml"/>
         <mapping resource="hbm/SequenceCollection.hbm.xml"/>
+        <mapping resource="hbm/Software.hbm.xml"/>
         <mapping resource="hbm/SourceFile.hbm.xml"/>
         <mapping resource="hbm/SpecificityRules.hbm.xml"/>
         <mapping resource="hbm/SpectraData.hbm.xml"/>
