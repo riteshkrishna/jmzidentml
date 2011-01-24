@@ -1,3 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Equipment" table="Equipment" abstract="true" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
     <!--     <many-to-one name="make" cascade="all" class="uk.ac.ebi.jmzidml.model.mzidml.ParamAlternative"/>
