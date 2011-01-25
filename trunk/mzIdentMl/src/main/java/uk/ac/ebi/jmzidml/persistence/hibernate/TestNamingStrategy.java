@@ -1,4 +1,4 @@
-package uk.ac.ebi.jmzidml.persistence.hibernate;
+/*package uk.ac.ebi.jmzidml.persistence.hibernate;
 
 import org.hibernate.cfg.DefaultComponentSafeNamingStrategy;
 
@@ -9,7 +9,7 @@ import org.hibernate.cfg.DefaultComponentSafeNamingStrategy;
  * Time: 14:14:37
  * To change this template use File | Settings | File Templates.
  */
-public class TestNamingStrategy extends DefaultComponentSafeNamingStrategy {
+/*public class TestNamingStrategy extends DefaultComponentSafeNamingStrategy {
 
 
     private static Integer identifierLengthLimit = 30;
@@ -72,4 +72,4 @@ public class TestNamingStrategy extends DefaultComponentSafeNamingStrategy {
     }
 
 
-}
+}     */
