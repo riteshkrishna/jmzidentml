@@ -37,7 +37,9 @@ public class MzIdentMLMarshallerTest {
         MzIdentMLMarshaller m = new MzIdentMLMarshaller();
         assertNotNull(m);
 
-        FileWriter writer = new FileWriter("output.xml");
+        FileWriter writer = null;
+        try {
+        writer = new FileWriter("output.xml");
 
         // mzIdentML
         //     cvList
@@ -144,8 +146,9 @@ public class MzIdentMLMarshallerTest {
 
         writer.write(m.createMzIdentMLClosingTag());
 
-
-
+        } finally {
+            if (writer != null) writer.close();
+        }
     }
 
 }
