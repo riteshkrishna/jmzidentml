@@ -2,10 +2,10 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="uk.ac.ebi.jmzidml.model.mzidml.Param" catalog="mzidentml" abstract="true">
+    <class name="uk.ac.ebi.jmzidml.model.mzidml.Param"  abstract="true">
         <id name="hid" type="java.lang.Long">
             <column name="hid"/>
-            <generator class="sequence"/>
+            <generator class="increment"/>
         </id>
         <property name="name" type="java.lang.String"/>
         <property name="value" type="java.lang.String"/>
