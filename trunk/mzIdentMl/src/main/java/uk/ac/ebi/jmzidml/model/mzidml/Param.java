@@ -39,7 +39,8 @@ import java.io.Serializable;
 })
 public abstract class Param implements Serializable, MzIdentMLObject
 {
-
+    @XmlTransient
+    private Long hid;
     private final static long serialVersionUID = 100L;
     @XmlAttribute(required = true)
     protected String name;
@@ -172,4 +173,23 @@ public abstract class Param implements Serializable, MzIdentMLObject
         this.unitCvRef = value;
     }
 
+    /**
+     * Get the HID of the Param object
+     * should not be used in XML marhalling and unmarshalling
+     *
+     * @return
+     */
+    public Long getHid() {
+        return hid;
+    }
+
+    /**
+     * sets the HID of a param object
+     * should not be used in XML marhalling and unmarshalling
+     * 
+     * @param hid
+     */
+    public void setHid(Long hid) {
+        this.hid = hid;
+    }
 }
