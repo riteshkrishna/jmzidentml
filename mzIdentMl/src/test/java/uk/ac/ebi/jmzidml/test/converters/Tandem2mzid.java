@@ -209,7 +209,7 @@ public class Tandem2mzid {
                     fixMods +=  name + "$" + loc + ";";
 
                     uk.ac.ebi.jmzidml.model.mzidml.Modification mod = new uk.ac.ebi.jmzidml.model.mzidml.Modification();
-                    List<Param> paramList = mod.getParamGroup();
+                    List<CvParam> paramList = mod.getCvParam();
                     paramList.add(getModCV(mass));
                     mod.setMonoisotopicMassDelta(mass);
                     int pepLoc = loc - peptide.getDomainStart(); //location in Tandem is given as location within the whole protein
@@ -231,7 +231,7 @@ public class Tandem2mzid {
                     varMods +=  name + "$" + loc + ";";
 
                     uk.ac.ebi.jmzidml.model.mzidml.Modification mod = new uk.ac.ebi.jmzidml.model.mzidml.Modification();
-                    List<Param> paramList = mod.getParamGroup();
+                    List<CvParam> paramList = mod.getCvParam();
 
                     CvParam modParam = new CvParam();
 
@@ -478,7 +478,7 @@ public class Tandem2mzid {
         localCvList.add(cv3);        
     }
 
-     /*
+     /**
       *
       * Aim is to write out set up the analysisSoftwareList following this structure:
       *  <AnalysisSoftware id="ID_software" name="xtandem" version="2008.12.1.1" >
@@ -508,7 +508,7 @@ public class Tandem2mzid {
     }
 
 
-    /*
+    /**
      *  Setup Provider element as follows
      *	<Provider id="PROVIDER">
      *      <ContactRole Contact_ref="PERSON_DOC_OWNER">
@@ -534,7 +534,7 @@ public class Tandem2mzid {
         
     }
 
-    /*  TO DO Capture name and email of the user
+    /**  TO DO Capture name and email of the user
      *	<AuditCollection>
      *		<Person id="PERSON_DOC_OWNER" firstName="Andy" lastName="Jones" email="someone@someuniversity.com">
      *			<affiliations Organization_ref="ORG_DOC_OWNER"/>
@@ -569,7 +569,7 @@ public class Tandem2mzid {
     }
 
 
-    /*
+    /**
      * TODO This part is optional in the file - not yet completed
      *
      *
@@ -580,7 +580,7 @@ public class Tandem2mzid {
 
    }
 
-   /*
+   /**
     *  	<AnalysisCollection>
     *		<SpectrumIdentification id="SI_1" SpectrumIdentificationProtocol_ref="SearchProtocol" SpectrumIdentificationList_ref="siiListID" activityDate="2008-02-27T08:22:12">
     *			<InputSpectra SpectraData_ref="SD_1"/>
@@ -613,7 +613,7 @@ public class Tandem2mzid {
    }
 
 
-   /*
+   /**
     *	<AnalysisProtocolCollection>
             <SpectrumIdentificationProtocol id="SearchProtocol" AnalysisSoftware_ref="ID_software">
                     <SearchType>
@@ -840,7 +840,7 @@ public class Tandem2mzid {
 
    public void writeMzidFile(){
 
-        try{
+        try {
             FileWriter writer = new FileWriter("tandem_output.xml");
             MzIdentMLMarshaller m = new MzIdentMLMarshaller();
 
@@ -870,7 +870,7 @@ public class Tandem2mzid {
 
             // XML header
             writer.write(m.createXmlHeader() + "\n");
-            
+
 
             // mzIdentML start tag
             
@@ -879,7 +879,7 @@ public class Tandem2mzid {
 
 
             m.marshall(cvList, writer);
-            writer.write("\n");   
+            writer.write("\n");
 
             m.marshall(analysisSoftwareList, writer);
             writer.write("\n");
@@ -944,7 +944,7 @@ public class Tandem2mzid {
 
            // writer.write(m.createSpectrumIdentificationListClosingTag() + "\n");
 
-           // writer.write(m.createProteinDetectionListStartTag("PDL_1", null) + "\n");
+           writer.write(m.createProteinDetectionListStartTag("PDL_1", null) + "\n");
 
             /*
             Iterator<ProteinAmbiguityGroup> protAmbGroupIter = unmarshaller.unmarshalCollectionFromXpath(MzIdentMLElement.ProteinAmbiguityGroup);
@@ -956,9 +956,9 @@ public class Tandem2mzid {
 
              */
             
-            //writer.write(m.createProteinDetectionListClosingTag() + "\n");
+            writer.write(m.createProteinDetectionListClosingTag() + "\n");
 
-            //writer.write(m.createAnalysisDataClosingTag() + "\n");
+            writer.write(m.createAnalysisDataClosingTag() + "\n");
 
             writer.write(m.createDataCollectionClosingTag() + "\n");
 
@@ -970,14 +970,15 @@ public class Tandem2mzid {
 
             writer.write(m.createMzIdentMLClosingTag());
 
-        }
-        catch(IOException e){
+            writer.close();
+
+        } catch(IOException e){
             e.printStackTrace();
         }
 
     }
 
-    /*
+    /**
      * Method to guess the Unimod entry from a given mass
      * TODO - complete for all mods or import code to do this properly
      *
@@ -1014,7 +1015,7 @@ public class Tandem2mzid {
         return modParam;
     }
 
-    /*
+    /**
      * Helper method to setup a CvParam with CVRef, with either Daltons or ppm as units
      *
      */
