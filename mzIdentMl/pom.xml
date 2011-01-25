@@ -128,16 +128,16 @@
             <version>1.2.4</version>
         </dependency>
 
+        <!-- temporary addition for the Hibernate code -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>3.5.2-Final</version>
+            <version>3.5.1-Final</version>
         </dependency>
-
         <dependency>
-            <groupId>org.javassist</groupId>
-            <artifactId>javassist</artifactId>
-            <version>3.14.0-GA</version>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>1.0</version>
         </dependency>
 
     </dependencies>
@@ -164,6 +164,13 @@
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
+        </repository>
+
+        <!-- temporary addition for the Hibernate dependency -->
+        <repository>
+            <id>jboss-maven2-repository</id>
+            <name>JBoss maven2 repository</name>
+            <url>http://repository.jboss.org/maven2</url>
         </repository>
 
         <!-- temporary addition for the xTandem parser dependency -->
