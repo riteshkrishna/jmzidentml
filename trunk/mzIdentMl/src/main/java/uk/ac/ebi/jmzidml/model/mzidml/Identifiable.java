@@ -58,6 +58,9 @@ import java.io.Serializable;
 public abstract class Identifiable implements Serializable, MzIdentMLObject, IdentifiableMzIdentMLObject
 {
 
+    @XmlTransient
+    private Long hid;
+
     private final static long serialVersionUID = 100L;
     @XmlAttribute(required = true)
     protected String id;
@@ -111,5 +114,18 @@ public abstract class Identifiable implements Serializable, MzIdentMLObject, Ide
     public void setName(String value) {
         this.name = value;
     }
+
+    /**
+     * ID for each record
+     * @return
+     */
+    public Long getHid() {
+        return hid;
+    }
+
+    public void setHid(Long hid) {
+        this.hid = hid;
+    }
+
 
 }
