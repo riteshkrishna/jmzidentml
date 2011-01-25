@@ -51,14 +51,6 @@ public class AnalysisSearchDatabase
     @XmlElement(name = "DatabaseName", required = true)
     protected ParamAlternative databaseName;
 
-    public List<CvParam> getCvParam() {
-        return cvParam;
-    }
-
-    public void setCvParam(List<CvParam> cvParam) {
-        this.cvParam = cvParam;
-    }
-
     protected List<CvParam> cvParam;
     @XmlAttribute
     protected String version;
@@ -115,7 +107,7 @@ public class AnalysisSearchDatabase
      * 
      * 
      */
-    public List<CvParam> getCvParams() {
+    public List<CvParam> getCvParam() {
         if (cvParam == null) {
             cvParam = new ArrayList<CvParam>();
         }
