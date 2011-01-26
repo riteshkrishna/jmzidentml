@@ -10,7 +10,7 @@
         <list name="paramGroup" table="ParamAlternativeList_Param" cascade="all" access="field">
             <key column="ParamAlternative_hid"/>
             <index column="idx"/>
-            <many-to-many column="ParamGroup_hid" class="uk.ac.ebi.jmzidml.model.mzidml.Param"/>
+            <many-to-many column="Param_hid" class="uk.ac.ebi.jmzidml.model.mzidml.Param"/>
         </list>
     </class>
 </hibernate-mapping>
