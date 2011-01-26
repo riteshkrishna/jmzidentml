@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="uk.ac.ebi.jmzidml.model.mzidml.ParamAlternativeList" table="ParamAlternativeList" catalog="mzidentml">
+    <class name="uk.ac.ebi.jmzidml.model.mzidml.ParamAlternativeList" table="ParamAlternativeList">
         <id name="hid" type="java.lang.Long">
             <column name="hid"/>
-            <generator class="sequence"/>
+            <generator class="increment"/>
         </id>
+        <list name="paramGroup" table="ParamAlternativeList_Param" cascade="all" access="field">
+            <key column="ParamAlternative_hid"/>
+            <index column="idx"/>
+            <many-to-many column="ParamGroup_hid" class="uk.ac.ebi.jmzidml.model.mzidml.Param"/>
+        </list>
     </class>
 </hibernate-mapping>
