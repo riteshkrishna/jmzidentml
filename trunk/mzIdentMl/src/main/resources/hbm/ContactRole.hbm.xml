@@ -6,10 +6,10 @@
     <class name="uk.ac.ebi.jmzidml.model.mzidml.ContactRole" table="ContactRole" catalog="mzidentml">
         <id name="hid" type="java.lang.Long">
             <column name="hid" />
-            <generator class="sequence" />
+            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator" />
         </id>
-        <property name="role" type="uk.ac.ebi.jmzidml.model.mzidml.Role"/>
-        <property name="contact" type="uk.ac.ebi.jmzidml.model.mzidml.Contact"/>
+        <many-to-one name="role" cascade="all" class="uk.ac.ebi.jmzidml.model.mzidml.Role"/>
+        <many-to-one name="contact" cascade="all" class="uk.ac.ebi.jmzidml.model.mzidml.Contact"/>
         <property name="contactRef" type="java.lang.String"/>
     </class>
 </hibernate-mapping>
