@@ -3,15 +3,15 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="uk.ac.ebi.jmzidml.model.mzidml.AuditCollection" table="AuditCollection" catalog="mzidentml">
+    <class name="uk.ac.ebi.jmzidml.model.mzidml.AuditCollection" catalog="mzidentml" table="AuditCollection" >
         <id name="hid" type="java.lang.Long">
-            <generator class="sequence" />
+            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator" />
         </id>
 
-    <list name="contactGroup" cascade="all">
-            <key column="hid"/>
+    <list name="contactGroup" table="AuditCollection_Contact" cascade="all" access="field">
+            <key column="AuditCollection_hid"/>
             <index column="idx"/>
-            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.Contact"/>
+            <many-to-many column="Contact_hid" class="uk.ac.ebi.jmzidml.model.mzidml.Contact"/>
     </list>
     </class>
 </hibernate-mapping>
