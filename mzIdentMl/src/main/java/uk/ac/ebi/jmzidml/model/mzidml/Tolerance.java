@@ -43,6 +43,8 @@ public class Tolerance
     implements Serializable, MzIdentMLObject, CvParamListCapable
 {
 
+    private Long hid;
+
     private final static long serialVersionUID = 100L;
     @XmlElement(required = true)
     protected List<CvParam> cvParam;
@@ -76,4 +78,12 @@ public class Tolerance
         return this.cvParam;
     }
 
+    /**
+     * Returns the HID value from DB
+     *
+     * @return
+     */
+    public Long getHid() {
+        return hid;
+    }
 }

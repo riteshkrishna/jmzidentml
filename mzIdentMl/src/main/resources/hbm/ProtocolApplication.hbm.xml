@@ -6,14 +6,9 @@
     <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.ProtocolApplication"
                     catalog="mzidentml" abstract="true"
                     extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
-        <property name="id" type="java.lang.String">
-            <column name="table_id"/>
-        </property>
-        <property name="name" type="java.lang.String">
-            <column name="name"/>
-        </property>
+
         <property name="activityDate" type="java.sql.Timestamp">
-            <column name="activitydate" length="19"/>
+            <column name="activityDate" length="19"/>
         </property>
     </union-subclass>
 </hibernate-mapping>

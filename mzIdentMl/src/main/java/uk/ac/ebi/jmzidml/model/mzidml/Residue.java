@@ -2,10 +2,8 @@
 package uk.ac.ebi.jmzidml.model.mzidml;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
@@ -32,12 +30,23 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 public class Residue
     implements Serializable, MzIdentMLObject
 {
+    @XmlTransient
+    private Long hid;
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(name = "Code", required = true)
     protected String code;
     @XmlAttribute(name = "Mass", required = true)
     protected float mass;
+
+    /**
+     * Gets the value of the row id of the Residue table
+     *
+     * @return the hid of the table
+     */
+    public Long getHid() {
+        return hid;
+    }
 
     /**
      * Gets the value of the code property.

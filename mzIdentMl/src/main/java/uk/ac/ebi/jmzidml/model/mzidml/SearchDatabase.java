@@ -30,12 +30,23 @@ public class SearchDatabase
     implements Serializable, MzIdentMLObject
 {
 
+    @XmlTransient
+    private Long hid;
+
     private final static long serialVersionUID = 100L;
     @XmlAttribute(name = "SearchDatabase_ref")
     protected String searchDatabaseRef;
 
     @XmlTransient
     private AnalysisSearchDatabase analysisSearchDatabase;
+
+    /**
+     * Getter for hibernate don't use that method
+     * @return
+     */
+    public AnalysisSearchDatabase getAnalysisSearchDatabase() {
+        return analysisSearchDatabase;
+    }
 
     public AnalysisSearchDatabase getSearchDatabase() {
         return analysisSearchDatabase;
@@ -75,4 +86,13 @@ public class SearchDatabase
         }
     }
 
+    /**
+     * Get the value of HID from DB
+     *
+     * @return
+     */
+
+    public Long getHid() {
+        return hid;
+    }
 }

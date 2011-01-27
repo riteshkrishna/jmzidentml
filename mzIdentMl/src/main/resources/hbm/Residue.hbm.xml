@@ -4,7 +4,7 @@
 
 <hibernate-mapping>
     <class name="uk.ac.ebi.jmzidml.model.mzidml.Residue" table="Residue" catalog="mzidentml">
-        <id name="hid" type="java.lang.Long">
+        <id name="hid" type="java.lang.Long" access="field">
             <column name="hid" />
             <generator class="identity" />
         </id>
@@ -15,11 +15,5 @@
             <column name="mass" precision="12" scale="0" not-null="true" />
         </property>
 
-        <!--<property name="softwareRef" type="java.lang.String">-->
-            <!--<column name="softwareRef" />-->
-        <!--</property>-->
-        <!--<many-to-one name="contactRole" class="uk.ac.ebi.jmzidml.model.mzidml.ContactRole" column="contactRole" cascade="all"/>-->
-        <!--<many-to-one name="analysisSoftware" class="uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftware" column="analysisSoftware_hid" cascade="all"/>-->
-        
     </class>
 </hibernate-mapping>

@@ -51,6 +51,8 @@ public class SubstitutionModification
     implements Serializable, MzIdentMLObject
 {
 
+    private Long hid;
+
     private final static long serialVersionUID = 100L;
     @XmlAttribute(required = true)
     protected String originalResidue;
@@ -183,4 +185,12 @@ public class SubstitutionModification
         this.monoisotopicMassDelta = value;
     }
 
+    /**
+     * Returns the HID value from DB
+     *
+     * @return
+     */
+    public Long getHid() {
+        return hid;
+    }
 }
