@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="uk.ac.ebi.jmzidml.model.mzidml.AuditCollection" catalog="mzidentml" table="AuditCollection" >
+    <class name="uk.ac.ebi.jmzidml.model.mzidml.AuditCollection"  table="AuditCollection" >
         <id name="hid" type="java.lang.Long">
             <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator" />
         </id>
