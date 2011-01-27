@@ -2,8 +2,8 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Organization" table="Organization" catalog="mzidentml"
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Organization"
                     extends="uk.ac.ebi.jmzidml.model.mzidml.Contact">
-        <many-to-one name="parent" class="uk.ac.ebi.jmzidml.model.mzidml.Organization.Parent" cascade="all"/>
+        <many-to-one name="parent" class="uk.ac.ebi.jmzidml.model.mzidml.Organization$Parent" cascade="all"/>
     </union-subclass>
 </hibernate-mapping>
