@@ -3,16 +3,16 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="uk.ac.ebi.jmzidml.model.mzidml.Enzymes" table="Enzymes" catalog="mzidentml">
+    <class name="uk.ac.ebi.jmzidml.model.mzidml.Enzymes" catalog="mzidentml">
         <id name="hid" type="java.lang.Long">
             <column name="hid" />
-            <generator class="sequence" />
+            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator" />
         </id>
         <property name="independent" type="java.lang.Boolean"/>
-        <list name="enzyme" cascade="all">
-            <key column="hid"/>
+        <list name="enzyme" cascade="all" table="Enzymes_Enzyme" access="field">
+            <key column="Enzymes_hid"/>
             <index column="idx"/>
-            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.Enzyme"/>
+            <many-to-many column="Enzyme_hid" class="uk.ac.ebi.jmzidml.model.mzidml.Enzyme"/>
     </list>
     </class>
 </hibernate-mapping>
