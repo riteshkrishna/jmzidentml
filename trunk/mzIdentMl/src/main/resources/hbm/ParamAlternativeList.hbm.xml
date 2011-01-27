@@ -2,15 +2,11 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="uk.ac.ebi.jmzidml.model.mzidml.ParamAlternativeList" table="ParamAlternativeList">
-        <id name="hid" type="java.lang.Long">
-            <column name="hid"/>
-            <generator class="increment"/>
-        </id>
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.ParamAlternativeList" table="ParamAlternativeList" extends="uk.ac.ebi.jmzidml.model.AbstractParamGroup">
         <list name="paramGroup" table="ParamAlternativeList_Param" cascade="all" access="field">
-            <key column="ParamAlternative_hid"/>
+            <key column="ParamAlternativeList_hid"/>
             <index column="idx"/>
             <many-to-many column="Param_hid" class="uk.ac.ebi.jmzidml.model.mzidml.Param"/>
         </list>
-    </class>
+    </union-subclass>
 </hibernate-mapping>
