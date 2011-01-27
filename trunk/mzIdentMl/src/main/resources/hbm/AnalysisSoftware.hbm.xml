@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftware" catalog="mzidentml" table="AnalysisSoftware"  extends="uk.ac.ebi.jmzidml.model.mzidml.Software">
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftware"  table="AnalysisSoftware"  extends="uk.ac.ebi.jmzidml.model.mzidml.Software">
         <property name="customizations" type="java.lang.String"/>
         <property name="uri" type="java.lang.String"/>
         <!-- <property name="softwareName" type="uk.ac.ebi.jmzidml.model.mzidml.ParamAlternative"/> -->
