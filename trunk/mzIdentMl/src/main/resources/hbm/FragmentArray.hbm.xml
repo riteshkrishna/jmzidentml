@@ -3,17 +3,17 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="uk.ac.ebi.jmzidml.model.mzidml.FragmentArray" table="FragmentArray" catalog="mzidentml">
+    <class name="uk.ac.ebi.jmzidml.model.mzidml.FragmentArray" catalog="mzidentml" table="FragmentArray">
         <id name="hid" type="java.lang.Long">
             <column name="hid" />
-            <generator class="assigned" />
+            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator" />
         </id>
-        <list name="values" cascade="all" table="column_values">
-            <key column="hid"/>
+        <list name="values"  cascade="all" table="FragmentArray_values" access="field">
+            <key column="FragmentArray_hid"/>
             <index column="idx"/>
             <element type="float"/>
         </list>
-        <property name="measure" type="uk.ac.ebi.jmzidml.model.mzidml.Measure"/>
+        <many-to-one name="measure" cascade="all" class="uk.ac.ebi.jmzidml.model.mzidml.Measure"/>
         <property name="measureRef" type="java.lang.String"/>
-    </class>
+   </class>
 </hibernate-mapping>
