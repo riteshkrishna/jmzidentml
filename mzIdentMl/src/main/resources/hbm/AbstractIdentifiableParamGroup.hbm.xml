@@ -3,6 +3,6 @@
      "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <union-subclass name="uk.ac.ebi.jmzidml.model.AbstractIdentifiableParamGroup" extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable" catalog="mzidentml" abstract="true">
+    <union-subclass name="uk.ac.ebi.jmzidml.model.AbstractIdentifiableParamGroup" extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable" abstract="true">
     </union-subclass>
 </hibernate-mapping>
