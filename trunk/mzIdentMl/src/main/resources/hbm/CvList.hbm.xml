@@ -6,12 +6,12 @@
     <class name="uk.ac.ebi.jmzidml.model.mzidml.CvList" table="CvList" catalog="mzidentml">
         <id name="hid" type="java.lang.Long">
             <column name="hid" />
-            <generator class="sequence" />
+            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator" />
         </id>
-        <list name="cv" cascade="all">
-                <key column="hid"/>
+        <list name="cv" access="field" table="CvList_Cv" cascade="all">
+                <key column="CvList_hid"/>
                 <index column="idx"/>
-                <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.Cv"/>
+                <many-to-many column="Cv_hid" class="uk.ac.ebi.jmzidml.model.mzidml.Cv"/>
         </list>
 
     </class>
