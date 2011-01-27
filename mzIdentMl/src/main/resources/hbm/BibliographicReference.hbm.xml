@@ -4,7 +4,7 @@
 
 <hibernate-mapping>
 
-    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.BibliographicReference" table="BibliographicReference" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.BibliographicReference" table="BibliographicReference" extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
         <property name="authors" type="java.lang.String"/>
         <property name="publication" type="java.lang.String"/>
         <property name="publisher" type="java.lang.String"/>
