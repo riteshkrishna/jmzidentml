@@ -6,9 +6,9 @@
     <class name="uk.ac.ebi.jmzidml.model.mzidml.FileFormat" table="FileFormat" catalog="mzidentml">
         <id name="hid" type="java.lang.Long" >
             <column name="hid" />
-            <generator class="sequence" />
+            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator" />
         </id>
+    <many-to-one name="cvParam" cascade="all" class="uk.ac.ebi.jmzidml.model.mzidml.CvParam"/>
 
-    <property name="cvParam" type="uk.ac.ebi.jmzidml.model.mzidml.CvParam"/>
     </class>
 </hibernate-mapping>
