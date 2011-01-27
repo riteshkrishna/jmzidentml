@@ -6,7 +6,7 @@
     <class name="uk.ac.ebi.jmzidml.model.mzidml.Cv" table="Cv" catalog="mzidentml">
         <id name="hid" type="java.lang.Long">
             <column name="hid" />
-            <generator class="sequence" />
+            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator" />
         </id>
         <property name="id" type="java.lang.String">
             <column name="table_id" />
