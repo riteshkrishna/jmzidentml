@@ -4,10 +4,7 @@ package uk.ac.ebi.jmzidml.model.mzidml;
 import uk.ac.ebi.jmzidml.model.CvParamListCapable;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +36,9 @@ import java.util.List;
 public class SpecificityRules
     implements Serializable, MzIdentMLObject, CvParamListCapable
 {
+
+    @XmlTransient
+    private Long hid;
 
     private final static long serialVersionUID = 100L;
     @XmlElement(required = true)
@@ -73,4 +73,12 @@ public class SpecificityRules
         return this.cvParam;
     }
 
+    /**
+     * Getter for the HID from DB for the table SpecifityRules
+     *
+     * @return
+     */
+    public Long getHid() {
+        return hid;
+    }
 }

@@ -57,14 +57,14 @@ public class ProteinDetectionHypothesis
     protected boolean passThreshold;
 
     @XmlTransient
-    private DBSequence dbSequence;
+    private DBSequence dBSequence;
 
     public DBSequence getDBSequence() {
-        return dbSequence;
+        return dBSequence;
     }
 
     public void setDBSequence(DBSequence dbSequence) {
-        this.dbSequence = dbSequence;
+        this.dBSequence = dbSequence;
         if (dbSequence != null) {
             this.dbSequenceRef = dbSequence.getId();
         }
@@ -151,8 +151,8 @@ public class ProteinDetectionHypothesis
      */
     public void setDBSequenceRef(String value) {
         this.dbSequenceRef = value;
-        if ( dbSequence != null && !dbSequence.getId().equals(value) ) {
-            dbSequence = null;
+        if ( dBSequence != null && !dBSequence.getId().equals(value) ) {
+            dBSequence = null;
         }
     }
 

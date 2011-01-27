@@ -6,11 +6,9 @@
     <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Provider" table="Provider" catalog="mzidentml"
                     extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
 
-        <many-to-one name="analysisSoftware" class="uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftware" cascade="all"
-                     column="analysisSoftware_hid"/>
+        <many-to-one name="software" column="AnalysisSoftware_hid" class="uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftware" cascade="all"/>
 
-        <many-to-one name="contactRole" class="uk.ac.ebi.jmzidml.model.mzidml.ContactRole" cascade="all"
-                     column="contactRole_hid"/>
+        <many-to-one name="contactRole" column="ContactRole_hid" class="uk.ac.ebi.jmzidml.model.mzidml.ContactRole" cascade="all"/>
 
     </union-subclass>
 </hibernate-mapping>

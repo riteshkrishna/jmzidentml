@@ -35,6 +35,8 @@ public class SubSample
     implements Serializable, MzIdentMLObject
 {
 
+    private Long hid;
+
     private final static long serialVersionUID = 100L;
     @XmlAttribute(name = "Sample_ref", required = true)
     protected String sampleRef;
@@ -61,6 +63,15 @@ public class SubSample
      */
     public void setSampleRef(String value) {
         this.sampleRef = value;
+    }
+
+    /**
+     * Returns the HID value from DB
+     *
+     * @return
+     */
+    public Long getHid(){
+        return hid;
     }
 
 }

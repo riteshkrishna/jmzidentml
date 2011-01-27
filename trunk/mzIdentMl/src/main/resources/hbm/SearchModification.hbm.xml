@@ -5,21 +5,21 @@
 <hibernate-mapping>
     <class name="uk.ac.ebi.jmzidml.model.mzidml.SearchModification"
            table="SearchModification" catalog="mzidentml">
-        <id name="hid" type="java.lang.Long">
+        <id name="hid" type="java.lang.Long" access="field">
             <column name="hid"/>
             <generator class="identity"/>
         </id>
         <property name="fixedMod" type="java.lang.Boolean">
-            <column name="fixedmod" not-null="true"/>
+            <column name="fixedMod" not-null="true"/>
         </property>
 
         <many-to-one name="modParam"
-                     class="uk.ac.ebi.jmzidml.model.mzidml.ModParam" column="modParam_hid"
+                     class="uk.ac.ebi.jmzidml.model.mzidml.ModParam" column="ModParam_hid"
                      not-null="true">
         </many-to-one>
 
         <many-to-one name="specificityRules"
-                     class="uk.ac.ebi.jmzidml.model.mzidml.SpecificityRules" column="specifyRules_hid" not-null="true">
+                     class="uk.ac.ebi.jmzidml.model.mzidml.SpecificityRules" column="SpecifyRules_hid" not-null="true">
         </many-to-one>
 
     </class>

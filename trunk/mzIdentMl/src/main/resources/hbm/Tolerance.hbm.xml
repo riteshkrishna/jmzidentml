@@ -4,14 +4,14 @@
 
 <hibernate-mapping>
     <class name="uk.ac.ebi.jmzidml.model.mzidml.Tolerance" table="Tolerance" catalog="mzidentml">
-        <id name="hid" type="java.lang.Long">
+        <id name="hid" type="java.lang.Long" access="field">
             <column name="hid"/>
             <generator class="identity"/>
         </id>
 
-        <list name="cvParam" cascade="all">
-            <key column="cvParam"/>
-            <index column="cvParam_idx"/>
+        <list name="cvParam" cascade="all" access="field">
+            <key column="Tolerance_hid"/>
+            <index column="idx"/>
             <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.CvParam"/>
         </list>
 

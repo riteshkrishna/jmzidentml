@@ -7,8 +7,7 @@
                     extends="uk.ac.ebi.jmzidml.model.mzidml.ExternalData">
 
         <many-to-one name="spectrumIDFormat"
-                     class="uk.ac.ebi.jmzidml.model.mzidml.SpectrumIDFormat" column="spectrumIDFormat_hid"
-                     not-null="true"/>
-        
+                     class="uk.ac.ebi.jmzidml.model.mzidml.SpectrumIDFormat" column="spectrumIDFormat_hid"/>
+
     </union-subclass>
 </hibernate-mapping>

@@ -44,12 +44,16 @@ public class SpectrumIdentification
 {
 
     private final static long serialVersionUID = 100L;
+
     @XmlElement(name = "InputSpectra", required = true)
     protected List<InputSpectra> inputSpectra;
+
     @XmlElement(name = "SearchDatabase", required = true)
     protected List<SearchDatabase> searchDatabase;
+
     @XmlAttribute(name = "SpectrumIdentificationProtocol_ref", required = true)
     protected String spectrumIdentificationProtocolRef;
+
     @XmlAttribute(name = "SpectrumIdentificationList_ref", required = true)
     protected String spectrumIdentificationListRef;
 

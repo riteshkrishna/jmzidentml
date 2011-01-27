@@ -37,9 +37,9 @@
             <column name="threshold_hid"/>
         </many-to-one>
 
-        <list name="massTable" inverse="true" cascade="all">
-            <key column="massTable_id"/>
-            <index column="massTable_idx"/>
+        <list name="massTable" inverse="true" cascade="all" access="field">
+            <key column="SpectrumIdentificationProtocol_id"/>
+            <index column="idx"/>
             <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.MassTable"/>
         </list>
     </union-subclass>

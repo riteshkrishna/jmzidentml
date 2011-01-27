@@ -38,6 +38,8 @@ public class SpectrumIDFormat
     implements Serializable, MzIdentMLObject
 {
 
+    private Long hid;
+
     private final static long serialVersionUID = 100L;
     @XmlElement(required = true)
     protected CvParam cvParam;
@@ -66,4 +68,12 @@ public class SpectrumIDFormat
         this.cvParam = value;
     }
 
+    /**
+     * Getter for hid from DB
+     *
+     * @return
+     */
+    public Long getHid() {
+        return hid;
+    }
 }
