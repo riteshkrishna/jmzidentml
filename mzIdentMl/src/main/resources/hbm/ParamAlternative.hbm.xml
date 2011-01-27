@@ -2,12 +2,15 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="uk.ac.ebi.jmzidml.model.mzidml.ParamAlternative" table="ParamAlternative" catalog="mzidentml">
+    <class name="uk.ac.ebi.jmzidml.model.mzidml.ParamAlternativeList" table="ParamAlternativeList">
         <id name="hid" type="java.lang.Long">
             <column name="hid"/>
-            <generator class="sequence"/>
+            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator"/>
         </id>
-        <many-to-one name="cvParam" class="uk.ac.ebi.jmzidml.model.mzidml.CvParam" cascade="all"/>
-        <many-to-one name="userParam" class="uk.ac.ebi.jmzidml.model.mzidml.UserParam" cascade="all"/>
+        <list name="paramGroup" table="ParamAlternativeList_Param" cascade="all" access="field">
+            <key column="ParamAlternative_hid"/>
+            <index column="idx"/>
+            <many-to-many column="ParamGroup_hid" class="uk.ac.ebi.jmzidml.model.mzidml.Param"/>
+        </list>
     </class>
 </hibernate-mapping>
