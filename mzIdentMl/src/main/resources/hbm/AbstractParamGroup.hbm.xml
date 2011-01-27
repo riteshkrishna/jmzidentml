@@ -2,20 +2,12 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="uk.ac.ebi.jmzidml.model.AbstractParamGroup" catalog="mzidentml" abstract="true">
+    <class name="uk.ac.ebi.jmzidml.model.AbstractParamGroup" abstract="true" catalog="mzidentml" >
         <id name="hid" type="java.lang.Long">
             <column name="hid"/>
-            <generator class="sequence"/>
+            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator"  />
         </id>
-        <list name="cvParams" cascade="all">
-            <key column="cvParams_hid"/>
-            <index column="cvParams_idx"/>
-            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.CvParam"/>
-        </list>
-        <list name="userParams" cascade="all">
-            <key column="userParam_hid"/>
-            <index column="userParam_idx"/>
-            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.UserParam"/>
-        </list>
+
+
         </class>
 </hibernate-mapping>
