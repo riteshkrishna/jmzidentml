@@ -3,7 +3,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.SpectraData" table="SpectraData" catalog="mzidentml"
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.SpectraData" table="SpectraData"
                     extends="uk.ac.ebi.jmzidml.model.mzidml.ExternalData">
 
         <many-to-one name="spectrumIDFormat"

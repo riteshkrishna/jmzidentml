@@ -4,7 +4,7 @@
 
 <hibernate-mapping>
     <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.ProteinDetectionHypothesis" table="ProteinDetectionHypothesis"
-           catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
+           extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
 
         <property name="passThreshold" type="java.lang.Boolean">
             <column name="passThreshold" not-null="true"/>

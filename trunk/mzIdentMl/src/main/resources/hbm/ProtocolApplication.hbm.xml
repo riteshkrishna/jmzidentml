@@ -4,7 +4,7 @@
 
 <hibernate-mapping>
     <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.ProtocolApplication"
-                    catalog="mzidentml" abstract="true"
+                    abstract="true"
                     extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
 
         <property name="activityDate" type="java.sql.Timestamp">

@@ -3,7 +3,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Sample" table="Sample" catalog="mzidentml"
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Sample" table="Sample"
                     extends="uk.ac.ebi.jmzidml.model.mzidml.Material">
 
         <list name="subSample" cascade="all" access="field">
