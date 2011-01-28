@@ -3,10 +3,7 @@ package uk.ac.ebi.jmzidml.model.mzidml;
 
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 
 
@@ -52,6 +49,18 @@ public class Organization
 
     private final static long serialVersionUID = 100L;
     protected Organization.Parent parent;
+
+    @XmlTransient
+    protected Long hid;
+
+    public Long getHid() {
+        return hid;
+    }
+
+    public void setHid(Long hid) {
+        this.hid = hid;
+    }
+
 
     /**
      * Gets the value of the parent property.
@@ -104,6 +113,18 @@ public class Organization
         private final static long serialVersionUID = 100L;
         @XmlAttribute(name = "Organization_ref", required = true)
         protected String organizationRef;
+
+        @XmlTransient
+        protected Long hid;
+
+        public Long getHid() {
+            return hid;
+        }
+
+        public void setHid(Long hid) {
+            this.hid = hid;
+        }
+
 
         /**
          * Gets the value of the organizationRef property.
