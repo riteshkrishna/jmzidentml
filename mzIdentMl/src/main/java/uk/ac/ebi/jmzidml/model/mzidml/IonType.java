@@ -41,7 +41,7 @@ import java.util.List;
 public class IonType
     implements Serializable, MzIdentMLObject, CvParamCapable
 {
-
+    @XmlTransient
     private Long hid;
 
     public Long getHid() {
