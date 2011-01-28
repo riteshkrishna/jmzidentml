@@ -41,7 +41,7 @@ import java.util.List;
 public class ModParam
     implements Serializable, MzIdentMLObject, CvParamCapable
 {
-
+    @XmlTransient
     private Long hid;
 
     private final static long serialVersionUID = 100L;
