@@ -4,10 +4,7 @@ package uk.ac.ebi.jmzidml.model.mzidml;
 import uk.ac.ebi.jmzidml.model.CvParamListCapable;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +40,7 @@ public class Tolerance
     implements Serializable, MzIdentMLObject, CvParamListCapable
 {
 
+    @XmlTransient
     private Long hid;
 
     private final static long serialVersionUID = 100L;
@@ -78,12 +76,4 @@ public class Tolerance
         return this.cvParam;
     }
 
-    /**
-     * Returns the HID value from DB
-     *
-     * @return
-     */
-    public Long getHid() {
-        return hid;
-    }
 }

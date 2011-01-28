@@ -3,12 +3,14 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Provider" table="Provider" catalog="mzidentml"
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Provider" table="Provider"
                     extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
 
-        <many-to-one name="software" column="AnalysisSoftware_hid" class="uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftware" cascade="all"/>
+        <many-to-one name="software" column="AnalysisSoftware_hid"
+                     class="uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftware" cascade="all"/>
 
-        <many-to-one name="contactRole" column="ContactRole_hid" class="uk.ac.ebi.jmzidml.model.mzidml.ContactRole" cascade="all"/>
+        <many-to-one name="contactRole" column="ContactRole_hid" class="uk.ac.ebi.jmzidml.model.mzidml.ContactRole"
+                     cascade="all"/>
 
     </union-subclass>
 </hibernate-mapping>

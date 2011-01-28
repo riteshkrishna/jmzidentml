@@ -2,10 +2,8 @@
 package uk.ac.ebi.jmzidml.model.mzidml;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
@@ -38,6 +36,7 @@ public class SpectrumIDFormat
     implements Serializable, MzIdentMLObject
 {
 
+    @XmlTransient
     private Long hid;
 
     private final static long serialVersionUID = 100L;
@@ -68,12 +67,4 @@ public class SpectrumIDFormat
         this.cvParam = value;
     }
 
-    /**
-     * Getter for hid from DB
-     *
-     * @return
-     */
-    public Long getHid() {
-        return hid;
-    }
 }
