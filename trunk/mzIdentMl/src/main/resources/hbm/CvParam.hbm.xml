@@ -3,10 +3,10 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.CvParam" table="CvParam" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.Param">
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.CvParam"  extends="uk.ac.ebi.jmzidml.model.mzidml.Param">
         <property name="accession" type="java.lang.String"/>
         <property name="cvRef" type="java.lang.String"/>
-        <property name="cv" type="uk.ac.ebi.jmzidml.model.mzidml.Cv"/>
-        <!-- <many-to-one name="cv" cascade="all" class="uk.ac.ebi.jmzidml.model.mzidml.Cv"/> -->
+
+         <many-to-one name="cv" cascade="all" class="uk.ac.ebi.jmzidml.model.mzidml.Cv"/>
     </union-subclass>
 </hibernate-mapping>

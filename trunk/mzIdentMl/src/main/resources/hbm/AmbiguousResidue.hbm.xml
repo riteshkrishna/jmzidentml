@@ -4,7 +4,7 @@
 
 <hibernate-mapping>
 
-    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.AmbiguousResidue" table="AmbiguousResidue" extends="uk.ac.ebi.jmzidml.model.AbstractParamGroup">
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.AmbiguousResidue" table="AmbiguousResidue" extends="uk.ac.ebi.jmzidml.model.AbstractParamGroup"  >
         <list name="paramGroup" access="field" cascade="all" table="AmbiguousResidue_Param">
                 <key column="AmbiguousResidue_hid"/>
                 <index column="idx"/>

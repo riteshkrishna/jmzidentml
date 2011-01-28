@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Equipment" table="Equipment" abstract="true" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Equipment" table="Equipment" abstract="true"  extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
     <!--     <many-to-one name="make" cascade="all" class="uk.ac.ebi.jmzidml.model.mzidml.ParamAlternative"/>
         <many-to-one name="model" cascade="all" class="uk.ac.ebi.jmzidml.model.mzidml.ParamAlternative"/>
     -->

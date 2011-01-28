@@ -2,10 +2,10 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="uk.ac.ebi.jmzidml.model.mzidml.ModificationParams" table="ModificationParams" catalog="mzidentml">
-        <id name="hid" type="java.lang.Long" access="field">
+    <class name="uk.ac.ebi.jmzidml.model.mzidml.ModificationParams" table="ModificationParams" >
+        <id name="hid"  type="java.lang.Long" access="field">
             <column name="hid"/>
-            <generator class="increment"/>
+            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator"/>
         </id>
         <list name="searchModification" cascade="all" access="field">
             <key column="searchModification_hid"/>

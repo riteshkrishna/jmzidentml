@@ -3,9 +3,9 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="uk.ac.ebi.jmzidml.model.mzidml.Param"  abstract="true">
-        <id name="hid" type="java.lang.Long">
+        <id name="hid" access="field" type="java.lang.Long">
             <column name="hid"/>
-            <generator class="increment"/>
+            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator"/>
         </id>
         <property name="name" type="java.lang.String"/>
         <property name="value" type="java.lang.String"/>

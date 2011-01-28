@@ -2,7 +2,8 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Contact" abstract="true" table="Contact" extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Contact" abstract="true"
+                    table="Contact"  extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
     <property name="address" type="java.lang.String"/>
     <property name="phone" type="java.lang.String"/>
     <property name="email" type="java.lang.String"/>

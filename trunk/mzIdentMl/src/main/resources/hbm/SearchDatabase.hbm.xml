@@ -4,11 +4,11 @@
 
 <hibernate-mapping>
     <class name="uk.ac.ebi.jmzidml.model.mzidml.SearchDatabase" table="SearchDatabase">
-        <id name="hid" type="java.lang.Long" access="field">
+        <id name="hid" access="field" type="java.lang.Long">
             <column name="hid"/>
             <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator"/>
         </id>
-        <many-to-one name="analysisSearchDatabase" column="AnalysisSoftware_hid"
-                     class="uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftware" access="field"/>
+        <many-to-one name="analysisSearchDatabase" column="analysisSoftware_hid"
+                     class="uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftware"/>
     </class>
 </hibernate-mapping>

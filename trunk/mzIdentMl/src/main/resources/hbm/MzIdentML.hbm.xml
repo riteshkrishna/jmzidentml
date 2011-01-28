@@ -2,22 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.MzIdentML" table="MzIdentML" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
-        <many-to-one name="cvList" class="uk.ac.ebi.jmzidml.model.mzidml.CvList" cascade="all" not-null="true"/>
-        <many-to-one name="analysisSoftwareList" class="uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftwareList" cascade="all"/>
-        <many-to-one name="provider" class="uk.ac.ebi.jmzidml.model.mzidml.Provider" cascade="all"/>
-        <many-to-one name="auditCollection" class="uk.ac.ebi.jmzidml.model.mzidml.AuditCollection" cascade="all"/>
-        <many-to-one name="analysisSampleCollection" class="uk.ac.ebi.jmzidml.model.mzidml.AnalysisSampleCollection" cascade="all"/>
-        <many-to-one name="sequenceCollection" class="uk.ac.ebi.jmzidml.model.mzidml.SequenceCollection" cascade="all"/>
-        <many-to-one name="analysisCollection" class="uk.ac.ebi.jmzidml.model.mzidml.AnalysisCollection" cascade="all" not-null="true"/>
-        <many-to-one name="analysisProtocolCollection" class="uk.ac.ebi.jmzidml.model.mzidml.AnalysisProtocolCollection" cascade="all" not-null="true"/>
-        <many-to-one name="dataCollection" class="uk.ac.ebi.jmzidml.model.mzidml.DataCollection" cascade="all" not-null="true"/>
-        <list name="bibliographicReference" cascade="all">
-            <key column="bibliographicReference_hid"/>
-            <index column="bibliographicReference_idx"/>
-            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.BibliographicReference"/>
-        </list>
-        <property name="creationDate" type="java.util.Calendar"/>
-        <property name="version" type="java.lang.String"/>
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.MzIdentML"  extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
+
     </union-subclass>
 </hibernate-mapping>

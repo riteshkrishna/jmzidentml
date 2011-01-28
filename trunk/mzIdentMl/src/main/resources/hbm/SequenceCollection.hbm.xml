@@ -4,22 +4,22 @@
 
 <hibernate-mapping>
     <class name="uk.ac.ebi.jmzidml.model.mzidml.SequenceCollection" table="SequenceCollection" >
-        <id name="hid" type="java.lang.Long" access="field">
+        <id name="hid" access="field" type="java.lang.Long">
             <column name="hid" />
             <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator"/>
         </id>
-        <list name="peptide" inverse="true" access="field" cascade="all">
+        <list name="peptide" inverse="true">
             <key>
-                <column name="SequenceCollection_hid" />
+                <column name="peptide_hid" not-null="true" />
             </key>
-            <index column="idx"/>
+            <index column="peptide_idx"/>
             <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.Peptide" />
         </list>
-        <list name="dBSequence" access="field" cascade="all">
+        <list name="dbSequence" inverse="true">
             <key>
-                <column name="SequenceCollection_hid"/>
+                <column name="dbSequence_hid" not-null="true" />
             </key>
-            <index column="idx"/>
+            <index column="dbSeuence"/>
             <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.DBSequence" />
         </list>
     </class>

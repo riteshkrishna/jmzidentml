@@ -4,7 +4,7 @@
 
 <hibernate-mapping>
 
-    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.AnalysisSearchDatabase" table="AnalysisSearchDatabase"  extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.AnalysisSearchDatabase"  table="AnalysisSearchDatabase"  extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
         <property name="version" type="java.lang.String"/>
         <property name="releaseDate" type="java.lang.String"/>
         <property name="numDatabaseSequences" type="java.lang.Long"/>

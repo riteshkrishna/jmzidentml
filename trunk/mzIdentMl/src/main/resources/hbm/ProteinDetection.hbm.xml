@@ -4,23 +4,23 @@
 
 <hibernate-mapping>
 	<union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.ProteinDetection"
-		table="ProteinDetection" extends="uk.ac.ebi.jmzidml.model.mzidml.ProtocolApplication">
+		table="ProteinDetection"  extends="uk.ac.ebi.jmzidml.model.mzidml.ProtocolApplication">
 
 		<!--<many-to-one name="proteinAmbiguityGroup" cascade="all"-->
 			<!--column="proteinAmbiguityGroup_hid" not-null="true"-->
 			<!--class="uk.ac.ebi.jmzidml.model.mzidml.ProteinAmbiguityGroup" />-->
 
 		<many-to-one name="proteinDetectionProtocol" cascade="all"
-			column="ProteinDetection_hid" not-null="true"
+			column="proteinDetectionProtocol_hid" not-null="true"
 			class="uk.ac.ebi.jmzidml.model.mzidml.ProteinDetectionProtocol" />
 
 		<many-to-one name="proteinDetectionList" cascade="all"
-			column="ProteinDetectionList_hid" not-null="true"
+			column="proteinDetectionProtocol_hid" not-null="true"
 			class="uk.ac.ebi.jmzidml.model.mzidml.ProteinDetectionList" />
 
 		<list name="inputSpectrumIdentifications" inverse="true" cascade="all">
-			<key column="ProteinDetection_hid" not-null="true" />
-			<index column="idx" />
+			<key column="inputspectrumidentifications_hid" not-null="true" />
+			<index column="inputSpectrumIdentificationsidx" />
 			<one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.InputSpectrumIdentifications" />
 		</list>
 
