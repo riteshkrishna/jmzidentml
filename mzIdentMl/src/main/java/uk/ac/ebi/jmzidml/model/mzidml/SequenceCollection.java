@@ -97,14 +97,4 @@ public class SequenceCollection
         return this.peptide;
     }
 
-    /**
-     * Getter for HID value from DB
-     *
-     * @return
-     */
-    public Long getHid() {
-        return hid;
-    }
-
-
 }

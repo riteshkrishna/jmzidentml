@@ -32,6 +32,7 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 public class SubSample
     implements Serializable, MzIdentMLObject
 {
+
     @XmlTransient
     private Long hid;
 
@@ -62,5 +63,6 @@ public class SubSample
     public void setSampleRef(String value) {
         this.sampleRef = value;
     }
+
 
 }

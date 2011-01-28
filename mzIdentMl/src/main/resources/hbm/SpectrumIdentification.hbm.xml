@@ -4,7 +4,7 @@
 
 <hibernate-mapping>
     <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentification" table="SpectrumIdentification"
-                    catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
+                    extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
 
         <list name="inputSpectra" cascade="all" access="field">
             <key column="SpectrumIdentification_hid" />
