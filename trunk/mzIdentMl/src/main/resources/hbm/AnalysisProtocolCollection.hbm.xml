@@ -3,9 +3,9 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="uk.ac.ebi.jmzidml.model.mzidml.AnalysisProtocolCollection" table="AnalysisProtocolCollection" catalog="mzidentml">
-        <id name="hid" type="java.lang.Long">
-            <generator class="sequence" />
+    <class name="uk.ac.ebi.jmzidml.model.mzidml.AnalysisProtocolCollection" table="AnalysisProtocolCollection">
+        <id name="hid" type="java.lang.Long" access="field">
+            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator" />
         </id>
 
         <list name="spectrumIdentificationProtocol" cascade="all">
