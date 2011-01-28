@@ -4,10 +4,7 @@ package uk.ac.ebi.jmzidml.model.mzidml;
 import uk.ac.ebi.jmzidml.model.CvParamCapable;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 
 
@@ -38,11 +35,22 @@ public class Role
     implements Serializable, MzIdentMLObject, CvParamCapable
 {
 
-    private Long hid;
+
 
     private final static long serialVersionUID = 100L;
     @XmlElement(required = true)
     protected CvParam cvParam;
+
+    @XmlTransient
+    protected Long hid;
+
+    public Long getHid() {
+        return hid;
+    }
+
+    public void setHid(Long hid) {
+        this.hid = hid;
+    }
 
     /**
      * Gets the value of the cvParam property.
@@ -68,13 +76,5 @@ public class Role
         this.cvParam = value;
     }
 
-    /**
-     * Gets the value of HID from DB
-     *
-     * @return
-     */
-    public Long getHid() {
-        return hid;
-    }
 
 }
