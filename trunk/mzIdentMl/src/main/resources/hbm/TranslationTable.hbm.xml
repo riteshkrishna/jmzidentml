@@ -4,7 +4,7 @@
 
 <hibernate-mapping>
     <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.TranslationTable"
-                    table="TranslationTable" extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
+                    table="TranslationTable" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
         <list name="cvParam" cascade="all" access="field">
             <key column="TranslationTable_hid"/>
             <index column="idx"/>

@@ -3,31 +3,13 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.SourceFile" table="SourceFile"
-		 extends="uk.ac.ebi.jmzidml.model.mzidml.ExternalData">
+	<union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.SourceFile" table="SourceFile" extends="uk.ac.ebi.jmzidml.model.mzidml.ExternalData">
 
-        
-		<!--<list name="sourceFiles" inverse="true" cascade="all">-->
-			<!--<key>-->
-				<!--<column name="sourceFile_hid" not-null="true" unique="true" />-->
-			<!--</key>-->
-			<!--<index column="sourceFile_indx"></index>-->
-			<!--<one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.SourceFile" />-->
-		<!--</list>-->
+        <list name="paramGroup" cascade="all" access="field">
+            <key column="SourceFile_hid"/>
+            <index column="idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.Param"/>
+        </list>
 
-		<list name="userParams" inverse="true" cascade="all">
-			<key>
-				<column name="userParam_hid" not-null="true" />
-			</key>
-			<index column="userParams_idx"/>
-			<one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.UserParam" />
-		</list>
-		<list name="cvParams" inverse="true" cascade="all">
-			<key>
-				<column name="cvParam_hid" not-null="true" />
-			</key>
-			<index column="cvParams_idx"/>
-			<one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.CvParam" />
-		</list>
 	</union-subclass>
 </hibernate-mapping>

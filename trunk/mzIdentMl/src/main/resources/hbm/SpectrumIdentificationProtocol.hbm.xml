@@ -4,7 +4,7 @@
 
 <hibernate-mapping>
     <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationProtocol"
-                    table="SpectrumIdentificationProtocol"
+                    table="SpectrumIdentificationProtocol" catalog="mzidentml"
                     extends="uk.ac.ebi.jmzidml.model.mzidml.Protocol">
 
         <many-to-one name="additionalSearchParams" class="uk.ac.ebi.jmzidml.model.mzidml.ParamAlternativeList"

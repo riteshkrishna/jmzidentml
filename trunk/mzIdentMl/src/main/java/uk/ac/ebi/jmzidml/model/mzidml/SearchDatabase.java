@@ -86,13 +86,4 @@ public class SearchDatabase
         }
     }
 
-    /**
-     * Get the value of HID from DB
-     *
-     * @return
-     */
-
-    public Long getHid() {
-        return hid;
-    }
 }

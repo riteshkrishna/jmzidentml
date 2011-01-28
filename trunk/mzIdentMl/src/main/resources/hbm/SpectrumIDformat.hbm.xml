@@ -4,12 +4,12 @@
 
 <hibernate-mapping>
 	<class name="uk.ac.ebi.jmzidml.model.mzidml.SpectrumIDFormat"
-		table="SpectrumIDFormat" >
-		<id name="hid" access="field" type="java.lang.Long">
+		table="SpectrumIDFormat" catalog="mzidentml">
+		<id name="hid" type="java.lang.Long" access="field">
 			<column name="hid" />
 			<generator class="org.hibernate.id.enhanced.SequenceStyleGenerator"/>
 		</id>
-		<many-to-one name="cvParam" cascade="all" column="cvParam_hid"
+		<many-to-one name="cvParam" cascade="all" column="CvParam_hid"
 			not-null="true" class="uk.ac.ebi.jmzidml.model.mzidml.CvParam"/>
 	</class>
 </hibernate-mapping>

@@ -4,7 +4,7 @@
 
 <hibernate-mapping>
     <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationResult"
-                    table="SpectrumIdentificationResult"
+                    table="SpectrumIdentificationResult" catalog="mzidentml"
                     extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
 
         <property name="spectrumID" type="java.lang.String">
