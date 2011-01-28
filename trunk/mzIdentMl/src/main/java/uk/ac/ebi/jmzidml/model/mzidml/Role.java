@@ -38,6 +38,8 @@ public class Role
     implements Serializable, MzIdentMLObject, CvParamCapable
 {
 
+    private Long hid;
+
     private final static long serialVersionUID = 100L;
     @XmlElement(required = true)
     protected CvParam cvParam;
@@ -64,6 +66,15 @@ public class Role
      */
     public void setCvParam(CvParam value) {
         this.cvParam = value;
+    }
+
+    /**
+     * Gets the value of HID from DB
+     *
+     * @return
+     */
+    public Long getHid() {
+        return hid;
     }
 
 }
