@@ -3,12 +3,12 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="uk.ac.ebi.jmzidml.model.mzidml.ModParam" table="ModParam" catalog="mzidentml">
-        <id name="hid" type="java.lang.Long">
+        <id name="hid" type="java.lang.Long" access="field">
             <column name="hid"/>
-            <generator class="sequence"/>
+            <generator class="identity"/>
         </id>
         <property name="massDelta" type="java.lang.Float"/>
-        <list name="residues">
+        <list name="residues" cascade="all" access="field">
 	        <key column="hid" />
 	        <list-index column="index" />
 	        <element type="java.lang.String"/>

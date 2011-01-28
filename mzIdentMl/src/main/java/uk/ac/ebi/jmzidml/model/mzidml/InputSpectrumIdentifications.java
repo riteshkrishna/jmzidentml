@@ -29,6 +29,8 @@ import java.io.Serializable;
 public class InputSpectrumIdentifications
     implements Serializable, MzIdentMLObject
 {
+    @XmlTransient
+    private Long hid;
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(name = "SpectrumIdentificationList_ref", required = true)
@@ -36,6 +38,14 @@ public class InputSpectrumIdentifications
 
     @XmlTransient
     private SpectrumIdentificationList spectrumIdentificationList;
+
+    public Long getHid() {
+        return hid;
+    }
+
+    public void setHid(Long hid) {
+        this.hid = hid;
+    }
 
     public SpectrumIdentificationList getSpectrumIdentificationList() {
         return spectrumIdentificationList;

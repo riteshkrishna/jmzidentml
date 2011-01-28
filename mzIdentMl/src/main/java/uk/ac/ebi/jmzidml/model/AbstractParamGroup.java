@@ -22,7 +22,16 @@ public abstract class AbstractParamGroup implements ParamGroupCapable {
     @XmlTransient
     private List<UserParam> userParams;
 
+    @XmlTransient
+    private Long hid;
 
+    public Long getHid() {
+        return hid;
+    }
+
+    public void setHid(Long hid) {
+        this.hid = hid;
+    }
 
     public List<CvParam> getCvParam() {
         if (cvParams == null) {

@@ -42,6 +42,8 @@ public class ModParam
     implements Serializable, MzIdentMLObject, CvParamCapable
 {
 
+    private Long hid;
+
     private final static long serialVersionUID = 100L;
     @XmlElement(required = true)
     protected CvParam cvParam;
@@ -49,6 +51,15 @@ public class ModParam
     protected float massDelta;
     @XmlAttribute(required = true)
     protected List<String> residues;
+
+    /**
+     * Gets the HID value from DB
+     *
+     * @return
+     */
+    public Long getHid() {
+        return hid;
+    }
 
     /**
      * The name of the modification imported from a relevant CV

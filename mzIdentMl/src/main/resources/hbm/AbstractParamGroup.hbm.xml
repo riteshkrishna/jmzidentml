@@ -3,11 +3,10 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="uk.ac.ebi.jmzidml.model.AbstractParamGroup" abstract="true"  >
-        <id name="hid" type="java.lang.Long">
+        <id name="hid" type="java.lang.Long" access="field">
             <column name="hid"/>
             <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator"  />
         </id>
-
 
         </class>
 </hibernate-mapping>
