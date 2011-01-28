@@ -38,6 +38,12 @@ public class ModificationParams
     implements Serializable, MzIdentMLObject
 {
 
+    private Long hid;
+
+    public Long getHid() {
+        return hid;
+    }
+
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "SearchModification", required = true)
     protected List<SearchModification> searchModification;

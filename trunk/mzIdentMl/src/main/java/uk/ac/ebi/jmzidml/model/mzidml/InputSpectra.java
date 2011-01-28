@@ -32,6 +32,8 @@ import java.io.Serializable;
 public class InputSpectra
     implements Serializable, MzIdentMLObject
 {
+    @XmlTransient
+    private Long hid;
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(name = "SpectraData_ref")
@@ -39,6 +41,10 @@ public class InputSpectra
 
     @XmlTransient
     private SpectraData spectraData;
+
+    public Long getHid() {
+        return hid;
+    }
 
     public SpectraData getSpectraData() {
         return spectraData;

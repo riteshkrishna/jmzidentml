@@ -6,14 +6,14 @@
     <class name="uk.ac.ebi.jmzidml.model.mzidml.DatabaseTranslation" table="DatabaseTranslation" catalog="mzidentml">
         <id name="hid" type="java.lang.Long">
             <column name="hid" />
-            <generator class="sequence" />
+            <generator class="increment" />
         </id>
-        <list name="translationTable" cascade="all">
+        <list name="translationTable" cascade="all" access="field">
             <key column="hid"/>
             <index column="idx"/>
             <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentification"/>
         </list>
-        <list name="frames" cascade="all" table="FRAMES">
+        <list name="frames" cascade="all" table="FRAMES" access="field">
             <key column="hid"/>
             <index column="idx"/>
             <element type="long"/>

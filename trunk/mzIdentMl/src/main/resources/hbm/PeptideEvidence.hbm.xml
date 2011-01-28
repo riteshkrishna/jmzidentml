@@ -3,12 +3,12 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidence" table="PeptideEvidence" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
-        <list name="paramGroup" cascade="all">
+        <list name="paramGroup" cascade="all" access="field">
             <key column="paramGroup_hid"/>
             <index column="paramGroup_idx"/>
             <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.Param"/>
         </list>
-        <property name="dbSequenceRef" type="java.lang.String"/>
+        <property name="dbSequenceRef" type="java.lang.String" access="field"/>
         <property name="start" type="java.lang.Integer"/>
         <property name="end" type="java.lang.Integer"/>
         <property name="pre" type="java.lang.String"/>

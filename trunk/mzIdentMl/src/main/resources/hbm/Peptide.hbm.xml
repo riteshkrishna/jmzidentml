@@ -4,19 +4,19 @@
 <hibernate-mapping>
     <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Peptide" table="Peptide" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.ConceptualMolecule">
         <property name="peptideSequence" type="java.lang.String"/>
-        <list name="modification" cascade="all">
-            <key column="modification_hid"/>
-            <index column="modification_idx"/>
+        <list name="modification" cascade="all" access="field">
+            <key column="Peptide_hid"/>
+            <index column="idx"/>
             <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.Modification"/>
         </list>
-        <list name="substitutionModification" cascade="all">
-            <key column="substitutionModification_hid"/>
-            <index column="substitutionModification_idx"/>
+        <list name="substitutionModification" cascade="all" access="field">
+            <key column="Peptide_hid"/>
+            <index column="idx"/>
             <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.SubstitutionModification"/>
         </list>
-        <list name="paramGroup" cascade="all">
-            <key column="paramGroup_hid"/>
-            <index column="paramGroup_idx"/>
+        <list name="paramGroup" cascade="all" access="field">
+            <key column="Peptide_hid"/>
+            <index column="idx"/>
             <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.Param"/>
         </list>
     </union-subclass>

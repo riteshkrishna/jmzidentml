@@ -42,6 +42,12 @@ public class IonType
     implements Serializable, MzIdentMLObject, CvParamCapable
 {
 
+    private Long hid;
+
+    public Long getHid() {
+        return hid;
+    }
+
     private final static long serialVersionUID = 100L;
     @XmlElement(required = true)
     protected CvParam cvParam;

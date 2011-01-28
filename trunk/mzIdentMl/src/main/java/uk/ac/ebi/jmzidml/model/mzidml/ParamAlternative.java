@@ -38,11 +38,21 @@ public class ParamAlternative
         @XmlElement(name = "userParam", type = UserParam.class)
     })
     protected Param paramGroup;
+    @XmlTransient
+    private Long hid;
 
     @XmlTransient
     private CvParam cvParam;
     @XmlTransient
     private UserParam userParam;
+
+    public Long getHid() {
+        return hid;
+    }
+
+    public void setHid(Long hid) {
+        this.hid = hid;
+    }
 
     public CvParam getCvParam() {
         return cvParam;

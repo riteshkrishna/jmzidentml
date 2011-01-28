@@ -3,11 +3,11 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="uk.ac.ebi.jmzidml.model.mzidml.ModificationParams" table="ModificationParams" catalog="mzidentml">
-        <id name="hid" type="java.lang.Long">
+        <id name="hid" type="java.lang.Long" access="field">
             <column name="hid"/>
-            <generator class="sequence"/>
+            <generator class="increment"/>
         </id>
-        <list name="searchModification" cascade="all">
+        <list name="searchModification" cascade="all" access="field">
             <key column="searchModification_hid"/>
             <index column="searchModification_idx"/>
             <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.SearchModification"/>
