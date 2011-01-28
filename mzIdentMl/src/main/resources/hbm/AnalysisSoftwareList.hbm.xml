@@ -3,12 +3,12 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftwareList" >
-        <id name="hid" type="java.lang.Long">
+    <class name="uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftwareList">
+        <id name="hid" access="field" type="java.lang.Long">
             <column name="hid" />
             <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator" />
         </id>
-        <list name="analysisSoftware" cascade="all" access="field">
+        <list name="analysisSoftware" cascade="all" access="field" table="AnalysisSoftwareList_AnalysisSoftware">
             <key column="AnalysisSoftwareList_hid"/>
             <index column="idx"/>
             <many-to-many column="AnalysisSoftware_hid" class="uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftware"/>

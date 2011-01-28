@@ -5,7 +5,7 @@
 <hibernate-mapping>
 
 
-    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.DBSequence" table="DBSequence" catalog="mzidentml"
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.DBSequence" table="DBSequence"
                     extends="uk.ac.ebi.jmzidml.model.mzidml.ConceptualMolecule">
         <property name="seq" type="java.lang.String">
 

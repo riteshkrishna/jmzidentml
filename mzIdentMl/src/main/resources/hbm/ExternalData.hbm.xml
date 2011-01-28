@@ -3,10 +3,9 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.ExternalData" table="ExternalData" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.Data">
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.ExternalData" table="ExternalData" extends="uk.ac.ebi.jmzidml.model.mzidml.Data">
         <property name="externalFormatDocumentation" type="java.lang.String"/>
         <property name="location" type="java.lang.String"/>
-        <!-- <many-to-one name="fileFormat" cascade="all" class="uk.ac.ebi.jmzidml.model.mzidml.FileFormat"/> -->
-    <property name="fileFormat" type="uk.ac.ebi.jmzidml.model.mzidml.FileFormat"/>
+        <many-to-one name="fileFormat" cascade="all" class="uk.ac.ebi.jmzidml.model.mzidml.FileFormat"/>
     </union-subclass>
 </hibernate-mapping>

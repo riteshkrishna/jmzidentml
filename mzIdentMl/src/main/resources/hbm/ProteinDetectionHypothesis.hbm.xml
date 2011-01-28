@@ -7,22 +7,22 @@
            extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
 
         <property name="passThreshold" type="java.lang.Boolean">
-            <column name="passThreshold" not-null="true"/>
+            <column name="passthreshold" not-null="true"/>
         </property>
 
-        <list name="cvParam" cascade="all">
-            <key column="ProteinDetectionHypothesis_hid" not-null="true"/>
-            <index column="idx"/>
+        <list name="cvParam" cascade="all" inverse="true">
+            <key column="cvParam_hid" not-null="true"/>
+            <index column="cvParam_idx"/>
             <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.CvParam"/>
         </list>
 
-        <list name="userParam" cascade="all">
-            <key column="ProteinDetectionHypothesis_hid" not-null="true"/>
-            <index column="idx"/>
+        <list name="userParam" inverse="true" cascade="all">
+            <key column="userParam_hid" not-null="true"/>
+            <index column="userParam_idx"/>
             <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.UserParam"/>
         </list>
 
-        <many-to-one name="dBSequence" column="DBSequence_hid" class="uk.ac.ebi.jmzidml.model.mzidml.DBSequence" cascade="all"/>
+        <many-to-one name="DBSequenceProteinDetection" class="uk.ac.ebi.jmzidml.model.mzidml.DBSequence" cascade="all"/>
 
     </union-subclass>
 </hibernate-mapping>

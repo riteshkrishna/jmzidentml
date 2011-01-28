@@ -3,8 +3,8 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="uk.ac.ebi.jmzidml.model.mzidml.FileFormat" table="FileFormat" catalog="mzidentml">
-        <id name="hid" type="java.lang.Long" >
+    <class name="uk.ac.ebi.jmzidml.model.mzidml.FileFormat" table="FileFormat">
+        <id name="hid" access="field" type="java.lang.Long" >
             <column name="hid" />
             <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator" />
         </id>

@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidence" table="PeptideEvidence" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidence" table="PeptideEvidence"  extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
         <list name="paramGroup" cascade="all" access="field">
             <key column="paramGroup_hid"/>
             <index column="paramGroup_idx"/>

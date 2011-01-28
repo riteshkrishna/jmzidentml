@@ -2,6 +2,6 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.params.PeptideUserParam" table="PeptideUserParam" catalog="mzidentml" extends="uk.ac.ebi.jmzidml.model.mzidml.UserParam">
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.params.PeptideUserParam" table="PeptideUserParam"  extends="uk.ac.ebi.jmzidml.model.mzidml.UserParam">
     </union-subclass>
 </hibernate-mapping>

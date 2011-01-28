@@ -4,19 +4,19 @@
 
 <hibernate-mapping>
 	<union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.ProteinDetectionList"
-		table="ProteinDetectionList" extends="uk.ac.ebi.jmzidml.model.mzidml.InternalData">
+		table="ProteinDetectionList"  extends="uk.ac.ebi.jmzidml.model.mzidml.InternalData">
 
-        <list name="paramGroup" cascade="all" access="field" >
-            <key column="ProteinDetectionList_hid"/>
-            <index column="idx"/>
-            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.Param"/>
+        <list name="cvParam" cascade="all" inverse="true">
+            <key column="cvParam_hid" not-null="true"/>
+            <index column="cvParam_idx"/>
+            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.CvParam"/>
         </list>
-
-        <list name="proteinAmbiguityGroup" access="field">
-            <key column="ProteinAmbiguityGroup_hid"/>
-            <index column="idx"/>
-            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.ProteinAmbiguityGroup"/>
-        </list>
+        
+		<list name="userParam" inverse="true" cascade="all">
+			<key column="userParam_hid" not-null="true" />
+			<index column="userParam_idx" />
+			<one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.UserParam" />
+		</list>
 
 	</union-subclass>
 </hibernate-mapping>

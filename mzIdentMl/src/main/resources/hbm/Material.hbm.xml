@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Material" abstract="true" catalog="mzidentml"
+    <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.Material" abstract="true"
                     extends="uk.ac.ebi.jmzidml.model.AbstractIdentifiableParamGroup">
         <list name="contactRole" cascade="all" access="field">
             <key column="contactRole_hid"/>
