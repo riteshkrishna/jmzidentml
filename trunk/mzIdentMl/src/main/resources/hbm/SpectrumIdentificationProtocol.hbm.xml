@@ -4,12 +4,12 @@
 
 <hibernate-mapping>
     <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationProtocol"
-                    table="SpectrumIdentificationProtocol" catalog="mzidentml"
+                    table="SpectrumIdentificationProtocol"
                     extends="uk.ac.ebi.jmzidml.model.mzidml.Protocol">
 
         <many-to-one name="additionalSearchParams" class="uk.ac.ebi.jmzidml.model.mzidml.ParamAlternativeList"
                      cascade="all">
-            <column name="additionalsearchparams_hid"/>
+            <column name="additionalSearchParams_hid"/>
         </many-to-one>
         <many-to-one name="databaseFilters" class="uk.ac.ebi.jmzidml.model.mzidml.DatabaseFilters" cascade="all">
             <column name="databaseFilters_hid"/>
@@ -37,9 +37,9 @@
             <column name="threshold_hid"/>
         </many-to-one>
 
-        <list name="massTable" inverse="true" cascade="all">
-            <key column="massTable_id"/>
-            <index column="massTable_idx"/>
+        <list name="massTable" inverse="true" cascade="all" access="field">
+            <key column="SpectrumIdentificationProtocol_id"/>
+            <index column="idx"/>
             <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.MassTable"/>
         </list>
     </union-subclass>

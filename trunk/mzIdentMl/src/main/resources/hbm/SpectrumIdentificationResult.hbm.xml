@@ -4,28 +4,24 @@
 
 <hibernate-mapping>
     <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationResult"
-                    table="SpectrumIdentificationResult" catalog="mzidentml"
+                    table="SpectrumIdentificationResult"
                     extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
 
         <property name="spectrumID" type="java.lang.String">
-            <column name="spectrumid"/>
+            <column name="spectrumId"/>
         </property>
         <!--<property name="spectraDataRef" type="java.lang.String">-->
         <!--<column name="spectradata_hid" />-->
         <!--</property>-->
-        <list name="cvParam" inverse="true" cascade="all">
-            <key column="cvParams_hid" not-null="true"/>
-            <index column="cvParam_idx"/>
+        <list name="paramGroup" inverse="true" cascade="all" access="field">
+            <key column="SpectrumIdentificationResult_hid" not-null="true"/>
+            <index column="idx"/>
             <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.CvParam"/>
         </list>
-        <list name="userParam" inverse="true" cascade="all">
-            <key column="userParams_hid" not-null="true"/>
-            <index column="userParam_idx"/>
-            <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.UserParam"/>
-        </list>
-        <list name="spectrumIdentificationItem" cascade="all">
-            <key column="spectrumIdentificationItem_hid" not-null="true"/>
-            <index column="spectrumIdentificationItem_idx"/>
+
+        <list name="spectrumIdentificationItem" cascade="all" access="field">
+            <key column="SpectrumIdentificationResult_hid" not-null="true"/>
+            <index column="idx"/>
             <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationItem"/>
         </list>
     </union-subclass>
