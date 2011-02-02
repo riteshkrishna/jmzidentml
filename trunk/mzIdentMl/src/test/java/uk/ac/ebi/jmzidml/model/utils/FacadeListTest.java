@@ -151,6 +151,30 @@ public class FacadeListTest {
         }
     }
 
+    /**
+     * Test adding at certain index.
+     * @throws Exception
+     */
+    @Test
+    public void testAddAtIndex() {
+        CvParam cv = new CvParam();
+        cv.setAccession("CV5");
+        this.cvList.add(1, cv);
+        try{
+            System.out.println(this.cvList.toString());
+            cv = this.cvList.get(1);
+            assertTrue(cv.getAccession().equals("CV5"));
+
+            cv = this.cvList.get(4);
+            assertTrue(cv.getAccession().equals("CV4"));
+            System.out.println(this.cvList.toString());
+        }catch(Exception e){
+            e.printStackTrace();
+            assertTrue(false);
+        }
+    }
+
+
     @Test
     public void testRemove() throws Exception {
 
@@ -184,6 +208,8 @@ public class FacadeListTest {
             assertTrue(true);
         }
     }
+
+
 
     @Test
     public void testSet() throws Exception {
