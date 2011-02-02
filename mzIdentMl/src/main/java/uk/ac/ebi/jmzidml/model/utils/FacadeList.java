@@ -17,6 +17,10 @@ import java.util.*;
  * If the size method is called the list be searched and only instances of CvParam are counted towards the size.
  * Likewise, if get(3) (3 is the index) is called the 3rd instance of CvParam will be returned. Note, this CvParam might
  * not be the third element in the originallist.
+ *
+ *
+ * TODO Implement toString
+ * TODO Check iterator working with foreach
  */
 public class FacadeList<T> implements List<T> {
     private List originalList;
@@ -158,7 +162,7 @@ public class FacadeList<T> implements List<T> {
 
 
     public void add(int index, T element) {
-
+        this.addAtIndex(index, element);
     }
 
 
@@ -254,6 +258,35 @@ public class FacadeList<T> implements List<T> {
             throw new IndexOutOfBoundsException("Input index for sublist should be greater than or equal than zero, and less than the size of the list: " + index);
         }
         return (T) this.originalList.set(originalListIndex, newElement);
+    }
+
+      /**
+     * TODO: Move this into add at index method if not reused in future.
+     *
+     * @param index
+     * @param newElement
+     * @return
+     */
+    private void addAtIndex(int index, T newElement) {
+        this.checkIndex(index);
+        int cnt = 0;
+        int originalListIndex = 0;
+        Iterator it = originalList.iterator();
+
+        while (it.hasNext()) {
+            Object o = it.next();
+            if (clazz.isInstance(o)) {
+                if (index == cnt) {
+                    break;
+                }
+                cnt++;
+            }
+            originalListIndex++;
+        }
+        if (originalListIndex >= this.originalList.size()) {
+            throw new IndexOutOfBoundsException("Input index for sublist should be greater than or equal than zero, and less than the size of the list: " + index);
+        }
+        this.originalList.add(originalListIndex, newElement);
     }
 
     private void checkIndex(int index) {
