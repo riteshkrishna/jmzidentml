@@ -7,7 +7,7 @@ import java.util.*;
  * User: rwang
  * Date: 26/01/11
  * Time: 10:16
- *
+ * <p/>
  * Controls access to a standard java list which contains more than one instance type, providing the developer with
  * a virtual list of a specified type. When this list is created, the developer must specify the class of interest.
  * Methods called on this class will be applied to the original list but will only act on instances of the specified
@@ -17,12 +17,16 @@ import java.util.*;
  * If the size method is called the list be searched and only instances of CvParam are counted towards the size.
  * Likewise, if get(3) (3 is the index) is called the 3rd instance of CvParam will be returned. Note, this CvParam might
  * not be the third element in the originallist.
- *
- *
- * TODO Implement toString
+ * <p/>
+ * <p/>
+ * TODO Implement CvParam and UserParam's toString, equals, hashcode. With equals objects are normally considered equals if contents match.
  * TODO Check iterator working with foreach
+ * TODO check the checkIndex(), maybe not the best implementation
+ * TODO finish all the add methods with checking the null input values
  */
 public class FacadeList<T> implements List<T> {
+    private static final String INDEX_ERROR_MESSAGE = "Input index should be greater than or equal than zero, and less than the size of the original list";
+    public static final String SUBLIST_INDEX_ERROR_MESSAGE = "";
     private List originalList;
     private Class<T> clazz;
 
@@ -39,7 +43,7 @@ public class FacadeList<T> implements List<T> {
     }
 
     public boolean add(T t) {
-        checkArugment(t);
+        checkArgument(t);
         return originalList.add(t);
     }
 
@@ -63,8 +67,7 @@ public class FacadeList<T> implements List<T> {
      * @return T element to get
      */
     public T get(int index) {
-        T elementAtIndex = this.getAtIndex(index);
-        return elementAtIndex;
+        return this.getAtIndex(index);
     }
 
     /**
@@ -75,6 +78,8 @@ public class FacadeList<T> implements List<T> {
      * @return T    old element in the position
      */
     public T set(int index, T element) {
+        this.checkArgument(element);
+        this.checkIndex(index);
         return this.setAtIndex(index, element);
     }
 
@@ -87,8 +92,8 @@ public class FacadeList<T> implements List<T> {
         int cnt = 0;
 
         for (Object anOriginalList : this.originalList) {
-            Object o = anOriginalList;
-            if (clazz.isInstance(o)) {
+
+            if (clazz.isInstance(anOriginalList)) {
                 cnt++;
             }
         }
@@ -122,29 +127,69 @@ public class FacadeList<T> implements List<T> {
      * @return boolean     true means sublist contains the input object
      */
     public boolean contains(Object o) {
-        checkArugment(o);
+        checkArgument(o);
         return this.originalList.contains(o);
     }
 
-
+    /**
+     * Get an iterator of the sublist
+     *
+     * @return Iterator<T> an iterator of the sublist
+     */
     public Iterator<T> iterator() {
         return new SublistIterator(this.originalList);
     }
 
+    /**
+     * Get the index of sublist using a given object
+     *
+     * @param o input object
+     * @return int index of the object
+     */
     public int indexOf(Object o) {
+        checkArgument(o);
+        int cnt = 0;
+        for (Object anOriginalList : this.originalList) {
+            if (clazz.isInstance(anOriginalList)) {
+                if (o.equals(anOriginalList)) {
+                    return cnt;
+                }
+                cnt++;
+            }
+        }
         return -1;
     }
 
+    /**
+     * Get the last index of sublist using a given object
+     *
+     * @param o input object
+     * @return int index of the object
+     */
     public int lastIndexOf(Object o) {
-        return -1;
+        checkArgument(o);
+
+        int pointer = -1;
+        int size = this.size();
+
+        if (size > 0) {
+            for (int i = (size - 1); i >= 0; i--) {
+                if (o.equals(this.get(i))) {
+                    pointer = i;
+                    break;
+                }
+            }
+        }
+
+        return pointer;
     }
 
     public ListIterator<T> listIterator() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return new SubListListIterator(originalList);
     }
 
     public ListIterator<T> listIterator(int index) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return new SubListListIterator(originalList, index);
     }
 
     public List<T> subList(int fromIndex, int toIndex) {
@@ -161,7 +206,16 @@ public class FacadeList<T> implements List<T> {
     }
 
 
+    /**
+     * Add a new element to the sublist
+     * This will add the new element to the immediate index after the element at (index -1) in the sublist
+     *
+     * @param index   index of the sublist
+     * @param element the new element
+     */
     public void add(int index, T element) {
+        this.checkArgument(element);
+        this.checkIndex(index);
         this.addAtIndex(index, element);
     }
 
@@ -180,6 +234,7 @@ public class FacadeList<T> implements List<T> {
 
 
     public boolean addAll(Collection<? extends T> c) {
+        this.checkArgument(c);
         return false;
     }
 
@@ -198,13 +253,48 @@ public class FacadeList<T> implements List<T> {
     }
 
     /**
+     * This method is overridden to print out the list in concatenated string format
+     *
+     * @return String  list string
+     */
+    @Override
+    public String toString() {
+        StringBuilder buffer = new StringBuilder();
+
+        buffer.append("[");
+        for (T element : this) {
+            buffer.append("[");
+            buffer.append(element.toString());
+            buffer.append("], ");
+        }
+        if (this.size() > 0) {
+            buffer.replace(buffer.length() - 2, buffer.length(), "");
+        }
+
+        buffer.append("]");
+        return buffer.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    /**
      * Check the legality of the argument
      * if illegal, then throw an IllegalArgument exception
      *
      * @param o Object to check
      */
-    private void checkArugment(Object o) {
-        //todo: may be change this to instanceof ?
+    private void checkArgument(Object o) {
+        if (o == null) {
+            throw new IllegalArgumentException("Argument cannot be a null value");
+        }
         if (!clazz.isInstance(o)) {
             throw new IllegalArgumentException("Argument must be an instance of " + clazz.getName() + ". Received instance of " + o.getClass().getName());
         }
@@ -239,28 +329,16 @@ public class FacadeList<T> implements List<T> {
      * @return
      */
     private T setAtIndex(int index, T newElement) {
-        this.checkIndex(index);
         int cnt = 0;
-        int originalListIndex = 0;
-        Iterator it = originalList.iterator();
+        int originalListIndex = this.getOriginalIndex(index);
 
-        while (it.hasNext()) {
-            Object o = it.next();
-            if (clazz.isInstance(o)) {
-                if (index == cnt) {
-                    break;
-                }
-                cnt++;
-            }
-            originalListIndex++;
-        }
-        if (originalListIndex >= this.originalList.size()) {
-            throw new IndexOutOfBoundsException("Input index for sublist should be greater than or equal than zero, and less than the size of the list: " + index);
-        }
+        // check index and throw an exception
+        this.checkIndex(originalListIndex, "Input sublist index doesn't exist" + index);
+
         return (T) this.originalList.set(originalListIndex, newElement);
     }
 
-      /**
+    /**
      * TODO: Move this into add at index method if not reused in future.
      *
      * @param index
@@ -268,14 +346,26 @@ public class FacadeList<T> implements List<T> {
      * @return
      */
     private void addAtIndex(int index, T newElement) {
-        this.checkIndex(index);
+
+        int originalListIndex = this.getOriginalIndex(index);
+
+        this.checkIndex(originalListIndex, "Input sublist index doesn't exist" + index);
+
+        this.originalList.add(originalListIndex, newElement);
+    }
+
+    /**
+     * Get the index from the original list
+     *
+     * @param index index for the sublist
+     * @return int index for the original list
+     */
+    private int getOriginalIndex(int index) {
         int cnt = 0;
         int originalListIndex = 0;
-        Iterator it = originalList.iterator();
 
-        while (it.hasNext()) {
-            Object o = it.next();
-            if (clazz.isInstance(o)) {
+        for (Object element : originalList) {
+            if (clazz.isInstance(element)) {
                 if (index == cnt) {
                     break;
                 }
@@ -283,33 +373,40 @@ public class FacadeList<T> implements List<T> {
             }
             originalListIndex++;
         }
-        if (originalListIndex >= this.originalList.size()) {
-            throw new IndexOutOfBoundsException("Input index for sublist should be greater than or equal than zero, and less than the size of the list: " + index);
-        }
-        this.originalList.add(originalListIndex, newElement);
+
+        return originalListIndex;
     }
 
+
     private void checkIndex(int index) {
+        this.checkIndex(index, null);
+    }
+
+    private void checkIndex(int index, String errMsg) {
         if (index < 0 && index > (originalList.size() - 1)) {
-            throw new IndexOutOfBoundsException("Input index should be greater than or equal than zero, and less than the size of the list: " + index);
+            throw new IndexOutOfBoundsException(errMsg == null ? ("Input sublist index does not exist: " + index) : errMsg);
         }
     }
 
     private class SublistIterator implements Iterator<T> {
-        private List superCollection;
-        private int currentPosition = 0;
+        private List superList;
+        /**
+         * Next position in the super list
+         */
+        private int nextPosition;
         private boolean nextHasBeenCalled = false;
-        public SublistIterator(List superCollection) {
-            this.superCollection = superCollection;
+
+        public SublistIterator(List superList) {
+            this.superList = superList;
         }
 
 
         public boolean hasNext() {
-           // check whether this is a next element in the super collection
-            if (currentPosition <= (superCollection.size() - 1)) {
+            // check whether this is a next element in the super collection
+            if (nextPosition <= (superList.size() - 1)) {
                 // starting from the current position, loop through the super collection
-                for (int i = currentPosition; i < superCollection.size(); i++) {
-                    if (clazz.isInstance(superCollection.get(i))) {
+                for (int i = nextPosition; i < superList.size(); i++) {
+                    if (clazz.isInstance(superList.get(i))) {
                         return true;
                     }
                 }
@@ -320,13 +417,13 @@ public class FacadeList<T> implements List<T> {
 
         public T next() {
             // check whether this is a next element in the super collection
-            if (currentPosition <= (superCollection.size() - 1)) {
+            if (nextPosition <= (superList.size() - 1)) {
                 this.nextHasBeenCalled = true;
                 // starting from the current position, loop through the super collection
-                for (int i = currentPosition; i < superCollection.size(); i++) {
-                    currentPosition ++;
-                    if (clazz.isInstance(superCollection.get(i))) {
-                        return (T)superCollection.get(i);
+                for (int i = nextPosition; i < superList.size(); i++) {
+                    nextPosition++;
+                    if (clazz.isInstance(superList.get(i))) {
+                        return (T) superList.get(i);
                     }
                 }
             }
@@ -334,11 +431,139 @@ public class FacadeList<T> implements List<T> {
         }
 
         public void remove() {
-            if(this.nextHasBeenCalled == false){
+            if (this.nextHasBeenCalled == false) {
                 throw new IllegalStateException("Next method for sublist iterator must be called at least once before remove can be called.");
             }
-            this.currentPosition--;
-            this.superCollection.remove(this.currentPosition);
+            this.nextPosition--;
+            this.superList.remove(this.nextPosition);
+        }
+    }
+
+    private class SubListListIterator implements ListIterator<T> {
+        private List superList;
+        /**
+         * Next position in the super list
+         */
+        private int nextPosition;
+        private int startSuperPosition = -1;
+        private int startIndex;
+        private boolean nextHasBeenCalled = false;
+
+        private SubListListIterator(List superList) {
+            this(superList, 0);
+        }
+
+        public SubListListIterator(List superList, int startIndex) {
+            if (superList == null) {
+                throw new NullPointerException("Input super list cannot be null");
+            }
+
+            if (startIndex < 0 || startIndex >= superList.size()) {
+                throw new IllegalArgumentException("Start index of the iterator cannot be less than zero or greater-equal than the size of the list");
+            }
+
+            this.superList = superList;
+            this.startIndex = startIndex;
+
+            initNextPosition();
+        }
+
+        /**
+         * set the nextPosition according the start index
+         */
+        private void initNextPosition() {
+            if (this.startIndex > 0) {
+                int cnt = 0;
+                for (Object o : superList) {
+                    if (clazz.isInstance(o)) {
+                        if (cnt == this.startIndex) {
+                            startSuperPosition = nextPosition;
+                            break;
+                        }
+                        cnt++;
+                    }
+                    nextPosition++;
+                }
+
+                if (startSuperPosition == -1) {
+                    throw new IndexOutOfBoundsException("Index out of the bound of the sublist: " + startIndex);
+                }
+            }
+        }
+
+        public boolean hasNext() {
+            // check whether this is a next element in the super collection
+            if (nextPosition <= (superList.size() - 1)) {
+                // starting from the current position, loop through the super collection
+                for (int i = nextPosition; i < superList.size(); i++) {
+                    if (clazz.isInstance(superList.get(i))) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public T next() {
+            // check whether this is a next element in the super collection
+            if (nextPosition <= (superList.size() - 1)) {
+                this.nextHasBeenCalled = true;
+                // starting from the current position, loop through the super collection
+                for (int i = nextPosition; i < superList.size(); i++) {
+                    nextPosition++;
+                    if (clazz.isInstance(superList.get(i))) {
+                        return (T) superList.get(i);
+                    }
+                }
+            }
+            throw new NoSuchElementException("Sublist does not contain any more elements.");
+        }
+
+        public boolean hasPrevious() {
+            if (nextPosition > 0) {
+                System.out.println(nextPosition + "\t" + startSuperPosition);
+                for (int i = nextPosition - 1; i >= startSuperPosition; i--) {
+                    if (clazz.isInstance(superList.get(i))) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public T previous() {
+            if (nextPosition > 0) {
+                for (int i = nextPosition - 1; i >= 0; i--) {
+                    nextPosition--;
+                    if (clazz.isInstance(superList.get(i))) {
+                        return (T) superList.get(i);
+                    }
+                }
+            }
+
+            throw new NoSuchElementException("Failed to find a previous element");
+        }
+
+        public int nextIndex() {
+            return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        }
+
+        public int previousIndex() {
+            return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        }
+
+        public void remove() {
+            //To change body of implemented methods use File | Settings | File Templates.
+        }
+
+        public void set(T t) {
+            //To change body of implemented methods use File | Settings | File Templates.
+        }
+
+        public void add(T t) {
+            //To change body of implemented methods use File | Settings | File Templates.
         }
     }
 }
