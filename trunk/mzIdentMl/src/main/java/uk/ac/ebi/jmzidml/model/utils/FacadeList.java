@@ -478,6 +478,7 @@ public class FacadeList<T> implements List<T> {
                     if (clazz.isInstance(o)) {
                         if (cnt == this.startIndex) {
                             startSuperPosition = nextPosition;
+                            nextPosition++;
                             break;
                         }
                         cnt++;
@@ -522,7 +523,6 @@ public class FacadeList<T> implements List<T> {
 
         public boolean hasPrevious() {
             if (nextPosition > 0) {
-                System.out.println(nextPosition + "\t" + startSuperPosition);
                 for (int i = nextPosition - 1; i >= startSuperPosition; i--) {
                     if (clazz.isInstance(superList.get(i))) {
                         return true;
@@ -535,7 +535,7 @@ public class FacadeList<T> implements List<T> {
 
         public T previous() {
             if (nextPosition > 0) {
-                for (int i = nextPosition - 1; i >= 0; i--) {
+                for (int i = nextPosition - 2; i >= this.startSuperPosition; i--) {
                     nextPosition--;
                     if (clazz.isInstance(superList.get(i))) {
                         return (T) superList.get(i);
@@ -547,7 +547,21 @@ public class FacadeList<T> implements List<T> {
         }
 
         public int nextIndex() {
-            return 0;  //To change body of implemented methods use File | Settings | File Templates.
+            int cnt = 0;
+            int nextIndex = -1;
+            // starting from the current position, loop through the super collection
+            System.out.println("startSuperPosition: " + startSuperPosition);
+            System.out.println("nextSuperPosition: " + nextPosition);
+            for (int i = (startSuperPosition == 0 ? 0 : startSuperPosition); i < superList.size(); i++) {
+                if (clazz.isInstance(superList.get(i))) {
+                    System.out.println("Count: " + cnt);
+                    if (nextIndex == -1 && i >= (this.nextPosition-1)) {
+                        nextIndex = cnt;
+                    }
+                    cnt++;
+                }
+            }
+            return nextIndex;
         }
 
         public int previousIndex() {
