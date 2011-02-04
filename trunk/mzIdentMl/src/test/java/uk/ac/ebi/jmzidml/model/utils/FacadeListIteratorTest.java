@@ -128,6 +128,8 @@ public class FacadeListIteratorTest {
         assertTrue(!it.hasPrevious());
     }
 
+    /** Tests for previous() */
+
     /**
      * Try to retrieve previous element before next has been called.
      *
@@ -160,6 +162,9 @@ public class FacadeListIteratorTest {
     }
 
 
+    /**
+     * Tests for nextIndex()
+     */
     @Test
     public void testNextIndex() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator();
@@ -190,12 +195,18 @@ public class FacadeListIteratorTest {
         assertTrue(nextIndex == 1);
     }
 
+
+    /**
+     * Tests for previousIndex()
+     */
     @Test
     public void testPreviousIndex() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator();
         it.next();
+        it.next();
+        it.next();
         int previousIndex = it.previousIndex();
-        assertTrue(previousIndex == 0);
+        assertTrue(previousIndex == 2);
     }
 
     @Test
@@ -221,6 +232,534 @@ public class FacadeListIteratorTest {
         assertTrue(previousIndex == -1);
     }
 
+    @Test
+    public void testPreviousIndexWithIndexLastElement() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator(3);
+        it.next();
+        int previousIndex = it.previousIndex();
+        assertTrue(previousIndex == 0);
+    }
+
+    /**
+     * Tests for remove()
+     */
+    @Test
+    public void testRemoveWithNext() {
+        ListIterator<CvParam> it = cvList.listIterator();
+        it.next();
+        it.remove();
+        assertTrue(it.next().getAccession().equals("CV2"));
+    }
+
+    @Test
+    public void testRemoveWithNextAndPrevious() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator();
+        it.next();
+        it.previous();
+        it.remove();
+        assertTrue(it.next().getAccession().equals("CV2"));
+    }
+
+    @Test
+    public void testRemoveWithIndexAndNext() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator(1);
+        it.next();
+        it.remove();
+        assertTrue(it.next().getAccession().equals("CV3"));
+    }
+
+    @Test
+    public void testRemoveWithIndexAndPrevious() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator(1);
+        it.next();
+        it.previous();
+        it.remove();
+        CvParam cv = it.next();
+        assertTrue(cv.getAccession().equals("CV3"));
+    }
+
+    @Test
+    public void testRemoveWithIndexLastElement() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator(1);
+        it.next();
+        it.next();
+        it.next();
+        it.remove();
+        CvParam cv = it.previous();
+        assertTrue(cv.getAccession().equals("CV3"));
+    }
+
+    @Test
+    public void testRemoveWithNextPrevious() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator(1);
+        it.next();
+        it.previous();
+        it.next();
+        it.remove();
+        CvParam cv = it.next();
+        assertTrue(cv.getAccession().equals("CV3"));
+    }
+
+    @Test
+    public void testRemoveWithNextIndex() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator();
+        it.next();
+        it.remove();
+        assertTrue(it.nextIndex() == 0);
+    }
+
+    @Test
+    public void testRemoveWithPreviousIndexFromStartOfList() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator();
+        it.next();
+        it.remove();
+        assertTrue(it.previousIndex() == -1);
+    }
+
+
+    @Test
+    public void testRemoveWithTwoNextRemoveNextIndex() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator();
+        it.next();
+        it.next();
+        it.remove();
+        assertTrue(it.nextIndex() == 1);
+    }
+
+    @Test
+    public void testRemoveWithTwoNextRemovePreviousIndex() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator();
+        it.next();
+        it.next();
+        it.remove();
+        assertTrue(it.previousIndex() == 0);
+    }
+
+    @Test
+    public void testRemoveAtEndOfListWithNextIndex() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator();
+        it.next();
+        it.next();
+        it.next();
+        it.next();
+        it.remove();
+        assertTrue(it.nextIndex() == 3);
+    }
+
+
+    @Test
+    public void testRemoveAtEndOfListWithPreviousIndex() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator();
+        it.next();
+        it.next();
+        it.next();
+        it.next();
+        it.remove();
+        assertTrue(it.previousIndex() == 2);
+    }
+
+    @Test
+    public void testRemoveNextIndexWithListIteratorStartIndex() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator(2);
+        it.next();
+        it.remove();
+        assertTrue(it.nextIndex() == 0);
+    }
+
+    @Test
+    public void testRemovePreviousIndexWithListIteratorStartIndex() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator(2);
+        it.next();
+        it.remove();
+        assertTrue(it.previousIndex() == -1);
+    }
+
+    /**
+     * ******************** Test adding elements *************************************
+     */
+
+    /**
+     * Add a new element to the sublist
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testAddElement() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator();
+        CvParam cv = new CvParam();
+        cv.setAccession("addedCV1");
+        it.add(cv);
+        cv = it.next();
+        assertTrue(cv.getAccession().equals("addedCV1"));
+    }
+
+    /**
+     * Confirm nextIndex after adding a element
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testAddElementWithNextIndex() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator();
+        CvParam cv = new CvParam();
+        cv.setAccession("addedCV1");
+        it.add(cv);
+        assertTrue(it.nextIndex() == 0);
+    }
+
+    /**
+     * Confirm previousIndex after adding a element
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testAddElementWithPreviousIndex() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator();
+        CvParam cv = new CvParam();
+        cv.setAccession("addedCV1");
+        it.add(cv);
+        assertTrue(it.previousIndex() == -1);
+    }
+
+
+    /**
+     * Add a new element using sublist starting index
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testAddElementWithStartIndex() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator(2);
+        CvParam cv = new CvParam();
+        cv.setAccession("addedCV1");
+        it.add(cv);
+        cv = it.next();
+        assertTrue(cv.getAccession().equals("addedCV1"));
+    }
+
+    /**
+     * Confirm NoSuchElementException after setting the first element then calling previous()
+     *
+     * @throws Exception
+     */
+    @Test(expected = NoSuchElementException.class)
+    public void testAddElementPrevious() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator();
+        CvParam cv = new CvParam();
+        cv.setAccession("addedCV1");
+        it.add(cv);
+        it.previous();
+    }
+
+    /**
+     * Confirm NoSuchElementException after setting the first element then calling previous()
+     * using sublist start index
+     *
+     * @throws Exception
+     */
+    @Test(expected = NoSuchElementException.class)
+    public void testAddElementPreviousAndIndex() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator(2);
+        CvParam cv = new CvParam();
+        cv.setAccession("addedCV1");
+        it.add(cv);
+        it.previous();
+    }
+
+    /**
+     * Confirm nextIndex after adding a element using sublist start index
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testAddElementWithNextIndexAndStartIndex() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator(2);
+        CvParam cv = new CvParam();
+        cv.setAccession("addedCV1");
+        it.add(cv);
+        assertTrue(it.nextIndex() == 0);
+    }
+
+    /**
+     * Confirm previousIndex after adding a element using sublist start index
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testAddElementWithPreviousIndexAndStartIndex() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator(2);
+        CvParam cv = new CvParam();
+        cv.setAccession("addedCV1");
+        it.add(cv);
+        assertTrue(it.previousIndex() == -1);
+    }
+
+    /**
+     * ********************* Test setting elements ************************************
+     */
+
+    /**
+     * Test setting element
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSetElement() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator();
+        it.next();
+        CvParam cv = new CvParam();
+        cv.setAccession("setCV1");
+        it.set(cv);
+        assertTrue(it.previous().getAccession().equals("setCV1"));
+    }
+
+    /**
+     * Setting element has correctly replaced the element in current iterator index
+     * And next() returns correct instance
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSetElementCheckReplace() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator();
+        it.next();
+        CvParam cv = new CvParam();
+        cv.setAccession("setCV1");
+        it.set(cv);
+        assertTrue(it.next().getAccession().equals("CV2"));
+    }
+
+    /**
+     * Setting element after previous() been called
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSetElementWithPrevious() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator();
+        it.next();
+        it.previous();
+        CvParam cv = new CvParam();
+        cv.setAccession("setCV1");
+        it.set(cv);
+        assertTrue(it.next().getAccession().equals("setCV1"));
+    }
+
+
+    /**
+     * Setting element with specified sublist start index
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSetElementWithPreviousAndStartIndex() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator(2);
+        it.next();
+        it.previous();
+        CvParam cv = new CvParam();
+        cv.setAccession("setCV1");
+        it.set(cv);
+        assertTrue(it.next().getAccession().equals("setCV1"));
+        assertTrue(it.next().getAccession().equals("CV4"));
+    }
+
+    /**
+     * Setting element after previous() has been called
+     * Together with specified sublist start index
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSetElementWithPreviousAndLastIndex() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator(2);
+        it.next();
+        it.next();
+        CvParam cv = new CvParam();
+        cv.setAccession("setCV1");
+        it.set(cv);
+        assertTrue(it.previous().getAccession().equals("setCV1"));
+    }
+
+    /**
+     * hasNext() after setting the last element of the sublist
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSetElementWithHasNext() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator(2);
+        it.next();
+        it.next();
+        CvParam cv = new CvParam();
+        cv.setAccession("setCV1");
+        it.set(cv);
+        assertTrue(!it.hasNext());
+    }
+
+    /**
+     * hasPrevious() after setting the last element f the sublist
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSetELementWithHasPrevious() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator(2);
+        it.next();
+        it.next();
+        CvParam cv = new CvParam();
+        cv.setAccession("setCV1");
+        it.set(cv);
+        assertTrue(it.hasPrevious());
+    }
+
+    /**
+     * Setting element with specified sublist starting index
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSetElementWithStartIndex() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator(2);
+        it.next();
+        CvParam cv = new CvParam();
+        cv.setAccession("setCV1");
+        it.set(cv);
+        assertTrue(it.previous().getAccession().equals("setCV1"));
+    }
+
+    /**
+     * Setting element has correctly replaced the element in current iterator index
+     * And next() returns correct instance, using specified sublist start index
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSetElementCheckReplaceWithStartIndex() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator(2);
+        it.next();
+        CvParam cv = new CvParam();
+        cv.setAccession("setCV1");
+        it.set(cv);
+        assertTrue(it.next().getAccession().equals("CV4"));
+    }
+
+    /**
+     * nextIndex() after setting the first element of the sublist
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSetElementWithNextIndex() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator();
+        it.next();
+        CvParam cv = new CvParam();
+        cv.setAccession("setCV1");
+        it.set(cv);
+        assertTrue(it.nextIndex() == 1);
+    }
+
+    /**
+     * previousIndex() after setting the first element of the sublist
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSetElementWithPreviousIndex() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator();
+        it.next();
+        CvParam cv = new CvParam();
+        cv.setAccession("setCV1");
+        it.set(cv);
+        assertTrue(it.previousIndex() == 0);
+    }
+
+    /**
+     * nextIndex() after setting the first element of the sublist
+     * Together with sublist starting index
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSetElementWithNextIndexAndInputIndex() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator(2);
+        it.next();
+        CvParam cv = new CvParam();
+        cv.setAccession("setCV1");
+        it.set(cv);
+        assertTrue(it.nextIndex() == 1);
+    }
+
+    /**
+     * previousIndex() after setting the first element of the sublist
+     * Together with sublist starting index
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSetElementWithPreviousIndexAndInputIndex() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator(2);
+        it.next();
+        CvParam cv = new CvParam();
+        cv.setAccession("setCV1");
+        it.set(cv);
+        assertTrue(it.previousIndex() == 0);
+    }
+
+    /**
+     * Setting the last element of the sublist
+     * Together with sublist starting index
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSetLastElementWithInputIndex() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator(2);
+        it.next();
+        it.next();
+        CvParam cv = new CvParam();
+        cv.setAccession("setCV1");
+        it.set(cv);
+        assertTrue(it.previous().getAccession().equals("setCV1"));
+    }
+
+    /**
+     * Setting element after remove() has been called
+     * This should produce an IllegalStateException
+     *
+     * @throws Exception
+     */
+    @Test(expected = IllegalStateException.class)
+    public void testSetElementIllegalRemove() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator();
+        it.next();
+        it.remove();
+        CvParam cv = new CvParam();
+        cv.setAccession("setCV1");
+        it.set(cv);
+    }
+
+    /**
+     * Setting element after remove() then next() methods have been called
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSetElementRemove() throws Exception {
+        ListIterator<CvParam> it = cvList.listIterator();
+        it.next();
+        it.next();
+        it.remove();
+        it.next();
+        CvParam cv = new CvParam();
+        cv.setAccession("setCV1");
+        it.set(cv);
+        cv = it.next();
+        assertTrue(cv.getAccession().equals("CV4"));
+    }
+
+    /**
+     * ******************** Test for empty super list *********************************
+     */
 
     @Test
     public void testEmptySuperListHasNext() throws Exception {
@@ -230,7 +769,7 @@ public class FacadeListIteratorTest {
         assertTrue(!it.hasNext());
     }
 
-    @Test (expected = NoSuchElementException.class)
+    @Test(expected = NoSuchElementException.class)
     public void testEmptySuperListNext() throws Exception {
         List superlist = new ArrayList();
         FacadeList list = new FacadeList(superlist, CvParam.class);
@@ -246,7 +785,7 @@ public class FacadeListIteratorTest {
         assertTrue(!it.hasPrevious());
     }
 
-    @Test (expected = NoSuchElementException.class)
+    @Test(expected = NoSuchElementException.class)
     public void testEmptySuperListPrevious() throws Exception {
         List superlist = new ArrayList();
         FacadeList list = new FacadeList(superlist, CvParam.class);
@@ -301,5 +840,35 @@ public class FacadeListIteratorTest {
         int previous = listIt.previousIndex();
         System.out.println(previous);
 
+    }
+
+    @Test
+    public void testNextWithPrevious() throws Exception {
+        List list = new ArrayList();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+
+        ListIterator listIt = list.listIterator();
+        listIt.next();
+        String next = (String) listIt.next();
+        System.out.println("Next: " + next);
+        String previous = (String) listIt.previous();
+        System.out.println("Previous: " + previous);
+    }
+
+    @Test
+    public void testNextWithRemove() throws Exception {
+        List list = new ArrayList();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+
+        ListIterator listIt = list.listIterator();
+        listIt.next();
+        listIt.next();
+        listIt.previous();
+        listIt.remove();
+        System.out.println(listIt.next().toString());
     }
 }
