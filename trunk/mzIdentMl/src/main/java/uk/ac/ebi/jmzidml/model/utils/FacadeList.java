@@ -442,11 +442,21 @@ public class FacadeList<T> implements List<T> {
     private class SubListListIterator implements ListIterator<T> {
         private List superList;
         /**
-         * Next position in the super list
+         * Current position keeps track of the superlist index of the last instance returned by next()
+         * or -1 if next() has not been called
+         * The value of this index will be affected by next() and previous()
          */
-        private int nextPosition;
+        private int currPosition = -1;
+        /**
+         * Start super position is the superlist index of the first element in the sublist
+         * Once set, this should never change
+         */
         private int startSuperPosition = -1;
-        private int startIndex;
+        /**
+         * start index is the starting index of the sublist
+         * Once set, this should never change
+         */
+        private int startIndex = -1;
         private boolean nextHasBeenCalled = false;
 
         private SubListListIterator(List superList) {
@@ -458,7 +468,7 @@ public class FacadeList<T> implements List<T> {
                 throw new NullPointerException("Input super list cannot be null");
             }
 
-            if (startIndex < 0 || startIndex >= superList.size()) {
+            if (startIndex < 0 || (superList.size() > 0 && startIndex >= superList.size())) {
                 throw new IllegalArgumentException("Start index of the iterator cannot be less than zero or greater-equal than the size of the list");
             }
 
@@ -469,34 +479,39 @@ public class FacadeList<T> implements List<T> {
         }
 
         /**
-         * set the nextPosition according the start index
+         * set the currPosition according the start index
          */
         private void initNextPosition() {
             if (this.startIndex > 0) {
+                int matchCnt = 0;    // Keep track of how many instances of interest we have encountered
                 int cnt = 0;
                 for (Object o : superList) {
                     if (clazz.isInstance(o)) {
-                        if (cnt == this.startIndex) {
-                            startSuperPosition = nextPosition;
-                            nextPosition++;
+                        if (matchCnt == this.startIndex) {
+                            startSuperPosition = cnt;
+//                            currPosition++;
                             break;
                         }
-                        cnt++;
+                        matchCnt++;
                     }
-                    nextPosition++;
+                    cnt++;
                 }
 
                 if (startSuperPosition == -1) {
                     throw new IndexOutOfBoundsException("Index out of the bound of the sublist: " + startIndex);
                 }
+                currPosition = startSuperPosition - 1;
+            } else {
+                startSuperPosition = 0;
             }
+
         }
 
         public boolean hasNext() {
             // check whether this is a next element in the super collection
-            if (nextPosition <= (superList.size() - 1)) {
+            if ((currPosition + 1) <= (superList.size() - 1)) {
                 // starting from the current position, loop through the super collection
-                for (int i = nextPosition; i < superList.size(); i++) {
+                for (int i = (currPosition + 1); i < superList.size(); i++) {
                     if (clazz.isInstance(superList.get(i))) {
                         return true;
                     }
@@ -507,23 +522,28 @@ public class FacadeList<T> implements List<T> {
         }
 
         public T next() {
+            System.out.println("currPosition: " + currPosition);
             // check whether this is a next element in the super collection
-            if (nextPosition <= (superList.size() - 1)) {
+            if ((currPosition + 1) <= (superList.size() - 1)) {
                 this.nextHasBeenCalled = true;
                 // starting from the current position, loop through the super collection
-                for (int i = nextPosition; i < superList.size(); i++) {
-                    nextPosition++;
+
+                for (int i = ++currPosition; i < superList.size(); i++) {
+                    // currPosition++;
+                    System.out.println("next i " + i);
                     if (clazz.isInstance(superList.get(i))) {
                         return (T) superList.get(i);
                     }
+                    currPosition++;
                 }
             }
             throw new NoSuchElementException("Sublist does not contain any more elements.");
         }
 
         public boolean hasPrevious() {
-            if (nextPosition > 0) {
-                for (int i = nextPosition - 1; i >= startSuperPosition; i--) {
+            System.out.println("hasprevious nextposition " + currPosition);
+            if (currPosition >= 0) {
+                for (int i = currPosition; i >= startSuperPosition; i--) {
                     if (clazz.isInstance(superList.get(i))) {
                         return true;
                     }
@@ -534,9 +554,9 @@ public class FacadeList<T> implements List<T> {
         }
 
         public T previous() {
-            if (nextPosition > 0) {
-                for (int i = nextPosition - 2; i >= this.startSuperPosition; i--) {
-                    nextPosition--;
+            if (currPosition >= 0) {
+                for (int i = currPosition; i >= this.startSuperPosition; i--) {
+                    currPosition--;
                     if (clazz.isInstance(superList.get(i))) {
                         return (T) superList.get(i);
                     }
@@ -551,21 +571,32 @@ public class FacadeList<T> implements List<T> {
             int nextIndex = -1;
             // starting from the current position, loop through the super collection
             System.out.println("startSuperPosition: " + startSuperPosition);
-            System.out.println("nextSuperPosition: " + nextPosition);
-            for (int i = (startSuperPosition == 0 ? 0 : startSuperPosition); i < superList.size(); i++) {
+            System.out.println("nextSuperPosition: " + currPosition);
+            for (int i = startSuperPosition; i < superList.size(); i++) {
                 if (clazz.isInstance(superList.get(i))) {
                     System.out.println("Count: " + cnt);
-                    if (nextIndex == -1 && i >= (this.nextPosition-1)) {
+                    if (nextIndex == -1 && i >= (this.currPosition + 1)) {
                         nextIndex = cnt;
                     }
                     cnt++;
                 }
             }
-            return nextIndex;
+            return nextIndex == -1 ? cnt : nextIndex;
         }
 
         public int previousIndex() {
-            return 0;  //To change body of implemented methods use File | Settings | File Templates.
+            int previousIndex = -1;
+
+            if (currPosition >= startSuperPosition) {
+                // starting from the current position, loop backward through the super collection
+                for (int i = currPosition; i >= startSuperPosition; i--) {
+                    if (clazz.isInstance(superList.get(i))) {
+                        previousIndex++;
+                    }
+                }
+            }
+
+            return previousIndex;
         }
 
         public void remove() {

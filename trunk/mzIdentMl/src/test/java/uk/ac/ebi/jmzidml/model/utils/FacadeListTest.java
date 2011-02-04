@@ -59,80 +59,6 @@ public class FacadeListTest {
         cvList = new FacadeList<CvParam>(paramList, CvParam.class);
     }
 
-    @Test
-    public void testIteratorHasNext() throws NoSuchElementException {
-        Iterator<CvParam> cvIter = cvList.iterator();
-        // test hasnext
-        cvIter.hasNext();
-        cvIter.hasNext();
-        cvIter.hasNext();
-        cvIter.hasNext();
-    }
-
-    @Test
-    public void testIteratorHasNextFailsAtEndOfList() {
-        Iterator<CvParam> cvIter = cvList.iterator();
-        cvIter.next();
-        cvIter.next();
-        cvIter.next();
-
-        try {
-            cvIter.next();
-        } catch (NoSuchElementException e) {
-            assertTrue(true);
-        } catch (Exception e) {
-            assertTrue(false);
-        }
-
-    }
-
-    @Test
-    public void testIteratorNext() {
-        Iterator<CvParam> cvIter = cvList.iterator();
-
-        // remove the first cv param
-        CvParam cv = cvIter.next();
-        assertTrue(cv.getAccession().equals("CV1"));
-    }
-
-    @Test
-    public void testIteratorRemove() {
-        Iterator<CvParam> cvIter = cvList.iterator();
-        cvIter.next();
-        cvIter.next();
-        cvIter.remove();
-        CvParam cv = cvIter.next();
-        assertTrue(cv.getAccession().equals("CV3"));
-    }
-
-    /**
-     * Get an iterator, call next one or more times then remove an instance from the list using the remove
-     * method of list. Call next on the iterator again and check returned instance. This is to test the
-     * consistency of the iterator.
-     */
-    @Test
-    public void testIteratorInconsistency() {
-        Iterator<CvParam> cvIter = cvList.iterator();
-
-        // remove the first cv param
-        cvIter.next();
-        cvIter.next();
-        cvIter.next();
-        CvParam cv = cvIter.next();
-        assertTrue(cv.getAccession().equals("CV4"));
-
-        // remove one element
-        cvList.remove(cv);
-
-        // get next
-        try {
-            cv = cvIter.next();
-            assertTrue(false);
-        } catch (Exception ex) {
-            assertTrue(ex instanceof NoSuchElementException);
-        }
-        //  assertTrue(false);
-    }
 
 
     @Test
@@ -179,38 +105,6 @@ public class FacadeListTest {
         }
     }
 
-    @Test
-    public void testAddAtIndexWithIteratorBefore() {
-        Iterator<CvParam> cvs = cvList.iterator();
-
-        cvs.next();
-        cvs.next();
-        cvs.next();
-
-        CvParam cv = new CvParam();
-        cv.setAccession("New Cv 1");
-        cvList.add(1, cv);
-
-        assertTrue(cvs.next().getAccession().equals("CV3"));
-    }
-
-    @Test
-    public void testAddAtIndexWithIteratorAfter() {
-        Iterator<CvParam> cvs = cvList.iterator();
-
-        cvs.next();
-        cvs.next();
-
-        CvParam cv = new CvParam();
-        cv.setAccession("New Cv 4");
-        cvList.add(3, cv);
-
-        assertTrue(cvs.next().getAccession().equals("CV3"));
-
-        assertTrue(cvs.next().getAccession().equals("New Cv 4"));
-
-        assertTrue(cvs.next().getAccession().equals("CV4"));
-    }
 
 
     @Test
@@ -302,118 +196,6 @@ public class FacadeListTest {
         assertEquals(cvList.lastIndexOf(cv), 4);
     }
 
-    @Test
-    public void testListIteratorHasNext() throws Exception {
-        ListIterator<CvParam> it = cvList.listIterator();
-        assertTrue(it.hasNext());
-    }
-
-    @Test
-    public void testListIteratorHasNextWithIndex() throws Exception {
-        ListIterator<CvParam> it = cvList.listIterator(1);
-        assertTrue(it.hasNext());
-    }
-
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void testListIteratorNotHasNextWithIndex() throws Exception {
-        ListIterator<CvParam> it = cvList.listIterator(4);
-    }
-
-    @Test
-    public void testListIteratorNext() throws Exception {
-        ListIterator<CvParam> it = cvList.listIterator();
-        CvParam cv = it.next();
-        assertTrue(cv.getAccession().equals("CV1"));
-    }
-
-    @Test
-    public void testListIteratorNextWithIndex() throws Exception {
-        ListIterator<CvParam> it = cvList.listIterator(1);
-        CvParam cv = it.next();
-        assertTrue(cv.getAccession().equals("CV2"));
-    }
-
-    @Test
-    public void testListIteratorLastNextWithIndex() throws Exception {
-        ListIterator<CvParam> it = cvList.listIterator(3);
-        CvParam cv = it.next();
-        assertTrue(cv.getAccession().equals("CV4"));
-    }
-
-
-
-    @Test
-    public void testListIteratorHasPrevious() throws Exception {
-        ListIterator<CvParam> it = cvList.listIterator();
-        it.next();
-        assertTrue(it.hasPrevious());
-    }
-
-    @Test
-    public void testListIteratorHasNoPrevious() throws Exception {
-        ListIterator<CvParam> it = cvList.listIterator();
-        assertTrue(!it.hasPrevious());
-    }
-
-    @Test
-    public void testListIteratorHasPreviousWithIndex() throws Exception {
-        ListIterator<CvParam> it = cvList.listIterator(1);
-        assertTrue(!it.hasPrevious());
-        it.next();
-        assertTrue(it.hasPrevious());
-    }
-
-    @Test (expected = IndexOutOfBoundsException.class)
-    public void testListIteratorNotHasPreviousWithIndex() throws Exception {
-        ListIterator<CvParam> it = cvList.listIterator(4);
-        assertTrue(!it.hasPrevious());
-    }
-
-    /**
-     * Try to retrieve previous element before next has been called.
-     * @throws Exception
-
-     */
-    @Test(expected = NoSuchElementException.class)
-    public void testPreviousFromStart() throws Exception{
-        ListIterator<CvParam> it = cvList.listIterator();
-        it.previous();
-    }
-
-    @Test
-    public void testPrevious() throws Exception{
-        ListIterator<CvParam> it = cvList.listIterator();
-        it.next();
-        CvParam cv = it.previous();
-        assertNotNull(cv);
-        assertTrue(cv.getAccession().equals("CV1"));
-    }
-
-    /**
-     * Pass an index into listiterator call and call previous. Should throw Exception
-     * @throws Exception
-     */
-    @Test(expected = NoSuchElementException.class)
-    public void testPreviousFailingWithIndex() throws Exception{
-        ListIterator<CvParam> it = cvList.listIterator(1);
-        it.previous();
-    }
-
-
-    @Test
-    public void testNextIndex() throws Exception{
-        ListIterator<CvParam> it = cvList.listIterator();
-        int nextIndex = it.nextIndex();
-        assertTrue(nextIndex == 0);
-    }
-
-    @Test
-    public void testNextIndexWithIndex() throws Exception{
-        ListIterator<CvParam> it = cvList.listIterator(2);
-        int nextIndex = it.nextIndex();
-        System.out.println(nextIndex);
-        assertTrue(nextIndex == 0);
-    }
 
     @Test
     public void testSubList() throws Exception {
@@ -449,4 +231,6 @@ public class FacadeListTest {
     public void testRetainAll() throws Exception {
 
     }
+
+
 }
