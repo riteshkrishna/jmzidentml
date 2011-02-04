@@ -457,7 +457,8 @@ public class FacadeList<T> implements List<T> {
          * Once set, this should never change
          */
         private int startIndex = -1;
-        private boolean nextHasBeenCalled = false;
+        private boolean nextOrPreviousHasBeenCalled = false;
+        private boolean addOrRemoveCalled;
 
         private SubListListIterator(List superList) {
             this(superList, 0);
@@ -468,8 +469,8 @@ public class FacadeList<T> implements List<T> {
                 throw new NullPointerException("Input super list cannot be null");
             }
 
-            if (startIndex < 0 || (superList.size() > 0 && startIndex >= superList.size())) {
-                throw new IllegalArgumentException("Start index of the iterator cannot be less than zero or greater-equal than the size of the list");
+            if (startIndex < 0 || (superList.size() > 0 && startIndex >= superList.size()) || (superList.size() == 0 && startIndex > 0)) {
+                throw new IndexOutOfBoundsException("Start index of the iterator cannot be less than zero or greater-equal than the size of the list");
             }
 
             this.superList = superList;
@@ -523,9 +524,10 @@ public class FacadeList<T> implements List<T> {
 
         public T next() {
             System.out.println("currPosition: " + currPosition);
+            this.addOrRemoveCalled = false;
             // check whether this is a next element in the super collection
             if ((currPosition + 1) <= (superList.size() - 1)) {
-                this.nextHasBeenCalled = true;
+                nextOrPreviousHasBeenCalled = true;
                 // starting from the current position, loop through the super collection
 
                 for (int i = ++currPosition; i < superList.size(); i++) {
@@ -537,12 +539,14 @@ public class FacadeList<T> implements List<T> {
                     currPosition++;
                 }
             }
+
             throw new NoSuchElementException("Sublist does not contain any more elements.");
         }
 
         public boolean hasPrevious() {
             System.out.println("hasprevious nextposition " + currPosition);
             if (currPosition >= 0) {
+                nextOrPreviousHasBeenCalled = true;
                 for (int i = currPosition; i >= startSuperPosition; i--) {
                     if (clazz.isInstance(superList.get(i))) {
                         return true;
@@ -557,12 +561,13 @@ public class FacadeList<T> implements List<T> {
             if (currPosition >= 0) {
                 for (int i = currPosition; i >= this.startSuperPosition; i--) {
                     currPosition--;
+
                     if (clazz.isInstance(superList.get(i))) {
                         return (T) superList.get(i);
                     }
                 }
             }
-
+            this.addOrRemoveCalled = false;
             throw new NoSuchElementException("Failed to find a previous element");
         }
 
@@ -587,12 +592,10 @@ public class FacadeList<T> implements List<T> {
         public int previousIndex() {
             int previousIndex = -1;
 
-            if (currPosition >= startSuperPosition) {
-                // starting from the current position, loop backward through the super collection
-                for (int i = currPosition; i >= startSuperPosition; i--) {
-                    if (clazz.isInstance(superList.get(i))) {
-                        previousIndex++;
-                    }
+            // starting from the current position, loop backward through the super collection
+            for (int i = currPosition; i >= startSuperPosition; i--) {
+                if (clazz.isInstance(superList.get(i))) {
+                    previousIndex++;
                 }
             }
 
@@ -600,15 +603,33 @@ public class FacadeList<T> implements List<T> {
         }
 
         public void remove() {
-            //To change body of implemented methods use File | Settings | File Templates.
+            if (this.nextOrPreviousHasBeenCalled == false) {
+                throw new IllegalStateException("Next method for sublist iterator must be called at least once before remove can be called.");
+            }
+            this.addOrRemoveCalled = true;
+            if (currPosition >= startSuperPosition) {
+                this.superList.remove(this.currPosition);
+                this.currPosition--;
+            } else {
+                this.superList.remove(startSuperPosition);
+            }
         }
 
         public void set(T t) {
-            //To change body of implemented methods use File | Settings | File Templates.
+            if (this.nextOrPreviousHasBeenCalled && !this.addOrRemoveCalled) {
+                if (currPosition >= startSuperPosition) {
+                    this.superList.set(this.currPosition, t);
+                } else {
+                    this.superList.set(startSuperPosition, t);
+                }
+            } else {
+                throw new IllegalStateException();
+            }
         }
 
         public void add(T t) {
-            //To change body of implemented methods use File | Settings | File Templates.
+            this.addOrRemoveCalled = true;
+            this.superList.add(currPosition + 1, t);
         }
     }
 }
