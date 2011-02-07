@@ -59,24 +59,44 @@ public class FacadeListIteratorTest {
         cvList = new FacadeList<CvParam>(paramList, CvParam.class);
     }
 
+    /**************************** Test hasNext() *********************************/
 
+    /**
+     * Confirm has next element
+     *
+     * @throws Exception
+     */
     @Test
     public void testListIteratorHasNext() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator();
         assertTrue(it.hasNext());
     }
 
+    /**
+     * Confirm has next element with sublist start index
+     * @throws Exception
+     */
     @Test
     public void testListIteratorHasNextWithIndex() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator(1);
         assertTrue(it.hasNext());
     }
 
+    /**
+     * Check IndexOutOfBoundsException when sublist start index over the limit
+     * @throws Exception
+     */
     @Test(expected = IndexOutOfBoundsException.class)
     public void testListIteratorNotHasNextWithIndex() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator(4);
     }
 
+    /****************************** Test next() ********************************/
+
+    /**
+     * Confirm sublist's next element is correct
+     * @throws Exception
+     */
     @Test
     public void testListIteratorNext() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator();
@@ -85,6 +105,10 @@ public class FacadeListIteratorTest {
         assertTrue(cv.getAccession().equals("CV1"));
     }
 
+    /**
+     * Confirm sublist's next element using sublist start index
+     * @throws Exception
+     */
     @Test
     public void testListIteratorNextWithIndex() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator(1);
@@ -93,6 +117,11 @@ public class FacadeListIteratorTest {
         assertTrue(cv.getAccession().equals("CV2"));
     }
 
+    /**
+     * Confirm the first/last element of the sublist is correct
+     * using sublist start index
+     * @throws Exception
+     */
     @Test
     public void testListIteratorLastNextWithIndex() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator(3);
@@ -101,6 +130,13 @@ public class FacadeListIteratorTest {
     }
 
 
+    /******************************* Tst hasPrevious() ****************************/
+
+    /**
+     * Confirm has previous returns correct properly.
+     *
+     * @throws Exception
+     */
     @Test
     public void testListIteratorHasPrevious() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator();
@@ -108,12 +144,23 @@ public class FacadeListIteratorTest {
         assertTrue(it.hasPrevious());
     }
 
+    /**
+     * Confirm hasPrevious returns false if next not called at all.
+     *
+     * @throws Exception
+     */
     @Test
     public void testListIteratorHasNoPrevious() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator();
         assertTrue(!it.hasPrevious());
     }
 
+    /**
+     * hasPrevious using start index. Confirm hasPrevious does not consider actual first element (CV1) as part
+     * of the sublist.
+     *
+     * @throws Exception
+     */
     @Test
     public void testListIteratorHasPreviousWithIndex() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator(1);
@@ -122,11 +169,6 @@ public class FacadeListIteratorTest {
         assertTrue(it.hasPrevious());
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void testListIteratorNotHasPreviousWithIndex() throws Exception {
-        ListIterator<CvParam> it = cvList.listIterator(4);
-        assertTrue(!it.hasPrevious());
-    }
 
     /** Tests for previous() */
 
@@ -151,7 +193,7 @@ public class FacadeListIteratorTest {
     }
 
     /**
-     * Pass an index into listiterator call and call previous. Should throw Exception
+     * Pass an index into listiterator call and call previous(). Should throw Exception
      *
      * @throws Exception
      */
@@ -172,6 +214,10 @@ public class FacadeListIteratorTest {
         assertTrue(nextIndex == 0);
     }
 
+    /**
+     * Confirm first index is 0 when using start index.
+     * @throws Exception
+     */
     @Test
     public void testNextIndexWithIndex() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator(2);
@@ -179,6 +225,10 @@ public class FacadeListIteratorTest {
         assertTrue(nextIndex == 0);
     }
 
+    /**
+     * Confirm first index is 0 when setting start index to end of list.
+     * @throws Exception
+     */
     @Test
     public void testNextIndexWithIndexEnd() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator(3);
@@ -186,12 +236,16 @@ public class FacadeListIteratorTest {
         assertTrue(nextIndex == 0);
     }
 
+    /**
+     * Set start index to last CV param and call next(). nextIndex() should return the size of the list when past the end of the list,
+     * in this = 1.
+     * @throws Exception
+     */
     @Test
     public void testNextIndexWithIndexSize() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator(3);
         it.next();
         int nextIndex = it.nextIndex();
-        System.out.println("nextIndex: " + nextIndex);
         assertTrue(nextIndex == 1);
     }
 
@@ -209,6 +263,10 @@ public class FacadeListIteratorTest {
         assertTrue(previousIndex == 2);
     }
 
+    /**
+     * Confirm -1 returned when previousIndex() called before next() called.
+     * @throws Exception
+     */
     @Test
     public void testPreviousIndexWithOutNext() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator();
@@ -216,6 +274,10 @@ public class FacadeListIteratorTest {
         assertTrue(previousIndex == -1);
     }
 
+    /**
+     * Confirm previousIndex() eqauls 1 when using start index and next() called twice
+     * @throws Exception
+     */
     @Test
     public void testPreviousIndexWithIndex() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator(1);
@@ -225,6 +287,11 @@ public class FacadeListIteratorTest {
         assertTrue(previousIndex == 1);
     }
 
+    /**
+     * Confirm -1 returned when previousIndex() called before next() called when using start index
+     *
+     * @throws Exception
+     */
     @Test
     public void testPreviousIndexWithoutNext() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator(1);
@@ -232,6 +299,11 @@ public class FacadeListIteratorTest {
         assertTrue(previousIndex == -1);
     }
 
+    /**
+     * When start index set to last element, call next() and confirm previousIndex() is 0.
+     *
+     * @throws Exception
+     */
     @Test
     public void testPreviousIndexWithIndexLastElement() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator(3);
@@ -243,6 +315,10 @@ public class FacadeListIteratorTest {
     /**
      * Tests for remove()
      */
+
+    /**
+     * Remove first element from the list and confirm next() returns reference to CV2.
+     */
     @Test
     public void testRemoveWithNext() {
         ListIterator<CvParam> it = cvList.listIterator();
@@ -251,6 +327,11 @@ public class FacadeListIteratorTest {
         assertTrue(it.next().getAccession().equals("CV2"));
     }
 
+    /**
+     * Confirm correct element returned when next(), previous() and remove() called
+     *
+     * @throws Exception
+     */
     @Test
     public void testRemoveWithNextAndPrevious() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator();
@@ -260,6 +341,11 @@ public class FacadeListIteratorTest {
         assertTrue(it.next().getAccession().equals("CV2"));
     }
 
+    /**
+     * Remove first element from the list and confirm next() returns reference to CV3 (start index is set to 1).
+     *
+     * @throws Exception
+     */
     @Test
     public void testRemoveWithIndexAndNext() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator(1);
@@ -268,6 +354,10 @@ public class FacadeListIteratorTest {
         assertTrue(it.next().getAccession().equals("CV3"));
     }
 
+    /**
+     * Confirm correct element returned when next(), previous() and remove() called when using start index > 0.
+     * @throws Exception
+     */
     @Test
     public void testRemoveWithIndexAndPrevious() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator(1);
@@ -278,6 +368,11 @@ public class FacadeListIteratorTest {
         assertTrue(cv.getAccession().equals("CV3"));
     }
 
+    /**
+     * Set start index > 0, use next() to iterate to end of sublist, remove() and confirm previous() return reference to CV3
+     *
+     * @throws Exception
+     */
     @Test
     public void testRemoveWithIndexLastElement() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator(1);
@@ -289,6 +384,11 @@ public class FacadeListIteratorTest {
         assertTrue(cv.getAccession().equals("CV3"));
     }
 
+    /**
+     * Set start index > 0, using next(), previous() and remove() and confirm next() returns reference to CV3
+     *
+     * @throws Exception
+     */
     @Test
     public void testRemoveWithNextPrevious() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator(1);
@@ -300,6 +400,11 @@ public class FacadeListIteratorTest {
         assertTrue(cv.getAccession().equals("CV3"));
     }
 
+    /**
+     * Use next() and remove() and confirm nextIndex still returns 0
+     *
+     * @throws Exception
+     */
     @Test
     public void testRemoveWithNextIndex() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator();
@@ -308,6 +413,10 @@ public class FacadeListIteratorTest {
         assertTrue(it.nextIndex() == 0);
     }
 
+    /**
+     * Remove first element from list and confirm previousIndex returns -1.
+     * @throws Exception
+     */
     @Test
     public void testRemoveWithPreviousIndexFromStartOfList() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator();
@@ -316,7 +425,10 @@ public class FacadeListIteratorTest {
         assertTrue(it.previousIndex() == -1);
     }
 
-
+    /**
+     * Remove second element from list and confirm nextIndex() reset to 1 (pointing to new second element).
+     * @throws Exception
+     */
     @Test
     public void testRemoveWithTwoNextRemoveNextIndex() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator();
@@ -326,6 +438,10 @@ public class FacadeListIteratorTest {
         assertTrue(it.nextIndex() == 1);
     }
 
+    /**
+     * Remove second element from list and confirm previousIndex() reset to 0 (pointing to first element).
+     * @throws Exception
+     */
     @Test
     public void testRemoveWithTwoNextRemovePreviousIndex() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator();
@@ -335,6 +451,10 @@ public class FacadeListIteratorTest {
         assertTrue(it.previousIndex() == 0);
     }
 
+    /**
+     * Starting at start of list, iterate to last element and remove. Confirm nextIndex() set to 3
+     * @throws Exception
+     */
     @Test
     public void testRemoveAtEndOfListWithNextIndex() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator();
@@ -346,7 +466,10 @@ public class FacadeListIteratorTest {
         assertTrue(it.nextIndex() == 3);
     }
 
-
+    /**
+     * Starting at start of list, iterate to last element and remove. Confirm previousIndex set to 2
+     * @throws Exception
+     */
     @Test
     public void testRemoveAtEndOfListWithPreviousIndex() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator();
@@ -358,6 +481,10 @@ public class FacadeListIteratorTest {
         assertTrue(it.previousIndex() == 2);
     }
 
+    /**
+     * Set start index > 0 and remove first element. Confirm nextIndex = 0;
+     * @throws Exception
+     */
     @Test
     public void testRemoveNextIndexWithListIteratorStartIndex() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator(2);
@@ -366,6 +493,10 @@ public class FacadeListIteratorTest {
         assertTrue(it.nextIndex() == 0);
     }
 
+    /**
+     * Set start index > 0, remove first element and confirm previousIndex() is -1.
+     * @throws Exception
+     */
     @Test
     public void testRemovePreviousIndexWithListIteratorStartIndex() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator(2);
@@ -810,7 +941,7 @@ public class FacadeListIteratorTest {
         int previousIndex = it.previousIndex();
         assertTrue(previousIndex == -1);
     }
-
+/*
     @Test
     public void testNextPositionatminusone() {
         List list = new ArrayList();
@@ -870,5 +1001,13 @@ public class FacadeListIteratorTest {
         listIt.previous();
         listIt.remove();
         System.out.println(listIt.next().toString());
+    }
+           */
+
+    /**
+     * test multiple removes
+     */
+    public void testMultipleRemoves() throws Exception{
+        assertTrue(false);
     }
 }
