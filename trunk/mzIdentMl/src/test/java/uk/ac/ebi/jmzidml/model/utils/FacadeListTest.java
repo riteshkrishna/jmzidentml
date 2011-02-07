@@ -1,6 +1,7 @@
 package uk.ac.ebi.jmzidml.model.utils;
 
 
+import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import uk.ac.ebi.jmzidml.model.mzidml.CvParam;
@@ -197,15 +198,182 @@ public class FacadeListTest {
     }
 
 
+    /**
+     * Confirm subList() method returns a sublist with right size
+     *
+     * @throws Exception
+     */
     @Test
     public void testSubList() throws Exception {
+        List<CvParam> sublist = cvList.subList(1, 3);
+        assertTrue(sublist.size() == 2);
+    }
+
+    /**
+     * Confirm the value returned by subList() is correct
+     * @throws Exception
+     */
+    @Test
+    public void testSubListCheckValue() throws Exception {
+        List<CvParam> sublist = cvList.subList(1, 3);
+        assertTrue(sublist.get(0).getAccession().equals("CV2"));
+        Assert.assertTrue(sublist.get(1).getAccession().equals("CV3"));
+    }
+
+    @Test (expected = UnsupportedOperationException.class)
+    public void testSubListModification() throws Exception {
+        List<CvParam> sublist = cvList.subList(1, 3);
+        CvParam cv = new CvParam();
+        cv.setAccession("Rubbish");
+        sublist.add(cv);
+    }
+
+    @Test (expected = IndexOutOfBoundsException.class)
+    public void testSubListCheckIndex() throws Exception {
+        List<CvParam> sublist = cvList.subList(1, 5);
+    }
+
+    @Test (expected = IndexOutOfBoundsException.class)
+    public void testSubListFromIndexGreaterThanToIndex() throws Exception {
+        List<CvParam> sublist = cvList.subList(3, 2);
+    }
+
+    @Test
+    public void testSubListToLastELement() throws Exception {
+        List<CvParam> sublist = cvList.subList(1, 4);
+        Assert.assertTrue(sublist.size() == 3);
+    }
+
+    @Test
+    public void testSubListChangeToOriginalList() throws Exception {
+        List<CvParam> sublist = cvList.subList(1, 4);
+        CvParam cv = sublist.get(0);
+        cv.setAccession("New CV2");
+
+        CvParam cv1 = cvList.get(1);
+        Assert.assertTrue(cv1.getAccession().equals("New CV2"));
+    }
+
+    /**
+     * Confirm toArray() returns an array with the right size
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testToArray() throws Exception {
+        Object[] arr = cvList.toArray();
+        Assert.assertTrue(arr.length == 4);
+    }
+
+    /**
+     * Confirms changes on element instance within the array will be made to the original list as well.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testToArrayChangeInstance() throws Exception {
+        Object[] arr = cvList.toArray();
+        CvParam cv = (CvParam)arr[0];
+        cv.setAccession("CV12");
+        Assert.assertTrue(cvList.get(0).getAccession().equals("CV12"));
+    }
+
+    /**
+     * Changes to reference in returned array are not reflected in list. Setting an array element to a new object does
+     * not change the reference in the original list.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testToArrayChangeInstanceReference() throws Exception {
+        Object[] arr = cvList.toArray();
+        CvParam cv = new CvParam();
+        cv.setAccession("CV12");
+        arr[0] = cv;
+        Assert.assertTrue(cvList.get(0).getAccession().equals("CV1"));
+    }
+
+
+    /********************************** toArray(T[]) *********************************/
+    @Test
+    public void testToArrayProvidingArrayWithData() throws Exception{
+        CvParam[] cvParams = new CvParam[6];
+        CvParam cv = new CvParam();
+        cv.setAccession("newCV1");
+        cvParams[0] = cv;
+
+        cv = new CvParam();
+        cv.setAccession("newCV2");
+        cvParams[1] = cv;
+
+        cv = new CvParam();
+        cv.setAccession("newCV3");
+        cvParams[2] = cv;
+
+        cv = new CvParam();
+        cv.setAccession("newCV4");
+        cvParams[3] = cv;
+
+        cv = new CvParam();
+        cv.setAccession("newCV5");
+        cvParams[4] = cv;
+
+        cv = new CvParam();
+        cv.setAccession("newCV6");
+        cvParams[5] = cv;
+
+        CvParam[] returnedArray = this.cvList.toArray(cvParams);
+        assertTrue(returnedArray[0].getAccession().equals("CV1"));
+        assertTrue(returnedArray[4] == null);
+        assertTrue(returnedArray[5].getAccession().equals("newCV6"));
 
     }
 
     @Test
-    public void testToArray() throws Exception {
-
+    public void testToArrayProvidingArrayChangingValues() throws Exception{
+        CvParam[] cvParams = new CvParam[5];
+        CvParam[] returnedParams = this.cvList.toArray(cvParams);
+        returnedParams[0].setAccession("newCV1");
+        assertTrue(this.cvList.get(0).getAccession().equals(("newCV1")));
     }
+
+    @Test
+    public void testToArrayProvidingArrayChangingReference() throws Exception{
+        CvParam[] cvParams = new CvParam[5];
+        CvParam[] returnedParams = this.cvList.toArray(cvParams);
+        CvParam newCvParam = new CvParam();
+        newCvParam.setAccession("newCV1");
+        returnedParams[0] = newCvParam;
+        assertTrue(this.cvList.get(0).getAccession().equals(("CV1")));
+    }
+
+
+    @Test
+    public void testToArrayProvidingArray() throws Exception{
+        CvParam[] cvParams = new CvParam[5];
+        CvParam[] returnedParams = this.cvList.toArray(cvParams);
+        assertTrue(returnedParams[0].getAccession().equals(("CV1")));
+        assertTrue(returnedParams[4] == null);
+    }
+
+    @Test
+    public void testToArrayProvidingSmallerArray() throws Exception{
+        CvParam[] cvParams = new CvParam[1];
+        CvParam[] returnedParams = this.cvList.toArray(cvParams);
+        assertTrue(returnedParams[0].getAccession().equals(("CV1")));
+        assertTrue(returnedParams.length == 4);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testToArrayProvidingNullArray() throws Exception{
+        CvParam[] nullArray = null;
+        CvParam[] returnedParams = this.cvList.toArray(nullArray);
+    }
+
+
+
+
+
 
     @Test
     public void testContainsAll() throws Exception {
@@ -232,5 +400,22 @@ public class FacadeListTest {
 
     }
 
+    @Test
+    public void testToArrayOnList() throws Exception {
+        List<CvParam> list = new ArrayList<CvParam>();
+        CvParam cv = new CvParam();
+        cv.setAccession("CV1");
+        list.add(cv);
 
+        CvParam cv1 = new CvParam();
+        cv1.setAccession("CV2");
+        list.add(cv1);
+
+        Object[] arr = list.toArray();
+        CvParam newCv = new CvParam();
+        newCv.setAccession("CV12");
+     //   ((CvParam)arr[0]).setAccession("CV12");
+        arr[0] = newCv;
+        System.out.println(list.get(0).getAccession());
+    }
 }

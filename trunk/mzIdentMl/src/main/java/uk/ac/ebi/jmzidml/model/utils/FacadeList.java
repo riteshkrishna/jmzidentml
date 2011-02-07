@@ -192,17 +192,68 @@ public class FacadeList<T> implements List<T> {
         return new SubListListIterator(originalList, index);
     }
 
+    /**
+     * sublist returned is an unmodifiable list, structural change to the sublist is not allowed.
+     * Please note: this behaves differently from the definition of the interface.
+     * Changes to the element in sublist will affect the element in the original list
+     * However, the behaviour is undefined if the original list has been changed
+     *
+     * @param fromIndex low endpoint (inclusive) of the sublist
+     * @param toIndex   high endpoint (exclusive) of the sublist
+     * @return  List<T> unmodifiable sublist
+     */
     public List<T> subList(int fromIndex, int toIndex) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        checkIndex(fromIndex);
+        checkIndex(toIndex - 1);
+
+        if (fromIndex > toIndex) {
+            throw new IndexOutOfBoundsException("The start index needs to be greater than the end index: start index: " + fromIndex + " end index: " + toIndex);
+        }
+
+        if (toIndex > this.size()) {
+            throw new IndexOutOfBoundsException("The end index should not be greater than the size of the list: " + toIndex);
+        }
+
+
+        List<T> result = new ArrayList<T>();
+        int cnt = 0;
+        int diff = toIndex - fromIndex;
+        ListIterator<T> listIter = this.listIterator(fromIndex);
+        while(listIter.hasNext()) {
+            if (cnt < diff) {
+                result.add(listIter.next());
+            } else {
+                break;
+            }
+            cnt++;
+        }
+
+        return Collections.unmodifiableList(result);
     }
 
+
     public Object[] toArray() {
-        return null;
+        Object[] arr = new Object[this.size()];
+        int index = 0;
+        for (T element : this) {
+            arr[index] = element;
+            index++;
+        }
+        return arr;
     }
 
 
     public <T> T[] toArray(T[] a) {
-        return null;
+      int size = this.size();
+      if (a.length < size)
+            // Make a new array of a's runtime type, but my contents:
+            return (T[]) Arrays.copyOf(this.toArray(), size, a.getClass());
+
+        System.arraycopy(this.toArray(), 0, a, 0, size);
+        if (a.length > size)
+            a[size] = null;
+        return a;
+
     }
 
 
@@ -393,7 +444,14 @@ public class FacadeList<T> implements List<T> {
         /**
          * Next position in the super list
          */
-        private int nextPosition;
+        //private int nextPosition;
+
+        /**
+         * Current position keeps track of the superlist index of the last instance returned by next()
+         * or -1 if next() has not been called
+         * The value of this index will be affected by next() and previous()
+         */
+        private int currPosition = -1;
         private boolean nextHasBeenCalled = false;
 
         public SublistIterator(List superList) {
@@ -402,31 +460,32 @@ public class FacadeList<T> implements List<T> {
 
 
         public boolean hasNext() {
-            // check whether this is a next element in the super collection
-            if (nextPosition <= (superList.size() - 1)) {
+           // check whether this is a next element in the super collection
+            if ((currPosition + 1) <= (superList.size() - 1)) {
                 // starting from the current position, loop through the super collection
-                for (int i = nextPosition; i < superList.size(); i++) {
+                for (int i = (currPosition + 1); i < superList.size(); i++) {
                     if (clazz.isInstance(superList.get(i))) {
                         return true;
                     }
                 }
             }
-
             return false;
         }
 
         public T next() {
             // check whether this is a next element in the super collection
-            if (nextPosition <= (superList.size() - 1)) {
-                this.nextHasBeenCalled = true;
+            if ((currPosition + 1) <= (superList.size() - 1)) {
+                nextHasBeenCalled = true;
                 // starting from the current position, loop through the super collection
-                for (int i = nextPosition; i < superList.size(); i++) {
-                    nextPosition++;
+
+                for (int i = ++currPosition; i < superList.size(); i++) {
                     if (clazz.isInstance(superList.get(i))) {
                         return (T) superList.get(i);
                     }
+                    currPosition++;
                 }
             }
+
             throw new NoSuchElementException("Sublist does not contain any more elements.");
         }
 
@@ -434,8 +493,11 @@ public class FacadeList<T> implements List<T> {
             if (this.nextHasBeenCalled == false) {
                 throw new IllegalStateException("Next method for sublist iterator must be called at least once before remove can be called.");
             }
-            this.nextPosition--;
-            this.superList.remove(this.nextPosition);
+
+            this.superList.remove(this.currPosition);
+            this.currPosition--;
+            this.nextHasBeenCalled = false;
+
         }
     }
 
@@ -523,7 +585,6 @@ public class FacadeList<T> implements List<T> {
         }
 
         public T next() {
-            System.out.println("currPosition: " + currPosition);
             this.addOrRemoveCalled = false;
             // check whether this is a next element in the super collection
             if ((currPosition + 1) <= (superList.size() - 1)) {
@@ -606,6 +667,7 @@ public class FacadeList<T> implements List<T> {
             if (this.nextOrPreviousHasBeenCalled == false) {
                 throw new IllegalStateException("Next method for sublist iterator must be called at least once before remove can be called.");
             }
+            this.nextOrPreviousHasBeenCalled = false;
             this.addOrRemoveCalled = true;
             if (currPosition >= startSuperPosition) {
                 this.superList.remove(this.currPosition);
