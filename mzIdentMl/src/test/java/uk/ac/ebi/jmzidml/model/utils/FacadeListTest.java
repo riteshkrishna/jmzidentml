@@ -8,12 +8,10 @@ import uk.ac.ebi.jmzidml.model.mzidml.CvParam;
 import uk.ac.ebi.jmzidml.model.mzidml.Param;
 import uk.ac.ebi.jmzidml.model.mzidml.UserParam;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import static junit.framework.Assert.assertNotNull;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 
 /**
@@ -455,18 +453,56 @@ public class FacadeListTest {
         this.cvList.containsAll(testList);
     }
 
+    /********************************* clear **********************************/
     @Test
     public void testClear() throws Exception {
         this.cvList.clear();
-        assertTrue(this.cvList.size() ==0 );
-        assertTrue(this.paramList.size() ==3);
+        assertTrue(this.cvList.size() == 0);
+        assertTrue(this.paramList.size() == 3);
         assertTrue(this.paramList.get(0).getName().equals("User1"));
     }
 
+    /******************************** addAll **********************************/
     @Test
     public void testAddAll() throws Exception {
-
+        List<CvParam> testList = new ArrayList<CvParam>();
+        int prevCvListSize = this.cvList.size();
+        int prevParamListSize = this.paramList.size();
+        CvParam cv = new CvParam();
+        cv.setAccession("newCV1");
+        testList.add(cv);
+        cv = new CvParam();
+        cv.setAccession("newCV2");
+        testList.add(cv);
+        cv = new CvParam();
+        cv.setAccession("newCV3");
+        testList.add(cv);
+        this.cvList.addAll(testList);
+        // Confirm new size of sublist is correct
+        assertTrue((prevCvListSize + testList.size()) == this.cvList.size());
+        // Confirm last element in sublist is last new element added.
+        assertTrue(this.cvList.get(this.cvList.size()-1).getAccession().equals("newCV3"));
+        // Confirm param list size has changed also.
+        assertTrue(this.paramList.size() == (prevParamListSize+testList.size()));
     }
+
+    @Test(expected = NullPointerException.class)
+    public void testAddAllWithNullElement() throws Exception {
+        List<CvParam> testList = new ArrayList<CvParam>();
+        CvParam cv = new CvParam();
+        cv.setAccession("newCV1");
+        testList.add(cv);
+        testList.add(null);
+        this.cvList.addAll(testList);
+    }
+
+
+    @Test(expected = NullPointerException.class)
+    public void testAddAllWithNullCollection() throws Exception {
+        List<CvParam> testList = new ArrayList<CvParam>();
+        this.cvList.addAll(null);
+    }
+
 
     @Test
     public void testRemoveAll() throws Exception {
