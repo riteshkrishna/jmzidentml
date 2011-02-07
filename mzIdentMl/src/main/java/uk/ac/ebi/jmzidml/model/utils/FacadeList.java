@@ -24,9 +24,7 @@ import java.util.*;
  * TODO check the checkIndex(), maybe not the best implementation
  * TODO finish all the add methods with checking the null input values
  */
-public class FacadeList<T> implements List<T> {
-    private static final String INDEX_ERROR_MESSAGE = "Input index should be greater than or equal than zero, and less than the size of the original list";
-    public static final String SUBLIST_INDEX_ERROR_MESSAGE = "";
+public class FacadeList<T> extends AbstractCollection<T> implements List<T> {
     private List originalList;
     private Class<T> clazz;
 
@@ -271,18 +269,16 @@ public class FacadeList<T> implements List<T> {
     }
 
 
+    /**
+     * Remove an object from the sublist
+     *
+     * @param o object to be removed
+     * @return  boolean true a object has been found and removed
+     */
     public boolean remove(Object o) {
-        return false;
+        checkArgument(o);
+        return this.originalList.remove(o);
     }
-
-
-    public boolean containsAll(Collection<?> c) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    public void clear() {
-    }
-
 
     public boolean addAll(Collection<? extends T> c) {
         this.checkArgument(c);
@@ -344,10 +340,10 @@ public class FacadeList<T> implements List<T> {
      */
     private void checkArgument(Object o) {
         if (o == null) {
-            throw new IllegalArgumentException("Argument cannot be a null value");
+            throw new NullPointerException("Argument cannot be a null value");
         }
         if (!clazz.isInstance(o)) {
-            throw new IllegalArgumentException("Argument must be an instance of " + clazz.getName() + ". Received instance of " + o.getClass().getName());
+            throw new ClassCastException("Argument must be an instance of " + clazz.getName() + ". Received instance of " + o.getClass().getName());
         }
     }
 

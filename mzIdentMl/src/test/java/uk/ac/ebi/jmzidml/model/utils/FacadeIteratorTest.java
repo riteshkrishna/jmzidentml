@@ -59,7 +59,9 @@ public class FacadeIteratorTest {
         cvList = new FacadeList<CvParam>(paramList, CvParam.class);
     }
 
-    /*********************************** hasNext ***********************************/
+    /**
+     * ******************************** hasNext **********************************
+     */
     @Test
     public void testIteratorHasNext() throws NoSuchElementException {
         Iterator<CvParam> cvIter = cvList.iterator();
@@ -87,7 +89,9 @@ public class FacadeIteratorTest {
 
     }
 
-    /***************************************** next *************************************************/
+    /**
+     * ************************************** next ************************************************
+     */
     @Test
     public void testIteratorNext() {
         Iterator<CvParam> cvIter = cvList.iterator();
@@ -97,7 +101,9 @@ public class FacadeIteratorTest {
         assertTrue(cv.getAccession().equals("CV1"));
     }
 
-    /****************************************** remove ********************************************/
+    /**
+     * *************************************** remove *******************************************
+     */
     @Test
     public void testIteratorRemove() {
         Iterator<CvParam> cvIter = cvList.iterator();
@@ -177,25 +183,25 @@ public class FacadeIteratorTest {
      * @throws Exception
      */
     @Test
-    public void testForEach() throws Exception{
-       for(Object o: this.cvList){
-            if(o instanceof CvParam == false){
+    public void testForEach() throws Exception {
+        for (Object o : this.cvList) {
+            if (o instanceof CvParam == false) {
                 assertTrue(false);
-           }
-       }
+            }
+        }
     }
 
     @Test
-    public void testaddtosublist() throws Exception{
+    public void testaddtosublist() throws Exception {
         List test = new ArrayList();
         test.add("1");
-test.add("2");
+        test.add("2");
         test.add("3");
-test.add("4");
-           test.add("5");
-test.add("6");
+        test.add("4");
+        test.add("5");
+        test.add("6");
         test.add("7");
-test.add("8");
+        test.add("8");
         List sublist = test.subList(2, 6);
         System.out.println("sublist " + sublist);
         sublist.add("9");
