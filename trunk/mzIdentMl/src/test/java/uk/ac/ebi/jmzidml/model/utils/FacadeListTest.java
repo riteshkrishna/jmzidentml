@@ -12,6 +12,7 @@ import java.util.*;
 
 import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 
@@ -23,11 +24,12 @@ import static org.junit.Assert.assertTrue;
  * To change this template use File | Settings | File Templates.
  */
 public class FacadeListTest {
+    private List<Param> paramList;
     private FacadeList<CvParam> cvList;
 
     @Before
     public void setUp() throws Exception {
-        List<Param> paramList = new ArrayList<Param>();
+        paramList = new ArrayList<Param>();
 
         CvParam cv = new CvParam();
         cv.setAccession("CV1");
@@ -59,7 +61,6 @@ public class FacadeListTest {
 
         cvList = new FacadeList<CvParam>(paramList, CvParam.class);
     }
-
 
 
     @Test
@@ -104,13 +105,6 @@ public class FacadeListTest {
             e.printStackTrace();
             assertTrue(false);
         }
-    }
-
-
-
-    @Test
-    public void testRemove() throws Exception {
-
     }
 
     @Test
@@ -211,6 +205,7 @@ public class FacadeListTest {
 
     /**
      * Confirm the value returned by subList() is correct
+     *
      * @throws Exception
      */
     @Test
@@ -220,7 +215,7 @@ public class FacadeListTest {
         Assert.assertTrue(sublist.get(1).getAccession().equals("CV3"));
     }
 
-    @Test (expected = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void testSubListModification() throws Exception {
         List<CvParam> sublist = cvList.subList(1, 3);
         CvParam cv = new CvParam();
@@ -228,12 +223,12 @@ public class FacadeListTest {
         sublist.add(cv);
     }
 
-    @Test (expected = IndexOutOfBoundsException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void testSubListCheckIndex() throws Exception {
         List<CvParam> sublist = cvList.subList(1, 5);
     }
 
-    @Test (expected = IndexOutOfBoundsException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void testSubListFromIndexGreaterThanToIndex() throws Exception {
         List<CvParam> sublist = cvList.subList(3, 2);
     }
@@ -273,7 +268,7 @@ public class FacadeListTest {
     @Test
     public void testToArrayChangeInstance() throws Exception {
         Object[] arr = cvList.toArray();
-        CvParam cv = (CvParam)arr[0];
+        CvParam cv = (CvParam) arr[0];
         cv.setAccession("CV12");
         Assert.assertTrue(cvList.get(0).getAccession().equals("CV12"));
     }
@@ -294,9 +289,11 @@ public class FacadeListTest {
     }
 
 
-    /********************************** toArray(T[]) *********************************/
+    /**
+     * ******************************* toArray(T[]) ********************************
+     */
     @Test
-    public void testToArrayProvidingArrayWithData() throws Exception{
+    public void testToArrayProvidingArrayWithData() throws Exception {
         CvParam[] cvParams = new CvParam[6];
         CvParam cv = new CvParam();
         cv.setAccession("newCV1");
@@ -330,7 +327,7 @@ public class FacadeListTest {
     }
 
     @Test
-    public void testToArrayProvidingArrayChangingValues() throws Exception{
+    public void testToArrayProvidingArrayChangingValues() throws Exception {
         CvParam[] cvParams = new CvParam[5];
         CvParam[] returnedParams = this.cvList.toArray(cvParams);
         returnedParams[0].setAccession("newCV1");
@@ -338,7 +335,7 @@ public class FacadeListTest {
     }
 
     @Test
-    public void testToArrayProvidingArrayChangingReference() throws Exception{
+    public void testToArrayProvidingArrayChangingReference() throws Exception {
         CvParam[] cvParams = new CvParam[5];
         CvParam[] returnedParams = this.cvList.toArray(cvParams);
         CvParam newCvParam = new CvParam();
@@ -349,7 +346,7 @@ public class FacadeListTest {
 
 
     @Test
-    public void testToArrayProvidingArray() throws Exception{
+    public void testToArrayProvidingArray() throws Exception {
         CvParam[] cvParams = new CvParam[5];
         CvParam[] returnedParams = this.cvList.toArray(cvParams);
         assertTrue(returnedParams[0].getAccession().equals(("CV1")));
@@ -357,7 +354,7 @@ public class FacadeListTest {
     }
 
     @Test
-    public void testToArrayProvidingSmallerArray() throws Exception{
+    public void testToArrayProvidingSmallerArray() throws Exception {
         CvParam[] cvParams = new CvParam[1];
         CvParam[] returnedParams = this.cvList.toArray(cvParams);
         assertTrue(returnedParams[0].getAccession().equals(("CV1")));
@@ -365,24 +362,105 @@ public class FacadeListTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void testToArrayProvidingNullArray() throws Exception{
+    public void testToArrayProvidingNullArray() throws Exception {
         CvParam[] nullArray = null;
         CvParam[] returnedParams = this.cvList.toArray(nullArray);
     }
 
+    /************************** Test remove() ***********************************/
+    /**
+     * Remove an existing element from the sublist
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testRemove() throws Exception {
+        CvParam cv = cvList.get(0);
+        cvList.remove(cv);
+        assertTrue(!cvList.contains(cv));
+    }
 
+    /**
+     * Remove null should throw an NullPointerException
+     * @throws Exception
+     */
+    @Test(expected = NullPointerException.class)
+    public void testRemoveNullObject() throws Exception {
+        cvList.remove(null);
+    }
 
+    /**
+     * Remove a user param should throw a ClassCastException
+     * @throws Exception
+     */
+    @Test (expected = ClassCastException.class)
+    public void testRemoveUserParam() throws Exception {
+        UserParam userParam = (UserParam)paramList.get(2);
+        cvList.remove(userParam);
+    }
 
+    /**
+     * Remove a cv param not in the list
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testRemoveNewCvParam() throws Exception {
+        CvParam cv = new CvParam();
+        cv.setAccession("NewCV");
+        assertTrue(!cvList.remove(cv));
+    }
 
-
+    /********************************** containsAll ***********************************/
     @Test
     public void testContainsAll() throws Exception {
+        List<CvParam> testList = new ArrayList<CvParam>();
+        testList.add(this.cvList.get(0));
+        testList.add(this.cvList.get(1));
+        assertTrue(this.cvList.containsAll(testList));
+    }
 
+    @Test
+    public void testContainsAllWithAdditionalCvParam() throws Exception {
+        List<CvParam> testList = new ArrayList<CvParam>();
+        testList.add(this.cvList.get(0));
+        testList.add(this.cvList.get(1));
+        CvParam cv = new CvParam();
+        cv.setAccession("additionalCv");
+        testList.add(cv);
+        assertFalse(this.cvList.containsAll(testList));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testContainsAllWithNull() throws Exception {
+        List<CvParam> testList = new ArrayList<CvParam>();
+        testList.add(this.cvList.get(0));
+        testList.add(this.cvList.get(1));
+        testList.add(null);
+        this.cvList.containsAll(testList);
+    }
+
+
+    @Test(expected = NullPointerException.class)
+    public void testContainsAllWithNullCollection() throws Exception {
+        this.cvList.containsAll(null);
+    }
+
+
+    @Test(expected = ClassCastException.class)
+    public void testContainsAllWithWrongClasses() throws Exception {
+        List testList = new ArrayList();
+        testList.add("wrong class");
+        testList.add(this.cvList.get(1));
+        this.cvList.containsAll(testList);
     }
 
     @Test
     public void testClear() throws Exception {
-
+        this.cvList.clear();
+        assertTrue(this.cvList.size() ==0 );
+        assertTrue(this.paramList.size() ==3);
+        assertTrue(this.paramList.get(0).getName().equals("User1"));
     }
 
     @Test
@@ -414,7 +492,7 @@ public class FacadeListTest {
         Object[] arr = list.toArray();
         CvParam newCv = new CvParam();
         newCv.setAccession("CV12");
-     //   ((CvParam)arr[0]).setAccession("CV12");
+        //   ((CvParam)arr[0]).setAccession("CV12");
         arr[0] = newCv;
         System.out.println(list.get(0).getAccession());
     }
