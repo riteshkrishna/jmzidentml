@@ -280,10 +280,6 @@ public class FacadeList<T> extends AbstractCollection<T> implements List<T> {
         return this.originalList.remove(o);
     }
 
-    public boolean addAll(Collection<? extends T> c) {
-        this.checkArgument(c);
-        return false;
-    }
 
 
     public boolean addAll(int index, Collection<? extends T> c) {
