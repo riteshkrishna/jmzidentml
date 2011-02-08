@@ -8,7 +8,7 @@
                     extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
 
         <many-to-one name="contactRole"
-                     class="uk.ac.ebi.jmzidml.model.mzidml.ContactRole" column="ContactRole_hid" not-null="true"/>
+                     class="uk.ac.ebi.jmzidml.model.mzidml.ContactRole" cascade="all" column="ContactRole_hid" not-null="true"/>
         <property name="version" type="java.lang.String"/>
     </union-subclass>
 </hibernate-mapping>
