@@ -9,7 +9,7 @@
         <property name="releaseDate" type="java.lang.String"/>
         <property name="numDatabaseSequences" type="java.lang.Long"/>
         <property name="numResidues" type="java.lang.Long"/>
-        <many-to-one name="databaseName" class="uk.ac.ebi.jmzidml.model.mzidml.ParamAlternative"/>
+        <many-to-one name="databaseName" cascade="all" class="uk.ac.ebi.jmzidml.model.mzidml.ParamAlternative"/>
 
         <list name="cvParam" cascade="all" access="field" table="AnalysisSearchDatabase_CvParam">
                 <key column="AnalysisSearchDatabase_hid"/>
