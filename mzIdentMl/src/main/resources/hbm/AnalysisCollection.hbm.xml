@@ -7,13 +7,11 @@
         <id name="hid" type="java.lang.Long">
             <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator" />
         </id>
-
-    <list name="spectrumIdentification" cascade="all" table="AnalysisCollection_SpectrumIdentification">
+        <list name="spectrumIdentification" cascade="all" table="AnalysisColl_SpectrumId">
             <key column="AnalysisCollection_hid"/>
-            <index column="idx"/>
-            <many-to-many column="SpectrumIdentification_hid" class="uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentification"/>
-    </list>
-    <many-to-one name="proteinDetection" cascade="all" class="uk.ac.ebi.jmzidml.model.mzidml.ProteinDetection"/>
-
+            <index column="AnalysisCollection_idx"/>
+            <one-to-many column="SpectrumIdentification_hid" class="uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentification"/>
+        </list>
+        <many-to-one name="proteinDetection" cascade="all" class="uk.ac.ebi.jmzidml.model.mzidml.ProteinDetection"/>
     </class>
 </hibernate-mapping>
