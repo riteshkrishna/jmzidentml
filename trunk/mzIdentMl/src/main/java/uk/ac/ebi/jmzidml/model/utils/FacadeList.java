@@ -283,17 +283,47 @@ public class FacadeList<T> extends AbstractCollection<T> implements List<T> {
 
 
     public boolean addAll(int index, Collection<? extends T> c) {
+        checkIndex(index);
+        this.checkArgumentsInCollection(c);
+        // find index in the original list first
+        int originalIndex = getOriginalIndex(index);
+        // call addAll() of the original list
+        return originalList.addAll(originalIndex, c);
+    }
+
+    private void checkArgumentsInCollection(Collection<?> c) {
+        if (c == null) {
+            throw new NullPointerException("Input collection can not be NULL");
+        }
+
+        // check for NullPionterException
+        for (Object t : c) {
+            if (t == null) {
+                throw new NullPointerException("Input collection has one or more NULL elements");
+            } else if (!clazz.isInstance(t)) {
+                throw new ClassCastException("Input collection has mismatching element types, expected: "
+                        + clazz.getName() + " found: " + t.getClass().getName());
+            }
+        }
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        this.checkArgumentsInCollection(c);
+        return super.removeAll(c);
+    }
+/*
+    public boolean removeAll(Collection<? extends T> c){
+        this.checkArgumentsInCollection(c);
         return false;
     }
-
-
-    public boolean removeAll(Collection<?> c) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
+  */
+    @Override
     public boolean retainAll(Collection<?> c) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        this.checkArgumentsInCollection(c);
+        return super.retainAll(c);
     }
+
 
     /**
      * This method is overridden to print out the list in concatenated string format
@@ -320,12 +350,35 @@ public class FacadeList<T> extends AbstractCollection<T> implements List<T> {
 
     @Override
     public int hashCode() {
-        return super.hashCode();    //To change body of overridden methods use File | Settings | File Templates.
+        int hashCode = 1;
+        Iterator<T> i = this.iterator();
+        while (i.hasNext()) {
+            T obj = i.next();
+            hashCode = 31 * hashCode + (obj == null ? 0 : obj.hashCode());
+        }
+        return hashCode;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);    //To change body of overridden methods use File | Settings | File Templates.
+    public boolean equals(Object comparedToListObject) {
+        if((comparedToListObject instanceof FacadeList) == false){
+            return false;
+        }
+        FacadeList<T> comparedToList = (FacadeList) comparedToListObject;
+        if(comparedToList.size() != this.size()){
+            return false;
+        }
+        Iterator<T> thisIt = this.iterator();
+        Iterator<T> comparedToListIt = comparedToList.iterator();
+        while(thisIt.hasNext()){
+            T thisT = thisIt.next();
+            T comparedToT = comparedToListIt.next();
+            if(!thisT.equals(comparedToT)){
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -376,7 +429,7 @@ public class FacadeList<T> extends AbstractCollection<T> implements List<T> {
         int originalListIndex = this.getOriginalIndex(index);
 
         // check index and throw an exception
-        this.checkIndex(originalListIndex, "Input sublist index doesn't exist" + index);
+        //this.checkIndex(index, "Input sublist index doesn't exist " + index);
 
         return (T) this.originalList.set(originalListIndex, newElement);
     }
@@ -392,7 +445,7 @@ public class FacadeList<T> extends AbstractCollection<T> implements List<T> {
 
         int originalListIndex = this.getOriginalIndex(index);
 
-        this.checkIndex(originalListIndex, "Input sublist index doesn't exist" + index);
+        //this.checkIndex(originalListIndex, "Input sublist index doesn't exist" + index);
 
         this.originalList.add(originalListIndex, newElement);
     }
@@ -426,7 +479,7 @@ public class FacadeList<T> extends AbstractCollection<T> implements List<T> {
     }
 
     private void checkIndex(int index, String errMsg) {
-        if (index < 0 && index > (originalList.size() - 1)) {
+        if (index < 0  || index >= this.size()) {
             throw new IndexOutOfBoundsException(errMsg == null ? ("Input sublist index does not exist: " + index) : errMsg);
         }
     }
