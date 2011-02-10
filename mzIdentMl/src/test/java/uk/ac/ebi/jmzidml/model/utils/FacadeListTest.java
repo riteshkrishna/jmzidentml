@@ -9,21 +9,21 @@ import uk.ac.ebi.jmzidml.model.mzidml.Param;
 import uk.ac.ebi.jmzidml.model.mzidml.UserParam;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.*;
 
 
 /**
- * Created by IntelliJ IDEA.
- * User: rwang
- * Date: 01/02/11
- * Time: 11:57
- * To change this template use File | Settings | File Templates.
+ * ToDo: test effect of working with CvParam sublist on UserParam sublist
+ * ToDo; Add test for equals methods comparing different instances of Params that contain identical value. Params equals methods have to be overridden first.
  */
 public class FacadeListTest {
     private List<Param> paramList;
     private FacadeList<CvParam> cvList;
+    private FacadeList<UserParam> userList;
 
     @Before
     public void setUp() throws Exception {
@@ -58,6 +58,7 @@ public class FacadeListTest {
         paramList.add(user2);
 
         cvList = new FacadeList<CvParam>(paramList, CvParam.class);
+        userList = new FacadeList<UserParam>(paramList, UserParam.class);
     }
 
 
@@ -75,7 +76,7 @@ public class FacadeListTest {
         }
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void testAddNullValue() throws Exception {
         this.cvList.add(null);
     }
@@ -169,12 +170,12 @@ public class FacadeListTest {
         assertTrue(index == 2);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void testIndexOfPassingNullReference() {
         int index = cvList.indexOf(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void testIndexOfProcessingNullReference() {
         cvList.set(2, null);
 
@@ -503,15 +504,336 @@ public class FacadeListTest {
         this.cvList.addAll(null);
     }
 
+    @Test (expected = ClassCastException.class)
+    public void testAddAllClassCastException() throws Exception {
+        List testList = new ArrayList<CvParam>();
+        CvParam cv = new CvParam();
+        cv.setAccession("newCV1");
+        testList.add(cv);
+        testList.add("test");
+        this.cvList.addAll(testList);
+    }
 
+    /********************************* Test addAll() with index ************************************/
+    /**
+     * Add a collection to the start of the sublist
+     * @throws Exception
+     */
     @Test
-    public void testRemoveAll() throws Exception {
+    public void tesAddAllToStart() throws Exception {
+        // store the size of the original list
+        int originalSize = paramList.size();
+        int originalSubListSize = cvList.size();
 
+        Collection<CvParam> cvs = new ArrayList<CvParam>();
+
+        CvParam cv1 = new CvParam();
+        cv1.setAccession("NewCV1");
+        cvs.add(cv1);
+
+        CvParam cv2 = new CvParam();
+        cv2.setAccession("NewCV2");
+        cvs.add(cv2);
+
+        this.cvList.addAll(0, cvs);
+
+        // check the size of the original list
+        assertTrue(paramList.size() == (originalSize + cvs.size()));
+        // check the size of the sub list
+        assertTrue(cvList.size() == (originalSubListSize + cvs.size()));
+        // check the element is correct
+        CvParam cv = cvList.get(0);
+        assertTrue(cv.getAccession().equals("NewCV1"));
+        // check the original starting element has been moved to the correct position
+        cv = cvList.get(2);
+        assertTrue(cv.getAccession().equals("CV1"));
+    }
+
+    /**
+     * Add a collection the middle of the sublist
+     * @throws Exception
+     */
+    @Test
+    public void testAddAllToMiddle() throws Exception {
+        // store the size of the original list
+        int originalSize = paramList.size();
+        int originalSubListSize = cvList.size();
+
+        Collection<CvParam> cvs = new ArrayList<CvParam>();
+
+        CvParam cv1 = new CvParam();
+        cv1.setAccession("NewCV1");
+        cvs.add(cv1);
+
+        CvParam cv2 = new CvParam();
+        cv2.setAccession("NewCV2");
+        cvs.add(cv2);
+
+        this.cvList.addAll(2, cvs);
+
+        // check the size of the original list
+        assertTrue(paramList.size() == (originalSize + cvs.size()));
+        // check the size of the sub list
+        assertTrue(cvList.size() == (originalSubListSize + cvs.size()));
+        // check the element is correct
+        CvParam cv = cvList.get(2);
+        assertTrue(cv.getAccession().equals("NewCV1"));
+        // check the original starting element has been moved to the correct position
+        cv = cvList.get(4);
+        assertTrue(cv.getAccession().equals("CV3"));
+    }
+
+    /**
+     * Add a collection to the end of the list
+     * @throws Exception
+     */
+    @Test
+    public void testAddAllToEnd() throws Exception {
+        // store the size of the original list
+        int originalSize = paramList.size();
+        int originalSubListSize = cvList.size();
+
+        Collection<CvParam> cvs = new ArrayList<CvParam>();
+
+        CvParam cv1 = new CvParam();
+        cv1.setAccession("NewCV1");
+        cvs.add(cv1);
+
+        CvParam cv2 = new CvParam();
+        cv2.setAccession("NewCV2");
+        cvs.add(cv2);
+
+        this.cvList.addAll(3, cvs);
+
+        // check the size of the original list
+        assertTrue(paramList.size() == (originalSize + cvs.size()));
+        // check the size of the sub list
+        assertTrue(cvList.size() == (originalSubListSize + cvs.size()));
+        // check the element is correct
+        CvParam cv = cvList.get(3);
+        assertTrue(cv.getAccession().equals("NewCV1"));
+        // check the original starting element has been moved to the correct position
+        cv = cvList.get(5);
+        assertTrue(cv.getAccession().equals("CV4"));
+    }
+
+    /**
+     * Add a null collection should throw an NullPointerException
+     * @throws Exception
+     */
+    @Test (expected = NullPointerException.class)
+    public void testAddAllNull() throws Exception {
+        this.cvList.addAll(0, null);
+    }
+
+    /**
+     * Add a collection contains null element should throw an NullPointerException
+     * @throws Exception
+     */
+    @Test (expected = NullPointerException.class)
+    public void testAddAllNullElement() throws Exception {
+        Collection<CvParam> cvs = new ArrayList<CvParam>();
+
+        CvParam cv1 = new CvParam();
+        cv1.setAccession("NewCV1");
+        cvs.add(cv1);
+        cvs.add(null);
+
+        this.cvList.addAll(0, cvs);
+    }
+
+    /**
+     * Confirm IndexOutOfBoundException with illegal index
+     * @throws Exception
+     */
+    @Test (expected = IndexOutOfBoundsException.class)
+    public void testAddAllIllegalIndex() throws Exception {
+        Collection<CvParam> cvs = new ArrayList<CvParam>();
+
+        CvParam cv1 = new CvParam();
+        cv1.setAccession("NewCV1");
+
+        this.cvList.addAll(4, cvs);
+    }
+
+    /**
+     * Confirm ClassCastException if input collection contains illegal object types
+     *
+     * @throws Exception
+     */
+    @Test (expected = ClassCastException.class)
+    public void testAddAllMixedElementType() throws Exception {
+        Collection cvs = new ArrayList();
+
+        CvParam cv1 = new CvParam();
+        cv1.setAccession("NewCV1");
+        cvs.add(cv1);
+
+        UserParam up1 = new UserParam();
+        up1.setName("NewUserParam1");
+        cvs.add(up1);
+
+        this.cvList.addAll(1, cvs);
     }
 
     @Test
-    public void testRetainAll() throws Exception {
+    public void testRemoveAll() throws Exception {
+        // store the size of the original list
+        int originalSize = paramList.size();
+        int originalSubListSize = cvList.size();
 
+        Collection<CvParam> cvs = new ArrayList<CvParam>();
+        cvs.add(this.cvList.get(0));
+        cvs.add(this.cvList.get(1));
+        boolean success = this.cvList.removeAll(cvs);
+        assertTrue(success);
+        // check the size of the original list
+        assertTrue(paramList.size() == (originalSize - cvs.size()));
+        // check the size of the sub list
+        assertTrue(cvList.size() == (originalSubListSize - cvs.size()));
+        // check the element is correct
+        CvParam cv = cvList.get(0);
+        assertTrue(cv.getAccession().equals("CV3"));
+    }
+
+    /**
+     * Try removeAll supplying a collection that only contains objects NOT present in target collection.
+     * @throws Exception
+     */
+    @Test
+    public void testRemoveAllWithNoMatches() throws Exception{
+        // store the size of the original list
+        int originalSize = paramList.size();
+        int originalSubListSize = cvList.size();
+
+        Collection<CvParam> cvs = new ArrayList<CvParam>();
+        CvParam cv = new CvParam();
+        cv.setAccession("NewCV1");
+        cvs.add(cv);
+        cv = new CvParam();
+        cv.setAccession("NewCV2");
+        cvs.add(cv);
+        boolean success = this.cvList.removeAll(cvs);
+        assertTrue(!success);
+        // check the size of the original list
+        assertTrue(paramList.size() == originalSize);
+        // check the size of the sub list
+        assertTrue(cvList.size() == originalSubListSize);
+        // check the element is correct
+        cv = cvList.get(0);
+        assertTrue(cv.getAccession().equals("CV1"));
+
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testRemoveAllNullCollection() throws Exception{
+        this.cvList.removeAll(null);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testRemoveAllNullElement() throws Exception{
+        Collection<CvParam> cvs = new ArrayList<CvParam>();
+        cvs.add(null);
+        this.cvList.removeAll(cvs);
+    }
+
+    @Test(expected = ClassCastException.class)
+    public void testRemoveAllClassCastException() throws Exception{
+        Collection cvs = new ArrayList();
+        int originalSize = this.paramList.size();
+        int userSize = this.userList.size();
+        cvs.add(this.userList.get(0));
+        assertTrue(originalSize == this.paramList.size());
+        assertTrue(userSize == this.userList.size());
+        this.cvList.removeAll(cvs);
+    }
+
+
+    @Test
+    public void testRetainAll() throws Exception {
+        // store the size of the original list
+        int originalSize = paramList.size();
+        int originalSubListSize = cvList.size();
+
+        Collection<CvParam> cvs = new ArrayList<CvParam>();
+        cvs.add(this.cvList.get(0));
+        cvs.add(this.cvList.get(1));
+        boolean success = this.cvList.retainAll(cvs);
+        assertTrue(success);
+        // check the size of the original list
+        assertTrue(paramList.size() == (originalSize - originalSubListSize + cvs.size()));
+        // check the size of the sub list
+        assertTrue(cvList.size() == cvs.size());
+        // check the element is correct
+        CvParam cv = cvList.get(0);
+        assertTrue(cv.getAccession().equals("CV1"));
+    }
+
+    /**
+     * Use a mixture of matching and non-matching objects.
+     * @throws Exception
+     */
+    @Test
+    public void testRetainAllWithSomeNonMatchingObjects() throws Exception {
+        // store the size of the original list
+        int originalSize = paramList.size();
+        int originalSubListSize = cvList.size();
+
+        Collection<CvParam> cvs = new ArrayList<CvParam>();
+        cvs.add(this.cvList.get(0));
+        cvs.add(this.cvList.get(1));
+        CvParam cv = new CvParam();
+        cv.setAccession("newCV1");
+        cvs.add(cv);
+        boolean success = this.cvList.retainAll(cvs);
+        assertTrue(success);
+        // check the size of the original list
+        assertTrue(paramList.size() == (originalSize - originalSubListSize + (cvs.size()-1)));
+        // check the size of the sub list
+        assertTrue(cvList.size() == cvs.size()-1);
+        // check the element is correct
+        cv = cvList.get(0);
+        assertTrue(cv.getAccession().equals("CV1"));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testRetainAllNullCollection() throws Exception{
+        this.cvList.retainAll(null);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testRetainAllNullElement() throws Exception{
+        Collection<CvParam> cvs = new ArrayList<CvParam>();
+        cvs.add(null);
+        this.cvList.retainAll(cvs);
+    }
+
+    /**
+     * Pass in a userParam. Specifically use an instance contained in the same original list rather than a new instance.
+     *
+     *
+     * @throws Exception
+     */
+    @Test(expected = ClassCastException.class)
+    public void testRetainAllClassCastException() throws Exception{
+        Collection cvs = new ArrayList();
+        int originalSize = this.paramList.size();
+        int userSize = this.userList.size();
+        cvs.add(this.userList.get(0));
+        assertTrue(originalSize == this.paramList.size());
+        assertTrue(userSize == this.userList.size());
+        this.cvList.retainAll(cvs);
+    }
+
+    /**
+     * Should clear the list as nothing will match
+     * @throws Exception
+     */
+    @Test
+    public void testRetainAllWithEmptyList() throws Exception{
+        Collection cvs = new ArrayList();
+        boolean changed = this.cvList.retainAll(cvs);
+        assertTrue(changed);
     }
 
     @Test
@@ -531,5 +853,70 @@ public class FacadeListTest {
         //   ((CvParam)arr[0]).setAccession("CV12");
         arr[0] = newCv;
         System.out.println(list.get(0).getAccession());
+    }
+
+    /*********************************** equals ************************************/
+    @Test
+    public void testEquals() throws Exception{
+        assertTrue(this.cvList.equals(this.cvList));
+    }
+
+    @Test
+    public void testNotEquals() throws Exception{
+        assertTrue(!this.cvList.equals(this.paramList));
+    }
+
+    @Test
+    public void testEqualsSameCvParamDiffList() throws Exception{
+        List<Param> newParamList = new ArrayList<Param>(paramList.size());
+        newParamList.addAll(paramList);
+        FacadeList<CvParam> newCvList = new FacadeList<CvParam>(newParamList, CvParam.class);
+        assertTrue(this.cvList.equals(newCvList));
+    }
+
+    @Test
+    public void testEqualsSameCvParamDiffUserParamOrder() throws Exception{
+        List<Param> newParamList = new ArrayList<Param>(paramList.size());
+        newParamList.addAll(paramList);
+        UserParam userParam = this.userList.get(0);
+        this.userList.set(1, userParam);
+        FacadeList<CvParam> newCvList = new FacadeList<CvParam>(newParamList, CvParam.class);
+        assertTrue(this.cvList.equals(newCvList));
+    }
+
+    /********************************* hashcode *************************************/
+
+    @Test
+    public void testHashCode() throws Exception{
+        assertTrue(this.cvList.hashCode() == this.cvList.hashCode());
+    }
+
+    @Test
+    public void testHashCodeWithNewElement() throws Exception{
+        int originalHashCode = this.cvList.hashCode();
+        CvParam cv = new CvParam();
+        cv.setAccession("newCV1");
+        this.cvList.add(cv);
+        assertFalse(originalHashCode == this.cvList.hashCode());
+    }
+
+    @Test
+    public void testHashCodeWithPositionModifiedUserParamsElements() throws Exception{
+        List<Param> newParamList = new ArrayList<Param>(paramList.size());
+        newParamList.addAll(paramList);
+        UserParam userParam = this.userList.get(0);
+        this.userList.set(1, userParam);
+        FacadeList<CvParam> newCvList = new FacadeList<CvParam>(newParamList, CvParam.class);
+        assertTrue(this.cvList.hashCode() == newCvList.hashCode());
+    }
+
+    @Test
+    public void testHashCodeWithSwappedCvParamPositions() throws Exception{
+        int originalHashCode = this.cvList.hashCode();
+        CvParam cv = this.cvList.get(0);
+        CvParam cv2 = this.cvList.get(1);
+        this.cvList.set(0, cv2);
+        this.cvList.set(1, cv);
+        assertFalse(this.cvList.hashCode() == originalHashCode);
     }
 }
