@@ -18,9 +18,9 @@
 			column="ProteinDetectionList_hid" not-null="true"
 			class="uk.ac.ebi.jmzidml.model.mzidml.ProteinDetectionList" />
 
-		<list name="inputSpectrumIdentifications" inverse="true" cascade="all">
+		<list name="inputSpectrumIdentifications" inverse="true" cascade="all" access="field">
 			<key column="ProteinDetection_hid" not-null="true" />
-			<index column="idx" />
+			<index column="InputSpecId_idx" />
 			<one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.InputSpectrumIdentifications" />
 		</list>
 
