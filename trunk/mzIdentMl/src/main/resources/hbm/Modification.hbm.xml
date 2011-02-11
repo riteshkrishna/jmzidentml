@@ -10,11 +10,11 @@
         <property name="location" type="java.lang.Integer"/>
         <property name="avgMassDelta" type="java.lang.Double"/>
         <property name="monoisotopicMassDelta" type="java.lang.Double"/>
-        <list name="paramGroup" cascade="all" access="field">
+     <!--    <list name="paramGroup" cascade="all" access="field">
             <key column="paramGroup_hid"/>
             <index column="paramGroup_idx"/>
             <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.Param"/>
-        </list>
+        </list> -->
         <list name="residues" cascade="all" access="field">
             <key column="hid"/>
             <list-index column="modification_index"/>
