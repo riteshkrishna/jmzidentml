@@ -37,6 +37,11 @@
             <column name="threshold_hid"/>
         </many-to-one>
 
+        <many-to-one name="analysisSoftware" class="uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftware" cascade="all">
+            <column name="analysisSoftware_hid"/>
+        </many-to-one>
+
+
         <list name="massTable" inverse="true" cascade="all" access="field">
             <key column="SpectrumIdentificationProtocol_id"/>
             <index column="idx"/>
