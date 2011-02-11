@@ -5,12 +5,12 @@
     <class name="uk.ac.ebi.jmzidml.model.mzidml.ModParam" table="ModParam" >
         <id name="hid"  type="java.lang.Long" access="field">
             <column name="hid"/>
-            <generator class="identity"/>
+            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator"/>
         </id>
         <property name="massDelta" type="java.lang.Float"/>
         <list name="residues" cascade="all" access="field">
 	        <key column="hid" />
-	        <list-index column="index" />
+	        <list-index column="residues_index" />
 	        <element type="java.lang.String"/>
         </list>
     </class>
