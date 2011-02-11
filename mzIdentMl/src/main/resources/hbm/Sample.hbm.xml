@@ -8,7 +8,7 @@
 
         <list name="subSample" cascade="all" access="field">
             <key column="Sample_hid"/>
-            <index column="idx"/>
+            <index column="subSampleList_idx"/>
             <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.SubSample"/>
         </list>
 
