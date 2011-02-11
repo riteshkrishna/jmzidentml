@@ -5,13 +5,13 @@
 <hibernate-mapping>
     <union-subclass name="uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentification" table="SpectrumIdentification"
                     extends="uk.ac.ebi.jmzidml.model.mzidml.Identifiable">
-
+  <!--
         <list name="inputSpectra" cascade="all" access="field">
             <key column="SpectrumIdentification_hid" />
             <index column="idx"/>
             <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.InputSpectra"/>
         </list>
-
+      -->
         <list name="searchDatabase" cascade="all" access="field">
             <key column="SpectrumIdentification_hid"/>
             <index column="idx"/>
