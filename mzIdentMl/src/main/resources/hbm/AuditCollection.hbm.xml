@@ -8,10 +8,18 @@
             <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator" />
         </id>
 
-    <list name="contactGroup" table="AuditCollection_Contact" cascade="all" access="field">
+    <!-- <list name="contactGroup" table="AuditCollection_Contact" cascade="all" access="field">
             <key column="AuditCollection_hid"/>
-            <index column="idx"/>
-            <many-to-many column="Contact_hid" class="uk.ac.ebi.jmzidml.model.mzidml.Contact"/>
-    </list>
+            <index column="Contact_idx"/> -->
+        <!-- this does not cause an exception due to non-existent contact table. This is because new join table
+        is created. The hid space is shared between tables of child classes so hibernate can tell which instance to create
+         -->
+<!--            <many-to-many column="Contact_hid" class="uk.ac.ebi.jmzidml.model.mzidml.Contact"/> -->
+
+
+   <!--
+        <one-to-many   class="uk.ac.ebi.jmzidml.model.mzidml.Contact" />
+        
+    </list> -->
     </class>
 </hibernate-mapping>
