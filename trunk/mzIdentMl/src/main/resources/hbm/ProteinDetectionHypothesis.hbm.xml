@@ -10,19 +10,19 @@
             <column name="passThreshold" not-null="true"/>
         </property>
 
-        <list name="cvParam" cascade="all">
+        <list name="paramGroup" cascade="all" access="field">
             <key column="ProteinDetectionHypothesis_hid" not-null="true"/>
             <index column="idx"/>
             <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.CvParam"/>
         </list>
 
-        <list name="userParam" cascade="all">
+<!--        <list name="userParam" cascade="all" access="field">
             <key column="ProteinDetectionHypothesis_hid" not-null="true"/>
             <index column="idx"/>
             <one-to-many class="uk.ac.ebi.jmzidml.model.mzidml.UserParam"/>
-        </list>
+        </list>                                                            -->
 
-        <many-to-one name="dBSequence" column="DBSequence_hid" class="uk.ac.ebi.jmzidml.model.mzidml.DBSequence" cascade="all"/>
+     <!--   <many-to-one name="dBSequence" column="DBSequence_hid" class="uk.ac.ebi.jmzidml.model.mzidml.DBSequence" cascade="all"/> -->
 
     </union-subclass>
 </hibernate-mapping>
