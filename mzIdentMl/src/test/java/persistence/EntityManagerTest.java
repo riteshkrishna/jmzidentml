@@ -5,6 +5,7 @@ package persistence;
  * TODO: verify cvparam under AnalysisSoftwareList - does it need a new table?
  *
  */
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,12 +13,15 @@ import org.hibernate.cfg.Configuration;
 import org.junit.Test;
 import uk.ac.ebi.JmzIdentMLParser;
 import uk.ac.ebi.jmzidml.model.mzidml.*;
+import uk.ac.ebi.jmzidml.model.mzidml.params.FileFormatCvParam;
+import uk.ac.ebi.jmzidml.model.mzidml.params.RoleCvParam;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLMarshaller;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.io.Console;
 import java.io.FileWriter;
 import java.io.Writer;
 import java.net.URL;
@@ -29,52 +33,6 @@ import static junit.framework.Assert.assertTrue;
 
 public class EntityManagerTest {
 
-
-
-    /*
-           Unmarshall AnalysisSoftwareList from the xml file and persist to the database.
-     */
-   /* @Test
-    public void testUnmarshallAndPersistAnalysisSoftwareList() throws Exception {
-        SessionFactory factory=null;
-        Session session = null;
-
-        try{
-            URL xmlFileURL = JmzIdentMLParser.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-            if (xmlFileURL != null) {
-                // 1. parse file
-                boolean aUseSpectrumCache = true;
-                MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-                factory = new Configuration().configure("/META-INF/hibernate.cfg.xml").buildSessionFactory();
-                session = factory.openSession();
-                // check the same in another way
-                AnalysisSoftwareList asList = unmarshaller.unmarshal(AnalysisSoftwareList.class);
-                for (AnalysisSoftware as : asList.getAnalysisSoftware()) {
-                    try{
-                        System.out.println("Processing AnalysisSoftware " + as.getSoftwareName());
-                        session.save(as);
-
-                        /*
-                            TODO Automate retrieval and confirmation so eyeballing db
-                            isnt necessary
-
-                         */
-                     /*
-                    }catch(Exception e){
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }catch(Exception e){
-            Assert.fail();
-            e.printStackTrace();
-        }finally{
-            session.flush();
-            session.close();
-            factory.close(); // close at application end
-        }
-    }
-        */
     /*
         Unmarshall AnalysisSoftwareList from the xml file. Iterate through the AnalysisSoftware instances
         and modify the Customizations properties. Persist to db and verify changes committed.
@@ -85,172 +43,208 @@ public class EntityManagerTest {
         FileWriter writer = null;
         SessionFactory factory = null;
         Session session = null;
-            try{
-                URL xmlFileURL = JmzIdentMLParser.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-//            URL xmlFileURL = JmzIdentMLParser.class.getClassLoader().getResource("spec2_F001242.mzid");
-//            URL xmlFileURL = JmzIdentMLParser.class.getClassLoader().getResource("output_test.xml");
-
-                if (xmlFileURL != null) {
-                    boolean aUseSpectrumCache = true;
-                    MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-                    factory = new Configuration().configure("META-INF/hibernate.cfg.xml").buildSessionFactory();
-                    session = factory.openSession();
-                    session.beginTransaction();
-                    // check the same in another way
-                    AnalysisSoftwareList asList = unmarshaller.unmarshal(AnalysisSoftwareList.class);
-                    for (AnalysisSoftware as : asList.getAnalysisSoftware()) {
-                        try{
-                            System.out.println("Processing AnalysisSoftware " + as.getName());
-                            as.setCustomizations("Modified customization");
-                            System.out.println("set new value for customizations");
-                            session.save(as);
-                            System.out.println("session saved");
-                        }catch(Exception e){
-                            e.printStackTrace();
-                        }
-                    }
-                    session.getTransaction().commit();
-                    Query query = session.createQuery("from AnalysisSoftware");
-                    List<AnalysisSoftware> analysisSoftwareList = query.list();
-                    System.out.println("Retrieved " + analysisSoftwareList.size() + " analysis software entries");
-                    Iterator<AnalysisSoftware> it = analysisSoftwareList.iterator();
-                    while(it.hasNext()){
-                        AnalysisSoftware analysisSoftware = it.next();
-                        System.out.println("Retrieved analysis software with customizations " + analysisSoftware.getCustomizations());
-                    }
-
-                    MzIdentMLMarshaller m = new MzIdentMLMarshaller();
-                    assertNotNull(m);
-                    writer = new FileWriter("testUnmarshallAndPersistAnalysisSoftwareListWithModifications.xml");
-                    writer.write(m.createMzIdentMLStartTag("1") +"\n");
-                    m.marshall(asList, writer);
-                    writer.write("\n");
-                    writer.write(m.createMzIdentMLClosingTag());
+        try {
+            URL xmlFileURL = JmzIdentMLParser.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
+            if (xmlFileURL != null) {
+                MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
+                factory = new Configuration().configure("META-INF/hibernate.cfg.xml").buildSessionFactory();
+                session = factory.openSession();
+                session.beginTransaction();
+                // check the same in another way
+                AnalysisSoftwareList asList = unmarshaller.unmarshal(AnalysisSoftwareList.class);
+                int count=0;
+                for (AnalysisSoftware as : asList.getAnalysisSoftware()) {
+                        as.setCustomizations("Modified customization"+count);
+                        count++;
+                        session.save(as);
                 }
-            }catch(Exception e){
-                //e.printStackTrace();
-            }finally{
-                try{
-                    session.flush();
-                    session.close();
-                    factory.close(); // close at application end
-                }catch(Exception e){
-
+                session.getTransaction().commit();
+                Query query = session.createQuery("from AnalysisSoftware");
+                List<AnalysisSoftware> analysisSoftwareList = query.list();
+                Iterator<AnalysisSoftware> it = analysisSoftwareList.iterator();
+                count = 0;
+                while (it.hasNext()) {
+                    AnalysisSoftware analysisSoftware = it.next();
+                    assertTrue(analysisSoftware.getCustomizations().equals("Modified customization"+count));
+                    count++;
                 }
+
+                /**
+                 * Ideally this would write out a correctly formed mzIdentML file which could be read back in to
+                 * check but that is not possible yet.
+                 */
+                MzIdentMLMarshaller m = new MzIdentMLMarshaller();
+                writer = new FileWriter("testUnmarshallAndPersistAnalysisSoftwareListWithModifications.xml");
+                writer.write(m.createMzIdentMLStartTag("1") + "\n");
+                m.marshall(asList, writer);
+                writer.write("\n");
+                writer.write(m.createMzIdentMLClosingTag());
+            }
+        } finally {
+            try {
+                session.flush();
+                session.close();
+                factory.close(); // close at application end
+            } catch (Exception e) {
+
             }
         }
-
+    }
 
 
     @Test
     public void testPersistNewObjects() throws Exception {
-        SessionFactory factory=null;
+        SessionFactory factory = null;
         Session session = null;
 
         try {
-            URL xmlFileURL = JmzIdentMLParser.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-            boolean aUseSpectrumCache = true;
-                MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-                Cv cv = (Cv) unmarshaller.unmarshal(Cv.class);
-                assertNotNull(cv);
-                //CvParam cvParam = new CvParam();
-                //cvParam.setName("testcvparam");
-                factory = new Configuration().configure("META-INF/hibernate.cfg.xml").buildSessionFactory();
-                session = factory.openSession();
-                session.getTransaction().begin();
-                session.save(cv);
-                session.save(cv);
-                CvList cvList = new CvList();
-                List list = cvList.getCv();
-                list.add(cv);
-                cv = new Cv();
-                session.save(cv);
-                list.add(cv);
-                session.save(cvList);
-                //cvParam.setCv(cv);
-                //session.save(cvParam);
-                AmbiguousResidue ambRes = new AmbiguousResidue();
-                ambRes.setCode("testcode");
-                session.save(ambRes);
-                FileFormat fileFormat = new FileFormat();
-               // fileFormat.setCvParam(cvParam);
-                session.save(fileFormat);
-                fileFormat = new FileFormat();
-               // fileFormat.setCvParam(cvParam);
-                session.save(fileFormat);
-                ExternalData externalData = new ExternalData();
-                externalData.setFileFormat(fileFormat);
-                session.save(externalData);
-                Filter filter = new Filter();
-                session.save(filter);
-                FragmentArray fragmentArray = new FragmentArray();
-                session.save(fragmentArray);
-                DatabaseFilters databaseFilters = new DatabaseFilters();
-                databaseFilters.getFilter().add(filter);
-                session.save(databaseFilters);
-                AnalysisSearchDatabase analysisSearchDatabase = new AnalysisSearchDatabase();
-                List<CvParam> searchDbList = analysisSearchDatabase.getCvParam();
-               // searchDbList.add(cvParam);
-                session.save(analysisSearchDatabase);
-                Organization org = new Organization();
-                Organization.Parent parent = new Organization.Parent();
-                org.setParent(parent);
-                session.save(org);
-                Role role = new Role();
-               // role.setCvParam(cvParam);
-                session.save(role);
-                ContactRole contactRole = new ContactRole();
-                contactRole.setContact(org);
-                contactRole.setRole(role);
-                session.save(contactRole);
-                AnalysisSoftware analysisSoftware = new AnalysisSoftware();
-                analysisSoftware.setContactRole(contactRole);
-                session.save(analysisSoftware);
-                Affiliations affiliation = new Affiliations();
-                affiliation.setOrganization(org);
-                session.save(affiliation);
-                Person person = new Person();
-                person.setFirstName("Frank");
-                List<Affiliations> affilList = person.getAffiliations();
-                affilList.add(affiliation);
-                session.save(person);
-                AuditCollection auditCollection = new AuditCollection();
-                auditCollection.getContactGroup().add(org);
-                auditCollection.getContactGroup().add(person);
-                session.save(auditCollection);
-                BibliographicReference biblio = new BibliographicReference();
-                biblio.setAuthors("Frank");
-                session.save(biblio);
-                Enzyme enzyme = new Enzyme();
-                enzyme.setMinDistance(new Integer(1));
-                Enzymes enzymes = new Enzymes();
-                enzymes.getEnzyme().add(enzyme);
-                session.save(enzymes);
-                session.save(enzyme);
-                Measure measure = new Measure();
-                //measure.getCvParam().add(cvParam);
-                FragmentationTable fragmentationTable = new FragmentationTable();
-                fragmentationTable.getMeasure().add(measure);
-                session.save(fragmentationTable);
-                session.getTransaction().commit();
-        } catch (Exception e) {
-           e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } finally{
-            try{
+            factory = new Configuration().configure("META-INF/hibernate.cfg.xml").buildSessionFactory();
+            session = factory.openSession();
+            session.getTransaction().begin();
+            Query query = null;
+
+            // AmbiguousResidue
+            AmbiguousResidue ambRes = new AmbiguousResidue();
+            ambRes.setCode("testcode");
+            session.save(ambRes);
+            query = session.createQuery("from AmbiguousResidue");
+            assertTrue(((AmbiguousResidue) query.list().get(0)).getCode().equals("testcode"));
+
+            // FileFormat
+            FileFormat fileFormat = new FileFormat();
+            FileFormatCvParam fileCv = new FileFormatCvParam();
+            fileCv.setAccession("fileFormatCvParamAccession");
+            fileFormat.setCvParam(fileCv);
+            session.save(fileFormat);
+            query = session.createQuery("from FileFormat");
+            List<FileFormat> fileFormatList = query.list();
+            assertTrue(fileFormatList.size() > 0);
+            fileFormat = (FileFormat) query.iterate().next();
+            assertTrue(fileFormat.getCvParam().getAccession().equals("fileFormatCvParamAccession"));
+
+            // ExternalData
+            ExternalData externalData = new ExternalData();
+            externalData.setFileFormat(fileFormat);
+            session.save(externalData);
+            query = session.createQuery("from ExternalData");
+            List<ExternalData> externalDataList = query.list();
+            externalData = externalDataList.get(0);
+            assertTrue(externalData.getFileFormat().getCvParam().getAccession().equals("fileFormatCvParamAccession"));
+
+            // DatabaseFilters
+            Filter filter = new Filter();
+            DatabaseFilters databaseFilters = new DatabaseFilters();
+            databaseFilters.getFilter().add(filter);
+            session.save(databaseFilters);
+            query = session.createQuery("from DatabaseFilters");
+            assertTrue(((DatabaseFilters) query.list().get(0)).getFilter().size() > 0);
+
+            // AnalysisSearchDatabase
+            AnalysisSearchDatabase analysisSearchDatabase = new AnalysisSearchDatabase();
+            analysisSearchDatabase.setVersion("version1");
+            session.save(analysisSearchDatabase);
+            query = session.createQuery("from AnalysisSearchDatabase");
+            assertTrue(((AnalysisSearchDatabase) query.list().get(0)).getVersion().equals("version1"));
+
+            //Organization
+            Organization org = new Organization();
+            Organization.Parent parent = new Organization.Parent();
+            parent.setOrganizationRef("organizationRef");
+            org.setParent(parent);
+            org.setName("orgname");
+            session.save(org);
+            query = session.createQuery("from Organization");
+            assertTrue(((Organization) query.list().get(0)).getParent().getOrganizationRef().equals("organizationRef"));
+            assertTrue(((Organization) query.list().get(0)).getName().equals("orgname"));
+
+            // AnalysisSoftware
+            Role role = new Role();
+            RoleCvParam roleCvParam = new RoleCvParam();
+            roleCvParam.setAccession("roleaccession");
+            role.setCvParam(roleCvParam);
+            session.save(role);
+            ContactRole contactRole = new ContactRole();
+            contactRole.setContact(org);
+            contactRole.setRole(role);
+            session.save(contactRole);
+            AnalysisSoftware analysisSoftware = new AnalysisSoftware();
+            analysisSoftware.setContactRole(contactRole);
+            analysisSoftware.setCustomizations("thiscustomization");
+            session.save(analysisSoftware);
+            query = session.createQuery("from AnalysisSoftware");
+            assertTrue(((AnalysisSoftware) query.list().get(0)).getCustomizations().equals("thiscustomization"));
+            assertTrue(((AnalysisSoftware) query.list().get(0)).getContactRole().getRole().getCvParam().getAccession().equals("roleaccession"));
+            assertTrue(((AnalysisSoftware) query.list().get(0)).getContactRole().getContact().getName().equals("orgname"));
+
+            // Affiliations
+            Affiliations affiliation = new Affiliations();
+            affiliation.setOrganization(org);
+            session.save(affiliation);
+            query = session.createQuery("from Affiliations");
+            assertTrue(((Affiliations) query.list().get(0)).getOrganization().getName().equals("orgname"));
+
+            //Person
+            Person person = new Person();
+            person.setFirstName("Frank");
+            List<Affiliations> affilList = person.getAffiliations();
+            affilList.add(affiliation);
+            session.save(person);
+            query = session.createQuery("from Person");
+            assertTrue(((Person) query.list().get(0)).getAffiliations().get(0).getOrganization().getName().equals("orgname"));
+            assertTrue(((Person) query.list().get(0)).getFirstName().equals("Frank"));
+
+            // AuditCollection
+            AuditCollection auditCollection = new AuditCollection();
+            auditCollection.getContactGroup().add(org);
+            auditCollection.getContactGroup().add(person);
+            session.save(auditCollection);
+            query = session.createQuery("from AuditCollection");
+            assertTrue(((AuditCollection) query.list().get(0)).getContactGroup().size() == 2);
+            assertTrue(((AuditCollection) query.list().get(0)).getContactGroup().get(0).getName().equals("orgname"));
+            assertTrue(((Person) ((AuditCollection) query.list().get(0)).getContactGroup().get(1)).getFirstName().equals("Frank"));
+
+            // BibliographicReference
+            BibliographicReference biblio = new BibliographicReference();
+            biblio.setAuthors("Frank");
+            session.save(biblio);
+            query = session.createQuery("from BibliographicReference");
+            assertTrue(((BibliographicReference) (query.list().get(0))).getAuthors().equals("Frank"));
+
+            // Enzymes
+            Enzyme enzyme = new Enzyme();
+            enzyme.setMinDistance(new Integer(1));
+            Enzymes enzymes = new Enzymes();
+            enzymes.getEnzyme().add(enzyme);
+            session.save(enzymes);
+            query = session.createQuery("from Enzymes");
+            assertTrue(((Enzymes)(query.list().get(0))).getEnzyme().size() > 0);
+            assertTrue(((Enzymes)(query.list().get(0))).getEnzyme().get(0).getMinDistance().equals(1));
+
+            //FragmentationTable
+            Measure measure = new Measure();
+            measure.setName("measurename");
+            FragmentationTable fragmentationTable = new FragmentationTable();
+            fragmentationTable.getMeasure().add(measure);
+            session.save(fragmentationTable);
+            query = session.createQuery("from FragmentationTable");
+            assertTrue(((FragmentationTable)(query.list().get(0))).getMeasure().get(0).getName().equals("measurename"));
+            session.getTransaction().commit();
+        } finally {
+            try {
                 session.flush();
                 session.close();
                 factory.close(); // close at application end
-            }catch(Exception e){
+            } catch (Exception e) {
 
             }
         }
     }
 
     @Test
-    public void testProvider() throws Exception{
+    public void testProvider() throws Exception {
         SessionFactory factory = null;
         Session session = null;
-        try{
+        try {
             factory = new Configuration().configure("META-INF/hibernate.cfg.xml").buildSessionFactory();
             session = factory.openSession();
             session.beginTransaction();
@@ -267,12 +261,12 @@ public class EntityManagerTest {
             Iterator<Provider> providerIt = providerList.iterator();
             provider = providerIt.next();
             assertTrue(provider.getSoftwareRef().equals("AS_mascot_parser"));
-        }finally{
-            try{
+        } finally {
+            try {
                 session.flush();
                 session.close();
                 factory.close();
-            }catch(Exception e){
+            } catch (Exception e) {
 
             }
         }
@@ -280,13 +274,14 @@ public class EntityManagerTest {
 
     /**
      * Problems with list of contacts which is an abstract class
+     *
      * @throws Exception
      */
     @Test
-    public void testAuditCollection() throws Exception{
+    public void testAuditCollection() throws Exception {
         SessionFactory factory = null;
         Session session = null;
-        try{
+        try {
             factory = new Configuration().configure("META-INF/hibernate.cfg.xml").buildSessionFactory();
             session = factory.openSession();
             session.beginTransaction();
@@ -320,56 +315,19 @@ public class EntityManagerTest {
                     }
                 }
             }    */
-        }finally{
-            try{
+        } finally {
+            try {
                 session.flush();
                 session.close();
                 factory.close();
-            }catch(Exception e){
+            } catch (Exception e) {
 
             }
         }
 
     }
 
-    /**
-     * Contains a reference to Sample which has a problem with a list of abstract base classes.
-     *
-     * @throws Exception
-     */
-    @Test
-    public void testAnalysisSampleCollection() throws Exception{
-        SessionFactory factory = null;
-        Session session = null;
-        try{
-            factory = new Configuration().configure("META-INF/hibernate.cfg.xml").buildSessionFactory();
-            session = factory.openSession();
-            session.beginTransaction();
-            URL xmlFileURL = JmzIdentMLParser.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-            MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-            AnalysisSampleCollection analysisSampleCollection = unmarshaller.unmarshal(AnalysisSampleCollection.class);
-            assertNotNull(analysisSampleCollection);
-            session.save(analysisSampleCollection);
-            session.getTransaction().commit();
-            Query query = session.createQuery("from AnalysisSampleCollection");
-            List<AnalysisSampleCollection> analysisSampleCollectionList = query.list();
-            Iterator<AnalysisSampleCollection> analysisSampleCollectionIt = analysisSampleCollectionList.iterator();
-            analysisSampleCollection = analysisSampleCollectionIt.next();
-            assertNotNull(analysisSampleCollection);
-            Iterator<Sample> sampleIt = analysisSampleCollection.getSample().iterator();
-            assertTrue(sampleIt.hasNext());
-            assertTrue(analysisSampleCollection.getSample().iterator().next().getName().equals("name23"));
-        }finally{
-            try{
-                session.flush();
-                session.close();
-                factory.close();
-            }catch(Exception e){
 
-            }
-        }
-
-    }
 
     /**
      * Problems with base class which has a list of abstract classes.
@@ -377,10 +335,10 @@ public class EntityManagerTest {
      * @throws Exception
      */
     @Test
-    public void testSample() throws Exception{
+    public void testSample() throws Exception {
         SessionFactory factory = null;
         Session session = null;
-        try{
+        try {
             factory = new Configuration().configure("META-INF/hibernate.cfg.xml").buildSessionFactory();
             session = factory.openSession();
             session.beginTransaction();
@@ -417,68 +375,49 @@ public class EntityManagerTest {
                     }
                 }
             }    */
-        }finally{
-            try{
+        } finally {
+            try {
                 session.flush();
                 session.close();
                 factory.close();
-            }catch(Exception e){
+            } catch (Exception e) {
 
             }
         }
     }
 
+
     /**
-     * Doesnt work yet. Dependencies not completed.
+     * Confirmation done by eyeballing db, needs to be automated.
+     *
      * @throws Exception
      */
-    /*
     @Test
-    public void testRetrieveProteinDetection() throws Exception{
+    public void testAnalysisSearchDatabase() throws Exception {
         SessionFactory factory = null;
         Session session = null;
-        try{
-            factory = new Configuration().configure("META-INF/hibernate.cfg.xml").buildSessionFactory();
-            session = factory.openSession();
-            session.beginTransaction();
-            URL xmlFileURL = JmzIdentMLParser.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-            MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-            ProteinDetection proteinDetection = unmarshaller.unmarshal(ProteinDetection.class);
-            assertNotNull(proteinDetection);
-            assertTrue(proteinDetection.getId().equals("PD_1"));
-            session.save(proteinDetection);
-            session.getTransaction().commit();
-        }finally{
-            try{
-                session.flush();
-                session.close();
-                factory.close();
-            }catch(Exception e){
-
-            }
-        }
-    }         */
-
-
-    @Test
-    public void testAnalysisSearchDatabase() throws Exception{
-        SessionFactory factory = null;
-        Session session = null;
-        try{
+        try {
             factory = new Configuration().configure("META-INF/hibernate.cfg.xml").buildSessionFactory();
             session = factory.openSession();
             session.beginTransaction();
             URL xmlFileURL = JmzIdentMLParser.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
             MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
             AnalysisSearchDatabase analysisSearchDatabase = unmarshaller.unmarshal(AnalysisSearchDatabase.class);
+            System.out.println("name " + analysisSearchDatabase.getName());
             session.save(analysisSearchDatabase);
             session.getTransaction().commit();
-        }finally{
-            try{
+
+            Query query = session.createQuery("from AnalysisSearchDatabase");
+            List<AnalysisSearchDatabase> analysisSearchDatabaseList = query.list();
+            Iterator<AnalysisSearchDatabase> analysisSearchDatabaseIt = analysisSearchDatabaseList.iterator();
+            analysisSearchDatabase = analysisSearchDatabaseIt.next();
+            assertTrue(analysisSearchDatabase.getName().equals("SwissProt"));
+        } finally {
+            try {
                 session.flush();
                 session.close();
                 factory.close();
-            }catch(Exception e){
+            } catch (Exception e) {
 
             }
         }
@@ -490,10 +429,10 @@ public class EntityManagerTest {
      * @throws Exception
      */
     @Test
-    public void testDBSequence() throws Exception{
+    public void testDBSequence() throws Exception {
         SessionFactory factory = null;
         Session session = null;
-        try{
+        try {
             factory = new Configuration().configure("META-INF/hibernate.cfg.xml").buildSessionFactory();
             session = factory.openSession();
             session.beginTransaction();
@@ -516,26 +455,27 @@ public class EntityManagerTest {
             Iterator<DBSequence> dbSequenceIt = dbSequenceList.iterator();
             dbSequence = dbSequenceIt.next();
             assertTrue(dbSequence.getId().equals("DBSeq_HSP7D_MANSE"));
-        }finally{
-            try{
+        } finally {
+            try {
                 session.flush();
                 session.close();
                 factory.close();
-            }catch(Exception e){
+            } catch (Exception e) {
 
             }
         }
     }
 
     /**
-     *  Problem :Peptide and Modification had references to param list.
+     * Problem :Peptide and Modification had references to param list.
+     *
      * @throws Exception
      */
     @Test
-    public void testSequenceCollection() throws Exception{
+    public void testSequenceCollection() throws Exception {
         SessionFactory factory = null;
         Session session = null;
-        try{
+        try {
             factory = new Configuration().configure("META-INF/hibernate.cfg.xml").buildSessionFactory();
             session = factory.openSession();
             session.beginTransaction();
@@ -548,13 +488,13 @@ public class EntityManagerTest {
             List<SequenceCollection> sequenceCollectionList = query.list();
             Iterator<SequenceCollection> sequenceCollectionIt = sequenceCollectionList.iterator();
             sequenceCollection = sequenceCollectionIt.next();
-            assertTrue(sequenceCollection.getPeptide().size()>0);
-        }finally{
-            try{
+            assertTrue(sequenceCollection.getPeptide().size() > 0);
+        } finally {
+            try {
                 session.flush();
                 session.close();
                 factory.close();
-            }catch(Exception e){
+            } catch (Exception e) {
 
             }
         }
@@ -563,160 +503,35 @@ public class EntityManagerTest {
 
 
     @Test
-    public void testSearchDatabase() throws Exception{
+    public void testInputSpectra() throws Exception {
         SessionFactory factory = null;
         Session session = null;
-        try{
+        try {
             factory = new Configuration().configure("META-INF/hibernate.cfg.xml").buildSessionFactory();
             session = factory.openSession();
             session.beginTransaction();
             URL xmlFileURL = JmzIdentMLParser.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
             MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-            SequenceCollection sequenceCollection = unmarshaller.unmarshal(SequenceCollection.class);
-            session.save(sequenceCollection);
+            InputSpectra inputSpectra = unmarshaller.unmarshal(InputSpectra.class);
+            String spectraDataRef = inputSpectra.getSpectraDataRef();
+            session.save(inputSpectra);
             session.getTransaction().commit();
-            Query query = session.createQuery("from SequenceCollection");
-            List<SequenceCollection> sequenceCollectionList = query.list();
-            Iterator<SequenceCollection> sequenceCollectionIt = sequenceCollectionList.iterator();
-            sequenceCollection = sequenceCollectionIt.next();
-            assertTrue(sequenceCollection.getPeptide().size()>0);
-        }finally{
-            try{
+            Query query = session.createQuery("from InputSpectra ");
+            Iterator it = query.iterate();
+            assertTrue((((InputSpectra) it.next()).getSpectraDataRef()).equals(spectraDataRef));
+        } finally {
+            try {
                 session.flush();
                 session.close();
                 factory.close();
-            }catch(Exception e){
+            } catch (Exception e) {
 
             }
         }
-
-    }
-
-    @Test
-    public void testSpectrumIdentification() throws Exception{
-        SessionFactory factory = null;
-            Session session = null;
-            try{
-                factory = new Configuration().configure("META-INF/hibernate.cfg.xml").buildSessionFactory();
-                session = factory.openSession();
-                session.beginTransaction();
-                URL xmlFileURL = JmzIdentMLParser.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-                MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-                SpectrumIdentification spectrumIdentification = unmarshaller.unmarshal(SpectrumIdentification.class);
-                String name = spectrumIdentification.getName();
-                session.save(spectrumIdentification);
-                session.getTransaction().commit();
-                Query query = session.createQuery("from SpectrumIdentification");
-                assertTrue(spectrumIdentification.getName().equals(name));
-            }catch(Exception e){
-                e.printStackTrace();
-            }
-
-
-            finally{
-                try{
-                    session.flush();
-                    session.close();
-                    factory.close();
-                }catch(Exception e){
-
-                }
-            }
-    }
-
-    @Test
-    public void testInputSpectra() throws Exception{
-        SessionFactory factory = null;
-            Session session = null;
-            try{
-                factory = new Configuration().configure("META-INF/hibernate.cfg.xml").buildSessionFactory();
-                session = factory.openSession();
-                session.beginTransaction();
-                URL xmlFileURL = JmzIdentMLParser.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-                MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-                InputSpectra inputSpectra = unmarshaller.unmarshal(InputSpectra.class);
-                String spectraDataRef = inputSpectra.getSpectraDataRef();
-                session.save(inputSpectra);
-                session.getTransaction().commit();
-                Query query = session.createQuery("from InputSpectra ");
-                assertTrue(inputSpectra.getSpectraDataRef().equals(spectraDataRef));
-            }finally{
-                try{
-                    session.flush();
-                    session.close();
-                    factory.close();
-                }catch(Exception e){
-
-                }
-            }
-    }
-
-    @Test
-    public void testSearchModification() throws Exception{
-        SessionFactory factory = null;
-        Session session = null;
-            try{
-                factory = new Configuration().configure("META-INF/hibernate.cfg.xml").buildSessionFactory();
-                session = factory.openSession();
-                session.beginTransaction();
-                URL xmlFileURL = JmzIdentMLParser.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-                MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-                SearchModification searchModification = unmarshaller.unmarshal(SearchModification.class);
-                session.save(searchModification);
-                session.getTransaction().commit();
-                Query query = session.createQuery("from SearchModification");
-
-            }catch(Exception e){
-             e.printStackTrace();
-            }
-            finally
-            {
-                try{
-                    session.flush();
-                    session.close();
-                    factory.close();
-                }catch(Exception e){
-
-                }
-            }
-    }
-
-    /**
-     * Setting modparams line in MzIdentMLElement to:
-     *     ModParam                        ("ModParam",                        true, "/mzIdentML/AnalysisProtocolCollection/SpectrumIdentificationProtocol/ModificationParams/SearchModification",                                                                                                                                            false, false, ModParam.class,                       ModParamCvParam.class,                      null,                                           false,  null),
-     *     allows unmarshalling to succeed
-     * @throws Exception
-     */
-    @Test
-    public void testModParams() throws Exception{
-        SessionFactory factory = null;
-        Session session = null;
-            try{
-                factory = new Configuration().configure("META-INF/hibernate.cfg.xml").buildSessionFactory();
-                session = factory.openSession();
-                session.beginTransaction();
-                URL xmlFileURL = JmzIdentMLParser.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-                MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-                ModParam modParam = unmarshaller.unmarshal(ModParam.class);
-                System.out.println("modparam " + modParam.getResidues());
-                session.save(modParam);
-                session.getTransaction().commit();
-                Query query = session.createQuery("from ModParam");
-
-            }finally{
-                try{
-                    session.flush();
-                    session.close();
-                    factory.close();
-                }catch(Exception e){
-
-                }
-            }
-
     }
 
 
-  //  @Test
+    //  @Test
     public void testRetrieve() throws Exception {
 
         try {
