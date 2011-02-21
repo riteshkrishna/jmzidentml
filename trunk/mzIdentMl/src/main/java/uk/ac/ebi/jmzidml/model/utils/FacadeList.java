@@ -637,8 +637,6 @@ public class FacadeList<T> extends AbstractCollection<T> implements List<T> {
                 // starting from the current position, loop through the super collection
 
                 for (int i = ++currPosition; i < superList.size(); i++) {
-                    // currPosition++;
-                    System.out.println("next i " + i);
                     if (clazz.isInstance(superList.get(i))) {
                         return (T) superList.get(i);
                     }
@@ -650,7 +648,6 @@ public class FacadeList<T> extends AbstractCollection<T> implements List<T> {
         }
 
         public boolean hasPrevious() {
-            System.out.println("hasprevious nextposition " + currPosition);
             if (currPosition >= 0) {
                 nextOrPreviousHasBeenCalled = true;
                 for (int i = currPosition; i >= startSuperPosition; i--) {
@@ -681,11 +678,8 @@ public class FacadeList<T> extends AbstractCollection<T> implements List<T> {
             int cnt = 0;
             int nextIndex = -1;
             // starting from the current position, loop through the super collection
-            System.out.println("startSuperPosition: " + startSuperPosition);
-            System.out.println("nextSuperPosition: " + currPosition);
             for (int i = startSuperPosition; i < superList.size(); i++) {
                 if (clazz.isInstance(superList.get(i))) {
-                    System.out.println("Count: " + cnt);
                     if (nextIndex == -1 && i >= (this.currPosition + 1)) {
                         nextIndex = cnt;
                     }
