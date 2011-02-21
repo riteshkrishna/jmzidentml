@@ -4,42 +4,50 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
-    <session-factory name="oracle10g_manager">
-        <!-- Database connection settings -->
-        <property name="javax.persistence.jdbc.driver">oracle.jdbc.driver.OracleDriver</property>
-        <property name="javax.persistence.jdbc.user">hibernate</property>
-        <property name="javax.persistence.jdbc.password">testing</property>
-        <property name="javax.persistence.jdbc.url">jdbc:oracle:thin:@localhost:1521:xe"</property>
+    <!--    <session-factory name="oracle10g_manager"> -->
+    <!-- Database connection settings -->
+    <!--        <property name="javax.persistence.jdbc.driver">oracle.jdbc.driver.OracleDriver</property>
+<property name="javax.persistence.jdbc.user">hibernate</property>
+<property name="javax.persistence.jdbc.password">testing</property>
+<property name="javax.persistence.jdbc.url">jdbc:oracle:thin:@localhost:1521:xe"</property>
+    -->
+    <!-- Hibernate specific configuration  -->
+    <!--       <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+            <property name="hibernate.max_fetch_depth">3</property>
+    -->
+    <!-- Auto detect annotation model classes -->
+    <!--        <property name="hibernate.archive.autodetection">class</property> -->
 
-        <!-- Hibernate specific configuration  -->
-        <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
-        <property name="hibernate.max_fetch_depth">3</property>
+    <!-- Disable the second-level cache  -->
+    <!--        <property name="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+    -->
+    <!-- Echo all executed SQL to stdout -->
+    <!--        <property name="hibernate.show_sql">true</property>       -->
 
-        <!-- Auto detect annotation model classes -->
-        <property name="hibernate.archive.autodetection">class</property>
+    <!-- Drop and re-create the database schema on startup -->
+    <!--        <property name="hibernate.hbm2ddl.auto">create</property> -->
 
-        <!-- Disable the second-level cache  -->
-        <property name="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
-
-        <!-- Echo all executed SQL to stdout -->
-        <property name="hibernate.show_sql">true</property>
-
-        <!-- Drop and re-create the database schema on startup -->
+    <!--        <property name="hibernate.ejb.naming_strategy">uk.ac.ebi.jmzidml.persistence.hibernate.TestNamingStrategy
+        </property>
+    -->
+    <session-factory>
+        <property name="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</property>
+        <property name="hibernate.connection.url">jdbc:hsqldb:mem:mzidentml</property>
+        <property name="hibernate.connection.username">sa</property>
+        <property name="hibernate.connection.password"></property>
+        <property name="hibernate.connection.pool_size">10</property>
+        <property name="show_sql">true</property>
+        <property name="dialect">org.hibernate.dialect.HSQLDialect</property>
         <property name="hibernate.hbm2ddl.auto">create</property>
 
-        <property name="hibernate.ejb.naming_strategy">uk.ac.ebi.jmzidml.persistence.hibernate.TestNamingStrategy
-        </property>
-        <!-- Mapping files -->
 
+        <!-- Mapping files -->
         <mapping resource="hbm/AbstractIdentifiableParamGroup.hbm.xml"/>
         <mapping resource="hbm/AbstractParamGroup.hbm.xml"/>
         <mapping resource="hbm/Affiliations.hbm.xml"/>
         <mapping resource="hbm/AmbiguousResidue.hbm.xml"/>
-        <mapping resource="hbm/AnalysisCollection.hbm.xml"/>
-        <mapping resource="hbm/AnalysisData.hbm.xml"/>
-        <mapping resource="hbm/AnalysisProtocolCollection.hbm.xml"/>
-        <mapping resource="hbm/AnalysisSampleCollection.hbm.xml"/>
         <mapping resource="hbm/AnalysisSearchDatabase.hbm.xml"/>
+        <mapping resource="hbm/AnalysisSampleCollection.hbm.xml"/>
         <mapping resource="hbm/AnalysisSoftware.hbm.xml"/>
         <mapping resource="hbm/AnalysisSoftwareList.hbm.xml"/>
         <mapping resource="hbm/AuditCollection.hbm.xml"/>
@@ -53,66 +61,46 @@
         <mapping resource="hbm/Data.hbm.xml"/>
         <mapping resource="hbm/DatabaseFilters.hbm.xml"/>
         <mapping resource="hbm/DatabaseTranslation.hbm.xml"/>
-        <mapping resource="hbm/DataCollection.hbm.xml"/>
         <mapping resource="hbm/DBSequence.hbm.xml"/>
         <mapping resource="hbm/Enzyme.hbm.xml"/>
         <mapping resource="hbm/Enzymes.hbm.xml"/>
-        <mapping resource="hbm/Equipment.hbm.xml"/>
         <mapping resource="hbm/ExternalData.hbm.xml"/>
         <mapping resource="hbm/FileFormat.hbm.xml"/>
         <mapping resource="hbm/Filter.hbm.xml"/>
         <mapping resource="hbm/FragmentArray.hbm.xml"/>
-        <mapping resource="hbm/Fragmentation.hbm.xml"/>
         <mapping resource="hbm/FragmentationTable.hbm.xml"/>
         <mapping resource="hbm/Identifiable.hbm.xml"/>
-        <mapping resource="hbm/Inputs.hbm.xml"/>
-        <mapping resource="hbm/InputSpectra.hbm.xml"/>
         <mapping resource="hbm/InputSpectrumIdentifications.hbm.xml"/>
         <mapping resource="hbm/InternalData.hbm.xml"/>
-        <mapping resource="hbm/IonType.hbm.xml"/>
+        <mapping resource="hbm/InputSpectra.hbm.xml"/>
         <mapping resource="hbm/MassTable.hbm.xml"/>
         <mapping resource="hbm/Material.hbm.xml"/>
         <mapping resource="hbm/Measure.hbm.xml"/>
         <mapping resource="hbm/Modification.hbm.xml"/>
         <mapping resource="hbm/ModificationParams.hbm.xml"/>
         <mapping resource="hbm/ModParam.hbm.xml"/>
-        <mapping resource="hbm/MzIdentML.hbm.xml"/>
         <mapping resource="hbm/Organization.hbm.xml"/>
         <mapping resource="hbm/Param.hbm.xml"/>
         <mapping resource="hbm/ParamAlternative.hbm.xml"/>
         <mapping resource="hbm/ParamAlternativeList.hbm.xml"/>
         <mapping resource="hbm/Parent.hbm.xml"/>
-        <mapping resource="hbm/Peptide.hbm.xml"/>
-        <mapping resource="hbm/PeptideEvidence.hbm.xml"/>
-        <mapping resource="hbm/PeptideHypothesis.hbm.xml"/>
         <mapping resource="hbm/Person.hbm.xml"/>
-        <mapping resource="hbm/PropertyValue.hbm.xml"/>
-        <mapping resource="hbm/ProteinAmbiguityGroup.hbm.xml"/>
-        <mapping resource="hbm/ProteinDetection.hbm.xml"/>
-        <mapping resource="hbm/ProteinDetectionHypothesis.hbm.xml"/>
-        <mapping resource="hbm/ProteinDetectionList.hbm.xml"/>
-        <mapping resource="hbm/Protocol.hbm.xml"/>
-        <mapping resource="hbm/ProtocolApplication.hbm.xml"/>
+        <mapping resource="hbm/Peptide.hbm.xml"/>
         <mapping resource="hbm/Provider.hbm.xml"/>
+        <mapping resource="hbm/Protocol.hbm.xml"/>
         <mapping resource="hbm/Residue.hbm.xml"/>
+        <mapping resource="hbm/Role.hbm.xml"/>
         <mapping resource="hbm/Sample.hbm.xml"/>
         <mapping resource="hbm/SearchDatabase.hbm.xml"/>
         <mapping resource="hbm/SearchModification.hbm.xml"/>
         <mapping resource="hbm/SequenceCollection.hbm.xml"/>
         <mapping resource="hbm/Software.hbm.xml"/>
-        <mapping resource="hbm/SourceFile.hbm.xml"/>
         <mapping resource="hbm/SpecificityRules.hbm.xml"/>
-        <mapping resource="hbm/SpectraData.hbm.xml"/>
         <mapping resource="hbm/SpectrumIdentification.hbm.xml"/>
-        <mapping resource="hbm/SpectrumIdentificationItem.hbm.xml"/>
-        <mapping resource="hbm/SpectrumIdentificationList.hbm.xml"/>
         <mapping resource="hbm/SpectrumIdentificationProtocol.hbm.xml"/>
-        <mapping resource="hbm/SpectrumIdentificationResult.hbm.xml"/>
-        <mapping resource="hbm/SpectrumIDformat.hbm.xml"/>
         <mapping resource="hbm/SubSample.hbm.xml"/>
         <mapping resource="hbm/SubstitutionModification.hbm.xml"/>
         <mapping resource="hbm/Tolerance.hbm.xml"/>
-        <mapping resource="hbm/TranslationTable.hbm.xml"/>
         <mapping resource="hbm/UserParam.hbm.xml"/>
 
         <!-- Params mapping files -->
