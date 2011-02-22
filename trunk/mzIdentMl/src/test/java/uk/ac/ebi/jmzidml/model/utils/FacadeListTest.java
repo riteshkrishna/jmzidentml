@@ -10,7 +10,6 @@ import uk.ac.ebi.jmzidml.model.mzidml.UserParam;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -836,24 +835,7 @@ public class FacadeListTest {
         assertTrue(changed);
     }
 
-    @Test
-    public void testToArrayOnList() throws Exception {
-        List<CvParam> list = new ArrayList<CvParam>();
-        CvParam cv = new CvParam();
-        cv.setAccession("CV1");
-        list.add(cv);
-
-        CvParam cv1 = new CvParam();
-        cv1.setAccession("CV2");
-        list.add(cv1);
-
-        Object[] arr = list.toArray();
-        CvParam newCv = new CvParam();
-        newCv.setAccession("CV12");
-        //   ((CvParam)arr[0]).setAccession("CV12");
-        arr[0] = newCv;
-        System.out.println(list.get(0).getAccession());
-    }
+    
 
     /*********************************** equals ************************************/
     @Test
