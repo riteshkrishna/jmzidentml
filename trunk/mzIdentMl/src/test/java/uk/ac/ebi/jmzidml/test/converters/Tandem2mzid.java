@@ -189,8 +189,6 @@ public class Tandem2mzid {
                     dbSeqList.add(dbSeq);
                 }
                
-
-
                 // Do the modifications
                 ArrayList<de.proteinms.xtandemparser.interfaces.Modification> fixModList = iXTandemFile.getModificationMap().getFixedModifications(peptide.getDomainID());
                 ArrayList<de.proteinms.xtandemparser.interfaces.Modification> varModList = iXTandemFile.getModificationMap().getVariableModifications(peptide.getDomainID());
@@ -198,8 +196,6 @@ public class Tandem2mzid {
                 String fixMods = "";
 
                 List<uk.ac.ebi.jmzidml.model.mzidml.Modification> allMods = mzidPep.getModification();
-
-
 
                 for (de.proteinms.xtandemparser.interfaces.Modification fixMod : fixModList) {
 
@@ -217,7 +213,6 @@ public class Tandem2mzid {
                     List<String> residueList = mod.getResidues();
                     residueList.add(""+ peptide.getDomainSequence().charAt(pepLoc));
                     allMods.add(mod);
-
 
                 }
 
@@ -255,15 +250,12 @@ public class Tandem2mzid {
                         modParam.setName("Carbamidomethyl");
                     }
                     else{
-
                         System.out.println("Error: modification with mass not recognized");
                         modParam.setName("ERROR");
                     }
 
-
                     //paramList.add(getModCV(mass));
-                    paramList.add(modParam);
-                    
+                    paramList.add(modParam);                  
 
                     mod.setMonoisotopicMassDelta(mass);
                     int pepLoc = loc - peptide.getDomainStart(); //location in Tandem is given as location within the whole protein
@@ -276,19 +268,28 @@ public class Tandem2mzid {
 
                 //System.out.println("\t" + peptide.getDomainSequence() + "," + peptide.getStart() + "," + peptide.getEnd() + "," + peptide.getDomainExpect() + "," + fixMods + "," + varMods);
                 evalue = peptide.getDomainExpect();
-                hyperscore = peptide.getDomainHyperScore();
-                              
+                hyperscore = peptide.getDomainHyperScore();                              
                 
                 //Add peptide sequence to mzid Peptide object
                 mzidPep.setPeptideSequence(peptide.getDomainSequence());
                 mzidPep.setId("Peptide" + sirCounter + "_" + siiCounter);
-                peptideList.add(mzidPep);
                 pepEvid.setEnd(peptide.getEnd());
                 pepEvid.setStart(peptide.getStart());
                 pepEvid.setMissedCleavages(peptide.getMissedCleavages());
                 pepEvid.setDBSequenceRef("dbseq_" + protAccession); //This would be better linked to DB seq object, but taking a short cut here
-                pepEvid.setPost("" +  peptide.getDownFlankSequence().charAt(0)); //Reports 4 chars, we need the first only
-                pepEvid.setPre("" + peptide.getUpFlankSequence().charAt(3));    //Reports 4 chars, we need last only
+
+                char post = peptide.getDownFlankSequence().charAt(0);
+                if(post == ']'){
+                    post = '-';
+
+                }
+                pepEvid.setPost(""+post); //Reports 4 chars, we need the first only
+
+                char pre = peptide.getUpFlankSequence().charAt(3);
+                if(pre == '['){
+                    pre = '-';
+                }
+                pepEvid.setPre(""+pre);    //Reports 4 chars, we need last only
                 pepEvid.setId("PE" + sirCounter + "_" + siiCounter + "_" + pepEvidCounter);
                 pepEvidCounter++;
                 pepEvid.setIsDecoy(Boolean.FALSE);      //TODO - insert some code for testing a REGEX on protein accession
@@ -428,6 +429,8 @@ public class Tandem2mzid {
 
 
             siiList.add(sii);
+            peptideList.add(mzidPep);               //The logic within X!Tandem is slightly complicated - need to test if the sequence is the same (new PepEvid) or different (new SII) - only for I or L within pep sequences
+                                                    //TO - currently only implements the case where the same peptide matches to different proteins
 
 
             // Initialize the array lists
