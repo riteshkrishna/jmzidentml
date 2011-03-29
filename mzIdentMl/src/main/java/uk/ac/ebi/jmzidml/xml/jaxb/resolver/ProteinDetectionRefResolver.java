@@ -20,39 +20,17 @@ public class ProteinDetectionRefResolver extends AbstractReferenceResolver<Prote
 
     @Override
     public void updateObject(ProteinDetection object) {
-        // if we automatically resolve the references, then update the object with the referenced object
-        if (MzIdentMLElement.ProteinDetection.isAutoRefResolving()) {
-            // add objects for the refID
-            String ref1 = object.getProteinDetectionListRef();
-            if (ref1 != null) {
-                ProteinDetectionList refObject1 = this.unmarshal(ref1, ProteinDetectionList.class);
-                object.setProteinDetectionList(refObject1);
-            }
-
-            String ref2 = object.getProteinDetectionProtocolRef();
-            if (ref2 != null) {
-                ProteinDetectionProtocol refObject2 = this.unmarshal(ref2, ProteinDetectionProtocol.class);
-                object.setProteinDetectionProtocol(refObject2);
-            }
+        // add objects for the refID
+        String ref1 = object.getProteinDetectionListRef();
+        if (ref1 != null) {
+            ProteinDetectionList refObject1 = this.unmarshal(ref1, ProteinDetectionList.class);
+            object.setProteinDetectionList(refObject1);
         }
-    }
 
-    /**
-     * A method to be called before the marshall process.
-     * Whenever a referenced object is set, its refID should be updated
-     * automatically, so that the refID and the ID of the object are
-     * always in sync. Here we check that this is the case.
-     *
-     * @param object The Object to check for reference ID integrity.
-     */
-    @Override
-    public void checkRefID(ProteinDetection object) {
-        // if there is a referenced object and its ID does not correspond to the refID, then there is something wrong
-        if ( object.getProteinDetectionList()!= null && !object.getProteinDetectionListRef().equals(object.getProteinDetectionList().getId()) ) {
-            throw new IllegalStateException("Reference ID and referenced object ID do not match!");
-        }
-        if ( object.getProteinDetectionProtocol()!= null && !object.getProteinDetectionProtocolRef().equals(object.getProteinDetectionProtocol().getId()) ) {
-            throw new IllegalStateException("Reference ID and referenced object ID do not match!");
+        String ref2 = object.getProteinDetectionProtocolRef();
+        if (ref2 != null) {
+            ProteinDetectionProtocol refObject2 = this.unmarshal(ref2, ProteinDetectionProtocol.class);
+            object.setProteinDetectionProtocol(refObject2);
         }
     }
 
@@ -65,8 +43,8 @@ public class ProteinDetectionRefResolver extends AbstractReferenceResolver<Prote
      */
     @Override
     public void afterUnmarshal(Object target, Object parent) {
-        if (ProteinDetection.class.isInstance(target)) {
-            updateObject((ProteinDetection)target);
+        if (ProteinDetection.class.isInstance(target) && MzIdentMLElement.ProteinDetection.isAutoRefResolving()) {
+            updateObject((ProteinDetection) target);
         } // else, not business of this resolver
     }
 

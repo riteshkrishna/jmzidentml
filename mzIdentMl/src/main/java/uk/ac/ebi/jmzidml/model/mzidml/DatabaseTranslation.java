@@ -4,8 +4,11 @@ package uk.ac.ebi.jmzidml.model.mzidml;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.*;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
@@ -19,9 +22,9 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="TranslationTable" type="{http://psidev.info/psi/pi/mzIdentML/1.0}TranslationTableType" maxOccurs="unbounded"/>
+ *         &lt;element name="TranslationTable" type="{http://psidev.info/psi/pi/mzIdentML/1.1}TranslationTableType" maxOccurs="unbounded"/>
  *       &lt;/sequence>
- *       &lt;attribute name="frames" type="{http://psidev.info/psi/pi/mzIdentML/1.0}listOfAllowedFrames" />
+ *       &lt;attribute name="frames" type="{http://psidev.info/psi/pi/mzIdentML/1.1}listOfAllowedFrames" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -34,7 +37,8 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
     "translationTable"
 })
 public class DatabaseTranslation
-    implements Serializable, MzIdentMLObject
+    extends MzIdentMLObject
+    implements Serializable
 {
 
     private final static long serialVersionUID = 100L;
@@ -42,18 +46,6 @@ public class DatabaseTranslation
     protected List<TranslationTable> translationTable;
     @XmlAttribute
     protected List<Integer> frames;
-
-    @XmlTransient
-    protected Long hid;
-
-    public Long getHid() {
-        return hid;
-    }
-
-    public void setHid(Long hid) {
-        this.hid = hid;
-    }
-
 
     /**
      * Gets the value of the translationTable property.

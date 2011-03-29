@@ -1,8 +1,9 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.AbstractParamGroup;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
+import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
@@ -20,9 +21,9 @@ import java.util.List;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.0}ParamGroup" maxOccurs="unbounded"/>
+ *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamGroup" maxOccurs="unbounded"/>
  *       &lt;/sequence>
- *       &lt;attribute name="Code" use="required" type="{http://psidev.info/psi/pi/mzIdentML/1.0}chars" />
+ *       &lt;attribute name="Code" use="required" type="{http://psidev.info/psi/pi/mzIdentML/1.1}chars" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -34,8 +35,9 @@ import java.util.List;
 @XmlType(name = "AmbiguousResidueType", propOrder = {
     "paramGroup"
 })
-public class AmbiguousResidue extends AbstractParamGroup
-    implements Serializable, MzIdentMLObject
+public class AmbiguousResidue
+    extends MzIdentMLObject
+    implements Serializable, ParamGroupCapable
 {
 
     private final static long serialVersionUID = 100L;
@@ -43,8 +45,8 @@ public class AmbiguousResidue extends AbstractParamGroup
         @XmlElement(name = "userParam", type = UserParam.class),
         @XmlElement(name = "cvParam", type = CvParam.class)
     })
-    protected List<Param> paramGroup;
-    @XmlAttribute(name = "Code", required = true)
+    protected List<AbstractParam> paramGroup;
+    @XmlAttribute(name = "code", required = true)
     protected String code;
 
     /**
@@ -70,9 +72,9 @@ public class AmbiguousResidue extends AbstractParamGroup
      * 
      * 
      */
-    public List<Param> getParamGroup() {
+    public List<AbstractParam> getParamGroup() {
         if (paramGroup == null) {
-            paramGroup = new ArrayList<Param>();
+            paramGroup = new ArrayList<AbstractParam>();
         }
         return this.paramGroup;
     }
@@ -101,4 +103,11 @@ public class AmbiguousResidue extends AbstractParamGroup
         this.code = value;
     }
 
+    public List getCvParam() {
+        return new FacadeList(this.getParamGroup(), CvParam.class);
+    }
+
+    public List getUserParam() {
+        return new FacadeList(this.getParamGroup(), UserParam.class);
+    }
 }

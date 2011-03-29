@@ -1,7 +1,8 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.AbstractIdentifiableParamGroup;
+import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
+import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
@@ -14,17 +15,17 @@ import java.util.List;
  *                 conflicting assignments of peptides to proteins.
  *             
  * 
- * <p>Java class for PSI-PI.analysis.process.ProteinAmbiguityGroupType complex type.
+ * <p>Java class for ProteinAmbiguityGroupType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="PSI-PI.analysis.process.ProteinAmbiguityGroupType">
+ * &lt;complexType name="ProteinAmbiguityGroupType">
  *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Common.IdentifiableType">
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType">
  *       &lt;sequence>
- *         &lt;element name="ProteinDetectionHypothesis" type="{http://psidev.info/psi/pi/mzIdentML/1.0}PSI-PI.analysis.process.ProteinDetectionHypothesisType" maxOccurs="unbounded"/>
- *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.0}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="ProteinDetectionHypothesis" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ProteinDetectionHypothesisType" maxOccurs="unbounded"/>
+ *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>
@@ -34,23 +35,23 @@ import java.util.List;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PSI-PI.analysis.process.ProteinAmbiguityGroupType", propOrder = {
+@XmlType(name = "ProteinAmbiguityGroupType", propOrder = {
     "proteinDetectionHypothesis",
     "paramGroup"
 })
 public class ProteinAmbiguityGroup
-    extends AbstractIdentifiableParamGroup
-    implements Serializable
+    extends Identifiable
+    implements Serializable, ParamGroupCapable
 {
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "ProteinDetectionHypothesis", required = true)
     protected List<ProteinDetectionHypothesis> proteinDetectionHypothesis;
     @XmlElements({
-        @XmlElement(name = "cvParam", type = CvParam.class),
-        @XmlElement(name = "userParam", type = UserParam.class)
+        @XmlElement(name = "userParam", type = UserParam.class),
+        @XmlElement(name = "cvParam", type = CvParam.class)
     })
-    protected List<Param> paramGroup;
+    protected List<AbstractParam> paramGroup;
 
     /**
      * Gets the value of the proteinDetectionHypothesis property.
@@ -99,16 +100,23 @@ public class ProteinAmbiguityGroup
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link CvParam }
      * {@link UserParam }
+     * {@link CvParam }
      * 
      * 
      */
-    public List<Param> getParamGroup() {
+    public List<AbstractParam> getParamGroup() {
         if (paramGroup == null) {
-            paramGroup = new ArrayList<Param>();
+            paramGroup = new ArrayList<AbstractParam>();
         }
         return this.paramGroup;
     }
 
+    public List getCvParam() {
+        return new FacadeList(this.getParamGroup(), CvParam.class);
+    }
+
+    public List getUserParam() {
+        return new FacadeList(this.getParamGroup(), UserParam.class);
+    }
 }

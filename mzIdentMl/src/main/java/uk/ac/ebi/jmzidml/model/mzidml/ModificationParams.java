@@ -1,12 +1,14 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
@@ -19,7 +21,7 @@ import java.util.List;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="SearchModification" type="{http://psidev.info/psi/pi/mzIdentML/1.0}PSI-PI.analysis.search.SearchModificationType" maxOccurs="unbounded"/>
+ *         &lt;element name="SearchModification" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SearchModificationType" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -33,16 +35,9 @@ import java.util.List;
     "searchModification"
 })
 public class ModificationParams
-    implements Serializable, MzIdentMLObject
+    extends MzIdentMLObject
+    implements Serializable
 {
-    @XmlTransient
-    private Long hid;
-
-    public Long getHid() {
-        return hid;
-    }
-
-
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "SearchModification", required = true)

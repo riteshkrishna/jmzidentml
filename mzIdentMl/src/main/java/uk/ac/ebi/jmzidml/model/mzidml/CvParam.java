@@ -6,16 +6,23 @@ import java.io.Serializable;
 
 
 /**
+ *
+ * TODO marshalling/ persistor add validation to check for case where someone gets cv and changes its id without updating ref id in
+ *      CvParam and other such clases.
+ *
+ * NOTE: There is no setter method for the cvRef. This simplifies keeping the cv object reference and
+ * cvRef synchronized.
+*
  * A single entry from an ontology or a controlled vocabulary.
  * 
- * <p>Java class for FuGE.Common.Ontology.cvParamType complex type.
+ * <p>Java class for cvParamType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="FuGE.Common.Ontology.cvParamType">
+ * &lt;complexType name="cvParamType">
  *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Common.Ontology.ParamType">
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}AbstractParamType">
  *       &lt;attribute name="cvRef" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="accession" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>
@@ -26,9 +33,9 @@ import java.io.Serializable;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "FuGE.Common.Ontology.cvParamType")
+@XmlType(name = "CVParamType")
 public class CvParam
-    extends Param
+    extends AbstractParam
     implements Serializable
 {
 
@@ -37,19 +44,24 @@ public class CvParam
     protected String cvRef;
     @XmlAttribute(required = true)
     protected String accession;
-
     @XmlTransient
-    Cv cv;
+    protected Cv cv;
+
 
     public Cv getCv() {
         return cv;
     }
 
     public void setCv(Cv cv) {
-        this.cv = cv;
-        if (cv != null) {
-            this.cvRef = cv.getId();
-        }
+          if (cv == null) {
+              this.cvRef = null;
+          } else {
+              String refId = cv.getId();
+              if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
+              this.cvRef = refId;
+          }
+          this.cv = cv;
+
     }
 
     /**
@@ -64,20 +76,6 @@ public class CvParam
         return cvRef;
     }
 
-    /**
-     * Sets the value of the cvRef property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCvRef(String value) {
-        this.cvRef = value;
-        if ( cv != null && !cv.getId().equals(value) ) {
-            cv = null;
-        }
-    }
 
     /**
      * Gets the value of the accession property.

@@ -1,6 +1,9 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
+import uk.ac.ebi.jmzidml.model.utils.FacadeList;
+
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,17 +16,17 @@ import java.util.List;
  *                 rather than a translated sequence.
  *             
  * 
- * <p>Java class for PSI-PI.analysis.search.DBSequenceType complex type.
+ * <p>Java class for DBSequenceType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="PSI-PI.analysis.search.DBSequenceType">
+ * &lt;complexType name="DBSequenceType">
  *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Bio.ConceptualMolecule.ConceptualMoleculeType">
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType">
  *       &lt;sequence>
- *         &lt;element name="seq" type="{http://psidev.info/psi/pi/mzIdentML/1.0}sequence" minOccurs="0"/>
- *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.0}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="seq" type="{http://psidev.info/psi/pi/mzIdentML/1.1}sequence" minOccurs="0"/>
+ *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="length" type="{http://www.w3.org/2001/XMLSchema}int" />
  *       &lt;attribute name="SearchDatabase_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -36,47 +39,31 @@ import java.util.List;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PSI-PI.analysis.search.DBSequenceType", propOrder = {
+@XmlType(name = "DBSequenceType", propOrder = {
     "seq",
     "paramGroup"
 })
 public class DBSequence
-    extends ConceptualMolecule
-    implements Serializable
+    extends Identifiable
+    implements Serializable, ParamGroupCapable
 {
 
     private final static long serialVersionUID = 100L;
+    @XmlElement(name="Seq")
     protected String seq;
     @XmlElements({
-        @XmlElement(name = "cvParam", type = CvParam.class),
-        @XmlElement(name = "userParam", type = UserParam.class)
+        @XmlElement(name = "userParam", type = UserParam.class),
+        @XmlElement(name = "cvParam", type = CvParam.class)
     })
-    protected List<Param> paramGroup;
+    protected List<AbstractParam> paramGroup;
     @XmlAttribute
     protected Integer length;
-    @XmlAttribute(name = "SearchDatabase_ref", required = true)
+    @XmlAttribute(name = "searchDatabase_ref", required = true)
     protected String searchDatabaseRef;
     @XmlAttribute(required = true)
     protected String accession;
-
-
-    public AnalysisSearchDatabase getAnalysisSearchDatabase() {
-        return analysisSearchDatabase;
-    }
-
     @XmlTransient
-    private AnalysisSearchDatabase analysisSearchDatabase;
-
-    public AnalysisSearchDatabase getSearchDatabase() {
-        return analysisSearchDatabase;
-    }
-
-    public void setSearchDatabase(AnalysisSearchDatabase analysisSearchDatabase) {
-        this.analysisSearchDatabase = analysisSearchDatabase;
-        if (analysisSearchDatabase != null) {
-            this.searchDatabaseRef = analysisSearchDatabase.getId();
-        }
-    }
+    protected AnalysisSearchDatabase searchDatabase;
 
     /**
      * Gets the value of the seq property.
@@ -120,14 +107,14 @@ public class DBSequence
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link CvParam }
      * {@link UserParam }
+     * {@link CvParam }
      * 
      * 
      */
-    public List<Param> getParamGroup() {
+    public List<AbstractParam> getParamGroup() {
         if (paramGroup == null) {
-            paramGroup = new ArrayList<Param>();
+            paramGroup = new ArrayList<AbstractParam>();
         }
         return this.paramGroup;
     }
@@ -168,20 +155,6 @@ public class DBSequence
         return searchDatabaseRef;
     }
 
-    /**
-     * Sets the value of the searchDatabaseRef property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSearchDatabaseRef(String value) {
-        this.searchDatabaseRef = value;
-        if ( analysisSearchDatabase != null && !analysisSearchDatabase.getId().equals(value) ) {
-            analysisSearchDatabase = null;
-        }
-    }
 
     /**
      * Gets the value of the accession property.
@@ -207,4 +180,27 @@ public class DBSequence
         this.accession = value;
     }
 
+    public AnalysisSearchDatabase getSearchDatabase() {
+        return searchDatabase;
+    }
+
+    public void setSearchDatabase(AnalysisSearchDatabase searchDatabase) {
+        if (searchDatabase == null) {
+            this.searchDatabaseRef = null;
+        } else {
+            String refId = searchDatabase.getId();
+            if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
+            this.searchDatabaseRef = refId;
+        }
+        this.searchDatabase = searchDatabase;
+
+    }
+
+    public List getCvParam() {
+        return new FacadeList(this.getParamGroup(), CvParam.class);
+    }
+
+    public List getUserParam() {
+        return new FacadeList(this.getParamGroup(), UserParam.class);
+    }
 }

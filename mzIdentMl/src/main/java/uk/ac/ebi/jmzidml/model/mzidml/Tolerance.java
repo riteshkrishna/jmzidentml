@@ -1,13 +1,16 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.CvParamListCapable;
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+
+import uk.ac.ebi.jmzidml.model.CvParamListCapable;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
@@ -23,7 +26,7 @@ import java.util.List;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://psidev.info/psi/pi/mzIdentML/1.0}cvParam" maxOccurs="unbounded"/>
+ *         &lt;element name="cvParam" type="{http://psidev.info/psi/pi/mzIdentML/1.1}cvParamType" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,11 +40,9 @@ import java.util.List;
     "cvParam"
 })
 public class Tolerance
-    implements Serializable, MzIdentMLObject, CvParamListCapable
+    extends MzIdentMLObject
+    implements Serializable, CvParamListCapable
 {
-
-    @XmlTransient
-    private Long hid;
 
     private final static long serialVersionUID = 100L;
     @XmlElement(required = true)

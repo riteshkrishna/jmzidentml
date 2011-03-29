@@ -1,10 +1,7 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,16 +10,16 @@ import java.util.List;
 /**
  * A person for which the attributes are self describing.
  * 
- * <p>Java class for FuGE.Common.Audit.PersonType complex type.
+ * <p>Java class for PersonType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="FuGE.Common.Audit.PersonType">
+ * &lt;complexType name="PersonType">
  *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Common.Audit.ContactType">
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}AbstractContactType">
  *       &lt;sequence>
- *         &lt;element name="affiliations" type="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Common.Audit.AffiliationsType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="affiliations" type="{http://psidev.info/psi/pi/mzIdentML/1.1}AffiliationsType" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="lastName" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="firstName" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -35,15 +32,16 @@ import java.util.List;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "FuGE.Common.Audit.PersonType", propOrder = {
+@XmlType(name = "PersonType", propOrder = {
     "affiliations"
 })
 public class Person
-    extends Contact
+    extends AbstractContact
     implements Serializable
 {
 
     private final static long serialVersionUID = 100L;
+    @XmlElement(name="Affiliations")
     protected List<Affiliations> affiliations;
     @XmlAttribute
     protected String lastName;

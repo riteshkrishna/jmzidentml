@@ -13,36 +13,17 @@ import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
  */
 public class AffiliationsRefResolver extends AbstractReferenceResolver<Affiliations> {
 
-        public AffiliationsRefResolver(MzIdentMLIndexer index, MzIdentMLObjectCache cache) {
+    public AffiliationsRefResolver(MzIdentMLIndexer index, MzIdentMLObjectCache cache) {
         super(index, cache);
     }
 
     @Override
     public void updateObject(Affiliations object) {
-        // if we automatically resolve the references, then update the object with the referenced object
-        if (MzIdentMLElement.Affiliations.isAutoRefResolving()) {
-            // add objects for the refID
-            String ref = object.getOrganizationRef();
-            if (ref != null) {
-                Organization refObject = this.unmarshal(ref, Organization.class);
-                object.setOrganization(refObject);
-            }
-        } // else, don't bother, it can be resolved manually if required.
-    }
-
-    /**
-     * A method to be called before the marshall process.
-     * Whenever a referenced object is set, its refID should be updated
-     * automatically, so that the refID and the ID of the object are
-     * always in sync. Here we check that this is the case.
-     *
-     * @param object The Object to check for reference ID integrity.
-     */
-    @Override
-    public void checkRefID(Affiliations object) {
-        // if there is a referenced object and its ID does not correspond to the refID, then there is something wrong
-        if ( object.getOrganization() != null && !object.getOrganizationRef().equals(object.getOrganization().getId()) ) {
-            throw new IllegalStateException("Reference ID and referenced object ID do not match!");
+        // add objects for the refID
+        String ref = object.getOrganizationRef();
+        if (ref != null) {
+            Organization refObject = this.unmarshal(ref, Organization.class);
+            object.setOrganization(refObject);
         }
     }
 
@@ -55,8 +36,8 @@ public class AffiliationsRefResolver extends AbstractReferenceResolver<Affiliati
      */
     @Override
     public void afterUnmarshal(Object target, Object parent) {
-        if (Affiliations.class.isInstance(target)) {
-            updateObject((Affiliations)target);
+        if (Affiliations.class.isInstance(target) && MzIdentMLElement.Affiliations.isAutoRefResolving()) {
+            updateObject((Affiliations) target);
         } // else, not business of this resolver
     }
 }

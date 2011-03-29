@@ -1,27 +1,27 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.io.Serializable;
 
 
 /**
  * A data set containing spectra data (consisting of one or more spectra).
  *             
  * 
- * <p>Java class for PSI-PI.spectra.SpectraDataType complex type.
+ * <p>Java class for SpectraDataType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="PSI-PI.spectra.SpectraDataType">
+ * &lt;complexType name="SpectraDataType">
  *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Bio.Data.ExternalDataType">
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}ExternalDataType">
  *       &lt;sequence>
- *         &lt;element name="spectrumIDFormat" type="{http://psidev.info/psi/pi/mzIdentML/1.0}spectrumIDFormatType"/>
+ *         &lt;element name="spectrumIDFormat" type="{http://psidev.info/psi/pi/mzIdentML/1.1}spectrumIDFormatType"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>
@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PSI-PI.spectra.SpectraDataType", propOrder = {
+@XmlType(name = "SpectraDataType", propOrder = {
     "spectrumIDFormat"
 })
 public class SpectraData
@@ -40,7 +40,7 @@ public class SpectraData
 {
 
     private final static long serialVersionUID = 100L;
-    @XmlElement(required = true)
+    @XmlElement(name="SpectrumIDFormat" ,required = true)
     protected SpectrumIDFormat spectrumIDFormat;
 
     /**

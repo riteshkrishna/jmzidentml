@@ -2,10 +2,13 @@
 package uk.ac.ebi.jmzidml.model.mzidml;
 
 import uk.ac.ebi.jmzidml.model.CvParamListCapable;
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.CalendarAdapter;
 
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -14,20 +17,20 @@ import java.util.List;
  *                 entries, or annotated spectra libraries.
  *             
  * 
- * <p>Java class for PSI-PI.analysis.search.SearchDatabaseType complex type.
+ * <p>Java class for SearchDatabaseType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="PSI-PI.analysis.search.SearchDatabaseType">
+ * &lt;complexType name="SearchDatabaseType">
  *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Bio.Data.ExternalDataType">
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}ExternalDataType">
  *       &lt;sequence>
- *         &lt;element name="DatabaseName" type="{http://psidev.info/psi/pi/mzIdentML/1.0}ParamType"/>
- *         &lt;element ref="{http://psidev.info/psi/pi/mzIdentML/1.0}cvParam" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="DatabaseName" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamType"/>
+ *         &lt;element name="cvParam" type="{http://psidev.info/psi/pi/mzIdentML/1.1}cvParamType" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="version" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="releaseDate" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="releaseDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
  *       &lt;attribute name="numDatabaseSequences" type="{http://www.w3.org/2001/XMLSchema}long" />
  *       &lt;attribute name="numResidues" type="{http://www.w3.org/2001/XMLSchema}long" />
  *     &lt;/extension>
@@ -38,7 +41,7 @@ import java.util.List;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PSI-PI.analysis.search.SearchDatabaseType", propOrder = {
+@XmlType(name = "SearchDatabaseType", propOrder = {
     "databaseName",
     "cvParam"
 })
@@ -49,13 +52,14 @@ public class AnalysisSearchDatabase
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "DatabaseName", required = true)
-    protected ParamAlternative databaseName;
-
+    protected Param databaseName;
     protected List<CvParam> cvParam;
     @XmlAttribute
     protected String version;
     @XmlAttribute
-    protected String releaseDate;
+    @XmlJavaTypeAdapter(CalendarAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    protected Calendar releaseDate;
     @XmlAttribute
     protected Long numDatabaseSequences;
     @XmlAttribute
@@ -66,10 +70,10 @@ public class AnalysisSearchDatabase
      * 
      * @return
      *     possible object is
-     *     {@link ParamAlternative }
+     *     {@link Param }
      *     
      */
-    public ParamAlternative getDatabaseName() {
+    public Param getDatabaseName() {
         return databaseName;
     }
 
@@ -78,10 +82,10 @@ public class AnalysisSearchDatabase
      * 
      * @param value
      *     allowed object is
-     *     {@link ParamAlternative }
+     *     {@link Param }
      *     
      */
-    public void setDatabaseName(ParamAlternative value) {
+    public void setDatabaseName(Param value) {
         this.databaseName = value;
     }
 
@@ -146,7 +150,7 @@ public class AnalysisSearchDatabase
      *     {@link String }
      *     
      */
-    public String getReleaseDate() {
+    public Calendar getReleaseDate() {
         return releaseDate;
     }
 
@@ -158,7 +162,7 @@ public class AnalysisSearchDatabase
      *     {@link String }
      *     
      */
-    public void setReleaseDate(String value) {
+    public void setReleaseDate(Calendar value) {
         this.releaseDate = value;
     }
 

@@ -10,18 +10,24 @@ import java.util.List;
 /**
  * An Analysis which assembles a set of peptides (e.g. from a spectra search analysis) to
  *                 proteins.
- *             
+ *
+ * TODO marshalling/ persistor add validation to check for case where someone gets proteinDetectionList/proteinDetectionProtocol and changes its id without updating ref id in
+ *      ProteinDetection and other such clases.
+ *
+ * NOTE: There is no setter method for the proteinDetectionListRef/proteinDetectionProtocolRef. This simplifies keeping the proteinDetectionList/proteinDetectionProtocol object reference and
+ * proteinDetectionListRef/proteinDetectionProtocolRef synchronized.
+ *
  * 
- * <p>Java class for PSI-PI.analysis.process.ProteinDetectionType complex type.
+ * <p>Java class for ProteinDetectionType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="PSI-PI.analysis.process.ProteinDetectionType">
+ * &lt;complexType name="ProteinDetectionType">
  *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Common.Protocol.ProtocolApplicationType">
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}ProtocolApplicationType">
  *       &lt;sequence>
- *         &lt;element name="InputSpectrumIdentifications" type="{http://psidev.info/psi/pi/mzIdentML/1.0}InputSpectrumIdentificationsType" maxOccurs="unbounded"/>
+ *         &lt;element name="InputSpectrumIdentifications" type="{http://psidev.info/psi/pi/mzIdentML/1.1}InputSpectrumIdentificationsType" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *       &lt;attribute name="ProteinDetectionList_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="ProteinDetectionProtocol_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -33,7 +39,7 @@ import java.util.List;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PSI-PI.analysis.process.ProteinDetectionType", propOrder = {
+@XmlType(name = "ProteinDetectionType", propOrder = {
     "inputSpectrumIdentifications"
 })
 public class ProteinDetection
@@ -44,25 +50,29 @@ public class ProteinDetection
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "InputSpectrumIdentifications", required = true)
     protected List<InputSpectrumIdentifications> inputSpectrumIdentifications;
-    @XmlAttribute(name = "ProteinDetectionList_ref", required = true)
+    @XmlAttribute(name = "proteinDetectionList_ref", required = true)
     protected String proteinDetectionListRef;
-    @XmlAttribute(name = "ProteinDetectionProtocol_ref", required = true)
+    @XmlTransient
+    protected ProteinDetectionList proteinDetectionList;
+    @XmlAttribute(name = "proteinDetectionProtocol_ref", required = true)
     protected String proteinDetectionProtocolRef;
+    @XmlTransient
+    protected ProteinDetectionProtocol proteinDetectionProtocol;
 
-    @XmlTransient
-    private ProteinDetectionList proteinDetectionList;
-    @XmlTransient
-    private ProteinDetectionProtocol proteinDetectionProtocol;
 
     public ProteinDetectionList getProteinDetectionList() {
         return proteinDetectionList;
     }
 
     public void setProteinDetectionList(ProteinDetectionList proteinDetectionList) {
-        this.proteinDetectionList = proteinDetectionList;
-        if (proteinDetectionList != null) {
-            this.proteinDetectionListRef = proteinDetectionList.getId();
+        if (proteinDetectionList == null) {
+            this.proteinDetectionListRef = null;
+        } else {
+            String refId = proteinDetectionList.getId();
+            if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
+            this.proteinDetectionListRef = refId;
         }
+        this.proteinDetectionList = proteinDetectionList;
     }
 
     public ProteinDetectionProtocol getProteinDetectionProtocol() {
@@ -70,10 +80,14 @@ public class ProteinDetection
     }
 
     public void setProteinDetectionProtocol(ProteinDetectionProtocol proteinDetectionProtocol) {
-        this.proteinDetectionProtocol = proteinDetectionProtocol;
-        if (proteinDetectionProtocol != null) {
-            this.proteinDetectionProtocolRef = proteinDetectionProtocol.getId();
+        if (proteinDetectionProtocol == null) {
+            this.proteinDetectionProtocolRef = null;
+        } else {
+            String refId = proteinDetectionProtocol.getId();
+            if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
+            this.proteinDetectionProtocolRef = refId;
         }
+        this.proteinDetectionProtocol = proteinDetectionProtocol;
     }
 
     /**
@@ -118,21 +132,6 @@ public class ProteinDetection
     }
 
     /**
-     * Sets the value of the proteinDetectionListRef property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setProteinDetectionListRef(String value) {
-        this.proteinDetectionListRef = value;
-        if ( proteinDetectionList != null && !proteinDetectionList.getId().equals(value) ) {
-            proteinDetectionList = null;
-        }
-    }
-
-    /**
      * Gets the value of the proteinDetectionProtocolRef property.
      * 
      * @return
@@ -143,20 +142,4 @@ public class ProteinDetection
     public String getProteinDetectionProtocolRef() {
         return proteinDetectionProtocolRef;
     }
-
-    /**
-     * Sets the value of the proteinDetectionProtocolRef property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setProteinDetectionProtocolRef(String value) {
-        this.proteinDetectionProtocolRef = value;
-        if ( proteinDetectionProtocol != null && !proteinDetectionProtocol.getId().equals(value) ) {
-            proteinDetectionProtocol = null;
-        }
-    }
-
 }

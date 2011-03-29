@@ -2,8 +2,10 @@
 package uk.ac.ebi.jmzidml.model.mzidml;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.*;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlType;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
@@ -11,12 +13,12 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
  * A modification where one residue is substituted by another (amino acid change).
  *             
  * 
- * <p>Java class for PSI-PI.polypeptide.SubstitutionModificationType complex type.
+ * <p>Java class for SubstitutionModificationType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="PSI-PI.polypeptide.SubstitutionModificationType">
+ * &lt;complexType name="SubstitutionModificationType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;attribute name="originalResidue" use="required">
@@ -44,13 +46,11 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PSI-PI.polypeptide.SubstitutionModificationType")
+@XmlType(name = "SubstitutionModificationType")
 public class SubstitutionModification
-    implements Serializable, MzIdentMLObject
+    extends MzIdentMLObject
+    implements Serializable
 {
-
-    @XmlTransient
-    private Long hid;
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(required = true)

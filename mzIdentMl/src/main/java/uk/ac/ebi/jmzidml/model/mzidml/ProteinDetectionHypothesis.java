@@ -1,7 +1,8 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.AbstractIdentifiableParamGroup;
+import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
+import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
@@ -12,17 +13,17 @@ import java.util.List;
 /**
  * A single result of the ProteinDetection analysis (i.e. a protein).
  * 
- * <p>Java class for PSI-PI.analysis.process.ProteinDetectionHypothesisType complex type.
+ * <p>Java class for ProteinDetectionHypothesisType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="PSI-PI.analysis.process.ProteinDetectionHypothesisType">
+ * &lt;complexType name="ProteinDetectionHypothesisType">
  *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Common.IdentifiableType">
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType">
  *       &lt;sequence>
- *         &lt;element name="PeptideHypothesis" type="{http://psidev.info/psi/pi/mzIdentML/1.0}PeptideHypothesisType" maxOccurs="unbounded"/>
- *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.0}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="PeptideHypothesis" type="{http://psidev.info/psi/pi/mzIdentML/1.1}PeptideHypothesisType" maxOccurs="unbounded"/>
+ *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="DBSequence_ref" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="passThreshold" use="required" type="{http://www.w3.org/2001/XMLSchema}boolean" />
@@ -34,41 +35,30 @@ import java.util.List;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PSI-PI.analysis.process.ProteinDetectionHypothesisType", propOrder = {
+@XmlType(name = "ProteinDetectionHypothesisType", propOrder = {
     "peptideHypothesis",
     "paramGroup"
 })
 public class ProteinDetectionHypothesis
-    extends AbstractIdentifiableParamGroup
-    implements Serializable
+    extends Identifiable
+    implements Serializable, ParamGroupCapable
 {
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "PeptideHypothesis", required = true)
     protected List<PeptideHypothesis> peptideHypothesis;
     @XmlElements({
-        @XmlElement(name = "userParam", type = UserParam.class),
-        @XmlElement(name = "cvParam", type = CvParam.class)
+        @XmlElement(name = "cvParam", type = CvParam.class),
+        @XmlElement(name = "userParam", type = UserParam.class)
     })
-    protected List<Param> paramGroup;
-    @XmlAttribute(name = "DBSequence_ref")
+    protected List<AbstractParam> paramGroup;
+    @XmlAttribute(name = "dBSequence_ref")
     protected String dbSequenceRef;
     @XmlAttribute(required = true)
     protected boolean passThreshold;
-
     @XmlTransient
-    private DBSequence dBSequence;
+    protected DBSequence dbSequence;
 
-    public DBSequence getDBSequence() {
-        return dBSequence;
-    }
-
-    public void setDBSequence(DBSequence dbSequence) {
-        this.dBSequence = dbSequence;
-        if (dbSequence != null) {
-            this.dbSequenceRef = dbSequence.getId();
-        }
-    }
 
     /**
      * Gets the value of the peptideHypothesis property.
@@ -117,14 +107,14 @@ public class ProteinDetectionHypothesis
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link UserParam }
      * {@link CvParam }
+     * {@link UserParam }
      * 
      * 
      */
-    public List<Param> getParamGroup() {
+    public List<AbstractParam> getParamGroup() {
         if (paramGroup == null) {
-            paramGroup = new ArrayList<Param>();
+            paramGroup = new ArrayList<AbstractParam>();
         }
         return this.paramGroup;
     }
@@ -141,20 +131,6 @@ public class ProteinDetectionHypothesis
         return dbSequenceRef;
     }
 
-    /**
-     * Sets the value of the dbSequenceRef property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setDBSequenceRef(String value) {
-        this.dbSequenceRef = value;
-        if ( dBSequence != null && !dBSequence.getId().equals(value) ) {
-            dBSequence = null;
-        }
-    }
 
     /**
      * Gets the value of the passThreshold property.
@@ -172,4 +148,27 @@ public class ProteinDetectionHypothesis
         this.passThreshold = value;
     }
 
+
+    public DBSequence getDBSequence() {
+        return dbSequence;
+    }
+
+    public void setDBSequence(DBSequence dbSequence) {
+        if (dbSequence == null) {
+            this.dbSequenceRef = null;
+        } else {
+            String refId = dbSequence.getId();
+            if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
+            this.dbSequenceRef = refId;
+        }
+        this.dbSequence = dbSequence;
+    }
+
+    public List getCvParam() {
+        return new FacadeList(this.getParamGroup(), CvParam.class);
+    }
+
+    public List getUserParam() {
+        return new FacadeList(this.getParamGroup(), UserParam.class);
+    }
 }

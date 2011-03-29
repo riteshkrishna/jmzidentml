@@ -1,20 +1,25 @@
-
 package uk.ac.ebi.jmzidml.model.mzidml;
+
+import java.io.Serializable;
+import javax.xml.bind.annotation.*;
 
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
-import javax.xml.bind.annotation.*;
-import java.io.Serializable;
-
 
 /**
+ * TODO marshalling/ persistor add validation to check for case where someone gets spectraData and changes its id without updating ref id in
+ *      InputSpectra and other such classes.
+ *
+ * NOTE: There is no setter method for the spectraDataRef. This simplifies keeping the measure object reference and
+ * spectraDataRef synchronized.
+ *
  * The attribute referencing an identifier within the SpectraData section.
- *             
- * 
+ * <p/>
+ * <p/>
  * <p>Java class for InputSpectraType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="InputSpectraType">
  *   &lt;complexContent>
@@ -24,64 +29,41 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "InputSpectraType")
 public class InputSpectra
-    implements Serializable, MzIdentMLObject
-{
-    @XmlTransient
-    private Long hid;
+        extends MzIdentMLObject
+        implements Serializable {
 
     private final static long serialVersionUID = 100L;
-    @XmlAttribute(name = "SpectraData_ref")
+    @XmlAttribute(name = "spectraData_ref")
     protected String spectraDataRef;
-
     @XmlTransient
-    private SpectraData spectraData;
-
-    public Long getHid() {
-        return hid;
-    }
+    protected SpectraData spectraData;
 
     public SpectraData getSpectraData() {
         return spectraData;
     }
 
     public void setSpectraData(SpectraData spectraData) {
-        this.spectraData = spectraData;
-        if (spectraData != null) {
-            this.spectraDataRef = spectraData.getId();
+        if (spectraData == null) {
+            this.spectraDataRef = null;
+        } else {
+            String refId = spectraData.getId();
+            if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
+            this.spectraDataRef= refId;
         }
+        this.spectraData = spectraData;
     }
 
     /**
      * Gets the value of the spectraDataRef property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSpectraDataRef() {
         return spectraDataRef;
     }
-
-    /**
-     * Sets the value of the spectraDataRef property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSpectraDataRef(String value) {
-        this.spectraDataRef = value;
-        if ( spectraData != null && !spectraData.getId().equals(value) ) {
-            spectraData = null;
-        }
-    }
-
 }

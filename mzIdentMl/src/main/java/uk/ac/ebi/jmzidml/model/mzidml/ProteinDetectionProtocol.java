@@ -8,17 +8,17 @@ import java.io.Serializable;
 /**
  * The parameters and settings of a ProteinDetection process.
  * 
- * <p>Java class for PSI-PI.analysis.process.ProteinDetectionProtocolType complex type.
+ * <p>Java class for ProteinDetectionProtocolType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="PSI-PI.analysis.process.ProteinDetectionProtocolType">
+ * &lt;complexType name="ProteinDetectionProtocolType">
  *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Common.Protocol.ProtocolType">
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType">
  *       &lt;sequence>
- *         &lt;element name="AnalysisParams" type="{http://psidev.info/psi/pi/mzIdentML/1.0}ParamListType" minOccurs="0"/>
- *         &lt;element name="Threshold" type="{http://psidev.info/psi/pi/mzIdentML/1.0}ParamListType"/>
+ *         &lt;element name="AnalysisParams" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamListType" minOccurs="0"/>
+ *         &lt;element name="Threshold" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamListType"/>
  *       &lt;/sequence>
  *       &lt;attribute name="AnalysisSoftware_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>
@@ -29,59 +29,56 @@ import java.io.Serializable;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PSI-PI.analysis.process.ProteinDetectionProtocolType", propOrder = {
+@XmlType(name = "ProteinDetectionProtocolType", propOrder = {
     "analysisParams",
     "threshold"
 })
 public class ProteinDetectionProtocol
-    extends Protocol
+    extends Identifiable
     implements Serializable
 {
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "AnalysisParams")
-    protected ParamAlternativeList analysisParams;
+    protected ParamList analysisParams;
     @XmlElement(name = "Threshold", required = true)
-    protected ParamAlternativeList threshold;
-    @XmlAttribute(name = "AnalysisSoftware_ref", required = true)
+    protected ParamList threshold;
+    @XmlAttribute(name = "analysisSoftware_ref", required = true)
     protected String analysisSoftwareRef;
 
     @XmlTransient
-    private AnalysisSoftware analysisSoftware;
-
-    public AnalysisSoftware getAnalysisSoftware() {
-        return analysisSoftware;
-    }
-
-    public void setAnalysisSoftware(AnalysisSoftware analysisSoftware) {
-        this.analysisSoftware = analysisSoftware;
-        if (analysisSoftware != null) {
-            this.analysisSoftwareRef = analysisSoftware.getId();
-        }
-    }
+    protected AnalysisSoftware analysisSoftware;
 
     /**
      * Gets the value of the analysisParams property.
      * 
      * @return
      *     possible object is
-     *     {@link ParamAlternativeList }
+     *     {@link ParamList }
      *     
      */
-    public ParamAlternativeList getAnalysisParams() {
+    public ParamList getAnalysisParams() {
         return analysisParams;
     }
 
-    /**
-     * Sets the value of the analysisParams property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ParamAlternativeList }
-     *     
-     */
-    public void setAnalysisParams(ParamAlternativeList value) {
-        this.analysisParams = value;
+    public void setAnalysisParams(ParamList analysisParams){
+        this.analysisParams = analysisParams;
+    }
+
+
+    public AnalysisSoftware getAnalysisSoftware() {
+        return analysisSoftware;
+    }
+
+    public void setAnalysisSoftware(AnalysisSoftware analysisSoftware) {
+        if (analysisSoftware == null) {
+            this.analysisSoftwareRef = null;
+        } else {
+            String refId = analysisSoftware.getId();
+            if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
+            this.analysisSoftwareRef = refId;
+        }
+        this.analysisSoftware = analysisSoftware;
     }
 
     /**
@@ -89,23 +86,15 @@ public class ProteinDetectionProtocol
      * 
      * @return
      *     possible object is
-     *     {@link ParamAlternativeList }
+     *     {@link ParamList }
      *     
      */
-    public ParamAlternativeList getThreshold() {
+    public ParamList getThreshold() {
         return threshold;
     }
 
-    /**
-     * Sets the value of the threshold property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ParamAlternativeList }
-     *     
-     */
-    public void setThreshold(ParamAlternativeList value) {
-        this.threshold = value;
+    public void setThreshold(ParamList threshold){
+        this.threshold = threshold;
     }
 
     /**
@@ -120,19 +109,5 @@ public class ProteinDetectionProtocol
         return analysisSoftwareRef;
     }
 
-    /**
-     * Sets the value of the analysisSoftwareRef property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setAnalysisSoftwareRef(String value) {
-        this.analysisSoftwareRef = value;
-        if ( analysisSoftware != null && !analysisSoftware.getId().equals(value) ) {
-            analysisSoftware = null;
-        }
-    }
 
 }

@@ -7,16 +7,12 @@ import psidev.psi.tools.xxindex.XmlElementExtractor;
 import psidev.psi.tools.xxindex.index.IndexElement;
 import psidev.psi.tools.xxindex.index.XpathIndex;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
-import uk.ac.ebi.jmzidml.model.IdentifiableMzIdentMLObject;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 import uk.ac.ebi.jmzidml.xml.Constants;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,7 +32,11 @@ public class MzIdentMLIndexerFactory {
     }
 
     public MzIdentMLIndexer buildIndex(File xmlFile) {
-        return new MzIdentMLIndexerImpl(xmlFile);
+        return buildIndex(xmlFile, Constants.XML_INDEXED_XPATHS);
+    }
+
+    public MzIdentMLIndexer buildIndex(File xmlFile, Set<String> xpaths) {
+        return new MzIdentMLIndexerImpl(xmlFile, xpaths);
     }
 
     private class MzIdentMLIndexerImpl implements MzIdentMLIndexer {
@@ -47,12 +47,12 @@ public class MzIdentMLIndexerFactory {
         private XpathIndex index = null;
         private String mzIdentMLAttributeXMLString = null;
         // a unified cache of all the id maps
-        private HashMap<Class, HashMap<String, IndexElement>> idMapCache = new HashMap<Class, HashMap<String, IndexElement>>();
+        private Map<Class, Map<String, IndexElement>> idMapCache = new HashMap<Class, Map<String, IndexElement>>();
 
         ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
         // Constructor
 
-        private MzIdentMLIndexerImpl(File xmlFile) {
+        private MzIdentMLIndexerImpl(File xmlFile, Set<String> xpaths) {
 
             if (xmlFile == null) {
                 throw new IllegalStateException("XML File to index must not be null");
@@ -67,7 +67,7 @@ public class MzIdentMLIndexerFactory {
             try {
                 // generate XXINDEX
                 logger.info("Creating index: ");
-                xpathAccess = new StandardXpathAccess(xmlFile, Constants.XML_INDEXED_XPATHS);
+                xpathAccess = new StandardXpathAccess(xmlFile, xpaths);
                 logger.debug("done!");
 
                 // create xml element extractor
@@ -140,7 +140,7 @@ public class MzIdentMLIndexerFactory {
         public String getXmlString(String ID, Class clazz) {
             logger.debug("Getting cached ID: " + ID + " from cache: " + clazz);
 
-            HashMap<String, IndexElement> idMap = idMapCache.get(clazz);
+            Map<String, IndexElement> idMap = idMapCache.get(clazz);
             IndexElement element = idMap.get(ID);
 
             String xmlSnippet = null;
@@ -158,7 +158,7 @@ public class MzIdentMLIndexerFactory {
             logger.debug("Getting start tag of element with id: " + id + " for class: " + clazz);
             String tag = null;
 
-            HashMap<String, IndexElement> idMap = idMapCache.get(clazz);
+            Map<String, IndexElement> idMap = idMapCache.get(clazz);
             if (idMap != null) {
                 IndexElement element = idMap.get(id);
                 if (element != null) {
@@ -180,13 +180,13 @@ public class MzIdentMLIndexerFactory {
             if (clazz == null) {
                 return false;
             }
-            HashMap<String, IndexElement> idMap = idMapCache.get(clazz);
+            Map<String, IndexElement> idMap = idMapCache.get(clazz);
             return idMap != null && idMap.containsKey(id);
         }
 
         public <T extends MzIdentMLObject> Set<String> getElementIDs(Class<T> clazz) {
             if (idMapCache == null) { return null; }
-            HashMap<String, IndexElement> classCache = idMapCache.get(clazz);
+            Map<String, IndexElement> classCache = idMapCache.get(clazz);
             if (classCache == null) { return null; }
             return classCache.keySet();
         }
@@ -255,11 +255,11 @@ public class MzIdentMLIndexerFactory {
                 if (element.isIdMapped() && element.isIndexed()) {
                     logger.debug("Initialising ID map for " + element.getClazz().getName());
                     // check if the according class is a sub-class of Identifiable
-                    if (!IdentifiableMzIdentMLObject.class.isAssignableFrom(element.getClazz())) {
-                        throw new IllegalStateException("Attempt to create ID map for not Identifiable element: " + element.getClazz());
-                    }
+//                    if (!IdentifiableMzIdentMLObject.class.isAssignableFrom(element.getClazz())) {
+//                        throw new IllegalStateException("Attempt to create ID map for not Identifiable element: " + element.getClazz());
+//                    }
                     // so far so good, now generate the ID map (if not already present) and populate it
-                    HashMap<String, IndexElement> map = idMapCache.get(element.getClazz());
+                    Map<String, IndexElement> map = idMapCache.get(element.getClazz());
                     if (map == null) {
                         map = new HashMap<String, IndexElement>();
                         idMapCache.put(element.getClazz(), map);
@@ -269,7 +269,7 @@ public class MzIdentMLIndexerFactory {
             }
         }
 
-        private void initIdMapCache(HashMap<String, IndexElement> idMap, String xpath) throws IOException {
+        private void initIdMapCache(Map<String, IndexElement> idMap, String xpath) throws IOException {
             List<IndexElement> ranges = index.getElements(xpath);
             for (IndexElement byteRange : ranges) {
                 String xml = xpathAccess.getStartTag(byteRange);

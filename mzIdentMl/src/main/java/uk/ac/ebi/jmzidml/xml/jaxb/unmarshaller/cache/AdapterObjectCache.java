@@ -51,7 +51,7 @@ public class AdapterObjectCache implements MzIdentMLObjectCache {
      * @param element the Identifiable to store in the cache.
      */
     public void putInCache(IdentifiableMzIdentMLObject element) {
-        putInCache(element.getId(), element);
+//        putInCache(element.getId(), element);
     }
 
     /**

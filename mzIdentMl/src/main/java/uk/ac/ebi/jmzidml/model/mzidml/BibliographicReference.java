@@ -13,14 +13,14 @@ import javax.xml.bind.annotation.XmlType;
  *                 because a BibliographicReference is Identifiable, a DatabaseEntry can also be specified.
  *             
  * 
- * <p>Java class for FuGE.Common.References.BibliographicReferenceType complex type.
+ * <p>Java class for BibliographicReferenceType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="FuGE.Common.References.BibliographicReferenceType">
+ * &lt;complexType name="BibliographicReferenceType">
  *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Common.IdentifiableType">
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType">
  *       &lt;attribute name="authors" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="publication" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="publisher" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -30,6 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;attribute name="issue" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="pages" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="title" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="doi" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -38,7 +39,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "FuGE.Common.References.BibliographicReferenceType")
+@XmlType(name = "BibliographicReferenceType")
 public class BibliographicReference
     extends Identifiable
     implements Serializable
@@ -63,6 +64,8 @@ public class BibliographicReference
     protected String pages;
     @XmlAttribute
     protected String title;
+    @XmlAttribute
+    protected String doi;
 
     /**
      * Gets the value of the authors property.
@@ -278,6 +281,30 @@ public class BibliographicReference
      */
     public void setTitle(String value) {
         this.title = value;
+    }
+
+    /**
+     * Gets the value of the doi property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getDoi() {
+        return doi;
+    }
+
+    /**
+     * Sets the value of the doi property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDoi(String value) {
+        this.doi = value;
     }
 
 }

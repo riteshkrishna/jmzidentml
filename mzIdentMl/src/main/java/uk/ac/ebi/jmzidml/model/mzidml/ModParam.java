@@ -14,19 +14,19 @@ import java.util.List;
  * The modification searched for, sourced from e.g. UniMod and the mass delta
  *             
  * 
- * <p>Java class for PSI-PI.polypeptide.ModParamType complex type.
+ * <p>Java class for ModParamType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="PSI-PI.polypeptide.ModParamType">
+ * &lt;complexType name="ModParamType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://psidev.info/psi/pi/mzIdentML/1.0}cvParam"/>
+ *         &lt;element name="cvParam" type="{http://psidev.info/psi/pi/mzIdentML/1.1}cvParamType"/>
  *       &lt;/sequence>
  *       &lt;attribute name="massDelta" use="required" type="{http://www.w3.org/2001/XMLSchema}float" />
- *       &lt;attribute name="residues" use="required" type="{http://psidev.info/psi/pi/mzIdentML/1.0}listOfChars" />
+ *       &lt;attribute name="residues" use="required" type="{http://psidev.info/psi/pi/mzIdentML/1.1}listOfChars" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -35,14 +35,13 @@ import java.util.List;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PSI-PI.polypeptide.ModParamType", propOrder = {
+@XmlType(name = "ModParamType", propOrder = {
     "cvParam"
 })
 public class ModParam
-    implements Serializable, MzIdentMLObject, CvParamCapable
+    extends MzIdentMLObject
+    implements Serializable, CvParamCapable
 {
-    @XmlTransient
-    private Long hid;
 
     private final static long serialVersionUID = 100L;
     @XmlElement(required = true)
@@ -53,16 +52,7 @@ public class ModParam
     protected List<String> residues;
 
     /**
-     * Gets the HID value from DB
-     *
-     * @return
-     */
-    public Long getHid() {
-        return hid;
-    }
-
-    /**
-     * The name of the modification imported from a relevant CV
+     * Gets the value of the cvParam property.
      * 
      * @return
      *     possible object is

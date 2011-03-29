@@ -4,8 +4,10 @@ package uk.ac.ebi.jmzidml.model.mzidml;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.*;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
@@ -19,8 +21,8 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="SpectrumIdentificationList" type="{http://psidev.info/psi/pi/mzIdentML/1.0}PSI-PI.analysis.search.SpectrumIdentificationListType" maxOccurs="unbounded"/>
- *         &lt;element name="ProteinDetectionList" type="{http://psidev.info/psi/pi/mzIdentML/1.0}PSI-PI.analysis.process.ProteinDetectionListType" minOccurs="0"/>
+ *         &lt;element name="SpectrumIdentificationList" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SpectrumIdentificationListType" maxOccurs="unbounded"/>
+ *         &lt;element name="ProteinDetectionList" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ProteinDetectionListType" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,18 +37,9 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
     "proteinDetectionList"
 })
 public class AnalysisData
-    implements Serializable, MzIdentMLObject
+    extends MzIdentMLObject
+    implements Serializable
 {
-    @XmlTransient
-    protected Long hid;
-
-    public Long getHid() {
-        return hid;
-    }
-
-    public void setHid(Long hid) {
-        this.hid = hid;
-    }
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "SpectrumIdentificationList", required = true)

@@ -1,4 +1,3 @@
-
 package uk.ac.ebi.jmzidml.model.mzidml;
 
 import javax.xml.bind.annotation.*;
@@ -8,62 +7,70 @@ import java.util.List;
 
 
 /**
+ * TODO marshalling/ persistor add validation to check for case where someone gets analysisSoftware and changes its id without updating ref id in
+ *      SpectrumIdentificationProtocol and other such classes.
+ *
+ * NOTE: There is no setter method for the analysisSoftwareRef. This simplifies keeping the analysisSoftware object reference and
+ * analysisSoftwareRef synchronized.
+ *
  * The parameters and settings of a SpectrumIdentification analysis.
- * 
- * <p>Java class for PSI-PI.analysis.search.SpectrumIdentificationProtocolType complex type.
- * 
+ * <p/>
+ * <p>Java class for SpectrumIdentificationProtocolType complex type.
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
- * &lt;complexType name="PSI-PI.analysis.search.SpectrumIdentificationProtocolType">
+ * &lt;complexType name="SpectrumIdentificationProtocolType">
  *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Common.Protocol.ProtocolType">
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType">
  *       &lt;sequence>
- *         &lt;element name="SearchType" type="{http://psidev.info/psi/pi/mzIdentML/1.0}ParamType"/>
- *         &lt;element name="AdditionalSearchParams" type="{http://psidev.info/psi/pi/mzIdentML/1.0}ParamListType" minOccurs="0"/>
- *         &lt;element name="ModificationParams" type="{http://psidev.info/psi/pi/mzIdentML/1.0}ModificationParamsType" minOccurs="0"/>
- *         &lt;element name="Enzymes" type="{http://psidev.info/psi/pi/mzIdentML/1.0}PSI-PI.analysis.search.EnzymesType" minOccurs="0"/>
- *         &lt;element name="MassTable" type="{http://psidev.info/psi/pi/mzIdentML/1.0}PSI-PI.analysis.search.MassTableType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="FragmentTolerance" type="{http://psidev.info/psi/pi/mzIdentML/1.0}ToleranceType" minOccurs="0"/>
- *         &lt;element name="ParentTolerance" type="{http://psidev.info/psi/pi/mzIdentML/1.0}ToleranceType" minOccurs="0"/>
- *         &lt;element name="Threshold" type="{http://psidev.info/psi/pi/mzIdentML/1.0}ParamListType"/>
- *         &lt;element name="DatabaseFilters" type="{http://psidev.info/psi/pi/mzIdentML/1.0}DatabaseFiltersType" minOccurs="0"/>
- *         &lt;element name="DatabaseTranslation" type="{http://psidev.info/psi/pi/mzIdentML/1.0}DatabaseTranslationType" minOccurs="0"/>
+ *         &lt;element name="SearchType" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamType"/>
+ *         &lt;element name="AdditionalSearchParams" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamListType" minOccurs="0"/>
+ *         &lt;element name="ModificationParams" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ModificationParamsType" minOccurs="0"/>
+ *         &lt;element name="Enzymes" type="{http://psidev.info/psi/pi/mzIdentML/1.1}EnzymesType" minOccurs="0"/>
+ *         &lt;element name="MassTable" type="{http://psidev.info/psi/pi/mzIdentML/1.1}MassTableType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="FragmentTolerance" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ToleranceType" minOccurs="0"/>
+ *         &lt;element name="ParentTolerance" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ToleranceType" minOccurs="0"/>
+ *         &lt;element name="Threshold" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamListType"/>
+ *         &lt;element name="DatabaseFilters" type="{http://psidev.info/psi/pi/mzIdentML/1.1}DatabaseFiltersType" minOccurs="0"/>
+ *         &lt;element name="DatabaseTranslation" type="{http://psidev.info/psi/pi/mzIdentML/1.1}DatabaseTranslationType" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="AnalysisSoftware_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PSI-PI.analysis.search.SpectrumIdentificationProtocolType", propOrder = {
-    "searchType",
-    "additionalSearchParams",
-    "modificationParams",
-    "enzymes",
-    "massTable",
-    "fragmentTolerance",
-    "parentTolerance",
-    "threshold",
-    "databaseFilters",
-    "databaseTranslation"
+@XmlType(name = "SpectrumIdentificationProtocolType", propOrder = {
+        "searchType",
+        "additionalSearchParams",
+        "modificationParams",
+        "enzymes",
+        "massTable",
+        "fragmentTolerance",
+        "parentTolerance",
+        "threshold",
+        "databaseFilters",
+        "databaseTranslation"
 })
 public class SpectrumIdentificationProtocol
-    extends Protocol
-    implements Serializable
-{
+        extends Identifiable
+        implements Serializable {
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "SearchType", required = true)
-    protected ParamAlternative searchType;
+    protected Param searchType;
     @XmlElement(name = "AdditionalSearchParams")
-    protected ParamAlternativeList additionalSearchParams;
+    protected ParamList additionalSearchParams;
     @XmlElement(name = "ModificationParams")
     protected ModificationParams modificationParams;
     @XmlElement(name = "Enzymes")
+    /**
+     * Enzymes has an additional property (independent) so adapter is not used.
+     */
+    /*@XmlJavaTypeAdapter(value = EnzymesAdapter.class)
+    List<Enzyme> enzymes;*/
     protected Enzymes enzymes;
     @XmlElement(name = "MassTable")
     protected List<MassTable> massTable;
@@ -72,83 +79,70 @@ public class SpectrumIdentificationProtocol
     @XmlElement(name = "ParentTolerance")
     protected Tolerance parentTolerance;
     @XmlElement(name = "Threshold", required = true)
-    protected ParamAlternativeList threshold;
+    protected ParamList threshold;
     @XmlElement(name = "DatabaseFilters")
     protected DatabaseFilters databaseFilters;
     @XmlElement(name = "DatabaseTranslation")
     protected DatabaseTranslation databaseTranslation;
-    @XmlAttribute(name = "AnalysisSoftware_ref", required = true)
+    @XmlAttribute(name = "analysisSoftware_ref", required = true)
     protected String analysisSoftwareRef;
-
     @XmlTransient
-    private AnalysisSoftware analysisSoftware;
+    protected AnalysisSoftware analysisSoftware;
 
     public AnalysisSoftware getAnalysisSoftware() {
         return analysisSoftware;
     }
 
     public void setAnalysisSoftware(AnalysisSoftware analysisSoftware) {
-        this.analysisSoftware = analysisSoftware;
-        if (analysisSoftware != null) {
-            this.analysisSoftwareRef = analysisSoftware.getId();
+        if (analysisSoftware == null) {
+            this.analysisSoftwareRef = null;
+        } else {
+            String refId = analysisSoftware.getId();
+            if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
+            this.analysisSoftwareRef = refId;
         }
+        this.analysisSoftware = analysisSoftware;
     }
 
     /**
      * Gets the value of the searchType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ParamAlternative }
-     *     
+     *
+     * @return possible object is
+     *         {@link Param }
      */
-    public ParamAlternative getSearchType() {
+    public Param getSearchType() {
         return searchType;
     }
 
     /**
      * Sets the value of the searchType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ParamAlternative }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Param }
      */
-    public void setSearchType(ParamAlternative value) {
+    public void setSearchType(Param value) {
         this.searchType = value;
     }
 
     /**
      * Gets the value of the additionalSearchParams property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ParamAlternativeList }
-     *     
+     *
+     * @return possible object is
+     *         {@link ParamList }
      */
-    public ParamAlternativeList getAdditionalSearchParams() {
+    public ParamList getAdditionalSearchParams() {
         return additionalSearchParams;
     }
 
-    /**
-     * Sets the value of the additionalSearchParams property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ParamAlternativeList }
-     *     
-     */
-    public void setAdditionalSearchParams(ParamAlternativeList value) {
-        this.additionalSearchParams = value;
+    public void setAdditionalSearchParams(ParamList additionalSearchParams){
+        this.additionalSearchParams = additionalSearchParams;
     }
 
     /**
      * Gets the value of the modificationParams property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ModificationParams }
-     *     
+     *
+     * @return possible object is
+     *         {@link ModificationParams }
      */
     public ModificationParams getModificationParams() {
         return modificationParams;
@@ -156,11 +150,9 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Sets the value of the modificationParams property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ModificationParams }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ModificationParams }
      */
     public void setModificationParams(ModificationParams value) {
         this.modificationParams = value;
@@ -168,49 +160,44 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Gets the value of the enzymes property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Enzymes }
-     *     
+     *
+     * @return possible object is
+     *         {@link Enzymes }
      */
     public Enzymes getEnzymes() {
         return enzymes;
     }
 
+
     /**
      * Sets the value of the enzymes property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Enzymes }
-     *     
+     *
+     * @return possible object is
+     *         {@link Enzymes }
      */
-    public void setEnzymes(Enzymes value) {
-        this.enzymes = value;
+    public void setEnzymes(Enzymes enzymes) {
+        this.enzymes = enzymes;
     }
 
     /**
      * Gets the value of the massTable property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the massTable property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getMassTable().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
+     * <p/>
+     * <p/>
+     * <p/>
      * Objects of the following type(s) are allowed in the list
      * {@link MassTable }
-     * 
-     * 
      */
     public List<MassTable> getMassTable() {
         if (massTable == null) {
@@ -221,11 +208,9 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Gets the value of the fragmentTolerance property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tolerance }
-     *     
+     *
+     * @return possible object is
+     *         {@link Tolerance }
      */
     public Tolerance getFragmentTolerance() {
         return fragmentTolerance;
@@ -233,11 +218,9 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Sets the value of the fragmentTolerance property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tolerance }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tolerance }
      */
     public void setFragmentTolerance(Tolerance value) {
         this.fragmentTolerance = value;
@@ -245,11 +228,9 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Gets the value of the parentTolerance property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tolerance }
-     *     
+     *
+     * @return possible object is
+     *         {@link Tolerance }
      */
     public Tolerance getParentTolerance() {
         return parentTolerance;
@@ -257,11 +238,9 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Sets the value of the parentTolerance property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tolerance }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Tolerance }
      */
     public void setParentTolerance(Tolerance value) {
         this.parentTolerance = value;
@@ -269,35 +248,24 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Gets the value of the threshold property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ParamAlternativeList }
-     *     
+     *
+     * @return possible object is
+     *         {@link AbstractParam }
      */
-    public ParamAlternativeList getThreshold() {
+    public ParamList getThreshold() {
         return threshold;
     }
 
-    /**
-     * Sets the value of the threshold property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ParamAlternativeList }
-     *     
-     */
-    public void setThreshold(ParamAlternativeList value) {
-        this.threshold = value;
+    public void setThreshold(ParamList threshold){
+        this.threshold = threshold;
     }
+
 
     /**
      * Gets the value of the databaseFilters property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link DatabaseFilters }
-     *     
+     *
+     * @return possible object is
+     *         {@link DatabaseFilters }
      */
     public DatabaseFilters getDatabaseFilters() {
         return databaseFilters;
@@ -305,11 +273,9 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Sets the value of the databaseFilters property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link DatabaseFilters }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link DatabaseFilters }
      */
     public void setDatabaseFilters(DatabaseFilters value) {
         this.databaseFilters = value;
@@ -317,11 +283,9 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Gets the value of the databaseTranslation property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link DatabaseTranslation }
-     *     
+     *
+     * @return possible object is
+     *         {@link DatabaseTranslation }
      */
     public DatabaseTranslation getDatabaseTranslation() {
         return databaseTranslation;
@@ -329,11 +293,9 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Sets the value of the databaseTranslation property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link DatabaseTranslation }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link DatabaseTranslation }
      */
     public void setDatabaseTranslation(DatabaseTranslation value) {
         this.databaseTranslation = value;
@@ -341,29 +303,11 @@ public class SpectrumIdentificationProtocol
 
     /**
      * Gets the value of the analysisSoftwareRef property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAnalysisSoftwareRef() {
         return analysisSoftwareRef;
     }
-
-    /**
-     * Sets the value of the analysisSoftwareRef property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setAnalysisSoftwareRef(String value) {
-        this.analysisSoftwareRef = value;
-        if ( analysisSoftware != null && !analysisSoftware.getId().equals(value) ) {
-            analysisSoftware = null;
-        }
-    }
-
 }

@@ -74,7 +74,10 @@ public class MzIdentMLMarshaller {
             }
 
             QName aQName = ModelConstants.getQNameForClass(object.getClass());
-            marshaller.marshal( new JAXBElement(aQName, object.getClass(), object), out );
+            JAXBElement jaxbElement = new JAXBElement(aQName, object.getClass(), object);
+
+
+            marshaller.marshal( jaxbElement, out);
 
         } catch (JAXBException e) {
             logger.error("MzMLMarshaller.marshall", e);
@@ -96,13 +99,13 @@ public class MzIdentMLMarshaller {
         StringBuffer sb = new StringBuffer();
 
         // tag opening plus id attribute
-        sb.append("<mzIdentML id=\"").append(id).append("\"");
+        sb.append("<MzIdentML id=\"").append(id).append("\"");
         // further attributes
-        sb.append(" version=\"1.0.0\"");
-        sb.append(" xmlns=\"http://psidev.info/psi/pi/mzIdentML/1.0\"");
+        sb.append(" version=\"").append(ModelConstants.MZIDML_VERSION).append("\"");
+        sb.append(" xmlns=\"").append(ModelConstants.MZIDML_NS).append("\"");
         sb.append(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"");
-        sb.append(" xsi:schemaLocation=\"http://psidev.info/psi/pi/mzIdentML/1.0 http://www.psidev.info/files/mzIdentML1.0.0.xsd\"");
-        DateFormat dfm = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
+        sb.append(" xsi:schemaLocation=\"").append(ModelConstants.MZIDML_NS).append(" ").append(ModelConstants.MZIDML_SCHEMA).append("\"");
+        DateFormat dfm = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         sb.append(" creationDate=\"").append( dfm.format(new Date()) ).append("\"");
         // finally close the tag
         sb.append(" >");
@@ -111,7 +114,7 @@ public class MzIdentMLMarshaller {
     }
 
     public String createMzIdentMLClosingTag() {
-        return "</mzIdentML>";
+        return "</MzIdentML>";
     }
 
     public String createDataCollectionStartTag() {

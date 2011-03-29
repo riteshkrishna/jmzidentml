@@ -44,12 +44,16 @@ public class MzIdentMLUnmarshaller {
     // Constructor
 
     public MzIdentMLUnmarshaller(URL mzIdentMLFileURL) {
-        this(mzIdentMLFileURL, null);
+        this(FileUtils.getFileFromURL(mzIdentMLFileURL));
     }
 
     public MzIdentMLUnmarshaller(File mzIdentMLFile) {
-        this(mzIdentMLFile, null);
+        this(MzIdentMLIndexerFactory.getInstance().buildIndex(mzIdentMLFile));
+    }
 
+    public MzIdentMLUnmarshaller(MzIdentMLIndexer indexer) {
+        this.index = indexer;
+        this.cache = null;
     }
 
     @Deprecated

@@ -19,30 +19,11 @@ public class ProteinDetectionHypothesisRefResolver extends AbstractReferenceReso
 
     @Override
     public void updateObject(ProteinDetectionHypothesis object) {
-        // if we automatically resolve the references, then update the object with the referenced object
-        if (MzIdentMLElement.ProteinDetectionHypothesis.isAutoRefResolving()) {
-            // add objects for the refID
-            String ref = object.getDBSequenceRef();
-            if (ref != null) {
-                DBSequence refObject = this.unmarshal(ref, DBSequence.class);
-                object.setDBSequence(refObject);
-            }
-        }
-    }
-
-    /**
-     * A method to be called before the marshall process.
-     * Whenever a referenced object is set, its refID should be updated
-     * automatically, so that the refID and the ID of the object are
-     * always in sync. Here we check that this is the case.
-     *
-     * @param object The Object to check for reference ID integrity.
-     */
-    @Override
-    public void checkRefID(ProteinDetectionHypothesis object) {
-        // if there is a referenced object and its ID does not correspond to the refID, then there is something wrong
-        if ( object.getDBSequence()!= null && !object.getDBSequenceRef().equals(object.getDBSequence().getId()) ) {
-            throw new IllegalStateException("Reference ID and referenced object ID do not match!");
+        // add objects for the refID
+        String ref = object.getDBSequenceRef();
+        if (ref != null) {
+            DBSequence refObject = this.unmarshal(ref, DBSequence.class);
+            object.setDBSequence(refObject);
         }
     }
 
@@ -55,8 +36,8 @@ public class ProteinDetectionHypothesisRefResolver extends AbstractReferenceReso
      */
     @Override
     public void afterUnmarshal(Object target, Object parent) {
-        if (ProteinDetectionHypothesis.class.isInstance(target)) {
-            updateObject((ProteinDetectionHypothesis)target);
+        if (ProteinDetectionHypothesis.class.isInstance(target) && MzIdentMLElement.ProteinDetectionHypothesis.isAutoRefResolving()) {
+            updateObject((ProteinDetectionHypothesis) target);
         } // else, not business of this resolver
     }
 

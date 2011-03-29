@@ -19,30 +19,11 @@ public class PeptideHypothesisRefResolver extends AbstractReferenceResolver<Pept
 
     @Override
     public void updateObject(PeptideHypothesis object) {
-        // if we automatically resolve the references, then update the object with the referenced object
-        if (MzIdentMLElement.PeptideHypothesis.isAutoRefResolving()) {
-            // add objects for the refID
-            String ref = object.getPeptideEvidenceRef();
-            if (ref != null) {
-                PeptideEvidence refObject = this.unmarshal(ref, PeptideEvidence.class);
-                object.setPeptideEvidence(refObject);
-            }
-        }
-    }
-
-    /**
-     * A method to be called before the marshall process.
-     * Whenever a referenced object is set, its refID should be updated
-     * automatically, so that the refID and the ID of the object are
-     * always in sync. Here we check that this is the case.
-     *
-     * @param object The Object to check for reference ID integrity.
-     */
-    @Override
-    public void checkRefID(PeptideHypothesis object) {
-        // if there is a referenced object and its ID does not correspond to the refID, then there is something wrong
-        if ( object.getPeptideEvidence() != null && !object.getPeptideEvidenceRef().equals(object.getPeptideEvidence().getId()) ) {
-            throw new IllegalStateException("Reference ID and referenced object ID do not match!");
+        // add objects for the refID
+        String ref = object.getPeptideEvidenceRef();
+        if (ref != null) {
+            PeptideEvidence refObject = this.unmarshal(ref, PeptideEvidence.class);
+            object.setPeptideEvidence(refObject);
         }
     }
 
@@ -55,8 +36,8 @@ public class PeptideHypothesisRefResolver extends AbstractReferenceResolver<Pept
      */
     @Override
     public void afterUnmarshal(Object target, Object parent) {
-        if (PeptideHypothesis.class.isInstance(target)) {
-            updateObject((PeptideHypothesis)target);
+        if (PeptideHypothesis.class.isInstance(target) && MzIdentMLElement.PeptideHypothesis.isAutoRefResolving()) {
+            updateObject((PeptideHypothesis) target);
         } // else, not business of this resolver
     }
 }

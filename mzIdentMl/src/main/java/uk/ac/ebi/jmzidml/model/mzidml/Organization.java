@@ -1,9 +1,10 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 import java.io.Serializable;
 
 
@@ -12,24 +13,16 @@ import java.io.Serializable;
  *                 the attributes are self describing.
  *             
  * 
- * <p>Java class for FuGE.Common.Audit.OrganizationType complex type.
+ * <p>Java class for OrganizationType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="FuGE.Common.Audit.OrganizationType">
+ * &lt;complexType name="OrganizationType">
  *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Common.Audit.ContactType">
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}AbstractContactType">
  *       &lt;sequence>
- *         &lt;element name="parent" minOccurs="0">
- *           &lt;complexType>
- *             &lt;complexContent>
- *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                 &lt;attribute name="Organization_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *               &lt;/restriction>
- *             &lt;/complexContent>
- *           &lt;/complexType>
- *         &lt;/element>
+ *         &lt;element name="Parent" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ParentOrganizationType" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>
@@ -39,38 +32,27 @@ import java.io.Serializable;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "FuGE.Common.Audit.OrganizationType", propOrder = {
+@XmlType(name = "OrganizationType", propOrder = {
     "parent"
 })
 public class Organization
-    extends Contact
+    extends AbstractContact
     implements Serializable
 {
 
     private final static long serialVersionUID = 100L;
-    protected Organization.Parent parent;
-
-    @XmlTransient
-    protected Long hid;
-
-    public Long getHid() {
-        return hid;
-    }
-
-    public void setHid(Long hid) {
-        this.hid = hid;
-    }
-
+    @XmlElement(name = "Parent")
+    protected ParentOrganization parent;
 
     /**
      * Gets the value of the parent property.
      * 
      * @return
      *     possible object is
-     *     {@link Organization.Parent }
+     *     {@link ParentOrganization }
      *     
      */
-    public Organization.Parent getParent() {
+    public ParentOrganization getParent() {
         return parent;
     }
 
@@ -79,77 +61,11 @@ public class Organization
      * 
      * @param value
      *     allowed object is
-     *     {@link Organization.Parent }
+     *     {@link ParentOrganization }
      *     
      */
-    public void setParent(Organization.Parent value) {
+    public void setParent(ParentOrganization value) {
         this.parent = value;
-    }
-
-
-    /**
-     * <p>Java class for anonymous complex type.
-     * 
-     * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
-     * <pre>
-     * &lt;complexType>
-     *   &lt;complexContent>
-     *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-     *       &lt;attribute name="Organization_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *     &lt;/restriction>
-     *   &lt;/complexContent>
-     * &lt;/complexType>
-     * </pre>
-     * 
-     * 
-     */
-    @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "")
-    public static class Parent
-        implements Serializable, MzIdentMLObject
-    {
-
-        private final static long serialVersionUID = 100L;
-        @XmlAttribute(name = "Organization_ref", required = true)
-        protected String organizationRef;
-
-        @XmlTransient
-        protected Long hid;
-
-        public Long getHid() {
-            return hid;
-        }
-
-        public void setHid(Long hid) {
-            this.hid = hid;
-        }
-
-
-        /**
-         * Gets the value of the organizationRef property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
-         */
-        public String getOrganizationRef() {
-            return organizationRef;
-        }
-
-        /**
-         * Sets the value of the organizationRef property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
-         */
-        public void setOrganizationRef(String value) {
-            this.organizationRef = value;
-        }
-
     }
 
 }

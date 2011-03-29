@@ -1,10 +1,13 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import java.io.Serializable;
-import javax.xml.bind.annotation.*;
-
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlType;
+import java.io.Serializable;
 
 
 /**
@@ -16,7 +19,7 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
  * &lt;complexType name="ResidueType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="Code" use="required" type="{http://psidev.info/psi/pi/mzIdentML/1.0}chars" />
+ *       &lt;attribute name="Code" use="required" type="{http://psidev.info/psi/pi/mzIdentML/1.1}chars" />
  *       &lt;attribute name="Mass" use="required" type="{http://www.w3.org/2001/XMLSchema}float" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -28,25 +31,15 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ResidueType")
 public class Residue
-    implements Serializable, MzIdentMLObject
+    extends MzIdentMLObject
+    implements Serializable
 {
-    @XmlTransient
-    private Long hid;
 
     private final static long serialVersionUID = 100L;
-    @XmlAttribute(name = "Code", required = true)
+    @XmlAttribute( required = true)
     protected String code;
-    @XmlAttribute(name = "Mass", required = true)
+    @XmlAttribute( required = true)
     protected float mass;
-
-    /**
-     * Gets the value of the row id of the Residue table
-     *
-     * @return the hid of the table
-     */
-    public Long getHid() {
-        return hid;
-    }
 
     /**
      * Gets the value of the code property.

@@ -1,8 +1,9 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.AbstractParamGroup;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
+import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
@@ -20,19 +21,19 @@ import java.util.List;
  *                 within the FragmentationArray.
  *             
  * 
- * <p>Java class for PSI-PI.polypeptide.ModificationType complex type.
+ * <p>Java class for ModificationType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="PSI-PI.polypeptide.ModificationType">
+ * &lt;complexType name="ModificationType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.0}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="location" type="{http://www.w3.org/2001/XMLSchema}int" />
- *       &lt;attribute name="residues" type="{http://psidev.info/psi/pi/mzIdentML/1.0}listOfChars" />
+ *       &lt;attribute name="residues" type="{http://psidev.info/psi/pi/mzIdentML/1.1}listOfChars" />
  *       &lt;attribute name="avgMassDelta" type="{http://www.w3.org/2001/XMLSchema}double" />
  *       &lt;attribute name="monoisotopicMassDelta" type="{http://www.w3.org/2001/XMLSchema}double" />
  *     &lt;/restriction>
@@ -43,12 +44,12 @@ import java.util.List;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PSI-PI.polypeptide.ModificationType", propOrder = {
+@XmlType(name = "ModificationType", propOrder = {
     "paramGroup"
 })
 public class Modification
-    extends AbstractParamGroup
-    implements Serializable, MzIdentMLObject
+    extends MzIdentMLObject
+    implements Serializable , ParamGroupCapable
 {
 
     private final static long serialVersionUID = 100L;
@@ -56,7 +57,7 @@ public class Modification
         @XmlElement(name = "userParam", type = UserParam.class),
         @XmlElement(name = "cvParam", type = CvParam.class)
     })
-    protected List<Param> paramGroup;
+    protected List<AbstractParam> paramGroup;
     @XmlAttribute
     protected Integer location;
     @XmlAttribute
@@ -89,9 +90,9 @@ public class Modification
      * 
      * 
      */
-    public List<Param> getParamGroup() {
+    public List<AbstractParam> getParamGroup() {
         if (paramGroup == null) {
-            paramGroup = new ArrayList<Param>();
+            paramGroup = new ArrayList<AbstractParam>();
         }
         return this.paramGroup;
     }
@@ -197,4 +198,11 @@ public class Modification
         this.monoisotopicMassDelta = value;
     }
 
+    public List getCvParam() {
+        return new FacadeList(this.getParamGroup(), CvParam.class);
+    }
+
+    public List getUserParam() {
+        return new FacadeList(this.getParamGroup(), UserParam.class);
+    }
 }

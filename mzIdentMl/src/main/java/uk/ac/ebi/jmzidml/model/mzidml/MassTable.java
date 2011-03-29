@@ -1,7 +1,8 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.AbstractIdentifiableParamGroup;
+import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
+import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
@@ -13,20 +14,20 @@ import java.util.List;
 /**
  * The masses of residues used in the search.
  * 
- * <p>Java class for PSI-PI.analysis.search.MassTableType complex type.
+ * <p>Java class for MassTableType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="PSI-PI.analysis.search.MassTableType">
+ * &lt;complexType name="MassTableType">
  *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Common.IdentifiableType">
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType">
  *       &lt;sequence>
- *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.0}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="Residue" type="{http://psidev.info/psi/pi/mzIdentML/1.0}ResidueType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="AmbiguousResidue" type="{http://psidev.info/psi/pi/mzIdentML/1.0}AmbiguousResidueType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="Residue" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ResidueType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="AmbiguousResidue" type="{http://psidev.info/psi/pi/mzIdentML/1.1}AmbiguousResidueType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
- *       &lt;attribute name="msLevel" use="required" type="{http://psidev.info/psi/pi/mzIdentML/1.0}listOfIntegers" />
+ *       &lt;attribute name="msLevel" use="required" type="{http://psidev.info/psi/pi/mzIdentML/1.1}listOfIntegers" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -35,58 +36,28 @@ import java.util.List;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PSI-PI.analysis.search.MassTableType", propOrder = {
-    "paramGroup",
+@XmlType(name = "MassTableType", propOrder = {
     "residue",
-    "ambiguousResidue"
+    "ambiguousResidue",
+    "paramGroup"
 })
 public class MassTable
-    extends AbstractIdentifiableParamGroup
-    implements Serializable
+    extends Identifiable
+    implements Serializable, ParamGroupCapable
 {
 
     private final static long serialVersionUID = 100L;
-    @XmlElements({
-        @XmlElement(name = "userParam", type = UserParam.class),
-        @XmlElement(name = "cvParam", type = CvParam.class)
-    })
-    protected List<Param> paramGroup;
     @XmlElement(name = "Residue")
     protected List<Residue> residue;
     @XmlElement(name = "AmbiguousResidue")
     protected List<AmbiguousResidue> ambiguousResidue;
+    @XmlElements({
+        @XmlElement(name = "cvParam", type = CvParam.class),
+        @XmlElement(name = "userParam", type = UserParam.class)
+    })
+    protected List<AbstractParam> paramGroup;
     @XmlAttribute(required = true)
     protected List<BigInteger> msLevel;
-
-    /**
-     * Gets the value of the paramGroup property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the paramGroup property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getParamGroup().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link UserParam }
-     * {@link CvParam }
-     * 
-     * 
-     */
-    public List<Param> getParamGroup() {
-        if (paramGroup == null) {
-            paramGroup = new ArrayList<Param>();
-        }
-        return this.paramGroup;
-    }
 
     /**
      * Gets the value of the residue property.
@@ -147,6 +118,36 @@ public class MassTable
     }
 
     /**
+     * Gets the value of the paramGroup property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the paramGroup property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getParamGroup().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link CvParam }
+     * {@link UserParam }
+     * 
+     * 
+     */
+    public List<AbstractParam> getParamGroup() {
+        if (paramGroup == null) {
+            paramGroup = new ArrayList<AbstractParam>();
+        }
+        return this.paramGroup;
+    }
+
+    /**
      * Gets the value of the msLevel property.
      * 
      * <p>
@@ -174,5 +175,11 @@ public class MassTable
         }
         return this.msLevel;
     }
+    public List getCvParam() {
+        return new FacadeList(this.getParamGroup(), CvParam.class);
+    }
 
+    public List getUserParam() {
+        return new FacadeList(this.getParamGroup(), UserParam.class);
+    }
 }

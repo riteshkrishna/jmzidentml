@@ -1,10 +1,13 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import java.io.Serializable;
-import javax.xml.bind.annotation.*;
-
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+import java.io.Serializable;
 
 
 /**
@@ -17,9 +20,9 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="FilterType" type="{http://psidev.info/psi/pi/mzIdentML/1.0}ParamType"/>
- *         &lt;element name="Include" type="{http://psidev.info/psi/pi/mzIdentML/1.0}ParamListType" minOccurs="0"/>
- *         &lt;element name="Exclude" type="{http://psidev.info/psi/pi/mzIdentML/1.0}ParamListType" minOccurs="0"/>
+ *         &lt;element name="FilterType" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamType"/>
+ *         &lt;element name="Include" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamListType" minOccurs="0"/>
+ *         &lt;element name="Exclude" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamListType" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,37 +38,26 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
     "exclude"
 })
 public class Filter
-    implements Serializable, MzIdentMLObject
+    extends MzIdentMLObject
+    implements Serializable
 {
-
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "FilterType", required = true)
-    protected ParamAlternative filterType;
+    protected Param filterType;
     @XmlElement(name = "Include")
-    protected ParamAlternativeList include;
+    protected ParamList include;
     @XmlElement(name = "Exclude")
-    protected ParamAlternativeList exclude;
-
-    @XmlTransient
-    protected Long hid;
-
-    public Long getHid() {
-        return hid;
-    }
-
-    public void setHid(Long hid) {
-        this.hid = hid;
-    }
+    protected ParamList exclude;
 
     /**
      * Gets the value of the filterType property.
      * 
      * @return
      *     possible object is
-     *     {@link ParamAlternative }
+     *     {@link Param }
      *     
      */
-    public ParamAlternative getFilterType() {
+    public Param getFilterType() {
         return filterType;
     }
 
@@ -74,10 +66,10 @@ public class Filter
      * 
      * @param value
      *     allowed object is
-     *     {@link ParamAlternative }
+     *     {@link Param }
      *     
      */
-    public void setFilterType(ParamAlternative value) {
+    public void setFilterType(Param value) {
         this.filterType = value;
     }
 
@@ -86,47 +78,32 @@ public class Filter
      * 
      * @return
      *     possible object is
-     *     {@link ParamAlternativeList }
+     *     {@link ParamList }
      *     
      */
-    public ParamAlternativeList getInclude() {
+    public ParamList getInclude() {
         return include;
     }
 
-    /**
-     * Sets the value of the include property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ParamAlternativeList }
-     *     
-     */
-    public void setInclude(ParamAlternativeList value) {
-        this.include = value;
+    public void setInclude(ParamList paramList){
+        this.include = paramList;
     }
+
 
     /**
      * Gets the value of the exclude property.
      * 
      * @return
      *     possible object is
-     *     {@link ParamAlternativeList }
+     *     {@link ParamList }
      *     
      */
-    public ParamAlternativeList getExclude() {
+    public ParamList getExclude() {
         return exclude;
     }
 
-    /**
-     * Sets the value of the exclude property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ParamAlternativeList }
-     *     
-     */
-    public void setExclude(ParamAlternativeList value) {
-        this.exclude = value;
+    public void setExclude(ParamList exclude){
+        this.exclude = exclude;
     }
 
 }

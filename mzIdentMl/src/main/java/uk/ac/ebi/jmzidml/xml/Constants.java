@@ -16,6 +16,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * ToDo: Should XML_INDEXED_XPATHS be moved to MzIdentMLIndexerFactory?
+ */
 public class Constants {
 
     public static final String JAXB_ENCODING_PROPERTY = "jaxb.encoding";

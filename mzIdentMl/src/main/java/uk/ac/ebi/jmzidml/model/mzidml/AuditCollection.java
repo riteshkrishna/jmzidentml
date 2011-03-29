@@ -12,17 +12,18 @@ import java.util.List;
 /**
  * The collection of Contact records.
  * 
- * <p>Java class for FuGE.Collection.AuditCollectionType complex type.
+ * <p>Java class for AuditCollectionType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="FuGE.Collection.AuditCollectionType">
+ * &lt;complexType name="AuditCollectionType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.0}ContactGroup" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
+ *       &lt;choice maxOccurs="unbounded">
+ *         &lt;element name="Person" type="{http://psidev.info/psi/pi/mzIdentML/1.1}PersonType"/>
+ *         &lt;element name="Organization" type="{http://psidev.info/psi/pi/mzIdentML/1.1}OrganizationType"/>
+ *       &lt;/choice>
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -31,43 +32,34 @@ import java.util.List;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "FuGE.Collection.AuditCollectionType", propOrder = {
-    "contactGroup"
+@XmlType(name = "AuditCollectionType", propOrder = {
+    "personOrOrganization"
 })
 public class AuditCollection
-    implements Serializable, MzIdentMLObject
+    extends MzIdentMLObject
+    implements Serializable
 {
-    @XmlTransient
-    protected Long hid;
-
-    public Long getHid() {
-        return hid;
-    }
-
-    public void setHid(Long hid) {
-        this.hid = hid;
-    }
 
     private final static long serialVersionUID = 100L;
     @XmlElements({
         @XmlElement(name = "Person", type = Person.class),
         @XmlElement(name = "Organization", type = Organization.class)
     })
-    protected List<Contact> contactGroup;
+    protected List<AbstractContact> personOrOrganization;
 
     /**
-     * The complete set of Contacts.Gets the value of the contactGroup property.
+     * Gets the value of the personOrOrganization property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the contactGroup property.
+     * This is why there is not a <CODE>set</CODE> method for the personOrOrganization property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getContactGroup().add(newItem);
+     *    getPersonOrOrganization().add(newItem);
      * </pre>
      * 
      * 
@@ -78,11 +70,11 @@ public class AuditCollection
      * 
      * 
      */
-    public List<Contact> getContactGroup() {
-        if (contactGroup == null) {
-            contactGroup = new ArrayList<Contact>();
+    public List<AbstractContact> getPersonOrOrganization() {
+        if (personOrOrganization == null) {
+            personOrOrganization = new ArrayList<AbstractContact>();
         }
-        return this.contactGroup;
+        return this.personOrOrganization;
     }
 
 }

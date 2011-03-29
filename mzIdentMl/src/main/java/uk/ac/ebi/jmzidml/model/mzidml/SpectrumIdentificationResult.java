@@ -1,7 +1,8 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.AbstractIdentifiableParamGroup;
+import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
+import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
@@ -15,17 +16,17 @@ import java.util.List;
  *                 ranked SpectrumIdentificationItems corresponding to possible different peptide IDs.
  *             
  * 
- * <p>Java class for PSI-PI.analysis.search.SpectrumIdentificationResultType complex type.
+ * <p>Java class for SpectrumIdentificationResultType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="PSI-PI.analysis.search.SpectrumIdentificationResultType">
+ * &lt;complexType name="SpectrumIdentificationResultType">
  *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Common.IdentifiableType">
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType">
  *       &lt;sequence>
- *         &lt;element name="SpectrumIdentificationItem" type="{http://psidev.info/psi/pi/mzIdentML/1.0}PSI-PI.analysis.search.SpectrumIdentificationItemType" maxOccurs="unbounded"/>
- *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.0}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="SpectrumIdentificationItem" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SpectrumIdentificationItemType" maxOccurs="unbounded"/>
+ *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="spectrumID" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="SpectraData_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -37,40 +38,44 @@ import java.util.List;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PSI-PI.analysis.search.SpectrumIdentificationResultType", propOrder = {
+@XmlType(name = "SpectrumIdentificationResultType", propOrder = {
     "spectrumIdentificationItem",
     "paramGroup"
 })
 public class SpectrumIdentificationResult
-    extends AbstractIdentifiableParamGroup
-    implements Serializable
+    extends Identifiable
+    implements Serializable, ParamGroupCapable
 {
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "SpectrumIdentificationItem", required = true)
     protected List<SpectrumIdentificationItem> spectrumIdentificationItem;
     @XmlElements({
-        @XmlElement(name = "cvParam", type = CvParam.class),
-        @XmlElement(name = "userParam", type = UserParam.class)
+        @XmlElement(name = "userParam", type = UserParam.class),
+        @XmlElement(name = "cvParam", type = CvParam.class)
     })
-    protected List<Param> paramGroup;
+    protected List<AbstractParam> paramGroup;
     @XmlAttribute(required = true)
     protected String spectrumID;
-    @XmlAttribute(name = "SpectraData_ref", required = true)
+    @XmlAttribute(name = "spectraData_ref", required = true)
     protected String spectraDataRef;
 
     @XmlTransient
-    private SpectraData spectraData;
+    protected SpectraData spectraData;
 
     public SpectraData getSpectraData() {
         return spectraData;
     }
 
     public void setSpectraData(SpectraData spectraData) {
-        this.spectraData = spectraData;
-        if (spectraData != null) {
-            this.spectraDataRef = spectraData.getId();
+        if (spectraData == null) {
+            this.spectraDataRef = null;
+        } else {
+            String refId = spectraData.getId();
+            if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
+            this.spectraDataRef = refId;
         }
+        this.spectraData = spectraData;
     }
 
     /**
@@ -120,14 +125,14 @@ public class SpectrumIdentificationResult
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link CvParam }
      * {@link UserParam }
+     * {@link CvParam }
      * 
      * 
      */
-    public List<Param> getParamGroup() {
+    public List<AbstractParam> getParamGroup() {
         if (paramGroup == null) {
-            paramGroup = new ArrayList<Param>();
+            paramGroup = new ArrayList<AbstractParam>();
         }
         return this.paramGroup;
     }
@@ -169,18 +174,19 @@ public class SpectrumIdentificationResult
     }
 
     /**
-     * Sets the value of the spectraDataRef property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * Get the cvparams for spectrumidentificationresult
+     * @return
      */
-    public void setSpectraDataRef(String value) {
-        this.spectraDataRef = value;
-        if ( spectraData != null && !spectraData.getId().equals(value) ) {
-            spectraData = null;
-        }
+    public List getCvParam() {
+        return new FacadeList(this.getParamGroup(), CvParam.class);
     }
 
+    /**
+     * Get the userparams for spectrumidentificationresult
+     * @return
+     */
+
+    public List getUserParam() {
+        return new FacadeList(this.getParamGroup(), UserParam.class);
+    }
 }

@@ -1,4 +1,3 @@
-
 package uk.ac.ebi.jmzidml.model.mzidml;
 
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
@@ -8,12 +7,19 @@ import java.io.Serializable;
 
 
 /**
- * <p>Java class for FuGE.Common.Audit.AffiliationsType complex type.
- * 
+ *
+ * TODO marshalling/ persistor add validation to check for case where someone gets organization and changes its id without updating ref id in
+ *      affliliations and other such clases.
+ *
+ * NOTE: There is no setter method for the organizationRef. This simplifies keeping the organization object reference and
+ * organizationRef synchronized.
+ *
+ * <p>Java class for AffiliationsType complex type.
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
- * &lt;complexType name="FuGE.Common.Audit.AffiliationsType">
+ * &lt;complexType name="AffiliationsType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;attribute name="Organization_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -21,86 +27,47 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "FuGE.Common.Audit.AffiliationsType")
+@XmlType(name = "AffiliationsType")
 public class Affiliations
-    implements Serializable, MzIdentMLObject
-{
-
-    @XmlTransient
-    protected Long hid;
-
-    public Long getHid() {
-        return hid;
-    }
-
-    public void setHid(Long hid) {
-        this.hid = hid;
-    }
+        extends MzIdentMLObject
+        implements Serializable {
 
     private final static long serialVersionUID = 100L;
-    @XmlAttribute(name = "Organization_ref", required = true)
+    @XmlAttribute(name = "organization_ref", required = true)
     protected String organizationRef;
-
     @XmlTransient
-    private Organization organization;
+    protected Organization organization;
 
-    /**
-     * Gets the value of the organisation property.
-     * Note: this property may be populated automatically at unmarshal
-     * time with the Object referenced with the contactRef property.
-     *
-     * @see uk.ac.ebi.jmzidml.MzIdentMLElement#isAutoRefResolving()
-     * @return Valid values are Organisation objects.
-     */
+
     public Organization getOrganization() {
         return organization;
     }
 
-    /**
-     * Sets a Organization reference. Setting a Organization object will update
-     * the organizationRef element with the id from the new Organization object.
-     * Note: if the contact object is null, the organizationRef ID is NOT
-     * changed, only the object reference is set to null.
-     *
-     * @see #organizationRef
-     * @param organization the Organization to reference from this Affiliation.
-     */
     public void setOrganization(Organization organization) {
-        this.organization = organization;
-        if (organization != null) {
-            this.organizationRef = organization.getId();
+        if (organization == null) {
+            this.organizationRef = null;
+        } else {
+            String refId = organization.getId();
+            if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
+            this.organizationRef = refId;
         }
+        this.organization = organization;
     }
+
+
 
     /**
      * Gets the value of the organizationRef property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getOrganizationRef() {
         return organizationRef;
     }
 
-    /**
-     * Sets the value of the organizationRef property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setOrganizationRef(String value) {
-        this.organizationRef = value;
-        if ( organization != null && !organization.getId().equals(value) ) {
-            organization = null;
-        }
-    }
 
 }

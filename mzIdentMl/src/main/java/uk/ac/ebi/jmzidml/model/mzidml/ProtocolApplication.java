@@ -1,12 +1,16 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.CalendarAdapter;
-
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.Calendar;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.CalendarAdapter;
 
 
 /**
@@ -16,14 +20,14 @@ import java.util.Calendar;
  *                 formats. The subclass GenericProtocolApplication can be used without extension.
  *             
  * 
- * <p>Java class for FuGE.Common.Protocol.ProtocolApplicationType complex type.
+ * <p>Java class for ProtocolApplicationType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="FuGE.Common.Protocol.ProtocolApplicationType">
+ * &lt;complexType name="ProtocolApplicationType">
  *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Common.IdentifiableType">
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType">
  *       &lt;attribute name="activityDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
  *     &lt;/extension>
  *   &lt;/complexContent>
@@ -33,10 +37,10 @@ import java.util.Calendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "FuGE.Common.Protocol.ProtocolApplicationType")
+@XmlType(name = "ProtocolApplicationType")
 @XmlSeeAlso({
-    ProteinDetection.class,
-    SpectrumIdentification.class
+    SpectrumIdentification.class,
+    ProteinDetection.class
 })
 public abstract class ProtocolApplication
     extends Identifiable

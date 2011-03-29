@@ -24,10 +24,4 @@ public interface ParamGroupCapable extends CvParamListCapable {
     public List<CvParam> getCvParam();
 
     public List<UserParam> getUserParam();
-
-    public List<Param> getParamGroup();
-
-    public void splitParamList();
-
-    public void updateParamList();
 }

@@ -1,22 +1,24 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.IdentifiableMzIdentMLObject;
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
  * A source controlled vocabulary from which cvParams will be obtained.
  * 
- * <p>Java class for FuGE.Common.Ontology.cvType complex type.
+ * <p>Java class for cvType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="FuGE.Common.Ontology.cvType">
+ * &lt;complexType name="cvType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;attribute name="fullName" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -31,27 +33,18 @@ import java.io.Serializable;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "FuGE.Common.Ontology.cvType")
+@XmlType(name = "cvType")
 public class Cv
-    implements Serializable, MzIdentMLObject, IdentifiableMzIdentMLObject
+    extends MzIdentMLObject
+    implements Serializable
 {
-    @XmlTransient
-    protected Long hid;
-
-    public Long getHid() {
-        return hid;
-    }
-
-    public void setHid(Long hid) {
-        this.hid = hid;
-    }
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(required = true)
     protected String fullName;
     @XmlAttribute
     protected String version;
-    @XmlAttribute(name = "URI", required = true)
+    @XmlAttribute( required = true)
     @XmlSchemaType(name = "anyURI")
     protected String uri;
     @XmlAttribute(required = true)

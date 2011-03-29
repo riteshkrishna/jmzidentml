@@ -2,8 +2,10 @@
 package uk.ac.ebi.jmzidml.model.mzidml;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.*;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
@@ -17,8 +19,8 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Inputs" type="{http://psidev.info/psi/pi/mzIdentML/1.0}InputsType"/>
- *         &lt;element name="AnalysisData" type="{http://psidev.info/psi/pi/mzIdentML/1.0}AnalysisDataType"/>
+ *         &lt;element name="Inputs" type="{http://psidev.info/psi/pi/mzIdentML/1.1}InputsType"/>
+ *         &lt;element name="AnalysisData" type="{http://psidev.info/psi/pi/mzIdentML/1.1}AnalysisDataType"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -33,7 +35,8 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
     "analysisData"
 })
 public class DataCollection
-    implements Serializable, MzIdentMLObject
+    extends MzIdentMLObject
+    implements Serializable
 {
 
     private final static long serialVersionUID = 100L;
@@ -41,18 +44,6 @@ public class DataCollection
     protected Inputs inputs;
     @XmlElement(name = "AnalysisData", required = true)
     protected AnalysisData analysisData;
-
-    @XmlTransient
-    protected Long hid;
-
-    public Long getHid() {
-        return hid;
-    }
-
-    public void setHid(Long hid) {
-        this.hid = hid;
-    }
-
 
     /**
      * Gets the value of the inputs property.
