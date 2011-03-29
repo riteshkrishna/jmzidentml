@@ -1,10 +1,8 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import java.io.Serializable;
 import javax.xml.bind.annotation.*;
-
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+import java.io.Serializable;
 
 
 /**
@@ -12,17 +10,17 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
  *                 expression or a CV term if a "standard" enzyme cleavage has been performed.
  *             
  * 
- * <p>Java class for PSI-PI.analysis.search.EnzymeType complex type.
+ * <p>Java class for EnzymeType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="PSI-PI.analysis.search.EnzymeType">
+ * &lt;complexType name="EnzymeType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="SiteRegexp" type="{http://psidev.info/psi/pi/mzIdentML/1.0}PSI-PI.analysis.search.SiteRegexpType" minOccurs="0"/>
- *         &lt;element name="EnzymeName" type="{http://psidev.info/psi/pi/mzIdentML/1.0}ParamListType" minOccurs="0"/>
+ *         &lt;element name="SiteRegexp" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="EnzymeName" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamListType" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="NTermGain">
@@ -56,24 +54,23 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PSI-PI.analysis.search.EnzymeType", propOrder = {
+@XmlType(name = "EnzymeType", propOrder = {
     "siteRegexp",
     "enzymeName"
 })
 public class Enzyme
-    implements Serializable, MzIdentMLObject
+    extends Identifiable
+    implements Serializable
 {
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "SiteRegexp")
     protected String siteRegexp;
     @XmlElement(name = "EnzymeName")
-    protected ParamAlternativeList enzymeName;
-    @XmlAttribute(required = true)
-    protected String id;
-    @XmlAttribute(name = "NTermGain")
+    protected ParamList enzymeName;
+    @XmlAttribute
     protected String nTermGain;
-    @XmlAttribute(name = "CTermGain")
+    @XmlAttribute
     protected String cTermGain;
     @XmlAttribute
     protected Boolean semiSpecific;
@@ -81,17 +78,6 @@ public class Enzyme
     protected Integer missedCleavages;
     @XmlAttribute
     protected Integer minDistance;
-
-    @XmlTransient
-    protected Long hid;
-
-    public Long getHid() {
-        return hid;
-    }
-
-    public void setHid(Long hid) {
-        this.hid = hid;
-    }
 
     /**
      * Gets the value of the siteRegexp property.
@@ -122,48 +108,21 @@ public class Enzyme
      * 
      * @return
      *     possible object is
-     *     {@link ParamAlternativeList }
+     *     {@link ParamList }
      *     
      */
-    public ParamAlternativeList getEnzymeName() {
+    public ParamList getEnzymeName() {
         return enzymeName;
     }
 
-    /**
-     * Sets the value of the enzymeName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ParamAlternativeList }
-     *     
-     */
-    public void setEnzymeName(ParamAlternativeList value) {
-        this.enzymeName = value;
+
+    public void setEnzmeName(ParamList enzymeName){
+        this.enzymeName = enzymeName;
     }
 
-    /**
-     * Gets the value of the id property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getId() {
-        return id;
-    }
 
-    /**
-     * Sets the value of the id property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setId(String value) {
-        this.id = value;
-    }
+
+
 
     /**
      * Gets the value of the nTermGain property.
@@ -222,19 +181,6 @@ public class Enzyme
      *     
      */
     public Boolean isSemiSpecific() {
-        return semiSpecific;
-    }
-
-    /**
-     * Gets the value of the semiSpecific property. Hibernate hbm files dont seem to recognise isSemiSpecific
-     * so this method was added.
-     *
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *
-     */
-    public Boolean getSemiSpecific() {
         return semiSpecific;
     }
 

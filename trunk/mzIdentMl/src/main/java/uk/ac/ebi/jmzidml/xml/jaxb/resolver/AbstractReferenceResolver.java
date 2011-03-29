@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 import org.xml.sax.InputSource;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-import uk.ac.ebi.jmzidml.model.mzidml.Contact;
+import uk.ac.ebi.jmzidml.model.mzidml.AbstractContact;
 import uk.ac.ebi.jmzidml.model.mzidml.Organization;
 import uk.ac.ebi.jmzidml.model.mzidml.Person;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLObjectCache;
@@ -42,9 +42,9 @@ public abstract class AbstractReferenceResolver<T extends MzIdentMLObject> exten
     }
 
 
-
     public <R extends MzIdentMLObject> R unmarshal(String refId, Class<R> cls) {
-        R retVal = null;
+        R retVal;
+        Class<R> originalClass = cls;
 
         // check if we have a cache to look up, if so see if it contains the referenced object already
 //        if (cache != null) {
@@ -53,62 +53,66 @@ public abstract class AbstractReferenceResolver<T extends MzIdentMLObject> exten
 
         // if the referenced object/element is not yet in the cache (or no cache
         // is available) create it from the XML using the index and ID maps
-        if (retVal == null) {
 
-            log.debug("AbstractReferenceResolver.unmarshal for id: " + refId);
-            // first retrieve the XML snippet representing the referenced object/element
-            String xml;
-            // special case for Contact.class as we can either have a Person.class or a Organisation.class
-            if (cls ==  Contact.class) {
-                log.debug("SPECIAL CASE: Contact");
-                // see if the ID fits a Person
-                String personXML = index.getXmlString(refId, Person.class);
-                // see if the ID fits an Organisation
-                String organisationXML = index.getXmlString(refId, Organization.class);
-                if (personXML != null && organisationXML == null) {
-                    xml = personXML;
-                    cls = MzIdentMLElement.Person.getClazz();
-                } else if (personXML == null && organisationXML != null) {
-                    xml = organisationXML;
-                    cls = MzIdentMLElement.Person.getClazz();
-                } else {
-                    throw new IllegalStateException("Could not uniquely resolve Contact reference " + refId);
-                }
+        log.debug("AbstractReferenceResolver.unmarshal for id: " + refId);
+        // first retrieve the XML snippet representing the referenced object/element
+        String xml;
+        // special case for Contact.class as we can either have a Person.class or a Organisation.class
+
+        if (cls == AbstractContact.class) {
+            log.debug("SPECIAL CASE: Contact");
+            // see if the ID fits a Person
+            String personXML = index.getXmlString(refId, Person.class);
+            // see if the ID fits an Organisation
+            String organisationXML = index.getXmlString(refId, Organization.class);
+            if (personXML != null && organisationXML == null) {
+                xml = personXML;
+                cls = MzIdentMLElement.Person.getClazz();
+            } else if (personXML == null && organisationXML != null) {
+                xml = organisationXML;
+                cls = MzIdentMLElement.Person.getClazz();
             } else {
-                xml = index.getXmlString(refId, cls);
+                throw new IllegalStateException("Could not uniquely resolve Contact reference " + refId);
             }
+        } else {
 
-            try {
-                // required for the addition of namespaces to top-level objects
-                MzIdentMLNamespaceFilter xmlFilter = new MzIdentMLNamespaceFilter();
+            xml = index.getXmlString(refId, cls);
+        }
 
-                // initializeUnmarshaller will assign the proper reader to the xmlFilter
-                Unmarshaller unmarshaller = UnmarshallerFactory.getInstance().initializeUnmarshaller(index, cache, xmlFilter);
+        try {
+            // required for the addition of namespaces to top-level objects
+            MzIdentMLNamespaceFilter xmlFilter = new MzIdentMLNamespaceFilter();
 
-                // need to do it this way because snippet does not have a XmlRootElement annotation
-                JAXBElement<R> holder = unmarshaller.unmarshal(new SAXSource(xmlFilter, new InputSource(new StringReader(xml))), cls);
-                retVal = holder.getValue();
+            // initializeUnmarshaller will assign the proper reader to the xmlFilter
+            Unmarshaller unmarshaller = UnmarshallerFactory.getInstance().initializeUnmarshaller(index, cache, xmlFilter);
 
-                // add it to the cache, if we there is one (as it was not in there)
-                // the cache may accept this object or not depending on the settings in MzIdentMLElement
+            // need to do it this way because snippet does not have a XmlRootElement annotation
+            JAXBElement<R> holder = unmarshaller.unmarshal(new SAXSource(xmlFilter, new InputSource(new StringReader(xml))), cls);
+            retVal = holder.getValue();
+
+/*
+            if (originalClass == Contact.class) {
+                Contact contact = new Contact();
+                contact.setPersonOrOrganization((AbstractContact) retVal);
+                return (R) contact;
+            }
+*/
+
+            // add it to the cache, if we there is one (as it was not in there)
+            // the cache may accept this object or not depending on the settings in MzIdentMLElement
 //                if (cache != null) {
 //                    cache.putInCache(refId, retVal);
 //                }
 
-            } catch (JAXBException e) {
-                log.error("AbstractReferenceResolver.unmarshal", e);
-                throw new IllegalStateException("Could not unmarshall refId: " + refId + " for element type: " + cls);
-            }
-
+        } catch (JAXBException e) {
+            log.error("AbstractReferenceResolver.unmarshal", e);
+            throw new IllegalStateException("Could not unmarshall refId: " + refId + " for element type: " + cls);
         }
+
 
         // finally return the referenced object
         return retVal;
     }
 
     public abstract void updateObject(T object);
-
-    public abstract void checkRefID(T object);
-    
-    // ToDo: update all the resolver and corresponding classes with id consistency methods
 }

@@ -4,21 +4,24 @@ package uk.ac.ebi.jmzidml.model.mzidml;
 import uk.ac.ebi.jmzidml.model.CvParamCapable;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 import java.io.Serializable;
 
 
 /**
- * <p>Java class for FuGE.Bio.Data.FileFormatType complex type.
+ * <p>Java class for FileFormatType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="FuGE.Bio.Data.FileFormatType">
+ * &lt;complexType name="FileFormatType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://psidev.info/psi/pi/mzIdentML/1.0}cvParam"/>
+ *         &lt;element name="cvParam" type="{http://psidev.info/psi/pi/mzIdentML/1.1}cvParamType"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -28,28 +31,17 @@ import java.io.Serializable;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "FuGE.Bio.Data.FileFormatType", propOrder = {
+@XmlType(name = "FileFormatType", propOrder = {
     "cvParam"
 })
 public class FileFormat
-    implements Serializable, MzIdentMLObject, CvParamCapable
+    extends MzIdentMLObject
+    implements Serializable, CvParamCapable
 {
 
     private final static long serialVersionUID = 100L;
     @XmlElement(required = true)
     protected CvParam cvParam;
-
-
-    @XmlTransient
-    protected Long hid;
-
-    public Long getHid() {
-        return hid;
-    }
-
-    public void setHid(Long hid) {
-        this.hid = hid;
-    }
 
     /**
      * Gets the value of the cvParam property.

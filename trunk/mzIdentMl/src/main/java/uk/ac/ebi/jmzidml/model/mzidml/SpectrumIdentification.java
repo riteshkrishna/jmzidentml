@@ -8,21 +8,29 @@ import java.util.List;
 
 
 /**
+ *
+ * * TODO marshalling/ persistor add validation to check for case where someone gets spectrumIdentificationList/spectrumIdentificationProtocol and changes its id without updating ref id in
+ * SpectrumIdentification and other such clases.
+ * <p/>
+ * NOTE: There is no setter method for the spectrumIdentificationListRef/spectrumIdentificationProtocolRef. This simplifies keeping the spectrumIdentificationList/spectrumIdentificationProtocol object reference and
+ * spectrumIdentificationListRef/spectrumIdentificationProtocolRef synchronized.
+ * <p/>
+ *
  * An Analysis which tries to identify peptides in input spectra, referencing the database
  *                 searched, the input spectra, the output results and the protocol that is run.
  *             
  * 
- * <p>Java class for PSI-PI.analysis.search.SpectrumIdentificationType complex type.
+ * <p>Java class for SpectrumIdentificationType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="PSI-PI.analysis.search.SpectrumIdentificationType">
+ * &lt;complexType name="SpectrumIdentificationType">
  *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Common.Protocol.ProtocolApplicationType">
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}ProtocolApplicationType">
  *       &lt;sequence>
- *         &lt;element name="InputSpectra" type="{http://psidev.info/psi/pi/mzIdentML/1.0}InputSpectraType" maxOccurs="unbounded"/>
- *         &lt;element name="SearchDatabase" type="{http://psidev.info/psi/pi/mzIdentML/1.0}SearchDatabaseType" maxOccurs="unbounded"/>
+ *         &lt;element name="InputSpectra" type="{http://psidev.info/psi/pi/mzIdentML/1.1}InputSpectraType" maxOccurs="unbounded"/>
+ *         &lt;element name="SearchDatabaseRef" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SearchDatabaseRefType" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *       &lt;attribute name="SpectrumIdentificationProtocol_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="SpectrumIdentificationList_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -34,9 +42,9 @@ import java.util.List;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PSI-PI.analysis.search.SpectrumIdentificationType", propOrder = {
+@XmlType(name = "SpectrumIdentificationType", propOrder = {
     "inputSpectra",
-    "searchDatabase"
+    "searchDatabaseRef"
 })
 public class SpectrumIdentification
     extends ProtocolApplication
@@ -44,45 +52,51 @@ public class SpectrumIdentification
 {
 
     private final static long serialVersionUID = 100L;
-
     @XmlElement(name = "InputSpectra", required = true)
     protected List<InputSpectra> inputSpectra;
-
-    @XmlElement(name = "SearchDatabase", required = true)
-    protected List<SearchDatabase> searchDatabase;
-
-    @XmlAttribute(name = "SpectrumIdentificationProtocol_ref", required = true)
+    @XmlElement(name = "SearchDatabaseRef", required = true)
+    protected List<SearchDatabaseRef> searchDatabaseRef;
+    @XmlAttribute(name = "spectrumIdentificationProtocol_ref", required = true)
     protected String spectrumIdentificationProtocolRef;
-
-    @XmlAttribute(name = "SpectrumIdentificationList_ref", required = true)
+    @XmlAttribute(name = "spectrumIdentificationList_ref", required = true)
     protected String spectrumIdentificationListRef;
 
     @XmlTransient
-    private SpectrumIdentificationList spectrumIdentificationList;
+    protected SpectrumIdentificationList spectrumIdentificationList;
     @XmlTransient
-    private SpectrumIdentificationProtocol spectrumIdentificationProtocol;
+    protected SpectrumIdentificationProtocol spectrumIdentificationProtocol;
 
-    public SpectrumIdentificationList getSpectrumIdentificationList() {
-        return spectrumIdentificationList;
-    }
-
-    public void setSpectrumIdentificationList(SpectrumIdentificationList spectrumIdentificationList) {
-        this.spectrumIdentificationList = spectrumIdentificationList;
-        if (spectrumIdentificationList != null) {
-            this.spectrumIdentificationListRef = spectrumIdentificationList.getId();
-        }
-    }
 
     public SpectrumIdentificationProtocol getSpectrumIdentificationProtocol() {
         return spectrumIdentificationProtocol;
     }
 
     public void setSpectrumIdentificationProtocol(SpectrumIdentificationProtocol spectrumIdentificationProtocol) {
-        this.spectrumIdentificationProtocol = spectrumIdentificationProtocol;
-        if (spectrumIdentificationProtocol != null) {
-            this.spectrumIdentificationProtocolRef = spectrumIdentificationProtocol.getId();
+        if (spectrumIdentificationProtocol == null) {
+            this.spectrumIdentificationProtocolRef = null;
+        } else {
+            String refId = spectrumIdentificationProtocol.getId();
+            if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
+            this.spectrumIdentificationProtocolRef = refId;
         }
+        this.spectrumIdentificationProtocol = spectrumIdentificationProtocol;
     }
+
+    public SpectrumIdentificationList getSpectrumIdentificationList() {
+        return spectrumIdentificationList;
+    }
+
+    public void setSpectrumIdentificationList(SpectrumIdentificationList spectrumIdentificationList) {
+        if (spectrumIdentificationList == null) {
+            this.spectrumIdentificationListRef = null;
+        } else {
+            String refId = spectrumIdentificationList.getId();
+            if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
+            this.spectrumIdentificationListRef = refId;
+        }
+        this.spectrumIdentificationList = spectrumIdentificationList;
+    }
+
 
     /**
      * Gets the value of the inputSpectra property.
@@ -114,32 +128,32 @@ public class SpectrumIdentification
     }
 
     /**
-     * Gets the value of the searchDatabase property.
+     * Gets the value of the searchDatabaseRef property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the searchDatabase property.
+     * This is why there is not a <CODE>set</CODE> method for the searchDatabaseRef property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getSearchDatabase().add(newItem);
+     *    getSearchDatabaseRef().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link SearchDatabase }
+     * {@link SearchDatabaseRef }
      * 
      * 
      */
-    public List<SearchDatabase> getSearchDatabase() {
-        if (searchDatabase == null) {
-            searchDatabase = new ArrayList<SearchDatabase>();
+    public List<SearchDatabaseRef> getSearchDatabaseRef() {
+        if (searchDatabaseRef == null) {
+            searchDatabaseRef = new ArrayList<SearchDatabaseRef>();
         }
-        return this.searchDatabase;
+        return this.searchDatabaseRef;
     }
 
     /**
@@ -154,20 +168,6 @@ public class SpectrumIdentification
         return spectrumIdentificationProtocolRef;
     }
 
-    /**
-     * Sets the value of the spectrumIdentificationProtocolRef property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSpectrumIdentificationProtocolRef(String value) {
-        this.spectrumIdentificationProtocolRef = value;
-        if ( spectrumIdentificationProtocol != null && !spectrumIdentificationProtocol.getId().equals(value) ) {
-            spectrumIdentificationProtocol = null;
-        }
-    }
 
     /**
      * Gets the value of the spectrumIdentificationListRef property.
@@ -181,19 +181,5 @@ public class SpectrumIdentification
         return spectrumIdentificationListRef;
     }
 
-    /**
-     * Sets the value of the spectrumIdentificationListRef property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSpectrumIdentificationListRef(String value) {
-        this.spectrumIdentificationListRef = value;
-        if ( spectrumIdentificationList != null && !spectrumIdentificationList.getId().equals(value) ) {
-            spectrumIdentificationList = null;
-        }
-    }
 
 }

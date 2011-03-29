@@ -26,9 +26,8 @@ import java.io.Serializable;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SearchDatabaseType")
-public class SearchDatabase
-    implements Serializable, MzIdentMLObject
-{
+public class SearchDatabase   extends MzIdentMLObject
+    implements Serializable {
 
     @XmlTransient
     private Long hid;

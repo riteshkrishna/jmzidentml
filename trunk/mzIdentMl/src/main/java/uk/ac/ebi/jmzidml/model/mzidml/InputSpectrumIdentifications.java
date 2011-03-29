@@ -1,17 +1,22 @@
-
 package uk.ac.ebi.jmzidml.model.mzidml;
+
+import java.io.Serializable;
+import javax.xml.bind.annotation.*;
 
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
-import javax.xml.bind.annotation.*;
-import java.io.Serializable;
-
 
 /**
+ * TODO marshalling/ persistor add validation to check for case where someone gets SpectrumIdentificationList and changes its id without updating ref id in
+ * InputSpectrumIdentifications and other such classes.
+ * <p/>
+ * NOTE: There is no setter method for the spectrumIdentificationListRef. This simplifies keeping the measure object reference and
+ * spectrumIdentificationListRef synchronized.
+ * <p/>
  * <p>Java class for InputSpectrumIdentificationsType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="InputSpectrumIdentificationsType">
  *   &lt;complexContent>
@@ -21,68 +26,41 @@ import java.io.Serializable;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "InputSpectrumIdentificationsType")
 public class InputSpectrumIdentifications
-    implements Serializable, MzIdentMLObject
-{
-    @XmlTransient
-    private Long hid;
+        extends MzIdentMLObject
+        implements Serializable {
 
     private final static long serialVersionUID = 100L;
-    @XmlAttribute(name = "SpectrumIdentificationList_ref", required = true)
+    @XmlAttribute(name = "spectrumIdentificationList_ref", required = true)
     protected String spectrumIdentificationListRef;
-
     @XmlTransient
-    private SpectrumIdentificationList spectrumIdentificationList;
-
-    public Long getHid() {
-        return hid;
-    }
-
-    public void setHid(Long hid) {
-        this.hid = hid;
-    }
+    protected SpectrumIdentificationList spectrumIdentificationList;
 
     public SpectrumIdentificationList getSpectrumIdentificationList() {
         return spectrumIdentificationList;
     }
 
     public void setSpectrumIdentificationList(SpectrumIdentificationList spectrumIdentificationList) {
-        this.spectrumIdentificationList = spectrumIdentificationList;
-        if (spectrumIdentificationList != null) {
-            this.spectrumIdentificationListRef = spectrumIdentificationList.getId();
+        if (spectrumIdentificationList == null) {
+            this.spectrumIdentificationListRef = null;
+        } else {
+            String refId = spectrumIdentificationList.getId();
+            if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
+            this.spectrumIdentificationListRef = refId;
         }
+        this.spectrumIdentificationList = spectrumIdentificationList;
     }
 
     /**
      * Gets the value of the spectrumIdentificationListRef property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSpectrumIdentificationListRef() {
         return spectrumIdentificationListRef;
     }
-
-    /**
-     * Sets the value of the spectrumIdentificationListRef property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSpectrumIdentificationListRef(String value) {
-        this.spectrumIdentificationListRef = value;
-        if ( spectrumIdentificationList != null && !spectrumIdentificationList.getId().equals(value) ) {
-            spectrumIdentificationList = null;
-        }
-    }
-
 }

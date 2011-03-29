@@ -21,9 +21,9 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="SourceFile" type="{http://psidev.info/psi/pi/mzIdentML/1.0}PSI-PI.analysis.search.SourceFileType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="SearchDatabase" type="{http://psidev.info/psi/pi/mzIdentML/1.0}PSI-PI.analysis.search.SearchDatabaseType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="SpectraData" type="{http://psidev.info/psi/pi/mzIdentML/1.0}PSI-PI.spectra.SpectraDataType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="SourceFile" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SourceFileType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="SearchDatabase" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SearchDatabaseType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="SpectraData" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SpectraDataType" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -39,7 +39,8 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
     "spectraData"
 })
 public class Inputs
-    implements Serializable, MzIdentMLObject
+    extends MzIdentMLObject
+    implements Serializable
 {
 
     private final static long serialVersionUID = 100L;

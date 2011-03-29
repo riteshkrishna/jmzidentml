@@ -18,40 +18,35 @@ import java.util.List;
  * &lt;complexType name="FragmentArrayType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="values" use="required" type="{http://psidev.info/psi/pi/mzIdentML/1.0}listOfFloats" />
+ *       &lt;attribute name="values" use="required" type="{http://psidev.info/psi/pi/mzIdentML/1.1}listOfFloats" />
  *       &lt;attribute name="Measure_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ *
+ * TODO marshalling/ persistor add validation to check for case where someone gets measure and changes its id without updating ref id in
+ *      FragmentArray and other such clases.
+ *
+ * NOTE: There is no setter method for the measureRef. This simplifies keeping the measure object reference and
+ * measureRef synchronized.
  * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FragmentArrayType")
 public class FragmentArray
-    implements Serializable, MzIdentMLObject
+    extends MzIdentMLObject
+    implements Serializable
 {
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(required = true)
     protected List<Float> values;
-    @XmlAttribute(name = "Measure_ref", required = true)
+    @XmlAttribute(name = "measure_ref", required = true)
     protected String measureRef;
-
     @XmlTransient
-    private Measure measure;
-
-    @XmlTransient
-    protected Long hid;
-
-    public Long getHid() {
-        return hid;
-    }
-
-    public void setHid(Long hid) {
-        this.hid = hid;
-    }
+    protected Measure measure;
 
 
     public Measure getMeasure() {
@@ -59,11 +54,17 @@ public class FragmentArray
     }
 
     public void setMeasure(Measure measure) {
-        this.measure = measure;
-        if (measure != null) {
-            this.measureRef = measure.getId();
+        if (measure == null) {
+            this.measureRef = null;
+        } else {
+            String refId = measure.getId();
+            if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
+            this.measureRef = refId;
         }
+        this.measure = measure;
     }
+
+
 
     /**
      * Gets the value of the values property.
@@ -104,21 +105,6 @@ public class FragmentArray
      */
     public String getMeasureRef() {
         return measureRef;
-    }
-
-    /**
-     * Sets the value of the measureRef property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setMeasureRef(String value) {
-        this.measureRef = value;
-        if ( measure != null && !measure.getId().equals(value) ) {
-            measure = null;
-        }
     }
 
 }

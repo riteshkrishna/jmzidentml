@@ -1,7 +1,6 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.IdentifiableMzIdentMLObject;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 import javax.xml.bind.annotation.*;
@@ -15,12 +14,12 @@ import java.io.Serializable;
  *                 DatabaseEntry(s).
  *             
  * 
- * <p>Java class for FuGE.Common.IdentifiableType complex type.
+ * <p>Java class for IdentifiableType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="FuGE.Common.IdentifiableType">
+ * &lt;complexType name="IdentifiableType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -33,33 +32,37 @@ import java.io.Serializable;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "FuGE.Common.IdentifiableType")
+@XmlType(name = "IdentifiableType")
 @XmlSeeAlso({
     MzIdentML.class,
-    BibliographicReference.class,
-    Provider.class,
+    Enzyme.class,
     TranslationTable.class,
-    ConceptualMolecule.class,
-    ProteinDetectionHypothesis.class,
-    Protocol.class,
-    Measure.class,
-    SpectrumIdentificationItem.class,
-    Material.class,
-    Contact.class,
+    AnalysisSoftware.class,
+    BibliographicReference.class,
+    ProteinDetectionList.class,
+    Peptide.class,
+    DBSequence.class,
+    SpectrumIdentificationList.class,
     MassTable.class,
     ProteinAmbiguityGroup.class,
+    PeptideEvidenceList.class,
+    Measure.class,
+    ProteinDetectionProtocol.class,
+    SpectrumIdentificationItem.class,
+    Sample.class,
     PeptideEvidence.class,
-    Data.class,
-    Software.class,
     SpectrumIdentificationResult.class,
-    Equipment.class,
+    ProteinDetectionHypothesis.class,
+    ExternalData.class,
+    SpectrumIdentificationProtocol.class,
+    AbstractContact.class,
+    Provider.class,
     ProtocolApplication.class
 })
-public abstract class Identifiable implements Serializable, MzIdentMLObject, IdentifiableMzIdentMLObject
+public abstract class Identifiable
+    extends MzIdentMLObject
+    implements Serializable
 {
-
-    @XmlTransient
-    private Long hid;
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(required = true)
@@ -114,18 +117,5 @@ public abstract class Identifiable implements Serializable, MzIdentMLObject, Ide
     public void setName(String value) {
         this.name = value;
     }
-
-    /**
-     * ID for each record
-     * @return
-     */
-    public Long getHid() {
-        return hid;
-    }
-
-    public void setHid(Long hid) {
-        this.hid = hid;
-    }
-
 
 }

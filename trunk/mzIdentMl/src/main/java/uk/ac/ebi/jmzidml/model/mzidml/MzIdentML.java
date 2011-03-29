@@ -1,18 +1,14 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.*;
+
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.CalendarAdapter;
 
 
 /**
@@ -20,28 +16,28 @@ import uk.ac.ebi.jmzidml.xml.jaxb.adapters.CalendarAdapter;
  *                 software, protocols and search results (spectrum identifications or protein detection results).
  *             
  * 
- * <p>Java class for PSI-PI.Main.mzIdentMLType complex type.
+ * <p>Java class for mzIdentMLType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="PSI-PI.Main.mzIdentMLType">
+ * &lt;complexType name="mzIdentMLType">
  *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Common.IdentifiableType">
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType">
  *       &lt;sequence>
- *         &lt;element name="cvList" type="{http://psidev.info/psi/pi/mzIdentML/1.0}cvListType"/>
- *         &lt;element name="AnalysisSoftwareList" type="{http://psidev.info/psi/pi/mzIdentML/1.0}AnalysisSoftwareListType" minOccurs="0"/>
- *         &lt;element ref="{http://psidev.info/psi/pi/mzIdentML/1.0}Provider" minOccurs="0"/>
- *         &lt;element ref="{http://psidev.info/psi/pi/mzIdentML/1.0}AuditCollection" minOccurs="0"/>
- *         &lt;element name="AnalysisSampleCollection" type="{http://psidev.info/psi/pi/mzIdentML/1.0}AnalysisSampleCollectionType" minOccurs="0"/>
- *         &lt;element name="SequenceCollection" type="{http://psidev.info/psi/pi/mzIdentML/1.0}SequenceCollectionType" minOccurs="0"/>
- *         &lt;element name="AnalysisCollection" type="{http://psidev.info/psi/pi/mzIdentML/1.0}AnalysisCollectionType"/>
- *         &lt;element name="AnalysisProtocolCollection" type="{http://psidev.info/psi/pi/mzIdentML/1.0}AnalysisProtocolCollectionType"/>
- *         &lt;element name="DataCollection" type="{http://psidev.info/psi/pi/mzIdentML/1.0}DataCollectionType"/>
- *         &lt;element ref="{http://psidev.info/psi/pi/mzIdentML/1.0}BibliographicReference" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="cvList" type="{http://psidev.info/psi/pi/mzIdentML/1.1}cvListType"/>
+ *         &lt;element name="AnalysisSoftwareList" type="{http://psidev.info/psi/pi/mzIdentML/1.1}AnalysisSoftwareListType" minOccurs="0"/>
+ *         &lt;element name="Provider" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ProviderType" minOccurs="0"/>
+ *         &lt;element name="AuditCollection" type="{http://psidev.info/psi/pi/mzIdentML/1.1}AuditCollectionType" minOccurs="0"/>
+ *         &lt;element name="AnalysisSampleCollection" type="{http://psidev.info/psi/pi/mzIdentML/1.1}AnalysisSampleCollectionType" minOccurs="0"/>
+ *         &lt;element name="SequenceCollection" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SequenceCollectionType" minOccurs="0"/>
+ *         &lt;element name="AnalysisCollection" type="{http://psidev.info/psi/pi/mzIdentML/1.1}AnalysisCollectionType"/>
+ *         &lt;element name="AnalysisProtocolCollection" type="{http://psidev.info/psi/pi/mzIdentML/1.1}AnalysisProtocolCollectionType"/>
+ *         &lt;element name="DataCollection" type="{http://psidev.info/psi/pi/mzIdentML/1.1}DataCollectionType"/>
+ *         &lt;element name="BibliographicReference" type="{http://psidev.info/psi/pi/mzIdentML/1.1}BibliographicReferenceType" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="creationDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
- *       &lt;attribute name="version" use="required" type="{http://psidev.info/psi/pi/mzIdentML/1.0}versionRegex" />
+ *       &lt;attribute name="version" use="required" type="{http://psidev.info/psi/pi/mzIdentML/1.1}versionRegex" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -50,7 +46,7 @@ import uk.ac.ebi.jmzidml.xml.jaxb.adapters.CalendarAdapter;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PSI-PI.Main.mzIdentMLType", propOrder = {
+@XmlType(name = "MzIdentMLType", propOrder = {
     "cvList",
     "analysisSoftwareList",
     "provider",
@@ -107,17 +103,10 @@ public class MzIdentML
         return cvList;
     }
 
-    /**
-     * Sets the value of the cvList property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link CvList }
-     *     
-     */
-    public void setCvList(CvList value) {
-        this.cvList = value;
+    public void setCvList(CvList cvList){
+        this.cvList = cvList;
     }
+
 
     /**
      * Gets the value of the analysisSoftwareList property.
@@ -131,22 +120,13 @@ public class MzIdentML
         return analysisSoftwareList;
     }
 
-    /**
-     * Sets the value of the analysisSoftwareList property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AnalysisSoftwareList }
-     *     
-     */
-    public void setAnalysisSoftwareList(AnalysisSoftwareList value) {
-        this.analysisSoftwareList = value;
+    public void setAnalysisSoftwareList(AnalysisSoftwareList analysisSoftwareList){
+        this.analysisSoftwareList = analysisSoftwareList;
     }
 
+
     /**
-     * The Provider of the mzIdentML record in terms of the contact and
-     *                                 software.
-     *                             
+     * Gets the value of the provider property.
      * 
      * @return
      *     possible object is
@@ -170,8 +150,7 @@ public class MzIdentML
     }
 
     /**
-     * The complete set of Contacts (people and organisations) for this file.
-     *                             
+     * Gets the value of the auditCollection property.
      * 
      * @return
      *     possible object is
@@ -182,16 +161,8 @@ public class MzIdentML
         return auditCollection;
     }
 
-    /**
-     * Sets the value of the auditCollection property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AuditCollection }
-     *     
-     */
-    public void setAuditCollection(AuditCollection value) {
-        this.auditCollection = value;
+    public void setAuditCollection(AuditCollection auditCollection){
+        this.auditCollection = auditCollection;
     }
 
     /**
@@ -206,16 +177,8 @@ public class MzIdentML
         return analysisSampleCollection;
     }
 
-    /**
-     * Sets the value of the analysisSampleCollection property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AnalysisSampleCollection }
-     *     
-     */
-    public void setAnalysisSampleCollection(AnalysisSampleCollection value) {
-        this.analysisSampleCollection = value;
+    public void setAnalysisSampleCollection(AnalysisSampleCollection analysisSampleCollection){
+        this.analysisSampleCollection = analysisSampleCollection;
     }
 
     /**
@@ -315,7 +278,7 @@ public class MzIdentML
     }
 
     /**
-     * Any bibliographic references associated with the file Gets the value of the bibliographicReference property.
+     * Gets the value of the bibliographicReference property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,

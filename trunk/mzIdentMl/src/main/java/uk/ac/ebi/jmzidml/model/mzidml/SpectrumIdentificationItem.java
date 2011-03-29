@@ -1,7 +1,8 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.AbstractIdentifiableParamGroup;
+import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
+import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
@@ -10,23 +11,32 @@ import java.util.List;
 
 
 /**
+ *
+ * * TODO marshalling/ persistor add validation to check for case where someone gets peptide/massTable/sample and changes its id without updating ref id in
+ *      SpectrumIdentificationItem and other such clases.
+ *
+ * NOTE: There is no setter method for the peptideRef/massTableRef/sampleRef. This simplifies keeping the peptide/massTable/sample object reference and
+ * peptideRef/massTableRef/sampleRef synchronized.
+ *
+ * TODO: write an adaptor for changing List<PeptideEvidenceRef> to List<String>
+ *
  * An identification of a single (poly)peptide, resulting from querying an input spectra,
  *                 along with the set of confidence values for that identification. PeptideEvidence elements should be
  *                 given for all mappings of the corresponding Peptide sequence within protein sequences.
  *             
  * 
- * <p>Java class for PSI-PI.analysis.search.SpectrumIdentificationItemType complex type.
+ * <p>Java class for SpectrumIdentificationItemType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="PSI-PI.analysis.search.SpectrumIdentificationItemType">
+ * &lt;complexType name="SpectrumIdentificationItemType">
  *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Common.IdentifiableType">
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType">
  *       &lt;sequence>
- *         &lt;element name="PeptideEvidence" type="{http://psidev.info/psi/pi/mzIdentML/1.0}PSI-PI.analysis.process.PeptideEvidenceType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.0}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="Fragmentation" type="{http://psidev.info/psi/pi/mzIdentML/1.0}FragmentationType" minOccurs="0"/>
+ *         &lt;element name="PeptideEvidenceRef" type="{http://psidev.info/psi/pi/mzIdentML/1.1}PeptideEvidenceRefType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="Fragmentation" type="{http://psidev.info/psi/pi/mzIdentML/1.1}FragmentationType" minOccurs="0"/>
+ *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="chargeState" use="required" type="{http://www.w3.org/2001/XMLSchema}int" />
  *       &lt;attribute name="experimentalMassToCharge" use="required" type="{http://www.w3.org/2001/XMLSchema}double" />
@@ -45,26 +55,26 @@ import java.util.List;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PSI-PI.analysis.search.SpectrumIdentificationItemType", propOrder = {
-    "peptideEvidence",
-    "paramGroup",
-    "fragmentation"
+@XmlType(name = "SpectrumIdentificationItemType", propOrder = {
+    "peptideEvidenceRef",
+    "fragmentation",
+    "paramGroup"
 })
 public class SpectrumIdentificationItem
-    extends AbstractIdentifiableParamGroup
-    implements Serializable
+    extends Identifiable
+    implements Serializable, ParamGroupCapable
 {
 
     private final static long serialVersionUID = 100L;
-    @XmlElement(name = "PeptideEvidence")
-    protected List<PeptideEvidence> peptideEvidence;
-    @XmlElements({
-        @XmlElement(name = "userParam", type = UserParam.class),
-        @XmlElement(name = "cvParam", type = CvParam.class)
-    })
-    protected List<Param> paramGroup;
+    @XmlElement(name = "PeptideEvidenceRef")
+    protected List<PeptideEvidenceRef> peptideEvidenceRef;
     @XmlElement(name = "Fragmentation")
     protected Fragmentation fragmentation;
+    @XmlElements({
+        @XmlElement(name = "cvParam", type = CvParam.class),
+        @XmlElement(name = "userParam", type = UserParam.class)
+    })
+    protected List<AbstractParam> paramGroup;
     @XmlAttribute(required = true)
     protected int chargeState;
     @XmlAttribute(required = true)
@@ -73,33 +83,36 @@ public class SpectrumIdentificationItem
     protected Double calculatedMassToCharge;
     @XmlAttribute
     protected Float calculatedPI;
-    @XmlAttribute(name = "Peptide_ref")
+    @XmlAttribute(name = "peptide_ref")
     protected String peptideRef;
     @XmlAttribute(required = true)
     protected int rank;
     @XmlAttribute(required = true)
     protected boolean passThreshold;
-    @XmlAttribute(name = "MassTable_ref")
+    @XmlAttribute(name = "massTable_ref")
     protected String massTableRef;
-    @XmlAttribute(name = "Sample_ref")
+    @XmlAttribute(name = "sample_ref")
     protected String sampleRef;
-
     @XmlTransient
-    private Peptide peptide;
+    protected Peptide peptide;
     @XmlTransient
-    private MassTable massTable;
+    protected MassTable massTable;
     @XmlTransient
-    private Sample sample;
+    protected Sample sample;
 
     public Peptide getPeptide() {
         return peptide;
     }
 
     public void setPeptide(Peptide peptide) {
-        this.peptide = peptide;
-        if (peptide != null) {
-            this.peptideRef = peptide.getId();
+        if (peptide == null) {
+            this.peptideRef = null;
+        } else {
+            String refId = peptide.getId();
+            if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
+            this.peptideRef = refId;
         }
+        this.peptide = peptide;
     }
 
     public MassTable getMassTable() {
@@ -107,10 +120,14 @@ public class SpectrumIdentificationItem
     }
 
     public void setMassTable(MassTable massTable) {
-        this.massTable = massTable;
-        if (massTable != null) {
-            this.massTableRef = massTable.getId();
+        if (massTable == null) {
+            this.massTableRef = null;
+        } else {
+            String refId = massTable.getId();
+            if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
+            this.massTableRef = refId;
         }
+        this.massTable = massTable;
     }
 
     public Sample getSample() {
@@ -118,40 +135,73 @@ public class SpectrumIdentificationItem
     }
 
     public void setSample(Sample sample) {
-        this.sample = sample;
-        if (sample != null) {
-            this.sampleRef = sample.getId();
+        if (sample == null) {
+            this.sampleRef = null;
+        } else {
+            String refId = sample.getId();
+            if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
+            this.sampleRef = refId;
         }
+        this.sample = sample;
     }
 
     /**
-     * Gets the value of the peptideEvidence property.
+     * Gets the value of the peptideEvidenceRef property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the peptideEvidence property.
+     * This is why there is not a <CODE>set</CODE> method for the peptideEvidenceRef property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPeptideEvidence().add(newItem);
+     *    getPeptideEvidenceRef().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link PeptideEvidence }
+     * {@link PeptideEvidenceRef }
      * 
      * 
      */
-    public List<PeptideEvidence> getPeptideEvidence() {
-        if (peptideEvidence == null) {
-            peptideEvidence = new ArrayList<PeptideEvidence>();
+    public List<PeptideEvidenceRef> getPeptideEvidenceRef() {
+        if (peptideEvidenceRef == null) {
+            peptideEvidenceRef = new ArrayList<PeptideEvidenceRef>();
         }
-        return this.peptideEvidence;
+        return this.peptideEvidenceRef;
     }
+
+    /**
+     * Gets the value of the fragmentation property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Fragmentation }
+     *     
+     */
+    public Fragmentation getFragmentation() {
+        if(fragmentation == null){
+            this.fragmentation = new Fragmentation();
+        }
+        return fragmentation;
+    }
+
+
+    /**
+     * Gets the value of the fragmentation property.
+     *
+     * @return
+     *     possible object is
+     *     {@link Fragmentation }
+     *
+     */
+    public void setFragmentation(Fragmentation fragmentation) {
+        this.fragmentation = fragmentation;
+    }
+
 
     /**
      * Gets the value of the paramGroup property.
@@ -171,40 +221,16 @@ public class SpectrumIdentificationItem
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link UserParam }
      * {@link CvParam }
+     * {@link UserParam }
      * 
      * 
      */
-    public List<Param> getParamGroup() {
+    public List<AbstractParam> getParamGroup() {
         if (paramGroup == null) {
-            paramGroup = new ArrayList<Param>();
+            paramGroup = new ArrayList<AbstractParam>();
         }
         return this.paramGroup;
-    }
-
-    /**
-     * Gets the value of the fragmentation property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Fragmentation }
-     *     
-     */
-    public Fragmentation getFragmentation() {
-        return fragmentation;
-    }
-
-    /**
-     * Sets the value of the fragmentation property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Fragmentation }
-     *     
-     */
-    public void setFragmentation(Fragmentation value) {
-        this.fragmentation = value;
     }
 
     /**
@@ -299,20 +325,6 @@ public class SpectrumIdentificationItem
         return peptideRef;
     }
 
-    /**
-     * Sets the value of the peptideRef property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setPeptideRef(String value) {
-        this.peptideRef = value;
-        if ( peptide != null && !peptide.getId().equals(value) ) {
-            peptide = null;
-        }
-    }
 
     /**
      * Gets the value of the rank property.
@@ -358,20 +370,6 @@ public class SpectrumIdentificationItem
         return massTableRef;
     }
 
-    /**
-     * Sets the value of the massTableRef property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setMassTableRef(String value) {
-        this.massTableRef = value;
-        if ( massTable != null && !massTable.getId().equals(value) ) {
-            massTable = null;
-        }
-    }
 
     /**
      * Gets the value of the sampleRef property.
@@ -385,19 +383,22 @@ public class SpectrumIdentificationItem
         return sampleRef;
     }
 
+
     /**
-     * Sets the value of the sampleRef property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * Get the cv params for SpectrumIdentification
+     * @return
+     *    List<CvParam> A FacadeList providing a CvParam view of the underlying param list.
      */
-    public void setSampleRef(String value) {
-        this.sampleRef = value;
-        if ( sample != null && !sample.getId().equals(value) ) {
-            sample = null;
-        }
+    public List getCvParam() {
+        return new FacadeList(this.getParamGroup(), CvParam.class);
     }
 
+    /**
+     * Get the user params for SpectrumIdentification
+     * @return
+     *    List<UserParam> A FacadeList providing a UserParam view of the underlying param list.
+     */
+    public List getUserParam() {
+        return new FacadeList(this.getParamGroup(), UserParam.class);
+    }
 }

@@ -2,7 +2,6 @@ package uk.ac.ebi.jmzidml.model;
 
 import uk.ac.ebi.jmzidml.model.mzidml.CvParam;
 import uk.ac.ebi.jmzidml.model.mzidml.Identifiable;
-import uk.ac.ebi.jmzidml.model.mzidml.Param;
 import uk.ac.ebi.jmzidml.model.mzidml.UserParam;
 
 import javax.xml.bind.annotation.XmlTransient;
@@ -37,34 +36,5 @@ public abstract class AbstractIdentifiableParamGroup extends Identifiable implem
         return userParams;
     }
 
-    public void splitParamList() {
-        if (getCvParam() == null || getCvParam().size() != 0) {
-            throw new IllegalStateException("Error in initialisation. List of CvParam objects should be not null and empty in afterUnmarshal operation!");
-        }
-        if (getUserParam() == null || getUserParam().size() != 0) {
-            throw new IllegalStateException("Error in initialisation. List of UserParam objects should be not null and empty in afterUnmarshal operation!");
-        }
-        for (Param param : getParamGroup()) {
-            if (param instanceof CvParam) {
-                getCvParam().add((CvParam) param);
-            }
-            if (param instanceof UserParam) {
-                getUserParam().add((UserParam) param);
-            }
-        }
-    }
-
-    public void updateParamList() {
-        // whatever we had in the List of Params, we only
-        // consider what is in the CvParam/UserParam lists now.
-        getParamGroup().clear();
-        // combine the List<CvParam> and List<UserParam> in the one List<Param> that will be marshalled.
-        for (CvParam cvParam : getCvParam()) {
-            getParamGroup().add(cvParam);
-        }
-        for (UserParam userParam : getUserParam()) {
-            getParamGroup().add(userParam);
-        }
-    }
 
 }

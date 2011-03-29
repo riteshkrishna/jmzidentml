@@ -1,7 +1,8 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.AbstractIdentifiableParamGroup;
+import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
+import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
@@ -14,18 +15,19 @@ import java.util.List;
  *                 located.
  *             
  * 
- * <p>Java class for PSI-PI.analysis.process.PeptideEvidenceType complex type.
+ * <p>Java class for PeptideEvidenceType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="PSI-PI.analysis.process.PeptideEvidenceType">
+ * &lt;complexType name="PeptideEvidenceType">
  *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Common.IdentifiableType">
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType">
  *       &lt;sequence>
- *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.0}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
- *       &lt;attribute name="DBSequence_Ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="DBSequence_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="Peptide_ref" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="start" type="{http://www.w3.org/2001/XMLSchema}int" />
  *       &lt;attribute name="end" type="{http://www.w3.org/2001/XMLSchema}int" />
  *       &lt;attribute name="pre">
@@ -43,7 +45,7 @@ import java.util.List;
  *         &lt;/simpleType>
  *       &lt;/attribute>
  *       &lt;attribute name="TranslationTable_ref" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="frame" type="{http://psidev.info/psi/pi/mzIdentML/1.0}allowed_frames" />
+ *       &lt;attribute name="frame" type="{http://psidev.info/psi/pi/mzIdentML/1.1}allowed_frames" />
  *       &lt;attribute name="isDecoy" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" />
  *       &lt;attribute name="missedCleavages" type="{http://www.w3.org/2001/XMLSchema}int" />
  *     &lt;/extension>
@@ -54,22 +56,24 @@ import java.util.List;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PSI-PI.analysis.process.PeptideEvidenceType", propOrder = {
+@XmlType(name = "PeptideEvidenceType", propOrder = {
     "paramGroup"
 })
 public class PeptideEvidence
-    extends AbstractIdentifiableParamGroup
-    implements Serializable
+    extends Identifiable
+    implements Serializable  , ParamGroupCapable
 {
 
     private final static long serialVersionUID = 100L;
     @XmlElements({
-        @XmlElement(name = "userParam", type = UserParam.class),
-        @XmlElement(name = "cvParam", type = CvParam.class)
+        @XmlElement(name = "cvParam", type = CvParam.class),
+        @XmlElement(name = "userParam", type = UserParam.class)
     })
-    protected List<Param> paramGroup;
-    @XmlAttribute(name = "DBSequence_Ref", required = true)
+    protected List<AbstractParam> paramGroup;
+    @XmlAttribute(name = "dBSequence_ref", required = true)
     protected String dbSequenceRef;
+    @XmlAttribute(name = "peptide_ref")
+    protected String peptideRef;
     @XmlAttribute
     protected Integer start;
     @XmlAttribute
@@ -78,7 +82,7 @@ public class PeptideEvidence
     protected String pre;
     @XmlAttribute
     protected String post;
-    @XmlAttribute(name = "TranslationTable_ref")
+    @XmlAttribute(name = "translationTable_ref")
     protected String translationTableRef;
     @XmlAttribute
     protected Integer frame;
@@ -87,20 +91,44 @@ public class PeptideEvidence
     @XmlAttribute
     protected Integer missedCleavages;
 
+
+
     @XmlTransient
-    private DBSequence dbSequence;
+    protected DBSequence dbSequence;
     @XmlTransient
-    private TranslationTable translationTable;
+    protected Peptide peptide;
+    @XmlTransient
+    protected TranslationTable translationTable;
+
+
+    public Peptide getPeptide() {
+        return peptide;
+    }
+
+    public void setPeptide(Peptide peptide) {
+        if (peptide == null) {
+            this.peptideRef = null;
+        } else {
+            String refId = peptide.getId();
+            if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
+            this.peptideRef = refId;
+        }
+        this.peptide = peptide;
+    }
 
     public DBSequence getDBSequence() {
         return dbSequence;
     }
 
     public void setDBSequence(DBSequence dbSequence) {
-        this.dbSequence = dbSequence;
-        if (dbSequence != null) {
-            this.dbSequenceRef = dbSequence.getId();
+        if (dbSequence == null) {
+            this.dbSequenceRef = null;
+        } else {
+            String refId = dbSequence.getId();
+            if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
+            this.dbSequenceRef = refId;
         }
+        this.dbSequence = dbSequence;
     }
 
     public TranslationTable getTranslationTable() {
@@ -108,10 +136,14 @@ public class PeptideEvidence
     }
 
     public void setTranslationTable(TranslationTable translationTable) {
-        this.translationTable = translationTable;
-        if (translationTable != null) {
-            this.translationTableRef = translationTable.getId();
+        if (translationTable == null) {
+            this.translationTableRef = null;
+        } else {
+            String refId = translationTable.getId();
+            if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
+            this.translationTableRef = refId;
         }
+        this.translationTable = translationTable;
     }
 
     /**
@@ -132,14 +164,14 @@ public class PeptideEvidence
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link UserParam }
      * {@link CvParam }
+     * {@link UserParam }
      * 
      * 
      */
-    public List<Param> getParamGroup() {
+    public List<AbstractParam> getParamGroup() {
         if (paramGroup == null) {
-            paramGroup = new ArrayList<Param>();
+            paramGroup = new ArrayList<AbstractParam>();
         }
         return this.paramGroup;
     }
@@ -157,19 +189,17 @@ public class PeptideEvidence
     }
 
     /**
-     * Sets the value of the dbSequenceRef property.
+     * Gets the value of the peptideRef property.
      * 
-     * @param value
-     *     allowed object is
+     * @return
+     *     possible object is
      *     {@link String }
      *     
      */
-    public void setDBSequenceRef(String value) {
-        this.dbSequenceRef = value;
-        if ( dbSequence != null && !dbSequence.getId().equals(value) ) {
-            dbSequence = null;
-        }
+    public String getPeptideRef() {
+        return peptideRef;
     }
+
 
     /**
      * Gets the value of the start property.
@@ -279,20 +309,6 @@ public class PeptideEvidence
         return translationTableRef;
     }
 
-    /**
-     * Sets the value of the translationTableRef property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setTranslationTableRef(String value) {
-        this.translationTableRef = value;
-        if ( translationTable != null && !translationTable.getId().equals(value) ) {
-            translationTable = null;
-        }
-    }
 
     /**
      * Gets the value of the frame property.
@@ -370,4 +386,11 @@ public class PeptideEvidence
         this.missedCleavages = value;
     }
 
+    public List getCvParam() {
+        return new FacadeList(this.getParamGroup(), CvParam.class);
+    }
+
+    public List getUserParam() {
+        return new FacadeList(this.getParamGroup(), UserParam.class);
+    }
 }

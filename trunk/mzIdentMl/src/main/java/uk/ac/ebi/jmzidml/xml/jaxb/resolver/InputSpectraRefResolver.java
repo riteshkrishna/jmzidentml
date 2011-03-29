@@ -19,30 +19,11 @@ public class InputSpectraRefResolver extends AbstractReferenceResolver<InputSpec
 
     @Override
     public void updateObject(InputSpectra object) {
-        // if we automatically resolve the references, then update the object with the referenced object
-        if (MzIdentMLElement.InputSpectra.isAutoRefResolving()) {
-            // add objects for the refID
-            String ref = object.getSpectraDataRef();
-            if (ref != null) {
-                SpectraData refObject = this.unmarshal(ref, SpectraData.class);
-                object.setSpectraData(refObject);
-            }
-        }
-    }
-
-    /**
-     * A method to be called before the marshall process.
-     * Whenever a referenced object is set, its refID should be updated
-     * automatically, so that the refID and the ID of the object are
-     * always in sync. Here we check that this is the case.
-     *
-     * @param object The Object to check for reference ID integrity.
-     */
-    @Override
-    public void checkRefID(InputSpectra object) {
-        // if there is a referenced object and its ID does not correspond to the refID, then there is something wrong
-        if ( object.getSpectraData() != null && !object.getSpectraDataRef().equals(object.getSpectraData().getId()) ) {
-            throw new IllegalStateException("Reference ID and referenced object ID do not match!");
+        // add objects for the refID
+        String ref = object.getSpectraDataRef();
+        if (ref != null) {
+            SpectraData refObject = this.unmarshal(ref, SpectraData.class);
+            object.setSpectraData(refObject);
         }
     }
 
@@ -55,8 +36,8 @@ public class InputSpectraRefResolver extends AbstractReferenceResolver<InputSpec
      */
     @Override
     public void afterUnmarshal(Object target, Object parent) {
-        if (InputSpectra.class.isInstance(target)) {
-            updateObject((InputSpectra)target);
+        if (InputSpectra.class.isInstance(target) && MzIdentMLElement.InputSpectra.isAutoRefResolving()) {
+            updateObject((InputSpectra) target);
         } // else, not business of this resolver
     }
 }

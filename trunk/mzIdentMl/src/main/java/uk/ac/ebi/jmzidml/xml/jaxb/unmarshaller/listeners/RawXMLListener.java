@@ -6,8 +6,6 @@ import uk.ac.ebi.jmzidml.model.CvParamCapable;
 import uk.ac.ebi.jmzidml.model.CvParamListCapable;
 import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
 import uk.ac.ebi.jmzidml.model.mzidml.CvParam;
-import uk.ac.ebi.jmzidml.model.mzidml.ParamAlternative;
-import uk.ac.ebi.jmzidml.model.mzidml.ParamAlternativeList;
 import uk.ac.ebi.jmzidml.model.utils.ParamUpdater;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLObjectCache;
 import uk.ac.ebi.jmzidml.xml.jaxb.resolver.AbstractReferenceResolver;
@@ -73,27 +71,21 @@ public class RawXMLListener extends Unmarshaller.Listener {
             // now we check what kind of object we are dealing with
             // NOTE: the order of the if statements is IMPORTANT!
             // (every AbstractParamGroup is a CvParamCapable, but not vice versa)
-            if (target instanceof ParamAlternative) {
-                // special case, no need to subclass and only one Param!
-                ((ParamAlternative)target).afterUnmarshalOperation();
-            } else if (target instanceof ParamGroupCapable) {
+            if (target instanceof ParamGroupCapable) {
                 // in this case we not only have to subclass the params, but also to split them up
                 ParamGroupCapable apg = (ParamGroupCapable) target;
                 // first we are going to split the List<Param> in a List<CvParam> and a List<UserParam>
-                apg.splitParamList();
+            //    apg.splitParamList();
                 // then we are going to subclass the params
-                if (target instanceof ParamAlternativeList) {
-                    // no need to subclass
-                } else {
-                    if (ele.getCvParamClass() == null) {
-                        throw new IllegalStateException("Subclass of AbstractParamGroup does not have CvParam subclass! " + target.getClass());
-                    }
-                    ParamUpdater.updateCvParamSubclassesList(apg.getCvParam(), ele.getCvParamClass());
-                    if (ele.getUserParamClass() == null) {
-                        throw new IllegalStateException("Subclass of AbstractParamGroup does not have UserParam subclass! " + target.getClass());
-                    }
-                    ParamUpdater.updateUserParamSubclassesList(apg.getUserParam(), ele.getUserParamClass());
+
+                if (ele.getCvParamClass() == null) {
+                    throw new IllegalStateException("Subclass of AbstractParamGroup does not have CvParam subclass! " + target.getClass());
                 }
+                ParamUpdater.updateCvParamSubclassesList(apg.getCvParam(), ele.getCvParamClass());
+                if (ele.getUserParamClass() == null) {
+                    throw new IllegalStateException("Subclass of AbstractParamGroup does not have UserParam subclass! " + target.getClass());
+                }
+                ParamUpdater.updateUserParamSubclassesList(apg.getUserParam(), ele.getUserParamClass());
             } else if (target instanceof CvParamCapable) {
                 // no need to split up params, but we need to subclass them
                 CvParamCapable cpc = (CvParamCapable) target;
@@ -101,7 +93,7 @@ public class RawXMLListener extends Unmarshaller.Listener {
                     throw new IllegalStateException("Subclass of AbstractParamGroup does not have CvParam subclass! " + target.getClass());
                 }
                 CvParam param = cpc.getCvParam();
-                cpc.setCvParam( ParamUpdater.updateCvParamSubclass(param, ele.<CvParam>getCvParamClass()) );
+                cpc.setCvParam(ParamUpdater.updateCvParamSubclass(param, ele.<CvParam>getCvParamClass()));
             } else if (target instanceof CvParamListCapable) {
                 CvParamListCapable cpc = (CvParamListCapable) target;
                 if (ele.getCvParamClass() == null) {

@@ -1,23 +1,23 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
+import java.io.Serializable;
 
 
 /**
  * A single user-defined parameter.
  * 
- * <p>Java class for FuGE.Common.Ontology.userParamType complex type.
+ * <p>Java class for UserParamType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="FuGE.Common.Ontology.userParamType">
+ * &lt;complexType name="UserParamType">
  *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Common.Ontology.ParamType">
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}AbstractParamType">
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -26,9 +26,9 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "FuGE.Common.Ontology.userParamType")
+@XmlType(name = "UserParamType")
 public class UserParam
-    extends Param
+    extends AbstractParam
     implements Serializable
 {
 

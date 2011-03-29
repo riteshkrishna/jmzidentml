@@ -19,30 +19,11 @@ public class SpectrumIdentificationProtocolRefResolver extends AbstractReference
 
     @Override
     public void updateObject(SpectrumIdentificationProtocol object) {
-        // if we automatically resolve the references, then update the object with the referenced object
-        if (MzIdentMLElement.SpectrumIdentificationProtocol.isAutoRefResolving()) {
-            // add objects for the refID
-            String ref = object.getAnalysisSoftwareRef();
-            if (ref != null) {
-                AnalysisSoftware refObject = this.unmarshal(ref, AnalysisSoftware.class);
-                object.setAnalysisSoftware(refObject);
-            }
-        }
-    }
-
-    /**
-     * A method to be called before the marshall process.
-     * Whenever a referenced object is set, its refID should be updated
-     * automatically, so that the refID and the ID of the object are
-     * always in sync. Here we check that this is the case.
-     *
-     * @param object The Object to check for reference ID integrity.
-     */
-    @Override
-    public void checkRefID(SpectrumIdentificationProtocol object) {
-        // if there is a referenced object and its ID does not correspond to the refID, then there is something wrong
-        if ( object.getAnalysisSoftware()!= null && !object.getAnalysisSoftwareRef().equals(object.getAnalysisSoftware().getId()) ) {
-            throw new IllegalStateException("Reference ID and referenced object ID do not match!");
+        // add objects for the refID
+        String ref = object.getAnalysisSoftwareRef();
+        if (ref != null) {
+            AnalysisSoftware refObject = this.unmarshal(ref, AnalysisSoftware.class);
+            object.setAnalysisSoftware(refObject);
         }
     }
 
@@ -55,8 +36,8 @@ public class SpectrumIdentificationProtocolRefResolver extends AbstractReference
      */
     @Override
     public void afterUnmarshal(Object target, Object parent) {
-        if (SpectrumIdentificationProtocol.class.isInstance(target)) {
-            updateObject((SpectrumIdentificationProtocol)target);
+        if (SpectrumIdentificationProtocol.class.isInstance(target) && MzIdentMLElement.SpectrumIdentificationProtocol.isAutoRefResolving()) {
+            updateObject((SpectrumIdentificationProtocol) target);
         } // else, not business of this resolver
     }
 

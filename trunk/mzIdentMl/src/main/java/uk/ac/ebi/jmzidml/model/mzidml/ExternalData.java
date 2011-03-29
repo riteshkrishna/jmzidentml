@@ -10,17 +10,17 @@ import java.io.Serializable;
  *                 location attribute.
  *             
  * 
- * <p>Java class for FuGE.Bio.Data.ExternalDataType complex type.
+ * <p>Java class for ExternalDataType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="FuGE.Bio.Data.ExternalDataType">
+ * &lt;complexType name="ExternalDataType">
  *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Bio.Data.DataType">
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType">
  *       &lt;sequence>
  *         &lt;element name="externalFormatDocumentation" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
- *         &lt;element name="fileFormat" type="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Bio.Data.FileFormatType" minOccurs="0"/>
+ *         &lt;element name="fileFormat" type="{http://psidev.info/psi/pi/mzIdentML/1.1}FileFormatType" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="location" use="required" type="{http://www.w3.org/2001/XMLSchema}anyURI" />
  *     &lt;/extension>
@@ -31,23 +31,25 @@ import java.io.Serializable;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "FuGE.Bio.Data.ExternalDataType", propOrder = {
+@XmlType(name = "ExternalDataType", propOrder = {
     "externalFormatDocumentation",
     "fileFormat"
 })
 @XmlSeeAlso({
+    SpectraData.class,
     SourceFile.class,
-    AnalysisSearchDatabase.class,
-    SpectraData.class
+    AnalysisSearchDatabase.class
 })
 public class ExternalData
-    extends Data
+    extends Identifiable
     implements Serializable
 {
 
     private final static long serialVersionUID = 100L;
+    @XmlElement(name = "ExternalFormatDocumentation")
     @XmlSchemaType(name = "anyURI")
     protected String externalFormatDocumentation;
+    @XmlElement(name="FileFormat")
     protected FileFormat fileFormat;
     @XmlAttribute(required = true)
     @XmlSchemaType(name = "anyURI")

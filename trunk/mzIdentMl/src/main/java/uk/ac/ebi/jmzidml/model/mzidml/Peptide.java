@@ -1,5 +1,11 @@
 
+
+
+
 package uk.ac.ebi.jmzidml.model.mzidml;
+
+import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
+import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
@@ -10,19 +16,19 @@ import java.util.List;
 /**
  * One (poly)peptide (a sequence with modifications).
  * 
- * <p>Java class for PSI-PI.polypeptide.PeptideType complex type.
+ * <p>Java class for PeptideType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="PSI-PI.polypeptide.PeptideType">
+ * &lt;complexType name="PeptideType">
  *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.0}FuGE.Bio.ConceptualMolecule.ConceptualMoleculeType">
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType">
  *       &lt;sequence>
- *         &lt;element name="peptideSequence" type="{http://psidev.info/psi/pi/mzIdentML/1.0}sequence"/>
- *         &lt;element name="Modification" type="{http://psidev.info/psi/pi/mzIdentML/1.0}PSI-PI.polypeptide.ModificationType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="SubstitutionModification" type="{http://psidev.info/psi/pi/mzIdentML/1.0}PSI-PI.polypeptide.SubstitutionModificationType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.0}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="PeptideSequence" type="{http://psidev.info/psi/pi/mzIdentML/1.1}sequence"/>
+ *         &lt;element name="Modification" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ModificationType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="SubstitutionModification" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SubstitutionModificationType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>
@@ -32,29 +38,29 @@ import java.util.List;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PSI-PI.polypeptide.PeptideType", propOrder = {
+@XmlType(name = "PeptideType", propOrder = {
     "peptideSequence",
     "modification",
     "substitutionModification",
     "paramGroup"
 })
 public class Peptide
-    extends ConceptualMolecule
-    implements Serializable
+    extends Identifiable
+    implements Serializable, ParamGroupCapable
 {
 
     private final static long serialVersionUID = 100L;
-    @XmlElement(required = true)
+    @XmlElement(name = "PeptideSequence", required = true)
     protected String peptideSequence;
     @XmlElement(name = "Modification")
     protected List<Modification> modification;
     @XmlElement(name = "SubstitutionModification")
     protected List<SubstitutionModification> substitutionModification;
     @XmlElements({
-        @XmlElement(name = "userParam", type = UserParam.class),
-        @XmlElement(name = "cvParam", type = CvParam.class)
+        @XmlElement(name = "cvParam", type = CvParam.class),
+        @XmlElement(name = "userParam", type = UserParam.class)
     })
-    protected List<Param> paramGroup;
+    protected List<AbstractParam> paramGroup;
 
     /**
      * Gets the value of the peptideSequence property.
@@ -156,16 +162,24 @@ public class Peptide
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link UserParam }
      * {@link CvParam }
+     * {@link UserParam }
      * 
      * 
      */
-    public List<Param> getParamGroup() {
+    public List<AbstractParam> getParamGroup() {
         if (paramGroup == null) {
-            paramGroup = new ArrayList<Param>();
+            paramGroup = new ArrayList<AbstractParam>();
         }
         return this.paramGroup;
+    }
+
+    public List getCvParam() {
+        return new FacadeList(this.getParamGroup(), CvParam.class);
+    }
+
+    public List getUserParam() {
+        return new FacadeList(this.getParamGroup(), UserParam.class);
     }
 
 }

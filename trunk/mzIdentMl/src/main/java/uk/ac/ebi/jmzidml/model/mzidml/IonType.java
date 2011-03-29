@@ -21,10 +21,10 @@ import java.util.List;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://psidev.info/psi/pi/mzIdentML/1.0}cvParam"/>
- *         &lt;element name="FragmentArray" type="{http://psidev.info/psi/pi/mzIdentML/1.0}FragmentArrayType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="FragmentArray" type="{http://psidev.info/psi/pi/mzIdentML/1.1}FragmentArrayType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="cvParam" type="{http://psidev.info/psi/pi/mzIdentML/1.1}cvParamType"/>
  *       &lt;/sequence>
- *       &lt;attribute name="index" type="{http://psidev.info/psi/pi/mzIdentML/1.0}listOfIntegers" />
+ *       &lt;attribute name="index" type="{http://psidev.info/psi/pi/mzIdentML/1.1}listOfIntegers" />
  *       &lt;attribute name="charge" use="required" type="{http://www.w3.org/2001/XMLSchema}int" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,18 +35,13 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "IonTypeType", propOrder = {
-    "cvParam",
     "fragmentArray"
+        ,"cvParam"
 })
 public class IonType
-    implements Serializable, MzIdentMLObject, CvParamCapable
+    extends MzIdentMLObject
+    implements Serializable, CvParamCapable
 {
-    @XmlTransient
-    private Long hid;
-
-    public Long getHid() {
-        return hid;
-    }
 
     private final static long serialVersionUID = 100L;
     @XmlElement(required = true)
@@ -57,30 +52,6 @@ public class IonType
     protected List<BigInteger> index;
     @XmlAttribute(required = true)
     protected int charge;
-
-    /**
-     * The type of ion identified.
-     * 
-     * @return
-     *     possible object is
-     *     {@link CvParam }
-     *     
-     */
-    public CvParam getCvParam() {
-        return cvParam;
-    }
-
-    /**
-     * Sets the value of the cvParam property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link CvParam }
-     *     
-     */
-    public void setCvParam(CvParam value) {
-        this.cvParam = value;
-    }
 
     /**
      * Gets the value of the fragmentArray property.
@@ -109,6 +80,30 @@ public class IonType
             fragmentArray = new ArrayList<FragmentArray>();
         }
         return this.fragmentArray;
+    }
+
+    /**
+     * Gets the value of the cvParam property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link CvParam }
+     *     
+     */
+    public CvParam getCvParam() {
+        return cvParam;
+    }
+
+    /**
+     * Sets the value of the cvParam property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link CvParam }
+     *     
+     */
+    public void setCvParam(CvParam value) {
+        this.cvParam = value;
     }
 
     /**

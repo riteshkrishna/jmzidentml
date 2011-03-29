@@ -43,6 +43,7 @@ public class MarshallerFactory {
             // See: ParamAlternative.beforeMarshalOperation and ParamAlternativeList.beforeMarshalOperation
             marshaller.setListener(new ObjectClassListener());
 
+
             logger.info("Marshaller initialized");
 
             return marshaller;

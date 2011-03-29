@@ -11,7 +11,7 @@ package uk.ac.ebi.jmzidml.model;
  *         Date: 16-Nov-2010
  * @since 1.0
  */
-public interface IdentifiableMzIdentMLObject extends MzIdentMLObject {
+public interface IdentifiableMzIdentMLObject {
 
     public String getId();
 }

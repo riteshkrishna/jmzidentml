@@ -73,6 +73,7 @@ public abstract class InternalData
         if (getUserParam() == null || getUserParam().size() != 0) {
             throw new IllegalStateException("Error in initialisation. List of UserParam objects should be not null and empty in afterUnmarshal operation!");
         }
+/*
         for (Param param : getParamGroup()) {
             if (param instanceof CvParam) {
                 getCvParam().add((CvParam) param);
@@ -81,19 +82,20 @@ public abstract class InternalData
                 getUserParam().add((UserParam) param);
             }
         }
+*/
     }
 
     public void updateParamList() {
         // whatever we had in the List of Params, we only
         // consider what is in the CvParam/UserParam lists now.
-        getParamGroup().clear();
+        /*getParamGroup().clear();
         // combine the List<CvParam> and List<UserParam> in the one List<Param> that will be marshalled.
         for (CvParam cvParam : getCvParam()) {
             getParamGroup().add(cvParam);
         }
         for (UserParam userParam : getUserParam()) {
             getParamGroup().add(userParam);
-        }
+        }*/
     }
 
 

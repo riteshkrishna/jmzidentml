@@ -25,7 +25,6 @@ package uk.ac.ebi.jmzidml.xml.io;
 import org.apache.log4j.Logger;
 import org.xml.sax.InputSource;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
-import uk.ac.ebi.jmzidml.model.IdentifiableMzIdentMLObject;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.UnmarshallerFactory;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.filters.MzIdentMLNamespaceFilter;
@@ -106,17 +105,17 @@ public class MzIdentMLObjectIterator<T extends MzIdentMLObject> implements Itera
         // So here we check if the umarshalled Object has a representative in
         // the cache (e.g. an Object with the same ID), if so we return that
         // if not, we cache the new Object and return that.
-        if (cache != null && retval instanceof IdentifiableMzIdentMLObject) {
-            IdentifiableMzIdentMLObject object = (IdentifiableMzIdentMLObject) retval;
-            T cachedObject = (T) cache.getCachedObject(object.getId(), object.getClass());
-            if (cachedObject != null) {
-                // discard the unmarshalled object and return the cached version
-                retval = cachedObject;
-            } else {
-                // not in cache yet, so put it in
-                cache.putInCache(object);
-            }
-        }
+//        if (cache != null && retval instanceof IdentifiableMzIdentMLObject) {
+//            IdentifiableMzIdentMLObject object = (IdentifiableMzIdentMLObject) retval;
+//            T cachedObject = (T) cache.getCachedObject(object.getId(), object.getClass());
+//            if (cachedObject != null) {
+//                // discard the unmarshalled object and return the cached version
+//                retval = cachedObject;
+//            } else {
+//                // not in cache yet, so put it in
+//                cache.putInCache(object);
+//            }
+//        }
 
         return retval;
     }
