@@ -57,7 +57,7 @@ public class SequenceCollectionTest extends TestCase {
         assertEquals(dbseq.getLength().intValue(), dbseq.getSeq().length());
 
         assertEquals(3, dbseq.getParamGroup().size());
-        for (Param param : dbseq.getParamGroup()) {
+        for (AbstractParam param : dbseq.getParamGroup()) {
             log.debug("Param:" + param.getName()
                     + " acc:" + param.getUnitAccession()
                     + " value:" + param.getValue()

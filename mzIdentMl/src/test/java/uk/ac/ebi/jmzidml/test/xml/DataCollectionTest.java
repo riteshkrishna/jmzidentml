@@ -151,13 +151,18 @@ public class DataCollectionTest extends TestCase {
                         assertNull(spectrumIdentItem.getPeptide());
                     }
 
-                    for (PeptideEvidence peptideEvidence : spectrumIdentItem.getPeptideEvidence()) {
-                        if (MzIdentMLElement.PeptideEvidence.isAutoRefResolving() && peptideEvidence.getDBSequenceRef() != null) {
-                            assertNotNull(peptideEvidence.getDBSequence());
-                            assertTrue(peptideEvidence.getDBSequence().getSeq().length() > 30);
+                    for (PeptideEvidenceRef peptideEvidenceRef : spectrumIdentItem.getPeptideEvidenceRef()) {
+                        if (MzIdentMLElement.PeptideEvidence.isAutoRefResolving() && peptideEvidenceRef.getPeptideEvidence().getDBSequenceRef() != null) {
+                            assertNotNull(peptideEvidenceRef.getPeptideEvidence().getDBSequence());
+                            assertTrue(peptideEvidenceRef.getPeptideEvidence().getDBSequence().getSeq().length() > 30);
                         } else {
                             System.out.println("PeptideEvidence is not auto-resolving or does not contain a DBSequence reference.");
-                            assertNull(peptideEvidence.getDBSequence());
+                            /**
+                             *  Now that peptideevidence is not auto resolving confirm PeptideEvidence is null
+                             */
+                            assertNull(peptideEvidenceRef.getPeptideEvidence());
+
+
                         }
                     }
                 } // end spectrum identification items
