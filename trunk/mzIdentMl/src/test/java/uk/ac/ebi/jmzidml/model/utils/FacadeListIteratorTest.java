@@ -2,8 +2,8 @@ package uk.ac.ebi.jmzidml.model.utils;
 
 import org.junit.Before;
 import org.junit.Test;
+import uk.ac.ebi.jmzidml.model.mzidml.AbstractParam;
 import uk.ac.ebi.jmzidml.model.mzidml.CvParam;
-import uk.ac.ebi.jmzidml.model.mzidml.Param;
 import uk.ac.ebi.jmzidml.model.mzidml.UserParam;
 
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class FacadeListIteratorTest {
 
     @Before
     public void setUp() throws Exception {
-        List<Param> paramList = new ArrayList<Param>();
+        List<AbstractParam> paramList = new ArrayList<AbstractParam>();
 
         CvParam cv = new CvParam();
         cv.setAccession("CV1");

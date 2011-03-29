@@ -121,8 +121,12 @@ public class AnalysisCollectionTest extends TestCase {
                 SpectrumIdentificationProtocol sip = sid.getSpectrumIdentificationProtocol();
                 assertNotNull(sip);
                 if (MzIdentMLElement.SpectrumIdentificationProtocol.isAutoRefResolving() && sip.getAnalysisSoftwareRef() != null) {
+/*
+                    contact class has been removed. this information is now stored in a list of params. A utility
+                    class will provide convenience methods wuch as getAddress and getEmail which will parse
                     log.debug("Software Name :" + sip.getAnalysisSoftware().getSoftwareName().getCvParam().getName());
                     assertEquals("Mascot", sip.getAnalysisSoftware().getSoftwareName().getCvParam().getName());
+*/
                 } else {
                     System.out.println("SpectrumIdentificationProtocol is not auto-resolving or does not contain a Software reference.");
                     assertNull(sip.getAnalysisSoftware());
@@ -144,10 +148,10 @@ public class AnalysisCollectionTest extends TestCase {
                 assertNull(iSpectra.getSpectraData());
             }
 
-            List<SearchDatabase> sdbl  = sid.getSearchDatabase();
+            List<SearchDatabaseRef> sdbl  = sid.getSearchDatabaseRef();
             assertTrue(sdbl.size() > 0);
-            for (SearchDatabase db : sdbl) {
-                if (MzIdentMLElement.SearchDatabase.isAutoRefResolving() && db.getSearchDatabaseRef() != null) {
+            for (SearchDatabaseRef db : sdbl) {
+                if (MzIdentMLElement.SearchDatabaseRef.isAutoRefResolving() && db.getSearchDatabaseRef() != null) {
                     AnalysisSearchDatabase searchDB = db.getSearchDatabase();
                     assertNotNull(searchDB);
                     assertEquals("SwissProt", searchDB.getName());

@@ -43,7 +43,6 @@ public class CvListTest extends TestCase {
         for (Cv cv : cvs) {
             assertTrue(cv.getURI().endsWith(".obo"));
         }
-
     }
 
 }

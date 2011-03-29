@@ -2,8 +2,8 @@ package uk.ac.ebi.jmzidml.model.utils;
 
 import org.junit.Before;
 import org.junit.Test;
+import uk.ac.ebi.jmzidml.model.mzidml.AbstractParam;
 import uk.ac.ebi.jmzidml.model.mzidml.CvParam;
-import uk.ac.ebi.jmzidml.model.mzidml.Param;
 import uk.ac.ebi.jmzidml.model.mzidml.UserParam;
 
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class FacadeIteratorTest {
 
     @Before
     public void setUp() throws Exception {
-        List<Param> paramList = new ArrayList<Param>();
+        List<AbstractParam> paramList = new ArrayList<AbstractParam>();
 
         CvParam cv = new CvParam();
         cv.setAccession("CV1");
@@ -189,23 +189,5 @@ public class FacadeIteratorTest {
                 assertTrue(false);
             }
         }
-    }
-
-    @Test
-    public void testaddtosublist() throws Exception {
-        List test = new ArrayList();
-        test.add("1");
-        test.add("2");
-        test.add("3");
-        test.add("4");
-        test.add("5");
-        test.add("6");
-        test.add("7");
-        test.add("8");
-        List sublist = test.subList(2, 6);
-        System.out.println("sublist " + sublist);
-        sublist.add("9");
-        System.out.println("sublist " + sublist);
-        System.out.println("original list " + test);
     }
 }

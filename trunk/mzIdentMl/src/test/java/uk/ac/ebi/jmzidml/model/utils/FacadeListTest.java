@@ -4,8 +4,8 @@ package uk.ac.ebi.jmzidml.model.utils;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import uk.ac.ebi.jmzidml.model.mzidml.AbstractParam;
 import uk.ac.ebi.jmzidml.model.mzidml.CvParam;
-import uk.ac.ebi.jmzidml.model.mzidml.Param;
 import uk.ac.ebi.jmzidml.model.mzidml.UserParam;
 
 import java.util.ArrayList;
@@ -20,13 +20,13 @@ import static org.junit.Assert.*;
  * ToDo; Add test for equals methods comparing different instances of Params that contain identical value. Params equals methods have to be overridden first.
  */
 public class FacadeListTest {
-    private List<Param> paramList;
+    private List<AbstractParam> paramList;
     private FacadeList<CvParam> cvList;
     private FacadeList<UserParam> userList;
 
     @Before
     public void setUp() throws Exception {
-        paramList = new ArrayList<Param>();
+        paramList = new ArrayList<AbstractParam>();
 
         CvParam cv = new CvParam();
         cv.setAccession("CV1");
@@ -850,7 +850,7 @@ public class FacadeListTest {
 
     @Test
     public void testEqualsSameCvParamDiffList() throws Exception{
-        List<Param> newParamList = new ArrayList<Param>(paramList.size());
+        List<AbstractParam> newParamList = new ArrayList<AbstractParam>(paramList.size());
         newParamList.addAll(paramList);
         FacadeList<CvParam> newCvList = new FacadeList<CvParam>(newParamList, CvParam.class);
         assertTrue(this.cvList.equals(newCvList));
@@ -858,7 +858,7 @@ public class FacadeListTest {
 
     @Test
     public void testEqualsSameCvParamDiffUserParamOrder() throws Exception{
-        List<Param> newParamList = new ArrayList<Param>(paramList.size());
+        List<AbstractParam> newParamList = new ArrayList<AbstractParam>(paramList.size());
         newParamList.addAll(paramList);
         UserParam userParam = this.userList.get(0);
         this.userList.set(1, userParam);
@@ -884,7 +884,7 @@ public class FacadeListTest {
 
     @Test
     public void testHashCodeWithPositionModifiedUserParamsElements() throws Exception{
-        List<Param> newParamList = new ArrayList<Param>(paramList.size());
+        List<AbstractParam> newParamList = new ArrayList<AbstractParam>(paramList.size());
         newParamList.addAll(paramList);
         UserParam userParam = this.userList.get(0);
         this.userList.set(1, userParam);
