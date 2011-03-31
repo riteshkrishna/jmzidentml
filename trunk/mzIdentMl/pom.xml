@@ -3,9 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>uk.ac.ebi.jmzidml</groupId>
-    <artifactId>jmzidentml</artifactId>
+    <artifactId>jmzidentml-production</artifactId>
     <packaging>jar</packaging>
-    <version>0.2-SNAPSHOT</version>
+    <version>1</version>
     <name>mzIdentML Java core API</name>
 
     <developers>
