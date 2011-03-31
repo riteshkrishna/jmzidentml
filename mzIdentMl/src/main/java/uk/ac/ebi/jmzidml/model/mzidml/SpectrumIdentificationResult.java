@@ -177,8 +177,8 @@ public class SpectrumIdentificationResult
      * Get the cvparams for spectrumidentificationresult
      * @return
      */
-    public List getCvParam() {
-        return new FacadeList(this.getParamGroup(), CvParam.class);
+    public List<CvParam> getCvParam() {
+        return new FacadeList<CvParam>(this.getParamGroup(), CvParam.class);
     }
 
     /**
@@ -186,7 +186,7 @@ public class SpectrumIdentificationResult
      * @return
      */
 
-    public List getUserParam() {
-        return new FacadeList(this.getParamGroup(), UserParam.class);
+    public List<UserParam> getUserParam() {
+        return new FacadeList<UserParam>(this.getParamGroup(), UserParam.class);
     }
 }

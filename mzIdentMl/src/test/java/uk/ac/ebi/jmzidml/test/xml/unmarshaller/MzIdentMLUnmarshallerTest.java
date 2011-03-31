@@ -199,4 +199,21 @@ public class MzIdentMLUnmarshallerTest extends TestCase {
         assertTrue(sampleUserParams.size() == 1);
         assertTrue(sampleUserParams.get(0).getUnitCvRef().equals("UO"));
     }
+
+
+    @Test
+    public void testAuditCollection() throws Exception{
+        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
+        assertNotNull(unmarshaller);
+        Organization organization = unmarshaller.unmarshall(Organization.class, "ORG_MSL");
+        List<CvParam> cvParams = organization.getCvParam();
+        List<UserParam> userParams = organization.getUserParam();
+        assertTrue(cvParams.size() == 2);
+        assertTrue(userParams.size() == 2);
+        CvParam cvParam = cvParams.get(0);
+        assertTrue(cvParam.getAccession().equals("MS:1000589"));
+        UserParam userParam = userParams.get(0);
+        assertTrue(userParam.getValue().equals("+44 (0)20 7486 1050"));
+    }
 }
