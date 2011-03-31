@@ -79,8 +79,8 @@ public class ParamList
      * @return possible object is
      *         {@link uk.ac.ebi.jmzidml.model.utils.FacadeList }
      */
-    public List getCvParams() {
-        return new FacadeList(this.getParamGroup(), CvParam.class);
+    public List<CvParam> getCvParams() {
+        return new FacadeList<CvParam>(this.getParamGroup(), CvParam.class);
     }
 
     /**
@@ -89,8 +89,8 @@ public class ParamList
      * @return possible object is
      *         {@link FacadeList }
      */
-    public List getUserParams() {
-        return new FacadeList(this.getParamGroup(), UserParam.class);
+    public List<UserParam> getUserParams() {
+        return new FacadeList<UserParam>(this.getParamGroup(), UserParam.class);
     }
 
 

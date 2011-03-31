@@ -389,8 +389,8 @@ public class SpectrumIdentificationItem
      * @return
      *    List<CvParam> A FacadeList providing a CvParam view of the underlying param list.
      */
-    public List getCvParam() {
-        return new FacadeList(this.getParamGroup(), CvParam.class);
+    public List<CvParam> getCvParam() {
+        return new FacadeList<CvParam>(this.getParamGroup(), CvParam.class);
     }
 
     /**
@@ -398,7 +398,7 @@ public class SpectrumIdentificationItem
      * @return
      *    List<UserParam> A FacadeList providing a UserParam view of the underlying param list.
      */
-    public List getUserParam() {
-        return new FacadeList(this.getParamGroup(), UserParam.class);
+    public List<UserParam> getUserParam() {
+        return new FacadeList<UserParam>(this.getParamGroup(), UserParam.class);
     }
 }

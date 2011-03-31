@@ -198,11 +198,11 @@ public class Modification
         this.monoisotopicMassDelta = value;
     }
 
-    public List getCvParam() {
-        return new FacadeList(this.getParamGroup(), CvParam.class);
+    public List<CvParam> getCvParam() {
+        return new FacadeList<CvParam>(this.getParamGroup(), CvParam.class);
     }
 
-    public List getUserParam() {
-        return new FacadeList(this.getParamGroup(), UserParam.class);
+    public List<UserParam> getUserParam() {
+        return new FacadeList<UserParam>(this.getParamGroup(), UserParam.class);
     }
 }
