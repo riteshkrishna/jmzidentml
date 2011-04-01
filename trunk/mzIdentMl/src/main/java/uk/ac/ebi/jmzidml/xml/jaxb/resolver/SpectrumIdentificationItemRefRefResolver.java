@@ -1,19 +1,14 @@
 package uk.ac.ebi.jmzidml.xml.jaxb.resolver;
 
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
-import uk.ac.ebi.jmzidml.model.mzidml.Affiliations;
-import uk.ac.ebi.jmzidml.model.mzidml.Organization;
 import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationItem;
 import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationItemRef;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLObjectCache;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
 
 /**
- * Created by IntelliJ IDEA.
- * User: rwang
- * Date: 25/02/11
- * Time: 10:44
- * To change this template use File | Settings | File Templates.
+ * @author rwang
+ * @author florian
  */
 public class SpectrumIdentificationItemRefRefResolver extends AbstractReferenceResolver<SpectrumIdentificationItemRef> {
 
@@ -40,7 +35,7 @@ public class SpectrumIdentificationItemRefRefResolver extends AbstractReferenceR
      */
     @Override
     public void afterUnmarshal(Object target, Object parent) {
-        if (Affiliations.class.isInstance(target) && MzIdentMLElement.SpectrumIdentificationItemRef.isAutoRefResolving()) {
+        if (SpectrumIdentificationItemRef.class.isInstance(target) && MzIdentMLElement.SpectrumIdentificationItemRef.isAutoRefResolving()) {
             updateObject((SpectrumIdentificationItemRef) target);
         } // else, not business of this resolver
     }
