@@ -44,7 +44,6 @@ public abstract class AbstractReferenceResolver<T extends MzIdentMLObject> exten
 
     public <R extends MzIdentMLObject> R unmarshal(String refId, Class<R> cls) {
         R retVal;
-        Class<R> originalClass = cls;
 
         // check if we have a cache to look up, if so see if it contains the referenced object already
 //        if (cache != null) {
@@ -75,7 +74,6 @@ public abstract class AbstractReferenceResolver<T extends MzIdentMLObject> exten
                 throw new IllegalStateException("Could not uniquely resolve Contact reference " + refId);
             }
         } else {
-
             xml = index.getXmlString(refId, cls);
         }
 

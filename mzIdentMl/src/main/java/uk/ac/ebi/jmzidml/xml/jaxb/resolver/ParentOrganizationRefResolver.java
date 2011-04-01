@@ -1,18 +1,14 @@
 package uk.ac.ebi.jmzidml.xml.jaxb.resolver;
 
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
-import uk.ac.ebi.jmzidml.model.mzidml.Affiliations;
 import uk.ac.ebi.jmzidml.model.mzidml.Organization;
 import uk.ac.ebi.jmzidml.model.mzidml.ParentOrganization;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLObjectCache;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
 
 /**
- * Created by IntelliJ IDEA.
- * User: rwang
- * Date: 25/02/11
- * Time: 09:28
- * To change this template use File | Settings | File Templates.
+ * @author rwang
+ * @author florian
  */
 public class ParentOrganizationRefResolver extends AbstractReferenceResolver<ParentOrganization> {
 

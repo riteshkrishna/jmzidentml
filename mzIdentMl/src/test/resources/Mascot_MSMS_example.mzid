@@ -429,7 +429,7 @@
             </Modification>
         </Peptide>
         <Peptide id="peptide_1_2">
-            <PeptideSequence></PeptideSequence> 
+            <PeptideSequence>DAGTISGLNVLR</PeptideSequence>
             <Modification location="0" monoisotopicMassDelta="127.063324">
                 <cvParam accession="UNIMOD:29" name="SMA" cvRef="UNIMOD"/>
             </Modification>
@@ -4484,7 +4484,7 @@
                     <ProteinDetectionHypothesis id="PDH_HS70L_HUMAN_0" dBSequence_ref="DBSeq_HS70L_HUMAN"
                                                 passThreshold="true">
                         <PeptideHypothesis peptideEvidence_ref="PE_2_1_HS70L_HUMAN_0">
-                            <SpectrumIdentificationItemRef spectrumIdentificationItem_ref=""/>
+                            <SpectrumIdentificationItemRef spectrumIdentificationItem_ref="SII_1_1"/>
                         </PeptideHypothesis>
                         <PeptideHypothesis peptideEvidence_ref="PE_3_2_HS70L_HUMAN_0"><SpectrumIdentificationItemRef spectrumIdentificationItem_ref="SII_1_1"/></PeptideHypothesis>
                         <cvParam accession="MS:1001171" name="mascot:score" cvRef="PSI-MS" value="70.2171911660722"/>

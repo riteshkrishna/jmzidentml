@@ -8,6 +8,7 @@ import psidev.psi.tools.xxindex.index.IndexElement;
 import psidev.psi.tools.xxindex.index.XpathIndex;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+import uk.ac.ebi.jmzidml.model.mzidml.Identifiable;
 import uk.ac.ebi.jmzidml.xml.Constants;
 
 import java.io.File;
@@ -253,6 +254,9 @@ public class MzIdentMLIndexerFactory {
             for (MzIdentMLElement element : MzIdentMLElement.values()) {
                 // only for elements were a ID map is needed and a xpath is given
                 if (element.isIdMapped() && element.isIndexed()) {
+                    if (element.getClass().isAssignableFrom(Identifiable.class))  {
+                        logger.warn("Element for class " + element.getClass() + " may not contain an 'id' attribute, but was selected for id mapping!" );
+                    }
                     logger.debug("Initialising ID map for " + element.getClazz().getName());
                     // check if the according class is a sub-class of Identifiable
 //                    if (!IdentifiableMzIdentMLObject.class.isAssignableFrom(element.getClazz())) {
