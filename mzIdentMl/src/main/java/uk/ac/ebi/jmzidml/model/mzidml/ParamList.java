@@ -63,7 +63,8 @@ public class ParamList
      * Objects of the following type(s) are allowed in the list
      * {@link UserParam }
      * {@link CvParam }
-     * 
+     *
+     * @return List<AbstractParam> the list of CvParam and/or UserParam elements associated with this element.
      * 
      */
     public List<AbstractParam> getParamGroup() {
@@ -79,7 +80,7 @@ public class ParamList
      * @return possible object is
      *         {@link uk.ac.ebi.jmzidml.model.utils.FacadeList }
      */
-    public List<CvParam> getCvParams() {
+    public List<CvParam> getCvParam() {
         return new FacadeList<CvParam>(this.getParamGroup(), CvParam.class);
     }
 
@@ -89,7 +90,7 @@ public class ParamList
      * @return possible object is
      *         {@link FacadeList }
      */
-    public List<UserParam> getUserParams() {
+    public List<UserParam> getUserParam() {
         return new FacadeList<UserParam>(this.getParamGroup(), UserParam.class);
     }
 
