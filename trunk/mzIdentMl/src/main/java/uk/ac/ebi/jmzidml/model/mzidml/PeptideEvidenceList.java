@@ -71,7 +71,7 @@ public class PeptideEvidenceList
      * Objects of the following type(s) are allowed in the list
      * {@link PeptideEvidence }
      * 
-     * 
+     * @return List<PeptideEvidence> the list of PeptideEvidence elements contained in this list wrapper.
      */
     public List<PeptideEvidence> getPeptideEvidence() {
         if (peptideEvidence == null) {
@@ -99,12 +99,12 @@ public class PeptideEvidenceList
         return additionalParams;
     }
 
-    public List getCvParam() {
-        return this.getAdditionalParams().getCvParams();
+    public List<CvParam> getCvParam() {
+        return this.getAdditionalParams().getCvParam();
     }
 
-    public List getUserParam() {
-        return this.getAdditionalParams().getUserParams();
+    public List<UserParam> getUserParam() {
+        return this.getAdditionalParams().getUserParam();
     }
 
     public EnzymeRef getEnzymeRef() {
