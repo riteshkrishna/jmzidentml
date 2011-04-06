@@ -41,20 +41,8 @@ public class Param
     protected AbstractParam paramGroup;
 
     /**
-     * Gets the value of the paramGroup property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link CvParam }
-     *     {@link UserParam }
-     *     
-     */
-    public AbstractParam getParamGroup() {
-        return paramGroup;
-    }
-
-    /**
      * Sets the value of the paramGroup property.
+     * This can either be a CvParam or UserParam instance object.
      * 
      * @param value
      *     allowed object is
@@ -62,8 +50,24 @@ public class Param
      *     {@link UserParam }
      *     
      */
-    public void setParamGroup(AbstractParam value) {
+    public void setParam(AbstractParam value) {
         this.paramGroup = value;
+    }
+
+    public CvParam getCvParam() {
+        if (paramGroup instanceof CvParam) {
+            return (CvParam) paramGroup;
+        } else {
+            return null;
+        }
+    }
+
+    public UserParam getUserParam() {
+        if (paramGroup instanceof UserParam) {
+            return (UserParam) paramGroup;
+        } else {
+            return null;
+        }
     }
 
 }

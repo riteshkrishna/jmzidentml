@@ -54,10 +54,10 @@ public class AnalysisSoftwareTest extends TestCase {
                 assertNull(as.getContactRole().getContact());
             }
 
-            assertTrue("Analysis software name contains Mascot.", as.getSoftwareName().getParamGroup().getName().contains("Mascot"));
+            assertTrue("Analysis software name contains Mascot.", as.getSoftwareName().getCvParam().getName().contains("Mascot"));
 
 //            assertNull("We don't expect a UserParam in the SoftwareName tag!", as.getSoftwareName().getParamGroup().getUserParam());
-            CvParam cvParam = (CvParam)as.getSoftwareName().getParamGroup();
+            CvParam cvParam = (CvParam)as.getSoftwareName().getCvParam();
             assertNotNull(cvParam.getAccession());
 
         }
@@ -69,9 +69,9 @@ public class AnalysisSoftwareTest extends TestCase {
             // same tests as above have to be true
             assertNotNull(as);
             assertTrue("Analysis software is from Mascot.", as.getName().contains("Mascot"));
-            assertTrue("Analysis software name contains Mascot.", as.getSoftwareName().getParamGroup().getName().contains("Mascot"));
+            assertTrue("Analysis software name contains Mascot.", as.getSoftwareName().getCvParam().getName().contains("Mascot"));
 //            assertNull("We don't expect a UserParam in the SoftwareName tag!", as.getSoftwareName().getUserParam());
-            CvParam cvParam = (CvParam)as.getSoftwareName().getParamGroup();
+            CvParam cvParam = (CvParam)as.getSoftwareName().getCvParam();
             assertNotNull(cvParam.getAccession());
         }
 

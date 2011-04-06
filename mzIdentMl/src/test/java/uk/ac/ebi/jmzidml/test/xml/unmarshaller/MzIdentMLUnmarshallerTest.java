@@ -1,21 +1,24 @@
 package uk.ac.ebi.jmzidml.test.xml.unmarshaller;
 
-import junit.framework.TestCase;
 import org.junit.Test;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.*;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
+import javax.xml.bind.JAXBException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
+
+import static org.junit.Assert.*;
+
 
 /**
  * @author Florian Reisinger
  *         Date: 02-Dec-2010
  * @since 1.0
  */
-public class MzIdentMLUnmarshallerTest extends TestCase {
+public class MzIdentMLUnmarshallerTest {
 
     @Test
     public void testAttributeRetrieval() throws Exception {
@@ -91,7 +94,7 @@ public class MzIdentMLUnmarshallerTest extends TestCase {
     }
 
     @Test
-    public void testEnzymes() throws Exception{
+    public void testEnzymes() {
         URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
@@ -104,11 +107,9 @@ public class MzIdentMLUnmarshallerTest extends TestCase {
     /**
      * Unmarshal Inputs and confirm that FileFormat adapter has successfully converted the
      * FileFormat  property into a CvParam in SourceFile
-     *
-     * @throws Exception
      */
     @Test
-    public void testInputsUnmarshalWithFileFormatAdapter() throws Exception{
+    public void testInputsUnmarshalWithFileFormatAdapter() {
         URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
@@ -120,11 +121,9 @@ public class MzIdentMLUnmarshallerTest extends TestCase {
     /**
      * Unmarshal SpectraData and confirm that SpectrumIDFormat adapter has successfully converted the
      * SpectrumIDFormat property into a list of CvParams in SpectraData.
-     *
-     * @throws Exception
      */
     @Test
-    public void testInputsUnmarshalWithSpectrumIDFormatAdapter() throws Exception{
+    public void testInputsUnmarshalWithSpectrumIDFormatAdapter() {
         URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
@@ -134,7 +133,7 @@ public class MzIdentMLUnmarshallerTest extends TestCase {
     }
 
     @Test
-    public void testDataCollection() throws Exception{
+    public void testDataCollection() {
         URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
@@ -144,7 +143,7 @@ public class MzIdentMLUnmarshallerTest extends TestCase {
     }
 
     @Test
-    public void testPeptideEvidenceList() throws Exception{
+    public void testPeptideEvidenceList() {
         URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
@@ -154,7 +153,7 @@ public class MzIdentMLUnmarshallerTest extends TestCase {
     }
 
     @Test
-    public void testOrganization() throws Exception{
+    public void testOrganization() throws JAXBException {
         URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
@@ -173,7 +172,7 @@ public class MzIdentMLUnmarshallerTest extends TestCase {
     }
 
     @Test
-    public void testProvider() throws Exception{
+    public void testProvider() throws JAXBException {
         URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
@@ -183,7 +182,7 @@ public class MzIdentMLUnmarshallerTest extends TestCase {
     }
 
     @Test
-    public void testAnalysisSampleCollection() throws Exception{
+    public void testAnalysisSampleCollection() {
         URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
@@ -202,7 +201,7 @@ public class MzIdentMLUnmarshallerTest extends TestCase {
 
 
     @Test
-    public void testAuditCollection() throws Exception{
+    public void testAuditCollection() throws JAXBException {
         URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         assertNotNull(unmarshaller);
