@@ -1,6 +1,7 @@
 package uk.ac.ebi.jmzidml.model.utils;
 
 import uk.ac.ebi.jmzidml.model.mzidml.AbstractParam;
+import uk.ac.ebi.jmzidml.model.mzidml.Cv;
 import uk.ac.ebi.jmzidml.model.mzidml.CvParam;
 import uk.ac.ebi.jmzidml.model.mzidml.UserParam;
 
@@ -33,7 +34,7 @@ public class ParamUpdater {
              */
             if(input.getCv() != null){
                 newParam.setCv( input.getCv() );
-            }else{
+            } else {
                 /**
                  * No set*ref methods is provided so if auto resolving is off there is no way to record the cvParam.
                  * Use reflection to set the value.
@@ -43,8 +44,33 @@ public class ParamUpdater {
                     Field cvRefField = cls.getDeclaredField("cvRef");
                     cvRefField.setAccessible(true);
                     cvRefField.set(newParam, input.getCvRef());
-                }catch(Exception e){
+
+
+                } catch(Exception e){
                     throw new InstantiationError("Unable to create new instance of CvParam subclass due to problem updating cvRef.");
+                }
+               try{
+                    ParamUpdater.updateAbstractParamProperties(input, newParam);
+                } catch(Exception e){
+                    throw new InstantiationError("Unable to create new instance of CvParam subclass due to problem updating superclass properties.");
+
+                }
+            }
+
+            if (input.getUnitCv() != null) {
+                newParam.setUnitCv(input.getUnitCv());
+            } else if (input.getUnitCvRef() != null) {
+                // no unitCv object reference! might only be a reference string (not auto-resolving)
+                /**
+                 * No set*ref methods is provided so if auto resolving is off there is no way to record the cvParam.
+                 * Use reflection to set the value.
+                 */
+                try{
+                    Field unitCvRefField = AbstractParam.class.getDeclaredField("unitCvRef");
+                    unitCvRefField.setAccessible(true);
+                    unitCvRefField.set(newParam, input.getUnitCvRef());
+                } catch(Exception e){
+                    throw new InstantiationError("Unable to create new instance of CvParam subclass due to problem updating unitCvRef.");
                 }
                try{
                     ParamUpdater.updateAbstractParamProperties(input, newParam);
@@ -52,12 +78,14 @@ public class ParamUpdater {
                     throw new InstantiationError("Unable to create new instance of CvParam subclass due to problem updating superclass properties.");
 
                 }
+            } else {
+                // no unitCV reference given: not updating!
             }
+
             newParam.setName( input.getName() );
             newParam.setValue( input.getValue() );
             newParam.setUnitAccession( input.getUnitAccession() );
             newParam.setUnitName( input.getUnitName() );
-//            newParam.setUnitCvRef( input.getUnitCvRef() );
 
             // replace old with new
             return newParam;
