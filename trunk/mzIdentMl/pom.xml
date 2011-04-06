@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>uk.ac.ebi.jmzidml</groupId>
-    <artifactId>jmzidentml-production</artifactId>
+    <artifactId>jmzidentml</artifactId>
     <packaging>jar</packaging>
     <version>1</version>
     <name>mzIdentML Java core API</name>
