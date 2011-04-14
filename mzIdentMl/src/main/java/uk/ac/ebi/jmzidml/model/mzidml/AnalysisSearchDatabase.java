@@ -2,6 +2,7 @@
 package uk.ac.ebi.jmzidml.model.mzidml;
 
 import uk.ac.ebi.jmzidml.model.CvParamListCapable;
+import uk.ac.ebi.jmzidml.model.ParamCapable;
 import uk.ac.ebi.jmzidml.xml.jaxb.adapters.CalendarAdapter;
 
 import javax.xml.bind.annotation.*;
@@ -47,7 +48,7 @@ import java.util.List;
 })
 public class AnalysisSearchDatabase
     extends ExternalData
-    implements Serializable, CvParamListCapable
+    implements Serializable, CvParamListCapable, ParamCapable
 {
 
     private final static long serialVersionUID = 100L;

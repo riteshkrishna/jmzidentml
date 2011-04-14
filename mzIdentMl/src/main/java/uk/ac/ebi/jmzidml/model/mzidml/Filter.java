@@ -2,6 +2,7 @@
 package uk.ac.ebi.jmzidml.model.mzidml;
 
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+import uk.ac.ebi.jmzidml.model.ParamCapable;
 import uk.ac.ebi.jmzidml.model.ParamListCapable;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -40,7 +41,7 @@ import java.io.Serializable;
 })
 public class Filter
     extends MzIdentMLObject
-    implements Serializable, ParamListCapable
+    implements Serializable, ParamListCapable, ParamCapable
 {
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "FilterType", required = true)
