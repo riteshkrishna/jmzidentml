@@ -1,7 +1,7 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
+import uk.ac.ebi.jmzidml.model.ParamListCapable;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -40,7 +40,7 @@ import java.util.List;
 })
 public class PeptideEvidenceList
     extends Identifiable
-    implements Serializable, ParamGroupCapable
+    implements Serializable, ParamListCapable
 {
 
     private final static long serialVersionUID = 100L;
