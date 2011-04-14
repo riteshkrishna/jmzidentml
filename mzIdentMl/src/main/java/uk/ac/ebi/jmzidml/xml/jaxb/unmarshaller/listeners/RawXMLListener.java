@@ -2,10 +2,13 @@ package uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.listeners;
 
 import org.apache.log4j.Logger;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
+import uk.ac.ebi.jmzidml.ParamListMappings;
 import uk.ac.ebi.jmzidml.model.CvParamCapable;
 import uk.ac.ebi.jmzidml.model.CvParamListCapable;
 import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
+import uk.ac.ebi.jmzidml.model.ParamListCapable;
 import uk.ac.ebi.jmzidml.model.mzidml.CvParam;
+import uk.ac.ebi.jmzidml.model.mzidml.ParamList;
 import uk.ac.ebi.jmzidml.model.utils.ParamUpdater;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLObjectCache;
 import uk.ac.ebi.jmzidml.xml.jaxb.resolver.AbstractReferenceResolver;
@@ -13,6 +16,7 @@ import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
 
 import javax.xml.bind.Unmarshaller;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 
 /**
  * Listener to handle class specific post processing steps during unmarshalling.
@@ -68,10 +72,30 @@ public class RawXMLListener extends Unmarshaller.Listener {
     private void paramHandling(Object target, MzIdentMLElement ele) {
         // (due to possible exceptions while sub-classing in try/catch)
         try {
-            // now we check what kind of object we are dealing with
+             // now we check what kind of object we are dealing with
             // NOTE: the order of the if statements is IMPORTANT!
             // (every AbstractParamGroup is a CvParamCapable, but not vice versa)
-            if (target instanceof ParamGroupCapable) {
+            if(target instanceof ParamListCapable){
+                ParamListMappings mappings = ParamListMappings.getType(target.getClass());
+                String[] classNames = mappings.getClassNames();
+                for(String className: classNames){
+                    /**
+                     * Use the retrieved class name to dynamically call the appropriate get method in the class implementing
+                     * ParamListCapable
+                     */
+                    Method method = target.getClass().getMethod("get" + className);
+                    ParamList paramList = (ParamList)method.invoke(target);
+                    if(paramList != null){
+                        /**
+                         * Use the retrieved class name to determine the correct subclasses of CvParam and UserParam to use.
+                         */
+                        Class clazz = Class.forName("uk.ac.ebi.jmzidml.model.mzidml.params." + className + "CvParam");
+                        ParamUpdater.updateCvParamSubclassesList(paramList.getCvParam(), clazz);
+                        clazz = Class.forName("uk.ac.ebi.jmzidml.model.mzidml.params." + className + "UserParam");
+                        ParamUpdater.updateUserParamSubclassesList(paramList.getUserParam(), clazz);
+                    }
+                }
+            }else if (target instanceof ParamGroupCapable) {
                 // in this case we not only have to subclass the params, but also to split them up
                 ParamGroupCapable apg = (ParamGroupCapable) target;
                 // first we are going to split the List<Param> in a List<CvParam> and a List<UserParam>

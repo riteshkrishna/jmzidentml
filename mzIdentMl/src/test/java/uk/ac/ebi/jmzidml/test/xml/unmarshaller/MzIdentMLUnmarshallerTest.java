@@ -3,6 +3,8 @@ package uk.ac.ebi.jmzidml.test.xml.unmarshaller;
 import org.junit.Test;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.*;
+import uk.ac.ebi.jmzidml.model.mzidml.params.*;
+
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
 import javax.xml.bind.JAXBException;
@@ -94,14 +96,28 @@ public class MzIdentMLUnmarshallerTest {
     }
 
     @Test
-    public void testEnzymes() {
+    public void testEnzymes() throws JAXBException{
         URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         assertNotNull(unmarshaller);
-        SpectrumIdentificationProtocol specutrumIdentificactionProtocol = unmarshaller.unmarshal(SpectrumIdentificationProtocol.class);
-        Enzymes enzymes = specutrumIdentificactionProtocol.getEnzymes();
+        SpectrumIdentificationProtocol spectrumIdentificactionProtocol = unmarshaller.unmarshall(SpectrumIdentificationProtocol.class, "SIP");
+        Enzymes enzymes = spectrumIdentificactionProtocol.getEnzymes();
         assertTrue(enzymes.getEnzyme().get(0).getId().equals("ENZ_0"));
+        assertTrue(enzymes.getEnzyme().size() == 2);
+        Enzyme enzyme = enzymes.getEnzyme().get(0);
+        assertTrue(enzyme.getId().equals("ENZ_0"));
+        List<UserParam> enzymeNameUserParams = enzyme.getEnzymeName().getUserParam();
+        assertTrue(enzymeNameUserParams.get(0) instanceof EnzymeNameUserParam);
+        assertTrue(enzymeNameUserParams.get(0).getValue().equals("CNBr+Trypsin"));
+        List<CvParam> enzymeNameCvParam = enzyme.getEnzymeName().getCvParam();
+        assertTrue(enzymeNameCvParam.size() == 0);
+
+        enzyme = enzymes.getEnzyme().get(1);
+        assertTrue(enzyme.getId().equals("ENZ_1"));
+        enzymeNameUserParams = enzyme.getEnzymeName().getUserParam();
+        assertTrue(enzymeNameUserParams.get(0) instanceof EnzymeNameUserParam);
+        assertTrue(enzymeNameUserParams.get(0).getValue().equals("CNBr+Trypsin"));
     }
 
     /**
@@ -149,7 +165,15 @@ public class MzIdentMLUnmarshallerTest {
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         assertNotNull(unmarshaller);
         PeptideEvidenceList peptideEvidenceList = unmarshaller.unmarshal(PeptideEvidenceList.class);
-        assertTrue(peptideEvidenceList.getPeptideEvidence().size() > 0);
+        assertTrue(peptideEvidenceList.getPeptideEvidence().size() == 56);
+        assertTrue(((PeptideEvidence)peptideEvidenceList.getPeptideEvidence().get(55)).getId().equals("PE_3_4_HSP7D_DROME_0"));
+        List<CvParam> cvParams = peptideEvidenceList.getAdditionalParams().getCvParam();
+        assertTrue(cvParams.size() == 1);
+        AdditionalParamsCvParam additionalParamsCvParam = (AdditionalParamsCvParam) cvParams.get(0);
+        assertTrue(additionalParamsCvParam.getAccession().equals("MS:1001211"));
+        assertTrue(additionalParamsCvParam.getName().equals("parent mass type mono"));
+        assertTrue(additionalParamsCvParam.getCvRef().equals("PSI-MS"));
+        assertTrue(peptideEvidenceList.getAdditionalParams().getUserParam().size()==0);
     }
 
     @Test
@@ -215,4 +239,67 @@ public class MzIdentMLUnmarshallerTest {
         UserParam userParam = userParams.get(0);
         assertTrue(userParam.getValue().equals("+44 (0)20 7486 1050"));
     }
+
+    @Test
+    public void testProteinDetectionProtocol() throws JAXBException{
+       URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
+        assertNotNull(unmarshaller);
+        ProteinDetectionProtocol proteinDetectionProtocol = unmarshaller.unmarshall(ProteinDetectionProtocol.class, "PDP_MascotParser_1");
+        ThresholdCvParam thresholdCvParam = (ThresholdCvParam)proteinDetectionProtocol.getThreshold().getCvParam().get(0);
+        assertTrue(thresholdCvParam.getAccession().equals("MS:1001494"));
+        assertTrue(thresholdCvParam.getCvRef().equals("PSI-MS"));
+        assertTrue(thresholdCvParam.getName().equals("no threshold"));
+
+        List<CvParam> analysisParams = proteinDetectionProtocol.getAnalysisParams().getCvParam();
+        assertTrue(analysisParams.size() == 10);
+        AnalysisParamsCvParam analysisParamsCvParam = (AnalysisParamsCvParam)analysisParams.get(0);
+        assertTrue(analysisParamsCvParam.getAccession().equals("MS:1001316"));
+        assertTrue(analysisParamsCvParam.getName().equals("mascot:SigThreshold"));
+        assertTrue(analysisParamsCvParam.getValue().equals("0.05"));
+
+        analysisParamsCvParam = (AnalysisParamsCvParam)analysisParams.get(4);
+        assertTrue(analysisParamsCvParam.getAccession().equals("MS:1001320"));
+        assertTrue(analysisParamsCvParam.getName().equals("mascot:ShowHomologousProteinsWithSamePeptides"));
+        assertTrue(analysisParamsCvParam.getValue().equals("1"));
+
+        analysisParamsCvParam = (AnalysisParamsCvParam)analysisParams.get(9);
+        assertTrue(analysisParamsCvParam.getAccession().equals("MS:1001325"));
+        assertTrue(analysisParamsCvParam.getName().equals("mascot:ShowDecoyMatches"));
+        assertTrue(analysisParamsCvParam.getValue().equals("0"));
+
+    }
+
+    @Test
+    public void testSpectrumIdentificationProtocol() throws JAXBException{
+        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
+        SpectrumIdentificationProtocol spectrumIdentificationProtocol = unmarshaller.unmarshall(SpectrumIdentificationProtocol.class, "SIP");
+        List<CvParam> additionalSearchCvParams = spectrumIdentificationProtocol.getAdditionalSearchParams().getCvParam();
+        assertTrue(additionalSearchCvParams.size() == 10);
+        AdditionalSearchParamsCvParam additionalSearchParamsCvParam = (AdditionalSearchParamsCvParam)additionalSearchCvParams.get(0);
+        assertTrue(additionalSearchParamsCvParam.getAccession().equals("MS:1001211"));
+        assertTrue(additionalSearchParamsCvParam.getName().equals("parent mass type mono"));
+
+        List<UserParam> additionalSearchUserParams = spectrumIdentificationProtocol.getAdditionalSearchParams().getUserParam();
+        assertTrue(additionalSearchUserParams.size() == 2);
+        AdditionalSearchParamsUserParam additionalSearchParamsUserParam = (AdditionalSearchParamsUserParam) additionalSearchUserParams.get(0);
+        assertTrue(additionalSearchParamsUserParam.getName().equals("Mascot User Comment"));
+        assertTrue(additionalSearchParamsUserParam.getValue().equals("Example Mascot MS-MS search for PSI mzIdentML"));
+
+    }
+
+    @Test
+    public void testFilter() throws JAXBException{
+        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
+        SpectrumIdentificationProtocol spectrumIdentificationProtocol = unmarshaller.unmarshall(SpectrumIdentificationProtocol.class, "SIP");
+        DatabaseFilters dbFilters = spectrumIdentificationProtocol.getDatabaseFilters();
+        List<Filter> filter = dbFilters.getFilter();
+        assertTrue(filter.size() == 1);
+        IncludeCvParam includeCvParam = (IncludeCvParam)filter.get(0).getInclude().getCvParam().get(0);
+        assertTrue(includeCvParam.getAccession().equals("MS:1001467"));
+        assertTrue(includeCvParam.getValue().equals("33208"));
+    }
+
 }

@@ -1,7 +1,6 @@
 package uk.ac.ebi.jmzidml.model.utils;
 
 import uk.ac.ebi.jmzidml.model.mzidml.AbstractParam;
-import uk.ac.ebi.jmzidml.model.mzidml.Cv;
 import uk.ac.ebi.jmzidml.model.mzidml.CvParam;
 import uk.ac.ebi.jmzidml.model.mzidml.UserParam;
 
@@ -105,10 +104,12 @@ public class ParamUpdater {
             }
 
             // switch list content
-            inputs.clear();
+            //inputs.clear();
+            inputs.removeAll(inputs);
             inputs.addAll(newList);
         }
     }
+
 
     public static <T extends UserParam> T updateUserParamSubclass(UserParam input, Class<T> userParamSubClass)
             throws InstantiationException, IllegalAccessException {
@@ -142,10 +143,12 @@ public class ParamUpdater {
             }
 
             // switch list content
-            inputs.clear();
+            //inputs.clear();
+            inputs.removeAll(inputs);
             inputs.addAll(newList);
         }
     }
+
 
 
 }
