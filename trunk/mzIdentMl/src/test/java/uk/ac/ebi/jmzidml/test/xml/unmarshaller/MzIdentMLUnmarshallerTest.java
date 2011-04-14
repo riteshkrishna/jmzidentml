@@ -287,6 +287,18 @@ public class MzIdentMLUnmarshallerTest {
         assertTrue(additionalSearchParamsUserParam.getName().equals("Mascot User Comment"));
         assertTrue(additionalSearchParamsUserParam.getValue().equals("Example Mascot MS-MS search for PSI mzIdentML"));
 
+        Param searchType = spectrumIdentificationProtocol.getSearchType();
+        assertTrue(searchType.getCvParam() instanceof SearchTypeCvParam);
+
+    }
+
+    @Test
+    public void testAnalysisSearchDatabase() throws JAXBException{
+        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
+        AnalysisSearchDatabase searchDb = unmarshaller.unmarshall(AnalysisSearchDatabase.class, "SDB_SwissProt");
+        Param dbName = searchDb.getDatabaseName();
+        assertTrue(dbName.getUserParam() instanceof DatabaseNameUserParam);
     }
 
     @Test
@@ -300,6 +312,17 @@ public class MzIdentMLUnmarshallerTest {
         IncludeCvParam includeCvParam = (IncludeCvParam)filter.get(0).getInclude().getCvParam().get(0);
         assertTrue(includeCvParam.getAccession().equals("MS:1001467"));
         assertTrue(includeCvParam.getValue().equals("33208"));
+        assertTrue(filter.get(0).getFilterType().getCvParam() instanceof FilterTypeCvParam);
+        assertTrue(filter.get(0).getFilterType().getCvParam().getAccession().equals("MS:1001020"));
+    }
+
+    @Test
+    public void testAnalysisSoftware() throws JAXBException{
+        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
+        AnalysisSoftware analysisSoftware = unmarshaller.unmarshall(AnalysisSoftware.class, "AS_mascot_parser");
+        Param param = analysisSoftware.getSoftwareName();
+        assertTrue(param.getCvParam() instanceof SoftwareNameCvParam);
     }
 
 }

@@ -1,5 +1,6 @@
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import uk.ac.ebi.jmzidml.model.ParamCapable;
 import uk.ac.ebi.jmzidml.model.ParamListCapable;
 
 import javax.xml.bind.annotation.*;
@@ -58,7 +59,7 @@ import java.util.List;
 })
 public class SpectrumIdentificationProtocol
         extends Identifiable
-        implements Serializable, ParamListCapable {
+        implements Serializable, ParamListCapable, ParamCapable {
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "SearchType", required = true)

@@ -1,6 +1,8 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import uk.ac.ebi.jmzidml.model.ParamCapable;
+
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 
@@ -38,7 +40,7 @@ import java.io.Serializable;
 })
 public class AnalysisSoftware
     extends Identifiable
-    implements Serializable
+    implements Serializable, ParamCapable
 {
 
     private final static long serialVersionUID = 100L;

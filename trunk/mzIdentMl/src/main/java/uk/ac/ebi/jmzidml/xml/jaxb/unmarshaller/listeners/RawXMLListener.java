@@ -3,12 +3,12 @@ package uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.listeners;
 import org.apache.log4j.Logger;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.ParamListMappings;
-import uk.ac.ebi.jmzidml.model.CvParamCapable;
-import uk.ac.ebi.jmzidml.model.CvParamListCapable;
-import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
-import uk.ac.ebi.jmzidml.model.ParamListCapable;
+import uk.ac.ebi.jmzidml.ParamMappings;
+import uk.ac.ebi.jmzidml.model.*;
 import uk.ac.ebi.jmzidml.model.mzidml.CvParam;
+import uk.ac.ebi.jmzidml.model.mzidml.Param;
 import uk.ac.ebi.jmzidml.model.mzidml.ParamList;
+import uk.ac.ebi.jmzidml.model.mzidml.UserParam;
 import uk.ac.ebi.jmzidml.model.utils.ParamUpdater;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLObjectCache;
 import uk.ac.ebi.jmzidml.xml.jaxb.resolver.AbstractReferenceResolver;
@@ -72,6 +72,31 @@ public class RawXMLListener extends Unmarshaller.Listener {
     private void paramHandling(Object target, MzIdentMLElement ele) {
         // (due to possible exceptions while sub-classing in try/catch)
         try {
+
+            if(target instanceof ParamCapable){
+                ParamMappings mapping = ParamMappings.getType(target.getClass());
+                String className = mapping.getClassName();
+                Method method = target.getClass().getMethod("get" + className);
+                Param param  = (Param)method.invoke(target);
+                if(param != null){
+
+                    /**
+                     * Use the retrieved class name to determine the correct subclasses of CvParam and UserParam to use.
+                     */
+                    if(param.getCvParam() != null){
+                        Class clazz = Class.forName("uk.ac.ebi.jmzidml.model.mzidml.params." + className + "CvParam");
+                        CvParam cvParam = ParamUpdater.updateCvParamSubclass(param.getCvParam(), clazz);
+                        param.setParam(cvParam);
+                    }else if(param.getUserParam() != null){
+                        Class clazz = Class.forName("uk.ac.ebi.jmzidml.model.mzidml.params." + className + "UserParam");
+                        UserParam userParam = ParamUpdater.updateUserParamSubclass(param.getUserParam(), clazz);
+                        param.setParam(userParam);
+                    }
+
+                }
+
+            }
+
              // now we check what kind of object we are dealing with
             // NOTE: the order of the if statements is IMPORTANT!
             // (every AbstractParamGroup is a CvParamCapable, but not vice versa)
