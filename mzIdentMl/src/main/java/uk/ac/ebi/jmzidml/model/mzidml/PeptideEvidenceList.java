@@ -3,10 +3,7 @@ package uk.ac.ebi.jmzidml.model.mzidml;
 
 import uk.ac.ebi.jmzidml.model.ParamListCapable;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +47,7 @@ public class PeptideEvidenceList
     protected ParamList additionalParams;
     @XmlElement(name="EnzymeRef")
     protected EnzymeRef enzymeRef;
+
 
     /**
      * Gets the value of the peptideEvidence property.

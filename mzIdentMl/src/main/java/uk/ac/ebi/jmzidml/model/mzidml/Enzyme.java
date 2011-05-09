@@ -118,7 +118,7 @@ public class Enzyme
     }
 
 
-    public void setEnzmeName(ParamList enzymeName){
+    public void setEnzymeName(ParamList enzymeName){
         this.enzymeName = enzymeName;
     }
 
