@@ -1,9 +1,9 @@
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import java.io.Serializable;
-import javax.xml.bind.annotation.*;
-
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+
+import javax.xml.bind.annotation.*;
+import java.io.Serializable;
 
 
 /**

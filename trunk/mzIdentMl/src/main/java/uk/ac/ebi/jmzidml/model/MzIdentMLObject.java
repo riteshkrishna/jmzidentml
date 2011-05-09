@@ -13,4 +13,8 @@ public abstract class MzIdentMLObject {
     @XmlTransient
     private Long hid;
 
+    public Long getHid(){
+        return hid;
+    }
+
 }
