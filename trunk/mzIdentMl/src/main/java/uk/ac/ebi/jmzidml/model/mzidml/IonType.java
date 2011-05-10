@@ -49,7 +49,7 @@ public class IonType
     @XmlElement(name = "FragmentArray")
     protected List<FragmentArray> fragmentArray;
     @XmlAttribute
-    protected List<BigInteger> index;
+    protected List<Integer> index;
     @XmlAttribute(required = true)
     protected int charge;
 
@@ -73,7 +73,7 @@ public class IonType
      * Objects of the following type(s) are allowed in the list
      * {@link FragmentArray }
      * 
-     * 
+     * @return fragmentArray
      */
     public List<FragmentArray> getFragmentArray() {
         if (fragmentArray == null) {
@@ -124,13 +124,15 @@ public class IonType
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link BigInteger }
+     * {@link Integer }
+     *
+     * @return index
      * 
      * 
      */
-    public List<BigInteger> getIndex() {
+    public List<Integer> getIndex() {
         if (index == null) {
-            index = new ArrayList<BigInteger>();
+            index = new ArrayList<Integer>();
         }
         return this.index;
     }

@@ -9,6 +9,7 @@ import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
 import javax.xml.bind.JAXBException;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -325,4 +326,40 @@ public class MzIdentMLUnmarshallerTest {
         assertTrue(param.getCvParam() instanceof SoftwareNameCvParam);
     }
 
+    @Test
+    public void testIonType() throws JAXBException {
+        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
+        SpectrumIdentificationList list =  unmarshaller.unmarshall(SpectrumIdentificationList.class, "SIL_1");
+        List<IonType> ionTypes = list.getSpectrumIdentificationResult().get(0).getSpectrumIdentificationItem().get(0).getFragmentation().getIonType();
+        assertTrue(ionTypes.size() > 0);
+        IonType ionType = ionTypes.get(0);
+        List<Integer> index = ionType.getIndex();
+        assertTrue(index.size() == 5);
+        assertTrue(index.get(0) == 1);
+        assertTrue(index.get(1) == 2);
+        assertTrue(index.get(4) == 8);
+        /**
+         * Check if instances of Integer are returned. By default jaxb converts int in xml to BigInts in Java.
+         */
+        assertTrue(index.get(0) instanceof Integer);
+    }
+
+    @Test
+    public void testMassTable() throws JAXBException {
+        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
+        SpectrumIdentificationProtocol spectrumIdentificationProtocol = unmarshaller.unmarshall(SpectrumIdentificationProtocol.class, "SIP");
+        List<MassTable> massTables = spectrumIdentificationProtocol.getMassTable();
+        assertTrue(massTables.size() > 0);
+        MassTable massTable = massTables.get(0);
+        assertTrue(massTable.getId().equals("MT"));
+        List<Integer> msLevels = massTable.getMsLevel();
+        assertTrue(msLevels.size() == 2);
+        /**
+         * Check if instances of Integer are returned. By default jaxb converts int in xml to BigInts in Java.
+         */
+
+        assertTrue(msLevels.get(0) instanceof Integer);
+    }
 }
