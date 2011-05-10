@@ -57,7 +57,7 @@ public class MassTable
     })
     protected List<AbstractParam> paramGroup;
     @XmlAttribute(required = true)
-    protected List<BigInteger> msLevel;
+    protected List<Integer> msLevel;
 
     /**
      * Gets the value of the residue property.
@@ -169,9 +169,9 @@ public class MassTable
      * 
      * 
      */
-    public List<BigInteger> getMsLevel() {
+    public List<Integer> getMsLevel() {
         if (msLevel == null) {
-            msLevel = new ArrayList<BigInteger>();
+            msLevel = new ArrayList<Integer>();
         }
         return this.msLevel;
     }
