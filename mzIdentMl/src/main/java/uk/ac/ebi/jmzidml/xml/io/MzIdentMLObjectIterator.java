@@ -58,7 +58,7 @@ public class MzIdentMLObjectIterator<T extends MzIdentMLObject> implements Itera
 
 
     public boolean hasNext() {
-        return innerXpathIterator.hasNext();
+        return innerXpathIterator != null && innerXpathIterator.hasNext();
     }
 
     @SuppressWarnings("unchecked")
