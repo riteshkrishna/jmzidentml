@@ -6,7 +6,6 @@ import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -165,7 +164,7 @@ public class MassTable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link BigInteger }
+     * {@link Integer }
      * 
      * 
      */
