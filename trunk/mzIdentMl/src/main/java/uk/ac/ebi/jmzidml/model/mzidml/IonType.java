@@ -6,7 +6,6 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
