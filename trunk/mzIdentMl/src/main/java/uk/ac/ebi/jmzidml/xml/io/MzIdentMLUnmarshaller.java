@@ -231,7 +231,10 @@ public class MzIdentMLUnmarshaller {
         T retval = null;
         try {
             Iterator<String> xpathIter = index.getXmlStringIterator(xpath);
-
+            /**
+             * xpath may not be indexed or the requested cls might be optional and not present in the input xml file.
+             */
+            if(xpathIter == null) return null;
             if (xpathIter.hasNext()) {
 
                 String xmlSt = xpathIter.next();
