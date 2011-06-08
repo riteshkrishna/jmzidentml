@@ -69,7 +69,7 @@ public abstract class AbstractReferenceResolver<T extends MzIdentMLObject> exten
                 cls = MzIdentMLElement.Person.getClazz();
             } else if (personXML == null && organisationXML != null) {
                 xml = organisationXML;
-                cls = MzIdentMLElement.Person.getClazz();
+                cls = MzIdentMLElement.Organization.getClazz();
             } else {
                 throw new IllegalStateException("Could not uniquely resolve Contact reference " + refId);
             }
