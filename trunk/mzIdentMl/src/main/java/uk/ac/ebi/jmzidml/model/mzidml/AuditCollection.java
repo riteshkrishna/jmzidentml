@@ -2,6 +2,7 @@
 package uk.ac.ebi.jmzidml.model.mzidml;
 
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
@@ -76,5 +77,24 @@ public class AuditCollection
         }
         return this.personOrOrganization;
     }
+
+    /**
+     * Returns a list of the Person objects contained in list returned from getPersonOrOrganization.
+     *
+     * @return List<Person> The list of Person Contacts.
+     */
+    public List<Person> getPerson() {
+        return new FacadeList<Person>(this.getPersonOrOrganization(), Person.class);
+    }
+
+    /**
+     * Returns a list of the Organization objects contained in list returned from getPersonOrOrganization.
+     *
+     * @return
+     */
+    public List<Organization> getOrganization() {
+        return new FacadeList<Organization>(this.getPersonOrOrganization(), Organization.class);
+    }
+
 
 }
