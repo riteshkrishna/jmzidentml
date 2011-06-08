@@ -296,7 +296,7 @@
         </jxb:bindings>
 
         <jxb:bindings node="//xsd:complexType[@name='SearchDatabaseType']">
-            <jxb:class name="AnalysisSearchDatabase"/>
+            <jxb:class name="SearchDatabase"/>
         </jxb:bindings>
 
         <jxb:bindings node="//xsd:complexType[@name='SearchModificationType']">
