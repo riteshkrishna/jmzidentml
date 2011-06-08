@@ -55,6 +55,17 @@ public class ContactRole
     @XmlTransient
     protected AbstractContact contact;
 
+    public Person getPerson(){
+        if(contact != null && contact instanceof Person) return (Person)contact;
+        else return null;
+    }
+
+    public Organization getOrganization(){
+        if(contact != null && contact instanceof Organization) return (Organization)contact;
+        else return null;
+    }
+
+
     /**
      * Gets the value of the role property.
      * 

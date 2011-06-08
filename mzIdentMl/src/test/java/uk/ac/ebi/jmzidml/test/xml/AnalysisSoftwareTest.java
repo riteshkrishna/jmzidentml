@@ -1,7 +1,7 @@
 package uk.ac.ebi.jmzidml.test.xml;
 
-import junit.framework.TestCase;
 import org.apache.log4j.Logger;
+import org.junit.Test;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftware;
 import uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftwareList;
@@ -11,15 +11,18 @@ import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 import java.net.URL;
 import java.util.Iterator;
 
+import static junit.framework.Assert.*;
+
 /**
  * Package  : uk.ac.ebi.jmzidml.test.xml
  * User: riteshk
  * Date: Sep 18, 2010
  */
-public class AnalysisSoftwareTest extends TestCase {
+public class AnalysisSoftwareTest {
 
     private static final Logger log = Logger.getLogger(AnalysisSoftwareTest.class);
 
+    @Test
     public void testAnalysisSoftwareInformation() throws Exception {
 
         URL xmlFileURL = AnalysisSoftwareTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
@@ -49,6 +52,12 @@ public class AnalysisSoftwareTest extends TestCase {
             if (MzIdentMLElement.ContactRole.isAutoRefResolving() && as.getContactRole().getContactRef() != null) {
                 assertNotNull(as.getContactRole().getContact());
                 log.debug("\n Analysis Software -> Contact -> Name  :" + as.getContactRole().getContact().getName());
+                /**
+                 * Testing that only organization is returned (in this test file analysis software instances only
+                 * have Organization ContactRoles.
+                 */
+                assertNotNull(as.getContactRole().getOrganization());
+                assertNull(as.getContactRole().getPerson());
             } else {
                 System.out.println("ContactRole is not auto-resolving or does not contain a Contact reference.");
                 assertNull(as.getContactRole().getContact());
