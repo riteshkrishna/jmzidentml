@@ -8,6 +8,7 @@ import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
 import java.net.URL;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Package  : uk.ac.ebi.jmzidml.test.xml
@@ -69,5 +70,26 @@ public class AuditCollectionTest extends TestCase {
 
         }
 
+    }
+
+    public void testContactFacadeList(){
+        URL xmlFileURL = AuditCollectionTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
+        assertNotNull(xmlFileURL);
+
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
+        assertNotNull(unmarshaller);
+
+        Iterator<AuditCollection> aci = unmarshaller.unmarshalCollectionFromXpath(MzIdentMLElement.AuditCollection);
+        assertNotNull(aci);
+
+        assertTrue(aci.hasNext())  ;
+        AuditCollection ac = aci.next();
+        assertNotNull(ac);
+        List<AbstractContact> personOrOrganization = ac.getPersonOrOrganization();
+        assertTrue(personOrOrganization.size() == 4);
+        List<Person> personList = ac.getPerson();
+        assertTrue(personList.size() ==2);
+        List<Organization> orgList = ac.getOrganization();
+        assertTrue(orgList.size() ==2);
     }
 }
