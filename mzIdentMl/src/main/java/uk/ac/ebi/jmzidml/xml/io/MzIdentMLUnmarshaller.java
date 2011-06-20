@@ -147,12 +147,12 @@ public class MzIdentMLUnmarshaller {
      */
     public <T extends MzIdentMLObject> T unmarshal(Class<T> clazz) {
         String xpath = MzIdentMLElement.getType(clazz).getXpath();
-        return unmarshal(clazz, xpath);
+        return doUnmarshal(clazz, xpath);
     }
 
     public <T extends MzIdentMLObject> T unmarshal(String xpath) {
         Class<T> clazz = MzIdentMLElement.getType(xpath).getClazz();
-        return unmarshal(clazz, xpath);
+        return doUnmarshal(clazz, xpath);
     }
 
     /**
@@ -172,7 +172,7 @@ public class MzIdentMLUnmarshaller {
         String xpath = element.getXpath();
 
         // first check if we have an element(s) for this Class in the cache
-        return unmarshal(clazz, xpath);
+        return doUnmarshal(clazz, xpath);
     }
 
     public <T extends MzIdentMLObject> Iterator<T> unmarshalCollectionFromXpath(MzIdentMLElement element) {
@@ -194,7 +194,11 @@ public class MzIdentMLUnmarshaller {
         return new MzIdentMLObjectIterator<T>(element, index, cache);
     }
 
+    @Deprecated
     public <T extends MzIdentMLObject> T unmarshall(Class<T> clazz, String id) throws JAXBException {
+        return this.unmarshal(clazz, id);
+    }
+    public <T extends MzIdentMLObject> T unmarshal(Class<T> clazz, String id) throws JAXBException {
         if (!index.isIDmapped(id, clazz)) {
             throw new IllegalArgumentException("No entry found for ID: " + id + " and Class: " + clazz
                     + ". Make sure the element you are looking for has an ID attribute and is id-mapped!");
@@ -206,7 +210,7 @@ public class MzIdentMLUnmarshaller {
     ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
     // private Methods
 
-    private <T extends MzIdentMLObject> T unmarshal(Class<T> clazz, String xpath) {
+    private <T extends MzIdentMLObject> T doUnmarshal(Class<T> clazz, String xpath) {
         T retval = null;
 //        if (cache != null && cache.hasEntry(clazz)) {
 //            retval = cache.getEntries(clazz).get(0);

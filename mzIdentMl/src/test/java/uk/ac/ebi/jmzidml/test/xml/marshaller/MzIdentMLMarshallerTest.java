@@ -79,46 +79,46 @@ public class MzIdentMLMarshallerTest {
 
             CvList cvList = unmarshaller.unmarshal(MzIdentMLElement.CvList.getXpath());
             cvCount = cvList.getCv().size();
-            m.marshall(cvList, writer);
+            m.marshal(cvList, writer);
             writer.write("\n");
 
             AnalysisSoftwareList analysisSoftwareList = unmarshaller.unmarshal(MzIdentMLElement.AnalysisSoftwareList.getXpath());
             analysisSoftwareCount = analysisSoftwareList.getAnalysisSoftware().size();
-            m.marshall(analysisSoftwareList, writer);
+            m.marshal(analysisSoftwareList, writer);
             writer.write("\n");
 
             Provider provider = unmarshaller.unmarshal(MzIdentMLElement.Provider.getXpath());
-            m.marshall(provider, writer);
+            m.marshal(provider, writer);
             writer.write("\n");
 
             AuditCollection auditCollection = unmarshaller.unmarshal(MzIdentMLElement.AuditCollection.getXpath());
             auditCount = auditCollection.getPersonOrOrganization().size();
-            m.marshall(auditCollection, writer);
+            m.marshal(auditCollection, writer);
             writer.write("\n");
 
             AnalysisSampleCollection analysisSampleCollection = unmarshaller.unmarshal(MzIdentMLElement.AnalysisSampleCollection.getXpath());
-            m.marshall(analysisSampleCollection, writer);
+            m.marshal(analysisSampleCollection, writer);
             writer.write("\n");
 
             SequenceCollection sequenceCollection = unmarshaller.unmarshal(MzIdentMLElement.SequenceCollection.getXpath());
             dbSequenceCount = sequenceCollection.getDBSequence().size();
             peptideEvidencePeptideCount = sequenceCollection.getPeptideEvidenceList().get(0).getPeptideEvidence().size();
-            m.marshall(sequenceCollection, writer);
+            m.marshal(sequenceCollection, writer);
             writer.write("\n");
 
             AnalysisCollection analysisCollection = unmarshaller.unmarshal(MzIdentMLElement.AnalysisCollection.getXpath());
-            m.marshall(analysisCollection, writer);
+            m.marshal(analysisCollection, writer);
             writer.write("\n");
 
             AnalysisProtocolCollection analysisProtocolCollection = unmarshaller.unmarshal(MzIdentMLElement.AnalysisProtocolCollection.getXpath());
             analysisProtocolCollection.setProteinDetectionProtocol(analysisProtocolCollection.getProteinDetectionProtocol());
-            m.marshall(analysisProtocolCollection, writer);
+            m.marshal(analysisProtocolCollection, writer);
             writer.write("\n");
 
             writer.write(m.createDataCollectionStartTag() + "\n");
 
             Inputs inputs = unmarshaller.unmarshal(MzIdentMLElement.Inputs.getXpath());
-            m.marshall(inputs, writer);
+            m.marshal(inputs, writer);
             writer.write("\n");
 
             writer.write(m.createAnalysisDataStartTag() + "\n");
@@ -126,13 +126,13 @@ public class MzIdentMLMarshallerTest {
             writer.write(m.createSpectrumIdentificationListStartTag("SIL_1", null, 71412L) + "\n");
 
             FragmentationTable table = unmarshaller.unmarshal(MzIdentMLElement.FragmentationTable.getXpath());
-            m.marshall(table, writer);
+            m.marshal(table, writer);
             writer.write("\n");
 
             Iterator<SpectrumIdentificationResult> specResIter = unmarshaller.unmarshalCollectionFromXpath(MzIdentMLElement.SpectrumIdentificationResult);
             while (specResIter.hasNext()) {
                 SpectrumIdentificationResult specIdentRes = specResIter.next();
-                m.marshall(specIdentRes, writer);
+                m.marshal(specIdentRes, writer);
                 writer.write("\n");
             }
 
@@ -141,7 +141,7 @@ public class MzIdentMLMarshallerTest {
             Iterator<ProteinAmbiguityGroup> protAmbGroupIter = unmarshaller.unmarshalCollectionFromXpath(MzIdentMLElement.ProteinAmbiguityGroup);
             while (protAmbGroupIter.hasNext()) {
                 ProteinAmbiguityGroup protAmbGroup = protAmbGroupIter.next();
-                m.marshall(protAmbGroup, writer);
+                m.marshal(protAmbGroup, writer);
                 writer.write("\n");
             }
 
@@ -152,7 +152,7 @@ public class MzIdentMLMarshallerTest {
             writer.write(m.createDataCollectionClosingTag() + "\n");
 
             BibliographicReference ref = unmarshaller.unmarshal(MzIdentMLElement.BibliographicReference.getXpath());
-            m.marshall(ref, writer);
+            m.marshal(ref, writer);
             writer.write("\n");
 
             writer.write(m.createMzIdentMLClosingTag());
@@ -190,7 +190,7 @@ public class MzIdentMLMarshallerTest {
         MzIdentMLMarshaller m = new MzIdentMLMarshaller();
         AuditCollection auditCollection = unmarshaller.unmarshal(MzIdentMLElement.AuditCollection.getXpath());
         auditCollection.getPersonOrOrganization().clear();
-        m.marshall(auditCollection);
+        m.marshal(auditCollection);
     }
 
 
@@ -203,7 +203,7 @@ public class MzIdentMLMarshallerTest {
         MzIdentMLMarshaller m = new MzIdentMLMarshaller();
         CvList cvList = unmarshaller.unmarshal(MzIdentMLElement.CvList.getXpath());
         cvList.getCv().clear();
-        m.marshall(cvList);
+        m.marshal(cvList);
     }
 
 

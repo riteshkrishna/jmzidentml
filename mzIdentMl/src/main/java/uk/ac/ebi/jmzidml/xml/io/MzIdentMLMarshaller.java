@@ -42,18 +42,30 @@ public class MzIdentMLMarshaller {
 //            * marshal(Object,XMLStreamWriter) - the Marshaller will not generate XMLStreamConstants.START_DOCUMENT and XMLStreamConstants.END_DOCUMENT events.
 //
 
+    @Deprecated
     public <T extends MzIdentMLObject> String marshall(T object) {
+        return this.marshal(object);
+    }
+    public <T extends MzIdentMLObject> String marshal(T object) {
         StringWriter sw = new StringWriter();
-        this.marshall(object, sw);
+        this.marshal(object, sw);
         return sw.toString();
     }
 
+    @Deprecated
     public <T extends MzIdentMLObject> void marshall(T object, OutputStream os) {
-        this.marshall(object, new OutputStreamWriter(os));
+        this.marshal(object, os);
+    }
+    public <T extends MzIdentMLObject> void marshal(T object, OutputStream os) {
+        this.marshal(object, new OutputStreamWriter(os));
     }
 
-    @SuppressWarnings("unchecked")
+    @Deprecated
     public <T extends MzIdentMLObject> void marshall(T object, Writer out) {
+        this.marshal(object, out);
+    }
+    @SuppressWarnings("unchecked")
+    public <T extends MzIdentMLObject> void marshal(T object, Writer out) {
 
         if (object == null) {
             throw new IllegalArgumentException("Cannot marshall a NULL object");
