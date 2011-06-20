@@ -423,7 +423,7 @@
         <refResolverClass>uk.ac.ebi.jmzidml.xml.jaxb.resolver.PeptideEvidenceResolver</refResolverClass>
         <tagName>PeptideEvidence</tagName>
         <userParamClass>uk.ac.ebi.jmzidml.model.mzidml.params.PeptideEvidenceUserParam</userParamClass>
-        <xpath>/MzIdentML/SequenceCollection/PeptideEvidenceList/PeptideEvidence</xpath>
+        <xpath>/MzIdentML/SequenceCollection/PeptideEvidence</xpath>
     </configurations>
     <configurations>
         <autoRefResolving>false</autoRefResolving>
