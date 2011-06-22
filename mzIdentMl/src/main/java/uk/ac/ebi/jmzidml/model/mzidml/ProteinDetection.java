@@ -1,15 +1,14 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.*;
 
 
 /**
- * An Analysis which assembles a set of peptides (e.g. from a spectra search analysis) to
- *                 proteins.
+ * An Analysis which assembles a set of peptides (e.g. from a spectra search analysis) to proteins. 
  *
  * TODO marshalling/ persistor add validation to check for case where someone gets proteinDetectionList/proteinDetectionProtocol and changes its id without updating ref id in
  *      ProteinDetection and other such clases.
@@ -17,7 +16,6 @@ import java.util.List;
  * NOTE: There is no setter method for the proteinDetectionListRef/proteinDetectionProtocolRef. This simplifies keeping the proteinDetectionList/proteinDetectionProtocol object reference and
  * proteinDetectionListRef/proteinDetectionProtocolRef synchronized.
  *
- * 
  * <p>Java class for ProteinDetectionType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -29,8 +27,8 @@ import java.util.List;
  *       &lt;sequence>
  *         &lt;element name="InputSpectrumIdentifications" type="{http://psidev.info/psi/pi/mzIdentML/1.1}InputSpectrumIdentificationsType" maxOccurs="unbounded"/>
  *       &lt;/sequence>
- *       &lt;attribute name="ProteinDetectionList_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="ProteinDetectionProtocol_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="proteinDetectionList_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="proteinDetectionProtocol_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -52,10 +50,10 @@ public class ProteinDetection
     protected List<InputSpectrumIdentifications> inputSpectrumIdentifications;
     @XmlAttribute(name = "proteinDetectionList_ref", required = true)
     protected String proteinDetectionListRef;
-    @XmlTransient
-    protected ProteinDetectionList proteinDetectionList;
     @XmlAttribute(name = "proteinDetectionProtocol_ref", required = true)
     protected String proteinDetectionProtocolRef;
+    @XmlTransient
+    protected ProteinDetectionList proteinDetectionList;
     @XmlTransient
     protected ProteinDetectionProtocol proteinDetectionProtocol;
 
@@ -89,6 +87,7 @@ public class ProteinDetection
         }
         this.proteinDetectionProtocol = proteinDetectionProtocol;
     }
+
 
     /**
      * Gets the value of the inputSpectrumIdentifications property.

@@ -16,7 +16,6 @@ import uk.ac.ebi.jmzidml.model.mzidml.*;
 public enum ParamListMappings{
     ProteinDetectionProtocol                 (new String[]{"Threshold", "AnalysisParams"}, ProteinDetectionProtocol.class),
     Filter                                   (new String[]{"Include", "Exclude"}, Filter.class),
-    PeptideEvidenceList                      (new String[]{"AdditionalParams"}, PeptideEvidenceList.class),
     SpectrumIdentificationProtocol            (new String[]{"AdditionalSearchParams", "Threshold"}, SpectrumIdentificationProtocol.class),
     Enzyme                                   (new String[]{"EnzymeName"}, Enzyme.class);
 

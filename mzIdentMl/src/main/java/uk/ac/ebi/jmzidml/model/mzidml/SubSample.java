@@ -1,33 +1,29 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import javax.xml.bind.annotation.*;
+
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
- * References to the individual component samples within a mixed parent sample.
- *
+ * References to the individual component samples within a mixed parent sample. 
  *
  * TODO marshalling/ persistor add validation to check for case where someone gets sample and changes its id without updating ref id in
  *      SubSample and other such clases.
  *
  * NOTE: There is no setter method for the sampleRef. This simplifies keeping the sample object reference and
  * sampleRef synchronized.
- *
- *
- *
- * <p>Java class for subSampleType complex type.
+ * <p>Java class for SubSampleType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="subSampleType">
+ * &lt;complexType name="SubSampleType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="Sample_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="sample_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -62,8 +58,6 @@ public class SubSample
         }
         this.sample = sample;
     }
-
-
     /**
      * Gets the value of the sampleRef property.
      * 
@@ -75,6 +69,5 @@ public class SubSample
     public String getSampleRef() {
         return sampleRef;
     }
-
 
 }

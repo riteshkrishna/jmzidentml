@@ -1,14 +1,18 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * A person for which the attributes are self describing.
+ * A person's name and contact details. Any additional information such as the address, contact email etc. should be supplied using CV parameters or user parameters.
  * 
  * <p>Java class for PersonType complex type.
  * 
@@ -19,7 +23,7 @@ import java.util.List;
  *   &lt;complexContent>
  *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}AbstractContactType">
  *       &lt;sequence>
- *         &lt;element name="affiliations" type="{http://psidev.info/psi/pi/mzIdentML/1.1}AffiliationsType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="Affiliation" type="{http://psidev.info/psi/pi/mzIdentML/1.1}AffiliationType" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="lastName" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="firstName" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -33,7 +37,7 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PersonType", propOrder = {
-    "affiliations"
+    "affiliation"
 })
 public class Person
     extends AbstractContact
@@ -41,8 +45,8 @@ public class Person
 {
 
     private final static long serialVersionUID = 100L;
-    @XmlElement(name="Affiliations")
-    protected List<Affiliations> affiliations;
+    @XmlElement(name = "Affiliation")
+    protected List<Affiliation> affiliation;
     @XmlAttribute
     protected String lastName;
     @XmlAttribute
@@ -51,32 +55,32 @@ public class Person
     protected String midInitials;
 
     /**
-     * Gets the value of the affiliations property.
+     * Gets the value of the affiliation property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the affiliations property.
+     * This is why there is not a <CODE>set</CODE> method for the affiliation property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getAffiliations().add(newItem);
+     *    getAffiliation().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Affiliations }
+     * {@link Affiliation }
      * 
      * 
      */
-    public List<Affiliations> getAffiliations() {
-        if (affiliations == null) {
-            affiliations = new ArrayList<Affiliations>();
+    public List<Affiliation> getAffiliation() {
+        if (affiliation == null) {
+            affiliation = new ArrayList<Affiliation>();
         }
-        return this.affiliations;
+        return this.affiliation;
     }
 
     /**

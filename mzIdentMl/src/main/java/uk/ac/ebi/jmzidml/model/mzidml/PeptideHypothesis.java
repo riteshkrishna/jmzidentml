@@ -1,15 +1,17 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.*;
+
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
+ * Peptide evidence on which this ProteinHypothesis is based by reference to a PeptideEvidence element. 
+ *
  * TODO marshalling/ persistor add validation to check for case where someone gets peptideEvidence and changes its id without updating ref id in
  *      PeptideHypothesis and other such classes.
  *
@@ -25,9 +27,9 @@ import java.util.List;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="SpectrumIdentificationItemRef" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SpectrumIdentificationItemRefType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="SpectrumIdentificationItemRef" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SpectrumIdentificationItemRefType" maxOccurs="unbounded"/>
  *       &lt;/sequence>
- *       &lt;attribute name="PeptideEvidence_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="peptideEvidence_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>

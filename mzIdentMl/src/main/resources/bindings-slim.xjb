@@ -170,9 +170,6 @@
         <jxb:bindings node="//xsd:complexType[@name='PeptideEvidenceType']">
             <jxb:class name="PeptideEvidence"/>
         </jxb:bindings>
-        <jxb:bindings node="//xsd:complexType[@name='PeptideEvidenceListType']">
-            <jxb:class name="PeptideEvidenceList"/>
-        </jxb:bindings>
 
         <!--<jxb:bindings-->
         <!--node="//xsd:complexType[@name='PeptideEvidenceType']/xsd:complexContent/xsd:extension/xsd:attribute[@name='DBSequence_Ref']">-->
@@ -284,10 +281,6 @@
 
         <jxb:bindings node="//xsd:complexType[@name='EnzymeType']">
             <jxb:class name="Enzyme"/>
-        </jxb:bindings>
-
-        <jxb:bindings node="//xsd:complexType[@name='EnzymeRefType']">
-            <jxb:class name="EnzymeRef"/>
         </jxb:bindings>
 
 
@@ -550,8 +543,8 @@
         <!--</jxb:property>-->
         <!--</jxb:bindings>-->
 
-        <jxb:bindings node="//xsd:complexType[@name='AffiliationsType']">
-            <jxb:class name="Affiliations"/>
+        <jxb:bindings node="//xsd:complexType[@name='AffiliationType']">
+            <jxb:class name="Affiliation"/>
         </jxb:bindings>
 
         <jxb:bindings node="//xsd:complexType[@name='OrganizationType']">

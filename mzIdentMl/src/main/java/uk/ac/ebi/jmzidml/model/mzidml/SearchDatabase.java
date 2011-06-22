@@ -1,22 +1,26 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.CvParamListCapable;
-import uk.ac.ebi.jmzidml.model.ParamCapable;
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.CalendarAdapter;
-
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import uk.ac.ebi.jmzidml.model.CvParamListCapable;
+import uk.ac.ebi.jmzidml.model.ParamCapable;
+import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.CalendarAdapter;
 
 
 /**
- * A database for searching mass spectra. Examples include a set of amino acid sequence
- *                 entries, or annotated spectra libraries.
- *             
+ * A database for searching mass spectra. Examples include a set of amino acid sequence entries, or annotated spectra libraries. 
  * 
  * <p>Java class for SearchDatabaseType complex type.
  * 
@@ -28,7 +32,7 @@ import java.util.List;
  *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}ExternalDataType">
  *       &lt;sequence>
  *         &lt;element name="DatabaseName" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamType"/>
- *         &lt;element name="cvParam" type="{http://psidev.info/psi/pi/mzIdentML/1.1}cvParamType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="cvParam" type="{http://psidev.info/psi/pi/mzIdentML/1.1}CVParamType" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="version" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="releaseDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
@@ -46,9 +50,9 @@ import java.util.List;
     "databaseName",
     "cvParam"
 })
-public class AnalysisSearchDatabase
+public class SearchDatabase
     extends ExternalData
-    implements Serializable, CvParamListCapable, ParamCapable
+    implements Serializable, ParamCapable, CvParamListCapable
 {
 
     private final static long serialVersionUID = 100L;

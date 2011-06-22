@@ -1,18 +1,19 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
+ * The samples analysed can optionally be recorded using CV terms for descriptions. If a composite sample has been analysed, the subsample association can be used to build a hierarchical description. 
+ * 
  * <p>Java class for AnalysisSampleCollectionType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -64,7 +65,7 @@ public class AnalysisSampleCollection
      * Objects of the following type(s) are allowed in the list
      * {@link Sample }
      * 
-     * 
+     *  @return sample
      */
     public List<Sample> getSample() {
         if (sample == null) {

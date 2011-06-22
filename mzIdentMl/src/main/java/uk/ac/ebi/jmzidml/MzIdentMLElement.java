@@ -62,16 +62,16 @@ public enum MzIdentMLElement {
                                      getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.AbstractParam.class.getName()).getRefResolverClass()), // this resolver might be turned off for performance
 
 //    Affiliations                    ("Affiliations",                    true,  "/MzIdentML/AuditCollection/Person/Affiliations",                                                                                                false, false, Affiliations.class,                   null,                                       null,                                           false,  AffiliationsRefResolver.class),
-    Affiliations                    (getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.Affiliations.class.getName()).getTagName(),
-                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.Affiliations.class.getName()).isIndexed(),
-                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.Affiliations.class.getName()).getXpath(),
-                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.Affiliations.class.getName()).isCached(),
-                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.Affiliations.class.getName()).isIdMapped(),
-                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.Affiliations.class.getName()).getClazz(),
-                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.Affiliations.class.getName()).getCvParamClass(),
-                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.Affiliations.class.getName()).getUserParamClass(),
-                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.Affiliations.class.getName()).isAutoRefResolving(),
-                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.Affiliations.class.getName()).getRefResolverClass()),
+    Affiliation                    (getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.Affiliation.class.getName()).getTagName(),
+                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.Affiliation.class.getName()).isIndexed(),
+                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.Affiliation.class.getName()).getXpath(),
+                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.Affiliation.class.getName()).isCached(),
+                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.Affiliation.class.getName()).isIdMapped(),
+                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.Affiliation.class.getName()).getClazz(),
+                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.Affiliation.class.getName()).getCvParamClass(),
+                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.Affiliation.class.getName()).getUserParamClass(),
+                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.Affiliation.class.getName()).isAutoRefResolving(),
+                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.Affiliation.class.getName()).getRefResolverClass()),
     
 //    AmbiguousResidue                ("AmbiguousResidue",                false, "/MzIdentML/AnalysisProtocolCollection/SpectrumIdentificationProtocol/MassTable/AmbiguousResidue",                                               false, false, AmbiguousResidue.class,               AmbiguousResidueCvParam.class,              AmbiguousResidueUserParam.class,                false,  null),
     AmbiguousResidue                (getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.AmbiguousResidue.class.getName()).getTagName(),
@@ -134,18 +134,7 @@ public enum MzIdentMLElement {
                                      getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.AnalysisSampleCollection.class.getName()).isAutoRefResolving(),
                                      getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.AnalysisSampleCollection.class.getName()).getRefResolverClass()),
     
-    //AnalysisSearchDatabase          ("SearchDatabase",                  true,  "/MzIdentML/DataCollection/Inputs/SearchDatabase",                                                                                               false, true,  AnalysisSearchDatabase.class,         AnalysisSearchDatabaseCvParam.class,        null,                                           false,  null),
-    AnalysisSearchDatabase          (getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.AnalysisSearchDatabase.class.getName()).getTagName(),
-                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.AnalysisSearchDatabase.class.getName()).isIndexed(),
-                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.AnalysisSearchDatabase.class.getName()).getXpath(),
-                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.AnalysisSearchDatabase.class.getName()).isCached(),
-                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.AnalysisSearchDatabase.class.getName()).isIdMapped(),
-                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.AnalysisSearchDatabase.class.getName()).getClazz(),
-                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.AnalysisSearchDatabase.class.getName()).getCvParamClass(),
-                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.AnalysisSearchDatabase.class.getName()).getUserParamClass(),
-                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.AnalysisSearchDatabase.class.getName()).isAutoRefResolving(),
-                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.AnalysisSearchDatabase.class.getName()).getRefResolverClass()),
-    
+
  //   AnalysisSoftware                ("AnalysisSoftware",                true,  "/MzIdentML/AnalysisSoftwareList/AnalysisSoftware",                                                                                              false, true,  AnalysisSoftware.class,               null,                                       null,                                           false,  null),
     AnalysisSoftware                (getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftware.class.getName()).getTagName(),
                                      getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftware.class.getName()).isIndexed(),
@@ -582,6 +571,7 @@ public enum MzIdentMLElement {
                                      getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidence.class.getName()).getRefResolverClass()),
 
 //    PeptideEvidenceList             ("PeptideEvidenceList",             true,  "/MzIdentML/SequenceCollection/PeptideEvidenceList",                                                                                             false, true,  PeptideEvidenceList.class,            PeptideEvidenceListCvParam.class,           PeptideEvidenceListUserParam.class,                                           false,  null),
+/*
     PeptideEvidenceList             (getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidenceList.class.getName()).getTagName(),
                                      getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidenceList.class.getName()).isIndexed(),
                                      getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidenceList.class.getName()).getXpath(),
@@ -592,6 +582,7 @@ public enum MzIdentMLElement {
                                      getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidenceList.class.getName()).getUserParamClass(),
                                      getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidenceList.class.getName()).isAutoRefResolving(),
                                      getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidenceList.class.getName()).getRefResolverClass()),
+*/
 
 //    PeptideEvidenceRef              ("PeptideEvidenceRef",              false, "/MzIdentML/DataCollection/AnalysisData/SpectrumIdentificationList/SpectrumIdentificationResult/SpectrumIdentificationItem/PeptideEvidenceRef",  false, false, PeptideEvidenceRef.class,             null,                                       null,                                           false,   PeptideEvidenceRefResolver.class),
     PeptideEvidenceRef             (getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidenceRef.class.getName()).getTagName(),
@@ -748,6 +739,19 @@ public enum MzIdentMLElement {
                                      getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.Sample.class.getName()).getUserParamClass(),
                                      getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.Sample.class.getName()).isAutoRefResolving(),
                                      getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.Sample.class.getName()).getRefResolverClass()),
+
+
+    //AnalysisSearchDatabase          ("SearchDatabase",                  true,  "/MzIdentML/DataCollection/Inputs/SearchDatabase",                                                                                               false, true,  AnalysisSearchDatabase.class,         AnalysisSearchDatabaseCvParam.class,        null,                                           false,  null),
+    SearchDatabase          (getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.SearchDatabase.class.getName()).getTagName(),
+                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.SearchDatabase.class.getName()).isIndexed(),
+                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.SearchDatabase.class.getName()).getXpath(),
+                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.SearchDatabase.class.getName()).isCached(),
+                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.SearchDatabase.class.getName()).isIdMapped(),
+                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.SearchDatabase.class.getName()).getClazz(),
+                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.SearchDatabase.class.getName()).getCvParamClass(),
+                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.SearchDatabase.class.getName()).getUserParamClass(),
+                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.SearchDatabase.class.getName()).isAutoRefResolving(),
+                                     getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.SearchDatabase.class.getName()).getRefResolverClass()),
 
 //    SearchDatabaseRef               ("SearchDatabaseRef",                  false, "/MzIdentML/AnalysisCollection/SpectrumIdentification/SearchDatabaseRef",                                                                        false, false, SearchDatabaseRef.class,              null,                                       null,                                           false,   SearchDatabaseRefResolver.class),
     SearchDatabaseRef               (getCfg().get(uk.ac.ebi.jmzidml.model.mzidml.SearchDatabaseRef.class.getName()).getTagName(),

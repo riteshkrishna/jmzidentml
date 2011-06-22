@@ -1,14 +1,18 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * Data external to the XML instance document. The location of the data file is given in the
- *                 location attribute.
- *             
+ * Data external to the XML instance document. The location of the data file is given in the location attribute. 
  * 
  * <p>Java class for ExternalDataType complex type.
  * 
@@ -19,8 +23,8 @@ import java.io.Serializable;
  *   &lt;complexContent>
  *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType">
  *       &lt;sequence>
- *         &lt;element name="externalFormatDocumentation" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
- *         &lt;element name="fileFormat" type="{http://psidev.info/psi/pi/mzIdentML/1.1}FileFormatType" minOccurs="0"/>
+ *         &lt;element name="ExternalFormatDocumentation" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
+ *         &lt;element name="FileFormat" type="{http://psidev.info/psi/pi/mzIdentML/1.1}FileFormatType" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="location" use="required" type="{http://www.w3.org/2001/XMLSchema}anyURI" />
  *     &lt;/extension>
@@ -38,7 +42,7 @@ import java.io.Serializable;
 @XmlSeeAlso({
     SpectraData.class,
     SourceFile.class,
-    AnalysisSearchDatabase.class
+    SearchDatabase.class
 })
 public class ExternalData
     extends Identifiable
@@ -49,7 +53,7 @@ public class ExternalData
     @XmlElement(name = "ExternalFormatDocumentation")
     @XmlSchemaType(name = "anyURI")
     protected String externalFormatDocumentation;
-    @XmlElement(name="FileFormat")
+    @XmlElement(name = "FileFormat")
     protected FileFormat fileFormat;
     @XmlAttribute(required = true)
     @XmlSchemaType(name = "anyURI")

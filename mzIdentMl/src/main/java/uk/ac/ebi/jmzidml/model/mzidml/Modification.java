@@ -1,25 +1,22 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
-import uk.ac.ebi.jmzidml.model.utils.FacadeList;
-
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+
+import uk.ac.ebi.jmzidml.model.CvParamCapable;
+import uk.ac.ebi.jmzidml.model.CvParamListCapable;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
- * A molecule modification specification. If n modifications have been found on a peptide,
- *                 there should be n instances of Modification. If multiple modifications are provided as cvParams, it is
- *                 assumed that the modification is ambiguous i.e. one modification or another. If no CVParams are provided
- *                 it is assumed that the delta has not been matched to a known modification. A neutral loss should be
- *                 defined as an additional CVParam within Modification. If more complex information should be given about
- *                 neutral losses (such as presence/absence on particular product ions), this can additionally be encoded
- *                 within the FragmentationArray.
- *             
+ * A molecule modification specification. If n modifications have been found on a peptide, there should be n instances of Modification. If multiple modifications are provided as cvParams, it is assumed that the modification is ambiguous i.e. one modification or another. A cvParam must be provided with the identification of the modification sourced from a suitable CV e.g. UNIMOD. If the modification is not present in the CV (and this will be checked by the semantic validator within a given tolerance window), there is a “unknown modification�\u009d CV term that must be used instead. A neutral loss should be defined as an additional CVParam within Modification. If more complex information should be given about neutral losses (such as presence/absence on particular product ions), this can additionally be encoded within the FragmentationArray. 
  * 
  * <p>Java class for ModificationType complex type.
  * 
@@ -30,7 +27,7 @@ import java.util.List;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="cvParam" type="{http://psidev.info/psi/pi/mzIdentML/1.1}CVParamType" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *       &lt;attribute name="location" type="{http://www.w3.org/2001/XMLSchema}int" />
  *       &lt;attribute name="residues" type="{http://psidev.info/psi/pi/mzIdentML/1.1}listOfChars" />
@@ -45,19 +42,16 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ModificationType", propOrder = {
-    "paramGroup"
+    "cvParam"
 })
 public class Modification
     extends MzIdentMLObject
-    implements Serializable , ParamGroupCapable
+    implements Serializable, CvParamListCapable
 {
 
     private final static long serialVersionUID = 100L;
-    @XmlElements({
-        @XmlElement(name = "userParam", type = UserParam.class),
-        @XmlElement(name = "cvParam", type = CvParam.class)
-    })
-    protected List<AbstractParam> paramGroup;
+    @XmlElement(required = true)
+    protected List<CvParam> cvParam;
     @XmlAttribute
     protected Integer location;
     @XmlAttribute
@@ -68,33 +62,32 @@ public class Modification
     protected Double monoisotopicMassDelta;
 
     /**
-     * Gets the value of the paramGroup property.
+     * Gets the value of the cvParam property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the paramGroup property.
+     * This is why there is not a <CODE>set</CODE> method for the cvParam property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getParamGroup().add(newItem);
+     *    getCvParam().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link UserParam }
      * {@link CvParam }
      * 
      * 
      */
-    public List<AbstractParam> getParamGroup() {
-        if (paramGroup == null) {
-            paramGroup = new ArrayList<AbstractParam>();
+    public List<CvParam> getCvParam() {
+        if (cvParam == null) {
+            cvParam = new ArrayList<CvParam>();
         }
-        return this.paramGroup;
+        return this.cvParam;
     }
 
     /**
@@ -198,11 +191,4 @@ public class Modification
         this.monoisotopicMassDelta = value;
     }
 
-    public List<CvParam> getCvParam() {
-        return new FacadeList<CvParam>(this.getParamGroup(), CvParam.class);
-    }
-
-    public List<UserParam> getUserParam() {
-        return new FacadeList<UserParam>(this.getParamGroup(), UserParam.class);
-    }
 }

@@ -1,13 +1,12 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
@@ -19,8 +18,8 @@ import java.io.Serializable;
  * &lt;complexType name="ResidueType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="Code" use="required" type="{http://psidev.info/psi/pi/mzIdentML/1.1}chars" />
- *       &lt;attribute name="Mass" use="required" type="{http://www.w3.org/2001/XMLSchema}float" />
+ *       &lt;attribute name="code" use="required" type="{http://psidev.info/psi/pi/mzIdentML/1.1}chars" />
+ *       &lt;attribute name="mass" use="required" type="{http://www.w3.org/2001/XMLSchema}float" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -36,9 +35,9 @@ public class Residue
 {
 
     private final static long serialVersionUID = 100L;
-    @XmlAttribute( required = true)
+    @XmlAttribute(required = true)
     protected String code;
-    @XmlAttribute( required = true)
+    @XmlAttribute(required = true)
     protected float mass;
 
     /**

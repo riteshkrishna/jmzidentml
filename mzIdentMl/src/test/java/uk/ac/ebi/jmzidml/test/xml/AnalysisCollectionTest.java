@@ -4,7 +4,7 @@ import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.*;
-import uk.ac.ebi.jmzidml.model.mzidml.params.AnalysisSearchDatabaseCvParam;
+import uk.ac.ebi.jmzidml.model.mzidml.params.SearchDatabaseCvParam;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
 import java.net.URL;
@@ -152,14 +152,14 @@ public class AnalysisCollectionTest extends TestCase {
             assertTrue(sdbl.size() > 0);
             for (SearchDatabaseRef db : sdbl) {
                 if (MzIdentMLElement.SearchDatabaseRef.isAutoRefResolving() && db.getSearchDatabaseRef() != null) {
-                    AnalysisSearchDatabase searchDB = db.getSearchDatabase();
+                    SearchDatabase searchDB = db.getSearchDatabase();
                     assertNotNull(searchDB);
                     assertEquals("SwissProt", searchDB.getName());
 
                     // quickly check the sub-classing of the CvParams
                     assertTrue(searchDB.getCvParam().size() > 0);
                     for (CvParam cvParam : searchDB.getCvParam()) {
-                        assertTrue("Cv params have to be sub-classed.", (cvParam instanceof AnalysisSearchDatabaseCvParam) );
+                        assertTrue("Cv params have to be sub-classed.", (cvParam instanceof SearchDatabaseCvParam) );
                         if (MzIdentMLElement.CvParam.isAutoRefResolving() && cvParam.getCvRef() != null) {
                             assertNotNull(cvParam.getCv());
                         } else {

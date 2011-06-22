@@ -4,10 +4,14 @@ package uk.ac.ebi.jmzidml.model.mzidml;
 import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
 import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -42,13 +46,14 @@ public class SourceFile
 
     private final static long serialVersionUID = 100L;
     @XmlElements({
-        @XmlElement(name = "userParam", type = UserParam.class),
-        @XmlElement(name = "cvParam", type = CvParam.class)
+        @XmlElement(name = "cvParam", type = CvParam.class),
+        @XmlElement(name = "userParam", type = UserParam.class)
     })
     protected List<AbstractParam> paramGroup;
 
     /**
-     * Gets the value of the paramGroup property.
+     * Any additional parameters description the source
+     * 								file.Gets the value of the paramGroup property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
@@ -65,8 +70,8 @@ public class SourceFile
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link UserParam }
      * {@link CvParam }
+     * {@link UserParam }
      * 
      * 
      */

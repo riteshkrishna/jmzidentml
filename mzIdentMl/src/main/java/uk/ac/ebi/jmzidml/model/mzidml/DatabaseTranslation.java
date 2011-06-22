@@ -13,6 +13,8 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
+ * A specification of how a nucleic acid sequence database was translated for searching. 
+ * 
  * <p>Java class for DatabaseTranslationType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -67,7 +69,7 @@ public class DatabaseTranslation
      * Objects of the following type(s) are allowed in the list
      * {@link TranslationTable }
      * 
-     * 
+     * @return translationTable A list of translation tables.
      */
     public List<TranslationTable> getTranslationTable() {
         if (translationTable == null) {
@@ -96,7 +98,7 @@ public class DatabaseTranslation
      * Objects of the following type(s) are allowed in the list
      * {@link Integer }
      * 
-     * 
+     *  @return frames A list of frames.
      */
     public List<Integer> getFrames() {
         if (frames == null) {

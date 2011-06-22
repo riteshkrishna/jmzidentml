@@ -14,8 +14,7 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
- * The tolerance of the search given as a plus and minus value with units.
- *             
+ * The tolerance of the search given as a plus and minus value with units. 
  * 
  * <p>Java class for ToleranceType complex type.
  * 
@@ -26,7 +25,7 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="cvParam" type="{http://psidev.info/psi/pi/mzIdentML/1.1}cvParamType" maxOccurs="unbounded"/>
+ *         &lt;element name="cvParam" type="{http://psidev.info/psi/pi/mzIdentML/1.1}CVParamType" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

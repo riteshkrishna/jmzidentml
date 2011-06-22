@@ -14,11 +14,8 @@ import uk.ac.ebi.jmzidml.xml.jaxb.adapters.CalendarAdapter;
 
 
 /**
- * The use of a protocol with the requisite Parameters and ParameterValues.
- *                 ProtocolApplications can take Material or Data (or both) as input and produce Material or Data (or both)
- *                 as output. ProtocolApplication is abstract and should be subclassed in the development of modular
- *                 formats. The subclass GenericProtocolApplication can be used without extension.
- *             
+ * The use of a protocol with the requisite Parameters and ParameterValues. ProtocolApplications can take Material or Data (or both) as input
+ * and produce Material or Data (or both) as output. 
  * 
  * <p>Java class for ProtocolApplicationType complex type.
  * 

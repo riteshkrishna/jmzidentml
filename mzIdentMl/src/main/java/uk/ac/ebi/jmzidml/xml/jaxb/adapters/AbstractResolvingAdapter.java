@@ -107,8 +107,8 @@ public abstract class AbstractResolvingAdapter<ValueType, BoundType> extends Xml
                 case Person:
                      cls = Person.class;
                      break;
-                case AnalysisSearchDatabase:
-                     cls = AnalysisSearchDatabase.class;
+                case SearchDatabase:
+                     cls = SearchDatabase.class;
                      break;
                 case SpectraData:
                      cls = SpectraData.class;

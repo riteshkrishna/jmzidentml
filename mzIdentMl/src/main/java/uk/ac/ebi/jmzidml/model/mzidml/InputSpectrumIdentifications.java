@@ -1,3 +1,4 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
 import java.io.Serializable;
@@ -7,31 +8,36 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
+ * The lists of spectrum identifications that are input to the protein detection process. 
+ *
  * TODO marshalling/ persistor add validation to check for case where someone gets SpectrumIdentificationList and changes its id without updating ref id in
  * InputSpectrumIdentifications and other such classes.
  * <p/>
  * NOTE: There is no setter method for the spectrumIdentificationListRef. This simplifies keeping the measure object reference and
  * spectrumIdentificationListRef synchronized.
- * <p/>
+ *
  * <p>Java class for InputSpectrumIdentificationsType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="InputSpectrumIdentificationsType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="SpectrumIdentificationList_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="spectrumIdentificationList_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "InputSpectrumIdentificationsType")
 public class InputSpectrumIdentifications
-        extends MzIdentMLObject
-        implements Serializable {
+    extends MzIdentMLObject
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(name = "spectrumIdentificationList_ref", required = true)
@@ -56,9 +62,11 @@ public class InputSpectrumIdentifications
 
     /**
      * Gets the value of the spectrumIdentificationListRef property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getSpectrumIdentificationListRef() {
         return spectrumIdentificationListRef;

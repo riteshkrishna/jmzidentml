@@ -1,26 +1,26 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import javax.xml.bind.annotation.*;
 
 
 /**
+ * A single entry from an ontology or a controlled
+ * vocabulary.
  *
  * TODO marshalling/ persistor add validation to check for case where someone gets cv and changes its id without updating ref id in
  *      CvParam and other such clases.
  *
  * NOTE: There is no setter method for the cvRef. This simplifies keeping the cv object reference and
  * cvRef synchronized.
-*
- * A single entry from an ontology or a controlled vocabulary.
- * 
- * <p>Java class for cvParamType complex type.
+ *
+ * <p>Java class for CVParamType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="cvParamType">
+ * &lt;complexType name="CVParamType">
  *   &lt;complexContent>
  *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}AbstractParamType">
  *       &lt;attribute name="cvRef" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -44,6 +44,7 @@ public class CvParam
     protected String cvRef;
     @XmlAttribute(required = true)
     protected String accession;
+
     @XmlTransient
     protected Cv cv;
 
@@ -64,6 +65,7 @@ public class CvParam
 
     }
 
+
     /**
      * Gets the value of the cvRef property.
      * 
@@ -75,6 +77,7 @@ public class CvParam
     public String getCvRef() {
         return cvRef;
     }
+
 
 
     /**

@@ -4,10 +4,15 @@ package uk.ac.ebi.jmzidml.model.mzidml;
 import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
 import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -42,7 +47,7 @@ import java.util.List;
 })
 public class SpectrumIdentificationList
     extends Identifiable
-    implements Serializable , ParamGroupCapable
+    implements Serializable, ParamGroupCapable
 {
 
     private final static long serialVersionUID = 100L;
@@ -51,8 +56,8 @@ public class SpectrumIdentificationList
     @XmlElement(name = "SpectrumIdentificationResult", required = true)
     protected List<SpectrumIdentificationResult> spectrumIdentificationResult;
     @XmlElements({
-        @XmlElement(name = "cvParam", type = CvParam.class),
-        @XmlElement(name = "userParam", type = UserParam.class)
+        @XmlElement(name = "userParam", type = UserParam.class),
+        @XmlElement(name = "cvParam", type = CvParam.class)
     })
     protected List<AbstractParam> paramGroup;
     @XmlAttribute
@@ -112,9 +117,7 @@ public class SpectrumIdentificationList
     }
 
     /**
-     * Scores or output parameters associated with the
-     *                                 SpectrumIdentificationList
-     *                             Gets the value of the paramGroup property.
+     * Scores or output parameters associated with the SpectrumIdentificationList.Gets the value of the paramGroup property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
@@ -131,8 +134,8 @@ public class SpectrumIdentificationList
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link CvParam }
      * {@link UserParam }
+     * {@link CvParam }
      * 
      * 
      */

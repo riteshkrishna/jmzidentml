@@ -10,8 +10,7 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
- * A modification where one residue is substituted by another (amino acid change).
- *             
+ * A modification where one residue is substituted by another (amino acid change). 
  * 
  * <p>Java class for SubstitutionModificationType complex type.
  * 

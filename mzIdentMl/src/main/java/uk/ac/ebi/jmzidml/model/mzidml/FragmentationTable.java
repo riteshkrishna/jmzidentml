@@ -12,6 +12,8 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
+ * Contains the types of measures that will be reported in generic arrays for each SpectrumIdentificationItem e.g. product ion m/z, product ion intensity, product ion m/z error 
+ * 
  * <p>Java class for FragmentationTableType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.

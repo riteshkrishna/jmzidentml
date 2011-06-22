@@ -1,18 +1,19 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
- * Specification of a search modification as parameter for a spectra search. Contains the
- *                 name of the modification, the mass, the specificity and whether it is a static modification.
- *             
+ * Specification of a search modification as parameter for a spectra search. Contains the name of the modification, the mass, the specificity and whether it is a static modification. 
  * 
  * <p>Java class for SearchModificationType complex type.
  * 
@@ -23,8 +24,8 @@ import java.util.List;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="cvParam" type="{http://psidev.info/psi/pi/mzIdentML/1.1}CVParamType" maxOccurs="unbounded"/>
  *         &lt;element name="SpecificityRules" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SpecificityRulesType" minOccurs="0"/>
+ *         &lt;element name="cvParam" type="{http://psidev.info/psi/pi/mzIdentML/1.1}CVParamType" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *       &lt;attribute name="fixedMod" use="required" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *       &lt;attribute name="massDelta" use="required" type="{http://www.w3.org/2001/XMLSchema}float" />
@@ -39,7 +40,7 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SearchModificationType", propOrder = {
     "specificityRules",
-            "cvParam"
+    "cvParam"
 })
 public class SearchModification
     extends MzIdentMLObject
@@ -47,16 +48,40 @@ public class SearchModification
 {
 
     private final static long serialVersionUID = 100L;
-    @XmlElement(required = true)
-    protected List<CvParam> cvParam;
     @XmlElement(name = "SpecificityRules")
     protected SpecificityRules specificityRules;
+    @XmlElement(required = true)
+    protected List<CvParam> cvParam;
     @XmlAttribute(required = true)
     protected boolean fixedMod;
     @XmlAttribute(required = true)
     protected float massDelta;
     @XmlAttribute(required = true)
     protected List<String> residues;
+
+    /**
+     * Gets the value of the specificityRules property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link SpecificityRules }
+     *     
+     */
+    public SpecificityRules getSpecificityRules() {
+        return specificityRules;
+    }
+
+    /**
+     * Sets the value of the specificityRules property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link SpecificityRules }
+     *     
+     */
+    public void setSpecificityRules(SpecificityRules value) {
+        this.specificityRules = value;
+    }
 
     /**
      * Gets the value of the cvParam property.
@@ -85,30 +110,6 @@ public class SearchModification
             cvParam = new ArrayList<CvParam>();
         }
         return this.cvParam;
-    }
-
-    /**
-     * Gets the value of the specificityRules property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link SpecificityRules }
-     *     
-     */
-    public SpecificityRules getSpecificityRules() {
-        return specificityRules;
-    }
-
-    /**
-     * Sets the value of the specificityRules property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link SpecificityRules }
-     *     
-     */
-    public void setSpecificityRules(SpecificityRules value) {
-        this.specificityRules = value;
     }
 
     /**

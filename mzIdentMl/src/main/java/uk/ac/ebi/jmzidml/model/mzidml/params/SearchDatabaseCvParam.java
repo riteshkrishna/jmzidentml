@@ -7,5 +7,5 @@ import uk.ac.ebi.jmzidml.model.mzidml.CvParam;
  *         Date: 14-Oct-2010
  * @since 0.2
  */
-public class AnalysisSearchDatabaseCvParam extends CvParam {
+public class SearchDatabaseCvParam extends CvParam {
 }

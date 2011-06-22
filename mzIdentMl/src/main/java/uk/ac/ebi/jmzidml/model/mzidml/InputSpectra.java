@@ -1,3 +1,4 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
 
 import java.io.Serializable;
@@ -7,34 +8,36 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
+ * The attribute referencing an identifier within the SpectraData section. 
+ *
  * TODO marshalling/ persistor add validation to check for case where someone gets spectraData and changes its id without updating ref id in
  *      InputSpectra and other such classes.
  *
  * NOTE: There is no setter method for the spectraDataRef. This simplifies keeping the measure object reference and
  * spectraDataRef synchronized.
  *
- * The attribute referencing an identifier within the SpectraData section.
- * <p/>
- * <p/>
  * <p>Java class for InputSpectraType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="InputSpectraType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="SpectraData_ref" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="spectraData_ref" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "InputSpectraType")
 public class InputSpectra
-        extends MzIdentMLObject
-        implements Serializable {
+    extends MzIdentMLObject
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(name = "spectraData_ref")
@@ -56,12 +59,13 @@ public class InputSpectra
         }
         this.spectraData = spectraData;
     }
-
     /**
      * Gets the value of the spectraDataRef property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getSpectraDataRef() {
         return spectraDataRef;

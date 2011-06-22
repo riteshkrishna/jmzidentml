@@ -12,6 +12,8 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
+ * The collection of protocols which include the parameters and settings of the performed analyses. 
+ * 
  * <p>Java class for AnalysisProtocolCollectionType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -67,7 +69,7 @@ public class AnalysisProtocolCollection
      * Objects of the following type(s) are allowed in the list
      * {@link SpectrumIdentificationProtocol }
      * 
-     * 
+     *  @return spectrumIdentificationProtocol
      */
     public List<SpectrumIdentificationProtocol> getSpectrumIdentificationProtocol() {
         if (spectrumIdentificationProtocol == null) {

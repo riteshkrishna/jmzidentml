@@ -41,7 +41,7 @@ public class CvListTest extends TestCase {
         assertEquals(3, cvs.size());
 
         for (Cv cv : cvs) {
-            assertTrue(cv.getURI().endsWith(".obo"));
+            assertTrue(cv.getUri().endsWith(".obo"));
         }
     }
 

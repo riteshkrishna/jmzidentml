@@ -47,7 +47,7 @@ public class AnalysisSoftwareTest {
             AnalysisSoftware as = asl.next();
             assertNotNull(as);
             log.debug("\n Analysis Software -> Name : " + as.getName() + " \t Software : "
-                    + as.getCustomizations() + "\t URI" + as.getURI());
+                    + as.getCustomizations() + "\t URI" + as.getUri());
             assertTrue("Analysis software is from Mascot.", as.getName().contains("Mascot"));
             if (MzIdentMLElement.ContactRole.isAutoRefResolving() && as.getContactRole().getContactRef() != null) {
                 assertNotNull(as.getContactRole().getContact());

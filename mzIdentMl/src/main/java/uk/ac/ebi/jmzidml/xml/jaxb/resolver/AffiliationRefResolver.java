@@ -1,7 +1,7 @@
 package uk.ac.ebi.jmzidml.xml.jaxb.resolver;
 
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
-import uk.ac.ebi.jmzidml.model.mzidml.Affiliations;
+import uk.ac.ebi.jmzidml.model.mzidml.Affiliation;
 import uk.ac.ebi.jmzidml.model.mzidml.Organization;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLObjectCache;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
@@ -11,14 +11,14 @@ import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
  *         Date: 16-Nov-2010
  * @since 1.0
  */
-public class AffiliationsRefResolver extends AbstractReferenceResolver<Affiliations> {
+public class AffiliationRefResolver extends AbstractReferenceResolver<Affiliation> {
 
-    public AffiliationsRefResolver(MzIdentMLIndexer index, MzIdentMLObjectCache cache) {
+    public AffiliationRefResolver(MzIdentMLIndexer index, MzIdentMLObjectCache cache) {
         super(index, cache);
     }
 
     @Override
-    public void updateObject(Affiliations object) {
+    public void updateObject(Affiliation object) {
         // add objects for the refID
         String ref = object.getOrganizationRef();
         if (ref != null) {
@@ -36,8 +36,8 @@ public class AffiliationsRefResolver extends AbstractReferenceResolver<Affiliati
      */
     @Override
     public void afterUnmarshal(Object target, Object parent) {
-        if (Affiliations.class.isInstance(target) && MzIdentMLElement.Affiliations.isAutoRefResolving()) {
-            updateObject((Affiliations) target);
+        if (Affiliation.class.isInstance(target) && MzIdentMLElement.Affiliation.isAutoRefResolving()) {
+            updateObject((Affiliation) target);
         } // else, not business of this resolver
     }
 }

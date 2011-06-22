@@ -1,13 +1,18 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlType;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
+ * Helper type to allow either a cvParam or a userParam to be provided for an element.
+ * 
  * <p>Java class for ParamType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -35,19 +40,19 @@ public class Param
 
     private final static long serialVersionUID = 100L;
     @XmlElements({
-        @XmlElement(name = "cvParam", type = CvParam.class),
-        @XmlElement(name = "userParam", type = UserParam.class)
+        @XmlElement(name = "userParam", type = UserParam.class),
+        @XmlElement(name = "cvParam", type = CvParam.class)
     })
     protected AbstractParam paramGroup;
 
+
     /**
      * Sets the value of the paramGroup property.
-     * This can either be a CvParam or UserParam instance object.
      * 
      * @param value
      *     allowed object is
-     *     {@link CvParam }
      *     {@link UserParam }
+     *     {@link CvParam }
      *     
      */
     public void setParam(AbstractParam value) {
@@ -69,5 +74,4 @@ public class Param
             return null;
         }
     }
-
 }

@@ -50,10 +50,10 @@ public class AuditCollectionTest extends TestCase {
             assertNotNull(pi);
             Person p = pi.next();
             assertNotNull(p);
-            assertEquals(1, p.getAffiliations().size()); // we expect one affiliation per person
-            for (Affiliations affiliation : p.getAffiliations()) {
+            assertEquals(1, p.getAffiliation().size()); // we expect one affiliation per person
+            for (Affiliation affiliation : p.getAffiliation()) {
                 assertNotNull(affiliation);
-                if (MzIdentMLElement.Affiliations.isAutoRefResolving() && affiliation.getOrganizationRef() != null) {
+                if (MzIdentMLElement.Affiliation.isAutoRefResolving() && affiliation.getOrganizationRef() != null) {
                     Organization org = affiliation.getOrganization();
                     assertNotNull(org);
                     assertNotNull(org.getId());
