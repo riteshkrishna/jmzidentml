@@ -77,9 +77,9 @@ public class SequenceCollectionTest extends TestCase {
         assertEquals(1, mods.size());
         Modification mod = mods.get(0);
         assertTrue(mod.getMonoisotopicMassDelta() > 1);
-        assertEquals(1, mod.getParamGroup().size());
-        assertTrue(mod.getParamGroup().get(0) instanceof CvParam);
-        CvParam cvparam = (CvParam) mod.getParamGroup().get(0);
+        assertEquals(1, mod.getCvParam().size());
+        assertTrue(mod.getCvParam().get(0) instanceof CvParam);
+        CvParam cvparam = (CvParam) mod.getCvParam().get(0);
         assertTrue(cvparam.getAccession().startsWith("UNIMOD:"));
     }
 }

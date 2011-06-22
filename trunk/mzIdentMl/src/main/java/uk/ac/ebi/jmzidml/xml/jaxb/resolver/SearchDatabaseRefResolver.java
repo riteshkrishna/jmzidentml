@@ -1,7 +1,7 @@
 package uk.ac.ebi.jmzidml.xml.jaxb.resolver;
 
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
-import uk.ac.ebi.jmzidml.model.mzidml.AnalysisSearchDatabase;
+import uk.ac.ebi.jmzidml.model.mzidml.SearchDatabase;
 import uk.ac.ebi.jmzidml.model.mzidml.SearchDatabaseRef;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLObjectCache;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
@@ -22,7 +22,7 @@ public class SearchDatabaseRefResolver extends AbstractReferenceResolver<SearchD
         // add objects for the refID
         String ref = object.getSearchDatabaseRef();
         if (ref != null) {
-            AnalysisSearchDatabase refObject = this.unmarshal(ref, AnalysisSearchDatabase.class);
+            SearchDatabase refObject = this.unmarshal(ref, SearchDatabase.class);
             object.setSearchDatabase(refObject);
         }
     }

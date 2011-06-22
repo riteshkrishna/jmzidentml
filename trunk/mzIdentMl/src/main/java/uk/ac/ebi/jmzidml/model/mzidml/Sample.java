@@ -4,19 +4,18 @@ package uk.ac.ebi.jmzidml.model.mzidml;
 import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
 import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * 
- *                 A description of the sample analysed by mass spectrometry using CVParams or UserParams.
- *                 If a composite sample has been analysed, a parent sample should be defined, which references subsamples.
- *                 This represents any kind of substance used in an experimental workflow, such as whole
- *                 organisms, cells, DNA, solutions, compounds and experimental substances (gels, arrays etc.).
- *             
+ *  A description of the sample analysed by mass spectrometry using CVParams or UserParams. If a composite sample has been analysed, a parent sample should be defined, which references subsamples. This represents any kind of substance used in an experimental workflow, such as whole organisms, cells, DNA, solutions, compounds and experimental substances (gels, arrays etc.).	
  * 
  * <p>Java class for SampleType complex type.
  * 
@@ -28,7 +27,7 @@ import java.util.List;
  *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType">
  *       &lt;sequence>
  *         &lt;element name="ContactRole" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ContactRoleType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="subSample" type="{http://psidev.info/psi/pi/mzIdentML/1.1}subSampleType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="SubSample" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SubSampleType" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
@@ -119,7 +118,8 @@ public class Sample
     }
 
     /**
-     * The characteristics of a Material.Gets the value of the paramGroup property.
+     * The characteristics of a
+     * Material.Gets the value of the paramGroup property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,

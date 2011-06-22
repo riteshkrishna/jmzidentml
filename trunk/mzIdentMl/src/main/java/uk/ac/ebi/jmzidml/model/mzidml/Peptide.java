@@ -1,20 +1,21 @@
 
-
-
-
 package uk.ac.ebi.jmzidml.model.mzidml;
 
 import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
 import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * One (poly)peptide (a sequence with modifications).
+ * One (poly)peptide (a sequence with modifications). The combination of Peptide sequence and modifications must be unique in the file.
  * 
  * <p>Java class for PeptideType complex type.
  * 
@@ -145,7 +146,7 @@ public class Peptide
     }
 
     /**
-     * Gets the value of the paramGroup property.
+     * Additional descriptors of this peptide sequence Gets the value of the paramGroup property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,

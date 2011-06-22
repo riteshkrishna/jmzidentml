@@ -1,17 +1,15 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
 
 
 /**
- * Organizations are entities like companies, universities, government agencies for which
- *                 the attributes are self describing.
- *             
+ * Organizations are entities like companies, universities, government agencies. Any additional information such as the address, email etc. should be supplied either as CV parameters or as user parameters. 
  * 
  * <p>Java class for OrganizationType complex type.
  * 

@@ -1,17 +1,23 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlType;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
 import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 
-import javax.xml.bind.annotation.*;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
 
 /**
+ * Ambiguous residues e.g. X can be specified by the Code attribute and a set of parameters for example giving the different masses that will be used in the search. 
+ * 
  * <p>Java class for AmbiguousResidueType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -23,7 +29,7 @@ import java.util.List;
  *       &lt;sequence>
  *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamGroup" maxOccurs="unbounded"/>
  *       &lt;/sequence>
- *       &lt;attribute name="Code" use="required" type="{http://psidev.info/psi/pi/mzIdentML/1.1}chars" />
+ *       &lt;attribute name="code" use="required" type="{http://psidev.info/psi/pi/mzIdentML/1.1}chars" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -42,15 +48,15 @@ public class AmbiguousResidue
 
     private final static long serialVersionUID = 100L;
     @XmlElements({
-        @XmlElement(name = "userParam", type = UserParam.class),
-        @XmlElement(name = "cvParam", type = CvParam.class)
+        @XmlElement(name = "cvParam", type = CvParam.class),
+        @XmlElement(name = "userParam", type = UserParam.class)
     })
     protected List<AbstractParam> paramGroup;
-    @XmlAttribute(name = "code", required = true)
+    @XmlAttribute(required = true)
     protected String code;
 
     /**
-     * Gets the value of the paramGroup property.
+     * Parameters for capturing e.g. "alternate single letter codes"Gets the value of the paramGroup property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
@@ -67,8 +73,8 @@ public class AmbiguousResidue
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link UserParam }
      * {@link CvParam }
+     * {@link UserParam }
      * 
      * 
      */
@@ -110,4 +116,5 @@ public class AmbiguousResidue
     public List<UserParam> getUserParam() {
         return new FacadeList<UserParam>(this.getParamGroup(), UserParam.class);
     }
+
 }

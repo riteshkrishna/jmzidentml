@@ -4,10 +4,10 @@ package uk.ac.ebi.jmzidml.model.mzidml;
 import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
 import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.*;
 
 
 /**
@@ -25,7 +25,7 @@ import java.util.List;
  *         &lt;element name="PeptideHypothesis" type="{http://psidev.info/psi/pi/mzIdentML/1.1}PeptideHypothesisType" maxOccurs="unbounded"/>
  *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
- *       &lt;attribute name="DBSequence_ref" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="dBSequence_ref" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="passThreshold" use="required" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *     &lt;/extension>
  *   &lt;/complexContent>
@@ -59,7 +59,6 @@ public class ProteinDetectionHypothesis
     @XmlTransient
     protected DBSequence dbSequence;
 
-
     /**
      * Gets the value of the peptideHypothesis property.
      * 
@@ -90,7 +89,7 @@ public class ProteinDetectionHypothesis
     }
 
     /**
-     * Gets the value of the paramGroup property.
+     * Scores or parameters associated with this ProteinDetectionHypothesis e.g. p-value Gets the value of the paramGroup property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
@@ -130,7 +129,6 @@ public class ProteinDetectionHypothesis
     public String getDBSequenceRef() {
         return dbSequenceRef;
     }
-
 
     /**
      * Gets the value of the passThreshold property.

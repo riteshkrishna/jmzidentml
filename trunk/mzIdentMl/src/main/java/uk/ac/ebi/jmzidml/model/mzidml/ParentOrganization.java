@@ -1,37 +1,37 @@
+
 package uk.ac.ebi.jmzidml.model.mzidml;
+
+import java.io.Serializable;
+import javax.xml.bind.annotation.*;
 
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
-import javax.xml.bind.annotation.*;
-import java.io.Serializable;
-
 
 /**
- * TODO marshalling/ persistor add validation to check for case where someone gets organization and changes its id without updating ref id in
- *      ParentOrganization and other such clases.
- *
- * NOTE: There is no setter method for the organizationRef. This simplifies keeping the organization object reference and
- * organizationRef synchronized.
- *
+ * The containing organization (the university or business which a lab belongs to, etc.) 
+ * 
  * <p>Java class for ParentOrganizationType complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="ParentOrganizationType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="Organization_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="organization_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ParentOrganizationType")
 public class ParentOrganization
-        extends MzIdentMLObject
-        implements Serializable {
+    extends MzIdentMLObject
+    implements Serializable
+{
 
     private final static long serialVersionUID = 100L;
     @XmlAttribute(name = "organization_ref", required = true)
@@ -53,12 +53,13 @@ public class ParentOrganization
         }
         this.organization = organization;
     }
-
     /**
      * Gets the value of the organizationRef property.
-     *
-     * @return possible object is
-     *         {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getOrganizationRef() {
         return organizationRef;

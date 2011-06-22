@@ -1,25 +1,22 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.*;
 
 
 /**
+ * An Analysis which tries to identify peptides in input spectra, referencing the database searched, the input spectra, the output results and the protocol that is run. 
  *
- * * TODO marshalling/ persistor add validation to check for case where someone gets spectrumIdentificationList/spectrumIdentificationProtocol and changes its id without updating ref id in
+ * TODO marshalling/ persistor add validation to check for case where someone gets spectrumIdentificationList/spectrumIdentificationProtocol and changes its id without updating ref id in
  * SpectrumIdentification and other such clases.
  * <p/>
  * NOTE: There is no setter method for the spectrumIdentificationListRef/spectrumIdentificationProtocolRef. This simplifies keeping the spectrumIdentificationList/spectrumIdentificationProtocol object reference and
  * spectrumIdentificationListRef/spectrumIdentificationProtocolRef synchronized.
  * <p/>
  *
- * An Analysis which tries to identify peptides in input spectra, referencing the database
- *                 searched, the input spectra, the output results and the protocol that is run.
- *             
- * 
  * <p>Java class for SpectrumIdentificationType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -32,8 +29,8 @@ import java.util.List;
  *         &lt;element name="InputSpectra" type="{http://psidev.info/psi/pi/mzIdentML/1.1}InputSpectraType" maxOccurs="unbounded"/>
  *         &lt;element name="SearchDatabaseRef" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SearchDatabaseRefType" maxOccurs="unbounded"/>
  *       &lt;/sequence>
- *       &lt;attribute name="SpectrumIdentificationProtocol_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="SpectrumIdentificationList_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="spectrumIdentificationProtocol_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="spectrumIdentificationList_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -96,8 +93,6 @@ public class SpectrumIdentification
         }
         this.spectrumIdentificationList = spectrumIdentificationList;
     }
-
-
     /**
      * Gets the value of the inputSpectra property.
      * 
@@ -168,7 +163,6 @@ public class SpectrumIdentification
         return spectrumIdentificationProtocolRef;
     }
 
-
     /**
      * Gets the value of the spectrumIdentificationListRef property.
      * 
@@ -180,6 +174,5 @@ public class SpectrumIdentification
     public String getSpectrumIdentificationListRef() {
         return spectrumIdentificationListRef;
     }
-
 
 }

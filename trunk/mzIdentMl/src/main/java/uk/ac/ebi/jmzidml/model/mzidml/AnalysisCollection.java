@@ -12,6 +12,8 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
+ * The analyses performed to get the results, which map the input and output data sets. Analyses are for example: SpectrumIdentification (resulting in peptides) or ProteinDetection (assemble proteins from peptides).
+ * 
  * <p>Java class for AnalysisCollectionType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -67,7 +69,7 @@ public class AnalysisCollection
      * Objects of the following type(s) are allowed in the list
      * {@link SpectrumIdentification }
      * 
-     * 
+     * @return spectrumIdentification
      */
     public List<SpectrumIdentification> getSpectrumIdentification() {
         if (spectrumIdentification == null) {

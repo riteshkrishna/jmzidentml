@@ -3,8 +3,8 @@ package uk.ac.ebi.jmzidml.model.mzidml;
 
 import uk.ac.ebi.jmzidml.model.ParamListCapable;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import javax.xml.bind.annotation.*;
 
 
 /**
@@ -22,7 +22,7 @@ import java.io.Serializable;
  *         &lt;element name="AnalysisParams" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamListType" minOccurs="0"/>
  *         &lt;element name="Threshold" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamListType"/>
  *       &lt;/sequence>
- *       &lt;attribute name="AnalysisSoftware_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="analysisSoftware_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -63,8 +63,52 @@ public class ProteinDetectionProtocol
         return analysisParams;
     }
 
-    public void setAnalysisParams(ParamList analysisParams){
-        this.analysisParams = analysisParams;
+    /**
+     * Sets the value of the analysisParams property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ParamList }
+     *     
+     */
+    public void setAnalysisParams(ParamList value) {
+        this.analysisParams = value;
+    }
+
+    /**
+     * Gets the value of the threshold property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link ParamList }
+     *     
+     */
+    public ParamList getThreshold() {
+        return threshold;
+    }
+
+    /**
+     * Sets the value of the threshold property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ParamList }
+     *     
+     */
+    public void setThreshold(ParamList value) {
+        this.threshold = value;
+    }
+
+    /**
+     * Gets the value of the analysisSoftwareRef property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getAnalysisSoftwareRef() {
+        return analysisSoftwareRef;
     }
 
 
@@ -81,34 +125,6 @@ public class ProteinDetectionProtocol
             this.analysisSoftwareRef = refId;
         }
         this.analysisSoftware = analysisSoftware;
-    }
-
-    /**
-     * Gets the value of the threshold property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ParamList }
-     *     
-     */
-    public ParamList getThreshold() {
-        return threshold;
-    }
-
-    public void setThreshold(ParamList threshold){
-        this.threshold = threshold;
-    }
-
-    /**
-     * Gets the value of the analysisSoftwareRef property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getAnalysisSoftwareRef() {
-        return analysisSoftwareRef;
     }
 
 

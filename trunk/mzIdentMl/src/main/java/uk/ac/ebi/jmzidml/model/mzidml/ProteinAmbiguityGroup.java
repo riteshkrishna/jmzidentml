@@ -4,16 +4,19 @@ package uk.ac.ebi.jmzidml.model.mzidml;
 import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
 import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * A set of logically related results from a protein detection, for example to represent
- *                 conflicting assignments of peptides to proteins.
- *             
+ * A set of logically related results from a protein detection, for example to represent conflicting assignments of peptides to proteins.
+ * 			
  * 
  * <p>Java class for ProteinAmbiguityGroupType complex type.
  * 
@@ -83,7 +86,7 @@ public class ProteinAmbiguityGroup
     }
 
     /**
-     * Gets the value of the paramGroup property.
+     * Scores or parameters associated with the ProteinAmbiguityGroup.Gets the value of the paramGroup property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
@@ -112,6 +115,7 @@ public class ProteinAmbiguityGroup
         return this.paramGroup;
     }
 
+
     public List<CvParam> getCvParam() {
         return new FacadeList<CvParam>(this.getParamGroup(), CvParam.class);
     }
@@ -119,4 +123,5 @@ public class ProteinAmbiguityGroup
     public List<UserParam> getUserParam() {
         return new FacadeList<UserParam>(this.getParamGroup(), UserParam.class);
     }
+
 }

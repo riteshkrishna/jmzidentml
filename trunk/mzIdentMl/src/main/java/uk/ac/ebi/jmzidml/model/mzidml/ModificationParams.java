@@ -12,6 +12,8 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
+ * The specification of static/variable modifications (e.g. Oxidation of Methionine) that are to be considered in the spectra search. 
+ * 
  * <p>Java class for ModificationParamsType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.

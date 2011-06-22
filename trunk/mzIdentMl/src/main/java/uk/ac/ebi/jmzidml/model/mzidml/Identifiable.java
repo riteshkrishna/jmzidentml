@@ -1,18 +1,17 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlType;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
- * Other classes in the model can be specified as sub-classes, inheriting from Identifiable.
- *                 Identifiable gives classes a unique identifier within the scope and a name that need not be unique.
- *                 Identifiable also provides a mechanism for annotating objects with BibliographicReference(s) and
- *                 DatabaseEntry(s).
- *             
+ * Other classes in the model can be specified as sub-classes, inheriting from Identifiable. Identifiable gives classes a unique identifier within the scope and a name that need not be unique. Identifiable also provides a mechanism for annotating objects with BibliographicReference(s) and DatabaseEntry(s).	
  * 
  * <p>Java class for IdentifiableType complex type.
  * 
@@ -45,7 +44,6 @@ import java.io.Serializable;
     SpectrumIdentificationList.class,
     MassTable.class,
     ProteinAmbiguityGroup.class,
-    PeptideEvidenceList.class,
     Measure.class,
     ProteinDetectionProtocol.class,
     SpectrumIdentificationItem.class,

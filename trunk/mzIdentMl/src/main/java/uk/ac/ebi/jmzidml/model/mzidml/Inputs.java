@@ -12,6 +12,8 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
+ * The inputs to the analyses including the databases searched, the spectral data and the source file converted to mzIdentML. 
+ * 
  * <p>Java class for InputsType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -23,7 +25,7 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
  *       &lt;sequence>
  *         &lt;element name="SourceFile" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SourceFileType" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="SearchDatabase" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SearchDatabaseType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="SpectraData" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SpectraDataType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="SpectraData" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SpectraDataType" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -47,8 +49,8 @@ public class Inputs
     @XmlElement(name = "SourceFile")
     protected List<SourceFile> sourceFile;
     @XmlElement(name = "SearchDatabase")
-    protected List<AnalysisSearchDatabase> searchDatabase;
-    @XmlElement(name = "SpectraData")
+    protected List<SearchDatabase> searchDatabase;
+    @XmlElement(name = "SpectraData", required = true)
     protected List<SpectraData> spectraData;
 
     /**
@@ -98,13 +100,13 @@ public class Inputs
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link AnalysisSearchDatabase }
+     * {@link SearchDatabase }
      * 
      * 
      */
-    public List<AnalysisSearchDatabase> getSearchDatabase() {
+    public List<SearchDatabase> getSearchDatabase() {
         if (searchDatabase == null) {
-            searchDatabase = new ArrayList<AnalysisSearchDatabase>();
+            searchDatabase = new ArrayList<SearchDatabase>();
         }
         return this.searchDatabase;
     }

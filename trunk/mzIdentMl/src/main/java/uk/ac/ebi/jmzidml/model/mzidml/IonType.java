@@ -1,16 +1,23 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
+import java.io.Serializable;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+
 import uk.ac.ebi.jmzidml.model.CvParamCapable;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
-import javax.xml.bind.annotation.*;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
 
 /**
+ * IonType defines the index of fragmentation ions being reported, importing a CV term for the type of ion e.g. b ion. Example: if b3 b7 b8 and b10 have been identified, the index attribute will contain 3 7 8 10, and the corresponding values will be reported in parallel arrays below 
+ * 
  * <p>Java class for IonTypeType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -21,7 +28,7 @@ import java.util.List;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="FragmentArray" type="{http://psidev.info/psi/pi/mzIdentML/1.1}FragmentArrayType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="cvParam" type="{http://psidev.info/psi/pi/mzIdentML/1.1}cvParamType"/>
+ *         &lt;element name="cvParam" type="{http://psidev.info/psi/pi/mzIdentML/1.1}CVParamType"/>
  *       &lt;/sequence>
  *       &lt;attribute name="index" type="{http://psidev.info/psi/pi/mzIdentML/1.1}listOfIntegers" />
  *       &lt;attribute name="charge" use="required" type="{http://www.w3.org/2001/XMLSchema}int" />
@@ -34,8 +41,8 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "IonTypeType", propOrder = {
-    "fragmentArray"
-        ,"cvParam"
+    "fragmentArray",
+    "cvParam"
 })
 public class IonType
     extends MzIdentMLObject
@@ -43,10 +50,10 @@ public class IonType
 {
 
     private final static long serialVersionUID = 100L;
-    @XmlElement(required = true)
-    protected CvParam cvParam;
     @XmlElement(name = "FragmentArray")
     protected List<FragmentArray> fragmentArray;
+    @XmlElement(required = true)
+    protected CvParam cvParam;
     @XmlAttribute
     protected List<Integer> index;
     @XmlAttribute(required = true)
@@ -72,7 +79,7 @@ public class IonType
      * Objects of the following type(s) are allowed in the list
      * {@link FragmentArray }
      * 
-     * @return fragmentArray
+     * 
      */
     public List<FragmentArray> getFragmentArray() {
         if (fragmentArray == null) {
@@ -124,8 +131,6 @@ public class IonType
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Integer }
-     *
-     * @return index
      * 
      * 
      */

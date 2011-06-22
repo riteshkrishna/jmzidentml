@@ -35,7 +35,7 @@ public class DataCollectionTest extends TestCase {
         assertNotNull(dcInputs);
 
         assertEquals(1, dcInputs.getSearchDatabase().size());
-        AnalysisSearchDatabase asd = dcInputs.getSearchDatabase().get(0);
+        SearchDatabase asd = dcInputs.getSearchDatabase().get(0);
 
         String searchDB = asd.getId(); // store for later reference
         String searchDBName = asd.getName();

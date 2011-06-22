@@ -1,18 +1,19 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
+ * The product ions identified in this result.
+ * 
  * <p>Java class for FragmentationType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -68,7 +69,7 @@ public class Fragmentation
      */
     public List<IonType> getIonType() {
         if (ionType == null) {
-            this.ionType = new ArrayList<IonType>();
+            ionType = new ArrayList<IonType>();
         }
         return this.ionType;
     }

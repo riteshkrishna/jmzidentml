@@ -12,6 +12,9 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
+ * The software packages used to perform the analyses.
+ * 			
+ * 
  * <p>Java class for AnalysisSoftwareListType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.

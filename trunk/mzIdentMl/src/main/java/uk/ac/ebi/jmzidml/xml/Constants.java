@@ -46,7 +46,7 @@ public class Constants {
         Contact,
         Person,
         Organization,
-        AnalysisSearchDatabase,
+        SearchDatabase,
         SpectraData,
         SpectrumIdentificationList,
         SpectrumIdentificationProtocol,

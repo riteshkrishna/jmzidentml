@@ -4,16 +4,14 @@ package uk.ac.ebi.jmzidml.model.mzidml;
 import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
 import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.*;
 
 
 /**
- * PeptideEvidence maps a spectrum identification to DBSequence in which such a peptide is
- *                 located.
- *             
+ * PeptideEvidence links a specific Peptide element to a specific position in a DBSequence. There must only be one PeptideEvidence item per Peptide-to-DBSequence-position. 
  * 
  * <p>Java class for PeptideEvidenceType complex type.
  * 
@@ -26,8 +24,8 @@ import java.util.List;
  *       &lt;sequence>
  *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
- *       &lt;attribute name="DBSequence_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="Peptide_ref" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="dBSequence_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="peptide_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="start" type="{http://www.w3.org/2001/XMLSchema}int" />
  *       &lt;attribute name="end" type="{http://www.w3.org/2001/XMLSchema}int" />
  *       &lt;attribute name="pre">
@@ -44,10 +42,9 @@ import java.util.List;
  *           &lt;/restriction>
  *         &lt;/simpleType>
  *       &lt;/attribute>
- *       &lt;attribute name="TranslationTable_ref" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="translationTable_ref" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="frame" type="{http://psidev.info/psi/pi/mzIdentML/1.1}allowed_frames" />
  *       &lt;attribute name="isDecoy" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" />
- *       &lt;attribute name="missedCleavages" type="{http://www.w3.org/2001/XMLSchema}int" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -61,18 +58,18 @@ import java.util.List;
 })
 public class PeptideEvidence
     extends Identifiable
-    implements Serializable  , ParamGroupCapable
+    implements Serializable, ParamGroupCapable
 {
 
     private final static long serialVersionUID = 100L;
     @XmlElements({
-        @XmlElement(name = "cvParam", type = CvParam.class),
-        @XmlElement(name = "userParam", type = UserParam.class)
+        @XmlElement(name = "userParam", type = UserParam.class),
+        @XmlElement(name = "cvParam", type = CvParam.class)
     })
     protected List<AbstractParam> paramGroup;
     @XmlAttribute(name = "dBSequence_ref", required = true)
     protected String dbSequenceRef;
-    @XmlAttribute(name = "peptide_ref")
+    @XmlAttribute(name = "peptide_ref", required = true)
     protected String peptideRef;
     @XmlAttribute
     protected Integer start;
@@ -88,8 +85,6 @@ public class PeptideEvidence
     protected Integer frame;
     @XmlAttribute
     protected Boolean isDecoy;
-    @XmlAttribute
-    protected Integer missedCleavages;
 
 
 
@@ -147,7 +142,7 @@ public class PeptideEvidence
     }
 
     /**
-     * Gets the value of the paramGroup property.
+     * Additional parameters or descriptors for the PeptideEvidence.Gets the value of the paramGroup property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
@@ -164,8 +159,8 @@ public class PeptideEvidence
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link CvParam }
      * {@link UserParam }
+     * {@link CvParam }
      * 
      * 
      */
@@ -199,7 +194,6 @@ public class PeptideEvidence
     public String getPeptideRef() {
         return peptideRef;
     }
-
 
     /**
      * Gets the value of the start property.
@@ -362,30 +356,6 @@ public class PeptideEvidence
         this.isDecoy = value;
     }
 
-    /**
-     * Gets the value of the missedCleavages property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
-     */
-    public Integer getMissedCleavages() {
-        return missedCleavages;
-    }
-
-    /**
-     * Sets the value of the missedCleavages property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
-     */
-    public void setMissedCleavages(Integer value) {
-        this.missedCleavages = value;
-    }
-
     public List<CvParam> getCvParam() {
         return new FacadeList<CvParam>(this.getParamGroup(), CvParam.class);
     }
@@ -393,4 +363,5 @@ public class PeptideEvidence
     public List<UserParam> getUserParam() {
         return new FacadeList<UserParam>(this.getParamGroup(), UserParam.class);
     }
+
 }

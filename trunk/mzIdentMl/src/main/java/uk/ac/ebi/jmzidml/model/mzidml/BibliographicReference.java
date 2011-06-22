@@ -9,9 +9,7 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * Represents bibliographic references, including the most common attributes. Note that
- *                 because a BibliographicReference is Identifiable, a DatabaseEntry can also be specified.
- *             
+ * Represents bibliographic references. 
  * 
  * <p>Java class for BibliographicReferenceType complex type.
  * 

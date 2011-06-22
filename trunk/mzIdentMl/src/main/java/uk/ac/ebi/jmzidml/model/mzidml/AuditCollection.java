@@ -1,17 +1,20 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-import uk.ac.ebi.jmzidml.model.utils.FacadeList;
-
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlType;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 
 
 /**
- * The collection of Contact records.
+ * The complete set of Contacts (people and organisations) for this file. 
  * 
  * <p>Java class for AuditCollectionType complex type.
  * 
@@ -78,7 +81,8 @@ public class AuditCollection
         return this.personOrOrganization;
     }
 
-    /**
+
+     /**
      * Returns a list of the Person objects contained in list returned from getPersonOrOrganization.
      *
      * @return List<Person> The list of Person Contacts.
@@ -95,6 +99,4 @@ public class AuditCollection
     public List<Organization> getOrganization() {
         return new FacadeList<Organization>(this.getPersonOrOrganization(), Organization.class);
     }
-
-
 }

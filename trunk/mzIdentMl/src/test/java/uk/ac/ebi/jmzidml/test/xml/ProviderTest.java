@@ -54,10 +54,10 @@ public class ProviderTest extends TestCase{
             assertTrue("The contact should be a Person!", contact instanceof Person);
             Person p = (Person) contact;
             assertNotNull(p);
-            assertEquals("The person should have one affiliation!", 1, p.getAffiliations().size());
-            Affiliations aff = p.getAffiliations().get(0);
+            assertEquals("The person should have one affiliation!", 1, p.getAffiliation().size());
+            Affiliation aff = p.getAffiliation().get(0);
             assertNotNull(aff);
-            if (MzIdentMLElement.Affiliations.isAutoRefResolving() && aff.getOrganizationRef() != null) {
+            if (MzIdentMLElement.Affiliation.isAutoRefResolving() && aff.getOrganizationRef() != null) {
                 assertNotNull(aff.getOrganization());
                 assertEquals(aff.getOrganizationRef(), aff.getOrganization().getId());
             } else {

@@ -12,6 +12,9 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
+ * The specification of filters applied to the database searched.
+ * 			
+ * 
  * <p>Java class for DatabaseFiltersType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -63,7 +66,7 @@ public class DatabaseFilters
      * Objects of the following type(s) are allowed in the list
      * {@link Filter }
      * 
-     * 
+     *  @return filter A list of filters
      */
     public List<Filter> getFilter() {
         if (filter == null) {

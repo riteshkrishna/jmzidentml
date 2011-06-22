@@ -1,6 +1,6 @@
 package uk.ac.ebi.jmzidml;
 
-import uk.ac.ebi.jmzidml.model.mzidml.AnalysisSearchDatabase;
+import uk.ac.ebi.jmzidml.model.mzidml.SearchDatabase;
 import uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftware;
 import uk.ac.ebi.jmzidml.model.mzidml.Filter;
 import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationProtocol;
@@ -11,7 +11,7 @@ import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationProtocol;
  * Time: 1:56 PM
  */
 public enum ParamMappings {
-    AnalysisSearchDatabase                 ("DatabaseName" , AnalysisSearchDatabase.class),
+    AnalysisSearchDatabase                 ("DatabaseName" , SearchDatabase.class),
     AnalysisSoftware                       ("SoftwareName", AnalysisSoftware.class),
     Filter                                  ("FilterType", Filter.class),
     SpectrumIdentificationProtocol          ("SearchType", SpectrumIdentificationProtocol.class);

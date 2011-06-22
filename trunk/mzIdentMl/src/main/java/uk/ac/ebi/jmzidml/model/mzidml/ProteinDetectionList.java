@@ -4,10 +4,14 @@ package uk.ac.ebi.jmzidml.model.mzidml;
 import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
 import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -39,15 +43,15 @@ import java.util.List;
 })
 public class ProteinDetectionList
     extends Identifiable
-    implements Serializable , ParamGroupCapable
+    implements Serializable, ParamGroupCapable
 {
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "ProteinAmbiguityGroup")
     protected List<ProteinAmbiguityGroup> proteinAmbiguityGroup;
     @XmlElements({
-        @XmlElement(name = "userParam", type = UserParam.class),
-        @XmlElement(name = "cvParam", type = CvParam.class)
+        @XmlElement(name = "cvParam", type = CvParam.class),
+        @XmlElement(name = "userParam", type = UserParam.class)
     })
     protected List<AbstractParam> paramGroup;
 
@@ -81,8 +85,7 @@ public class ProteinDetectionList
     }
 
     /**
-     * Scores or output parameters associated with the ProteinDetectionList
-     *                             Gets the value of the paramGroup property.
+     * Scores or output parameters associated with the whole ProteinDetectionList Gets the value of the paramGroup property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
@@ -99,8 +102,8 @@ public class ProteinDetectionList
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link UserParam }
      * {@link CvParam }
+     * {@link UserParam }
      * 
      * 
      */

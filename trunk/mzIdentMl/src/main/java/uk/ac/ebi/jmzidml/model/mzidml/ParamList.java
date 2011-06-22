@@ -1,16 +1,21 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
-import uk.ac.ebi.jmzidml.model.utils.FacadeList;
-
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlType;
+import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
+import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 
 
 /**
+ * Helper type to allow multiple cvParams or userParams to be given for an element.
+ * 
  * <p>Java class for ParamListType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -38,8 +43,8 @@ public class ParamList
 
     private final static long serialVersionUID = 100L;
     @XmlElements({
-        @XmlElement(name = "userParam", type = UserParam.class),
-        @XmlElement(name = "cvParam", type = CvParam.class)
+        @XmlElement(name = "cvParam", type = CvParam.class),
+        @XmlElement(name = "userParam", type = UserParam.class)
     })
     protected List<AbstractParam> paramGroup;
 
@@ -61,10 +66,9 @@ public class ParamList
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link UserParam }
      * {@link CvParam }
-     *
-     * @return List<AbstractParam> the list of CvParam and/or UserParam elements associated with this element.
+     * {@link UserParam }
+     * 
      * 
      */
     public List<AbstractParam> getParamGroup() {
@@ -93,6 +97,5 @@ public class ParamList
     public List<UserParam> getUserParam() {
         return new FacadeList<UserParam>(this.getParamGroup(), UserParam.class);
     }
-
 
 }

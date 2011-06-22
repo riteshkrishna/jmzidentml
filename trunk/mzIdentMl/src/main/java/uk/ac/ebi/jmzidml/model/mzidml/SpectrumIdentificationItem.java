@@ -4,15 +4,17 @@ package uk.ac.ebi.jmzidml.model.mzidml;
 import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
 import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.*;
 
 
 /**
+ * An identification of a single (poly)peptide, resulting from querying an input spectra, along with the set of confidence values for that identification.
+ * PeptideEvidence elements should be given for all mappings of the corresponding Peptide sequence within protein sequences. 
  *
- * * TODO marshalling/ persistor add validation to check for case where someone gets peptide/massTable/sample and changes its id without updating ref id in
+ * TODO marshalling/ persistor add validation to check for case where someone gets peptide/massTable/sample and changes its id without updating ref id in
  *      SpectrumIdentificationItem and other such clases.
  *
  * NOTE: There is no setter method for the peptideRef/massTableRef/sampleRef. This simplifies keeping the peptide/massTable/sample object reference and
@@ -20,11 +22,6 @@ import java.util.List;
  *
  * TODO: write an adaptor for changing List<PeptideEvidenceRef> to List<String>
  *
- * An identification of a single (poly)peptide, resulting from querying an input spectra,
- *                 along with the set of confidence values for that identification. PeptideEvidence elements should be
- *                 given for all mappings of the corresponding Peptide sequence within protein sequences.
- *             
- * 
  * <p>Java class for SpectrumIdentificationItemType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -34,7 +31,7 @@ import java.util.List;
  *   &lt;complexContent>
  *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType">
  *       &lt;sequence>
- *         &lt;element name="PeptideEvidenceRef" type="{http://psidev.info/psi/pi/mzIdentML/1.1}PeptideEvidenceRefType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="PeptideEvidenceRef" type="{http://psidev.info/psi/pi/mzIdentML/1.1}PeptideEvidenceRefType" maxOccurs="unbounded"/>
  *         &lt;element name="Fragmentation" type="{http://psidev.info/psi/pi/mzIdentML/1.1}FragmentationType" minOccurs="0"/>
  *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
@@ -42,11 +39,11 @@ import java.util.List;
  *       &lt;attribute name="experimentalMassToCharge" use="required" type="{http://www.w3.org/2001/XMLSchema}double" />
  *       &lt;attribute name="calculatedMassToCharge" type="{http://www.w3.org/2001/XMLSchema}double" />
  *       &lt;attribute name="calculatedPI" type="{http://www.w3.org/2001/XMLSchema}float" />
- *       &lt;attribute name="Peptide_ref" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="peptide_ref" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="rank" use="required" type="{http://www.w3.org/2001/XMLSchema}int" />
  *       &lt;attribute name="passThreshold" use="required" type="{http://www.w3.org/2001/XMLSchema}boolean" />
- *       &lt;attribute name="MassTable_ref" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="Sample_ref" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="massTable_ref" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="sample_ref" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -66,7 +63,7 @@ public class SpectrumIdentificationItem
 {
 
     private final static long serialVersionUID = 100L;
-    @XmlElement(name = "PeptideEvidenceRef")
+    @XmlElement(name = "PeptideEvidenceRef", required = true)
     protected List<PeptideEvidenceRef> peptideEvidenceRef;
     @XmlElement(name = "Fragmentation")
     protected Fragmentation fragmentation;
@@ -94,56 +91,56 @@ public class SpectrumIdentificationItem
     @XmlAttribute(name = "sample_ref")
     protected String sampleRef;
     @XmlTransient
-    protected Peptide peptide;
-    @XmlTransient
-    protected MassTable massTable;
-    @XmlTransient
-    protected Sample sample;
+     protected Peptide peptide;
+     @XmlTransient
+     protected MassTable massTable;
+     @XmlTransient
+     protected Sample sample;
 
-    public Peptide getPeptide() {
-        return peptide;
-    }
+     public Peptide getPeptide() {
+         return peptide;
+     }
 
-    public void setPeptide(Peptide peptide) {
-        if (peptide == null) {
-            this.peptideRef = null;
-        } else {
-            String refId = peptide.getId();
-            if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
-            this.peptideRef = refId;
-        }
-        this.peptide = peptide;
-    }
+     public void setPeptide(Peptide peptide) {
+         if (peptide == null) {
+             this.peptideRef = null;
+         } else {
+             String refId = peptide.getId();
+             if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
+             this.peptideRef = refId;
+         }
+         this.peptide = peptide;
+     }
 
-    public MassTable getMassTable() {
-        return massTable;
-    }
+     public MassTable getMassTable() {
+         return massTable;
+     }
 
-    public void setMassTable(MassTable massTable) {
-        if (massTable == null) {
-            this.massTableRef = null;
-        } else {
-            String refId = massTable.getId();
-            if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
-            this.massTableRef = refId;
-        }
-        this.massTable = massTable;
-    }
+     public void setMassTable(MassTable massTable) {
+         if (massTable == null) {
+             this.massTableRef = null;
+         } else {
+             String refId = massTable.getId();
+             if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
+             this.massTableRef = refId;
+         }
+         this.massTable = massTable;
+     }
 
-    public Sample getSample() {
-        return sample;
-    }
+     public Sample getSample() {
+         return sample;
+     }
 
-    public void setSample(Sample sample) {
-        if (sample == null) {
-            this.sampleRef = null;
-        } else {
-            String refId = sample.getId();
-            if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
-            this.sampleRef = refId;
-        }
-        this.sample = sample;
-    }
+     public void setSample(Sample sample) {
+         if (sample == null) {
+             this.sampleRef = null;
+         } else {
+             String refId = sample.getId();
+             if (refId == null) throw new IllegalArgumentException("Referenced object does not have an identifier.");
+             this.sampleRef = refId;
+         }
+         this.sample = sample;
+     }
 
     /**
      * Gets the value of the peptideEvidenceRef property.
@@ -189,22 +186,20 @@ public class SpectrumIdentificationItem
         return fragmentation;
     }
 
-
     /**
-     * Gets the value of the fragmentation property.
-     *
-     * @return
-     *     possible object is
+     * Sets the value of the fragmentation property.
+     * 
+     * @param value
+     *     allowed object is
      *     {@link Fragmentation }
-     *
+     *     
      */
-    public void setFragmentation(Fragmentation fragmentation) {
-        this.fragmentation = fragmentation;
+    public void setFragmentation(Fragmentation value) {
+        this.fragmentation = value;
     }
 
-
     /**
-     * Gets the value of the paramGroup property.
+     * Scores or attributes associated with the SpectrumIdentificationItem e.g. e-value, p-value, score.Gets the value of the paramGroup property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,

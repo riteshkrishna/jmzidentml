@@ -3,8 +3,13 @@ package uk.ac.ebi.jmzidml.model.mzidml;
 
 import uk.ac.ebi.jmzidml.model.ParamCapable;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -24,7 +29,7 @@ import java.io.Serializable;
  *         &lt;element name="Customizations" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="version" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="URI" type="{http://www.w3.org/2001/XMLSchema}anyURI" />
+ *       &lt;attribute name="uri" type="{http://www.w3.org/2001/XMLSchema}anyURI" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -160,7 +165,7 @@ public class AnalysisSoftware
      *     {@link String }
      *     
      */
-    public String getURI() {
+    public String getUri() {
         return uri;
     }
 
@@ -172,7 +177,7 @@ public class AnalysisSoftware
      *     {@link String }
      *     
      */
-    public void setURI(String value) {
+    public void setUri(String value) {
         this.uri = value;
     }
 

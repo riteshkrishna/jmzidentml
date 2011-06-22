@@ -3,14 +3,16 @@ package uk.ac.ebi.jmzidml.model.mzidml;
 
 import uk.ac.ebi.jmzidml.model.ParamListCapable;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * The details of an individual cleavage enzyme should be provided by giving a regular
- *                 expression or a CV term if a "standard" enzyme cleavage has been performed.
- *             
+ * The details of an individual cleavage enzyme should be provided by giving a regular expression or a CV term if a "standard" enzyme cleavage has been performed. 
  * 
  * <p>Java class for EnzymeType complex type.
  * 
@@ -19,20 +21,19 @@ import java.io.Serializable;
  * <pre>
  * &lt;complexType name="EnzymeType">
  *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType">
  *       &lt;sequence>
  *         &lt;element name="SiteRegexp" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="EnzymeName" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamListType" minOccurs="0"/>
  *       &lt;/sequence>
- *       &lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="NTermGain">
+ *       &lt;attribute name="nTermGain">
  *         &lt;simpleType>
  *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
  *             &lt;pattern value="[A-Za-z0-9 ]+"/>
  *           &lt;/restriction>
  *         &lt;/simpleType>
  *       &lt;/attribute>
- *       &lt;attribute name="CTermGain">
+ *       &lt;attribute name="cTermGain">
  *         &lt;simpleType>
  *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
  *             &lt;pattern value="[A-Za-z0-9 ]+"/>
@@ -48,7 +49,7 @@ import java.io.Serializable;
  *           &lt;/restriction>
  *         &lt;/simpleType>
  *       &lt;/attribute>
- *     &lt;/restriction>
+ *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
@@ -117,14 +118,17 @@ public class Enzyme
         return enzymeName;
     }
 
-
-    public void setEnzymeName(ParamList enzymeName){
-        this.enzymeName = enzymeName;
+    /**
+     * Sets the value of the enzymeName property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ParamList }
+     *     
+     */
+    public void setEnzymeName(ParamList value) {
+        this.enzymeName = value;
     }
-
-
-
-
 
     /**
      * Gets the value of the nTermGain property.

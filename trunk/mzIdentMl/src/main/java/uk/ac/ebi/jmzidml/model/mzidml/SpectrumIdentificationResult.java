@@ -4,17 +4,14 @@ package uk.ac.ebi.jmzidml.model.mzidml;
 import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
 import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.*;
 
 
 /**
- * All identifications made from searching one spectrum. For PMF data, all peptide
- *                 identifications will be listed underneath as SpectrumIdentificationItems. For MS/MS data, there will be
- *                 ranked SpectrumIdentificationItems corresponding to possible different peptide IDs.
- *             
+ * All identifications made from searching one spectrum. For PMF data, all peptide identifications will be listed underneath as SpectrumIdentificationItems. For MS/MS data, there will be ranked SpectrumIdentificationItems corresponding to possible different peptide IDs.
  * 
  * <p>Java class for SpectrumIdentificationResultType complex type.
  * 
@@ -29,7 +26,7 @@ import java.util.List;
  *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="spectrumID" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="SpectraData_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="spectraData_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -51,8 +48,8 @@ public class SpectrumIdentificationResult
     @XmlElement(name = "SpectrumIdentificationItem", required = true)
     protected List<SpectrumIdentificationItem> spectrumIdentificationItem;
     @XmlElements({
-        @XmlElement(name = "userParam", type = UserParam.class),
-        @XmlElement(name = "cvParam", type = CvParam.class)
+        @XmlElement(name = "cvParam", type = CvParam.class),
+        @XmlElement(name = "userParam", type = UserParam.class)
     })
     protected List<AbstractParam> paramGroup;
     @XmlAttribute(required = true)
@@ -77,7 +74,6 @@ public class SpectrumIdentificationResult
         }
         this.spectraData = spectraData;
     }
-
     /**
      * Gets the value of the spectrumIdentificationItem property.
      * 
@@ -108,7 +104,7 @@ public class SpectrumIdentificationResult
     }
 
     /**
-     * Gets the value of the paramGroup property.
+     *  Scores or parameters associated with the SpectrumIdentificationResult (i.e the set of SpectrumIdentificationItems derived from one spectrum) e.g. the number of peptide sequences within the parent tolerance for this spectrum. Gets the value of the paramGroup property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
@@ -125,8 +121,8 @@ public class SpectrumIdentificationResult
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link UserParam }
      * {@link CvParam }
+     * {@link UserParam }
      * 
      * 
      */

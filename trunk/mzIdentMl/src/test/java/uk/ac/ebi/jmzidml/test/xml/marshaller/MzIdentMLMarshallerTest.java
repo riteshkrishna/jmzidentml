@@ -102,7 +102,7 @@ public class MzIdentMLMarshallerTest {
 
             SequenceCollection sequenceCollection = unmarshaller.unmarshal(MzIdentMLElement.SequenceCollection.getXpath());
             dbSequenceCount = sequenceCollection.getDBSequence().size();
-            peptideEvidencePeptideCount = sequenceCollection.getPeptideEvidenceList().get(0).getPeptideEvidence().size();
+            peptideEvidencePeptideCount = sequenceCollection.getPeptideEvidence().size();
             m.marshal(sequenceCollection, writer);
             writer.write("\n");
 
@@ -177,7 +177,7 @@ public class MzIdentMLMarshallerTest {
         assertTrue(dbSequenceCount >= 0);
         assertTrue(mzIdentMl.getSequenceCollection().getDBSequence().size() == dbSequenceCount);
         assertTrue(peptideEvidencePeptideCount >= 0);
-        assertTrue(mzIdentMl.getSequenceCollection().getPeptideEvidenceList().get(0).getPeptideEvidence().size()
+        assertTrue(mzIdentMl.getSequenceCollection().getPeptideEvidence().size()
                 == peptideEvidencePeptideCount);
     }
 

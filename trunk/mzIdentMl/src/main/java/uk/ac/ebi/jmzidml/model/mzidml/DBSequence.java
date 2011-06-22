@@ -4,17 +4,15 @@ package uk.ac.ebi.jmzidml.model.mzidml;
 import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
 import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.*;
 
 
 /**
- * A database sequence from the specified SearchDatabase (nucleic acid or amino acid). If
- *                 the sequence is nucleic acid, the source nucleic acid sequence should be given in the seq attribute
- *                 rather than a translated sequence.
- *             
+ * A database sequence from the specified SearchDatabase (nucleic acid or amino acid). If the sequence is nucleic acid, the source nucleic acid sequence
+ * should be given in the seq attribute rather than a translated sequence.	
  * 
  * <p>Java class for DBSequenceType complex type.
  * 
@@ -25,11 +23,11 @@ import java.util.List;
  *   &lt;complexContent>
  *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType">
  *       &lt;sequence>
- *         &lt;element name="seq" type="{http://psidev.info/psi/pi/mzIdentML/1.1}sequence" minOccurs="0"/>
+ *         &lt;element name="Seq" type="{http://psidev.info/psi/pi/mzIdentML/1.1}sequence" minOccurs="0"/>
  *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="length" type="{http://www.w3.org/2001/XMLSchema}int" />
- *       &lt;attribute name="SearchDatabase_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="searchDatabase_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="accession" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>
  *   &lt;/complexContent>
@@ -49,7 +47,7 @@ public class DBSequence
 {
 
     private final static long serialVersionUID = 100L;
-    @XmlElement(name="Seq")
+    @XmlElement(name = "Seq")
     protected String seq;
     @XmlElements({
         @XmlElement(name = "userParam", type = UserParam.class),
@@ -63,7 +61,8 @@ public class DBSequence
     @XmlAttribute(required = true)
     protected String accession;
     @XmlTransient
-    protected AnalysisSearchDatabase searchDatabase;
+    protected SearchDatabase searchDatabase;
+
 
     /**
      * Gets the value of the seq property.
@@ -90,7 +89,7 @@ public class DBSequence
     }
 
     /**
-     * Gets the value of the paramGroup property.
+     * Additional descriptors for the sequence, such as taxon, description line etc.Gets the value of the paramGroup property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
@@ -155,7 +154,6 @@ public class DBSequence
         return searchDatabaseRef;
     }
 
-
     /**
      * Gets the value of the accession property.
      * 
@@ -180,11 +178,11 @@ public class DBSequence
         this.accession = value;
     }
 
-    public AnalysisSearchDatabase getSearchDatabase() {
+    public SearchDatabase getSearchDatabase() {
         return searchDatabase;
     }
 
-    public void setSearchDatabase(AnalysisSearchDatabase searchDatabase) {
+    public void setSearchDatabase(SearchDatabase searchDatabase) {
         if (searchDatabase == null) {
             this.searchDatabaseRef = null;
         } else {
@@ -203,4 +201,5 @@ public class DBSequence
     public List<UserParam> getUserParam() {
         return new FacadeList<UserParam>(this.getParamGroup(), UserParam.class);
     }
+
 }

@@ -23,7 +23,7 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;attribute name="fullName" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="version" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="URI" use="required" type="{http://www.w3.org/2001/XMLSchema}anyURI" />
+ *       &lt;attribute name="uri" use="required" type="{http://www.w3.org/2001/XMLSchema}anyURI" />
  *       &lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -44,7 +44,7 @@ public class Cv
     protected String fullName;
     @XmlAttribute
     protected String version;
-    @XmlAttribute( required = true)
+    @XmlAttribute(required = true)
     @XmlSchemaType(name = "anyURI")
     protected String uri;
     @XmlAttribute(required = true)
@@ -106,7 +106,7 @@ public class Cv
      *     {@link String }
      *     
      */
-    public String getURI() {
+    public String getUri() {
         return uri;
     }
 
@@ -118,7 +118,7 @@ public class Cv
      *     {@link String }
      *     
      */
-    public void setURI(String value) {
+    public void setUri(String value) {
         this.uri = value;
     }
 

@@ -10,6 +10,9 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 
 
 /**
+ * The collection of input and output data sets of the analyses.
+ * 			
+ * 
  * <p>Java class for DataCollectionType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.

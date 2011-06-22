@@ -1,31 +1,33 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.xml.jaxb.adapters.*;
-
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import uk.ac.ebi.jmzidml.xml.jaxb.adapters.CalendarAdapter;
 
 
 /**
- * The upper-most hierarchy level of mzIdentML with sub-containers for example describing
- *                 software, protocols and search results (spectrum identifications or protein detection results).
- *             
+ * The upper-most hierarchy level of mzIdentML with sub-containers for example describing software, protocols and search results (spectrum identifications or protein detection results). 
  * 
- * <p>Java class for mzIdentMLType complex type.
+ * <p>Java class for MzIdentMLType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="mzIdentMLType">
+ * &lt;complexType name="MzIdentMLType">
  *   &lt;complexContent>
  *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType">
  *       &lt;sequence>
- *         &lt;element name="cvList" type="{http://psidev.info/psi/pi/mzIdentML/1.1}cvListType"/>
+ *         &lt;element name="cvList" type="{http://psidev.info/psi/pi/mzIdentML/1.1}CVListType"/>
  *         &lt;element name="AnalysisSoftwareList" type="{http://psidev.info/psi/pi/mzIdentML/1.1}AnalysisSoftwareListType" minOccurs="0"/>
  *         &lt;element name="Provider" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ProviderType" minOccurs="0"/>
  *         &lt;element name="AuditCollection" type="{http://psidev.info/psi/pi/mzIdentML/1.1}AuditCollectionType" minOccurs="0"/>
@@ -103,10 +105,17 @@ public class MzIdentML
         return cvList;
     }
 
-    public void setCvList(CvList cvList){
-        this.cvList = cvList;
+    /**
+     * Sets the value of the cvList property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link CvList }
+     *     
+     */
+    public void setCvList(CvList value) {
+        this.cvList = value;
     }
-
 
     /**
      * Gets the value of the analysisSoftwareList property.
@@ -120,10 +129,17 @@ public class MzIdentML
         return analysisSoftwareList;
     }
 
-    public void setAnalysisSoftwareList(AnalysisSoftwareList analysisSoftwareList){
-        this.analysisSoftwareList = analysisSoftwareList;
+    /**
+     * Sets the value of the analysisSoftwareList property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link AnalysisSoftwareList }
+     *     
+     */
+    public void setAnalysisSoftwareList(AnalysisSoftwareList value) {
+        this.analysisSoftwareList = value;
     }
-
 
     /**
      * Gets the value of the provider property.
@@ -161,8 +177,16 @@ public class MzIdentML
         return auditCollection;
     }
 
-    public void setAuditCollection(AuditCollection auditCollection){
-        this.auditCollection = auditCollection;
+    /**
+     * Sets the value of the auditCollection property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link AuditCollection }
+     *     
+     */
+    public void setAuditCollection(AuditCollection value) {
+        this.auditCollection = value;
     }
 
     /**
@@ -177,8 +201,16 @@ public class MzIdentML
         return analysisSampleCollection;
     }
 
-    public void setAnalysisSampleCollection(AnalysisSampleCollection analysisSampleCollection){
-        this.analysisSampleCollection = analysisSampleCollection;
+    /**
+     * Sets the value of the analysisSampleCollection property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link AnalysisSampleCollection }
+     *     
+     */
+    public void setAnalysisSampleCollection(AnalysisSampleCollection value) {
+        this.analysisSampleCollection = value;
     }
 
     /**
