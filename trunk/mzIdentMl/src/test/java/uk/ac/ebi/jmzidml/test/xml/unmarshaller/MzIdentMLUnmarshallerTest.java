@@ -98,7 +98,7 @@ public class MzIdentMLUnmarshallerTest {
         assertNotNull(xmlFileURL);
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         assertNotNull(unmarshaller);
-        SpectrumIdentificationProtocol spectrumIdentificactionProtocol = unmarshaller.unmarshall(SpectrumIdentificationProtocol.class, "SIP");
+        SpectrumIdentificationProtocol spectrumIdentificactionProtocol = unmarshaller.unmarshal(SpectrumIdentificationProtocol.class, "SIP");
         Enzymes enzymes = spectrumIdentificactionProtocol.getEnzymes();
         assertTrue(enzymes.getEnzyme().get(0).getId().equals("ENZ_0"));
         assertTrue(enzymes.getEnzyme().size() == 2);
@@ -161,7 +161,7 @@ public class MzIdentMLUnmarshallerTest {
         assertNotNull(xmlFileURL);
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         assertNotNull(unmarshaller);
-        Organization organization = unmarshaller.unmarshall(Organization.class, "ORG_MSL");
+        Organization organization = unmarshaller.unmarshal(Organization.class, "ORG_MSL");
         assertTrue(organization.getParamGroup().size()==4);
         assertTrue(organization.getName().equals("Matrix Science Limited"));
         // Test facadelist
@@ -180,7 +180,7 @@ public class MzIdentMLUnmarshallerTest {
         assertNotNull(xmlFileURL);
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         assertNotNull(unmarshaller);
-        Provider provider = unmarshaller.unmarshall(Provider.class, "PROVIDER");
+        Provider provider = unmarshaller.unmarshal(Provider.class, "PROVIDER");
         assertTrue(provider.getContactRole().getRole().getCvParam().getAccession().equals("MS:1001271"));
     }
 
@@ -208,7 +208,7 @@ public class MzIdentMLUnmarshallerTest {
         URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         assertNotNull(unmarshaller);
-        Organization organization = unmarshaller.unmarshall(Organization.class, "ORG_MSL");
+        Organization organization = unmarshaller.unmarshal(Organization.class, "ORG_MSL");
         List<CvParam> cvParams = organization.getCvParam();
         List<UserParam> userParams = organization.getUserParam();
         assertTrue(cvParams.size() == 2);
@@ -224,7 +224,7 @@ public class MzIdentMLUnmarshallerTest {
        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         assertNotNull(unmarshaller);
-        ProteinDetectionProtocol proteinDetectionProtocol = unmarshaller.unmarshall(ProteinDetectionProtocol.class, "PDP_MascotParser_1");
+        ProteinDetectionProtocol proteinDetectionProtocol = unmarshaller.unmarshal(ProteinDetectionProtocol.class, "PDP_MascotParser_1");
         ThresholdCvParam thresholdCvParam = (ThresholdCvParam)proteinDetectionProtocol.getThreshold().getCvParam().get(0);
         assertTrue(thresholdCvParam.getAccession().equals("MS:1001494"));
         assertTrue(thresholdCvParam.getCvRef().equals("PSI-MS"));
@@ -253,7 +253,7 @@ public class MzIdentMLUnmarshallerTest {
     public void testSpectrumIdentificationProtocol() throws JAXBException{
         URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-        SpectrumIdentificationProtocol spectrumIdentificationProtocol = unmarshaller.unmarshall(SpectrumIdentificationProtocol.class, "SIP");
+        SpectrumIdentificationProtocol spectrumIdentificationProtocol = unmarshaller.unmarshal(SpectrumIdentificationProtocol.class, "SIP");
         List<CvParam> additionalSearchCvParams = spectrumIdentificationProtocol.getAdditionalSearchParams().getCvParam();
         assertTrue(additionalSearchCvParams.size() == 10);
         AdditionalSearchParamsCvParam additionalSearchParamsCvParam = (AdditionalSearchParamsCvParam)additionalSearchCvParams.get(0);
@@ -275,7 +275,7 @@ public class MzIdentMLUnmarshallerTest {
     public void testAnalysisSearchDatabase() throws JAXBException{
         URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-        SearchDatabase searchDb = unmarshaller.unmarshall(SearchDatabase.class, "SDB_SwissProt");
+        SearchDatabase searchDb = unmarshaller.unmarshal(SearchDatabase.class, "SDB_SwissProt");
         Param dbName = searchDb.getDatabaseName();
         assertTrue(dbName.getUserParam() instanceof DatabaseNameUserParam);
     }
@@ -284,7 +284,7 @@ public class MzIdentMLUnmarshallerTest {
     public void testFilter() throws JAXBException{
         URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-        SpectrumIdentificationProtocol spectrumIdentificationProtocol = unmarshaller.unmarshall(SpectrumIdentificationProtocol.class, "SIP");
+        SpectrumIdentificationProtocol spectrumIdentificationProtocol = unmarshaller.unmarshal(SpectrumIdentificationProtocol.class, "SIP");
         DatabaseFilters dbFilters = spectrumIdentificationProtocol.getDatabaseFilters();
         List<Filter> filter = dbFilters.getFilter();
         assertTrue(filter.size() == 1);
@@ -299,7 +299,7 @@ public class MzIdentMLUnmarshallerTest {
     public void testAnalysisSoftware() throws JAXBException{
         URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-        AnalysisSoftware analysisSoftware = unmarshaller.unmarshall(AnalysisSoftware.class, "AS_mascot_parser");
+        AnalysisSoftware analysisSoftware = unmarshaller.unmarshal(AnalysisSoftware.class, "AS_mascot_parser");
         Param param = analysisSoftware.getSoftwareName();
         assertTrue(param.getCvParam() instanceof SoftwareNameCvParam);
     }
@@ -308,7 +308,7 @@ public class MzIdentMLUnmarshallerTest {
     public void testIonType() throws JAXBException {
         URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-        SpectrumIdentificationList list =  unmarshaller.unmarshall(SpectrumIdentificationList.class, "SIL_1");
+        SpectrumIdentificationList list =  unmarshaller.unmarshal(SpectrumIdentificationList.class, "SIL_1");
         List<IonType> ionTypes = list.getSpectrumIdentificationResult().get(0).getSpectrumIdentificationItem().get(0).getFragmentation().getIonType();
         assertTrue(ionTypes.size() > 0);
         IonType ionType = ionTypes.get(0);
@@ -327,7 +327,7 @@ public class MzIdentMLUnmarshallerTest {
     public void testMassTable() throws JAXBException {
         URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-        SpectrumIdentificationProtocol spectrumIdentificationProtocol = unmarshaller.unmarshall(SpectrumIdentificationProtocol.class, "SIP");
+        SpectrumIdentificationProtocol spectrumIdentificationProtocol = unmarshaller.unmarshal(SpectrumIdentificationProtocol.class, "SIP");
         List<MassTable> massTables = spectrumIdentificationProtocol.getMassTable();
         assertTrue(massTables.size() > 0);
         MassTable massTable = massTables.get(0);
