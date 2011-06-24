@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+Configurations for various properties of model classes.
+
+        - autoRefResolving This determines if references within a class are automatically resolved. For example,
+            PeptideEvidence contains references to three separate classes. Setting this property to true for the
+            PeptideEvidence config will cause these references to be resolved during unmarshaling.
+        - An element cannot be idMapped if it is not indexed.
+-->
 <mzIdentMLElementProperties>
     <configurations>
         <autoRefResolving>false</autoRefResolving>
