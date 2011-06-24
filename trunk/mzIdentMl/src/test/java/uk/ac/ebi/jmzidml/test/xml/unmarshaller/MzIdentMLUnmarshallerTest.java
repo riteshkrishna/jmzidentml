@@ -4,12 +4,10 @@ import org.junit.Test;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.*;
 import uk.ac.ebi.jmzidml.model.mzidml.params.*;
-
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
 import javax.xml.bind.JAXBException;
 import java.net.URL;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -50,8 +48,6 @@ public class MzIdentMLUnmarshallerTest {
         assertEquals("Mascot Server", attributes.get("name"));
         assertEquals("2.2.03", attributes.get("version"));
         assertEquals("http://www.matrixscience.com/search_form_select.html", attributes.get("uri"));
-
-
 
         // test with another element
         Cv cv = unmarshaller.unmarshal(MzIdentMLElement.CV);
@@ -159,26 +155,6 @@ public class MzIdentMLUnmarshallerTest {
         dataCollection.getInputs();
     }
 
-/*
-    @Test
-    public void testPeptideEvidenceList() {
-        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-        assertNotNull(xmlFileURL);
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-        assertNotNull(unmarshaller);
-        PeptideEvidenceList peptideEvidenceList = unmarshaller.unmarshal(PeptideEvidenceList.class);
-        assertTrue(peptideEvidenceList.getPeptideEvidence().size() == 56);
-        assertTrue(((PeptideEvidence)peptideEvidenceList.getPeptideEvidence().get(55)).getId().equals("PE_3_4_HSP7D_DROME_0"));
-        List<CvParam> cvParams = peptideEvidenceList.getAdditionalParams().getCvParam();
-        assertTrue(cvParams.size() == 1);
-        AdditionalParamsCvParam additionalParamsCvParam = (AdditionalParamsCvParam) cvParams.get(0);
-        assertTrue(additionalParamsCvParam.getAccession().equals("MS:1001211"));
-        assertTrue(additionalParamsCvParam.getName().equals("parent mass type mono"));
-        assertTrue(additionalParamsCvParam.getCvRef().equals("PSI-MS"));
-        assertTrue(peptideEvidenceList.getAdditionalParams().getUserParam().size()==0);
-    }
-
-*/
     @Test
     public void testOrganization() throws JAXBException {
         URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
@@ -361,7 +337,26 @@ public class MzIdentMLUnmarshallerTest {
         /**
          * Check if instances of Integer are returned. By default jaxb converts int in xml to BigInts in Java.
          */
-
         assertTrue(msLevels.get(0) instanceof Integer);
+    }
+
+    @Test
+    public void testPeptideEvidence(){
+        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
+        assertNotNull(xmlFileURL);
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
+        MzIdentML mzIdentML = unmarshaller.unmarshal(MzIdentML.class);
+        List<PeptideEvidence> peptideEvidences =
+                mzIdentML.getSequenceCollection().getPeptideEvidence();
+        assertTrue(peptideEvidences.size() == 56);
+        PeptideEvidence pe = peptideEvidences.get(0);
+        assertTrue(pe.getId().equals("PE_1_1_HSP70_ECHGR_0"));
+
+        if (MzIdentMLElement.PeptideEvidence.isAutoRefResolving() && pe.getDBSequenceRef() != null) {
+            DBSequence dbSeq = pe.getDBSequence();
+            assertTrue(dbSeq.getAccession().equals("HSP70_ECHGR"));
+        }else{
+             System.out.println("PeptideEvidence is not auto-resolving.");
+        }
     }
 }
