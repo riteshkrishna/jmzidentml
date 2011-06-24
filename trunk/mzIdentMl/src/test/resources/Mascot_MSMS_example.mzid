@@ -42,7 +42,7 @@
             </Customizations>
         </AnalysisSoftware>
     </AnalysisSoftwareList>
-    <Provider id="PROVIDER" software_ref="AS_mascot_parser">
+    <Provider id="PROVIDER">
         <ContactRole contact_ref="PERSON_DOC_OWNER">
             <Role>
                 <cvParam accession="MS:1001271" name="researcher" cvRef="PSI-MS"/>
@@ -810,123 +810,118 @@
                 <cvParam accession="UNIMOD:29" name="SMA" cvRef="UNIMOD"/>
             </Modification>
         </Peptide>
-        <PeptideEvidenceList id="PEL_1">
-            <PeptideEvidence id="PE_1_1_HSP70_ECHGR_0" start="161" end="172" pre="K" post="I"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP70_ECHGR"/>
-            <PeptideEvidence id="PE_1_1_HSP70_ONCMY_0" start="160" end="171" pre="K" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP70_ONCMY"/>
-            <PeptideEvidence id="PE_1_1_HSP7C_ICTPU_0" start="160" end="171" pre="K" post="I"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP7C_ICTPU"/>
-            <PeptideEvidence id="PE_1_1_HSP7C_ORYLA_0" start="160" end="171" pre="K" post="I"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP7C_ORYLA"/>
-            <PeptideEvidence id="PE_1_1_HSP7D_MANSE_0" start="160" end="171" pre="K" post="I" 
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP7D_MANSE" translationTable_ref="id45"/>
-            <PeptideEvidence id="PE_2_1_HS70A_BOVIN_0" start="37" end="49" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HS70A_BOVIN"/>
-            <PeptideEvidence id="PE_2_1_HS70A_MOUSE_0" start="37" end="49" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HS70A_MOUSE"/>
-            <PeptideEvidence id="PE_2_1_HS70B_BOSMU_0" start="37" end="49" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HS70B_BOSMU"/>
-            <PeptideEvidence id="PE_2_1_HS70B_BOVIN_0" start="37" end="49" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HS70B_BOVIN"/>
-            <PeptideEvidence id="PE_2_1_HS70B_MOUSE_0" start="37" end="49" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HS70B_MOUSE"/>
-            <PeptideEvidence id="PE_2_1_HS70B_PIG_0" start="37" end="49" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HS70B_PIG"/>
-            <PeptideEvidence id="PE_2_1_HS70L_HUMAN_0" start="39" end="51" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HS70L_HUMAN"/>
-            <PeptideEvidence id="PE_2_1_HS70L_MOUSE_0" start="39" end="51" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HS70L_MOUSE"/>
-            <PeptideEvidence id="PE_2_1_HS70L_RAT_0" start="39" end="51" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HS70L_RAT"/>
-            <PeptideEvidence id="PE_2_1_HSP70_BRUMA_0" start="36" end="48" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP70_BRUMA"/>
-            <PeptideEvidence id="PE_2_1_HSP70_CHICK_0" start="38" end="50" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP70_CHICK"/>
-            <PeptideEvidence id="PE_2_1_HSP70_ECHGR_0" start="38" end="50" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP70_ECHGR"/>
-            <PeptideEvidence id="PE_2_1_HSP70_HYDMA_0" start="37" end="49" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP70_HYDMA"/>
-            <PeptideEvidence id="PE_2_1_HSP70_ONCTS_0" start="39" end="51" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP70_ONCTS"/>
-            <PeptideEvidence id="PE_2_1_HSP70_PLEWA_0" start="39" end="51" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP70_PLEWA"/>
-            <PeptideEvidence id="PE_2_1_HSP70_XENLA_0" start="38" end="50" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP70_XENLA"/>
-            <PeptideEvidence id="PE_2_1_HSP71_CANFA_0" start="37" end="49" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP71_CANFA"/>
-            <PeptideEvidence id="PE_2_1_HSP71_CERAE_0" start="37" end="49" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP71_CERAE"/>
-            <PeptideEvidence id="PE_2_1_HSP71_HUMAN_0" start="37" end="49" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP71_HUMAN"/>
-            <PeptideEvidence id="PE_2_1_HSP71_ORYLA_0" start="39" end="51" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP71_ORYLA"/>
-            <PeptideEvidence id="PE_2_1_HSP71_RAT_0" start="37" end="49" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP71_RAT"/>
-            <PeptideEvidence id="PE_2_1_HSP72_HUMAN_0" start="38" end="50" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP72_HUMAN"/>
-            <PeptideEvidence id="PE_2_1_HSP72_MOUSE_0" start="38" end="50" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP72_MOUSE"/>
-            <PeptideEvidence id="PE_2_1_HSP72_PARLI_0" start="37" end="49" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP72_PARLI"/>
-            <PeptideEvidence id="PE_2_1_HSP72_RAT_0" start="38" end="50" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP72_RAT"/>
-            <PeptideEvidence id="PE_2_1_HSP73_BOVIN_0" start="38" end="50" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP73_BOVIN"/>
-            <PeptideEvidence id="PE_2_1_HSP76_HUMAN_0" start="39" end="51" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP76_HUMAN"/>
-            <PeptideEvidence id="PE_2_1_HSP76_PIG_0" start="39" end="51" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP76_PIG"/>
-            <PeptideEvidence id="PE_2_1_HSP76_SAGOE_0" start="39" end="51" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP76_SAGOE"/>
-            <PeptideEvidence id="PE_2_1_HSP77_HUMAN_0" start="39" end="51" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP77_HUMAN"/>
-            <PeptideEvidence id="PE_2_1_HSP7A_CAEEL_0" start="37" end="49" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP7A_CAEEL"/>
-            <PeptideEvidence id="PE_2_1_HSP7C_BOVIN_0" start="37" end="49" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP7C_BOVIN"/>
-            <PeptideEvidence id="PE_2_1_HSP7C_BRARE_0" start="37" end="49" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP7C_BRARE"/>
-            <PeptideEvidence id="PE_2_1_HSP7C_CRIGR_0" start="37" end="49" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP7C_CRIGR"/>
-            <PeptideEvidence id="PE_2_1_HSP7C_HUMAN_0" start="37" end="49" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP7C_HUMAN"/>
-            <PeptideEvidence id="PE_2_1_HSP7C_MOUSE_0" start="37" end="49" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP7C_MOUSE"/>
-            <PeptideEvidence id="PE_2_1_HSP7C_ORYLA_0" start="37" end="49" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP7C_ORYLA"/>
-            <PeptideEvidence id="PE_2_1_HSP7C_PONPY_0" start="37" end="49" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP7C_PONPY"/>
-            <PeptideEvidence id="PE_2_1_HSP7C_RAT_0" start="37" end="49" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP7C_RAT"/>
-            <PeptideEvidence id="PE_2_1_HSP7C_SAGOE_0" start="37" end="49" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP7C_SAGOE"/>
-            <PeptideEvidence id="PE_2_1_HSP7D_DROME_0" start="37" end="49" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP7D_DROME"/>
-            <PeptideEvidence id="PE_2_2_HSP7A_DROME_0" start="37" end="49" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP7A_DROME"/>
-            <PeptideEvidence id="PE_2_2_HSP7A_DROSI_0" start="37" end="49" pre="R" post="L"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP7A_DROSI"/>
-            <PeptideEvidence id="PE_3_1_HSP7A_DROME_0" start="57" end="71" pre="K" post="R"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP7A_DROME"/>
-            <PeptideEvidence id="PE_3_1_HSP7A_DROSI_0" start="57" end="71" pre="K" post="R"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP7A_DROSI"/>
-            <PeptideEvidence id="PE_3_1_HSP7D_MANSE_0" start="57" end="71" pre="K" post="R"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP7D_MANSE"/>
-            <PeptideEvidence id="PE_3_2_HS70L_HUMAN_0" start="59" end="73" pre="K" post="R"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HS70L_HUMAN"/>
-            <PeptideEvidence id="PE_3_2_HS70L_MOUSE_0" start="59" end="73" pre="K" post="R"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HS70L_MOUSE"/>
-            <PeptideEvidence id="PE_3_2_HS70L_RAT_0" start="59" end="73" pre="K" post="R"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HS70L_RAT"/>
-            <PeptideEvidence id="PE_3_2_HSP70_XENLA_0" start="58" end="72" pre="K" post="R"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP70_XENLA"/>
-            <PeptideEvidence id="PE_3_4_HSP7D_DROME_0" start="57" end="71" pre="K" post="R"
-                missedCleavages="0" isDecoy="false" dBSequence_ref="DBSeq_HSP7D_DROME"/>
-            <AdditionalParams>
-                <cvParam accession="MS:1001211" name="parent mass type mono" cvRef="PSI-MS"/>
-            </AdditionalParams>
-        </PeptideEvidenceList>
+            <PeptideEvidence peptide_ref="peptide_1_1" id="PE_1_1_HSP70_ECHGR_0" start="161" end="172" pre="K" post="I"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP70_ECHGR"/>
+        <PeptideEvidence peptide_ref="peptide_1_1" id="PE_1_1_HSP70_ONCMY_0" start="160" end="171" pre="K" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP70_ONCMY"/>
+        <PeptideEvidence peptide_ref="peptide_1_1" id="PE_1_1_HSP7C_ICTPU_0" start="160" end="171" pre="K" post="I"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP7C_ICTPU"/>
+        <PeptideEvidence peptide_ref="peptide_1_1" id="PE_1_1_HSP7C_ORYLA_0" start="160" end="171" pre="K" post="I"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP7C_ORYLA"/>
+        <PeptideEvidence peptide_ref="peptide_1_1" id="PE_1_1_HSP7D_MANSE_0" start="160" end="171" pre="K" post="I" 
+                isDecoy="false" dBSequence_ref="DBSeq_HSP7D_MANSE" translationTable_ref="id45"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HS70A_BOVIN_0" start="37" end="49" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HS70A_BOVIN"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HS70A_MOUSE_0" start="37" end="49" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HS70A_MOUSE"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HS70B_BOSMU_0" start="37" end="49" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HS70B_BOSMU"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HS70B_BOVIN_0" start="37" end="49" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HS70B_BOVIN"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HS70B_MOUSE_0" start="37" end="49" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HS70B_MOUSE"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HS70B_PIG_0" start="37" end="49" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HS70B_PIG"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HS70L_HUMAN_0" start="39" end="51" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HS70L_HUMAN"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HS70L_MOUSE_0" start="39" end="51" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HS70L_MOUSE"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HS70L_RAT_0" start="39" end="51" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HS70L_RAT"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP70_BRUMA_0" start="36" end="48" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP70_BRUMA"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP70_CHICK_0" start="38" end="50" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP70_CHICK"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP70_ECHGR_0" start="38" end="50" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP70_ECHGR"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP70_HYDMA_0" start="37" end="49" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP70_HYDMA"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP70_ONCTS_0" start="39" end="51" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP70_ONCTS"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP70_PLEWA_0" start="39" end="51" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP70_PLEWA"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP70_XENLA_0" start="38" end="50" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP70_XENLA"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP71_CANFA_0" start="37" end="49" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP71_CANFA"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP71_CERAE_0" start="37" end="49" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP71_CERAE"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP71_HUMAN_0" start="37" end="49" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP71_HUMAN"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP71_ORYLA_0" start="39" end="51" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP71_ORYLA"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP71_RAT_0" start="37" end="49" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP71_RAT"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP72_HUMAN_0" start="38" end="50" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP72_HUMAN"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP72_MOUSE_0" start="38" end="50" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP72_MOUSE"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP72_PARLI_0" start="37" end="49" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP72_PARLI"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP72_RAT_0" start="38" end="50" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP72_RAT"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP73_BOVIN_0" start="38" end="50" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP73_BOVIN"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP76_HUMAN_0" start="39" end="51" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP76_HUMAN"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP76_PIG_0" start="39" end="51" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP76_PIG"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP76_SAGOE_0" start="39" end="51" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP76_SAGOE"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP77_HUMAN_0" start="39" end="51" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP77_HUMAN"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP7A_CAEEL_0" start="37" end="49" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP7A_CAEEL"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP7C_BOVIN_0" start="37" end="49" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP7C_BOVIN"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP7C_BRARE_0" start="37" end="49" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP7C_BRARE"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP7C_CRIGR_0" start="37" end="49" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP7C_CRIGR"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP7C_HUMAN_0" start="37" end="49" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP7C_HUMAN"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP7C_MOUSE_0" start="37" end="49" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP7C_MOUSE"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP7C_ORYLA_0" start="37" end="49" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP7C_ORYLA"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP7C_PONPY_0" start="37" end="49" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP7C_PONPY"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP7C_RAT_0" start="37" end="49" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP7C_RAT"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP7C_SAGOE_0" start="37" end="49" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP7C_SAGOE"/>
+        <PeptideEvidence peptide_ref="peptide_2_1" id="PE_2_1_HSP7D_DROME_0" start="37" end="49" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP7D_DROME"/>
+        <PeptideEvidence peptide_ref="peptide_2_2" id="PE_2_2_HSP7A_DROME_0" start="37" end="49" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP7A_DROME"/>
+        <PeptideEvidence peptide_ref="peptide_2_2" id="PE_2_2_HSP7A_DROSI_0" start="37" end="49" pre="R" post="L"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP7A_DROSI"/>
+        <PeptideEvidence peptide_ref="peptide_3_1" id="PE_3_1_HSP7A_DROME_0" start="57" end="71" pre="K" post="R"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP7A_DROME"/>
+        <PeptideEvidence peptide_ref="peptide_3_1" id="PE_3_1_HSP7A_DROSI_0" start="57" end="71" pre="K" post="R"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP7A_DROSI"/>
+        <PeptideEvidence peptide_ref="peptide_3_1" id="PE_3_1_HSP7D_MANSE_0" start="57" end="71" pre="K" post="R"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP7D_MANSE"/>
+        <PeptideEvidence peptide_ref="peptide_3_2" id="PE_3_2_HS70L_HUMAN_0" start="59" end="73" pre="K" post="R"
+                isDecoy="false" dBSequence_ref="DBSeq_HS70L_HUMAN"/>
+        <PeptideEvidence peptide_ref="peptide_3_2" id="PE_3_2_HS70L_MOUSE_0" start="59" end="73" pre="K" post="R"
+                isDecoy="false" dBSequence_ref="DBSeq_HS70L_MOUSE"/>
+        <PeptideEvidence peptide_ref="peptide_3_2" id="PE_3_2_HS70L_RAT_0" start="59" end="73" pre="K" post="R"
+                isDecoy="false" dBSequence_ref="DBSeq_HS70L_RAT"/>
+        <PeptideEvidence peptide_ref="peptide_3_2" id="PE_3_2_HSP70_XENLA_0" start="58" end="72" pre="K" post="R"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP70_XENLA"/>
+        <PeptideEvidence peptide_ref="peptide_3_4" id="PE_3_4_HSP7D_DROME_0" start="57" end="71" pre="K" post="R"
+                isDecoy="false" dBSequence_ref="DBSeq_HSP7D_DROME"/>
     </SequenceCollection>
     <AnalysisCollection>
         <SpectrumIdentification id="SI" spectrumIdentificationProtocol_ref="SIP" spectrumIdentificationList_ref="SIL_1"
@@ -1131,7 +1126,10 @@
                         <PeptideEvidenceRef peptideEvidence_ref="PE_1_1_HSP7C_ICTPU_0"/>
                         <PeptideEvidenceRef peptideEvidence_ref="PE_1_1_HSP7C_ORYLA_0"/>
                         <PeptideEvidenceRef peptideEvidence_ref="PE_1_1_HSP7D_MANSE_0"/>
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="1 2 3 4 8" charge="1">
                                 <FragmentArray values="214.8 286.1 342.8 444.1 814.1 " measure_ref="m_mz"/>
                                 <FragmentArray values="18 83 48 75 277" measure_ref="m_intensity"/>
@@ -1215,7 +1213,10 @@
                     <SpectrumIdentificationItem id="SII_1_2" calculatedMassToCharge="671.8679555" chargeState="2"
                                                 experimentalMassToCharge="671.9" peptide_ref="peptide_1_2" rank="2"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="1 2 6 7" charge="1">
                                 <FragmentArray values="214.8 286.1 730 843.6 " measure_ref="m_mz"/>
                                 <FragmentArray values="18 83 214 194" measure_ref="m_intensity"/>
@@ -1287,7 +1288,10 @@
                     <SpectrumIdentificationItem id="SII_1_3" calculatedMassToCharge="671.881101" chargeState="2"
                                                 experimentalMassToCharge="671.9" peptide_ref="peptide_1_3" rank="3"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="3 5" charge="1">
                                 <FragmentArray values="286.1 444.1 " measure_ref="m_mz"/>
                                 <FragmentArray values="83 75" measure_ref="m_intensity"/>
@@ -1364,7 +1368,10 @@
                     <SpectrumIdentificationItem id="SII_1_4" calculatedMassToCharge="671.3778585" chargeState="2"
                                                 experimentalMassToCharge="671.9" peptide_ref="peptide_1_4" rank="4"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="3" charge="1">
                                 <FragmentArray values="242.8 " measure_ref="m_mz"/>
                                 <FragmentArray values="417" measure_ref="m_intensity"/>
@@ -1453,7 +1460,10 @@
                     <SpectrumIdentificationItem id="SII_1_5" calculatedMassToCharge="671.875501" chargeState="2"
                                                 experimentalMassToCharge="671.9" peptide_ref="peptide_1_5" rank="5"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="3 7 8" charge="1">
                                 <FragmentArray values="359.1 730 843.6 " measure_ref="m_mz"/>
                                 <FragmentArray values="28 214 194" measure_ref="m_intensity"/>
@@ -1541,7 +1551,10 @@
                     <SpectrumIdentificationItem id="SII_1_6" calculatedMassToCharge="671.9006325" chargeState="2"
                                                 experimentalMassToCharge="671.9" peptide_ref="peptide_1_6" rank="6"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="2 3 4 7 8 10 11" charge="1">
                                 <FragmentArray values="214.8 342.8 472.096295 758.2 871.2 1056 1169.1 "
                                                measure_ref="m_mz"/>
@@ -1637,7 +1650,10 @@
                     <SpectrumIdentificationItem id="SII_1_7" calculatedMassToCharge="671.8460745" chargeState="2"
                                                 experimentalMassToCharge="671.9" peptide_ref="peptide_1_7" rank="7"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="1 2" charge="1">
                                 <FragmentArray values="214.8 286.1 " measure_ref="m_mz"/>
                                 <FragmentArray values="18 83" measure_ref="m_intensity"/>
@@ -1711,7 +1727,10 @@
                     <SpectrumIdentificationItem id="SII_1_8" calculatedMassToCharge="671.377866" chargeState="2"
                                                 experimentalMassToCharge="671.9" peptide_ref="peptide_1_8" rank="8"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="5 6 7 8 9 10" charge="1">
                                 <FragmentArray values="472.096295 586.2 841.9 955 1055 1167.994665 "
                                                measure_ref="m_mz"/>
@@ -1784,7 +1803,10 @@
                     <SpectrumIdentificationItem id="SII_1_9" calculatedMassToCharge="671.8553825" chargeState="2"
                                                 experimentalMassToCharge="671.9" peptide_ref="peptide_1_9" rank="9"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="6 7 9 10" charge="1">
                                 <FragmentArray values="730 843.6 1056 1169.1 " measure_ref="m_mz"/>
                                 <FragmentArray values="214 194 492 11230" measure_ref="m_intensity"/>
@@ -1882,7 +1904,10 @@
                     <SpectrumIdentificationItem id="SII_1_10" calculatedMassToCharge="671.39607" chargeState="2"
                                                 experimentalMassToCharge="671.9" peptide_ref="peptide_1_10" rank="10"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="3 4 5 7 8" charge="1">
                                 <FragmentArray values="288.2 359.1 472.096295 728.8 841.9 " measure_ref="m_mz"/>
                                 <FragmentArray values="2137 28 29390 1397 19170" measure_ref="m_intensity"/>
@@ -2002,7 +2027,10 @@
                         <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_RAT_0"/>
                         <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
                         <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="2 3" charge="1">
                                 <FragmentArray values="302.1 398.9 " measure_ref="m_mz"/>
                                 <FragmentArray values="11 10" measure_ref="m_intensity"/>
@@ -2070,7 +2098,10 @@
                                                 passThreshold="false">
                         <PeptideEvidenceRef peptideEvidence_ref="PE_2_2_HSP7A_DROME_0"/>
                         <PeptideEvidenceRef peptideEvidence_ref="PE_2_2_HSP7A_DROSI_0"/>
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="2 3" charge="1">
                                 <FragmentArray values="302.1 398.9 " measure_ref="m_mz"/>
                                 <FragmentArray values="11 10" measure_ref="m_intensity"/>
@@ -2137,7 +2168,10 @@
                     <SpectrumIdentificationItem id="SII_2_3" calculatedMassToCharge="808.3759055" chargeState="2"
                                                 experimentalMassToCharge="808.3" peptide_ref="peptide_2_3" rank="3"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="2 12" charge="1">
                                 <FragmentArray values="329.9 1441.3 " measure_ref="m_mz"/>
                                 <FragmentArray values="2053 179" measure_ref="m_intensity"/>
@@ -2214,7 +2248,10 @@
                     <SpectrumIdentificationItem id="SII_2_4" calculatedMassToCharge="808.3945595" chargeState="2"
                                                 experimentalMassToCharge="808.3" peptide_ref="peptide_2_4" rank="4"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="7 9 12" charge="1">
                                 <FragmentArray values="798.9 938.154605 1285.3 " measure_ref="m_mz"/>
                                 <FragmentArray values="25530 3681 11250" measure_ref="m_intensity"/>
@@ -2279,7 +2316,10 @@
                     <SpectrumIdentificationItem id="SII_2_5" calculatedMassToCharge="808.3945595" chargeState="2"
                                                 experimentalMassToCharge="808.3" peptide_ref="peptide_2_5" rank="5"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="7 9 12" charge="1">
                                 <FragmentArray values="798.9 938.154605 1285.3 " measure_ref="m_mz"/>
                                 <FragmentArray values="25530 3681 11250" measure_ref="m_intensity"/>
@@ -2355,7 +2395,10 @@
                     <SpectrumIdentificationItem id="SII_2_6" calculatedMassToCharge="808.4034325" chargeState="2"
                                                 experimentalMassToCharge="808.3" peptide_ref="peptide_2_6" rank="6"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="8 11 14" charge="1">
                                 <FragmentArray values="839.195244 1094.8 1441.3 " measure_ref="m_mz"/>
                                 <FragmentArray values="9126 701 179" measure_ref="m_intensity"/>
@@ -2425,7 +2468,10 @@
                     <SpectrumIdentificationItem id="SII_2_7" calculatedMassToCharge="808.4034325" chargeState="2"
                                                 experimentalMassToCharge="808.3" peptide_ref="peptide_2_7" rank="7"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="8 11 14" charge="1">
                                 <FragmentArray values="839.195244 1094.8 1441.3 " measure_ref="m_mz"/>
                                 <FragmentArray values="9126 701 179" measure_ref="m_intensity"/>
@@ -2495,7 +2541,10 @@
                     <SpectrumIdentificationItem id="SII_2_8" calculatedMassToCharge="807.927938" chargeState="2"
                                                 experimentalMassToCharge="808.3" peptide_ref="peptide_2_8" rank="8"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="3 10" charge="1">
                                 <FragmentArray values="398.9 1170.1 " measure_ref="m_mz"/>
                                 <FragmentArray values="10 28" measure_ref="m_intensity"/>
@@ -2560,7 +2609,10 @@
                     <SpectrumIdentificationItem id="SII_2_9" calculatedMassToCharge="807.8794075" chargeState="2"
                                                 experimentalMassToCharge="808.3" peptide_ref="peptide_2_9" rank="9"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="9" charge="2">
                                 <FragmentArray values="514.2 " measure_ref="m_mz"/>
                                 <FragmentArray values="125" measure_ref="m_intensity"/>
@@ -2632,7 +2684,10 @@
                     <SpectrumIdentificationItem id="SII_2_10" calculatedMassToCharge="808.400495" chargeState="2"
                                                 experimentalMassToCharge="808.3" peptide_ref="peptide_2_10" rank="10"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="12" charge="1">
                                 <FragmentArray values="1441.3 " measure_ref="m_mz"/>
                                 <FragmentArray values="179" measure_ref="m_intensity"/>
@@ -2718,7 +2773,10 @@
                         <PeptideEvidenceRef peptideEvidence_ref="PE_3_1_HSP7A_DROME_0"/>
                         <PeptideEvidenceRef peptideEvidence_ref="PE_3_1_HSP7A_DROSI_0"/>
                         <PeptideEvidenceRef peptideEvidence_ref="PE_3_1_HSP7D_MANSE_0"/>
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="3" charge="1">
                                 <FragmentArray values="440.8 " measure_ref="m_mz"/>
                                 <FragmentArray values="21" measure_ref="m_intensity"/>
@@ -2808,7 +2866,10 @@
                         <PeptideEvidenceRef peptideEvidence_ref="PE_3_2_HS70L_MOUSE_0"/>
                         <PeptideEvidenceRef peptideEvidence_ref="PE_3_2_HS70L_RAT_0"/>
                         <PeptideEvidenceRef peptideEvidence_ref="PE_3_2_HSP70_XENLA_0"/>
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="3 9" charge="1">
                                 <FragmentArray values="440.8 1112.5 " measure_ref="m_mz"/>
                                 <FragmentArray values="21 61" measure_ref="m_intensity"/>
@@ -2894,7 +2955,10 @@
                     <SpectrumIdentificationItem id="SII_3_3" calculatedMassToCharge="973.9856465" chargeState="2"
                                                 experimentalMassToCharge="973.9" peptide_ref="peptide_3_3" rank="3"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="3 9" charge="1">
                                 <FragmentArray values="440.8 1112.5 " measure_ref="m_mz"/>
                                 <FragmentArray values="21 61" measure_ref="m_intensity"/>
@@ -2984,7 +3048,10 @@
                                                 experimentalMassToCharge="973.9" peptide_ref="peptide_3_4" rank="4"
                                                 passThreshold="false">
                         <PeptideEvidenceRef peptideEvidence_ref="PE_3_4_HSP7D_DROME_0"/>
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="3 8 12" charge="1">
                                 <FragmentArray values="440.8 971.9 1461.1 " measure_ref="m_mz"/>
                                 <FragmentArray values="21 16170 30" measure_ref="m_intensity"/>
@@ -3058,7 +3125,10 @@
                     <SpectrumIdentificationItem id="SII_3_5" calculatedMassToCharge="973.9856465" chargeState="2"
                                                 experimentalMassToCharge="973.9" peptide_ref="peptide_3_5" rank="5"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="3 8 10" charge="1">
                                 <FragmentArray values="440.8 1125.9 1341.05302 " measure_ref="m_mz"/>
                                 <FragmentArray values="21 142 149" measure_ref="m_intensity"/>
@@ -3135,7 +3205,10 @@
                     <SpectrumIdentificationItem id="SII_3_6" calculatedMassToCharge="973.987333" chargeState="2"
                                                 experimentalMassToCharge="973.9" peptide_ref="peptide_3_6" rank="6"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="6" charge="1">
                                 <FragmentArray values="687.1 " measure_ref="m_mz"/>
                                 <FragmentArray values="3179" measure_ref="m_intensity"/>
@@ -3210,7 +3283,10 @@
                     <SpectrumIdentificationItem id="SII_3_7" calculatedMassToCharge="973.4346975" chargeState="2"
                                                 experimentalMassToCharge="973.9" peptide_ref="peptide_3_7" rank="7"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="10" charge="1">
                                 <FragmentArray values="1111.8 " measure_ref="m_mz"/>
                                 <FragmentArray values="127" measure_ref="m_intensity"/>
@@ -3298,7 +3374,10 @@
                     <SpectrumIdentificationItem id="SII_3_8" calculatedMassToCharge="973.9989065" chargeState="2"
                                                 experimentalMassToCharge="973.9" peptide_ref="peptide_3_8" rank="8"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="5 6 7 10" charge="1">
                                 <FragmentArray values="460.2 607.2 720 965.415264 " measure_ref="m_mz"/>
                                 <FragmentArray values="108 979 55 31180" measure_ref="m_intensity"/>
@@ -3370,7 +3449,10 @@
                     <SpectrumIdentificationItem id="SII_3_9" calculatedMassToCharge="974.005521" chargeState="2"
                                                 experimentalMassToCharge="973.9" peptide_ref="peptide_3_9" rank="9"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="6" charge="1">
                                 <FragmentArray values="687.1 " measure_ref="m_mz"/>
                                 <FragmentArray values="3179" measure_ref="m_intensity"/>
@@ -3444,7 +3526,10 @@
                     <SpectrumIdentificationItem id="SII_3_10" calculatedMassToCharge="973.4968925" chargeState="2"
                                                 experimentalMassToCharge="973.9" peptide_ref="peptide_3_10" rank="10"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="12" charge="1">
                                 <FragmentArray values="1339.9 " measure_ref="m_mz"/>
                                 <FragmentArray values="1412" measure_ref="m_intensity"/>
@@ -3521,7 +3606,10 @@
                     <SpectrumIdentificationItem id="SII_4_1" calculatedMassToCharge="1084.6070915" chargeState="2"
                                                 experimentalMassToCharge="1084.9" peptide_ref="peptide_4_1" rank="1"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="8 9 10 15 16" charge="1">
                                 <FragmentArray values="870.808475 967.1 1082.746399 1781.8 1895.5 " measure_ref="m_mz"/>
                                 <FragmentArray values="59 115 15470 14 49" measure_ref="m_intensity"/>
@@ -3579,7 +3667,10 @@
                     <SpectrumIdentificationItem id="SII_4_2" calculatedMassToCharge="1085.0652975" chargeState="2"
                                                 experimentalMassToCharge="1084.9" peptide_ref="peptide_4_2" rank="2"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="15" charge="1">
                                 <FragmentArray values="1739.9 " measure_ref="m_mz"/>
                                 <FragmentArray values="5" measure_ref="m_intensity"/>
@@ -3637,7 +3728,10 @@
                     <SpectrumIdentificationItem id="SII_4_3" calculatedMassToCharge="1085.075498" chargeState="2"
                                                 experimentalMassToCharge="1084.9" peptide_ref="peptide_4_3" rank="3"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="15" charge="1">
                                 <FragmentArray values="1868 " measure_ref="m_mz"/>
                                 <FragmentArray values="7" measure_ref="m_intensity"/>
@@ -3701,7 +3795,10 @@
                     <SpectrumIdentificationItem id="SII_4_4" calculatedMassToCharge="1085.0757115" chargeState="2"
                                                 experimentalMassToCharge="1084.9" peptide_ref="peptide_4_4" rank="4"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="8 15" charge="1">
                                 <FragmentArray values="1082.746399 1868 " measure_ref="m_mz"/>
                                 <FragmentArray values="15470 7" measure_ref="m_intensity"/>
@@ -3759,7 +3856,10 @@
                     <SpectrumIdentificationItem id="SII_4_5" calculatedMassToCharge="1085.0757115" chargeState="2"
                                                 experimentalMassToCharge="1084.9" peptide_ref="peptide_4_5" rank="5"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="8 15" charge="1">
                                 <FragmentArray values="1082.746399 1868 " measure_ref="m_mz"/>
                                 <FragmentArray values="15470 7" measure_ref="m_intensity"/>
@@ -3817,7 +3917,10 @@
                     <SpectrumIdentificationItem id="SII_4_6" calculatedMassToCharge="1085.055738" chargeState="2"
                                                 experimentalMassToCharge="1084.9" peptide_ref="peptide_4_6" rank="6"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="14 15" charge="1">
                                 <FragmentArray values="1770.5 1868 " measure_ref="m_mz"/>
                                 <FragmentArray values="3 7" measure_ref="m_intensity"/>
@@ -3899,7 +4002,10 @@
                     <SpectrumIdentificationItem id="SII_4_7" calculatedMassToCharge="1084.0271355" chargeState="2"
                                                 experimentalMassToCharge="1084.9" peptide_ref="peptide_4_7" rank="7"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="5 14" charge="1">
                                 <FragmentArray values="705 1868 " measure_ref="m_mz"/>
                                 <FragmentArray values="5 7" measure_ref="m_intensity"/>
@@ -3976,7 +4082,10 @@
                     <SpectrumIdentificationItem id="SII_4_8" calculatedMassToCharge="1084.6562855" chargeState="2"
                                                 experimentalMassToCharge="1084.9" peptide_ref="peptide_4_8" rank="8"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="9" charge="1">
                                 <FragmentArray values="866.1 " measure_ref="m_mz"/>
                                 <FragmentArray values="34" measure_ref="m_intensity"/>
@@ -4052,7 +4161,10 @@
                     <SpectrumIdentificationItem id="SII_4_9" calculatedMassToCharge="1085.0757115" chargeState="2"
                                                 experimentalMassToCharge="1084.9" peptide_ref="peptide_4_9" rank="9"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
+
                             <IonType index="8 15" charge="1">
                                 <FragmentArray values="1082.746399 1868 " measure_ref="m_mz"/>
                                 <FragmentArray values="15470 7" measure_ref="m_intensity"/>
@@ -4110,7 +4222,9 @@
                     <SpectrumIdentificationItem id="SII_4_10" calculatedMassToCharge="1085.075498" chargeState="2"
                                                 experimentalMassToCharge="1084.9" peptide_ref="peptide_4_10" rank="10"
                                                 passThreshold="false">
-                        <Fragmentation>
+                        <PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7C_SAGOE_0"/>
+<PeptideEvidenceRef peptideEvidence_ref="PE_2_1_HSP7D_DROME_0"/>
+<Fragmentation>
                             <IonType index="13" charge="2">
                                 <FragmentArray values="813.3 " measure_ref="m_mz"/>
                                 <FragmentArray values="26" measure_ref="m_intensity"/>
