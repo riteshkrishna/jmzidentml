@@ -345,22 +345,6 @@ file.</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
 			<xsd:element name="SourceFile" type="SourceFileType" minOccurs="0" maxOccurs="unbounded"/>
-<!--
-				<xsd:complexType>
-					<xsd:complexContent>
-						<xsd:extension base="SourceFileType">
-							<xsd:sequence>
-								<xsd:group ref="psi-pi:ParamGroup" minOccurs="0" maxOccurs="unbounded">
-									<xsd:annotation>
-										<xsd:documentation>Any additional parameters description the source file.</xsd:documentation>
-									</xsd:annotation>
-								</xsd:group>
-							</xsd:sequence>
-						</xsd:extension>
-					</xsd:complexContent>
-				</xsd:complexType>
-			</xsd:element>
--->
 			<xsd:element name="SearchDatabase" type="SearchDatabaseType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="SpectraData" type="SpectraDataType" minOccurs="1" maxOccurs="unbounded"/>
 		</xsd:sequence>
