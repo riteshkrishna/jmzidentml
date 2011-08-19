@@ -6,6 +6,13 @@ Configurations for various properties of model classes.
             PeptideEvidence contains references to three separate classes. Setting this property to true for the
             PeptideEvidence config will cause these references to be resolved during unmarshaling.
         - An element cannot be idMapped if it is not indexed.
+        - xpath entries with leading or trailing whitespace will prevent elements from being indexed!
+            make sure to use a non-whitespace notation:
+              <xpath>/MzIdentML/xyz</xpath>
+            instead of line breaks:
+              <xpath>
+                /MzIdentML/xyz
+              </xpath>
 -->
 <mzIdentMLElementProperties>
     <configurations>
