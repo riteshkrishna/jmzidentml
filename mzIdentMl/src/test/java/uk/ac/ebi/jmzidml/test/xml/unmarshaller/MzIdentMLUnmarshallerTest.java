@@ -21,14 +21,18 @@ import static org.junit.Assert.*;
  */
 public class MzIdentMLUnmarshallerTest {
 
-    @Test
-    public void testAttributeRetrieval() throws Exception {
+    private static MzIdentMLUnmarshaller unmarshaller;
+
+    static {
         URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
 
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
+        unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         assertNotNull(unmarshaller);
+    }
 
+    @Test
+    public void testAttributeRetrieval() throws Exception {
         // Number of providers
         int total = unmarshaller.getObjectCountForXpath(MzIdentMLElement.AnalysisSoftware.getXpath());
         assertEquals(2, total);
@@ -71,12 +75,6 @@ public class MzIdentMLUnmarshallerTest {
 
     @Test
     public void testRootAttributeRetrieval() throws Exception {
-        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-        assertNotNull(xmlFileURL);
-
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-        assertNotNull(unmarshaller);
-
         // check the root element (mzIdentML) attributes
         assertEquals("example_mzidentml_1", unmarshaller.getMzIdentMLId());
         assertEquals("1.1.0", unmarshaller.getMzIdentMLVersion());
@@ -94,10 +92,6 @@ public class MzIdentMLUnmarshallerTest {
 
     @Test
     public void testEnzymes() throws JAXBException{
-        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-        assertNotNull(xmlFileURL);
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-        assertNotNull(unmarshaller);
         SpectrumIdentificationProtocol spectrumIdentificactionProtocol = unmarshaller.unmarshal(SpectrumIdentificationProtocol.class, "SIP");
         Enzymes enzymes = spectrumIdentificactionProtocol.getEnzymes();
         assertTrue(enzymes.getEnzyme().get(0).getId().equals("ENZ_0"));
@@ -123,10 +117,6 @@ public class MzIdentMLUnmarshallerTest {
      */
     @Test
     public void testInputsUnmarshalWithFileFormatAdapter() {
-        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-        assertNotNull(xmlFileURL);
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-        assertNotNull(unmarshaller);
         Inputs inputs = unmarshaller.unmarshal(Inputs.class);
         assertTrue(inputs.getSourceFile().get(0).getFileFormat().getCvParam().getAccession().equals("MS:1001199"));
     }
@@ -137,30 +127,18 @@ public class MzIdentMLUnmarshallerTest {
      */
     @Test
     public void testInputsUnmarshalWithSpectrumIDFormatAdapter() {
-        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-        assertNotNull(xmlFileURL);
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-        assertNotNull(unmarshaller);
         SpectraData spectraData = unmarshaller.unmarshal(SpectraData.class);
         assertTrue(spectraData.getSpectrumIDFormat().getCvParam().getAccession().equals("MS:1001528"));
     }
 
     @Test
     public void testDataCollection() {
-        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-        assertNotNull(xmlFileURL);
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-        assertNotNull(unmarshaller);
         DataCollection dataCollection = unmarshaller.unmarshal(DataCollection.class);
         dataCollection.getInputs();
     }
 
     @Test
     public void testOrganization() throws JAXBException {
-        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-        assertNotNull(xmlFileURL);
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-        assertNotNull(unmarshaller);
         Organization organization = unmarshaller.unmarshal(Organization.class, "ORG_MSL");
         assertTrue(organization.getParamGroup().size()==4);
         assertTrue(organization.getName().equals("Matrix Science Limited"));
@@ -176,20 +154,12 @@ public class MzIdentMLUnmarshallerTest {
 
     @Test
     public void testProvider() throws JAXBException {
-        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-        assertNotNull(xmlFileURL);
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-        assertNotNull(unmarshaller);
         Provider provider = unmarshaller.unmarshal(Provider.class, "PROVIDER");
         assertTrue(provider.getContactRole().getRole().getCvParam().getAccession().equals("MS:1001271"));
     }
 
     @Test
     public void testAnalysisSampleCollection() {
-        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-        assertNotNull(xmlFileURL);
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-        assertNotNull(unmarshaller);
         AnalysisSampleCollection analysisSampleCollection = unmarshaller.unmarshal(AnalysisSampleCollection.class);
         Sample sample = analysisSampleCollection.getSample().get(0);
         // Test facade list
@@ -205,9 +175,6 @@ public class MzIdentMLUnmarshallerTest {
 
     @Test
     public void testAuditCollection() throws JAXBException {
-        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-        assertNotNull(unmarshaller);
         Organization organization = unmarshaller.unmarshal(Organization.class, "ORG_MSL");
         List<CvParam> cvParams = organization.getCvParam();
         List<UserParam> userParams = organization.getUserParam();
@@ -221,9 +188,6 @@ public class MzIdentMLUnmarshallerTest {
 
     @Test
     public void testProteinDetectionProtocol() throws JAXBException{
-       URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-        assertNotNull(unmarshaller);
         ProteinDetectionProtocol proteinDetectionProtocol = unmarshaller.unmarshal(ProteinDetectionProtocol.class, "PDP_MascotParser_1");
         ThresholdCvParam thresholdCvParam = (ThresholdCvParam)proteinDetectionProtocol.getThreshold().getCvParam().get(0);
         assertTrue(thresholdCvParam.getAccession().equals("MS:1001494"));
@@ -251,8 +215,6 @@ public class MzIdentMLUnmarshallerTest {
 
     @Test
     public void testSpectrumIdentificationProtocol() throws JAXBException{
-        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         SpectrumIdentificationProtocol spectrumIdentificationProtocol = unmarshaller.unmarshal(SpectrumIdentificationProtocol.class, "SIP");
         List<CvParam> additionalSearchCvParams = spectrumIdentificationProtocol.getAdditionalSearchParams().getCvParam();
         assertTrue(additionalSearchCvParams.size() == 10);
@@ -273,8 +235,6 @@ public class MzIdentMLUnmarshallerTest {
 
     @Test
     public void testAnalysisSearchDatabase() throws JAXBException{
-        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         SearchDatabase searchDb = unmarshaller.unmarshal(SearchDatabase.class, "SDB_SwissProt");
         Param dbName = searchDb.getDatabaseName();
         assertTrue(dbName.getUserParam() instanceof DatabaseNameUserParam);
@@ -282,8 +242,6 @@ public class MzIdentMLUnmarshallerTest {
 
     @Test
     public void testFilter() throws JAXBException{
-        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         SpectrumIdentificationProtocol spectrumIdentificationProtocol = unmarshaller.unmarshal(SpectrumIdentificationProtocol.class, "SIP");
         DatabaseFilters dbFilters = spectrumIdentificationProtocol.getDatabaseFilters();
         List<Filter> filter = dbFilters.getFilter();
@@ -297,8 +255,6 @@ public class MzIdentMLUnmarshallerTest {
 
     @Test
     public void testAnalysisSoftware() throws JAXBException{
-        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         AnalysisSoftware analysisSoftware = unmarshaller.unmarshal(AnalysisSoftware.class, "AS_mascot_parser");
         Param param = analysisSoftware.getSoftwareName();
         assertTrue(param.getCvParam() instanceof SoftwareNameCvParam);
@@ -306,8 +262,6 @@ public class MzIdentMLUnmarshallerTest {
 
     @Test
     public void testIonType() throws JAXBException {
-        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         SpectrumIdentificationList list =  unmarshaller.unmarshal(SpectrumIdentificationList.class, "SIL_1");
         List<IonType> ionTypes = list.getSpectrumIdentificationResult().get(0).getSpectrumIdentificationItem().get(0).getFragmentation().getIonType();
         assertTrue(ionTypes.size() > 0);
@@ -325,8 +279,6 @@ public class MzIdentMLUnmarshallerTest {
 
     @Test
     public void testMassTable() throws JAXBException {
-        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         SpectrumIdentificationProtocol spectrumIdentificationProtocol = unmarshaller.unmarshal(SpectrumIdentificationProtocol.class, "SIP");
         List<MassTable> massTables = spectrumIdentificationProtocol.getMassTable();
         assertTrue(massTables.size() > 0);
@@ -337,14 +289,11 @@ public class MzIdentMLUnmarshallerTest {
         /**
          * Check if instances of Integer are returned. By default jaxb converts int in xml to BigInts in Java.
          */
-        assertTrue(msLevels.get(0) instanceof Integer);
+        assertTrue(msLevels.get(0).getClass() == Integer.class);
     }
 
     @Test
     public void testPeptideEvidence(){
-        URL xmlFileURL = MzIdentMLUnmarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-        assertNotNull(xmlFileURL);
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         MzIdentML mzIdentML = unmarshaller.unmarshal(MzIdentML.class);
         List<PeptideEvidence> peptideEvidences =
                 mzIdentML.getSequenceCollection().getPeptideEvidence();
