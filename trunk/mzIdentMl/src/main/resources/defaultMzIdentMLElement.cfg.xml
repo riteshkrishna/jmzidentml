@@ -440,6 +440,7 @@ Configurations for various properties of model classes.
         <userParamClass>uk.ac.ebi.jmzidml.model.mzidml.params.PeptideEvidenceUserParam</userParamClass>
         <xpath>/MzIdentML/SequenceCollection/PeptideEvidence</xpath>
     </configurations>
+    <!-- was removed in latest schema version
     <configurations>
         <autoRefResolving>false</autoRefResolving>
         <cached>false</cached>
@@ -451,6 +452,7 @@ Configurations for various properties of model classes.
         <userParamClass>uk.ac.ebi.jmzidml.model.mzidml.params.PeptideEvidenceListUserParam</userParamClass>
         <xpath>/MzIdentML/SequenceCollection/PeptideEvidenceList</xpath>
     </configurations>
+    -->
     <configurations>
         <autoRefResolving>false</autoRefResolving>
         <cached>false</cached>
