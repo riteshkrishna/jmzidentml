@@ -15,6 +15,7 @@ import uk.ac.ebi.jmzidml.xml.xxindex.FileUtils;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexerFactory;
 
+import javax.naming.ConfigurationException;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -25,6 +26,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -192,6 +194,19 @@ public class MzIdentMLUnmarshaller {
 
         // we have to iterate over the XML elements
         return new MzIdentMLObjectIterator<T>(element, index, cache);
+    }
+
+    /**
+     * Depends on the element being indexed and ID mapped.
+     * See configuration of elements via MzIdentMLElement.
+     *
+     * @see MzIdentMLElement
+     * @param element the element for which to get the IDs.
+     * @return  a Set of all IDs of the specified element.
+     * @throws ConfigurationException
+     */
+    public Set<String> getIDsForElement(MzIdentMLElement element) throws ConfigurationException {
+        return index.getIDsForElement(element);
     }
 
     @Deprecated
