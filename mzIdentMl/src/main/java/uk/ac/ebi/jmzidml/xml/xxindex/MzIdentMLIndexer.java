@@ -8,7 +8,9 @@ package uk.ac.ebi.jmzidml.xml.xxindex;
 
 
 import psidev.psi.tools.xxindex.index.IndexElement;
+import uk.ac.ebi.jmzidml.MzIdentMLElement;
 
+import javax.naming.ConfigurationException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -54,4 +56,14 @@ public interface MzIdentMLIndexer {
     public String getMzIdentMLAttributeXMLString();
 
     public boolean isIDmapped(String id, Class clazz);
+
+    /**
+     * Is dependent on the element being indexed and ID mapped.
+     * See configuration of elements (MzIdentMLElement).
+     *
+     * @param element the element for which to get the IDs.
+     * @return  a Set of all IDs of the specified element.
+     * @throws ConfigurationException
+     */
+    public Set<String> getIDsForElement(MzIdentMLElement element) throws ConfigurationException;
 }

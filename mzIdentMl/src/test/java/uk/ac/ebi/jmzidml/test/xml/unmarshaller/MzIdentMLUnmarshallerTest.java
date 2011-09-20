@@ -6,6 +6,7 @@ import uk.ac.ebi.jmzidml.model.mzidml.*;
 import uk.ac.ebi.jmzidml.model.mzidml.params.*;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
+import javax.naming.ConfigurationException;
 import javax.xml.bind.JAXBException;
 import java.net.URL;
 import java.util.List;
@@ -307,5 +308,12 @@ public class MzIdentMLUnmarshallerTest {
         }else{
              System.out.println("PeptideEvidence is not auto-resolving.");
         }
+    }
+
+
+    @Test
+    public void testIDForElement() throws ConfigurationException {
+        int numOfPE = unmarshaller.getIDsForElement(MzIdentMLElement.PeptideEvidence).size();
+        assertEquals("number of PeptideEvidence not as expected.", 56, numOfPE);
     }
 }

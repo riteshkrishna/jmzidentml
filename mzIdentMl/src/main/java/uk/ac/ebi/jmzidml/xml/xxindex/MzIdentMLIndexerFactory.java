@@ -11,6 +11,7 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 import uk.ac.ebi.jmzidml.model.mzidml.Identifiable;
 import uk.ac.ebi.jmzidml.xml.Constants;
 
+import javax.naming.ConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -183,6 +184,22 @@ public class MzIdentMLIndexerFactory {
             }
             Map<String, IndexElement> idMap = idMapCache.get(clazz);
             return idMap != null && idMap.containsKey(id);
+        }
+
+        /**
+         * Is dependent on the element being indexed and ID mapped.
+         * See configuration of elements (MzIdentMLElement).
+         *
+         * @param element the element for which to get the IDs.
+         * @return  a Set of all IDs of the specified element.
+         * @throws ConfigurationException
+         */
+        public Set<String> getIDsForElement(MzIdentMLElement element) throws ConfigurationException {
+            if ( element.isIdMapped() ) {
+                return idMapCache.get(element.<MzIdentMLObject>getClazz()).keySet();
+            } else {
+                throw new ConfigurationException("API not configured to support ID mapping for element: " + element.getTagName());
+            }
         }
 
         public <T extends MzIdentMLObject> Set<String> getElementIDs(Class<T> clazz) {
