@@ -70,8 +70,8 @@ public abstract class AbstractResolvingAdapter<ValueType, BoundType> extends Xml
 
         String xml;
         Class cls;
-        // special case for Contact.class as we can either have a Person.class or a Organisation.class
-        if (refType == Constants.ReferencedType.Contact) {
+        // special case for ContactRole.class as we can either have a Person.class or a Organisation.class
+        if (refType == Constants.ReferencedType.ContactRole) {
             // see if the ID fits a Person
             String personXML = index.getXmlString(refId, Person.class);
             // see if the ID fits an Organisation
@@ -84,7 +84,7 @@ public abstract class AbstractResolvingAdapter<ValueType, BoundType> extends Xml
                 xml = organisationXML;
                 cls = Organization.class;
             } else {
-                throw new IllegalStateException("Could not uniquely resolve Contact reference " + refId);
+                throw new IllegalStateException("Could not uniquely resolve ContactRole reference " + refId);
             }
         } else {
             switch (refType) {

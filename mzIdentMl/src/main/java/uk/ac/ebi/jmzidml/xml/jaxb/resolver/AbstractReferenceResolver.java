@@ -56,10 +56,10 @@ public abstract class AbstractReferenceResolver<T extends MzIdentMLObject> exten
         log.debug("AbstractReferenceResolver.unmarshal for id: " + refId);
         // first retrieve the XML snippet representing the referenced object/element
         String xml;
-        // special case for Contact.class as we can either have a Person.class or a Organisation.class
+        // special case for ContactRole.class as we can either have a Person.class or a Organisation.class
 
         if (cls == AbstractContact.class) {
-            log.debug("SPECIAL CASE: Contact");
+            log.debug("SPECIAL CASE: ContactRole");
             // see if the ID fits a Person
             String personXML = index.getXmlString(refId, Person.class);
             // see if the ID fits an Organisation
@@ -71,7 +71,7 @@ public abstract class AbstractReferenceResolver<T extends MzIdentMLObject> exten
                 xml = organisationXML;
                 cls = MzIdentMLElement.Organization.getClazz();
             } else {
-                throw new IllegalStateException("Could not uniquely resolve Contact reference " + refId);
+                throw new IllegalStateException("Could not uniquely resolve ContactRole reference " + refId);
             }
         } else {
             xml = index.getXmlString(refId, cls);
@@ -89,8 +89,8 @@ public abstract class AbstractReferenceResolver<T extends MzIdentMLObject> exten
             retVal = holder.getValue();
 
 /*
-            if (originalClass == Contact.class) {
-                Contact contact = new Contact();
+            if (originalClass == ContactRole.class) {
+                ContactRole contact = new ContactRole();
                 contact.setPersonOrOrganization((AbstractContact) retVal);
                 return (R) contact;
             }

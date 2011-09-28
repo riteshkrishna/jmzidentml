@@ -2,6 +2,8 @@ package uk.ac.ebi.jmzidml.test.xml;
 
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
+import uk.ac.ebi.jmzidml.MzIdentMLElement;
+import uk.ac.ebi.jmzidml.model.mzidml.AbstractContact;
 import uk.ac.ebi.jmzidml.model.mzidml.AnalysisSampleCollection;
 import uk.ac.ebi.jmzidml.model.mzidml.ContactRole;
 import uk.ac.ebi.jmzidml.model.mzidml.Sample;
@@ -35,6 +37,15 @@ public class AnalysisSampleCollectionTest extends TestCase {
         assertTrue(sample.getContactRole().size() == 2);
         assertTrue(sample.getParamGroup().size() == 2);
         ContactRole contactRole = sample.getContactRole().get(0);
+
+        AbstractContact contact = contactRole.getContact();
+        if (MzIdentMLElement.ContactRole.isAutoRefResolving()) {
+            assertTrue(contact != null);
+            System.out.println("resolving");
+        } else {
+            assertTrue(contact == null);
+            System.out.println("not resolving");
+        }
         assertTrue(contactRole.getRole().getCvParam().getAccession().equals("MS:1001267"));
 /**
 
