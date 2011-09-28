@@ -51,7 +51,7 @@ public class AnalysisSoftwareTest {
             assertTrue("Analysis software is from Mascot.", as.getName().contains("Mascot"));
             if (MzIdentMLElement.ContactRole.isAutoRefResolving() && as.getContactRole().getContactRef() != null) {
                 assertNotNull(as.getContactRole().getContact());
-                log.debug("\n Analysis Software -> Contact -> Name  :" + as.getContactRole().getContact().getName());
+                log.debug("\n Analysis Software -> ContactRole -> Name  :" + as.getContactRole().getContact().getName());
                 /**
                  * Testing that only organization is returned (in this test file analysis software instances only
                  * have Organization ContactRoles.
@@ -59,7 +59,7 @@ public class AnalysisSoftwareTest {
                 assertNotNull(as.getContactRole().getOrganization());
                 assertNull(as.getContactRole().getPerson());
             } else {
-                System.out.println("ContactRole is not auto-resolving or does not contain a Contact reference.");
+                System.out.println("ContactRole is not auto-resolving or does not contain a ContactRole reference.");
                 assertNull(as.getContactRole().getContact());
             }
 

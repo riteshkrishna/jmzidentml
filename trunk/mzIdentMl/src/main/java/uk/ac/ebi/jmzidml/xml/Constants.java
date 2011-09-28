@@ -43,7 +43,7 @@ public class Constants {
         Peptide,
         DBSequence,
         PeptideEvidence,
-        Contact,
+        ContactRole,
         Person,
         Organization,
         SearchDatabase,

@@ -22,6 +22,9 @@ public class ContactRoleRefResolver extends AbstractReferenceResolver<ContactRol
         // add objects for the refID
         String ref = object.getContactRef();
         if (ref != null) {
+            // AbstractContact in contactRole is a special case!
+            // It can either represent a 'Person' or an 'Organisation'
+            // This will be handled by the unmarshaller accordingly!
             AbstractContact refObject = this.unmarshal(ref, AbstractContact.class);
             object.setContact(refObject);
         }
