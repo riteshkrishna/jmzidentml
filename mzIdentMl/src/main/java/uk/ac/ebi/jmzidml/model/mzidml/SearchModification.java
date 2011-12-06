@@ -24,12 +24,12 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="SpecificityRules" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SpecificityRulesType" minOccurs="0"/>
+ *         &lt;element name="SpecificityRules" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SpecificityRulesType" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="cvParam" type="{http://psidev.info/psi/pi/mzIdentML/1.1}CVParamType" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *       &lt;attribute name="fixedMod" use="required" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *       &lt;attribute name="massDelta" use="required" type="{http://www.w3.org/2001/XMLSchema}float" />
- *       &lt;attribute name="residues" use="required" type="{http://psidev.info/psi/pi/mzIdentML/1.1}listOfChars" />
+ *       &lt;attribute name="residues" use="required" type="{http://psidev.info/psi/pi/mzIdentML/1.1}listOfCharsOrAny" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -49,7 +49,7 @@ public class SearchModification
 
     private final static long serialVersionUID = 100L;
     @XmlElement(name = "SpecificityRules")
-    protected SpecificityRules specificityRules;
+    protected List<SpecificityRules> specificityRules;
     @XmlElement(required = true)
     protected List<CvParam> cvParam;
     @XmlAttribute(required = true)
@@ -62,25 +62,30 @@ public class SearchModification
     /**
      * Gets the value of the specificityRules property.
      * 
-     * @return
-     *     possible object is
-     *     {@link SpecificityRules }
-     *     
-     */
-    public SpecificityRules getSpecificityRules() {
-        return specificityRules;
-    }
-
-    /**
-     * Sets the value of the specificityRules property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the specificityRules property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link SpecificityRules }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getSpecificityRules().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link SpecificityRules }
+     * 
+     * 
      */
-    public void setSpecificityRules(SpecificityRules value) {
-        this.specificityRules = value;
+    public List<SpecificityRules> getSpecificityRules() {
+        if (specificityRules == null) {
+            specificityRules = new ArrayList<SpecificityRules>();
+        }
+        return this.specificityRules;
     }
 
     /**
