@@ -287,8 +287,7 @@ Distributed under the Creative Commons license http://creativecommons.org/licens
 	</xsd:element>
 	<xsd:complexType name="CVListType">
 		<xsd:annotation>
-			<xsd:documentation>The list of controlled vocabularies used in the
-file.</xsd:documentation>
+			<xsd:documentation>The list of controlled vocabularies used in the file.</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
 			<xsd:element name="cv" type="cvType" maxOccurs="unbounded"/>
@@ -671,7 +670,7 @@ file.</xsd:documentation>
 			<xsd:documentation>Specification of a search modification as parameter for a spectra search. Contains the name of the modification, the mass, the specificity and whether it is a static modification. </xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
-			<xsd:element name="SpecificityRules" type="SpecificityRulesType" minOccurs="0"/>
+			<xsd:element name="SpecificityRules" type="SpecificityRulesType" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="cvParam" type="CVParamType" minOccurs="1" maxOccurs="unbounded">
 				<xsd:annotation>
 					<xsd:documentation>The modification is uniquely identified by references to external CVs such as UNIMOD, see specification document and mapping file for more details.</xsd:documentation>
@@ -688,9 +687,9 @@ file.</xsd:documentation>
 				<xsd:documentation>The mass delta of the searched modification in Daltons.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute name="residues" type="listOfChars" use="required">
+		<xsd:attribute name="residues" type="listOfCharsOrAny" use="required">
 			<xsd:annotation>
-				<xsd:documentation>The residue(s) searched with the specified modification.</xsd:documentation>
+				<xsd:documentation>The residue(s) searched with the specified modification. For N or C terminal modifications that can occur on any residue, the . character should be used to specify any, otherwise the list of amino acids should be provided.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 	</xsd:complexType>
@@ -997,9 +996,7 @@ PeptideEvidence elements should be given for all mappings of the corresponding P
 		</xsd:sequence>
 		<xsd:attribute name="location" type="xsd:int">
 			<xsd:annotation>
-				<xsd:documentation>Location of the modification within the peptide - position in peptide sequence, counted from the N-terminus residue, starting at position 1.
-Specific modifications to the N-terminus should be given the location 0.
-Modification to the C-terminus should be given as peptide length + 1.	</xsd:documentation>
+				<xsd:documentation>Location of the modification within the peptide - position in peptide sequence, counted from the N-terminus residue, starting at position 1. Specific modifications to the N-terminus should be given the location 0. Modification to the C-terminus should be given as peptide length + 1. If the modification location is unknown e.g. for PMF data, this attribute should be omitted.	</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 		<xsd:attribute name="residues" type="listOfChars">
@@ -1437,6 +1434,18 @@ Material.</xsd:documentation>
 	<xsd:simpleType name="listOfChars">
 		<xsd:list itemType="chars"/>
 	</xsd:simpleType>
+	<xsd:simpleType name="listOfCharsOrAny">
+		<xsd:union>
+			<xsd:simpleType id="listOfChars">
+				<xsd:list itemType="chars"/>
+			</xsd:simpleType>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="."/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:union>
+	</xsd:simpleType>
 	<xsd:simpleType name="chars">
 		<xsd:restriction base="xsd:string">
 			<xsd:pattern value="[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}"/>
@@ -1769,7 +1778,7 @@ vocabulary.</xsd:documentation>
 	</xsd:complexType>
 	<xsd:complexType name="IdentifiableType" abstract="true">
 		<xsd:annotation>
-			<xsd:documentation>Other classes in the model can be specified as sub-classes, inheriting from Identifiable. Identifiable gives classes a unique identifier within the scope and a name that need not be unique. Identifiable also provides a mechanism for annotating objects with BibliographicReference(s) and DatabaseEntry(s).	</xsd:documentation>
+			<xsd:documentation>Other classes in the model can be specified as sub-classes, inheriting from Identifiable. Identifiable gives classes a unique identifier within the scope and a name that need not be unique.</xsd:documentation>
 		</xsd:annotation>
 		<xsd:attribute name="id" type="xsd:string" use="required">
 			<xsd:annotation>
