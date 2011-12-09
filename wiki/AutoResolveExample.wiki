@@ -1,0 +1,36 @@
+= Configuring the reference resolving mechanism =
+
+References can be resolved either by iterating through the whole file or by means of configurations provided in _defaultMzIdentMLElement.cfg.xml_ file. There are total four ways to configure reference resolving and caching behaviour - auto-resolving, caching, ID-mapping and Indexing. We can enable a particular behaviour for a class by setting the appropriate element to _true_. In this example, we have auto-resolve disabled for SpectrumIdentificationItem.
+
+{{{
+    <configurations>
+        <autoRefResolving>false</autoRefResolving>
+        <cached>false</cached>
+        <clazz>uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationItem</clazz>
+        <cvParamClass>uk.ac.ebi.jmzidml.model.mzidml.params.SpectrumIdentificationItemCvParam</cvParamClass>
+        <idMapped>false</idMapped>
+        <indexed>true</indexed>
+        <refResolverClass>uk.ac.ebi.jmzidml.xml.jaxb.resolver.SpectrumIdentificationItemRefResolver</refResolverClass>
+        <tagName>SpectrumIdentificationItem</tagName>
+        <userParamClass>uk.ac.ebi.jmzidml.model.mzidml.params.SpectrumIdentificationItemUserParam</userParamClass>
+        <xpath>/MzIdentML/DataCollection/AnalysisData/SpectrumIdentificationList/SpectrumIdentificationResult/SpectrumIdentificationItem</xpath>
+    </configurations>
+
+}}}
+
+To enable the auto-resolve in SpectrumIdentificationItem, we simple set the `<autoRefResolving>` to true.
+
+{{{
+    <configurations>
+        <autoRefResolving>true</autoRefResolving>
+        <cached>false</cached>
+        <clazz>uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationItem</clazz>
+        <cvParamClass>uk.ac.ebi.jmzidml.model.mzidml.params.SpectrumIdentificationItemCvParam</cvParamClass>
+        <idMapped>false</idMapped>
+        <indexed>true</indexed>
+        <refResolverClass>uk.ac.ebi.jmzidml.xml.jaxb.resolver.SpectrumIdentificationItemRefResolver</refResolverClass>
+        <tagName>SpectrumIdentificationItem</tagName>
+        <userParamClass>uk.ac.ebi.jmzidml.model.mzidml.params.SpectrumIdentificationItemUserParam</userParamClass>
+        <xpath>/MzIdentML/DataCollection/AnalysisData/SpectrumIdentificationList/SpectrumIdentificationResult/SpectrumIdentificationItem</xpath>
+    </configurations>
+}}}
