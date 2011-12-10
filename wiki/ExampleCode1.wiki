@@ -45,13 +45,13 @@ public class CaseStudyForParser {
                                  : spectrumIdentResult.getSpectrumIdentificationItem()) {
 
                                 // Get the following information for SpectrumIdentificationItem element
-                                String spetrumIdentItem = spectrumIdentItem.getId();
+                                String spectrumIdItem = spectrumIdentItem.getId();
                                 Double calculatedMassToCharge =  spectrumIdentItem.getCalculatedMassToCharge();
                                 Double experimentalMassToCharge = spectrumIdentItem.getExperimentalMassToCharge();
                                 int rank = spectrumIdentItem.getRank();
                                 int charge = spectrumIdentItem.getChargeState();
 
-                                System.out.println("Spectrum Identification ID = " + spetrumIdentItem);
+                                System.out.println("Spectrum Identification ID = " + spectrumIdItem);
                                 System.out.println("Calculated Mass/Charge = " + calculatedMassToCharge);
                                 System.out.println("Experimental Mass/Charge = " + experimentalMassToCharge);
                                 System.out.println("Search rank = " + rank);
