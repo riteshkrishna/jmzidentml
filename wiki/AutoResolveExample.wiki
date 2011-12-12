@@ -37,4 +37,4 @@ To enable the auto-resolve in SpectrumIdentificationItem, we simple set the `<au
 
 In case of ID-mapping and indexing, we will keep *both* idMapped and indexed to be true. 
 
-The values of _indexed_, _idMapped_ and _autoRefResolving_ are defined by the MzIdentMLElement enumeration in the source code. This enumeration loads it's configuration from the configuration file defaultMzIdentMLElement.cfg.xml discussed above. 
+The values of _indexed_, _idMapped_ and _autoRefResolving_ are defined by the MzIdentMLElement enumeration in the source code. This enumeration loads its configuration from the configuration file defaultMzIdentMLElement.cfg.xml discussed above. 
