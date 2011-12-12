@@ -1,6 +1,6 @@
 = Configuring the reference resolving mechanism =
 
-References can be resolved either by iterating through the whole file or by means of configurations provided in _defaultMzIdentMLElement.cfg.xml_ file. There are total four ways to configure reference resolving and caching behaviour - auto-resolving, caching, ID-mapping and Indexing. We can enable a particular behaviour for a class by setting the appropriate element to _true_. In this example, we have auto-resolve disabled for SpectrumIdentificationItem.
+References can be resolved either by iterating through the whole file or by means of configurations provided in _defaultMzIdentMLElement.cfg.xml_ file. There are total four parameters to configure reference resolving and caching behaviour - auto-resolving, caching, ID-mapping and Indexing. We can enable a particular behaviour for a class by setting the appropriate element to _true_. In this example, we have auto-resolve disabled for SpectrumIdentificationItem.
 
 {{{
     <configurations>
@@ -34,3 +34,7 @@ To enable the auto-resolve in SpectrumIdentificationItem, we simple set the `<au
         <xpath>/MzIdentML/DataCollection/AnalysisData/SpectrumIdentificationList/SpectrumIdentificationResult/SpectrumIdentificationItem</xpath>
     </configurations>
 }}}
+
+In case of ID-mapping and indexing, we will keep *both* idMapped and indexed to be true. 
+
+The values of _indexed_, _idMapped_ and _autoRefResolving_ are defined by the MzIdentMLElement enumeration in the source code. This enumeration loads it's configuration from the configuration file defaultMzIdentMLElement.cfg.xml discussed above. 
