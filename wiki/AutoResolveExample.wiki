@@ -8,7 +8,7 @@ References can be resolved either by iterating through the whole file or by mean
         <cached>false</cached>
         <clazz>uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationItem</clazz>
         <cvParamClass>uk.ac.ebi.jmzidml.model.mzidml.params.SpectrumIdentificationItemCvParam</cvParamClass>
-        <idMapped>false</idMapped>
+        <idMapped>true</idMapped>
         <indexed>true</indexed>
         <refResolverClass>uk.ac.ebi.jmzidml.xml.jaxb.resolver.SpectrumIdentificationItemRefResolver</refResolverClass>
         <tagName>SpectrumIdentificationItem</tagName>
@@ -26,7 +26,7 @@ To enable the auto-resolve in SpectrumIdentificationItem, we simple set the `<au
         <cached>false</cached>
         <clazz>uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationItem</clazz>
         <cvParamClass>uk.ac.ebi.jmzidml.model.mzidml.params.SpectrumIdentificationItemCvParam</cvParamClass>
-        <idMapped>false</idMapped>
+        <idMapped>true</idMapped>
         <indexed>true</indexed>
         <refResolverClass>uk.ac.ebi.jmzidml.xml.jaxb.resolver.SpectrumIdentificationItemRefResolver</refResolverClass>
         <tagName>SpectrumIdentificationItem</tagName>
