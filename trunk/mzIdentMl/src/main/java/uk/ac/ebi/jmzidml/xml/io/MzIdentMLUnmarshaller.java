@@ -40,6 +40,7 @@ public class MzIdentMLUnmarshaller {
     // maybe those pattern are a bit too generic, but it works fine for now
     private static final Pattern ID_PATTERN = Pattern.compile("id\\s*=\\s*[\"']([^\"'>]*)?[\"']", Pattern.CASE_INSENSITIVE);
     private static final Pattern VERSION_PATTERN = Pattern.compile("version\\s*=\\s*[\"']([^\"'>]*)?[\"']", Pattern.CASE_INSENSITIVE);
+    private static final Pattern NAME_PATTERN = Pattern.compile("name\\s*=\\s*[\"']([^\"'>]*)?[\"']", Pattern.CASE_INSENSITIVE);
     private static final Pattern XML_ATT_PATTERN = Pattern.compile("\\s+([A-Za-z:]+)\\s*=\\s*[\"']([^\"'>]+?)[\"']", Pattern.DOTALL);
 
     ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
@@ -83,6 +84,15 @@ public class MzIdentMLUnmarshaller {
 
     public String getMzIdentMLId() {
         Matcher match = ID_PATTERN.matcher(index.getMzIdentMLAttributeXMLString());
+        if (match.find()) {
+            return match.group(1);
+        } else {
+            return null;
+        }
+    }
+
+    public String getMzIdentMLName() {
+        Matcher match = NAME_PATTERN.matcher(index.getMzIdentMLAttributeXMLString());
         if (match.find()) {
             return match.group(1);
         } else {
