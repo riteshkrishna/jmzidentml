@@ -37,6 +37,10 @@ public class MzIdentMLUnmarshaller {
     private final MzIdentMLIndexer index;
     private final MzIdentMLObjectCache cache;
 
+    private String mzidName = null;
+    private String mzidID = null;
+    private String mzidVersion = null;
+
     // maybe those pattern are a bit too generic, but it works fine for now
     private static final Pattern ID_PATTERN = Pattern.compile("id\\s*=\\s*[\"']([^\"'>]*)?[\"']", Pattern.CASE_INSENSITIVE);
     private static final Pattern VERSION_PATTERN = Pattern.compile("version\\s*=\\s*[\"']([^\"'>]*)?[\"']", Pattern.CASE_INSENSITIVE);
@@ -74,30 +78,33 @@ public class MzIdentMLUnmarshaller {
     // public Methods
 
     public String getMzIdentMLVersion() {
-        Matcher match = VERSION_PATTERN.matcher(index.getMzIdentMLAttributeXMLString());
-        if (match.find()) {
-            return match.group(1);
-        } else {
-            return null;
+        if (mzidVersion == null) {
+            Matcher match = VERSION_PATTERN.matcher(index.getMzIdentMLAttributeXMLString());
+            if (match.find()) {
+                mzidVersion = match.group(1);
+            }
         }
+        return mzidVersion;
     }
 
     public String getMzIdentMLId() {
-        Matcher match = ID_PATTERN.matcher(index.getMzIdentMLAttributeXMLString());
-        if (match.find()) {
-            return match.group(1);
-        } else {
-            return null;
+        if (mzidID == null) {
+            Matcher match = ID_PATTERN.matcher(index.getMzIdentMLAttributeXMLString());
+            if (match.find()) {
+                mzidID = match.group(1);
+            }
         }
+        return mzidID;
     }
 
     public String getMzIdentMLName() {
-        Matcher match = NAME_PATTERN.matcher(index.getMzIdentMLAttributeXMLString());
-        if (match.find()) {
-            return match.group(1);
-        } else {
-            return null;
+        if (mzidName == null) {
+            Matcher match = NAME_PATTERN.matcher(index.getMzIdentMLAttributeXMLString());
+            if (match.find()) {
+                return match.group(1);
+            }
         }
+        return mzidName;
     }
 
     /**

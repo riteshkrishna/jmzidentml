@@ -79,12 +79,13 @@ public class MzIdentMLUnmarshallerTest {
         // check the root element (mzIdentML) attributes
         assertEquals("example_mzidentml_1", unmarshaller.getMzIdentMLId());
         assertEquals("1.1.0", unmarshaller.getMzIdentMLVersion());
+        assertEquals("test-mzid", unmarshaller.getMzIdentMLName());
 
         // now check all the other attributes
         String id = "example_mzidentml_1";
         Map<String, String> attributes = unmarshaller.getElementAttributes(id, MzIdentMLElement.MzIdentML.getClazz());
         assertNotNull(attributes);
-        assertEquals(6, attributes.keySet().size());
+        assertEquals(7, attributes.keySet().size());
         assertEquals("2009-08-18T17:59:55", attributes.get("creationDate"));
         assertEquals("http://psidev.info/psi/pi/mzIdentML/1.1", attributes.get("xmlns"));
         assertEquals("http://psidev.info/psi/pi/mzIdentML/1.1 ../resources/mzIdentML1.1.0.xsd", attributes.get("xsi:schemaLocation"));
