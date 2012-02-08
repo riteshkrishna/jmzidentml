@@ -5,11 +5,15 @@
 
 package uk.ac.ebi;
 
+import org.apache.commons.collections.keyvalue.TiedMapEntry;
+import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.MzIdentML;
+import uk.ac.ebi.jmzidml.model.mzidml.ProteinAmbiguityGroup;
 import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationItem;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
 import java.net.URL;
+import java.util.Iterator;
 import java.util.List;
 
 public class JmzIdentMLParser {
@@ -19,19 +23,42 @@ public class JmzIdentMLParser {
 
         try {
 
-            URL xmlFileURL = JmzIdentMLParser.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
+//            URL xmlFileURL = JmzIdentMLParser.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
+            URL xmlFileURL = JmzIdentMLParser.class.getClassLoader().getResource("SA_silac_a24.mzid");
+            System.out.println("mzIdentML file: " + xmlFileURL);
+
             if (xmlFileURL != null) {
 
 
                 boolean aUseSpectrumCache = true;
 
+                long start = System.currentTimeMillis();
                 MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
+                long end = System.currentTimeMillis();
+                System.out.println("Time to initialise unmarshaller: " + (end - start) + "ms");
 
-                MzIdentML mzIdentML_whole = (MzIdentML)unmarshaller.unmarshal(MzIdentML.class);
-                System.out.println("mzIdentML id: " + mzIdentML_whole.getId());
-                System.out.println("mzIdentML creation time: " + mzIdentML_whole.getCreationDate().getTime().toString());
-                System.out.println("mzIdentML provider role: " + mzIdentML_whole.getProvider().getContactRole().getRole().getCvParam().getName());
-                System.out.println("mzIdentML protein ambiguity groups: " + mzIdentML_whole.getDataCollection().getAnalysisData().getProteinDetectionList().getProteinAmbiguityGroup().size());
+                System.out.println("mzIdentML ID: " + unmarshaller.getMzIdentMLId());
+                System.out.println("mzIdentML name: " + unmarshaller.getMzIdentMLName());
+                System.out.println("mzIdentML version: " + unmarshaller.getMzIdentMLVersion());
+
+                System.out.println("Peptides: " + unmarshaller.getObjectCountForXpath(MzIdentMLElement.Peptide.getXpath()));
+                System.out.println("PeptideEvidences: " + unmarshaller.getObjectCountForXpath(MzIdentMLElement.PeptideEvidence.getXpath()));
+
+                System.out.println("ProteinAmbiguityGroups: " + unmarshaller.getObjectCountForXpath(MzIdentMLElement.ProteinAmbiguityGroup.getXpath()));
+
+                Iterator<ProteinAmbiguityGroup> iter = unmarshaller.unmarshalCollectionFromXpath(MzIdentMLElement.ProteinAmbiguityGroup);
+                while (iter.hasNext()) {
+                    ProteinAmbiguityGroup group = iter.next();
+                    System.out.println("ProteinAmbiguityGroup ID" + group.getId());
+                }
+
+
+
+//                MzIdentML mzIdentML_whole = (MzIdentML)unmarshaller.unmarshal(MzIdentML.class);
+//                System.out.println("mzIdentML id: " + mzIdentML_whole.getId());
+//                System.out.println("mzIdentML creation time: " + mzIdentML_whole.getCreationDate().getTime().toString());
+//                System.out.println("mzIdentML provider role: " + mzIdentML_whole.getProvider().getContactRole().getRole().getCvParam().getName());
+//                System.out.println("mzIdentML protein ambiguity groups: " + mzIdentML_whole.getDataCollection().getAnalysisData().getProteinDetectionList().getProteinAmbiguityGroup().size());
 
 
 //                System.out.println("attempt to read contacts");
@@ -164,7 +191,7 @@ public class JmzIdentMLParser {
     */
 
             } else {
-                System.err.println("FILE NOT FOUND");
+                System.out.println("FILE NOT FOUND");
             }
 
         } catch (Exception e) {
