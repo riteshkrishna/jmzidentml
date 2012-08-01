@@ -152,13 +152,14 @@ public class DataCollectionTest extends TestCase {
                     }
 
                     for (PeptideEvidenceRef peptideEvidenceRef : spectrumIdentItem.getPeptideEvidenceRef()) {
-                        if (MzIdentMLElement.PeptideEvidence.isAutoRefResolving() && peptideEvidenceRef.getPeptideEvidence().getDBSequenceRef() != null) {
+                        assertNotNull(peptideEvidenceRef);
+                        if (MzIdentMLElement.PeptideEvidenceRef.isAutoRefResolving() && peptideEvidenceRef.getPeptideEvidence().getDBSequenceRef() != null) {
                             assertNotNull(peptideEvidenceRef.getPeptideEvidence().getDBSequence());
                             assertTrue(peptideEvidenceRef.getPeptideEvidence().getDBSequence().getSeq().length() > 30);
                         } else {
-                            System.out.println("PeptideEvidence is not auto-resolving or does not contain a DBSequence reference.");
+                            System.out.println("PeptideEvidenceRef is not auto-resolving or does not contain a DBSequence reference.");
                             /**
-                             *  Now that peptideevidence is not auto resolving confirm PeptideEvidence is null
+                             *  Now that PeptideEvidenceRef is not auto resolving confirm PeptideEvidence is null
                              */
                             assertNull(peptideEvidenceRef.getPeptideEvidence());
 
