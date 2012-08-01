@@ -2,6 +2,7 @@ package uk.ac.ebi.jmzidml.xml.jaxb.resolver;
 
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.DBSequence;
+import uk.ac.ebi.jmzidml.model.mzidml.Peptide;
 import uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidence;
 import uk.ac.ebi.jmzidml.model.mzidml.TranslationTable;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLObjectCache;
@@ -31,6 +32,12 @@ public class PeptideEvidenceResolver extends AbstractReferenceResolver<PeptideEv
         if (ref2 != null) {
             TranslationTable refObject2 = this.unmarshal(ref2, TranslationTable.class);
             object.setTranslationTable(refObject2);
+        }
+
+        String ref3 = object.getPeptideRef();
+        if (ref3 != null) {
+            Peptide refObject3 = this.unmarshal(ref3, Peptide.class);
+            object.setPeptide(refObject3);
         }
     }
 
