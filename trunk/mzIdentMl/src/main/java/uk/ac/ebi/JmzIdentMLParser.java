@@ -5,9 +5,7 @@
 
 package uk.ac.ebi;
 
-import org.apache.commons.collections.keyvalue.TiedMapEntry;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
-import uk.ac.ebi.jmzidml.model.mzidml.MzIdentML;
 import uk.ac.ebi.jmzidml.model.mzidml.ProteinAmbiguityGroup;
 import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationItem;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
