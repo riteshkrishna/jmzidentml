@@ -131,11 +131,15 @@ public class MzIdentMLIndexerFactory {
         }
 
         public List<IndexElement> getIndexElements(String xpath) {
-            return index.getElements(xpath);
+            return new ArrayList<IndexElement>(index.getElements(xpath));
+        }
+
+        public Map<String, IndexElement> getIndexElements(Class clazz) {
+            return new HashMap<String, IndexElement>(idMapCache.get(clazz));
         }
 
         public Set<String> getXpath() {
-            return index.getKeys();
+            return new HashSet<String>(index.getKeys());
         }
 
         // ToDo: maybe generify to <T extends IdentifiableMzIdentMLObject>  Class<T>  ??
@@ -147,7 +151,7 @@ public class MzIdentMLIndexerFactory {
 
             String xmlSnippet = null;
             if (element != null) {
-                xmlSnippet = readXML(element);
+                xmlSnippet = getXmlString(element);
                 if (logger.isTraceEnabled()) {
                     logger.trace("Retrieved xml for class " + clazz + " with ID " + ID + ": " + xmlSnippet);
                 }
@@ -209,14 +213,13 @@ public class MzIdentMLIndexerFactory {
             return classCache.keySet();
         }
 
-        ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
-        // private methods
-
-        private String readXML(IndexElement byteRange) {
-            return readXML(byteRange, 0);
+        public String getXmlString(IndexElement byteRange) {
+            return getXmlString(byteRange, 0);
         }
 
-        private String readXML(IndexElement byteRange, int maxChars) {
+        ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
+        // private methods
+        private String getXmlString(IndexElement byteRange, int maxChars) {
             try {
                 if (byteRange != null) {
                     long stop; // where we will stop reading

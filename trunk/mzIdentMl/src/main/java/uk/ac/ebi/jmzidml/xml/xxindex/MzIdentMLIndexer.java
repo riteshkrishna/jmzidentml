@@ -13,6 +13,7 @@ import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import javax.naming.ConfigurationException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 
@@ -37,7 +38,29 @@ public interface MzIdentMLIndexer {
      */
     public String getXmlString(String ID, Class clazz);
 
+    /**
+     * Get all the byte ranges of a given xpath
+     *
+     * @param xpathExpression   xpath
+     * @return  a list of byte ranges
+     */
     public List<IndexElement> getIndexElements(String xpathExpression);
+
+    /**
+     * Get a map of id to byte range mappings
+     *
+     * @param clazz class type
+     * @return  a map of id to byte range mappings
+     */
+    public Map<String, IndexElement> getIndexElements(Class clazz);
+
+    /**
+     * Read XML string using a byte range
+     *
+     * @param byteRange byte range
+     * @return  xml string
+     */
+    public String getXmlString(IndexElement byteRange);
 
     /**
      * Retrieves all xpath for which an XML element has been recorded.
