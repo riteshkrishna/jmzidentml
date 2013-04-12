@@ -34,7 +34,7 @@ import java.util.regex.Pattern;
 public class MzIdentMLUnmarshaller {
     private static final Logger logger = Logger.getLogger(MzIdentMLUnmarshaller.class);
 
-    private final MzIdentMLIndexer index;
+    protected final MzIdentMLIndexer index;
     private final MzIdentMLObjectCache cache;
 
     private String mzidName = null;
@@ -117,7 +117,6 @@ public class MzIdentMLUnmarshaller {
      *         null if no element with the specified id was found.
      */
     public Map<String, String> getElementAttributes(String id, Class clazz) {
-        Map<String, String> attributes = new HashMap<String, String>();
         // retrieve the start tag of the corresponding XML element
         String tag = index.getStartTag(id, clazz);
         if (tag == null) {
@@ -125,7 +124,14 @@ public class MzIdentMLUnmarshaller {
         }
 
         // parse the tag for attributes
-        Matcher match = XML_ATT_PATTERN.matcher(tag);
+        return getElementAttributes(tag);
+    }
+
+    public Map<String, String> getElementAttributes(String xmlTag) {
+        Map<String, String> attributes = new HashMap<String, String>();
+
+        // parse the tag for attributes
+        Matcher match = XML_ATT_PATTERN.matcher(xmlTag);
         while (match.find()) {
             if (match.groupCount() == 2) {
                 // found name - value pair
@@ -135,7 +141,7 @@ public class MzIdentMLUnmarshaller {
                 attributes.put(name, value);
             } else {
                 // not a name - value pair, something is wrong!
-                System.out.println("Unexpected number of groups for XML attribute: " + match.groupCount() + " in tag: " + tag);
+                System.out.println("Unexpected number of groups for XML attribute: " + match.groupCount() + " in tag: " + xmlTag);
             }
 
         }
