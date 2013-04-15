@@ -11,6 +11,7 @@ import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.UnmarshallerFactory;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.filters.MzIdentMLNamespaceFilter;
+import uk.ac.ebi.jmzidml.xml.util.EscapingXMLUtilities;
 import uk.ac.ebi.jmzidml.xml.xxindex.FileUtils;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexerFactory;
@@ -294,8 +295,12 @@ public class MzIdentMLUnmarshaller {
 
     private <T extends MzIdentMLObject> T generateObject(Class<T> cls, String xmlSt) throws JAXBException {
         T retval;
+
+        //need to clean up XML to ensure that there are no weird control characters
+        String cleanXML = EscapingXMLUtilities.escapeCharacters(xmlSt);
+
         if (logger.isDebugEnabled()) {
-            logger.trace("XML to unmarshal: " + xmlSt);
+            logger.trace("XML to unmarshal: " + cleanXML);
         }
 
         // Create a filter to intercept events -- and patch the missing namespace
@@ -306,7 +311,7 @@ public class MzIdentMLUnmarshaller {
         //initializeUnmarshaller will assign the proper reader to the xmlFilter
         Unmarshaller unmarshaller = UnmarshallerFactory.getInstance().initializeUnmarshaller(index, cache, xmlFilter);
         //unmarshall the desired object
-        JAXBElement<T> holder = unmarshaller.unmarshal(new SAXSource(xmlFilter, new InputSource(new StringReader(xmlSt))), cls);
+        JAXBElement<T> holder = unmarshaller.unmarshal(new SAXSource(xmlFilter, new InputSource(new StringReader(cleanXML))), cls);
         retval = holder.getValue();
 
         if (logger.isDebugEnabled()) {
