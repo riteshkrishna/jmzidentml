@@ -28,6 +28,7 @@ import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.UnmarshallerFactory;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.filters.MzIdentMLNamespaceFilter;
+import uk.ac.ebi.jmzidml.xml.util.EscapingXMLUtilities;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
 
 import javax.xml.bind.JAXBElement;
@@ -71,9 +72,12 @@ public class MzIdentMLObjectIterator<T extends MzIdentMLObject> implements Itera
 
         try {
             String xmlSt = innerXpathIterator.next();
+            //need to clean up XML to ensure that there are no weird control characters
+            String cleanXML = EscapingXMLUtilities.escapeCharacters(xmlSt);
+
 
             if (logger.isDebugEnabled()) {
-                logger.trace("XML to unmarshal: " + xmlSt);
+                logger.trace("XML to unmarshal: " + cleanXML);
             }
 
             //required for the addition of namespaces to top-level objects
@@ -81,7 +85,7 @@ public class MzIdentMLObjectIterator<T extends MzIdentMLObject> implements Itera
             //initializeUnmarshaller will assign the proper reader to the xmlFilter
             Unmarshaller unmarshaller = UnmarshallerFactory.getInstance().initializeUnmarshaller(index, cache, xmlFilter);
             //unmarshall the desired object
-            JAXBElement<T> holder = unmarshaller.unmarshal(new SAXSource(xmlFilter, new InputSource(new StringReader(xmlSt))), cls);
+            JAXBElement<T> holder = unmarshaller.unmarshal(new SAXSource(xmlFilter, new InputSource(new StringReader(cleanXML))), cls);
 
             retval = holder.getValue();
 
