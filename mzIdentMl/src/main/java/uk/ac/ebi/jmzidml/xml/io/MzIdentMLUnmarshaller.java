@@ -59,6 +59,14 @@ public class MzIdentMLUnmarshaller {
         this(MzIdentMLIndexerFactory.getInstance().buildIndex(mzIdentMLFile));
     }
 
+    public MzIdentMLUnmarshaller(URL mzIdentMLFileURL, boolean inMemory) {
+        this(FileUtils.getFileFromURL(mzIdentMLFileURL), inMemory);
+    }
+
+    public MzIdentMLUnmarshaller(File mzIdentMLFile, boolean inMemory) {
+        this(MzIdentMLIndexerFactory.getInstance().buildIndex(mzIdentMLFile, inMemory));
+    }
+
     public MzIdentMLUnmarshaller(MzIdentMLIndexer indexer) {
         this.index = indexer;
         this.cache = null;

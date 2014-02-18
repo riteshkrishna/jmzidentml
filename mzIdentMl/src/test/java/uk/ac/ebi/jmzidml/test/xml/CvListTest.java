@@ -26,7 +26,7 @@ public class CvListTest extends TestCase {
         URL xmlFileURL = CvListTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
 
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, true);
         assertNotNull(unmarshaller);
 
         log.debug("Checking CvList element.");

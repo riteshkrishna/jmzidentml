@@ -24,7 +24,7 @@ public class AuditCollectionTest extends TestCase {
         URL xmlFileURL = AuditCollectionTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
 
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, true);
         assertNotNull(unmarshaller);
 
         Iterator<AuditCollection> aci = unmarshaller.unmarshalCollectionFromXpath(MzIdentMLElement.AuditCollection);

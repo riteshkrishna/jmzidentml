@@ -27,7 +27,7 @@ public class AnalysisCollectionTest extends TestCase {
 
 //        MzIdentMLObjectCache cache = new AdapterObjectCache();
 //        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, cache);
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, true);
         assertNotNull(unmarshaller);
 
         AnalysisCollection asc =  unmarshaller.unmarshal(AnalysisCollection.class);

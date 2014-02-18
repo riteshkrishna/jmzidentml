@@ -26,7 +26,7 @@ public class AnalysisSampleCollectionTest extends TestCase {
         URL xmlFileURL = AnalysisSampleCollectionTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
 
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, true);
         assertNotNull(unmarshaller);
 
         AnalysisSampleCollection asc =  unmarshaller.unmarshal(AnalysisSampleCollection.class);

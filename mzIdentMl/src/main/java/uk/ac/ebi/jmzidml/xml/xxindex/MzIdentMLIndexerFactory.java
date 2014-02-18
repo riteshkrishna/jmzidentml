@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import psidev.psi.tools.xxindex.SimpleXmlElementExtractor;
 import psidev.psi.tools.xxindex.StandardXpathAccess;
 import psidev.psi.tools.xxindex.XmlElementExtractor;
+import psidev.psi.tools.xxindex.XpathAccess;
 import psidev.psi.tools.xxindex.index.IndexElement;
 import psidev.psi.tools.xxindex.index.XpathIndex;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
@@ -12,8 +13,12 @@ import uk.ac.ebi.jmzidml.model.mzidml.Identifiable;
 import uk.ac.ebi.jmzidml.xml.Constants;
 
 import javax.naming.ConfigurationException;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,18 +39,29 @@ public class MzIdentMLIndexerFactory {
     }
 
     public MzIdentMLIndexer buildIndex(File xmlFile) {
-        return buildIndex(xmlFile, Constants.XML_INDEXED_XPATHS);
+        return buildIndex(xmlFile, Constants.XML_INDEXED_XPATHS, false);
     }
 
     public MzIdentMLIndexer buildIndex(File xmlFile, Set<String> xpaths) {
-        return new MzIdentMLIndexerImpl(xmlFile, xpaths);
+        return new MzIdentMLIndexerImpl(xmlFile, xpaths, false);
+    }
+
+    public MzIdentMLIndexer buildIndex(File xmlFile, boolean inMeomory) {
+        return buildIndex(xmlFile, Constants.XML_INDEXED_XPATHS, inMeomory);
+    }
+
+    public MzIdentMLIndexer buildIndex(File xmlFile, Set<String> xpaths, boolean inMemory) {
+        return new MzIdentMLIndexerImpl(xmlFile, xpaths, inMemory);
     }
 
     private class MzIdentMLIndexerImpl implements MzIdentMLIndexer {
 
         private File xmlFile = null;
-        private StandardXpathAccess xpathAccess = null;
+        private boolean inMemory = false;
+        private byte[] xmlFileBuffer;
+        private XpathAccess xpathAccess = null;
         private XmlElementExtractor xmlExtractor = null;
+        private MemoryMappedXmlElementExtractor memoryMappedXmlElementExtractor;
         private XpathIndex index = null;
         private String mzIdentMLAttributeXMLString = null;
         // a unified cache of all the id maps
@@ -54,7 +70,7 @@ public class MzIdentMLIndexerFactory {
         ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
         // Constructor
 
-        private MzIdentMLIndexerImpl(File xmlFile, Set<String> xpaths) {
+        private MzIdentMLIndexerImpl(File xmlFile, Set<String> xpaths, boolean inMemory) {
 
             if (xmlFile == null) {
                 throw new IllegalStateException("XML File to index must not be null");
@@ -65,16 +81,11 @@ public class MzIdentMLIndexerFactory {
 
             //store file reference
             this.xmlFile = xmlFile;
+            this.inMemory = inMemory;
 
             try {
-                // generate XXINDEX
-                logger.info("Creating index: ");
-                xpathAccess = new StandardXpathAccess(xmlFile, xpaths);
-                logger.debug("done!");
-
                 // create xml element extractor
-                xmlExtractor = new SimpleXmlElementExtractor();
-                xmlExtractor.setEncoding(xmlExtractor.detectFileEncoding(xmlFile.toURI().toURL()));
+                initXpathAccess(xmlFile, xpaths, inMemory);
 
                 // create index
                 index = xpathAccess.getIndex();
@@ -96,6 +107,33 @@ public class MzIdentMLIndexerFactory {
                 throw new IllegalStateException("Could not generate MzIdentML index for file: " + xmlFile);
             }
 
+        }
+
+        private void initXpathAccess(File xmlFile, Set<String> xpaths, boolean inMemory) throws IOException {
+            if (inMemory) {
+                // load file into memory
+                loadFileIntoMemory(xmlFile);
+
+                MemoryMappedStandardXpathAccess memoryMappedStandardXpathAccess = new MemoryMappedStandardXpathAccess(xmlFileBuffer, xpaths);
+                memoryMappedXmlElementExtractor = memoryMappedStandardXpathAccess.getExtractor();
+                xpathAccess = memoryMappedStandardXpathAccess;
+            } else {
+                xpathAccess = new StandardXpathAccess(xmlFile, xpaths);
+                xmlExtractor = new SimpleXmlElementExtractor();
+                xmlExtractor.setEncoding(xmlExtractor.detectFileEncoding(xmlFile.toURI().toURL()));
+            }
+        }
+
+        private void loadFileIntoMemory(File xmlFile) throws IOException {
+            FileInputStream fis = new FileInputStream(xmlFile);
+            FileChannel fc = fis.getChannel();
+
+            MappedByteBuffer mmb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
+
+            xmlFileBuffer = new byte[(int)fc.size()];
+            mmb.get(xmlFileBuffer);
+
+            fis.close();
         }
 
         ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
@@ -157,7 +195,6 @@ public class MzIdentMLIndexerFactory {
                 }
             }
             return xmlSnippet;
-
         }
 
         public String getStartTag(String id, Class clazz) {
@@ -169,7 +206,11 @@ public class MzIdentMLIndexerFactory {
                 IndexElement element = idMap.get(id);
                 if (element != null) {
                     try {
-                        tag = xpathAccess.getStartTag(element);
+                        if (xpathAccess instanceof StandardXpathAccess) {
+                            tag = ((StandardXpathAccess)xpathAccess).getStartTag(element);
+                        } else if (xpathAccess instanceof MemoryMappedStandardXpathAccess) {
+                            tag = ((MemoryMappedStandardXpathAccess)xpathAccess).getStartTag(element);
+                        }
                     } catch (IOException e) {
                         // ToDo: proper handling
                         e.printStackTrace();
@@ -231,7 +272,7 @@ public class MzIdentMLIndexerFactory {
                     } else { // otherwise we will read up to the end of the XML element
                         stop = byteRange.getStop();
                     }
-                    return xmlExtractor.readString(byteRange.getStart(), stop, xmlFile);
+                    return inMemory ? memoryMappedXmlElementExtractor.readString(byteRange.getStart(), stop, new ByteArrayInputStream(xmlFileBuffer)) : xmlExtractor.readString(byteRange.getStart(), stop, xmlFile);
                 } else {
                     throw new IllegalStateException("Attempting to read NULL ByteRange");
                 }
@@ -254,7 +295,7 @@ public class MzIdentMLIndexerFactory {
             long stopPos = ie.get(0).getStart() - 1;
 
             // get mzML start tag content
-            String startTag = xmlExtractor.readString(startPos, stopPos, xmlFile);
+            String startTag = inMemory ? memoryMappedXmlElementExtractor.readString(startPos, stopPos, new ByteArrayInputStream(xmlFileBuffer)) : xmlExtractor.readString(startPos, stopPos, xmlFile);
             if (startTag != null) {
                 //strip newlines that might interfere with later on regex matching
                 startTag = startTag.replace("\n", "");
@@ -296,7 +337,12 @@ public class MzIdentMLIndexerFactory {
         private void initIdMapCache(Map<String, IndexElement> idMap, String xpath) throws IOException {
             List<IndexElement> ranges = index.getElements(xpath);
             for (IndexElement byteRange : ranges) {
-                String xml = xpathAccess.getStartTag(byteRange);
+                String xml = null;
+                if (xpathAccess instanceof StandardXpathAccess) {
+                    xml = ((StandardXpathAccess)xpathAccess).getStartTag(byteRange);
+                } else if (xpathAccess instanceof MemoryMappedStandardXpathAccess) {
+                    xml = ((MemoryMappedStandardXpathAccess)xpathAccess).getStartTag(byteRange);
+                }
                 String id = getIdFromRawXML(xml);
                 if (id != null) {
                     idMap.put(id, byteRange);
