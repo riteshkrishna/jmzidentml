@@ -10,7 +10,7 @@ import uk.ac.ebi.jmzidml.model.mzidml.ProteinAmbiguityGroup;
 import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationItem;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
 
-import java.net.URL;
+import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 
@@ -22,18 +22,18 @@ public class JmzIdentMLParser {
         try {
 
 //            URL xmlFileURL = JmzIdentMLParser.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
-            URL xmlFileURL = JmzIdentMLParser.class.getClassLoader().getResource("SA_silac_a24.mzid");
-            System.out.println("mzIdentML file: " + xmlFileURL);
+            File file = new File(args[0]);
+            System.out.println("mzIdentML file: " + file.getAbsolutePath());
 
-            if (xmlFileURL != null) {
+            if (file != null) {
 
 
                 boolean aUseSpectrumCache = true;
 
                 long start = System.currentTimeMillis();
-                MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
-                long end = System.currentTimeMillis();
-                System.out.println("Time to initialise unmarshaller: " + (end - start) + "ms");
+                MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(file, true);
+
+
 
                 System.out.println("mzIdentML ID: " + unmarshaller.getMzIdentMLId());
                 System.out.println("mzIdentML name: " + unmarshaller.getMzIdentMLName());
@@ -49,6 +49,9 @@ public class JmzIdentMLParser {
                     ProteinAmbiguityGroup group = iter.next();
                     System.out.println("ProteinAmbiguityGroup ID" + group.getId());
                 }
+
+                long end = System.currentTimeMillis();
+                System.out.println("Time to initialise unmarshaller: " + (end - start) + "ms");
 
 
 

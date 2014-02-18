@@ -30,7 +30,7 @@ public class AnalysisSoftwareTest {
 
 //        MzIdentMLObjectCache cache = new AdapterObjectCache();
 //        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, cache);
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, true);
         assertNotNull(unmarshaller);
 
         // Number of Analysis Software

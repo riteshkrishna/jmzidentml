@@ -22,7 +22,7 @@ public class BibliographicTest extends TestCase {
         URL xmlFileURL = BibliographicTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
 
-        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, true);
         assertNotNull(unmarshaller);
 
         log.debug("unmarshalling BibliographicReference and checking content.");
