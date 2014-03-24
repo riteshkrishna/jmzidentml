@@ -18,21 +18,21 @@ import uk.ac.ebi.jmzidml.model.utils.FacadeList;
 /**
  * Ambiguous residues e.g. X can be specified by the Code attribute and a set of parameters for example giving the different masses that will be used in the search. 
  * 
- * <p>Java class for AmbiguousResidueType complex type.
+ * <p>;Java class for AmbiguousResidueType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>;The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="AmbiguousResidueType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamGroup" maxOccurs="unbounded"/>
- *       &lt;/sequence>
- *       &lt;attribute name="code" use="required" type="{http://psidev.info/psi/pi/mzIdentML/1.1}chars" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="AmbiguousResidueType"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamGroup" maxOccurs="unbounded"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="code" use="required" type="{http://psidev.info/psi/pi/mzIdentML/1.1}chars" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

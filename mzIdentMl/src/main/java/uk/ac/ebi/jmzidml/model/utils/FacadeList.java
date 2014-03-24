@@ -7,7 +7,7 @@ import java.util.*;
  * User: rwang
  * Date: 26/01/11
  * Time: 10:16
- * <p/>
+ * <p>
  * Controls access to a standard java list which contains more than one instance type, providing the developer with
  * a virtual list of a specified type. When this list is created, the developer must specify the class of interest.
  * Methods called on this class will be applied to the original list but will only act on instances of the specified
@@ -17,8 +17,8 @@ import java.util.*;
  * If the size method is called the list be searched and only instances of CvParam are counted towards the size.
  * Likewise, if get(3) (3 is the index) is called the 3rd instance of CvParam will be returned. Note, this CvParam might
  * not be the third element in the originallist.
- * <p/>
- * <p/>
+ * <p>
+ * <p>
  * TODO Implement CvParam and UserParam's toString, equals, hashcode. With equals objects are normally considered equals if contents match.
  * TODO Check iterator working with foreach
  * TODO check the checkIndex(), maybe not the best implementation
@@ -132,7 +132,7 @@ public class FacadeList<T> extends AbstractCollection<T> implements List<T> {
     /**
      * Get an iterator of the sublist
      *
-     * @return Iterator<T> an iterator of the sublist
+     * @return Iterator&lt;T&gt; an iterator of the sublist
      */
     public Iterator<T> iterator() {
         return new SublistIterator(this.originalList);
@@ -198,7 +198,7 @@ public class FacadeList<T> extends AbstractCollection<T> implements List<T> {
      *
      * @param fromIndex low endpoint (inclusive) of the sublist
      * @param toIndex   high endpoint (exclusive) of the sublist
-     * @return  List<T> unmodifiable sublist
+     * @return  List&lt;T&gt; unmodifiable sublist
      */
     public List<T> subList(int fromIndex, int toIndex) {
         checkIndex(fromIndex);

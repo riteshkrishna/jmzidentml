@@ -12,28 +12,28 @@ import javax.xml.bind.annotation.*;
  *
  * TODO marshalling/ persistor add validation to check for case where someone gets spectrumIdentificationList/spectrumIdentificationProtocol and changes its id without updating ref id in
  * SpectrumIdentification and other such clases.
- * <p/>
+ * <p>
  * NOTE: There is no setter method for the spectrumIdentificationListRef/spectrumIdentificationProtocolRef. This simplifies keeping the spectrumIdentificationList/spectrumIdentificationProtocol object reference and
  * spectrumIdentificationListRef/spectrumIdentificationProtocolRef synchronized.
- * <p/>
+ * <p>
  *
  * <p>Java class for SpectrumIdentificationType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="SpectrumIdentificationType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}ProtocolApplicationType">
- *       &lt;sequence>
- *         &lt;element name="InputSpectra" type="{http://psidev.info/psi/pi/mzIdentML/1.1}InputSpectraType" maxOccurs="unbounded"/>
- *         &lt;element name="SearchDatabaseRef" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SearchDatabaseRefType" maxOccurs="unbounded"/>
- *       &lt;/sequence>
- *       &lt;attribute name="spectrumIdentificationProtocol_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="spectrumIdentificationList_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="SpectrumIdentificationType"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}ProtocolApplicationType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="InputSpectra" type="{http://psidev.info/psi/pi/mzIdentML/1.1}InputSpectraType" maxOccurs="unbounded"/&gt;
+ *         &lt;element name="SearchDatabaseRef" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SearchDatabaseRefType" maxOccurs="unbounded"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="spectrumIdentificationProtocol_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="spectrumIdentificationList_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

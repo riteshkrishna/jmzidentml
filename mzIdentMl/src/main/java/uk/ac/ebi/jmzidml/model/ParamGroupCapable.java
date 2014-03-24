@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Defines the methods needed by the Marshal/Unmarshal listeners to split
- * a List<Param> into respective List<CvParam> and List<UserParam> and
+ * a List&lt;Param&gt; into respective List&lt;CvParam&gt; and List&lt;UserParam&gt; and
  * methods used to replace the CvParam/UserParam classes with their
  * respective subclasses.
  *

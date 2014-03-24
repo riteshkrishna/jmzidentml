@@ -20,33 +20,33 @@ import javax.xml.bind.annotation.*;
  * NOTE: There is no setter method for the peptideRef/massTableRef/sampleRef. This simplifies keeping the peptide/massTable/sample object reference and
  * peptideRef/massTableRef/sampleRef synchronized.
  *
- * TODO: write an adaptor for changing List<PeptideEvidenceRef> to List<String>
+ * TODO: write an adaptor for changing List&lt;PeptideEvidenceRef&gt; to List&lt;String&gt;
  *
  * <p>Java class for SpectrumIdentificationItemType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="SpectrumIdentificationItemType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType">
- *       &lt;sequence>
- *         &lt;element name="PeptideEvidenceRef" type="{http://psidev.info/psi/pi/mzIdentML/1.1}PeptideEvidenceRefType" maxOccurs="unbounded"/>
- *         &lt;element name="Fragmentation" type="{http://psidev.info/psi/pi/mzIdentML/1.1}FragmentationType" minOccurs="0"/>
- *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attribute name="chargeState" use="required" type="{http://www.w3.org/2001/XMLSchema}int" />
- *       &lt;attribute name="experimentalMassToCharge" use="required" type="{http://www.w3.org/2001/XMLSchema}double" />
- *       &lt;attribute name="calculatedMassToCharge" type="{http://www.w3.org/2001/XMLSchema}double" />
- *       &lt;attribute name="calculatedPI" type="{http://www.w3.org/2001/XMLSchema}float" />
- *       &lt;attribute name="peptide_ref" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="rank" use="required" type="{http://www.w3.org/2001/XMLSchema}int" />
- *       &lt;attribute name="passThreshold" use="required" type="{http://www.w3.org/2001/XMLSchema}boolean" />
- *       &lt;attribute name="massTable_ref" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="sample_ref" type="{http://www.w3.org/2001/XMLSchema}string" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="SpectrumIdentificationItemType"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="PeptideEvidenceRef" type="{http://psidev.info/psi/pi/mzIdentML/1.1}PeptideEvidenceRefType" maxOccurs="unbounded"/&gt;
+ *         &lt;element name="Fragmentation" type="{http://psidev.info/psi/pi/mzIdentML/1.1}FragmentationType" minOccurs="0"/&gt;
+ *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamGroup" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="chargeState" use="required" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
+ *       &lt;attribute name="experimentalMassToCharge" use="required" type="{http://www.w3.org/2001/XMLSchema}double" /&gt;
+ *       &lt;attribute name="calculatedMassToCharge" type="{http://www.w3.org/2001/XMLSchema}double" /&gt;
+ *       &lt;attribute name="calculatedPI" type="{http://www.w3.org/2001/XMLSchema}float" /&gt;
+ *       &lt;attribute name="peptide_ref" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="rank" use="required" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
+ *       &lt;attribute name="passThreshold" use="required" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *       &lt;attribute name="massTable_ref" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="sample_ref" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -382,7 +382,7 @@ public class SpectrumIdentificationItem
     /**
      * Get the cv params for SpectrumIdentification
      * @return
-     *    List<CvParam> A FacadeList providing a CvParam view of the underlying param list.
+     *    List&lt;CvParam&gt; A FacadeList providing a CvParam view of the underlying param list.
      */
     public List<CvParam> getCvParam() {
         return new FacadeList<CvParam>(this.getParamGroup(), CvParam.class);
@@ -391,7 +391,7 @@ public class SpectrumIdentificationItem
     /**
      * Get the user params for SpectrumIdentification
      * @return
-     *    List<UserParam> A FacadeList providing a UserParam view of the underlying param list.
+     *    List&lt;UserParam&gt; A FacadeList providing a UserParam view of the underlying param list.
      */
     public List<UserParam> getUserParam() {
         return new FacadeList<UserParam>(this.getParamGroup(), UserParam.class);

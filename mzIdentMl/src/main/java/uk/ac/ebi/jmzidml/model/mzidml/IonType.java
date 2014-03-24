@@ -23,18 +23,18 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="IonTypeType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="FragmentArray" type="{http://psidev.info/psi/pi/mzIdentML/1.1}FragmentArrayType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="cvParam" type="{http://psidev.info/psi/pi/mzIdentML/1.1}CVParamType"/>
- *       &lt;/sequence>
- *       &lt;attribute name="index" type="{http://psidev.info/psi/pi/mzIdentML/1.1}listOfIntegers" />
- *       &lt;attribute name="charge" use="required" type="{http://www.w3.org/2001/XMLSchema}int" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="IonTypeType"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="FragmentArray" type="{http://psidev.info/psi/pi/mzIdentML/1.1}FragmentArrayType" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="cvParam" type="{http://psidev.info/psi/pi/mzIdentML/1.1}CVParamType"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="index" type="{http://psidev.info/psi/pi/mzIdentML/1.1}listOfIntegers" /&gt;
+ *       &lt;attribute name="charge" use="required" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

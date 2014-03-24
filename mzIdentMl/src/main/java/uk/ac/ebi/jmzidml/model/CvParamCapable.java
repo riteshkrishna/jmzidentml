@@ -7,7 +7,7 @@ import uk.ac.ebi.jmzidml.model.mzidml.CvParam;
  * in the Marshaller/Unmarshaller to update the CvParam containing classes
  * with the respective subclasses of CvParam.
  * Note: this interface is use together with the CvParamListCapable interface,
- * to distinguish if a object has a CvParam or a List<CvParam>.
+ * to distinguish if a object has a CvParam or a List&lt;CvParam&gt;.
  *
  * @see uk.ac.ebi.jmzidml.model.CvParamListCapable
  * @author Florian Reisinger

@@ -19,17 +19,17 @@ import java.util.List;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="ModParamType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="cvParam" type="{http://psidev.info/psi/pi/mzIdentML/1.1}cvParamType"/>
- *       &lt;/sequence>
- *       &lt;attribute name="massDelta" use="required" type="{http://www.w3.org/2001/XMLSchema}float" />
- *       &lt;attribute name="residues" use="required" type="{http://psidev.info/psi/pi/mzIdentML/1.1}listOfChars" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="ModParamType"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="cvParam" type="{http://psidev.info/psi/pi/mzIdentML/1.1}cvParamType"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="massDelta" use="required" type="{http://www.w3.org/2001/XMLSchema}float" /&gt;
+ *       &lt;attribute name="residues" use="required" type="{http://psidev.info/psi/pi/mzIdentML/1.1}listOfChars" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

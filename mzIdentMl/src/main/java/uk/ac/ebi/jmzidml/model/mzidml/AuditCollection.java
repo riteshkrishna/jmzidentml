@@ -21,16 +21,16 @@ import uk.ac.ebi.jmzidml.model.utils.FacadeList;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="AuditCollectionType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;choice maxOccurs="unbounded">
- *         &lt;element name="Person" type="{http://psidev.info/psi/pi/mzIdentML/1.1}PersonType"/>
- *         &lt;element name="Organization" type="{http://psidev.info/psi/pi/mzIdentML/1.1}OrganizationType"/>
- *       &lt;/choice>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="AuditCollectionType"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;choice maxOccurs="unbounded"&gt;
+ *         &lt;element name="Person" type="{http://psidev.info/psi/pi/mzIdentML/1.1}PersonType"/&gt;
+ *         &lt;element name="Organization" type="{http://psidev.info/psi/pi/mzIdentML/1.1}OrganizationType"/&gt;
+ *       &lt;/choice&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -85,7 +85,7 @@ public class AuditCollection
      /**
      * Returns a list of the Person objects contained in list returned from getPersonOrOrganization.
      *
-     * @return List<Person> The list of Person Contacts.
+     * @return List&lt;Person&gt; The list of Person Contacts.
      */
     public List<Person> getPerson() {
         return new FacadeList<Person>(this.getPersonOrOrganization(), Person.class);

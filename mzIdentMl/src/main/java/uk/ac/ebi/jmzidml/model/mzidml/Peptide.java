@@ -22,18 +22,18 @@ import javax.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="PeptideType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType">
- *       &lt;sequence>
- *         &lt;element name="PeptideSequence" type="{http://psidev.info/psi/pi/mzIdentML/1.1}sequence"/>
- *         &lt;element name="Modification" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ModificationType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="SubstitutionModification" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SubstitutionModificationType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamGroup" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="PeptideType"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="PeptideSequence" type="{http://psidev.info/psi/pi/mzIdentML/1.1}sequence"/&gt;
+ *         &lt;element name="Modification" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ModificationType" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="SubstitutionModification" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SubstitutionModificationType" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;group ref="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamGroup" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

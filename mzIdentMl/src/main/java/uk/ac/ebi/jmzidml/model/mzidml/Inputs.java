@@ -19,17 +19,17 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="InputsType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="SourceFile" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SourceFileType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="SearchDatabase" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SearchDatabaseType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="SpectraData" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SpectraDataType" maxOccurs="unbounded"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="InputsType"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="SourceFile" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SourceFileType" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="SearchDatabase" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SearchDatabaseType" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="SpectraData" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SpectraDataType" maxOccurs="unbounded"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
