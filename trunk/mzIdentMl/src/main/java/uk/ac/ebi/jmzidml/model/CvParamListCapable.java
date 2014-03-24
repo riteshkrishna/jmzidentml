@@ -5,11 +5,11 @@ import uk.ac.ebi.jmzidml.model.mzidml.CvParam;
 import java.util.List;
 
 /**
- * This interface defines the presence of a List<Cvparam> getCvParam() method.
+ * This interface defines the presence of a List&lt;Cvparam&gt; getCvParam() method.
  * It is used in the Marshaller/Unmarshaller to update the CvParam containing
  * classes with the respective subclasses of CvParam.
  * Note: this interface is use together with the CvParamCapable interface,
- * to distinguish if a object has a CvParam or a List<CvParam>.
+ * to distinguish if a object has a CvParam or a List&lt;CvParam&gt;.
  *
  * @see uk.ac.ebi.jmzidml.model.CvParamCapable
  * @author Florian Reisinger

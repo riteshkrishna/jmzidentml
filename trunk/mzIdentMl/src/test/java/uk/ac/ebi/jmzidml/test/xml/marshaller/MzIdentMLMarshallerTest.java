@@ -18,7 +18,7 @@ import static junit.framework.Assert.assertTrue;
 /**
  * This test is not run automatically, since it only creates a mzIdentML output file.
  * No real additional testing is performed. It is just for manual checking.
- * <p/>
+ * <p>
  * TODO: automate comparing before and after values of marshalling.
  *
  * @author Florian Reisinger

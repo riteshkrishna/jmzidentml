@@ -16,22 +16,22 @@ import javax.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="BibliographicReferenceType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType">
- *       &lt;attribute name="authors" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="publication" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="publisher" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="editor" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="year" type="{http://www.w3.org/2001/XMLSchema}int" />
- *       &lt;attribute name="volume" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="issue" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="pages" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="title" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="doi" type="{http://www.w3.org/2001/XMLSchema}string" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="BibliographicReferenceType"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType"&gt;
+ *       &lt;attribute name="authors" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="publication" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="publisher" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="editor" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="year" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
+ *       &lt;attribute name="volume" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="issue" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="pages" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="title" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="doi" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

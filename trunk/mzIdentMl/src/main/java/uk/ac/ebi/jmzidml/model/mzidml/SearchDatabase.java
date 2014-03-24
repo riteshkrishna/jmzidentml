@@ -27,20 +27,20 @@ import uk.ac.ebi.jmzidml.xml.jaxb.adapters.CalendarAdapter;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="SearchDatabaseType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}ExternalDataType">
- *       &lt;sequence>
- *         &lt;element name="DatabaseName" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamType"/>
- *         &lt;element name="cvParam" type="{http://psidev.info/psi/pi/mzIdentML/1.1}CVParamType" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attribute name="version" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="releaseDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
- *       &lt;attribute name="numDatabaseSequences" type="{http://www.w3.org/2001/XMLSchema}long" />
- *       &lt;attribute name="numResidues" type="{http://www.w3.org/2001/XMLSchema}long" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="SearchDatabaseType"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}ExternalDataType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="DatabaseName" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ParamType"/&gt;
+ *         &lt;element name="cvParam" type="{http://psidev.info/psi/pi/mzIdentML/1.1}CVParamType" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="version" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="releaseDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" /&gt;
+ *       &lt;attribute name="numDatabaseSequences" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
+ *       &lt;attribute name="numResidues" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

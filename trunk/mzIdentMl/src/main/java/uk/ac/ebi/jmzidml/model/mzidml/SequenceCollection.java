@@ -19,17 +19,17 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="SequenceCollectionType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="DBSequence" type="{http://psidev.info/psi/pi/mzIdentML/1.1}DBSequenceType" maxOccurs="unbounded"/>
- *         &lt;element name="Peptide" type="{http://psidev.info/psi/pi/mzIdentML/1.1}PeptideType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="PeptideEvidence" type="{http://psidev.info/psi/pi/mzIdentML/1.1}PeptideEvidenceType" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="SequenceCollectionType"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="DBSequence" type="{http://psidev.info/psi/pi/mzIdentML/1.1}DBSequenceType" maxOccurs="unbounded"/&gt;
+ *         &lt;element name="Peptide" type="{http://psidev.info/psi/pi/mzIdentML/1.1}PeptideType" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="PeptideEvidence" type="{http://psidev.info/psi/pi/mzIdentML/1.1}PeptideEvidenceType" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

@@ -132,7 +132,7 @@ public class MemoryMappedStandardXpathAccess implements XpathAccess {
      * will be returned.
      * <pre>
      * Requirement for a XML element to be returned:
-     *     element.getStart() >= start && element.getStop() <= stop
+     *     element.getStart() &gt;= start &amp;&amp; element.getStop() &lt;= stop
      * Note: the start and stop parameters can be null, in which case snippets for <b>all</b> the XML elements
      *     for the specified xpath will be returned.
      * </pre>
@@ -142,7 +142,7 @@ public class MemoryMappedStandardXpathAccess implements XpathAccess {
      * @param stop  the stop byte position, after which no elements will be returned.
      * @return a List of Strings representing the XML elements specified with the xpath and within the specified range.
      * @throws IOException when IO Error while reading from the XML file.
-     * @see this#getXmlSnippets(String)
+     
      */
     public List<String> getXmlSnippets(String xpath, Long start, Long stop) throws IOException {
         List<String> results = new ArrayList<String>();
@@ -185,7 +185,6 @@ public class MemoryMappedStandardXpathAccess implements XpathAccess {
      * @param start the start byte position, before which no elements will be returned.
      * @param stop  the stop byte position, after which no elements will be returned.
      * @return a Iterator over the Strings representing the XML elements specified with the xpath.
-     * @see this#getXmlSnippets(String, Long, Long)
      */
     public Iterator<String> getXmlSnippetIterator(String xpath, Long start, Long stop) {
         Iterator<String> iter;
@@ -344,7 +343,6 @@ public class MemoryMappedStandardXpathAccess implements XpathAccess {
      * @return a List of LineXmlElement representing the XML elements specified with
      * the xpath and their starting line number.
      * @throws IOException when IO Error while reading from the XML file.
-     * @see this#getXmlSnippets(String, Long, Long)
      */
     public List<XmlElement> getXmlElements(String xpath, Long start, Long stop) throws IOException {
         List<XmlElement> results = new ArrayList<XmlElement>();

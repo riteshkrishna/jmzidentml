@@ -23,26 +23,26 @@ import uk.ac.ebi.jmzidml.xml.jaxb.adapters.CalendarAdapter;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="MzIdentMLType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType">
- *       &lt;sequence>
- *         &lt;element name="cvList" type="{http://psidev.info/psi/pi/mzIdentML/1.1}CVListType"/>
- *         &lt;element name="AnalysisSoftwareList" type="{http://psidev.info/psi/pi/mzIdentML/1.1}AnalysisSoftwareListType" minOccurs="0"/>
- *         &lt;element name="Provider" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ProviderType" minOccurs="0"/>
- *         &lt;element name="AuditCollection" type="{http://psidev.info/psi/pi/mzIdentML/1.1}AuditCollectionType" minOccurs="0"/>
- *         &lt;element name="AnalysisSampleCollection" type="{http://psidev.info/psi/pi/mzIdentML/1.1}AnalysisSampleCollectionType" minOccurs="0"/>
- *         &lt;element name="SequenceCollection" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SequenceCollectionType" minOccurs="0"/>
- *         &lt;element name="AnalysisCollection" type="{http://psidev.info/psi/pi/mzIdentML/1.1}AnalysisCollectionType"/>
- *         &lt;element name="AnalysisProtocolCollection" type="{http://psidev.info/psi/pi/mzIdentML/1.1}AnalysisProtocolCollectionType"/>
- *         &lt;element name="DataCollection" type="{http://psidev.info/psi/pi/mzIdentML/1.1}DataCollectionType"/>
- *         &lt;element name="BibliographicReference" type="{http://psidev.info/psi/pi/mzIdentML/1.1}BibliographicReferenceType" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attribute name="creationDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
- *       &lt;attribute name="version" use="required" type="{http://psidev.info/psi/pi/mzIdentML/1.1}versionRegex" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="MzIdentMLType"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://psidev.info/psi/pi/mzIdentML/1.1}IdentifiableType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="cvList" type="{http://psidev.info/psi/pi/mzIdentML/1.1}CVListType"/&gt;
+ *         &lt;element name="AnalysisSoftwareList" type="{http://psidev.info/psi/pi/mzIdentML/1.1}AnalysisSoftwareListType" minOccurs="0"/&gt;
+ *         &lt;element name="Provider" type="{http://psidev.info/psi/pi/mzIdentML/1.1}ProviderType" minOccurs="0"/&gt;
+ *         &lt;element name="AuditCollection" type="{http://psidev.info/psi/pi/mzIdentML/1.1}AuditCollectionType" minOccurs="0"/&gt;
+ *         &lt;element name="AnalysisSampleCollection" type="{http://psidev.info/psi/pi/mzIdentML/1.1}AnalysisSampleCollectionType" minOccurs="0"/&gt;
+ *         &lt;element name="SequenceCollection" type="{http://psidev.info/psi/pi/mzIdentML/1.1}SequenceCollectionType" minOccurs="0"/&gt;
+ *         &lt;element name="AnalysisCollection" type="{http://psidev.info/psi/pi/mzIdentML/1.1}AnalysisCollectionType"/&gt;
+ *         &lt;element name="AnalysisProtocolCollection" type="{http://psidev.info/psi/pi/mzIdentML/1.1}AnalysisProtocolCollectionType"/&gt;
+ *         &lt;element name="DataCollection" type="{http://psidev.info/psi/pi/mzIdentML/1.1}DataCollectionType"/&gt;
+ *         &lt;element name="BibliographicReference" type="{http://psidev.info/psi/pi/mzIdentML/1.1}BibliographicReferenceType" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="creationDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" /&gt;
+ *       &lt;attribute name="version" use="required" type="{http://psidev.info/psi/pi/mzIdentML/1.1}versionRegex" /&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

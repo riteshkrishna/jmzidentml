@@ -8,7 +8,7 @@ import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
 
 /**
  * This resolver is to map unitCvRef to an Cv object.
- * <p/>
+ * <p>
  * User: rwang
  * Date: 24/02/11
  * Time: 11:42

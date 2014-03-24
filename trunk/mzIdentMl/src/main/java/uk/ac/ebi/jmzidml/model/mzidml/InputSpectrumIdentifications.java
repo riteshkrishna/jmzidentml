@@ -12,7 +12,7 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
  *
  * TODO marshalling/ persistor add validation to check for case where someone gets SpectrumIdentificationList and changes its id without updating ref id in
  * InputSpectrumIdentifications and other such classes.
- * <p/>
+ * <p>
  * NOTE: There is no setter method for the spectrumIdentificationListRef. This simplifies keeping the measure object reference and
  * spectrumIdentificationListRef synchronized.
  *
@@ -21,13 +21,13 @@ import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="InputSpectrumIdentificationsType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="spectrumIdentificationList_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="InputSpectrumIdentificationsType"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;attribute name="spectrumIdentificationList_ref" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

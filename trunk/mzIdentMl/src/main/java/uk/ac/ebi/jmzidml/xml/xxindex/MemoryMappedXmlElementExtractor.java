@@ -139,7 +139,7 @@ public class MemoryMappedXmlElementExtractor {
      * @return The read byte array.
      * @throws IOException              If a I/O Exception during the reading process occurred.
      * @throws IllegalArgumentException If the range specified to read (to - from)
-     *                                  is to big (> Integer.MAX_VALUE characters).
+     *                                  is to big (&gt; Integer.MAX_VALUE characters).
      */
     public byte[] readBytes(long from, long to, InputStream inputStream) throws IOException {
         byte[] bytes;
@@ -159,7 +159,7 @@ public class MemoryMappedXmlElementExtractor {
 
     /**
      * Convenience method that combines the methods: readBytes(), removeZeroBytes() and bytes2String().
-     * <p/>
+     * <p>
      * Read a String representing a XML element from the specified file (which will be opened read-only).
      * It will read from position 'from' for length 'to - from'.
      *
@@ -287,8 +287,8 @@ public class MemoryMappedXmlElementExtractor {
      * @return The String representation of the byte array.
      * @throws IllegalStateException                If no character encoding is available.
      * @throws java.io.UnsupportedEncodingException if the set character encoding is not supported.
-     * @see this#setUseSystemDefaultEncoding(boolean)
-     * @see this#setEncoding(String)
+     * @see setUseSystemDefaultEncoding(boolean)
+     * @see setEncoding(String)
      */
     public String bytes2String(byte[] bytes) throws UnsupportedEncodingException {
 
