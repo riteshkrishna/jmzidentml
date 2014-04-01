@@ -16,10 +16,7 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.StringWriter;
-import java.io.Writer;
+import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -62,22 +59,43 @@ public class MzIdentMLMarshaller {
         this.marshal(object, os);
     }
     public <T extends MzIdentMLObject> void marshal(T object, OutputStream os) {
-        this.marshal(object, new OutputStreamWriter(os));
+        this.marshal(object, os, "UTF-8");
+    }
+    public <T extends MzIdentMLObject> void marshal(T object, OutputStream os, String encoding) {
+        try {
+            this.marshal(object, new OutputStreamWriter(os, encoding), encoding);
+        } catch (UnsupportedEncodingException e) {
+            throw new IllegalStateException("Could not set character encoding!");
+        }
     }
 
     @Deprecated
     public <T extends MzIdentMLObject> void marshall(T object, Writer out) {
         this.marshal(object, out);
     }
+
+    /**
+     * Method to write an MzIdentML object using a writer.
+     * Note: this assumes UTF-8 character encoding.
+     * For other encodings, use
+     * @see this#marshal(uk.ac.ebi.jmzidml.model.MzIdentMLObject, java.io.Writer, String)
+     *
+     * @param object the MzIdentML object to marshal.
+     * @param out the writer to marshal the object to.
+     */
     @SuppressWarnings("unchecked")
     public <T extends MzIdentMLObject> void marshal(T object, Writer out) {
+        this.marshal(object, out, "UTF-8");
+    }
 
+    public <T extends MzIdentMLObject> void marshal(T object, Writer out, String encoding) {
         if (object == null) {
             throw new IllegalArgumentException("Cannot marshall a NULL object");
         }
 
         try {
             Marshaller marshaller = MarshallerFactory.getInstance().initializeMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_ENCODING, encoding);
 
             // Set JAXB_FRAGMENT_PROPERTY to true for all objects that do not have
             // a @XmlRootElement annotation
@@ -97,7 +115,10 @@ public class MzIdentMLMarshaller {
             // to fix a JAXB bug: http://java.net/jira/browse/JAXB-614
             // also wrapping in IndentingXMLStreamWriter to generate formatted XML
             XMLStreamWriter xmlStreamWriter = XMLOutputFactory.newInstance().createXMLStreamWriter(out);
-            IndentingXMLStreamWriter writer = new IndentingXMLStreamWriter(new EscapingXMLStreamWriter(xmlStreamWriter));
+            // Note: the EscapingXMLStreamWriter should default to "UTF-8" as character encoding, but
+            //       does not on all platforms. Therefore the encoding is hard coded for the default case
+            //       see EscapingXMLStreamWriter.writeStartDocument()
+            IndentingXMLStreamWriter writer = new IndentingXMLStreamWriter(new EscapingXMLStreamWriter(xmlStreamWriter, encoding));
             marshaller.marshal( jaxbElement, writer );
 
         } catch (JAXBException e) {
