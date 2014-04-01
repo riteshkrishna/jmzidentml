@@ -76,9 +76,10 @@ public class MzIdentMLMarshaller {
 
     /**
      * Method to write an MzIdentML object using a writer.
-     * Note: this assumes UTF-8 character encoding.
-     * For other encodings, use
-     * @see this#marshal(uk.ac.ebi.jmzidml.model.MzIdentMLObject, java.io.Writer, String)
+     * Note: this assumes UTF-8 character encoding to be used for the writer.
+     *       If the writer set to another encoding, it may result in an exception
+     *       complaining about incompatible encodings.
+     * To use other encodings @see this#marshal(uk.ac.ebi.jmzidml.model.MzIdentMLObject, java.io.Writer, String)
      *
      * @param object the MzIdentML object to marshal.
      * @param out the writer to marshal the object to.
