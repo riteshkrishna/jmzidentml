@@ -15,6 +15,7 @@ import javax.xml.stream.XMLStreamWriter;
 public class EscapingXMLStreamWriter implements XMLStreamWriter {
 
     private final XMLStreamWriter writer;
+    private String charEncoding;
 
     public EscapingXMLStreamWriter(XMLStreamWriter writer) {
 
@@ -22,6 +23,14 @@ public class EscapingXMLStreamWriter implements XMLStreamWriter {
             throw new IllegalArgumentException("null");
         } else {
             this.writer = writer;
+        }
+        this.charEncoding = "UTF-8";
+    }
+
+    public EscapingXMLStreamWriter(XMLStreamWriter writer, String encoding) {
+        this(writer);
+        if (encoding != null) {
+            this.charEncoding = encoding;
         }
     }
 
@@ -115,7 +124,7 @@ public class EscapingXMLStreamWriter implements XMLStreamWriter {
     }
 
     public void writeStartDocument() throws XMLStreamException {
-        writer.writeStartDocument();
+        writer.writeStartDocument(this.charEncoding,"1.0");
     }
 
     public void writeStartDocument(String s) throws XMLStreamException {
