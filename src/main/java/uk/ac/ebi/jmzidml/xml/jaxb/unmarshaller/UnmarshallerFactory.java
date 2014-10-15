@@ -29,7 +29,6 @@
 package uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller;
 
 import com.ctc.wstx.sax.WstxSAXParserFactory;
-import com.ctc.wstx.stax.WstxInputFactory;
 import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -46,7 +45,6 @@ import javax.xml.bind.UnmarshallerHandler;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import javax.xml.stream.XMLInputFactory;
 
 public class UnmarshallerFactory {
 
@@ -101,9 +99,11 @@ public class UnmarshallerFactory {
             UnmarshallerHandler uh = unmarshaller.getUnmarshallerHandler();
 
             //Create a new XML parser SAX Woodstox
-            WstxInputFactory inputFactory = new WstxInputFactory();
-            inputFactory.configureForSpeed();
-            SAXParserFactory factory = new WstxSAXParserFactory(inputFactory);
+//            WstxInputFactory inputFactory = new WstxInputFactory();
+//            inputFactory.configureForSpeed();
+//            SAXParserFactory factory = new WstxSAXParserFactory(inputFactory);
+
+            SAXParserFactory factory = new WstxSAXParserFactory();
 
             // Create a new XML parser SAX
             //SAXParserFactory factory = SAXParserFactory.newInstance();
