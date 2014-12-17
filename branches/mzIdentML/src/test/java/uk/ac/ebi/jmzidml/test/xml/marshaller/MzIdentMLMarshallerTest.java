@@ -242,8 +242,6 @@ public class MzIdentMLMarshallerTest {
         Marshaller marshaller = jc.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         marshaller.marshal(object,outputFile);
-        System.out.println("lolo");
-
     }
 
 

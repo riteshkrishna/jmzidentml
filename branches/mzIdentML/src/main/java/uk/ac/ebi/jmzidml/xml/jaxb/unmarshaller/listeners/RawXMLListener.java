@@ -175,7 +175,7 @@ public class RawXMLListener extends Unmarshaller.Listener {
     }
 
     private void referenceResolving(Object target, Object parent, MzIdentMLElement ele) {
-        System.out.println("Target: " + target.toString() + "\t" + "Parent: " + parent.toString());
+       // System.out.println("Target: " + target.toString() + "\t" + "Parent: " + parent.toString());
         if (ele.isAutoRefResolving()) {
             Class cls = ele.getRefResolverClass();
             if (cls == null) {
@@ -185,12 +185,7 @@ public class RawXMLListener extends Unmarshaller.Listener {
                 Constructor con = cls.getDeclaredConstructor(MzIdentMLIndexer.class, MzIdentMLObjectCache.class);
                 AbstractReferenceResolver resolver = (AbstractReferenceResolver) con.newInstance(index, cache);
                 resolver.afterUnmarshal(target, parent);
-                if(target instanceof PeptideEvidence){
-                    System.out.println("PEptideEvidence ID: " +((PeptideEvidence) target).getId());
-                    if(((PeptideEvidence) target).getId().equalsIgnoreCase("DVLSAYK_generic|A_cds_TGME49_010690-1|_208_214")){
-                        System.out.println("Estoy Aqui");
-                    }
-                }
+
             } catch (Exception e) {
                 log.error("Error trying to instantiate reference resolver: " + cls.getName(), e);
                 throw new IllegalStateException("Could not instantiate reference resolver: " + cls.getName());

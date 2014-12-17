@@ -38,7 +38,7 @@ public class AdapterObjectCache implements MzIdentMLObjectCache {
                 classCache = new HashMap<String, MzIdentMLObject>();
                 cache.put(cls, classCache);
             }
-            System.out.println("Element put in cache: " + object);
+            //System.out.println("Element put in cache: " + object);
             classCache.put(id, object);
         } else {
             // this element is not meant to be cached!
