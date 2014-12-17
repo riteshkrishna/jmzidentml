@@ -105,8 +105,6 @@ public class UnmarshallerFactory {
 
             SAXParserFactory factory = new WstxSAXParserFactory();
 
-            // Create a new XML parser SAX
-            //SAXParserFactory factory = SAXParserFactory.newInstance();
             factory.setNamespaceAware(true);
             SAXParser parser = factory.newSAXParser();
             XMLReader xmlReader = parser.getXMLReader();
